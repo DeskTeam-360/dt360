@@ -39,6 +39,10 @@ const servicesSeeAll: NavDropdownLink = {
 
 const servicesLinksAll: NavDropdownLink[] = [...servicesDropdown, servicesSeeAll];
 
+type MenuKey = "how" | "services" | "showcase" | "about";
+
+const HOVER_CLOSE_MS = 180;
+
 function LogoMark() {
   return (
     <Image
@@ -62,6 +66,28 @@ function Chevron({ open }: { open: boolean }) {
       aria-hidden
     >
       <path d="M2 4.25h8L6 9.25 2 4.25z" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Ikon >> di tombol Book a call (sesuai referensi desain) */
+function CtaDoubleChevron({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="16"
+      height="14"
+      viewBox="0 0 14 12"
+      className={`shrink-0 opacity-95 ${className}`}
+      aria-hidden
+    >
+      <path
+        d="M1.5 1.5L5.5 6 1.5 10.5M6.5 1.5L10.5 6 6.5 10.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -98,8 +124,46 @@ export function SiteNavbar() {
   const [openMenu, setOpenMenu] = useState<NavKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const closeHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const close = useCallback(() => setOpenMenu(null), []);
+  const clearCloseHoverTimer = useCallback(() => {
+    if (closeHoverTimerRef.current !== null) {
+      clearTimeout(closeHoverTimerRef.current);
+      closeHoverTimerRef.current = null;
+    }
+  }, []);
+
+  const openHoverMenu = useCallback(
+    (key: MenuKey) => {
+      clearCloseHoverTimer();
+      setOpenMenu(key);
+    },
+    [clearCloseHoverTimer],
+  );
+
+  const scheduleCloseHover = useCallback(() => {
+    clearCloseHoverTimer();
+    closeHoverTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      closeHoverTimerRef.current = null;
+    }, HOVER_CLOSE_MS);
+  }, [clearCloseHoverTimer]);
+
+  const handleDropdownWrapperBlur = useCallback(
+    (e: React.FocusEvent<HTMLDivElement>) => {
+      const next = e.relatedTarget;
+      if (next instanceof Node && e.currentTarget.contains(next)) return;
+      scheduleCloseHover();
+    },
+    [scheduleCloseHover],
+  );
+
+  const close = useCallback(() => {
+    clearCloseHoverTimer();
+    setOpenMenu(null);
+  }, [clearCloseHoverTimer]);
+
+  useEffect(() => () => clearCloseHoverTimer(), [clearCloseHoverTimer]);
 
   useEffect(() => {
     if (!openMenu) return;
@@ -120,10 +184,6 @@ export function SiteNavbar() {
     };
   }, [openMenu, close]);
 
-  const toggle = (key: NavKey) => {
-    setOpenMenu((prev) => (prev === key ? null : key));
-  };
-
   return (
     <header ref={navRef} className="relative z-30 border-b border-white/10">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-2 py-4 sm:px-3 lg:px-3">
@@ -135,36 +195,54 @@ export function SiteNavbar() {
           <a className="rounded-md px-3 py-2 hover:bg-white/10" href="/">
             Home
           </a>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => openHoverMenu("how")}
+            onMouseLeave={scheduleCloseHover}
+            onFocusCapture={() => openHoverMenu("how")}
+            onBlurCapture={handleDropdownWrapperBlur}
+          >
             <button
               type="button"
               className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "how" ? "bg-white/10" : ""}`}
               aria-expanded={openMenu === "how"}
-              onClick={() => toggle("how")}
+              aria-haspopup="true"
             >
               How it Works
               <Chevron open={openMenu === "how"} />
             </button>
             {openMenu === "how" && <DesktopDropdown items={howItWorksDropdown} />}
           </div>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => openHoverMenu("services")}
+            onMouseLeave={scheduleCloseHover}
+            onFocusCapture={() => openHoverMenu("services")}
+            onBlurCapture={handleDropdownWrapperBlur}
+          >
             <button
               type="button"
               className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "services" ? "bg-white/10" : ""}`}
               aria-expanded={openMenu === "services"}
-              onClick={() => toggle("services")}
+              aria-haspopup="true"
             >
               Services
               <Chevron open={openMenu === "services"} />
             </button>
             {openMenu === "services" && <DesktopDropdown items={servicesLinksAll} />}
           </div>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => openHoverMenu("showcase")}
+            onMouseLeave={scheduleCloseHover}
+            onFocusCapture={() => openHoverMenu("showcase")}
+            onBlurCapture={handleDropdownWrapperBlur}
+          >
             <button
               type="button"
               className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "showcase" ? "bg-white/10" : ""}`}
               aria-expanded={openMenu === "showcase"}
-              onClick={() => toggle("showcase")}
+              aria-haspopup="true"
             >
               Showcase
               <Chevron open={openMenu === "showcase"} />
@@ -174,12 +252,18 @@ export function SiteNavbar() {
           <a className="rounded-md px-3 py-2 hover:bg-white/10" href="#">
             Blog
           </a>
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => openHoverMenu("about")}
+            onMouseLeave={scheduleCloseHover}
+            onFocusCapture={() => openHoverMenu("about")}
+            onBlurCapture={handleDropdownWrapperBlur}
+          >
             <button
               type="button"
               className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "about" ? "bg-white/10" : ""}`}
               aria-expanded={openMenu === "about"}
-              onClick={() => toggle("about")}
+              aria-haspopup="true"
             >
               About
               <Chevron open={openMenu === "about"} />
@@ -194,9 +278,10 @@ export function SiteNavbar() {
           </a>
           <a
             href="#"
-            className="ml-1 rounded-full bg-[#e11d74] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-900/30 transition hover:bg-[#c91662]"
+            className="ml-2 inline-flex items-center gap-2 rounded-lg bg-[#e11d74] px-6 py-3 text-base font-extrabold text-white shadow-lg shadow-rose-900/30 transition hover:bg-[#c91662]"
           >
             Book a call
+            <CtaDoubleChevron />
           </a>
         </nav>
 
@@ -228,8 +313,12 @@ export function SiteNavbar() {
               )}
             </svg>
           </button>
-          <a href="#" className="rounded-full bg-[#e11d74] px-4 py-2 text-sm font-semibold">
+          <a
+            href="#"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#e11d74] px-5 py-2.5 text-base font-extrabold text-white"
+          >
             Book a call
+            <CtaDoubleChevron />
           </a>
         </div>
       </div>
