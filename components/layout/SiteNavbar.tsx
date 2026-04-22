@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type NavKey = "how" | "services" | "showcase" | "about" | null;
@@ -79,19 +80,14 @@ const serviceItems = [
 
 function LogoMark() {
   return (
-    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden className="shrink-0">
-      <defs>
-        <linearGradient id="logoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#fbbf24" />
-          <stop offset="45%" stopColor="#f97316" />
-          <stop offset="100%" stopColor="#db2777" />
-        </linearGradient>
-      </defs>
-      <path
-        fill="url(#logoGrad)"
-        d="M6 28c2-10 6-18 14-22 4-2 8-2 10 1 1 2 0 5-3 8-4 4-10 7-16 8-3 1-5 3-5 5z M18 8c6 1 11 5 12 11 0 3-1 6-4 8-2 2-5 3-8 3 5-4 8-9 8-14 0-4-2-7-5-8h-3z"
-      />
-    </svg>
+    <Image
+      src="/deskteam360-logo-white 1.png"
+      alt="DeskTeam360"
+      width={220}
+      height={44}
+      className="h-8 w-auto shrink-0 object-contain object-left sm:h-9"
+      priority
+    />
   );
 }
 
@@ -143,9 +139,8 @@ export function SiteNavbar() {
   return (
     <header ref={navRef} className="relative z-30 border-b border-white/10">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <a href="/" className="flex items-center gap-2.5 font-semibold tracking-tight">
+        <a href="/" className="flex items-center font-semibold tracking-tight">
           <LogoMark />
-          <span className="text-lg sm:text-xl">DeskTeam360</span>
         </a>
 
         <nav className="ml-auto hidden items-center gap-1 text-sm font-medium text-white/95 lg:flex">
