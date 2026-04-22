@@ -5,78 +5,39 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type NavKey = "how" | "services" | "showcase" | "about" | null;
 
-const serviceItems = [
-  {
-    label: "Website Tasks",
-    iconBg: "bg-[#fecaca]",
-    icon: (
-      <path
-        d="M8 10h24v20H8V10zm4 4v12h16V14H12zm6 2h4v2h-4v-2zm-2 6l2-2 2 2 2-2"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
-  },
-  {
-    label: "CRM, Automation, and Marketing Tech",
-    iconBg: "bg-[#fbcfe8]",
-    icon: (
-      <>
-        <rect x="10" y="12" width="20" height="14" rx="2" fill="none" stroke="white" strokeWidth="1.6" />
-        <circle cx="20" cy="19" r="3" fill="none" stroke="white" strokeWidth="1.4" />
-        <path d="M26 26h6v6h-6z" fill="none" stroke="white" strokeWidth="1.4" />
-      </>
-    ),
-  },
-  {
-    label: "Email Marketing and Cold Outreach Setup",
-    iconBg: "bg-[#fde68a]",
-    icon: (
-      <>
-        <rect x="12" y="14" width="16" height="12" rx="2" fill="none" stroke="white" strokeWidth="1.6" />
-        <path d="M12 16l8 6 8-6" fill="none" stroke="white" strokeWidth="1.6" />
-        <path d="M16 28h12" stroke="white" strokeWidth="1.4" strokeLinecap="round" />
-      </>
-    ),
-  },
-  {
-    label: "Video Editing and Production",
-    iconBg: "bg-[#ddd6fe]",
-    icon: (
-      <>
-        <rect x="11" y="13" width="18" height="14" rx="2" fill="none" stroke="white" strokeWidth="1.6" />
-        <path d="M26 18l6-3v14l-6-3v-8z" fill="white" fillOpacity="0.9" />
-      </>
-    ),
-  },
-  {
-    label: "Graphic Design",
-    iconBg: "bg-[#bae6fd]",
-    icon: (
-      <path
-        d="M14 28l10-14 6 6-10 14-6-2-2-6zm8-10l4 4"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    ),
-  },
-  {
-    label: "On-Page Marketing Tasks",
-    iconBg: "bg-[#e2e8f0]",
-    icon: (
-      <>
-        <rect x="11" y="13" width="18" height="14" rx="2" fill="none" stroke="#64748b" strokeWidth="1.6" />
-        <path d="M15 24l4 4 8-10" fill="none" stroke="#64748b" strokeWidth="1.6" strokeLinecap="round" />
-      </>
-    ),
-  },
-] as const;
+type NavDropdownLink = { label: string; href: string };
+
+/** Dummy dropdown — ubah label/href di sini (satu file) */
+const howItWorksDropdown: NavDropdownLink[] = [
+  { label: "Option 1", href: "#" },
+  { label: "Option 2", href: "#" },
+];
+
+const showcaseDropdown: NavDropdownLink[] = [
+  { label: "Option 1", href: "#" },
+  { label: "Option 2", href: "#" },
+];
+
+const aboutDropdown: NavDropdownLink[] = [
+  { label: "Option 1", href: "#" },
+  { label: "Option 2", href: "#" },
+];
+
+const servicesDropdown: NavDropdownLink[] = [
+  { label: "Option 1", href: "#" },
+  { label: "Option 2", href: "#" },
+  { label: "Option 3", href: "#" },
+  { label: "Option 4", href: "#" },
+  { label: "Option 5", href: "#" },
+  { label: "Option 6", href: "#" },
+];
+
+const servicesSeeAll: NavDropdownLink = {
+  label: "Option 7",
+  href: "#",
+};
+
+const servicesLinksAll: NavDropdownLink[] = [...servicesDropdown, servicesSeeAll];
 
 function LogoMark() {
   return (
@@ -85,7 +46,7 @@ function LogoMark() {
       alt="DeskTeam360"
       width={220}
       height={44}
-      className="h-8 w-auto shrink-0 object-contain object-left sm:h-9"
+      className="h-8 w-auto shrink-0 object-contain object-left sm:h-7"
       priority
     />
   );
@@ -94,20 +55,47 @@ function LogoMark() {
 function Chevron({ open }: { open: boolean }) {
   return (
     <svg
-      width="12"
-      height="12"
+      width="10"
+      height="10"
       viewBox="0 0 12 12"
-      className={`opacity-90 transition-transform ${open ? "-rotate-180" : ""}`}
+      className={`shrink-0 opacity-95 transition-transform duration-200 ${open ? "-rotate-180" : ""}`}
       aria-hidden
     >
-      <path d="M3 4.5L6 7.5L9 4.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M2 4.25h8L6 9.25 2 4.25z" fill="currentColor" />
     </svg>
+  );
+}
+
+/** Panel dropdown desktop — `alignEnd` untuk menu di kanan (supaya tidak keluar layar) */
+function DesktopDropdown({
+  items,
+  alignEnd,
+}: {
+  items: NavDropdownLink[];
+  alignEnd?: boolean;
+}) {
+  return (
+    <div
+      className={`absolute top-full z-50 pt-2 ${alignEnd ? "right-0 left-auto" : "left-0"}`}
+      role="presentation"
+    >
+      <div className="min-w-[220px] rounded-xl border border-white/10 bg-[#0b2255] p-2 text-sm shadow-xl">
+        <ul className="space-y-1">
+          {items.map((item, i) => (
+            <li key={`${item.label}-${i}`}>
+              <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
 export function SiteNavbar() {
   const [openMenu, setOpenMenu] = useState<NavKey>(null);
-  const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
@@ -138,54 +126,66 @@ export function SiteNavbar() {
 
   return (
     <header ref={navRef} className="relative z-30 border-b border-white/10">
-      <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-6xl items-center gap-6 px-2 py-4 sm:px-3 lg:px-3">
         <a href="/" className="flex items-center font-semibold tracking-tight">
           <LogoMark />
         </a>
 
-        <nav className="ml-auto hidden items-center gap-1 text-sm font-medium text-white/95 lg:flex">
+        <nav className="ml-auto hidden items-center gap-4 text-sm font-medium text-white/95 lg:flex">
           <a className="rounded-md px-3 py-2 hover:bg-white/10" href="/">
             Home
           </a>
-          <button
-            type="button"
-            className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "how" ? "bg-white/10" : ""}`}
-            aria-expanded={openMenu === "how"}
-            onClick={() => toggle("how")}
-          >
-            How it Works
-            <Chevron open={openMenu === "how"} />
-          </button>
-          <button
-            type="button"
-            className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "services" ? "bg-white/10 underline decoration-amber-400 decoration-2 underline-offset-[10px]" : ""}`}
-            aria-expanded={openMenu === "services"}
-            onClick={() => toggle("services")}
-          >
-            Services
-            <Chevron open={openMenu === "services"} />
-          </button>
-          <button
-            type="button"
-            className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "showcase" ? "bg-white/10" : ""}`}
-            aria-expanded={openMenu === "showcase"}
-            onClick={() => toggle("showcase")}
-          >
-            Showcase
-            <Chevron open={openMenu === "showcase"} />
-          </button>
+          <div className="relative">
+            <button
+              type="button"
+              className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "how" ? "bg-white/10" : ""}`}
+              aria-expanded={openMenu === "how"}
+              onClick={() => toggle("how")}
+            >
+              How it Works
+              <Chevron open={openMenu === "how"} />
+            </button>
+            {openMenu === "how" && <DesktopDropdown items={howItWorksDropdown} />}
+          </div>
+          <div className="relative">
+            <button
+              type="button"
+              className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "services" ? "bg-white/10" : ""}`}
+              aria-expanded={openMenu === "services"}
+              onClick={() => toggle("services")}
+            >
+              Services
+              <Chevron open={openMenu === "services"} />
+            </button>
+            {openMenu === "services" && <DesktopDropdown items={servicesLinksAll} />}
+          </div>
+          <div className="relative">
+            <button
+              type="button"
+              className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "showcase" ? "bg-white/10" : ""}`}
+              aria-expanded={openMenu === "showcase"}
+              onClick={() => toggle("showcase")}
+            >
+              Showcase
+              <Chevron open={openMenu === "showcase"} />
+            </button>
+            {openMenu === "showcase" && <DesktopDropdown items={showcaseDropdown} />}
+          </div>
           <a className="rounded-md px-3 py-2 hover:bg-white/10" href="#">
             Blog
           </a>
-          <button
-            type="button"
-            className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "about" ? "bg-white/10" : ""}`}
-            aria-expanded={openMenu === "about"}
-            onClick={() => toggle("about")}
-          >
-            About
-            <Chevron open={openMenu === "about"} />
-          </button>
+          <div className="relative">
+            <button
+              type="button"
+              className={`inline-flex items-center gap-1 rounded-md px-3 py-2 hover:bg-white/10 ${openMenu === "about" ? "bg-white/10" : ""}`}
+              aria-expanded={openMenu === "about"}
+              onClick={() => toggle("about")}
+            >
+              About
+              <Chevron open={openMenu === "about"} />
+            </button>
+            {openMenu === "about" && <DesktopDropdown items={aboutDropdown} alignEnd />}
+          </div>
 
           <span className="mx-2 h-5 w-px bg-white/30" aria-hidden />
 
@@ -253,9 +253,13 @@ export function SiteNavbar() {
             </button>
             {openMenu === "services" && (
               <ul className="ml-2 space-y-1 border-l border-white/15 pl-3 text-white/90">
-                {serviceItems.map((item) => (
-                  <li key={item.label}>
-                    <a href="#" className="block rounded-md py-1.5 hover:text-white" onClick={() => setMobileOpen(false)}>
+                {servicesLinksAll.map((item, i) => (
+                  <li key={`svc-${i}-${item.label}`}>
+                    <a
+                      href={item.href}
+                      className="block rounded-md py-1.5 hover:text-white"
+                      onClick={() => setMobileOpen(false)}
+                    >
                       {item.label}
                     </a>
                   </li>
@@ -278,104 +282,6 @@ export function SiteNavbar() {
         </div>
       )}
 
-      {openMenu === "services" && (
-        <div className="absolute left-0 right-0 top-full z-40 hidden justify-center px-4 pb-6 pt-2 lg:flex">
-          <div className="w-full max-w-xl rounded-2xl border border-slate-200/80 bg-white p-4 text-slate-900 shadow-2xl shadow-black/40">
-            <ul className="divide-y divide-slate-100">
-              {serviceItems.map((item, i) => (
-                <li key={item.label}>
-                  <a
-                    href="#"
-                    className="flex items-center gap-3 py-3 transition-colors first:pt-1 last:pb-1"
-                    onMouseEnter={() => setHoveredService(i)}
-                    onMouseLeave={() => setHoveredService(null)}
-                  >
-                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${item.iconBg}`}>
-                      <svg width="28" height="28" viewBox="0 0 40 40" className="overflow-visible">
-                        {item.icon}
-                      </svg>
-                    </span>
-                    <span
-                      className={`text-[15px] font-medium leading-snug ${hoveredService === i ? "text-[#6d28d9]" : "text-slate-800"}`}
-                    >
-                      {item.label}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-3 border-t border-sky-100 pt-4">
-              <a
-                href="#"
-                className="mx-auto flex w-max items-center gap-2 rounded-full border-2 border-slate-900 px-5 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
-              >
-                See Full Services
-                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-900">
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                    <path
-                      d="M5 3l4 4-4 4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {openMenu && openMenu !== "services" && (
-        <div className="absolute left-0 right-0 top-full z-40 hidden justify-center px-4 pb-4 pt-2 lg:flex">
-          <div className="min-w-[220px] rounded-xl border border-white/10 bg-[#0b2255] p-2 text-sm shadow-xl">
-            {openMenu === "how" && (
-              <ul className="space-y-1">
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    3 simple steps
-                  </a>
-                </li>
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    What we won&apos;t do
-                  </a>
-                </li>
-              </ul>
-            )}
-            {openMenu === "showcase" && (
-              <ul className="space-y-1">
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    Graphics
-                  </a>
-                </li>
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    Websites
-                  </a>
-                </li>
-              </ul>
-            )}
-            {openMenu === "about" && (
-              <ul className="space-y-1">
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    Our story
-                  </a>
-                </li>
-                <li>
-                  <a className="block rounded-lg px-3 py-2 hover:bg-white/10" href="#">
-                    Meet the team
-                  </a>
-                </li>
-              </ul>
-            )}
-          </div>
-        </div>
-      )}
     </header>
   );
 }
