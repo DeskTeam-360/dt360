@@ -17,7 +17,29 @@ UI (components) is separated from data (data/services)
 No API logic directly in components
 
 3. Folder Structure
-Use the following structure as a standard:
+Use the following structure as a standard, like example:
+src/
+  app/
+    layout.tsx
+    page.tsx
+  components/
+    layout/
+      Navbar.tsx
+      Footer.tsx
+    shared/
+      Container.tsx
+      Button.tsx
+      Heading.tsx
+    pages/
+      home/
+        Hero.tsx
+        CTA.tsx
+  data/
+    home.tsx
+  lib/
+    utils.tsx
+  styles/
+    globals.css
 
 4. Component Rules
 4.1 Component Types
