@@ -1,12 +1,9 @@
 import { LandingTemplate } from "@/components/landing/LandingTemplate";
-import { PricingSection } from "@/components/landing/PricingSection";
 
 export default function Home() {
   return (
     <div id="top" className="min-h-screen">
-      <LandingTemplate>
-        <PricingSection />
-      </LandingTemplate>
+      <LandingTemplate />
     </div>
   );
 }
