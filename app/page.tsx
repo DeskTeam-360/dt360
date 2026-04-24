@@ -1,5 +1,7 @@
 import { Hero } from "@/components/pages/home/Hero";
 import { TeamMembers } from "@/components/pages/home/TeamMembers";
+import { StartBusiness } from "@/components/pages/home/StartBusiness";
+import { TrustedBy } from "@/components/pages/home/TrustedBy";
 
 export default function Home() {
   return (
@@ -8,6 +10,8 @@ export default function Home() {
         <Hero />
       </div>
       <TeamMembers />
+      <TrustedBy />
+      <StartBusiness />
     </main>
   );
 }
