@@ -22,7 +22,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0b0d2a]/90 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-gradient-to-r from-[#001f3f] to-[#000814] shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.06)]">
         <Container className="max-w-7xl">
           <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
             <DeskTeamLogo />
@@ -89,7 +89,7 @@ export function Navbar() {
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-[#0b0d2a] shadow-2xl">
+          <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-gradient-to-b from-[#001f3f] to-[#000814] shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
               <span className="text-sm font-semibold text-white">Menu</span>
               <button
