@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
   workflow_dispatch:
 
 permissions:
@@ -37,12 +37,12 @@ jobs:
         run: npm run build
 
   deploy:
-    name: Deploy to server
+    name: Deploy production (main)
     needs: ci
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     concurrency:
-      group: deploy-server
+      group: deploy-server-main
       cancel-in-progress: false
     steps:
       - name: Deploy over SSH
@@ -65,4 +65,35 @@ jobs:
               pm2 restart dt360 || pm2 start npm --name dt360 -- run start
             else
               echo "PM2 not found. Start the app manually, e.g.: nohup npm run start -- -p 3000 &"
+            fi
+
+  deploy-staging:
+    name: Deploy staging (dev)
+    needs: ci
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-server-dev
+      cancel-in-progress: false
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            set -e
+            cd "${{ secrets.DEPLOY_PATH_STAGING }}"
+            git remote -v
+            git fetch origin dev
+            git checkout dev
+            git reset --hard origin/dev
+            npm ci
+            npm run build
+            if command -v pm2 >/dev/null 2>&1; then
+              pm2 restart dt360-staging || pm2 start npm --name dt360-staging -- run start -- -p 3001
+            else
+              echo "PM2 not found. Start the app manually, e.g.: nohup npm run start -- -p 3001 &"
             fi
