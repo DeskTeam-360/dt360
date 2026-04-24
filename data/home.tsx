@@ -95,6 +95,8 @@ export type StartBusinessContent = {
   subheading: string;
   illustrationSrc: string;
   illustrationAlt: string;
+  decorTopLeftSrc: string;
+  decorTopRightSrc: string;
 };
 
 export const startBusinessContent: StartBusinessContent = {
@@ -106,6 +108,8 @@ export const startBusinessContent: StartBusinessContent = {
   illustrationSrc: "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite.png",
   illustrationAlt:
     "Designers, developers, and media specialists working together on digital projects.",
+  decorTopLeftSrc: "/images/home-startbusiness-topleft.png",
+  decorTopRightSrc: "/images/home-startbusiness-topright.png",
 };
 
 /** Hero copy aligned with landing screenshot (English). */
