@@ -33,6 +33,7 @@ export function TeamMembers() {
             Members
           </span>
         </h2>
+
         <div className="relative mt-12 lg:mt-14">
           <button
             type="button"
