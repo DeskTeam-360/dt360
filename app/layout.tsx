@@ -38,7 +38,8 @@ export const metadata: Metadata = {
   keywords: [...siteConfig.keywords],
   applicationName: siteConfig.name,
   icons: {
-    apple: [{ url: "/favicon.png", type: "image/png" }],
+    icon: [{ url: "/images/favicon.png", type: "image/png" }],
+    apple: [{ url: "/images/favicon.png", type: "image/png" }],
   },
   authors: [{ name: siteConfig.name, url: getSiteUrl() }],
   creator: siteConfig.name,

@@ -68,7 +68,7 @@ styles/
 ```
 
 **Outside this tree (repo root siblings):**  
-**`public/`** — static assets (`/logo.png`, favicon, etc.)  
+**`public/`** — static assets. **`public/images/`** — all site images (logo, favicon copies, hero art, team photos, dummies). Use **`SafeImage`** (`components/shared/SafeImage.tsx`) where a broken file should show **“Image not found”**.  
 **Tooling** — `next.config.ts`, `tsconfig.json`, `eslint.config.mjs`, `postcss.config.mjs`, `package.json`, `.github/`, `rules.md`, `.env.example`, etc.
 
 4. Component Rules
@@ -98,7 +98,11 @@ Global tokens: **`styles/globals.css`** — prefer classes/utilities over heavy 
 ❌ Don’t put large copy in components (use `data/` or CMS); don’t put public assets under `app/` or `components/`  
 
 8. Content must same with screenshot
+
 8.1 image file
+
 all image stored at /public/images/ if you no have or not found the image please create dummy image with dummy name and preview as image not found.
+
 8.2 text
+
 must be same with screenshot

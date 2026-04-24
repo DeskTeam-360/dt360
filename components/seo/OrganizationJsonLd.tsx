@@ -9,7 +9,7 @@ export function OrganizationJsonLd() {
     name: siteConfig.name,
     url,
     description: siteConfig.description,
-    logo: `${url}/favicon.png`,
+    logo: `${url}/images/logo.png`,
   };
 
   return (

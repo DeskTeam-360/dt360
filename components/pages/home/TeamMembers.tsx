@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useRef } from "react";
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
 import { cn } from "@/lib/utils";
 
@@ -73,7 +73,7 @@ export function TeamMembers() {
                 >
                   <div className="absolute inset-2 overflow-hidden rounded-xl bg-zinc-900/10">
                     <div className="relative h-full w-full">
-                      <Image
+                      <SafeImage
                         src={member.imageSrc}
                         alt={`${member.name}, ${member.role}`}
                         fill

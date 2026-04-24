@@ -16,17 +16,17 @@ export type TeamMember = {
   id: string;
   name: string;
   role: string;
-  /** Photo URL (remote allowed in `next.config.ts`) */
+  /** Path under `public/images/` (e.g. `/images/dummy-team-jovan.svg`) */
   imageSrc: string;
-  /** Tailwind class for card accent behind the photo */
   accentClass: string;
 };
 
+/** Hero copy aligned with marketing screenshot (English). */
 export const heroContent: HeroContent = {
   headlineLine1: "Stop Outsourcing",
   headlineLine2: "Start Insourcing",
   subheading:
-    "Dedicated AI specialists, developers, designers, and video editors—working as an extension of your team with clear communication, fast turnaround, and full control over quality.",
+    "Hire your own dedicated team of AI specialists, developers, designers, and video editors—trained on your brand, available in your timezone, and managed without the chaos of traditional outsourcing.",
   primaryCta: {
     href: "/#pricing",
     label: "See Plans & Pricing",
@@ -39,41 +39,41 @@ export const heroContent: HeroContent = {
   },
 };
 
-/** Placeholder photos — replace with local or production CDN assets */
+/** Team cards — screenshot-style names/roles; images are dummies under `/public/images/` until final assets exist. */
 export const teamMembers: TeamMember[] = [
   {
     id: "1",
     name: "Jovan",
     role: "AMA",
-    imageSrc: "https://i.pravatar.cc/600?img=12",
+    imageSrc: "/images/dummy-team-jovan.svg",
     accentClass: "bg-amber-400",
   },
   {
     id: "2",
     name: "Dhea",
     role: "Developer",
-    imageSrc: "https://i.pravatar.cc/600?img=47",
+    imageSrc: "/images/dummy-team-dhea.svg",
     accentClass: "bg-violet-500",
   },
   {
     id: "3",
     name: "Lex",
     role: "Account Manager",
-    imageSrc: "https://i.pravatar.cc/600?img=33",
+    imageSrc: "/images/dummy-team-lex.svg",
     accentClass: "bg-emerald-500",
   },
   {
     id: "4",
     name: "Mira",
     role: "Designer",
-    imageSrc: "https://i.pravatar.cc/600?img=45",
+    imageSrc: "/images/dummy-team-mira.svg",
     accentClass: "bg-rose-500",
   },
   {
     id: "5",
     name: "Raka",
     role: "Video Editor",
-    imageSrc: "https://i.pravatar.cc/600?img=59",
+    imageSrc: "/images/dummy-team-raka.svg",
     accentClass: "bg-sky-500",
   },
 ];
