@@ -20,8 +20,8 @@ export const siteConfig = {
   ],
   locale: "en_US",
   language: "en",
-  themeColor: "#0b0d2a",
-  manifestBackgroundColor: "#0b0d2a",
+  themeColor: "#11104C",
+  manifestBackgroundColor: "#11104C",
   twitterCreator: "" as string,
 } as const;
 

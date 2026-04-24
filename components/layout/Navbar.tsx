@@ -22,8 +22,13 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-gradient-to-r from-[#001f3f] to-[#000814] shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.06)]">
-        <Container className="max-w-7xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#11104C] shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.06)]">
+        {/* Figma-style: two overlapping corner radials from top-left (arc “slices”), not a full left stripe */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_400%_1500%_at_0%_0%,rgba(0,200,244,0.5)_0%,rgba(0,200,244,0.12)_14%,transparent_28%),radial-gradient(ellipse_36%_48%_at_-4%_-4%,rgba(0,200,244,0.22)_0%,transparent_32%)]"
+          aria-hidden
+        />
+        <Container className="relative z-10 max-w-7xl">
           <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
             <DeskTeamLogo />
 
@@ -60,7 +65,7 @@ export function Navbar() {
               </Link>
               <Link
                 href="/book-a-call"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#e4277a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-600/25 transition hover:bg-[#f0308a]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />
@@ -89,8 +94,12 @@ export function Navbar() {
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-gradient-to-b from-[#001f3f] to-[#000814] shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
+          <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-[#11104C] shadow-2xl">
+            <div
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_20%_200%_at_0%_0%,rgba(0,200,244,0.45)_0%,rgba(0,200,244,0.1)_14%,transparent_28%),radial-gradient(ellipse_36%_48%_at_-4%_-4%,rgba(0,200,244,0.2)_0%,transparent_32%)]"
+              aria-hidden
+            />
+            <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-4 py-4">
               <span className="text-sm font-semibold text-white">Menu</span>
               <button
                 type="button"
@@ -101,7 +110,7 @@ export function Navbar() {
                 <CloseIcon className="size-5" />
               </button>
             </div>
-            <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4" aria-label="Mobile navigation">
+            <nav className="relative z-10 flex flex-1 flex-col gap-1 overflow-y-auto p-4" aria-label="Mobile navigation">
               <MobileLink href="/" onNavigate={() => setMobileOpen(false)}>
                 Home
               </MobileLink>
@@ -119,7 +128,7 @@ export function Navbar() {
               <Link
                 href="/book-a-call"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#e4277a] px-4 py-3 text-center text-sm font-semibold text-white"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-4 py-3 text-center text-sm font-semibold text-white shadow-md"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />

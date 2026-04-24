@@ -106,3 +106,22 @@ all image stored at /public/images/ if you no have or not found the image please
 8.2 text
 
 must be same with screenshot
+
+9. list page to build :
+Homepage 
+
+Inner Page:
+- How it works
+- Showcase
+- Blog 
+- About 
+- Service (don't create page)
+-- Web Design & Development
+-- Graphic Design
+-- Video Editing
+-- Email & Funnels
+-- CRM & Automation
+-- Social Media Content
+-- Website Maintenance
+-- AI & Automation
+-- White Label (Agencies)

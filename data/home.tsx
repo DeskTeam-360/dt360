@@ -21,12 +21,12 @@ export type TeamMember = {
   accentClass: string;
 };
 
-/** Hero copy aligned with marketing screenshot (English). */
+/** Hero copy aligned with landing screenshot (English). */
 export const heroContent: HeroContent = {
   headlineLine1: "Stop Outsourcing",
   headlineLine2: "Start Insourcing",
   subheading:
-    "Hire your own dedicated team of AI specialists, developers, designers, and video editors—trained on your brand, available in your timezone, and managed without the chaos of traditional outsourcing.",
+    "AI specialists, developers, designers, and video editors—all working together in one focused team. Clear updates, fast delivery, and quality that feels in-house, without the usual outsourcing friction.",
   primaryCta: {
     href: "/#pricing",
     label: "See Plans & Pricing",

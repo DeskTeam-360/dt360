@@ -19,12 +19,12 @@ function ArrowCircle() {
 export function HeroActions() {
   const { primaryCta, secondaryCta } = heroContent;
   return (
-    <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+    <div className="mt-10 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:flex-wrap">
       <Link
         href={primaryCta.href}
         className={cn(
-          "inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg transition",
-          "bg-[#e4277a] shadow-rose-600/30 hover:bg-[#f0308a]",
+          "inline-flex min-h-[3rem] items-center justify-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition",
+          "bg-[#e4277a] shadow-[0_4px_24px_-4px_rgba(228,39,122,0.55)] hover:bg-[#f0308a]",
         )}
       >
         {primaryCta.label}
@@ -33,8 +33,8 @@ export function HeroActions() {
       <Link
         href={secondaryCta.href}
         className={cn(
-          "inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg transition",
-          "bg-gradient-to-r from-[#ff7a32] to-[#e4277a] hover:brightness-110",
+          "inline-flex min-h-[3rem] items-center justify-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition",
+          "bg-[#FF7A32] shadow-[0_4px_24px_-4px_rgba(255,122,50,0.45)] hover:bg-[#ff8f4d]",
         )}
       >
         {secondaryCta.label}
