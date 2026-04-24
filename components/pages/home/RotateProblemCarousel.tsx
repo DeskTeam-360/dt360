@@ -38,7 +38,7 @@ export function RotateProblemCarousel() {
       <Container className="relative z-10 max-w-7xl px-4 py-0 sm:px-6">
         <div className="mx-auto flex w-full max-w-[min(100%,1100px)] flex-col items-center">
           <div
-            className="relative w-[min(611px,calc(100vw-2rem))] shrink-0 [aspect-ratio:611/688]"
+            className="relative w-[min(560px,calc(100vw-2rem))] shrink-0 [aspect-ratio:464/610]"
             style={{ perspective: "1400px" }}
           >
             <div
@@ -91,7 +91,7 @@ export function RotateProblemCarousel() {
                         alt=""
                         fill
                         className="object-cover object-center"
-                        sizes="(max-width: 640px) 92vw, 611px"
+                        sizes="(max-width: 640px) 92vw, 560px"
                         priority={i === 0}
                       />
                     </span>

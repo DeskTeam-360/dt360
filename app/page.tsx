@@ -1,4 +1,5 @@
 import { Hero } from "@/components/pages/home/Hero";
+import { InsourcingBetter } from "@/components/pages/home/InsourcingBetter";
 import { RotateProblemCarousel } from "@/components/pages/home/RotateProblemCarousel";
 import { TeamMembers } from "@/components/pages/home/TeamMembers";
 import { StartBusiness } from "@/components/pages/home/StartBusiness";
@@ -14,6 +15,7 @@ export default function Home() {
       <TrustedBy />
       <StartBusiness />
       <RotateProblemCarousel />
+      <InsourcingBetter />
     </main>
   );
 }

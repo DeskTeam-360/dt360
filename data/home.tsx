@@ -137,8 +137,7 @@ export const heroStats: HeroStatItem[] = [
   { id: "revisions", layout: "text", line1: "Unlimited Revisions", line2: "Included" },
 ];
 
-/** Team cards — screenshot-style names/roles; images are dummies under `/public/images/` until final assets exist. */
-/** Carousel “rotate cards” — outsourcing pain points (611×688 artwork). */
+/** Carousel “rotate cards” — outsourcing pain points (464×610 artwork). */
 export type RotateProblemCard = {
   id: string;
   title: string;
@@ -152,24 +151,120 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "Death by a Thousand Invoices",
     description:
       "Your graphic designer bills hourly. Your web developer charges \"project management\" on top of dev time. Your video editor has a revision surcharge. Every task feels like opening your wallet and hoping for the best.",
-    imageSrc: "/images/home-rotatecard-DeathbyaThousandInvoices.png",
+    imageSrc: "/images/home-rotatecard-DeathbyaThousandInvoices-small.png",
   },
   {
     id: "vendors",
     title: "Five Vendors, Nobody Talking",
     description:
       "One person handles graphics. Another does web updates. A third builds funnels. Someone else edits video. They've never spoken to each other. And you're the human glue - the project manager you never signed up to be.",
-    imageSrc: "/images/home-rotatecard-FiveVendorsNobodyTalking.png",
+    imageSrc: "/images/home-rotatecard-FiveVendorsNobodyTalking-small.png",
   },
   {
     id: "lottery",
     title: "The Freelancer Lottery",
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
-    imageSrc: "/images/home-rotatecard-TheFreelancerLottery.png",
+    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small.png",
   },
 ];
 
+/** Bento “Outsourcing Is Broken…” — grid 3 kolom; ilustrasi/foto opsional nanti. */
+export type InsourcingBentoCardId =
+  | "insourcing"
+  | "redundancy"
+  | "one-office"
+  | "shifts"
+  | "us-managers"
+  | "better-over-time";
+
+export type InsourcingBentoCard = {
+  id: InsourcingBentoCardId;
+  title: string;
+  description: string;
+  /** Gambar ilustrasi / foto di `public/images/` (opsional). */
+  mediaSrc?: string;
+  mediaAlt?: string;
+  /** Pola sel di grid desktop (lihat komponen). */
+  placement: "tall-left" | "wide-magenta" | "compact" | "compact-icon" | "wide-orange" | "compact-bottom";
+  /** Warna blok kartu. */
+  tone: "dark" | "magenta" | "orange";
+};
+
+export type InsourcingBetterSection = {
+  titleLine1: string;
+  titleLine2: string;
+  subheading: string;
+  cards: InsourcingBentoCard[];
+};
+
+export const insourcingBetterSection: InsourcingBetterSection = {
+  titleLine1: "Outsourcing Is Broken",
+  titleLine2: "We Built Something Better",
+  subheading:
+    "Most 'outsourced' teams are scattered freelancers working from home across different time zones. Ours aren't. We brought our team in-house - into one office, under one roof, with real infrastructure and real accountability.",
+  cards: [
+    {
+      id: "insourcing",
+      placement: "tall-left",
+      tone: "dark",
+      title: "Insourcing, Not Outsourcing",
+      description:
+        "We eliminated the frustrations of traditional outsourcing by bringing everything in-house. Your work is done by a real team in a real office - with the infrastructure and accountability to back it up.",
+      mediaSrc: "/images/home-InsourcingBetter-grid1.png",
+      mediaAlt:
+        "Illustration of designers, developers, and video editors working together as one in-house team.",
+    },
+    {
+      id: "redundancy",
+      placement: "wide-magenta",
+      tone: "magenta",
+      title: "Built-In Redundancy",
+      description:
+        "Every station has redundant computers, internet, and power backup. If something fails, we rotate to spare equipment—without missing your deadlines.",
+      mediaSrc: "/images/home-InsourcingBetter-grid2.png",
+      mediaAlt: "Illustration of monitors, laptops, and design tools representing built-in redundancy.",
+    },
+    {
+      id: "one-office",
+      placement: "compact",
+      tone: "dark",
+      title: "One Office. One Team Leader",
+      description:
+        "Team members work together in-office under a unified leader. You get clear accountability—not a black hole of anonymous freelancers.",
+    },
+    {
+      id: "shifts",
+      placement: "compact-icon",
+      tone: "dark",
+      title: "Day & Night Shifts",
+      description:
+        "Shifts run around the clock in the same building, so work keeps moving—even when you're off the clock.",
+      mediaSrc: "/images/home-InsourcingBetter-grid3.png",
+      mediaAlt: "Sun and moon icons with arrows representing day and night shifts.",
+    },
+    {
+      id: "us-managers",
+      placement: "wide-orange",
+      tone: "orange",
+      title: "US-Based Account Managers",
+      description:
+        "Fluent English-speaking managers translate your feedback into clear tasks for the team—so nothing gets lost in translation.",
+      mediaSrc: "/images/home-InsourcingBetter-grid4.png",
+      mediaAlt: "US-based account manager portrait, professional and approachable.",
+    },
+    {
+      id: "better-over-time",
+      placement: "compact-bottom",
+      tone: "dark",
+      title: "Your Team Gets Better Over Time",
+      description:
+        "Work with the same people month after month. Speed goes up, rework goes down, and quality becomes what you can rely on.",
+    },
+  ],
+};
+
+/** Team cards — screenshot-style names/roles; images under `/public/images/`. */
 export const teamMembers: TeamMember[] = [
   {
     id: "1",
