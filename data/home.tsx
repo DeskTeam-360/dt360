@@ -12,6 +12,14 @@ export type HeroContent = {
   secondaryCta: HeroCta;
 };
 
+/** Hero stats strip — value + label, or two-line text (no value). */
+export type HeroStatItem = {
+  id: string;
+  value?: string;
+  label: string;
+  labelLine2?: string;
+};
+
 export type TeamMember = {
   id: string;
   name: string;
@@ -38,6 +46,17 @@ export const heroContent: HeroContent = {
     variant: "secondary",
   },
 };
+
+export const heroStats: HeroStatItem[] = [
+  { id: "years", value: "8+", label: "Years Running" },
+  { id: "clients", value: "400+", label: "Clients Served" },
+  { id: "turnaround", value: "1-3", label: "Day Turnaround" },
+  {
+    id: "revisions",
+    label: "Unlimited Revisions",
+    labelLine2: "Included",
+  },
+];
 
 /** Team cards — screenshot-style names/roles; images are dummies under `/public/images/` until final assets exist. */
 export const teamMembers: TeamMember[] = [

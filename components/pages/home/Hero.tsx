@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { heroContent } from "@/data/home";
 import { HeroActions } from "./CTA";
-import { HeroIllustration } from "./HeroIllustration";
+import { HeroStatsBar } from "./HeroStatsBar";
 
 export function Hero() {
   const { headlineLine1, headlineLine2, subheading } = heroContent;
@@ -9,29 +10,21 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#11104C] pb-20 pt-10 sm:pb-24 sm:pt-14 lg:pb-28 lg:pt-16"
+      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-10 sm:pt-14 lg:pt-16"
       aria-labelledby="hero-heading"
     >
       {/* Same Figma corner treatment as navbar — continues the cyan “arc” into hero */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_44%_120%_at_0%_0%,rgba(0,200,244,0.36)_0%,rgba(0,200,244,0.1)_24%,transparent_40%),radial-gradient(ellipse_100%_58%_at_-8%_-4%,rgba(0,200,244,0.2)_0%,transparent_40%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_0%_0%,rgba(0,200,244,0.5)_0%,transparent_50%)]" 
         aria-hidden
       />
-      {/* Organic glows — purple / orange behind illustration side */}
+      {/* Warm orange wash — bottom-left, behind CTA / stats (Figma-style) */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_92%_45%,rgba(249,115,22,0.2),transparent_55%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_42%_at_78%_35%,rgba(168,85,247,0.16),transparent_50%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_100%,rgba(228,39,122,0.08),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_75%_at_-8%_108%,rgba(237,141,83,0.52)_0%,rgba(237,141,83,0.14)_38%,transparent_68%)]"
         aria-hidden
       />
 
-      <Container className="relative max-w-7xl">
+      <Container className="relative z-10 max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-16">
           <div className="lg:pr-4">
             <h1
@@ -46,9 +39,48 @@ export function Hero() {
             </p>
             <HeroActions />
           </div>
-          <HeroIllustration />
+          <div className="relative mx-auto flex w-full max-w-lg items-center justify-center lg:max-w-none">
+            <div
+              className="absolute inset-0 -translate-y-4 scale-110 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.35)_0%,transparent_58%)] blur-3xl"
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 translate-x-6 translate-y-8 scale-105 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.22)_0%,transparent_55%)] blur-3xl"
+              aria-hidden
+            />
+            <div className="relative w-full min-h-[280px] max-w-[560px] p-4 sm:p-6 lg:p-8">
+              <Image
+                src="/images/homepage_hero_1.jpg"
+                alt="Collaborative digital team: designer, developer, and video editor working together on digital projects."
+                width={1024}
+                height={920}
+                className="relative z-[1] h-auto w-full"
+                sizes="(max-width: 1024px) 100vw, 560px"
+                priority
+              />
+            </div>
+          </div>
         </div>
+        <HeroStatsBar className="mt-14 sm:mt-16 lg:mt-20" />
       </Container>
+
+      {/* Transisi hero → putih: satu busur lebar (setengah elips), bukan gelombang */}
+      <div
+        className="relative z-10 mt-20 w-full text-white sm:mt-12 lg:mt-20"
+        aria-hidden
+      >
+        <svg
+          className="block h-12 w-full sm:h-14 lg:h-16"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M0,78 Q720,8 1440,78 L1440,100 L0,100 Z"
+          />
+        </svg>
+      </div>
     </section>
   );
 }

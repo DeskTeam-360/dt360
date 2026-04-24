@@ -22,10 +22,10 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#11104C] shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.06)]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-none bg-[#11104C] shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)]">
         {/* Figma-style: two overlapping corner radials from top-left (arc “slices”), not a full left stripe */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_400%_1500%_at_0%_0%,rgba(0,200,244,0.5)_0%,rgba(0,200,244,0.12)_14%,transparent_28%),radial-gradient(ellipse_36%_48%_at_-4%_-4%,rgba(0,200,244,0.22)_0%,transparent_32%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)]"
           aria-hidden
         />
         <Container className="relative z-10 max-w-7xl">
