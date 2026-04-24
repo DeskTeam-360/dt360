@@ -1,4 +1,5 @@
 import { Hero } from "@/components/pages/home/Hero";
+import { RotateProblemCarousel } from "@/components/pages/home/RotateProblemCarousel";
 import { TeamMembers } from "@/components/pages/home/TeamMembers";
 import { StartBusiness } from "@/components/pages/home/StartBusiness";
 import { TrustedBy } from "@/components/pages/home/TrustedBy";
@@ -12,6 +13,7 @@ export default function Home() {
       <TeamMembers />
       <TrustedBy />
       <StartBusiness />
+      <RotateProblemCarousel />
     </main>
   );
 }

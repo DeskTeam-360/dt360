@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
@@ -10,6 +10,13 @@ import { cn } from "@/lib/utils";
 /** ~ lebar kartu (280) + gap antar kartu */
 const SCROLL_STEP = 312;
 
+function centerHorizontalScroll(el: HTMLDivElement | null) {
+  if (!el) return;
+  const max = el.scrollWidth - el.clientWidth;
+  if (max <= 0) return;
+  el.scrollLeft = max / 2;
+}
+
 export function TeamMembers() {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
@@ -17,6 +24,29 @@ export function TeamMembers() {
     const el = scrollerRef.current;
     if (!el) return;
     el.scrollBy({ left: dir * SCROLL_STEP, behavior: "smooth" });
+  }, []);
+
+  /** Default: tampilan mengarah ke tengah deretan anggota, bukan dari kiri. */
+  useLayoutEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const apply = () => centerHorizontalScroll(el);
+
+    apply();
+    const raf = requestAnimationFrame(apply);
+
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+
+    const onResize = () => apply();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   return (

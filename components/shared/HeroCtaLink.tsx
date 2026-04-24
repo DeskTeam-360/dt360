@@ -17,13 +17,13 @@ export type HeroCtaLinkProps = Omit<ComponentProps<typeof Link>, "className"> & 
   className?: string;
 };
 
-/** Hero pill CTA: label + white circle-chevron (Lucide), matching landing design. */
+/** Hero CTA: kotak rounded + label + ikon chevron dalam lingkaran (Lucide). */
 export function HeroCtaLink({ variant, className, children, ...linkProps }: HeroCtaLinkProps) {
   return (
     <Link
       {...linkProps}
       className={cn(
-        "inline-flex min-h-[3rem] w-full min-w-0 items-center justify-between gap-3 rounded-full px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition sm:w-auto sm:px-7 sm:py-3.5",
+        "inline-flex min-h-[3rem] w-full min-w-0 items-center justify-between gap-3 rounded-xl px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition sm:w-auto sm:px-7 sm:py-3.5",
         variantClass[variant],
         className,
       )}

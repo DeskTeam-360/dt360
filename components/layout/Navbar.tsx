@@ -65,7 +65,7 @@ export function Navbar() {
               </Link>
               <Link
                 href="/book-a-call"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />
@@ -128,7 +128,7 @@ export function Navbar() {
               <Link
                 href="/book-a-call"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-4 py-3 text-center text-sm font-semibold text-white shadow-md"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-4 py-3 text-center text-sm font-semibold text-white shadow-md"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />

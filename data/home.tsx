@@ -138,6 +138,38 @@ export const heroStats: HeroStatItem[] = [
 ];
 
 /** Team cards — screenshot-style names/roles; images are dummies under `/public/images/` until final assets exist. */
+/** Carousel “rotate cards” — outsourcing pain points (611×688 artwork). */
+export type RotateProblemCard = {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+};
+
+export const rotateProblemCards: RotateProblemCard[] = [
+  {
+    id: "invoices",
+    title: "Death by a Thousand Invoices",
+    description:
+      "Your graphic designer bills hourly. Your web developer charges \"project management\" on top of dev time. Your video editor has a revision surcharge. Every task feels like opening your wallet and hoping for the best.",
+    imageSrc: "/images/home-rotatecard-DeathbyaThousandInvoices.png",
+  },
+  {
+    id: "vendors",
+    title: "Five Vendors, Nobody Talking",
+    description:
+      "One person handles graphics. Another does web updates. A third builds funnels. Someone else edits video. They've never spoken to each other. And you're the human glue - the project manager you never signed up to be.",
+    imageSrc: "/images/home-rotatecard-FiveVendorsNobodyTalking.png",
+  },
+  {
+    id: "lottery",
+    title: "The Freelancer Lottery",
+    description:
+      "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
+    imageSrc: "/images/home-rotatecard-TheFreelancerLottery.png",
+  },
+];
+
 export const teamMembers: TeamMember[] = [
   {
     id: "1",
