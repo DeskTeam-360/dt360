@@ -1,6 +1,12 @@
 import Image from "next/image";
+import Script from "next/script";
 import { Container } from "@/components/shared/Container";
 import { startBusinessContent } from "@/data/home";
+
+const DOTLOTTIE_WC_SCRIPT =
+  "https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js";
+const START_BUSINESS_LOTTIE_SRC =
+  "https://lottie.host/0891252a-8126-4075-a997-0e28d864c2a3/2NhMkeS4xT.lottie";
 
 export function StartBusiness() {
   const {
@@ -8,7 +14,6 @@ export function StartBusiness() {
     headlineHighlight,
     headlineAfter,
     subheading,
-    illustrationSrc,
     illustrationAlt,
     decorTopLeftSrc,
     decorTopRightSrc,
@@ -62,15 +67,25 @@ export function StartBusiness() {
           </p>
         </div>
 
+        <Script
+          id="dotlottie-wc-start-business"
+          src={DOTLOTTIE_WC_SCRIPT}
+          type="module"
+          strategy="afterInteractive"
+        />
+
         <div className="relative z-10 mx-auto mt-10 w-full max-w-5xl sm:mt-14 lg:max-w-6xl">
-          <div className="relative aspect-[5/3] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[2/1]">
-            <Image
-              src={illustrationSrc}
-              alt={illustrationAlt}
-              fill
-              className="object-cover object-[50%_45%] sm:object-[50%_42%]"
-              sizes="(max-width: 1024px) 100vw, 1152px"
-              priority={false}
+          <div
+            className="relative w-full"
+            role="img"
+            aria-label={illustrationAlt}
+          >
+            <dotlottie-wc
+              src={START_BUSINESS_LOTTIE_SRC}
+              className="block h-auto w-full"
+              style={{ width: "100%", height: "auto" }}
+              autoplay
+              loop
             />
           </div>
         </div>
