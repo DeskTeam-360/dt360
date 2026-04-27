@@ -6,7 +6,7 @@ import { startBusinessContent } from "@/data/home";
 const DOTLOTTIE_WC_SCRIPT =
   "https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js";
 const START_BUSINESS_LOTTIE_SRC =
-  "https://lottie.host/0891252a-8126-4075-a997-0e28d864c2a3/2NhMkeS4xT.lottie";
+  "https://lottie.host/c068980f-7fe7-4db1-a554-ea80931c7156/uFO8Tc83zo.lottie";
 
 export function StartBusiness() {
   const {
