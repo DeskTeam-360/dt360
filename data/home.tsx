@@ -211,6 +211,14 @@ export type HowItWorksSection = {
   steps: HowItWorksStep[];
 };
 
+export type SocialProofSection = {
+  headlineLine1: string;
+  headlineLine2: string;
+  headlineHighlight: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 export const insourcingBetterSection: InsourcingBetterSection = {
   titleLine1: "Outsourcing Is Broken",
   titleLine2: "We Built Something Better",
@@ -303,6 +311,14 @@ export const howItWorksSection: HowItWorksSection = {
         "We finish work and start the next task. Work lands in your inbox. Love it? Want changes? Unlimited revisions - no extra charge. Your queue keeps moving.",
     },
   ],
+};
+
+export const socialProofSection: SocialProofSection = {
+  headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
+  headlineLine2: "Then They",
+  headlineHighlight: "Found Us",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain.png",
+  imageAlt: "DeskTeam360 in-house team group photo.",
 };
 
 /** Team cards — screenshot-style names/roles; images under `/public/images/`. */

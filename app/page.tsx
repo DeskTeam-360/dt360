@@ -6,6 +6,7 @@ import { StartBusiness } from "@/components/pages/home/StartBusiness";
 import { TrustedBy } from "@/components/pages/home/TrustedBy";
 import { EverySkillGrid } from "@/components/pages/home/EverySkillGrid";
 import { HowItWorksSteps } from "@/components/pages/home/HowItWorksSteps";
+import { SocialProofTestimonials } from "@/components/pages/home/SocialProofTestimonials";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <InsourcingBetter />
       <EverySkillGrid />
       <HowItWorksSteps />
+      <SocialProofTestimonials />
     </main>
   );
 }

@@ -8,7 +8,7 @@ export function HowItWorksSteps() {
   return (
     <section
       id="how-it-works-steps"
-      className="relative overflow-x-hidden py-16 sm:py-20 lg:py-24"
+      className="relative isolate overflow-x-hidden py-16 sm:py-20 lg:py-24"
       style={{
         backgroundColor: "#11104C",
         backgroundImage:
@@ -16,6 +16,35 @@ export function HowItWorksSteps() {
       }}
       aria-labelledby="how-it-works-steps-heading"
     >
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[2] h-10 sm:h-12 lg:h-14" aria-hidden>
+        <svg
+          className="block h-full w-full"
+          viewBox="0 0 1440 140"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="how-it-works-arc-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FFFFFF" />
+              <stop offset="50%" stopColor="#CBDCFF" />
+              <stop offset="100%" stopColor="#FFFFFF" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#how-it-works-arc-gradient)" d="M0,0 H1440 V96 Q720,16 0,96 Z" />
+        </svg>
+      </div>
+
+      <div className="pointer-events-none absolute left-0 top-10 z-[1] -translate-x-[20%] sm:top-12 lg:top-14" aria-hidden>
+        <Image
+          src="/images/Home-HowItWorksStep-BgLeft.png"
+          alt=""
+          width={170}
+          height={230}
+          className="h-auto w-[126px] sm:w-[162px] lg:w-[198px]"
+          priority={false}
+        />
+      </div>
+
       <Container className="relative z-10 max-w-7xl">
         <h2
           id="how-it-works-steps-heading"
@@ -59,6 +88,13 @@ export function HowItWorksSteps() {
               </article>
             ))}
           </div>
+        </div>
+
+        <div className="mx-auto mt-10 w-full max-w-5xl rounded-xl border border-white/55 px-6 py-4 text-center sm:mt-12 sm:px-8">
+          <p className="text-base leading-relaxed text-white/95 sm:text-lg">
+            <span className="font-extrabold">Agencies:</span> We work under your brand as your invisible back-office.
+            Your clients never know we exist.
+          </p>
         </div>
       </Container>
     </section>
