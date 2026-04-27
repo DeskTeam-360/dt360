@@ -1,12 +1,8 @@
 import Image from "next/image";
-import Script from "next/script";
 import { Container } from "@/components/shared/Container";
 import { startBusinessContent } from "@/data/home";
-
-const DOTLOTTIE_WC_SCRIPT =
-  "https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js";
-const START_BUSINESS_LOTTIE_SRC =
-  "https://lottie.host/c068980f-7fe7-4db1-a554-ea80931c7156/uFO8Tc83zo.lottie";
+const START_BUSINESS_VIDEO_SRC =
+  "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite-HD.webm";
 
 export function StartBusiness() {
   const {
@@ -67,27 +63,17 @@ export function StartBusiness() {
           </p>
         </div>
 
-        <Script
-          id="dotlottie-wc-start-business"
-          src={DOTLOTTIE_WC_SCRIPT}
-          type="module"
-          strategy="afterInteractive"
-        />
-
         <div className="relative z-10 mx-auto mt-10 w-full max-w-5xl sm:mt-14 lg:max-w-6xl">
-          <div
-            className="relative w-full"
-            role="img"
+          <video
+            className="block h-auto w-full"
             aria-label={illustrationAlt}
+            autoPlay
+            loop
+            muted
+            playsInline
           >
-            <dotlottie-wc
-              src={START_BUSINESS_LOTTIE_SRC}
-              className="block h-auto w-full"
-              style={{ width: "100%", height: "auto" }}
-              autoplay
-              loop
-            />
-          </div>
+            <source src={START_BUSINESS_VIDEO_SRC} type="video/webm" />
+          </video>
         </div>
       </Container>
     </section>
