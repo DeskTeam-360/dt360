@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { heroContent } from "@/data/home";
 import { HeroActions } from "./CTA";
@@ -49,15 +48,17 @@ export function Hero() {
               aria-hidden
             />
             <div className="relative w-full min-h-[280px] max-w-[560px] p-4 sm:p-6 lg:p-8">
-              <Image
-                src="/images/homepage_hero_1.jpg"
-                alt="Collaborative digital team: designer, developer, and video editor working together on digital projects."
-                width={1024}
-                height={920}
+              <video
                 className="relative z-[1] h-auto w-full"
-                sizes="(max-width: 1024px) 100vw, 560px"
-                priority
-              />
+                aria-label="Collaborative digital team: designer, developer, and video editor working together on digital projects."
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+              >
+                <source src="/images/homepage_hero_hd.webm" type="video/webm" />
+              </video>
             </div>
           </div>
         </div>
