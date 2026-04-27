@@ -40,11 +40,11 @@ export function Hero() {
           </div>
           <div className="relative mx-auto flex w-full max-w-lg items-center justify-center lg:max-w-none">
             <div
-              className="absolute inset-0 -translate-y-4 scale-110 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.35)_0%,transparent_58%)] blur-3xl"
+              className="absolute inset-14 -translate-y-1 scale-85 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.35)_0%,transparent_58%)] blur-3xl"
               aria-hidden
             />
             <div
-              className="absolute inset-0 translate-x-6 translate-y-8 scale-105 rounded-[3rem] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.22)_0%,transparent_55%)] blur-3xl"
+              className="absolute inset-16 translate-x-2 translate-y-3 scale-80 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.22)_0%,transparent_55%)] blur-3xl"
               aria-hidden
             />
             <div className="relative w-full min-h-[280px] max-w-[560px] p-4 sm:p-6 lg:p-8">
@@ -57,7 +57,7 @@ export function Hero() {
                 playsInline
                 preload="auto"
               >
-                <source src="/images/homepage_hero_hd.webm" type="video/webm" />
+                <source src="/images/homepage_hero_hd_rev2.webm" type="video/webm" />
               </video>
             </div>
           </div>
