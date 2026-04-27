@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 
-/** Satu jenis rounded “leaf”: 3 sudut tebal, 1 tajam (0) — radius ~2.5rem (40px) */
-const r = "2.5rem";
+/** Satu jenis rounded “leaf”: 3 sudut tebal, 1 tajam (0) — radius diperbesar */
+const r = "5rem";
 
 /** Semua sel grid mengikuti ukuran yang sama: di md+ lebar kolom = tinggi (bangun persegi seperti sel logo) */
 const gridCellSizeClass =
@@ -31,7 +31,7 @@ const cells: Cell[] = [
     title: "AI &\nAutomation",
     description:
       "AI Agent setup, AI Training, Chatbot setup, workflow automation, process optimization - scale without headcount",
-    bg: "bg-[#1D1B67]",
+    bg: "bg-[#1E1D76]",
     text: "light",
   },
   {
@@ -40,7 +40,7 @@ const cells: Cell[] = [
     title: "Web Design &\nDevelopment",
     description:
       "WordPress, React, and other CMSs, landing pages, redesigns, bug fixes, WooCommerce, custom features",
-    bg: "bg-[#7243B5]",
+    bg: "bg-[#7547C5]",
     text: "light",
   },
   {
@@ -49,7 +49,7 @@ const cells: Cell[] = [
     title: "Graphic\nDesign",
     description:
       "Ad creatives, social graphics, branding, print materials, pitch decks, presentations",
-    bg: "bg-[#D80B8C]",
+    bg: "bg-[#E3058D]",
     text: "light",
   },
   {
@@ -58,7 +58,7 @@ const cells: Cell[] = [
     title: "Video\nEditing",
     description:
       "YouTube content, short-form reels, ad cuts, thumbnails, motion graphics",
-    bg: "bg-[#E1DFF6]",
+    bg: "bg-[#C7B3F2]",
     text: "dark",
   },
   {
@@ -67,7 +67,7 @@ const cells: Cell[] = [
     title: "Email &\nFunnels",
     description:
       "Campaign builds, automation sequences, drip nurture, newsletter design, A/B testing",
-    bg: "bg-[#ED643B]",
+    bg: "bg-[#F0573A]",
     text: "light",
   },
   {
@@ -76,7 +76,7 @@ const cells: Cell[] = [
     title: "CRM &\nMarketing Tech",
     description:
       "GoHighLevel, HubSpot, and other CRMs, Zapier, Make, ActiveCampaign, and other email software, integrations, API work",
-    bg: "bg-[#D1CCF2]",
+    bg: "bg-[#C7B3F2]",
     text: "dark",
   },
   {
@@ -85,7 +85,7 @@ const cells: Cell[] = [
     title: "Social Media\nContent",
     description:
       "Branded graphics, carousel posts, story templates, scheduling-ready assets",
-    bg: "bg-[#7A4EBF]",
+    bg: "bg-[#7547C5]",
     text: "light",
   },
   {
@@ -93,7 +93,7 @@ const cells: Cell[] = [
     id: "maintenance",
     title: "Website\nMaintenance",
     description: "Core updates, security monitoring, speed optimization, backups - always current",
-    bg: "bg-[#21206A]",
+    bg: "bg-[#1E1D76]",
     text: "light",
   },
 ];
@@ -111,7 +111,7 @@ function ServiceCardContent({
     <>
       <h3
         className={cn(
-          "whitespace-pre-line text-2xl font-bold leading-tight tracking-tight sm:text-3xl",
+          "whitespace-pre-line text-[2.15rem] font-bold leading-[1.12] tracking-[-0.01em] sm:text-[2.45rem]",
           text === "light" ? "text-white" : "text-[#101651]",
         )}
       >
@@ -119,7 +119,7 @@ function ServiceCardContent({
       </h3>
       <p
         className={cn(
-          "mt-3 text-sm leading-relaxed sm:text-base",
+          "mt-3 text-[1.05rem] leading-[1.5] sm:text-[1.15rem]",
           text === "light" ? "text-white/95" : "text-[#2a2f61]",
         )}
       >
@@ -133,19 +133,19 @@ export function EverySkillGrid() {
   return (
     <section
       id="every-skill"
-      className="relative overflow-x-hidden pb-20 pt-12 sm:pb-24 sm:pt-14 lg:pb-28 lg:pt-16"
+      className="relative overflow-x-hidden pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28"
       style={{
-        background: "linear-gradient(90deg, #FFFFFF 0%, #DDE8FF 49%, #FFFFFF 100%)",
+        background: "linear-gradient(90deg, #FFFFFF 0%, #CBDCFF 50%, #FFFFFF 100%)",
       }}
     >
-      <div className="absolute inset-x-0 top-0 z-0 -translate-y-[98%] text-white" aria-hidden>
+      <div className="absolute inset-x-0 -top-6 z-0 h-20 sm:-top-7 sm:h-24 lg:-top-8 lg:h-28" aria-hidden>
         <svg
-          className="block h-14 w-full sm:h-16 lg:h-[4.5rem]"
-          viewBox="0 0 1440 100"
+          className="block h-full w-full"
+          viewBox="0 0 1440 140"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path fill="currentColor" d="M0,78 Q720,8 1440,78 L1440,100 L0,100 Z" />
+          <path fill="#11104C" d="M0,0 H1440 V96 Q720,16 0,96 Z" />
         </svg>
       </div>
 
@@ -193,7 +193,7 @@ export function EverySkillGrid() {
               <article
                 key={item.id}
                 className={cn(
-                  "relative flex h-full flex-col overflow-hidden p-4 sm:p-5",
+                  "relative flex h-full flex-col overflow-hidden p-[3rem]",
                   gridCellSizeClass,
                   item.bg,
                 )}
@@ -259,10 +259,39 @@ export function EverySkillGrid() {
                   } as CSSProperties
                 }
               >
-                {/* Aksen tekstur halus (opsional, meniru blob di mockup) */}
-                {(item.id === "graphic-design" || item.id === "email-funnels" || item.id === "social-media") && (
+                {item.id === "email-funnels" && (
                   <div
-                    className="pointer-events-none absolute bottom-2 right-2 h-24 w-24 rounded-full bg-white/10 blur-sm sm:bottom-3 sm:right-3 sm:h-28 sm:w-28"
+                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] rounded-tr-[5rem] bg-white/10"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "graphic-design" && (
+                  <div
+                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] rounded-tl-[5rem] bg-white/10"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "video-editing" && (
+                  <div
+                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] rounded-bl-[5rem] bg-white/10"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "social-media" && (
+                  <div
+                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] rounded-tl-[5rem] bg-white/10"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "crm-marketing" && (
+                  <div
+                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] rounded-bl-[5rem] bg-white/10"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "maintenance" && (
+                  <div
+                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] rounded-tr-[5rem] bg-white/10"
                     aria-hidden
                   />
                 )}
