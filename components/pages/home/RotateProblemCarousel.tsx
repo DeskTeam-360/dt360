@@ -90,7 +90,7 @@ export function RotateProblemCarousel() {
                         src={card.imageSrc}
                         alt=""
                         fill
-                        className="object-cover object-center"
+                        className="object-cover object-bottom"
                         sizes="(max-width: 640px) 92vw, 560px"
                         priority={i === 0}
                       />
