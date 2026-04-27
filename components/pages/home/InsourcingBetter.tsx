@@ -138,25 +138,33 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       ) : null}
 
       {card.placement === "wide-magenta" ? (
-        <div className="grid h-full min-h-0 w-full gap-6 lg:min-h-0 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
-          <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
-            {title}
-            {body}
-          </div>
-          {card.mediaSrc ? (
-            <div className="flex w-full justify-center">
-              <BentoMedia
-                src={card.mediaSrc}
-                alt={card.mediaAlt ?? ""}
-                className="aspect-[5/4] max-h-[12rem] w-full max-w-sm sm:max-h-[13rem] lg:max-h-[11rem] xl:max-h-[13rem]"
-                sizes="(max-width: 1024px) 92vw, 320px"
-              />
-            </div>
-          ) : (
-            <div className="flex w-full justify-center">
-              <div className="aspect-[5/4] max-h-[12rem] w-full max-w-sm rounded-2xl bg-black/10 sm:max-h-[13rem] lg:max-h-[11rem]" aria-hidden />
-            </div>
+        <div
+          className={cn(
+            "box-border w-full min-w-0 self-center px-4 sm:px-6",
+            "max-w-7xl xl:max-w-6xl",
+            "mx-auto",
           )}
+        >
+          <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:min-h-0 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
+            <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
+              {title}
+              {body}
+            </div>
+            {card.mediaSrc ? (
+              <div className="flex w-full justify-center">
+                <BentoMedia
+                  src={card.mediaSrc}
+                  alt={card.mediaAlt ?? ""}
+                  className="aspect-[5/4] max-h-[12rem] w-full max-w-sm sm:max-h-[13rem] lg:max-h-[11rem] xl:max-h-[13rem]"
+                  sizes="(max-width: 1024px) 92vw, 320px"
+                />
+              </div>
+            ) : (
+              <div className="flex w-full justify-center">
+                <div className="aspect-[5/4] max-h-[12rem] w-full max-w-sm rounded-2xl bg-black/10 sm:max-h-[13rem] lg:max-h-[11rem]" aria-hidden />
+              </div>
+            )}
+          </div>
         </div>
       ) : null}
 
@@ -187,24 +195,32 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       ) : null}
 
       {card.placement === "wide-orange" ? (
-        <div className="grid h-full min-h-0 w-full gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
-          <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
-            {title}
-            {body}
-          </div>
-          {card.mediaSrc ? (
-            <BentoMedia
-              src={card.mediaSrc}
-              alt={card.mediaAlt ?? ""}
-              className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
-              sizes="(max-width: 1024px) 92vw, 280px"
-            />
-          ) : (
-            <div
-              className="mx-auto aspect-[4/5] max-h-[17rem] max-w-[13rem] rounded-2xl bg-black/10 sm:max-h-[18rem] sm:max-w-[14rem]"
-              aria-hidden
-            />
+        <div
+          className={cn(
+            "box-border w-full min-w-0 self-center px-4 sm:px-6",
+            "max-w-7xl xl:max-w-6xl",
+            "mx-auto",
           )}
+        >
+          <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
+            <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
+              {title}
+              {body}
+            </div>
+            {card.mediaSrc ? (
+              <BentoMedia
+                src={card.mediaSrc}
+                alt={card.mediaAlt ?? ""}
+                className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
+                sizes="(max-width: 1024px) 92vw, 280px"
+              />
+            ) : (
+              <div
+                className="mx-auto aspect-[4/5] max-h-[17rem] max-w-[13rem] rounded-2xl bg-black/10 sm:max-h-[18rem] sm:max-w-[14rem]"
+                aria-hidden
+              />
+            )}
+          </div>
         </div>
       ) : null}
 
@@ -227,6 +243,28 @@ export function InsourcingBetter() {
       className="relative overflow-x-hidden bg-[#11104C] py-16 sm:py-20 lg:py-24"
       aria-labelledby="insourcing-better-heading"
     >
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(56rem_34rem_at_-10%_34%,rgba(96,118,255,0.48)_0%,rgba(56,79,214,0.28)_36%,rgba(17,16,76,0)_69%)]"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-3 z-0 hidden justify-between px-0 sm:top-5 lg:flex">
+        <Image
+          src="/images/home-InsourcingBetter-title-left.png"
+          alt=""
+          width={220}
+          height={180}
+          className="opacity-95"
+          aria-hidden
+        />
+        <Image
+          src="/images/home-InsourcingBetter-title-right.png"
+          alt=""
+          width={180}
+          height={180}
+          className="opacity-95"
+          aria-hidden
+        />
+      </div>
       <Container className="relative max-w-7xl">
         <h2
           id="insourcing-better-heading"
