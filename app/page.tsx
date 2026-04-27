@@ -5,6 +5,7 @@ import { TeamMembers } from "@/components/pages/home/TeamMembers";
 import { StartBusiness } from "@/components/pages/home/StartBusiness";
 import { TrustedBy } from "@/components/pages/home/TrustedBy";
 import { EverySkillGrid } from "@/components/pages/home/EverySkillGrid";
+import { HowItWorksSteps } from "@/components/pages/home/HowItWorksSteps";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <RotateProblemCarousel />
       <InsourcingBetter />
       <EverySkillGrid />
+      <HowItWorksSteps />
     </main>
   );
 }

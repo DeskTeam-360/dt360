@@ -198,6 +198,19 @@ export type InsourcingBetterSection = {
   cards: InsourcingBentoCard[];
 };
 
+export type HowItWorksStep = {
+  id: string;
+  number: "1" | "2" | "3";
+  title: string;
+  description: string;
+};
+
+export type HowItWorksSection = {
+  titleLine1: string;
+  titleLine2: string;
+  steps: HowItWorksStep[];
+};
+
 export const insourcingBetterSection: InsourcingBetterSection = {
   titleLine1: "Outsourcing Is Broken",
   titleLine2: "We Built Something Better",
@@ -260,6 +273,34 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       title: "Your Team Gets Better Over Time",
       description:
         "Work with the same people month after month. Speed goes up, rework goes down, and quality becomes what you can rely on.",
+    },
+  ],
+};
+
+export const howItWorksSection: HowItWorksSection = {
+  titleLine1: "Three Steps. No Meetings.",
+  titleLine2: "No Micromanaging",
+  steps: [
+    {
+      id: "tell-us",
+      number: "1",
+      title: "Tell Us What You Need",
+      description:
+        "Drop a task into our request form or send an email - a homepage redesign, ad creatives, a GoHighLevel funnel, a video cut. Whatever's on your plate, hand it off.",
+    },
+    {
+      id: "we-handle",
+      number: "2",
+      title: "We Handle Everything",
+      description:
+        "Your US-based account manager assigns the right specialist, manages the timeline, and QAs the work before you see it. No standups. No Slack chasing.",
+    },
+    {
+      id: "review-move-on",
+      number: "3",
+      title: "Review and Move On",
+      description:
+        "We finish work and start the next task. Work lands in your inbox. Love it? Want changes? Unlimited revisions - no extra charge. Your queue keeps moving.",
     },
   ],
 };
