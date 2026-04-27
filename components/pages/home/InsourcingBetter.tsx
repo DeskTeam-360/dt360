@@ -240,7 +240,7 @@ export function InsourcingBetter() {
   return (
     <section
       id="insourcing-better"
-      className="relative overflow-x-hidden bg-[#11104C] py-16 sm:py-20 lg:py-24"
+      className="relative overflow-x-hidden bg-[#11104C] py-16 sm:py-20 lg:pt-24 lg:pb-[200px]"
       aria-labelledby="insourcing-better-heading"
     >
       <div
@@ -253,7 +253,7 @@ export function InsourcingBetter() {
           alt=""
           width={220}
           height={180}
-          className="opacity-95"
+          className="-translate-x-[40px] translate-y-[40px] opacity-95"
           aria-hidden
         />
         <Image
@@ -261,7 +261,25 @@ export function InsourcingBetter() {
           alt=""
           width={180}
           height={180}
-          className="opacity-95"
+          className="translate-x-[40px] opacity-95"
+          aria-hidden
+        />
+      </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-0 hidden justify-between px-0 sm:bottom-8 lg:flex">
+        <Image
+          src="/images/home-InsourcingBetter-bottom-left.png"
+          alt=""
+          width={180}
+          height={180}
+          className="translate-x-[100px] opacity-95"
+          aria-hidden
+        />
+        <Image
+          src="/images/home-InsourcingBetter-bottom-right.png"
+          alt=""
+          width={180}
+          height={180}
+          className="-translate-x-[40px] opacity-95"
           aria-hidden
         />
       </div>
