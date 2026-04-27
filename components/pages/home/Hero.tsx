@@ -49,7 +49,7 @@ export function Hero() {
             />
             <div className="relative w-full min-h-[280px] max-w-[560px] p-4 sm:p-6 lg:p-8">
               <video
-                className="relative z-[1] h-auto w-full"
+                className="relative z-[1] h-auto w-full origin-center scale-[1.2]"
                 aria-label="Collaborative digital team: designer, developer, and video editor working together on digital projects."
                 autoPlay
                 loop
