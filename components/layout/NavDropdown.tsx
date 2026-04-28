@@ -5,16 +5,27 @@ import { cn } from "@/lib/utils";
 type NavDropdownProps = {
   label: string;
   items: NavMenuItem[];
+  href?: string;
   className?: string;
 };
 
-export function NavDropdown({ label, items, className }: NavDropdownProps) {
+export function NavDropdown({ label, items, href, className }: NavDropdownProps) {
   return (
     <div className={cn("group relative", className)}>
-      <span className="flex cursor-default items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-white">
-        {label}
-        <ChevronDown className="size-3.5 opacity-70" aria-hidden />
-      </span>
+      {href ? (
+        <Link
+          href={href}
+          className="flex items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-white"
+        >
+          {label}
+          <ChevronDown className="size-3.5 opacity-70" aria-hidden />
+        </Link>
+      ) : (
+        <span className="flex cursor-default items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-white">
+          {label}
+          <ChevronDown className="size-3.5 opacity-70" aria-hidden />
+        </span>
+      )}
       <div className="pointer-events-none invisible absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
         <ul
           className="min-w-[220px] rounded-xl border border-white/10 bg-[#12152e]/95 py-2 shadow-xl backdrop-blur-md"

@@ -1,13 +1,13 @@
 export type FooterSimpleLink = { href: string; label: string };
 
 export const footerServices: FooterSimpleLink[] = [
-  { href: "/#services", label: "Web Design" },
-  { href: "/#services", label: "Graphic Design" },
-  { href: "/#services", label: "Video Editing" },
-  { href: "/#services", label: "Email & Funnels" },
-  { href: "/#services", label: "CRM & Automation" },
-  { href: "/#services", label: "Social Media" },
-  { href: "/#services", label: "Website Maintenance" },
+  { href: "/services", label: "Web Design" },
+  { href: "/services", label: "Graphic Design" },
+  { href: "/services", label: "Video Editing" },
+  { href: "/services", label: "Email & Funnels" },
+  { href: "/services", label: "CRM & Automation" },
+  { href: "/services", label: "Social Media" },
+  { href: "/services", label: "Website Maintenance" },
 ];
 
 export const footerCompany: FooterSimpleLink[] = [

@@ -43,7 +43,7 @@ export function Navbar() {
                 Home
               </Link>
               <NavDropdown label="How it Works" items={navHowItWorks} />
-              <NavDropdown label="Services" items={navServices} />
+              <NavDropdown label="Services" href="/services" items={navServices} />
               <NavDropdown label="Showcase" items={navShowcase} />
               <Link
                 href="/blog"

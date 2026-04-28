@@ -6,9 +6,8 @@ export const navHowItWorks: NavMenuItem[] = [
 ];
 
 export const navServices: NavMenuItem[] = [
-  { href: "/#services", label: "All services" },
-  { href: "/#design", label: "Design" },
-  { href: "/#development", label: "Development" },
+  { href: "/services#design", label: "Design" },
+  { href: "/services#development", label: "Development" },
 ];
 
 export const navShowcase: NavMenuItem[] = [
