@@ -211,12 +211,22 @@ export type HowItWorksSection = {
   steps: HowItWorksStep[];
 };
 
+export type SocialProofTestimonial = {
+  id: string;
+  /** Satu baris untuk atribusi, mis. "Luke Dalien, Special Ed Resource" */
+  attribution: string;
+  quote: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 export type SocialProofSection = {
   headlineLine1: string;
   headlineLine2: string;
   headlineHighlight: string;
   imageSrc: string;
   imageAlt: string;
+  testimonials: SocialProofTestimonial[];
 };
 
 export const insourcingBetterSection: InsourcingBetterSection = {
@@ -319,6 +329,32 @@ export const socialProofSection: SocialProofSection = {
   headlineHighlight: "Found Us",
   imageSrc: "/images/home-SocialProofTestimonials-ImageMain.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
+  testimonials: [
+    {
+      id: "luke",
+      attribution: "Luke Dalien, Special Ed Resource",
+      quote:
+        "I was spending 20+ hours a week managing designers and developers. Now I send a task and it gets done. DeskTeam360 gave me my time back - and my sanity.",
+      imageSrc: "/images/home-SocialProofTestimonials-luke.png",
+      imageAlt: "Luke Dalien portrait.",
+    },
+    {
+      id: "maria",
+      attribution: "Maria Chen, Brightline Marketing",
+      quote:
+        "Dummy testimonial: we needed consistent creative and dev support without hiring full-time. The team turned briefs around fast and the quality stayed high week after week.",
+      imageSrc: "/images/Home-Team-Imelda.png",
+      imageAlt: "Maria placeholder portrait.",
+    },
+    {
+      id: "emma",
+      attribution: "Emma Rodriguez, Northwind Digital",
+      quote:
+        "Dummy testimonial: onboarding was simple and communication stayed clear. We finally had one accountable partner instead of juggling five different freelancers.",
+      imageSrc: "/images/Home-Team-Gabriela.png",
+      imageAlt: "Emma placeholder portrait.",
+    },
+  ],
 };
 
 /** Team cards — screenshot-style names/roles; images under `/public/images/`. */

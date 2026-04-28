@@ -1,15 +1,16 @@
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { socialProofSection } from "@/data/home";
+import { SocialProofTestimonialCarousel } from "./SocialProofTestimonialCarousel";
 
 export function SocialProofTestimonials() {
-  const { headlineLine1, headlineLine2, headlineHighlight, imageSrc, imageAlt } =
+  const { headlineLine1, headlineLine2, headlineHighlight, imageSrc, imageAlt, testimonials } =
     socialProofSection;
 
   return (
     <section
       id="social-proof"
-      className="bg-[#ECECEC] py-14 sm:py-16 lg:py-20"
+      className="bg-white py-14 sm:py-16 lg:py-20"
       aria-labelledby="social-proof-heading"
     >
       <Container className="max-w-7xl pr-0">
@@ -38,6 +39,10 @@ export function SocialProofTestimonials() {
           </div>
         </div>
       </Container>
+
+      <div className="w-full">
+        <SocialProofTestimonialCarousel items={testimonials} />
+      </div>
     </section>
   );
 }
