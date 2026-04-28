@@ -108,14 +108,14 @@ export default function ServicesPage() {
           alt=""
           width={540}
           height={714}
-          className="pointer-events-none absolute right-0 top-0 h-auto w-[190px] opacity-95 md:w-[240px] lg:w-[300px]"
+          className="pointer-events-none absolute right-0 top-0 h-auto w-[260px] opacity-95 md:w-[340px] lg:w-[440px]"
         />
         <Image
           src="/images/dt360-bottom-bubble.png"
           alt=""
           width={382}
           height={576}
-          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[150px] opacity-95 md:w-[190px] lg:w-[220px]"
+          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] lg:w-[340px]"
         />
 
         <div className="relative mx-auto max-w-6xl">
