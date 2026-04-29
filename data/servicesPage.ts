@@ -43,6 +43,7 @@ export const servicesTestimonials: ServicesTestimonial[] = [
     quote:
       "I was spending 20+ hours a week managing designers and developers. Now I send a task and it gets done. DeskTeam360 gave me my time back.",
     attribution: "Luke Dalien, Special Ed Resource",
+    imageSrc: "/images/dt360-luke.png",
     imageAlt: "Portrait of Luke Dalien",
   },
   {
@@ -50,6 +51,7 @@ export const servicesTestimonials: ServicesTestimonial[] = [
     quote:
       "Saving at least $20,000 monthly compared to what I was paying individual contractors - and the quality and reliability is better.",
     attribution: "Gaynor Milky, Charisma Ink",
+    imageSrc: "/images/dt360-gaynor.webp",
     imageAlt: "Portrait of Gaynor Milky",
   },
   {
