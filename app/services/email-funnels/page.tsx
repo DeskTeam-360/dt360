@@ -4,7 +4,7 @@ import { PlatformsSupported } from "@/components/pages/service/email-funnels/Pla
 
 export default function EmailFunnelsPage() {
   return (
-    <main className="overflow-x-hidden bg-white">
+    <main className="bg-white">
       <Hero />
       <div className="-mt-px">
         <PlatformsSupported />

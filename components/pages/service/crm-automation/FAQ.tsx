@@ -6,14 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "Do I need to provide the copy or do you write it too?",
+    question: "What CRM platforms do you support?",
     answer:
-      "Your subscription includes the build - the technical setup, design, and implementations. If you need copywriting, that's an add-on service. You can provide the copy or we can help write it.",
+      "GoHighLevel, HubSpot, Salesforce, Keap, ActiveCampaign, Zoho, Monday.com, and more. If it has an API, we can probably work with it.",
   },
   {
-    question: "Can you work in my existing platform?",
+    question: "Do you handle the automations or just the setup?",
     answer:
-      "Yes. We can build inside your current CRM or email platform as long as we have access and your required integrations.",
+      "We configure end-to-end: triggers, routing, tags, integrations, QA, and refinement so automations stay reliable—not a one-off build you have to troubleshoot alone.",
   },
 ];
 
@@ -51,10 +51,10 @@ export function FAQ() {
       />
       <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
-          <div className="relative mx-auto w-full max-w-[540px]">
+          <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
-              src="/images/Email - FAQ.png"
-              alt="Email and funnels FAQ illustration"
+              src="/images/CRM - FAQ.png"
+              alt="CRM and automation FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"
@@ -78,7 +78,7 @@ export function FAQ() {
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="text-[20px] leading-tight sm:text-[24px]">{item.question}</span>
+                      <span className="text-[24px] leading-tight">{item.question}</span>
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
                           isOpen ? "rotate-180" : "rotate-0"
@@ -97,7 +97,7 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="mt-2 px-2 text-[16px] leading-relaxed text-[#11114d] sm:text-[18px]">{item.answer}</p>
+                      <p className="mt-2 px-2 text-[18px] leading-relaxed text-[#11114d]">{item.answer}</p>
                     ) : null}
                   </div>
                 );

@@ -43,16 +43,16 @@ export function FAQ() {
       <SafeImage
         src="/images/Service - Graphic Code.png"
         alt=""
-        width={200}
-        height={200}
-        className="pointer-events-none absolute z-[2] -top-12 -left-[0.375rem] h-auto w-auto max-w-[min(340px,88vw)] sm:-left-3 sm:-top-14 sm:max-w-[min(360px,82vw)] md:-left-10 md:max-w-[min(380px,76vw)] lg:-left-[3.5rem] lg:-top-16 lg:max-w-[280px]"
+        width={512}
+        height={512}
+        className="pointer-events-none absolute z-[2] -top-12 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <SafeImage
         src="/images/Service - Graphic Design.png"
         alt=""
-        width={200}
-        height={200}
-        className="pointer-events-none absolute z-[2] -top-12 -right-[0.375rem] h-auto w-auto max-w-[min(340px,88vw)] sm:-right-3 sm:-top-14 sm:max-w-[min(360px,82vw)] md:-right-10 md:max-w-[min(380px,76vw)] lg:-right-[3.5rem] lg:-top-16 lg:max-w-[280px]"
+        width={512}
+        height={512}
+        className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:-right-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-[5rem] lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">

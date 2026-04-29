@@ -4,7 +4,7 @@ import { Testimonials } from "@/components/pages/service/video-editing/Testimoni
 
 export default function VideoEditingPage() {
   return (
-    <main className="overflow-x-hidden bg-white">
+    <main className="bg-white">
       <Hero />
       <div className="-mt-px">
         <Testimonials />
