@@ -115,7 +115,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-x-hidden antialiased`}
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col">
         <OrganizationJsonLd />
