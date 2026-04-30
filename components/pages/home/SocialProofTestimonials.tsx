@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { socialProofSection } from "@/data/home";
+import { SocialProofMarquee } from "./HomeMarquee";
 import { SocialProofTestimonialCarousel } from "./SocialProofTestimonialCarousel";
 
 export function SocialProofTestimonials() {
@@ -10,7 +11,7 @@ export function SocialProofTestimonials() {
   return (
     <section
       id="social-proof"
-      className="bg-white py-14 sm:py-16 lg:py-20"
+      className="overflow-x-clip bg-white py-14 sm:py-16 lg:py-20"
       aria-labelledby="social-proof-heading"
     >
       <Container className="max-w-7xl pr-0">
@@ -43,6 +44,8 @@ export function SocialProofTestimonials() {
       <div className="w-full">
         <SocialProofTestimonialCarousel items={testimonials} />
       </div>
+
+      <SocialProofMarquee />
     </section>
   );
 }

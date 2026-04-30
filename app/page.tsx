@@ -7,6 +7,8 @@ import { TrustedBy } from "@/components/pages/home/TrustedBy";
 import { EverySkillGrid } from "@/components/pages/home/EverySkillGrid";
 import { HowItWorksSteps } from "@/components/pages/home/HowItWorksSteps";
 import { SocialProofTestimonials } from "@/components/pages/home/SocialProofTestimonials";
+import { Pricing } from "@/components/pages/home/Pricing";
+import { FAQ } from "@/components/pages/home/FAQ";
 
 export default function Home() {
   return (
@@ -22,6 +24,8 @@ export default function Home() {
       <EverySkillGrid />
       <HowItWorksSteps />
       <SocialProofTestimonials />
+      <Pricing />
+      <FAQ />
     </main>
   );
 }

@@ -339,20 +339,132 @@ export const socialProofSection: SocialProofSection = {
       imageAlt: "Luke Dalien portrait.",
     },
     {
-      id: "maria",
-      attribution: "Maria Chen, Brightline Marketing",
+      id: "heath-wilcock",
+      attribution: "Heath Wilcock, Fold Soup Copy",
       quote:
-        "Dummy testimonial: we needed consistent creative and dev support without hiring full-time. The team turned briefs around fast and the quality stayed high week after week.",
-      imageSrc: "/images/Home-Team-Imelda.png",
-      imageAlt: "Maria placeholder portrait.",
+        "I went from paying $5K a month to three different freelancers to one flat bill. I'm getting more done than ever. The consistency is what sold me.",
+      imageSrc: "/images/home-SocialProofTestimonials-Wilcock.png",
+      imageAlt: "Heath Wilcock portrait.",
     },
     {
-      id: "emma",
-      attribution: "Emma Rodriguez, Northwind Digital",
+      id: "renee-poindexter",
+      attribution: "Renee Beth Poindexter, Living the Potential",
       quote:
-        "Dummy testimonial: onboarding was simple and communication stayed clear. We finally had one accountable partner instead of juggling five different freelancers.",
-      imageSrc: "/images/Home-Team-Gabriela.png",
-      imageAlt: "Emma placeholder portrait.",
+        "I've tried Fiverr, Upwork, and two agencies. DeskTeam360 is the first team that feels like MY team. They know my brand, my voice, my standards.",
+      imageSrc: "/images/home-SocialProofTestimonials-Renee.png",
+      imageAlt: "Renee Beth Poindexter portrait.",
+    },
+  ],
+};
+
+/** Baris teks berjalan di bawah homepage — angka/metrik di awal baris ditampilkan bold. */
+export type HomeMarqueeItem = {
+  id: string;
+  leadBold: string;
+  rest: string;
+};
+
+export const homeMarqueeItems: HomeMarqueeItem[] = [
+  {
+    id: "zach",
+    leadBold: "+$160K/month",
+    rest: " added revenue after freeing 16 hrs/week - Zach S., Convert on Command",
+  },
+  {
+    id: "gaynor",
+    leadBold: "$20K/month",
+    rest: " saved vs. previous vendors - Gaynor, Charisma Ink",
+  },
+  {
+    id: "andreas",
+    leadBold: "15 hours/week",
+    rest: " saved on marketing execution - Andreas, Libra Growth Labs",
+  },
+];
+
+export type PricingPlanCard = {
+  id: string;
+  name: string;
+  ribbonColor: string;
+  ribbonFoldColor: string;
+  /** CSS `background` untuk isi kartu (solid atau gradient) */
+  cardBackground: string;
+  price: string;
+  buttonTextColor: string;
+  ctaHref: string;
+  features: string[];
+};
+
+export type PricingSection = {
+  headlineLine1: string;
+  headlineHighlight: string;
+  headlineLine2: string;
+  subheading: string;
+  ctaLabel: string;
+  plans: PricingPlanCard[];
+};
+
+export const pricingSection: PricingSection = {
+  headlineLine1: "One Team.",
+  headlineHighlight: "Three Plans.",
+  headlineLine2: "Pick Your Speed.",
+  subheading:
+    "Every plan includes the full team - graphic design, web development, video editing, marketing tech, team leader, and a dedicated account manager. The only difference is how many tasks run at once.",
+  ctaLabel: "GET STARTED",
+  plans: [
+    {
+      id: "entrepreneur",
+      name: "ENTREPRENEUR",
+      ribbonColor: "#5D3FD3",
+      ribbonFoldColor: "#B666FE",
+      cardBackground: "linear-gradient(180deg, #BD62FF 0%, #7E5BFD 100%)",
+      price: "1,497",
+      buttonTextColor: "#5D3FD3",
+      ctaHref: "/book-a-call",
+      features: [
+        "1 active task at a time",
+        "Full team access - all 8 services",
+        "US-based account manager",
+        "1-3 business day turnaround",
+        "Unlimited revisions",
+        "30-day money-back guarantee",
+      ],
+    },
+    {
+      id: "marketer",
+      name: "MARKETER",
+      ribbonColor: "#991B1B",
+      ribbonFoldColor: "#7F1D1D",
+      cardBackground: "linear-gradient(180deg, #FF8B52 0%, #EE4176 100%)",
+      price: "2,994",
+      buttonTextColor: "#E3058D",
+      ctaHref: "/book-a-call",
+      features: [
+        "2 active tasks at a time",
+        "Full team access - all 8 services",
+        "Priority account manager",
+        "1-3 business day turnaround",
+        "Unlimited revisions",
+        "30-day money-back guarantee",
+      ],
+    },
+    {
+      id: "agency",
+      name: "AGENCY",
+      ribbonColor: "#0F766E",
+      ribbonFoldColor: "#115E59",
+      cardBackground: "linear-gradient(180deg, #9DC54E 0%, #1D8A7D 100%)",
+      price: "4,491",
+      buttonTextColor: "#0F766E",
+      ctaHref: "/book-a-call",
+      features: [
+        "3 active tasks at a time",
+        "Full team access - all 8 services",
+        "Dedicated senior account manager",
+        "1-3 business day turnaround",
+        "White-label delivery",
+        "30-day money-back guarantee",
+      ],
     },
   ],
 };
