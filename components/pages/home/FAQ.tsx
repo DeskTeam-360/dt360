@@ -1,6 +1,11 @@
+import Image from "next/image";
 import { Container } from "@/components/shared/Container";
+import { faqSection } from "@/data/home";
+import { FAQAccordionList } from "./FAQAccordionList";
 
 export function FAQ() {
+  const { headingStart, headingHighlight, items } = faqSection;
+
   return (
     <section
       id="faq"
@@ -24,8 +29,28 @@ export function FAQ() {
         aria-hidden
       />
 
-      <Container className="max-w-7xl">
-        <div className="min-h-[320px]" />
+      <Container className="relative z-[1] max-w-7xl">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+          <div className="order-2 lg:order-1">
+            <Image
+              src="/images/home-faq-imageleft.png"
+              alt="FAQ illustration with design and development tools."
+              width={900}
+              height={980}
+              className="h-auto w-full max-w-[34rem]"
+              sizes="(max-width: 1024px) 90vw, 560px"
+            />
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <h2 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem]">
+              <span>{headingStart} </span>
+              <span className="text-[#E3058D]">{headingHighlight}</span>
+            </h2>
+
+            <FAQAccordionList items={items} />
+          </div>
+        </div>
       </Container>
     </section>
   );

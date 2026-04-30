@@ -404,6 +404,18 @@ export type PricingSection = {
   plans: PricingPlanCard[];
 };
 
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type FaqSection = {
+  headingStart: string;
+  headingHighlight: string;
+  items: FaqItem[];
+};
+
 export const pricingSection: PricingSection = {
   headlineLine1: "One Team.",
   headlineHighlight: "Three Plans.",
@@ -465,6 +477,49 @@ export const pricingSection: PricingSection = {
         "White-label delivery",
         "30-day money-back guarantee",
       ],
+    },
+  ],
+};
+
+export const faqSection: FaqSection = {
+  headingStart: "Got Questions?",
+  headingHighlight: "Good",
+  items: [
+    {
+      id: "faq-1",
+      question: "What exactly can I send you?",
+      answer:
+        "Anything in our wheelhouse - AI agents, graphic design, web design and development, video editing, email campaigns, funnel builds, CRM setup, website maintenance, automation. If it's marketing or tech work, we probably do it.",
+    },
+    {
+      id: "faq-2",
+      question: "How is this different from hiring a freelancer?",
+      answer:
+        "A freelancer gives you one skill and disappears when the project ends. DeskTeam360 gives you an entire team - designers, developers, video editors, and tech specialists - managed by a dedicated account manager. No hunting for talent, no onboarding, no ghosting.",
+    },
+    {
+      id: "faq-3",
+      question: "How fast do things get done?",
+      answer:
+        "Most tasks ship in 1-3 business days. Bigger projects get broken into tasks and completed in sequence. Your account manager keeps you updated - you never have to ask \"where's my stuff?\"",
+    },
+    {
+      id: "faq-4",
+      question: "What if the work isn't what I wanted?",
+      answer:
+        "Unlimited revisions on every plan. We revise until you're happy - no extra charge, no revision caps, no attitude.",
+    },
+    {
+      id: "faq-5",
+      question: "Can agencies white-label this?",
+      answer:
+        "Yes - and many do. We work behind the scenes under your brand. Your clients see your name, your logo, your deliverables. We're the team they never know about.",
+    },
+    {
+      id: "faq-6",
+      question: "Is there a minimum commitment?",
+      answer:
+        "No. Month-to-month. Cancel anytime. Plus the 30-day money-back guarantee means you can test it with zero risk.",
     },
   ],
 };
