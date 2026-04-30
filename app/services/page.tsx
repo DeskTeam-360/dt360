@@ -60,7 +60,7 @@ const OVERLAY_LAYER_CLASS =
 
 export default function ServicesPage() {
   return (
-    <main className="relative bg-white">
+    <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
       <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 lg:px-10 lg:pb-[80px] lg:pt-[120px]">
         <Image

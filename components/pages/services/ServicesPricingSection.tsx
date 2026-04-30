@@ -32,7 +32,7 @@ const PLANS = [
     name: "MARKETER",
     labelImageSrc: "/images/dt360-marketer.png",
     labelImageAlt: "Marketer plan label",
-    tasks: "2 Task",
+    tasks: "2 Tasks",
     price: "$2,994",
     period: "/month",
     ribbonClass: "bg-[#7f1d1d]",
@@ -46,7 +46,7 @@ const PLANS = [
     name: "AGENCY",
     labelImageSrc: "/images/dt360-agency.png",
     labelImageAlt: "Agency plan label",
-    tasks: "3 Task",
+    tasks: "3 Tasks",
     price: "$4,491",
     period: "/month",
     ribbonClass: "bg-[#134e4a]",
@@ -81,7 +81,7 @@ function CheckIcon({ className }: { className?: string }) {
 export function ServicesPricingSection() {
   return (
     <section
-      className="relative z-10 isolate overflow-hidden bg-white pb-[72px] pt-[160px] md:pb-[88px] md:pt-[180px] lg:pb-[100px] lg:pt-[200px]"
+      className="relative z-10 isolate overflow-hidden bg-white pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] lg:mt-0 lg:pb-[100px] lg:pt-[200px]"
       aria-labelledby="services-pricing-heading"
     >
       {/* Radial pink — kiri bawah, lebih besar */}
@@ -106,7 +106,7 @@ export function ServicesPricingSection() {
       <div className="relative z-10 mx-auto max-w-6xl px-5 md:px-10 lg:px-10">
         <h2
           id="services-pricing-heading"
-          className="text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] md:text-[64px]"
+          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] lg:mt-0"
         >
           Simple Pricing.
           <br />
