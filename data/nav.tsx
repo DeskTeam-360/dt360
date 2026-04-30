@@ -6,8 +6,15 @@ export const navHowItWorks: NavMenuItem[] = [
 ];
 
 export const navServices: NavMenuItem[] = [
-  { href: "/services#design", label: "Design" },
-  { href: "/services#development", label: "Development" },
+  { href: "/services/web-design-development", label: "Web Design & Development" },
+  { href: "/services/graphic-design", label: "Graphic Design" },
+  { href: "/services/video-editing", label: "Video Editing" },
+  { href: "/services/email-funnels", label: "Email & Funnels" },
+  { href: "/services/crm-automation", label: "CRM & Automation" },
+  { href: "/services/social-media-content", label: "Social Media Content" },
+  { href: "/services/website-maintenance", label: "Website Maintenance" },
+  { href: "/services/ai-automation", label: "AI & Automation" },
+  { href: "/services/white-label", label: "White Label" },
 ];
 
 export const navShowcase: NavMenuItem[] = [

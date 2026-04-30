@@ -7,7 +7,7 @@ import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { NavDropdown } from "./NavDropdown";
-import { navAbout, navHowItWorks, navServices, navShowcase, type NavMenuItem } from "@/data/nav";
+import { navServices, navShowcase, type NavMenuItem } from "@/data/nav";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -55,7 +55,12 @@ export function Navbar() {
               >
                 Home
               </Link>
-              <NavDropdown label="How it Works" items={navHowItWorks} />
+              <Link
+                href="/how-it-works"
+                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+              >
+                How it Works
+              </Link>
               <NavDropdown label="Services" href="/services" items={navServices} />
               <NavDropdown label="Showcase" items={navShowcase} />
               <Link
@@ -64,7 +69,12 @@ export function Navbar() {
               >
                 Blog
               </Link>
-              <NavDropdown label="About" items={navAbout} />
+              <Link
+                href="/about"
+                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+              >
+                About
+              </Link>
             </nav>
 
             <div className="hidden h-6 w-px shrink-0 bg-white/25 lg:block" aria-hidden />
@@ -127,13 +137,17 @@ export function Navbar() {
               <MobileLink href="/" onNavigate={() => setMobileOpen(false)}>
                 Home
               </MobileLink>
-              <MobileGroup title="How it Works" items={navHowItWorks} onPick={() => setMobileOpen(false)} />
+              <MobileLink href="/how-it-works" onNavigate={() => setMobileOpen(false)}>
+                How it Works
+              </MobileLink>
               <MobileGroup title="Services" items={navServices} onPick={() => setMobileOpen(false)} />
               <MobileGroup title="Showcase" items={navShowcase} onPick={() => setMobileOpen(false)} />
               <MobileLink href="/blog" onNavigate={() => setMobileOpen(false)}>
                 Blog
               </MobileLink>
-              <MobileGroup title="About" items={navAbout} onPick={() => setMobileOpen(false)} />
+              <MobileLink href="/about" onNavigate={() => setMobileOpen(false)}>
+                About
+              </MobileLink>
               <hr className="my-3 border-white/10" />
               <MobileLink href="/login" onNavigate={() => setMobileOpen(false)}>
                 Log in

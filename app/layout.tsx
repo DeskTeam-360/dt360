@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Montserrat, Russo_One } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
@@ -14,6 +14,24 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const russoOne = Russo_One({
+  variable: "--font-russo-one",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
@@ -115,9 +133,9 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} h-full overflow-x-hidden antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${russoOne.variable} h-full antialiased`}
     >
-      <body suppressHydrationWarning className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col font-sans">
         <OrganizationJsonLd />
         <Navbar />
         {children}
