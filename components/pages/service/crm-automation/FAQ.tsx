@@ -6,19 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "What format should I send raw video files in?",
+    question: "What CRM platforms do you support?",
     answer:
-      "We accept MP4, MOV, AVI, and most common formats. You can send via Google Drive, Dropbox, WeTransfer, or our task system.",
+      "GoHighLevel, HubSpot, Salesforce, Keap, ActiveCampaign, Zoho, Monday.com, and more. If it has an API, we can probably work with it.",
   },
   {
-    question: "How long does video editing take?",
+    question: "Do you handle the automations or just the setup?",
     answer:
-      "Turnaround depends on length and complexity. Simple cuts are often next business day; longer edits are scheduled with your editor and tracked in your workspace.",
-  },
-  {
-    question: "Can you match our existing brand style?",
-    answer:
-      "Yes. Share brand guidelines, reference videos, or past edits and we will match pacing, typography, lower-thirds, and on-screen style.",
+      "We configure end-to-end: triggers, routing, tags, integrations, QA, and refinement so automations stay reliable—not a one-off build you have to troubleshoot alone.",
   },
 ];
 
@@ -58,8 +53,8 @@ export function FAQ() {
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
-              src="/images/Service - Video FAQ.png"
-              alt="Video editing FAQ illustration"
+              src="/images/CRM - FAQ.png"
+              alt="CRM and automation FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"

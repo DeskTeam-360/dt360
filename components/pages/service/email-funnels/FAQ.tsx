@@ -6,19 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "What format should I send raw video files in?",
+    question: "Do I need to provide the copy or do you write it too?",
     answer:
-      "We accept MP4, MOV, AVI, and most common formats. You can send via Google Drive, Dropbox, WeTransfer, or our task system.",
+      "Your subscription includes the build - the technical setup, design, and implementations. If you need copywriting, that's an add-on service. You can provide the copy or we can help write it.",
   },
   {
-    question: "How long does video editing take?",
+    question: "Can you work in my existing platform?",
     answer:
-      "Turnaround depends on length and complexity. Simple cuts are often next business day; longer edits are scheduled with your editor and tracked in your workspace.",
-  },
-  {
-    question: "Can you match our existing brand style?",
-    answer:
-      "Yes. Share brand guidelines, reference videos, or past edits and we will match pacing, typography, lower-thirds, and on-screen style.",
+      "Yes. We can build inside your current CRM or email platform as long as we have access and your required integrations.",
   },
 ];
 
@@ -56,10 +51,10 @@ export function FAQ() {
       />
       <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
-          <div className="relative mx-auto w-full max-w-[620px]">
+          <div className="relative mx-auto w-full max-w-[540px]">
             <SafeImage
-              src="/images/Service - Video FAQ.png"
-              alt="Video editing FAQ illustration"
+              src="/images/Email - FAQ.png"
+              alt="Email and funnels FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"
@@ -83,7 +78,7 @@ export function FAQ() {
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="text-[24px] leading-tight">{item.question}</span>
+                      <span className="text-[20px] leading-tight sm:text-[24px]">{item.question}</span>
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
                           isOpen ? "rotate-180" : "rotate-0"
@@ -102,7 +97,7 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="mt-2 px-2 text-[18px] leading-relaxed text-[#11114d]">{item.answer}</p>
+                      <p className="mt-2 px-2 text-[16px] leading-relaxed text-[#11114d] sm:text-[18px]">{item.answer}</p>
                     ) : null}
                   </div>
                 );
