@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ServicesFloatingFeaturesBar } from "@/components/pages/services/ServicesFloatingFeaturesBar";
+import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
+import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
+import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
 import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
 import { servicesTestimonials } from "@/data/servicesPage";
 
@@ -42,7 +45,7 @@ const coreServices = [
   { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", icon: "/images/dt360-whitelabel-logo.png", href: "#" },
 ];
 
-/** Posisi overlay putih + radius lengkungan ke arah tengah kartu */
+/** White overlay position + corner radius pointing toward card center */
 const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
   "04": "bottom-0 right-0 rounded-tl-[52px] md:rounded-tl-[58px]",
   "05": "top-0 right-0 rounded-bl-[52px] md:rounded-bl-[58px]",
@@ -58,7 +61,7 @@ const OVERLAY_LAYER_CLASS =
 export default function ServicesPage() {
   return (
     <main className="relative bg-white">
-      {/* Hero: kartu platforms dipindahkan — di sini tidak overflow-hidden vertikal */}
+      {/* Hero: platforms card moved; keep vertical overflow visible */}
       <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 lg:px-10 lg:pb-[80px] lg:pt-[120px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
@@ -99,7 +102,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Jembatan di antara hero & section 2: z-20 > z-10 agar tidak tertutup warna putih */}
+      {/* Bridge between hero & section 2: keep z-20 > z-10 above white layer */}
       <div className="relative z-20 -mt-[72px] px-5 md:px-10 lg:-mt-[88px] lg:px-10">
         <div className="mx-auto w-full max-w-6xl rounded-[28px] border border-[#d8dbef] bg-white p-[40px] shadow-[0_0_22px_rgba(189,200,252,0.75),0_16px_40px_rgba(16,22,81,0.18)]">
           <h2 className="text-center text-2xl font-extrabold tracking-[0.14em] text-[#3f4f9a]">
@@ -198,7 +201,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <div className="py-[40px]">
+      <div className="py-[80px]">
         <ServicesFloatingFeaturesBar />
       </div>
 
@@ -219,6 +222,12 @@ export default function ServicesPage() {
         </div>
         <ServicesTestimonialsCarousel items={servicesTestimonials} />
       </section>
+
+      <ServicesHowItWorks />
+
+      <ServicesPricingSection />
+
+      <ServicesFaqSection />
     </main>
   );
 }

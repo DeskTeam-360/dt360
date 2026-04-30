@@ -1,4 +1,4 @@
-/** Section bar biru mengambang — gantikan iconSrc dengan asset di `/public/images/...` */
+/** Floating blue feature bar — replace iconSrc with assets from `/public/images/...` */
 export type ServicesFloatingFeature = {
   id: string;
   title: string;
@@ -6,12 +6,12 @@ export type ServicesFloatingFeature = {
   iconSrc?: string;
 };
 
-/** Placeholder foto quote — tambahkan ke `/public/images/...` lalu set imageSrc */
+/** Quote photo placeholder — add assets to `/public/images/...` and set imageSrc */
 export type ServicesTestimonial = {
   id: string;
   quote: string;
   attribution: string;
-  /** Path di bawah `/public`, e.g. `/images/services/testimonial-1.jpg` */
+  /** Path under `/public`, e.g. `/images/services/testimonial-1.jpg` */
   imageSrc?: string;
   imageAlt: string;
 };

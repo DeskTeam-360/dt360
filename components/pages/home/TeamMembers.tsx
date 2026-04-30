@@ -7,7 +7,7 @@ import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
 import { cn } from "@/lib/utils";
 
-/** ~ lebar kartu (280) + gap antar kartu */
+/** ~ card width (280) + gap between cards */
 const SCROLL_STEP = 312;
 
 function centerHorizontalScroll(el: HTMLDivElement | null) {
@@ -26,7 +26,7 @@ export function TeamMembers() {
     el.scrollBy({ left: dir * SCROLL_STEP, behavior: "smooth" });
   }, []);
 
-  /** Default: tampilan mengarah ke tengah deretan anggota, bukan dari kiri. */
+  /** Default view starts centered on the members row, not from the left. */
   useLayoutEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -98,7 +98,7 @@ export function TeamMembers() {
                 className="w-[min(100%,280px)] shrink-0 snap-center sm:w-[280px]"
               >
                 <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white">
-                  {/* Foto memenuhi seluruh kotak; label di atas lapisan gambar */}
+                  {/* Photo fills the whole tile; label sits above the image layer */}
                   <div className="absolute inset-0 z-[1] overflow-hidden">
                     <SafeImage
                       src={member.imageSrc}
@@ -111,7 +111,7 @@ export function TeamMembers() {
                   </div>
                   <div
                     className={cn(
-                      // Chip menempel kiri; jarak hanya dari bawah; sudut kanan atas membulat
+                      // Chip sticks to the left; offset only from bottom; top-right corner rounded
                       "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-bl-none rounded-br-none rounded-tl-none rounded-tr-[1.35rem] px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:rounded-tr-[1.75rem] sm:py-2.5 sm:pr-5",
                       member.labelClass,
                     )}

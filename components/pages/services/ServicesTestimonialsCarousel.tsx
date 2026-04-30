@@ -95,7 +95,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
                         role="img"
                         aria-label={item.imageAlt}
                       >
-                        Foto
+                        Photo
                       </div>
                     )}
                   </div>
@@ -120,7 +120,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
               "h-3 w-3 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]",
               dotIndex === index ? "bg-[#e4277a]" : "bg-[#c6d2df] hover:bg-[#aebdd0]",
             )}
-            aria-label={`Tampilkan testimonial ${dotIndex + 1}`}
+            aria-label={`Show testimonial ${dotIndex + 1}`}
             aria-current={dotIndex === index ? "true" : undefined}
           />
         ))}

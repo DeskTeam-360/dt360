@@ -3,10 +3,10 @@ import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 
-/** Satu jenis rounded “leaf”: 3 sudut tebal, 1 tajam (0) — radius diperbesar */
+/** One rounded leaf style: 3 rounded corners, 1 sharp (0) — increased radius */
 const r = "5rem";
 
-/** Semua sel grid mengikuti ukuran yang sama: di md+ lebar kolom = tinggi (bangun persegi seperti sel logo) */
+/** All grid cells share the same size behavior: at md+, column width = height (square like the logo cell) */
 const gridCellSizeClass =
   "w-full min-w-0 min-h-[10rem] sm:min-h-[11rem] md:min-h-0 md:aspect-square";
 
@@ -160,7 +160,7 @@ export function EverySkillGrid() {
           </p>
         </div>
 
-        {/* 3x3: satu kolom di mobile, 3 kolom mulai md (tablet) ke atas — gap memisahkan tile seperti desain */}
+        {/* 3x3: one column on mobile, 3 columns from md (tablet) and up — gaps separate tiles per design */}
         <div className="mt-10 grid min-h-0 grid-cols-1 gap-[6px] sm:mt-12 md:grid-cols-3">
           {cells.map((item) => {
             if (item.kind === "logo") {
@@ -170,7 +170,7 @@ export function EverySkillGrid() {
                   className={cn("flex h-full items-center justify-center overflow-hidden bg-white p-3 sm:p-4", gridCellSizeClass)}
                   style={
                     {
-                      // tajam: kiri atas + kanan bawah — lainnya membulat
+                      // Sharp corners: top-left + bottom-right — other corners rounded
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,
                       borderBottomLeftRadius: r,
@@ -199,8 +199,8 @@ export function EverySkillGrid() {
                 )}
                 style={
                   {
-                    // apply rounded via inline where template literal + TailwindJIT could miss dynamic strings
-                    // Baris 1 — kolom 2 & 3: tajam kanan atas + kiri bawah
+                    // Apply rounded corners via inline styles where template literals might be missed by Tailwind JIT.
+                    // Row 1 — columns 2 & 3: sharp top-right + bottom-left
                     ...(item.id === "ai-automation" && {
                       borderTopLeftRadius: r,
                       borderTopRightRadius: 0,
@@ -208,48 +208,48 @@ export function EverySkillGrid() {
                       borderBottomLeftRadius: 0,
                     }),
                     ...(item.id === "web-design" && {
-                      // tajam: kiri atas + kanan bawah
+                      // Sharp corners: top-left + bottom-right
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,
                       borderBottomRightRadius: 0,
                       borderBottomLeftRadius: r,
                     }),
-                    // Baris 2 — kolom 1: tajam kanan atas + kiri bawah
+                    // Row 2 — column 1: sharp top-right + bottom-left
                     ...(item.id === "graphic-design" && {
                       borderTopLeftRadius: r,
                       borderTopRightRadius: 0,
                       borderBottomRightRadius: r,
                       borderBottomLeftRadius: 0,
                     }),
-                    // Baris 2 — kolom 2: tajam kiri atas + kanan bawah
+                    // Row 2 — column 2: sharp top-left + bottom-right
                     ...(item.id === "video-editing" && {
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,
                       borderBottomRightRadius: 0,
                       borderBottomLeftRadius: r,
                     }),
-                    // Baris 2 — kolom 3: tajam kiri bawah + kanan atas
+                    // Row 2 — column 3: sharp bottom-left + top-right
                     ...(item.id === "email-funnels" && {
                       borderTopLeftRadius: r,
                       borderTopRightRadius: 0,
                       borderBottomRightRadius: r,
                       borderBottomLeftRadius: 0,
                     }),
-                    // Baris 3 — kolom 1: tajam kiri atas + kanan bawah
+                    // Row 3 — column 1: sharp top-left + bottom-right
                     ...(item.id === "crm-marketing" && {
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,
                       borderBottomRightRadius: 0,
                       borderBottomLeftRadius: r,
                     }),
-                    // Baris 3 — kolom 2: tajam kiri bawah + kanan atas
+                    // Row 3 — column 2: sharp bottom-left + top-right
                     ...(item.id === "social-media" && {
                       borderTopLeftRadius: r,
                       borderTopRightRadius: 0,
                       borderBottomRightRadius: r,
                       borderBottomLeftRadius: 0,
                     }),
-                    // Baris 3 — kolom 3: tajam kiri atas + kanan bawah
+                    // Row 3 — column 3: sharp top-left + bottom-right
                     ...(item.id === "maintenance" && {
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,

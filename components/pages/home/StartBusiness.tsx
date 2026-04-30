@@ -22,7 +22,7 @@ export function StartBusiness() {
       aria-labelledby="start-business-heading"
     >
       <Container className="max-w-7xl">
-        {/* Tinggi = hanya judul + subjudul → dekor tidak turun ke ilustrasi */}
+        {/* Height = heading + subheading only, so decor does not drop into the illustration */}
         <div className="relative">
           <div
             className="pointer-events-none absolute inset-0 left-1/2 z-0 w-screen -translate-x-1/2 overflow-hidden"
