@@ -127,12 +127,13 @@ export function SocialProofTestimonialCarousel({ items }: Props) {
 
   const [anchor, setAnchor] = useState(0);
   const [jumping, setJumping] = useState(false);
-  const anchorRef = useRef(0);
-
-  anchorRef.current = anchor;
 
   useLayoutEffect(() => {
-    if (L > 0) setAnchor(L);
+    if (L <= 0) return;
+    const id = requestAnimationFrame(() => {
+      setAnchor(L);
+    });
+    return () => cancelAnimationFrame(id);
   }, [L]);
 
   useLayoutEffect(() => {
@@ -154,7 +155,7 @@ export function SocialProofTestimonialCarousel({ items }: Props) {
   const handleTransitionEnd = useCallback(
     (e: React.TransitionEvent<HTMLDivElement>) => {
       if (e.propertyName !== "transform") return;
-      const a = anchorRef.current;
+      const a = anchor;
       if (count === 0) return;
       if (a >= L + count) {
         setJumping(true);
@@ -166,7 +167,7 @@ export function SocialProofTestimonialCarousel({ items }: Props) {
         setAnchor(a + count);
       }
     },
-    [L, count],
+    [anchor, L, count],
   );
 
   if (count === 0) return null;
