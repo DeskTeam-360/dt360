@@ -1,9 +1,13 @@
+import { FAQ } from "@/components/pages/service/ai-automation/FAQ";
+import { Hero } from "@/components/pages/service/ai-automation/Hero";
+
 export default function AiAutomationPage() {
   return (
-    <main className="flex min-h-[60vh] items-center justify-center bg-white px-4 py-16">
-      <h1 className="text-4xl font-bold tracking-tight text-[#101651] sm:text-5xl">
-        Hello World
-      </h1>
+    <main className="bg-white">
+      <Hero />
+      <div className="-mt-px">
+        <FAQ />
+      </div>
     </main>
   );
 }
