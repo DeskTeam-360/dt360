@@ -3,7 +3,6 @@ import { AboutCta } from "@/components/pages/about/AboutCta";
 import { AboutHeroStory } from "@/components/pages/about/AboutHeroStory";
 import { AboutNumbersThatMatter } from "@/components/pages/about/AboutNumbersThatMatter";
 import { AboutStoryTimeline } from "@/components/pages/about/AboutStoryTimeline";
-import { AboutTeamDifference } from "@/components/pages/about/AboutTeamDifference";
 import { AboutTeamPeople } from "@/components/pages/about/AboutTeamPeople";
 
 export default function AboutPage() {
@@ -13,7 +12,6 @@ export default function AboutPage() {
       <AboutStoryTimeline />
       <AboutNumbersThatMatter />
       <AboutTeamPeople />
-      <AboutTeamDifference />
       <AboutCoreValues />
       <AboutCta />
     </main>

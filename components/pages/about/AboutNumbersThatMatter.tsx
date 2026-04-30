@@ -4,7 +4,7 @@ import { numbersThatMatter } from "@/data/about";
 
 export function AboutNumbersThatMatter() {
   return (
-    <section className="relative bg-[#11104C] pb-16 lg:pb-32 pt-0 text-white">
+    <section className="relative z-20 bg-[#11104C] pb-0 pt-4 lg:pt-6 text-white">
       {/* Background radial glows from design */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.2)_0%,transparent_60%)] mix-blend-screen blur-[80px]" />
@@ -12,7 +12,7 @@ export function AboutNumbersThatMatter() {
       </div>
 
       <Container className="relative z-30 max-w-[1440px] px-6 lg:px-20">
-        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-tight sm:text-5xl lg:text-[64px] lg:leading-[80px] -mt-10 lg:-mt-20">
+        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-tight sm:text-5xl lg:text-[64px] lg:leading-[80px]">
           The Numbers That Matter
         </h2>
         <div className="mt-20 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">
@@ -44,10 +44,24 @@ export function AboutNumbersThatMatter() {
                    }}
               />
               <div className="relative z-10">
-                {/* 3D Icon Placeholder (floating) */}
-                <div className="absolute -top-16 -right-6 w-20 h-20 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl rotate-12">
-                   <span className="text-3xl opacity-80">✨</span>
-                </div>
+                {/* 3D Icon */}
+                {idx !== 2 && (
+                  <div className="absolute -top-16 -right-6 w-24 h-24 flex items-center justify-center drop-shadow-2xl hover:-translate-y-2 transition-transform duration-300">
+                    <SafeImage
+                      src={
+                        idx === 0 ? "/images/about-rocket-icon.png" :
+                        idx === 1 ? "/images/about-person-icon.png" :
+                        idx === 3 ? "/images/about-person-blue-icon.png" :
+                        idx === 4 ? "/images/about-mail-icon.png" :
+                        "/images/about-window-icon.png"
+                      }
+                      alt={`${item.label} icon`}
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                )}
                 <p className="font-[var(--font-russo-one)] text-5xl lg:text-[64px] lg:leading-[80px] uppercase text-white drop-shadow-lg tracking-wider">
                   {item.value}
                 </p>
@@ -59,6 +73,15 @@ export function AboutNumbersThatMatter() {
           ))}
         </div>
       </Container>
+
+      {/* Section Separator Image (Reversed) */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full z-20 leading-[0] translate-y-[98%] rotate-180">
+        <img 
+          src="/images/about-section-separator.png" 
+          alt="" 
+          className="w-full h-auto min-h-[50px] lg:min-h-[100px] object-cover object-bottom" 
+        />
+      </div>
     </section>
   );
 }

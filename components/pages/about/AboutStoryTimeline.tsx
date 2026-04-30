@@ -7,7 +7,7 @@ export function AboutStoryTimeline() {
 
   return (
     <section className="bg-white pt-16 lg:pt-32 relative z-10">
-      <Container className="max-w-[1440px] px-6 lg:px-20 relative z-10 pb-80 lg:pb-[450px]">
+      <Container className="max-w-[1440px] px-6 lg:px-20 relative z-10 pb-64 lg:pb-80">
         
         {/* Step 1: The $5,000 Mistake */}
         <div className="flex gap-6 lg:gap-12">
@@ -106,7 +106,7 @@ export function AboutStoryTimeline() {
         </div>
 
         {/* Upwork/Fiverr Comparison Block with high-fidelity styling */}
-        <div className="relative mt-10 lg:mt-16 max-w-[1100px] mx-auto px-4">
+        <div className="relative mt-2 lg:mt-4 max-w-[1100px] mx-auto px-4">
           {/* Background Blur Blobs */}
           <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[300px] h-[300px] bg-[#7CC2F9]/20 blur-[80px] rounded-full pointer-events-none" />
           <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[300px] h-[300px] bg-[#DE55AB]/20 blur-[80px] rounded-full pointer-events-none" />

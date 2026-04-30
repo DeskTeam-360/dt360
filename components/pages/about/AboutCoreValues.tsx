@@ -1,4 +1,5 @@
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { coreValues } from "@/data/about";
 
 export function AboutCoreValues() {
@@ -9,27 +10,56 @@ export function AboutCoreValues() {
         <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-tight sm:text-5xl lg:text-[64px] lg:leading-[80px]">
           We Run This Business the Way <span className="text-[#E3058D]">We Want to Be Treated</span>
         </h2>
-        <div className="mt-24 grid gap-8 lg:gap-12 lg:grid-cols-3 max-w-[1200px] mx-auto">
-          {coreValues.map((value, idx) => (
-            <article
-              key={value.title}
-              className="relative rounded-[30px] border-2 p-10 lg:p-12 transition-transform hover:-translate-y-2 duration-300"
-              style={{
-                borderColor: idx === 0 ? "rgba(222, 69, 244, 0.4)" : idx === 1 ? "rgba(58, 155, 213, 0.4)" : "rgba(239, 151, 113, 0.4)",
-                background: idx === 1 ? "linear-gradient(180deg, rgba(34,32,130,0.6) 0%, rgba(99,98,220,0.6) 100%)" : "rgba(17,16,76,0.6)",
-                boxShadow: "0px 30px 60px rgba(0, 0, 0, 0.3)",
-              }}
-            >
-              {/* Extra glassmorphism blur behind content */}
-              <div className="absolute inset-0 rounded-[30px] backdrop-blur-[24px] -z-10" />
-              
-              <div className="mb-10 h-[88px] w-[88px] rounded-full flex items-center justify-center bg-gradient-to-br from-white/20 to-white/5 border-[1.5px] border-white/30 shadow-[inset_0_4px_20px_rgba(255,255,255,0.15)] backdrop-blur-md">
-                 <span className="text-[40px] leading-none drop-shadow-lg">🛡️</span> {/* Placeholder icon */}
-              </div>
-              <h3 className="font-[var(--font-poppins)] text-[28px] lg:text-[32px] font-bold leading-[40px]">{value.title}</h3>
-              <p className="mt-6 font-[var(--font-montserrat)] text-[16px] lg:text-[18px] font-medium leading-[32px] text-white/90">{value.desc}</p>
-            </article>
-          ))}
+        <div className="mt-24 grid gap-8 gap-y-16 lg:gap-8 lg:grid-cols-3 max-w-[1200px] mx-auto">
+          {coreValues.map((value, idx) => {
+            const color = idx === 0 ? "#A855F7" : idx === 1 ? "#3B82F6" : "#F97316";
+            const colorBorder = idx === 0 ? "rgba(168, 85, 247, 0.5)" : idx === 1 ? "rgba(59, 130, 246, 0.5)" : "rgba(249, 115, 22, 0.5)";
+            const bgGradient = idx === 1 ? "linear-gradient(180deg, rgba(59,130,246,0.15) 0%, rgba(17,16,76,0.6) 100%)" : "rgba(17,16,76,0.6)";
+            
+            return (
+              <article
+                key={value.title}
+                className="relative rounded-[20px] border-[1.5px] p-8 lg:p-10 pt-14 lg:pt-16 transition-transform hover:-translate-y-2 duration-300 flex flex-col items-center text-center mt-6 lg:mt-0"
+                style={{
+                  borderColor: colorBorder,
+                  background: bgGradient,
+                  boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                {/* Extra glassmorphism blur behind content */}
+                <div className="absolute inset-0 rounded-[20px] backdrop-blur-[12px] -z-10" />
+                
+                {/* Floating Icon Halfway Out */}
+                <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 h-[100px] w-[100px] flex items-center justify-center">
+                   <SafeImage
+                     src={
+                       idx === 0 ? "/images/about-handshake-icon.png" :
+                       idx === 1 ? "/images/about-shield-icon.png" :
+                       "/images/about-dollar-shield-icon.png"
+                     }
+                     alt={`${value.title} icon`}
+                     width={100}
+                     height={100}
+                     className="w-full h-full object-contain"
+                   />
+                </div>
+
+                <h3 className="font-[var(--font-poppins)] text-[20px] lg:text-[22px] font-bold leading-[30px] text-white">
+                  {value.title}
+                </h3>
+                
+                {/* Underline */}
+                <div 
+                  className="h-[2px] w-[50px] rounded-full mt-5 mb-6"
+                  style={{ backgroundColor: color }}
+                />
+
+                <p className="font-[var(--font-montserrat)] text-[14px] lg:text-[15px] font-medium leading-[26px] text-white/90">
+                  {value.desc}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </Container>
     </section>

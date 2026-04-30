@@ -71,19 +71,19 @@ export const teamPeople = [
   {
     name: "JEREMY KENERSON",
     role: "FOUNDER & CEO",
-    desc: "Built DeskTeam360 after 12+ years running a digital agency and managing 200+ overseas contractors.",
+    desc: "Built DeskTeam360 after 12+ years running a digital agency and managing 200+ overseas contractors. Based in the US. Hosts weekly AMA calls for all clients. Kolbe A result: Quick Start - which means he builds systems fast and keeps things moving.",
     image: "/images/about/d3a1e8b26a75cbf29d39be8a2e7d6e424d47cf0b.png",
   },
   {
     name: "JOHN DORNER (JD)",
     role: "CLIENT SUCCESS MANAGER",
-    desc: "The bridge between Jeremy's vision and your day-to-day experience as a client. Handles smooth onboarding and handoffs.",
+    desc: "JD is the bridge between Jeremy's vision and your day-to-day experience as a client. US-based. Handles soft handoffs from sales to your account team and makes sure onboarding actually sticks.",
     image: "/images/about/b6068106c474f4f6b1a5538e4506fd4193689504.png",
   },
   {
     name: "INDONESIA PRODUCTION TEAM",
-    role: "2 designers, 2 developers, 2 technical VAs, 1 team leader",
-    desc: "One office, day and night shifts, and a consistent team that learns your brand standards deeply.",
+    role: "2 designers. 2 developers. 2 technical VAs. 1 team leader.",
+    desc: "All working in one physical office in Indonesia. Day and night shifts so your time zone is always covered. Same team every month - they learn your brand, your preferences, your standards.",
     image: "/images/about/9a7811f55169e7c6bf4641ccbc2570c0f743ed70.png",
   },
 ] as const;
@@ -99,21 +99,21 @@ export const teamDifferencePoints = [
 export const coreValues = [
   {
     title: "The Golden Rule",
-    desc: "We treat our clients the way we want to be treated. We treat our team the way we want to be treated.",
+    desc: "We treat our clients the way we want to be treated. We treat our team the way we want to be treated. It's not complicated. It's just not always easy. We try to do it every day.",
   },
   {
     title: "Radical Integrity",
-    desc: "We do what we say we're going to do, by the time we said we'd do it. If something changes, we communicate immediately.",
+    desc: "We do what we say we're going to do, by the time we said we'd do it. And if something comes up - and sometimes it does - we communicate immediately. Not after the fact. Not with excuses. Immediately.",
   },
   {
     title: "Zero Chargebacks. Ever",
-    desc: "$2.5 million processed through Stripe. Not a single chargeback. We intend to keep that streak going.",
+    desc: "$2.5 million processed through Stripe. Not a single chargeback. We're proud of that number. It means that when someone paid us, they felt they got what they paid for. We intend to keep that streak going.",
   },
 ] as const;
 
 export const aboutCta = {
   titleLead: "Ready",
   titleTail: " to Meet the Team?",
-  desc: "Book a free 30-minute strategy call. We'll talk about your business, what you're trying to accomplish, and whether DeskTeam360 is the right fit.",
+  desc: "Book a free 30-minute strategy call. We'll talk about your business, what you're trying to accomplish, and whether DeskTeam360 is the right fit. No pressure. No pitch. Just an honest conversation.",
   note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
 };
