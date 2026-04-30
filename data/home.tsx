@@ -12,6 +12,18 @@ export type HeroContent = {
   secondaryCta: HeroCta;
 };
 
+export type LastCtaContent = {
+  headingBefore: string;
+  headingHighlight: string;
+  headingAfter: string;
+  subheading: string;
+  primaryCta: HeroCta;
+  secondaryCta: HeroCta;
+  note: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 /**
  * Hero stats strip — value | two-line label (side), or two text lines (text).
  */
@@ -128,6 +140,27 @@ export const heroContent: HeroContent = {
     label: "Watch How It Works - 5 Minutes",
     variant: "secondary",
   },
+};
+
+export const lastCtaContent: LastCtaContent = {
+  headingBefore: "You've Got ",
+  headingHighlight: "Better Things",
+  headingAfter: " to Do Than Manage Freelancers",
+  subheading:
+    "400+ businesses already handed off the grunt work. Same team, same flat rate, every month. Your turn.",
+  primaryCta: {
+    href: "/#pricing",
+    label: "See Plans & Pricing",
+    variant: "primary",
+  },
+  secondaryCta: {
+    href: "/book-a-call",
+    label: "Book a Free Strategy Call",
+    variant: "secondary",
+  },
+  note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
+  imageSrc: "/images/Home-cta-imageright.png",
+  imageAlt: "Senior professional holding a laptop, ready to support your team.",
 };
 
 export const heroStats: HeroStatItem[] = [
