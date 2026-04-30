@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
@@ -10,6 +11,8 @@ import { navServices, navShowcase, type NavMenuItem } from "@/data/nav";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isServicesPage = pathname === "/services";
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -22,10 +25,20 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-none bg-[#11104C] shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)]">
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)]",
+          isServicesPage ? "bg-transparent" : "bg-[#11104C]"
+        )}
+      >
         {/* Figma-style: two overlapping corner radials from top-left (arc “slices”), not a full left stripe */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)]"
+          className={cn(
+            "pointer-events-none absolute inset-0",
+            isServicesPage
+              ? "bg-transparent"
+              : "bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)]"
+          )}
           aria-hidden
         />
         <Container className="relative z-10 max-w-7xl">

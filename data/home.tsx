@@ -202,7 +202,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
   },
 ];
 
-/** Bento “Outsourcing Is Broken…” — grid 3 kolom; ilustrasi/foto opsional nanti. */
+/** Bento “Outsourcing Is Broken…” — 3-column grid; illustration/photo optional for now. */
 export type InsourcingBentoCardId =
   | "insourcing"
   | "redundancy"
@@ -215,12 +215,12 @@ export type InsourcingBentoCard = {
   id: InsourcingBentoCardId;
   title: string;
   description: string;
-  /** Gambar ilustrasi / foto di `public/images/` (opsional). */
+  /** Illustration / photo path in `public/images/` (optional). */
   mediaSrc?: string;
   mediaAlt?: string;
-  /** Pola sel di grid desktop (lihat komponen). */
+  /** Desktop grid cell pattern (see component). */
   placement: "tall-left" | "wide-magenta" | "compact" | "compact-icon" | "wide-orange" | "compact-bottom";
-  /** Warna blok kartu. */
+  /** Card color tone. */
   tone: "dark" | "magenta" | "orange";
 };
 
@@ -246,7 +246,7 @@ export type HowItWorksSection = {
 
 export type SocialProofTestimonial = {
   id: string;
-  /** Satu baris untuk atribusi, mis. "Luke Dalien, Special Ed Resource" */
+  /** Single-line attribution, e.g. "Luke Dalien, Special Ed Resource" */
   attribution: string;
   quote: string;
   imageSrc: string;
