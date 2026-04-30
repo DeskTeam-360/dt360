@@ -12,6 +12,18 @@ export type HeroContent = {
   secondaryCta: HeroCta;
 };
 
+export type LastCtaContent = {
+  headingBefore: string;
+  headingHighlight: string;
+  headingAfter: string;
+  subheading: string;
+  primaryCta: HeroCta;
+  secondaryCta: HeroCta;
+  note: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 /**
  * Hero stats strip — value | two-line label (side), or two text lines (text).
  */
@@ -130,6 +142,27 @@ export const heroContent: HeroContent = {
   },
 };
 
+export const lastCtaContent: LastCtaContent = {
+  headingBefore: "You've Got ",
+  headingHighlight: "Better Things",
+  headingAfter: " to Do Than Manage Freelancers",
+  subheading:
+    "400+ businesses already handed off the grunt work. Same team, same flat rate, every month. Your turn.",
+  primaryCta: {
+    href: "/#pricing",
+    label: "See Plans & Pricing",
+    variant: "primary",
+  },
+  secondaryCta: {
+    href: "/book-a-call",
+    label: "Book a Free Strategy Call",
+    variant: "secondary",
+  },
+  note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
+  imageSrc: "/images/Home-cta-imageright.png",
+  imageAlt: "Senior professional holding a laptop, ready to support your team.",
+};
+
 export const heroStats: HeroStatItem[] = [
   { id: "years", layout: "side", value: "8+", labelLine1: "Years", labelLine2: "Running" },
   { id: "clients", layout: "side", value: "400+", labelLine1: "Clients", labelLine2: "Served" },
@@ -169,7 +202,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
   },
 ];
 
-/** Bento “Outsourcing Is Broken…” — grid 3 kolom; ilustrasi/foto opsional nanti. */
+/** Bento “Outsourcing Is Broken…” — 3-column grid; illustration/photo optional for now. */
 export type InsourcingBentoCardId =
   | "insourcing"
   | "redundancy"
@@ -182,12 +215,12 @@ export type InsourcingBentoCard = {
   id: InsourcingBentoCardId;
   title: string;
   description: string;
-  /** Gambar ilustrasi / foto di `public/images/` (opsional). */
+  /** Illustration / photo path in `public/images/` (optional). */
   mediaSrc?: string;
   mediaAlt?: string;
-  /** Pola sel di grid desktop (lihat komponen). */
+  /** Desktop grid cell pattern (see component). */
   placement: "tall-left" | "wide-magenta" | "compact" | "compact-icon" | "wide-orange" | "compact-bottom";
-  /** Warna blok kartu. */
+  /** Card color tone. */
   tone: "dark" | "magenta" | "orange";
 };
 
@@ -213,7 +246,7 @@ export type HowItWorksSection = {
 
 export type SocialProofTestimonial = {
   id: string;
-  /** Satu baris untuk atribusi, mis. "Luke Dalien, Special Ed Resource" */
+  /** Single-line attribution, e.g. "Luke Dalien, Special Ed Resource" */
   attribution: string;
   quote: string;
   imageSrc: string;
@@ -404,6 +437,18 @@ export type PricingSection = {
   plans: PricingPlanCard[];
 };
 
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type FaqSection = {
+  headingStart: string;
+  headingHighlight: string;
+  items: FaqItem[];
+};
+
 export const pricingSection: PricingSection = {
   headlineLine1: "One Team.",
   headlineHighlight: "Three Plans.",
@@ -465,6 +510,49 @@ export const pricingSection: PricingSection = {
         "White-label delivery",
         "30-day money-back guarantee",
       ],
+    },
+  ],
+};
+
+export const faqSection: FaqSection = {
+  headingStart: "Got Questions?",
+  headingHighlight: "Good",
+  items: [
+    {
+      id: "faq-1",
+      question: "What exactly can I send you?",
+      answer:
+        "Anything in our wheelhouse - AI agents, graphic design, web design and development, video editing, email campaigns, funnel builds, CRM setup, website maintenance, automation. If it's marketing or tech work, we probably do it.",
+    },
+    {
+      id: "faq-2",
+      question: "How is this different from hiring a freelancer?",
+      answer:
+        "A freelancer gives you one skill and disappears when the project ends. DeskTeam360 gives you an entire team - designers, developers, video editors, and tech specialists - managed by a dedicated account manager. No hunting for talent, no onboarding, no ghosting.",
+    },
+    {
+      id: "faq-3",
+      question: "How fast do things get done?",
+      answer:
+        "Most tasks ship in 1-3 business days. Bigger projects get broken into tasks and completed in sequence. Your account manager keeps you updated - you never have to ask \"where's my stuff?\"",
+    },
+    {
+      id: "faq-4",
+      question: "What if the work isn't what I wanted?",
+      answer:
+        "Unlimited revisions on every plan. We revise until you're happy - no extra charge, no revision caps, no attitude.",
+    },
+    {
+      id: "faq-5",
+      question: "Can agencies white-label this?",
+      answer:
+        "Yes - and many do. We work behind the scenes under your brand. Your clients see your name, your logo, your deliverables. We're the team they never know about.",
+    },
+    {
+      id: "faq-6",
+      question: "Is there a minimum commitment?",
+      answer:
+        "No. Month-to-month. Cancel anytime. Plus the 30-day money-back guarantee means you can test it with zero risk.",
     },
   ],
 };

@@ -48,7 +48,7 @@ function BentoMedia({
   className?: string;
   sizes: string;
   priority?: boolean;
-  /** Untuk kartu kiri: ilustrasi rata kiri. */
+  /** For the left card: align illustration to the left. */
   objectPosition?: "center" | "left";
 }) {
   return (
@@ -295,7 +295,7 @@ export function InsourcingBetter() {
           {subheading}
         </p>
 
-        {/* Tinggi baris mengikuti konten (auto), bukan min-h / 1fr — hindari grid “melar” tinggi */}
+        {/* Row height follows content (auto), not min-h / 1fr — avoid stretched grid rows */}
         <div className="mt-12 grid grid-cols-1 gap-4 sm:mt-14 sm:gap-5 lg:mt-16 lg:grid-cols-3 lg:gap-5 lg:items-stretch">
           {cards.map((card) => (
             <BentoCard key={card.id} card={card} />
