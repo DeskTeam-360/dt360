@@ -10,7 +10,7 @@ export function AboutHeroStory() {
         <div className="absolute top-[10%] left-[-20%] w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.4)_0%,transparent_50%)] mix-blend-screen blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.5)_0%,transparent_50%)] mix-blend-screen blur-[100px]" />
       </div>
-      
+
       {/* Container z-[10] so everything inside it sits above the background wave z-[3] */}
       <Container className="relative z-[10] max-w-[1440px] px-6 lg:px-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
@@ -38,7 +38,7 @@ export function AboutHeroStory() {
             />
             {/* Professional Team icon at bottom left of CEO image (Shrunken & Shifted Left) */}
             <div className="absolute left-[-25%] lg:left-[-15%] bottom-[5%] lg:bottom-[10%] z-20 w-[60px] lg:w-[75px] -translate-y-[20px]">
-               <SafeImage
+              <SafeImage
                 src="/images/about-icon-professional-team.png"
                 alt="Professional Team Icon"
                 width={75}

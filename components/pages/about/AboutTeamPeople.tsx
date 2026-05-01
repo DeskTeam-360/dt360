@@ -4,7 +4,7 @@ import { teamPeople, teamDifferencePoints } from "@/data/about";
 
 export function AboutTeamPeople() {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-56 lg:pt-72 pb-20 lg:pb-32 overflow-hidden">
+    <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[250px] lg:pt-[380px] pb-20 lg:pb-32 overflow-hidden">
       
       {/* 1. Bubble Background - Tempel di tepi kiri screen */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] lg:top-0 lg:w-[800px] lg:h-[800px] opacity-80 pointer-events-none z-0">

@@ -4,7 +4,7 @@ import { numbersThatMatter } from "@/data/about";
 
 export function AboutNumbersThatMatter() {
   return (
-    <section className="relative z-20 bg-[#11104C] pb-0 pt-4 lg:pt-6 text-white">
+    <section className="relative z-20 bg-[#11104C] pt-0 pb-0 text-white">
       {/* Background radial glows from design */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.2)_0%,transparent_60%)] mix-blend-screen blur-[80px]" />
@@ -12,14 +12,14 @@ export function AboutNumbersThatMatter() {
       </div>
 
       <Container className="relative z-30 max-w-[1440px] px-6 lg:px-20">
-        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-tight sm:text-5xl lg:text-[64px] lg:leading-[80px]">
+        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-none sm:text-5xl lg:text-[64px] lg:leading-none -mt-4 lg:-mt-8">
           The Numbers That Matter
         </h2>
-        <div className="mt-20 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">
+        <div className="mt-10 lg:mt-16 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">
           {numbersThatMatter.map((item, idx) => (
             <div
               key={item.value + item.label}
-              className="relative rounded-[30px] border border-solid bg-[linear-gradient(225deg,#11104C_21%,#201E7A_100%)] p-8 lg:p-10 min-h-[230px] flex flex-col justify-center backdrop-blur-xl transition-transform hover:-translate-y-2 duration-300"
+              className="relative rounded-[30px] border border-solid bg-[linear-gradient(225deg,#11104C_21%,#201E7A_100%)] p-6 lg:p-8 min-h-[210px] flex flex-col justify-center backdrop-blur-xl transition-transform hover:-translate-y-2 duration-300"
               style={{
                 borderColor:
                   idx === 0
