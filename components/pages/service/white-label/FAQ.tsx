@@ -6,19 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "What design software do you use?",
+    question: "How does billing work for white-label clients?",
     answer:
-      "Adobe Photoshop, Illustrator, InDesign, Figma, Canva Pro, After Effects for motion graphics. You can of course file - always.",
+      "You sell and invoice at your rate. DeskTeam360 bills you a predictable monthly seat model so margin stays clear and you can package services your way.",
   },
   {
-    question: "How do I submit design requests?",
+    question: "Can we use our own project tools and brand?",
     answer:
-      "You can submit requests through your shared workspace, and we prioritize based on urgency and campaign timelines.",
-  },
-  {
-    question: "Can I ask for revisions?",
-    answer:
-      "Yes. Revisions are included in your monthly plan so you can iterate until each design matches your brand goals.",
+      "Yes. We plug into your PM stack, email domain, and client-facing assets. Delivery happens under your processes with DeskTeam360 operating as your back-office team.",
   },
 ];
 
@@ -58,8 +53,8 @@ export function FAQ() {
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
-              src="/images/Service - Graphic FAQ.png"
-              alt="Graphic design FAQ illustration"
+              src="/images/White Label - FAQ.png"
+              alt="White label agency FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"

@@ -47,7 +47,7 @@ export function FAQ() {
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:-right-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-[5rem] lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">

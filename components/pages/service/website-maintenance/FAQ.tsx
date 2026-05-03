@@ -6,19 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "What design software do you use?",
+    question: "How much does website maintenance usually cost?",
     answer:
-      "Adobe Photoshop, Illustrator, InDesign, Figma, Canva Pro, After Effects for motion graphics. You can of course file - always.",
+      "DeskTeam360 delivers flat-rate website maintenance-so you avoid surprise invoices while keeping updates, backups, monitoring, and performance work on rails. Typical plans start around $1,497/month depending on complexity and SLA.",
   },
   {
-    question: "How do I submit design requests?",
+    question: "What CMS platforms do you maintain?",
     answer:
-      "You can submit requests through your shared workspace, and we prioritize based on urgency and campaign timelines.",
-  },
-  {
-    question: "Can I ask for revisions?",
-    answer:
-      "Yes. Revisions are included in your monthly plan so you can iterate until each design matches your brand goals.",
+      "Primarily WordPress and WooCommerce, plus Shopify, Webflow, and custom stacks when we have access and documentation. Tell us where your site lives and we will tailor the maintenance playbook.",
   },
 ];
 
@@ -58,8 +53,8 @@ export function FAQ() {
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
-              src="/images/Service - Graphic FAQ.png"
-              alt="Graphic design FAQ illustration"
+              src="/images/Maintenance - FAQ.png"
+              alt="Website maintenance FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"

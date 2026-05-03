@@ -6,19 +6,14 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
   {
-    question: "What design software do you use?",
+    question: "Do you schedule the posts or just create the graphics?",
     answer:
-      "Adobe Photoshop, Illustrator, InDesign, Figma, Canva Pro, After Effects for motion graphics. You can of course file - always.",
+      "We create the graphics and deliver them scheduling-ready. If you need scheduling and publishing, that's available as part of a broader social media management package - ask your account manager.",
   },
   {
-    question: "How do I submit design requests?",
+    question: "Can you match our existing brand style?",
     answer:
-      "You can submit requests through your shared workspace, and we prioritize based on urgency and campaign timelines.",
-  },
-  {
-    question: "Can I ask for revisions?",
-    answer:
-      "Yes. Revisions are included in your monthly plan so you can iterate until each design matches your brand goals.",
+      "Yes. Share your brand guidelines, examples, and tone references. We align every asset with your brand voice and visual direction.",
   },
 ];
 
@@ -56,10 +51,10 @@ export function FAQ() {
       />
       <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
-          <div className="relative mx-auto w-full max-w-[620px]">
+          <div className="relative mx-auto w-full max-w-[540px]">
             <SafeImage
-              src="/images/Service - Graphic FAQ.png"
-              alt="Graphic design FAQ illustration"
+              src="/images/Social - FAQ.png"
+              alt="Social media content FAQ illustration"
               width={860}
               height={640}
               className="h-auto w-full"
@@ -83,7 +78,7 @@ export function FAQ() {
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="text-[24px] leading-tight">{item.question}</span>
+                      <span className="text-[20px] leading-tight sm:text-[24px]">{item.question}</span>
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
                           isOpen ? "rotate-180" : "rotate-0"
@@ -102,7 +97,7 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="mt-2 px-2 text-[18px] leading-relaxed text-[#11114d]">{item.answer}</p>
+                      <p className="mt-2 px-2 text-[16px] leading-relaxed text-[#11114d] sm:text-[18px]">{item.answer}</p>
                     ) : null}
                   </div>
                 );
