@@ -31,7 +31,11 @@ export function ServicesHowItWorksFloatingRow({
   className,
 }: Props) {
   const measureRef = useRef<HTMLDivElement>(null);
-  const [overlapPx, setOverlapPx] = useState(0);
+  /** Mobile & tablet: smaller negative top + full negative bottom. Desktop: same overlap top and bottom. */
+  const [overlapTopPx, setOverlapTopPx] = useState(0);
+  const [overlapBottomPx, setOverlapBottomPx] = useState(0);
+  /** Extra pull-up on mobile so the light section meets the cards (no white strip). */
+  const [mobileExtraBottomPx, setMobileExtraBottomPx] = useState(0);
 
   useLayoutEffect(() => {
     const el = measureRef.current;
@@ -41,24 +45,46 @@ export function ServicesHowItWorksFloatingRow({
       /** getBoundingClientRect.height tracks visual bounds (cards include slight protruding assets). */
       const h = Math.ceil(el.getBoundingClientRect().height);
       const clamped = Math.max(0, Math.min(1, overlapFraction));
-      setOverlapPx(Math.round(h * clamped));
+      const fullPx = Math.round(h * clamped);
+      const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      /** Mobile & tablet: less negative top, full negative bottom. Desktop (lg+): unified overlap. */
+      if (isTablet || isMobile) {
+        setOverlapTopPx(Math.round(h * Math.min(clamped, 0.12)));
+        setOverlapBottomPx(fullPx);
+      } else {
+        setOverlapTopPx(fullPx);
+        setOverlapBottomPx(fullPx);
+      }
+      setMobileExtraBottomPx(isMobile ? 140 : 0);
     };
 
     update();
 
     const ro = new ResizeObserver(() => update());
     ro.observe(el);
-    return () => ro.disconnect();
+    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const mqMd = window.matchMedia("(min-width: 768px)");
+    const mqMaxMd = window.matchMedia("(max-width: 767px)");
+    mqLg.addEventListener("change", update);
+    mqMd.addEventListener("change", update);
+    mqMaxMd.addEventListener("change", update);
+    return () => {
+      ro.disconnect();
+      mqLg.removeEventListener("change", update);
+      mqMd.removeEventListener("change", update);
+      mqMaxMd.removeEventListener("change", update);
+    };
   }, [overlapFraction]);
 
   return (
     <div
-      className={className}
+      className={["overflow-visible", className].filter(Boolean).join(" ")}
       style={
-        overlapPx > 0
+        overlapTopPx > 0 || overlapBottomPx > 0 || mobileExtraBottomPx > 0
           ? {
-              marginTop: -(overlapPx + extraNegativeMarginTopPx),
-              marginBottom: -(overlapPx + extraNegativeMarginBottomPx),
+              marginTop: -(overlapTopPx + extraNegativeMarginTopPx),
+              marginBottom: -(overlapBottomPx + extraNegativeMarginBottomPx + mobileExtraBottomPx),
             }
           : undefined
       }
