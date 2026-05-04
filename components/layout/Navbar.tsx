@@ -28,10 +28,7 @@ export function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    if (isHomePage) {
-      setScrolled(false);
-      return;
-    }
+    if (isHomePage) return;
     const onScroll = () => {
       setScrolled(window.scrollY > SCROLL_SOLID_THRESHOLD_PX);
     };
