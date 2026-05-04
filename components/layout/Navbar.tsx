@@ -9,10 +9,14 @@ import { DeskTeamLogo } from "./DeskTeamLogo";
 import { NavDropdown } from "./NavDropdown";
 import { navServices, navShowcase, type NavMenuItem } from "@/data/nav";
 
+const SCROLL_SOLID_THRESHOLD_PX = 12;
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isServicesPage = pathname === "/services";
+  const isHomePage = pathname === "/";
+  const showSolidHeader = isHomePage || scrolled;
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -23,21 +27,32 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (isHomePage) {
+      setScrolled(false);
+      return;
+    }
+    const onScroll = () => {
+      setScrolled(window.scrollY > SCROLL_SOLID_THRESHOLD_PX);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHomePage, pathname]);
+
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)]",
-          isServicesPage ? "bg-transparent" : "bg-[#11104C]"
+          "fixed inset-x-0 top-0 z-50 border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)] transition-[background-color] duration-300 ease-out",
+          showSolidHeader ? "bg-[#11104C]" : "bg-transparent"
         )}
       >
         {/* Figma-style: two overlapping corner radials from top-left (arc “slices”), not a full left stripe */}
         <div
           className={cn(
-            "pointer-events-none absolute inset-0",
-            isServicesPage
-              ? "bg-transparent"
-              : "bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)]"
+            "pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)] transition-opacity duration-300 ease-out",
+            showSolidHeader ? "opacity-100" : "opacity-0"
           )}
           aria-hidden
         />

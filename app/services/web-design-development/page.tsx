@@ -1,9 +1,26 @@
+import { Hero } from "@/components/pages/service/website-development/Hero";
+import { WebDesignDevelopmentTestimonialAndHowSection } from "@/components/pages/service/website-development/WebDesignDevelopmentTestimonialAndHowSection";
+import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
+import { ServicesPlatformsSupportedBridge } from "@/components/pages/services/ServicesPlatformsSupportedBridge";
+import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
+
 export default function WebDesignDevelopmentPage() {
   return (
-    <main className="flex min-h-[60vh] items-center justify-center bg-white px-4 py-16">
-      <h1 className="text-4xl font-bold tracking-tight text-[#101651] sm:text-5xl">
-        Hello World
-      </h1>
+    <main className="relative bg-white">
+      <div className="relative z-10">
+        <Hero />
+      </div>
+      <ServicesPlatformsSupportedBridge />
+      <div className="relative">
+        <WebDesignDevelopmentTestimonialAndHowSection />
+        <div className="relative z-0">
+          <ServicesPricingSection variant="webDesignDevelopment" />
+        </div>
+      </div>
+
+      <div className="-mt-px">
+        <ServicesFaqSection variant="webDesignDevelopment" />
+      </div>
     </main>
   );
 }
