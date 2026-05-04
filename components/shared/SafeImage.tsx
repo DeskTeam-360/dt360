@@ -47,6 +47,7 @@ export function SafeImage({ src, alt, fill, width, height, className, sizes, pri
       sizes={sizes}
       priority={priority}
       unoptimized={isSvg}
+      draggable={false}
       className={className}
       onError={() => setFailed(true)}
     />

@@ -75,3 +75,13 @@ body {
     display: none;
   }
 }
+
+/** TeamMembers full-bleed: <1440px padding ≈ setengah kartu 280px di tepi + snap selaras */
+@media (max-width: 1439px) {
+  .team-members-scroller-peek {
+    padding-left: max(1rem, calc(50vw - 140px));
+    padding-right: max(1rem, calc(50vw - 140px));
+    scroll-padding-left: max(1rem, calc(50vw - 140px));
+    scroll-padding-right: max(1rem, calc(50vw - 140px));
+  }
+}

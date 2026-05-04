@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
@@ -17,8 +17,28 @@ function centerHorizontalScroll(el: HTMLDivElement | null) {
   el.scrollLeft = max / 2;
 }
 
+type MouseDragState = {
+  pointerId: number;
+  startX: number;
+  startScrollLeft: number;
+};
+
 export function TeamMembers() {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const mouseDragRef = useRef<MouseDragState | null>(null);
+  const [mouseDragging, setMouseDragging] = useState(false);
+
+  const endMouseDrag = useCallback((el: HTMLDivElement, pointerId: number) => {
+    const d = mouseDragRef.current;
+    if (!d || d.pointerId !== pointerId) return;
+    mouseDragRef.current = null;
+    setMouseDragging(false);
+    try {
+      el.releasePointerCapture(pointerId);
+    } catch {
+      /* already released */
+    }
+  }, []);
 
   const scrollByDir = useCallback((dir: -1 | 1) => {
     const el = scrollerRef.current;
@@ -49,10 +69,46 @@ export function TeamMembers() {
     };
   }, []);
 
+  const onScrollerPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    const el = scrollerRef.current;
+    if (!el || el.scrollWidth <= el.clientWidth + 1) return;
+    try {
+      el.setPointerCapture(e.pointerId);
+    } catch {
+      return;
+    }
+    mouseDragRef.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startScrollLeft: el.scrollLeft,
+    };
+    setMouseDragging(true);
+  }, []);
+
+  const onScrollerPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const d = mouseDragRef.current;
+    if (!d || e.pointerId !== d.pointerId) return;
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollLeft = d.startScrollLeft - (e.clientX - d.startX);
+  }, []);
+
+  const onScrollerPointerUp = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    endMouseDrag(el, e.pointerId);
+  }, [endMouseDrag]);
+
+  const onScrollerLostPointerCapture = useCallback(() => {
+    mouseDragRef.current = null;
+    setMouseDragging(false);
+  }, []);
+
   return (
     <section
       id="team"
-      className="bg-white py-16 sm:py-20 lg:py-24"
+      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24"
       aria-labelledby="team-heading"
     >
       <Container className="max-w-7xl">
@@ -65,33 +121,51 @@ export function TeamMembers() {
             Members
           </span>
         </h2>
+      </Container>
 
-        <div className="relative mt-12 lg:mt-14">
-          <button
-            type="button"
-            onClick={() => scrollByDir(-1)}
-            className="absolute left-0 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 md:flex sm:h-14 sm:w-10 lg:-left-2"
-            aria-label="Show previous team members"
-          >
-            <ChevronLeft className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollByDir(1)}
-            className="absolute right-0 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 md:flex sm:h-14 sm:w-10 lg:-right-2"
-            aria-label="Show next team members"
-          >
-            <ChevronRight className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
-          </button>
+      {/* Full-bleed slider: di bawah 1440px padding = setengah kartu di tepi + snap center; ≥1440px padding lebih kecil agar lebih banyak kartu penuh terlihat */}
+      <div
+        className={cn(
+          "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14",
+        )}
+      >
+        <button
+          type="button"
+          onClick={() => scrollByDir(-1)}
+          className="absolute left-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:left-6 md:flex sm:h-14 sm:w-10"
+          aria-label="Show previous team members"
+        >
+          <ChevronLeft className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByDir(1)}
+          className="absolute right-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:right-6 md:flex sm:h-14 sm:w-10"
+          aria-label="Show next team members"
+        >
+          <ChevronRight className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+        </button>
 
-          <div
-            ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-8 [&::-webkit-scrollbar]:hidden"
-            tabIndex={0}
-            role="region"
-            aria-roledescription="carousel"
-            aria-label="Team member cards"
-          >
+        <div
+          ref={scrollerRef}
+          className={cn(
+            "team-members-scroller-peek flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-8 [&::-webkit-scrollbar]:hidden",
+            // Desktop: klik–geser horizontal (mouse); sentuh tetap native (pointerType touch diabaikan)
+            "cursor-grab select-none",
+            mouseDragging && "cursor-grabbing snap-none",
+            // ≥1440px: padding horizontal lebih kecil → lebih banyak kartu penuh terlihat
+            "min-[1440px]:px-10 min-[1440px]:scroll-pl-10 min-[1440px]:scroll-pr-10 xl:px-14 xl:scroll-pl-14 xl:scroll-pr-14 2xl:px-20 2xl:scroll-pl-20 2xl:scroll-pr-20",
+          )}
+          tabIndex={0}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Team member cards"
+          onPointerDown={onScrollerPointerDown}
+          onPointerMove={onScrollerPointerMove}
+          onPointerUp={onScrollerPointerUp}
+          onPointerCancel={onScrollerPointerUp}
+          onLostPointerCapture={onScrollerLostPointerCapture}
+        >
             {teamMembers.map((member) => (
               <article
                 key={member.id}
@@ -129,9 +203,8 @@ export function TeamMembers() {
                 </div>
               </article>
             ))}
-          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
