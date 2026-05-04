@@ -283,11 +283,9 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "redundancy",
       placement: "wide-magenta",
       tone: "magenta",
-      title: "Built-In Redundancy",
-      description:
-        "Every station has redundant computers, internet, and power backup. If something fails, we rotate to spare equipment—without missing your deadlines.",
-      mediaSrc: "/images/home-InsourcingBetter-grid2.png",
-      mediaAlt: "Illustration of monitors, laptops, and design tools representing built-in redundancy.",
+      /** Sementara dikosongkan — bentuk kartu (placement) tetap; isi akan diisi lagi nanti. */
+      title: "",
+      description: "",
     },
     {
       id: "one-office",
@@ -311,11 +309,9 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "us-managers",
       placement: "wide-orange",
       tone: "orange",
-      title: "US-Based Account Managers",
-      description:
-        "Fluent English-speaking managers translate your feedback into clear tasks for the team—so nothing gets lost in translation.",
-      mediaSrc: "/images/home-InsourcingBetter-grid4.png",
-      mediaAlt: "US-based account manager portrait, professional and approachable.",
+      /** Sementara dikosongkan — bentuk kartu (placement) tetap; isi akan diisi lagi nanti. */
+      title: "",
+      description: "",
     },
     {
       id: "better-over-time",
