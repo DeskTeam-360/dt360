@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { insourcingBetterSection, type InsourcingBentoCard } from "@/data/home";
@@ -99,6 +100,15 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const wideOrangeEmpty =
     isWideOrange && !card.title && !card.description && !card.mediaSrc;
 
+  const wideMagentaBgStyle: CSSProperties | undefined = isWideMagenta
+    ? {
+        backgroundImage: "url('/images/home-InsourcingBetter-grid2.png')",
+        backgroundSize: "auto 100%",
+        backgroundPosition: "right 14px center",
+        backgroundRepeat: "no-repeat",
+      }
+    : undefined;
+
   return (
     <article
       className={cn(
@@ -125,6 +135,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
                   : "rounded-2xl lg:rounded-[1rem]",
             ),
       )}
+      style={wideMagentaBgStyle}
     >
       {card.placement === "tall-left" ? (
         <>
@@ -155,20 +166,18 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       {card.placement === "wide-magenta" && (card.title || card.description || card.mediaSrc) ? (
         <div
           className={cn(
-            "box-border w-full min-w-0 self-center px-4 sm:px-6",
-            "max-w-7xl xl:max-w-6xl",
-            "mx-auto",
+            "box-border ml-0 mr-auto w-full min-w-0 max-w-6xl px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
           )}
         >
-          <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:min-h-0 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
+          <div className="grid h-full min-h-0 w-full min-w-0 grid-cols-1 justify-items-start gap-6 lg:grid-cols-2 lg:items-center lg:gap-8">
             {(card.title || card.description) && (
-              <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
+              <div className="flex min-w-0 w-full max-w-full flex-col items-start justify-center gap-3 sm:gap-3.5 lg:col-start-1 lg:min-w-0 lg:gap-4">
                 {card.title ? title : null}
                 {card.description ? body : null}
               </div>
             )}
             {card.mediaSrc ? (
-              <div className="flex w-full justify-center">
+              <div className="flex w-full min-w-0 justify-start lg:col-start-2">
                 <BentoMedia
                   src={card.mediaSrc}
                   alt={card.mediaAlt ?? ""}
@@ -176,7 +185,12 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
                   sizes="(max-width: 1024px) 92vw, 320px"
                 />
               </div>
-            ) : null}
+            ) : (
+              <div
+                className="hidden min-h-0 w-full min-w-0 lg:col-start-2 lg:block"
+                aria-hidden
+              />
+            )}
           </div>
         </div>
       ) : null}
@@ -210,14 +224,12 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       {card.placement === "wide-orange" && (card.title || card.description || card.mediaSrc) ? (
         <div
           className={cn(
-            "box-border w-full min-w-0 self-center px-4 sm:px-6",
-            "max-w-7xl xl:max-w-6xl",
-            "mx-auto",
+            "box-border mx-auto w-full min-w-0 max-w-6xl self-center px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
           )}
         >
           <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
             {(card.title || card.description) && (
-              <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 p-4 lg:max-w-none lg:gap-3.5">
+              <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 sm:gap-3.5 lg:max-w-none lg:gap-4">
                 {card.title ? title : null}
                 {card.description ? body : null}
               </div>

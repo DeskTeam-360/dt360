@@ -283,9 +283,9 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "redundancy",
       placement: "wide-magenta",
       tone: "magenta",
-      /** Sementara dikosongkan — bentuk kartu (placement) tetap; isi akan diisi lagi nanti. */
-      title: "",
-      description: "",
+      title: "Built-In Redundancy",
+      description:
+        "New computers. Three different internet providers. Two backup power sources. When someone's out sick or on vacation, the team keeps moving - you never feel the gap.",
     },
     {
       id: "one-office",
