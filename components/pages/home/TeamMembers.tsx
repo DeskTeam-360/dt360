@@ -104,13 +104,15 @@ export function TeamMembers() {
                       src={member.imageSrc}
                       alt={`${member.name}, ${member.role}`}
                       fill
-                      className="origin-center object-cover object-center scale-[1.08]"
+                      className="object-cover object-left-bottom scale-100"
                       sizes="(max-width: 640px) 85vw, 280px"
                       priority={member.id === "1"}
                     />
                   </div>
+                  {/* Hidden: foto aset sudah punya chip bawaan. Hapus `hidden` di bawah untuk menampilkan lagi overlay nama|role. */}
                   <div
                     className={cn(
+                      "hidden",
                       // Chip sticks to the left; offset only from bottom; top-right corner rounded
                       "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-bl-none rounded-br-none rounded-tl-none rounded-tr-[1.35rem] px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:rounded-tr-[1.75rem] sm:py-2.5 sm:pr-5",
                       member.labelClass,
