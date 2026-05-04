@@ -1,6 +1,35 @@
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
+import type { TrustedByLogo } from "@/data/home";
 import { trustedByContent, trustedByLogos } from "@/data/home";
+import { cn } from "@/lib/utils";
+
+function LogoRow({ logos, ariaHidden }: { logos: TrustedByLogo[]; ariaHidden?: boolean }) {
+  return (
+    <ul
+      className={cn(
+        "flex shrink-0 list-none items-center gap-x-14 gap-y-8 px-8 sm:gap-x-16 sm:px-12 lg:gap-x-20",
+      )}
+      aria-hidden={ariaHidden ? true : undefined}
+      aria-label={ariaHidden ? undefined : "Client logos"}
+    >
+      {logos.map((logo) => (
+        <li key={ariaHidden ? `${logo.id}-dup` : logo.id} className="flex shrink-0 items-center justify-center">
+          <div className="origin-center transition-transform duration-300 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100">
+            <Image
+              src={logo.imageSrc}
+              alt={ariaHidden ? "" : logo.alt}
+              width={220}
+              height={56}
+              className="h-10 w-auto max-w-[11rem] object-contain opacity-90 sm:h-12 sm:max-w-[13rem]"
+              sizes="(max-width: 768px) 140px, 220px"
+            />
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function TrustedBy() {
   const { headlineLine1, headlineHighlight, headlineLine2After } = trustedByContent;
@@ -25,25 +54,36 @@ export function TrustedBy() {
             {headlineLine2After}
           </span>
         </h2>
-
-        <ul
-          className="mx-auto mt-12 flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-10 sm:mt-14 md:justify-between lg:gap-x-12"
-          aria-label="Client logos"
-        >
-          {trustedByLogos.map((logo) => (
-            <li key={logo.id} className="flex shrink-0 items-center justify-center">
-              <Image
-                src={logo.imageSrc}
-                alt={logo.alt}
-                width={220}
-                height={56}
-                className="h-10 w-auto max-w-[11rem] object-contain opacity-90 sm:h-12 sm:max-w-[13rem]"
-                sizes="(max-width: 768px) 140px, 220px"
-              />
-            </li>
-          ))}
-        </ul>
       </Container>
+
+      {/* Marquee + fade: lebar viewport penuh (keluar dari max-w container). */}
+      <div
+        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-4 sm:mt-14 sm:py-6"
+        role="presentation"
+        aria-label="Client logos marquee"
+      >
+        {/* Tepi: satu warna dasar area logo (~#f4f7f9) → transparan (tanpa putih #fff agar tidak “ngeblok”). */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 sm:w-28 lg:w-40"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(244 247 249) 0%, rgba(244,247,249,0.92) 22%, rgba(244,247,249,0.55) 55%, rgba(244,247,249,0.12) 88%, rgba(244,247,249,0) 100%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 sm:w-28 lg:w-40"
+          style={{
+            background:
+              "linear-gradient(to left, rgb(244 247 249) 0%, rgba(244,247,249,0.92) 22%, rgba(244,247,249,0.55) 55%, rgba(244,247,249,0.12) 88%, rgba(244,247,249,0) 100%)",
+          }}
+          aria-hidden
+        />
+        <div className="flex w-max trusted-by-marquee-track">
+          <LogoRow logos={trustedByLogos} />
+          <LogoRow logos={trustedByLogos} ariaHidden />
+        </div>
+      </div>
     </section>
   );
 }

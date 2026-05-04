@@ -44,3 +44,21 @@ body {
     animation: none;
   }
 }
+
+/** Trusted-by client logos — infinite horizontal scroll (sama pola translate -50%). */
+.trusted-by-marquee-track {
+  animation: home-marquee 55s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-by-marquee-track {
+    animation: none;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .trusted-by-marquee-track > ul:last-of-type {
+    display: none;
+  }
+}
