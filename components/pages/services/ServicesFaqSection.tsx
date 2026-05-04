@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { SafeImage } from "@/components/shared/SafeImage";
 
 const FAQ_ITEMS = [
   {
@@ -24,8 +25,19 @@ const FAQ_ITEMS = [
   },
 ] as const;
 
-export function ServicesFaqSection() {
+const FAQ_ILLUSTRATION_DEFAULT = "/images/dt360-faq-section.png";
+const FAQ_ILLUSTRATION_WEB_DEV = "/images/Service/web-design-dev-faq-illustration.png";
+
+export type ServicesFaqSectionVariant = "default" | "webDesignDevelopment";
+
+export type ServicesFaqSectionProps = {
+  variant?: ServicesFaqSectionVariant;
+};
+
+export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionProps = {}) {
   const [openId, setOpenId] = useState<string>(FAQ_ITEMS[0].id);
+  const isWebDev = variant === "webDesignDevelopment";
+  const illustrationSrc = isWebDev ? FAQ_ILLUSTRATION_WEB_DEV : FAQ_ILLUSTRATION_DEFAULT;
 
   return (
     <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-[88px] md:px-10 md:pb-[96px] md:pt-[100px] lg:px-10 lg:pb-[120px] lg:pt-[110px]">
@@ -39,14 +51,25 @@ export function ServicesFaqSection() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-[0.95fr_1.1fr] lg:gap-10">
         <div className="flex justify-center lg:justify-start">
-          <Image
-            src="/images/dt360-faq-section.png"
-            alt="FAQ section illustration"
-            width={609}
-            height={739}
-            className="h-auto w-full max-w-[520px] object-contain"
-            sizes="(min-width: 1024px) 40vw, 85vw"
-          />
+          {isWebDev ? (
+            <SafeImage
+              src={illustrationSrc}
+              alt="FAQ illustration with code editor monitor and web development icons"
+              width={640}
+              height={640}
+              className="h-auto w-full max-w-[560px] object-contain"
+              sizes="(min-width: 1024px) 40vw, 85vw"
+            />
+          ) : (
+            <Image
+              src={FAQ_ILLUSTRATION_DEFAULT}
+              alt="FAQ section illustration"
+              width={609}
+              height={739}
+              className="h-auto w-full max-w-[520px] object-contain"
+              sizes="(min-width: 1024px) 40vw, 85vw"
+            />
+          )}
         </div>
 
         <div>

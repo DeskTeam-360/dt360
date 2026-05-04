@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Montserrat, Readex_Pro } from "next/font/google";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,7 +34,7 @@ const PLANS = [
     name: "MARKETER",
     labelImageSrc: "/images/dt360-marketer.png",
     labelImageAlt: "Marketer plan label",
-    tasks: "2 Tasks",
+    tasks: "2 Task",
     price: "$2,994",
     period: "/month",
     ribbonClass: "bg-[#7f1d1d]",
@@ -46,7 +48,7 @@ const PLANS = [
     name: "AGENCY",
     labelImageSrc: "/images/dt360-agency.png",
     labelImageAlt: "Agency plan label",
-    tasks: "3 Tasks",
+    tasks: "3 Task",
     price: "$4,491",
     period: "/month",
     ribbonClass: "bg-[#134e4a]",
@@ -78,12 +80,35 @@ function CheckIcon({ className }: { className?: string }) {
   );
 }
 
-export function ServicesPricingSection() {
+export type ServicesPricingSectionVariant = "default" | "webDesignDevelopment";
+
+export type ServicesPricingSectionProps = {
+  /** `webDesignDevelopment`: title + footer CTA only for `/services/web-design-development`. */
+  variant?: ServicesPricingSectionVariant;
+};
+
+export function ServicesPricingSection({ variant = "default" }: ServicesPricingSectionProps = {}) {
+  const isWebDev = variant === "webDesignDevelopment";
+
   return (
     <section
-      className="relative z-10 isolate overflow-hidden bg-white pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] lg:mt-0 lg:pb-[100px] lg:pt-[200px]"
-      aria-labelledby="services-pricing-heading"
+      className={cn(
+        "relative overflow-hidden bg-white",
+        isWebDev
+          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[280px] lg:-mt-[140px] lg:pb-[100px] lg:pt-[300px] 2xl:pt-[320px]"
+          : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] lg:mt-0 lg:pb-[100px] lg:pt-[200px]",
+      )}
+      aria-labelledby={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
     >
+      {isWebDev ? (
+        <SafeImage
+          src="/images/Service/web-design-dev-pricing-bottom-left.png"
+          alt=""
+          width={900}
+          height={900}
+          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[45%] max-w-none object-contain object-left-bottom"
+        />
+      ) : null}
       {/* Radial pink — kiri bawah, lebih besar */}
       <div
         className="pointer-events-none absolute -bottom-[24%] -left-[18%] aspect-square w-[75%] min-w-[520px] rounded-full bg-[radial-gradient(circle,rgba(227,5,141,0.4)_0%,rgba(227,5,141,0.18)_32%,rgba(227,5,141,0.06)_52%,transparent_72%)]"
@@ -105,12 +130,20 @@ export function ServicesPricingSection() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-5 md:px-10 lg:px-10">
         <h2
-          id="services-pricing-heading"
+          id={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
           className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] lg:mt-0"
         >
-          Simple Pricing.
-          <br />
-          <span className="text-[#ef2fa9]">All-Inclusive</span>
+          {isWebDev ? (
+            <>
+              One Team. <span className="text-[#ef2fa9]">Three Plans.</span><br/>Pick Your Speed.
+            </>
+          ) : (
+            <>
+              Simple Pricing.
+              <br />
+              <span className="text-[#ef2fa9]">All-Inclusive</span>
+            </>
+          )}
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-3 md:mt-12 md:grid-cols-1 md:gap-3 lg:mt-14 lg:grid-cols-3 lg:gap-3">
@@ -118,7 +151,10 @@ export function ServicesPricingSection() {
             return (
               <article
                 key={plan.id}
-                className={`mx-auto flex min-h-[370px] w-full flex-col overflow-hidden rounded-[14px] bg-gradient-to-b p-0 text-white shadow-[0_12px_26px_-10px_rgba(16,22,81,0.35)] transition duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_38px_-14px_rgba(16,22,81,0.45)] md:max-w-[450px] lg:max-w-none ${plan.gradientClass}`}
+                className={cn(
+                  "mx-auto flex h-full min-h-[370px] w-full flex-col overflow-hidden rounded-[14px] bg-gradient-to-b p-0 text-white shadow-[0_12px_26px_-10px_rgba(16,22,81,0.35)] transition duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_38px_-14px_rgba(16,22,81,0.45)] md:max-w-[450px] lg:max-w-none",
+                  plan.gradientClass,
+                )}
               >
                 <div className="flex items-center justify-between gap-3 pr-5 pt-10">
                   <Image
@@ -163,29 +199,40 @@ export function ServicesPricingSection() {
           })}
         </div>
 
-        <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
-          <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
-            {FEATURE_ITEMS.map((label) => (
-              <li key={label} className="flex items-start gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
-                <CheckIcon className="mt-0.5 shrink-0" />
-                <span>{label}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="shrink-0 md:pl-2">
+        {isWebDev ? (
+          <div className="mt-10 flex justify-center md:mt-12 lg:mt-14">
             <Link
               href="#"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-6 py-3.5 text-center text-[20px] font-extrabold tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-8 py-3.5 text-center text-[18px] font-extrabold tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] sm:text-[20px]"
             >
-              See Full Pricing & Plans
-              <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>
-                <svg width={14} height={14} viewBox="0 0 24 24" fill="none" className="translate-x-px text-white">
-                  <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
+              See Full Pricing &amp; Plans &raquo;
             </Link>
           </div>
-        </div>
+        ) : (
+          <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
+            <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+              {FEATURE_ITEMS.map((label) => (
+                <li key={label} className="flex items-start gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
+                  <CheckIcon className="mt-0.5 shrink-0" />
+                  <span>{label}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="shrink-0 md:pl-2">
+              <Link
+                href="#"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-6 py-3.5 text-center text-[20px] font-extrabold tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+              >
+                See Full Pricing & Plans
+                <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="none" className="translate-x-px text-white">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
