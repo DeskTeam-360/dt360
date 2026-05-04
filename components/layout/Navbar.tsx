@@ -39,7 +39,7 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHomePage, pathname]);
-
+  const finalScrolled = isHomePage ? false : scrolled;
   return (
     <>
       <header
