@@ -4,7 +4,16 @@ import type { TrustedByLogo } from "@/data/home";
 import { trustedByContent, trustedByLogos } from "@/data/home";
 import { cn } from "@/lib/utils";
 
-function LogoRow({ logos, ariaHidden }: { logos: TrustedByLogo[]; ariaHidden?: boolean }) {
+function LogoRow({
+  logos,
+  ariaHidden,
+  dupIndex,
+}: {
+  logos: TrustedByLogo[];
+  ariaHidden?: boolean;
+  /** Segmen salinan (untuk key unik); undefined = segmen pertama. */
+  dupIndex?: number;
+}) {
   return (
     <ul
       className={cn(
@@ -14,8 +23,11 @@ function LogoRow({ logos, ariaHidden }: { logos: TrustedByLogo[]; ariaHidden?: b
       aria-label={ariaHidden ? undefined : "Client logos"}
     >
       {logos.map((logo) => (
-        <li key={ariaHidden ? `${logo.id}-dup` : logo.id} className="flex shrink-0 items-center justify-center">
-          <div className="origin-center transition-transform duration-300 ease-out hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100">
+        <li
+          key={dupIndex != null ? `${logo.id}-seg${dupIndex}` : logo.id}
+          className="flex shrink-0 items-center justify-center"
+        >
+          <div className="origin-center transition-transform duration-300 ease-out hover:scale-[1.3] motion-reduce:transition-none motion-reduce:hover:scale-100">
             <Image
               src={logo.imageSrc}
               alt={ariaHidden ? "" : logo.alt}
@@ -58,7 +70,7 @@ export function TrustedBy() {
 
       {/* Marquee + fade: lebar viewport penuh (keluar dari max-w container). */}
       <div
-        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-4 sm:mt-14 sm:py-6"
+        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-6 sm:mt-14 sm:py-8"
         role="presentation"
         aria-label="Client logos marquee"
       >
@@ -79,9 +91,13 @@ export function TrustedBy() {
           }}
           aria-hidden
         />
-        <div className="flex w-max trusted-by-marquee-track">
+        <div className="flex w-max shrink-0 trusted-by-marquee-track">
           <LogoRow logos={trustedByLogos} />
-          <LogoRow logos={trustedByLogos} ariaHidden />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={1} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={2} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={3} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={4} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={5} />
         </div>
       </div>
     </section>

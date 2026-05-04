@@ -45,9 +45,22 @@ body {
   }
 }
 
-/** Trusted-by client logos — infinite horizontal scroll (sama pola translate -50%). */
+/**
+ * Trusted-by: beberapa segmen identik; geser tepat 1 segmen per siklus
+ * (translate = -100% / jumlah segmen) agar loop mulus tanpa “jeda” kosong.
+ */
+@keyframes trusted-by-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-16.6666666667%);
+  }
+}
+
 .trusted-by-marquee-track {
-  animation: home-marquee 55s linear infinite;
+  animation: trusted-by-marquee 55s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -58,7 +71,7 @@ body {
     justify-content: center;
   }
 
-  .trusted-by-marquee-track > ul:last-of-type {
+  .trusted-by-marquee-track > ul:not(:first-of-type) {
     display: none;
   }
 }

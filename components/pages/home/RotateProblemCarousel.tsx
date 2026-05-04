@@ -79,8 +79,8 @@ export function RotateProblemCarousel() {
                       transform: isCenter
                         ? "translateZ(0) rotateY(0deg) scale(1)"
                         : isRight
-                          ? "translateX(38%) translateZ(-48px) rotateY(-26deg) scale(0.88)"
-                          : "translateX(-38%) translateZ(-48px) rotateY(26deg) scale(0.88)",
+                          ? "translateX(62%) translateZ(-48px) rotateY(-26deg) scale(0.88)"
+                          : "translateX(-62%) translateZ(-48px) rotateY(26deg) scale(0.88)",
                     }}
                     aria-label={isCenter ? undefined : `Show card: ${card.title}`}
                     aria-current={isCenter ? "true" : undefined}
@@ -103,10 +103,10 @@ export function RotateProblemCarousel() {
                       className="relative z-[2] flex h-full max-h-full flex-col justify-end overflow-y-auto p-6 sm:p-8 sm:pb-9 lg:max-w-[58%] [transform:translate3d(0,0,0.1px)] antialiased"
                       aria-hidden={!isCenter}
                     >
-                      <span className="text-2xl font-bold leading-tight tracking-tight text-white sm:text-[1.65rem] sm:leading-snug lg:text-3xl">
+                      <span className="text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-[2rem] sm:leading-[1.08] lg:text-[2.25rem] lg:leading-[1.06]">
                         {card.title}
                       </span>
-                      <span className="mt-3 text-pretty text-sm leading-relaxed text-white sm:mt-4 sm:text-[0.9375rem] sm:leading-relaxed">
+                      <span className="mt-5 text-pretty text-[0.9375rem] font-normal leading-[1.55] text-white sm:mt-6 sm:text-base sm:leading-[1.5] lg:mt-7 lg:text-[1.0625rem] lg:leading-[1.5]">
                         {card.description}
                       </span>
                     </span>
