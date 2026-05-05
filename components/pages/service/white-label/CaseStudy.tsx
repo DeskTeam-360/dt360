@@ -34,8 +34,8 @@ export function CaseStudy() {
         height={520}
         className="pointer-events-none absolute top-0 right-[-5rem] z-[1] h-auto max-w-none opacity-95 w-[min(52vw,200px)] sm:w-[min(46vw,260px)] md:w-[min(42vw,340px)] lg:top-[-5rem] lg:right-[-13rem] lg:w-[min(38vw,520px)]"
       />
-      <Container className="relative z-10 max-w-[1200px] !px-10 lg:!px-20">
-        <h2 className="text-center text-3xl font-extrabold tracking-wide text-[#11114d] sm:text-4xl lg:text-[46px]">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
+        <h2 className="type-rule-h3 text-center tracking-wide text-[#11114d]">
           CASE <span className="text-[#e62a98]">STUDY</span>
         </h2>
         <div className="mx-auto mt-12 max-w-[1040px] sm:mt-14">
@@ -59,10 +59,10 @@ export function CaseStudy() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-4 rounded-2xl bg-[linear-gradient(135deg,#7976BA_0%,#E595BB_100%)] px-6 py-8 text-white shadow-xl sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="text-lg font-extrabold leading-tight sm:text-xl lg:text-[28px] lg:leading-snug">
+              <p className="type-rule-h5 leading-tight lg:leading-snug">
                 Duct Tape Marketing – From Capacity-Constrained to Full-Service
               </p>
-              <p className="text-base leading-relaxed sm:text-lg lg:text-[22px] lg:leading-relaxed">
+              <p className="type-rule-p leading-relaxed">
                 DeskTeam360 cleared the backlog that was throttling new client work. By routing web, design, and campaign
                 production through a white-label desk, the team expanded offer breadth without adding headcount - and
                 clients still saw Duct Tape&apos;s brand on every deliverable.

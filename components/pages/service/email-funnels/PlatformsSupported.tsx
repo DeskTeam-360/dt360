@@ -50,8 +50,8 @@ export function PlatformsSupported() {
         height={420}
         className="pointer-events-none absolute left-[-30px] top-[8%] z-[1] hidden h-auto w-[40%] opacity-80 sm:block"
       />
-      <Container className="relative z-10 max-w-[1240px] !px-10 lg:!px-20">
-        <h2 className="text-center text-3xl font-extrabold tracking-wide text-[#11114d] sm:text-4xl lg:text-[56px]">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
+        <h2 className="type-rule-h3 text-center tracking-wide text-[#11114d]">
           PLATFORMS SUPPORTED
         </h2>
 

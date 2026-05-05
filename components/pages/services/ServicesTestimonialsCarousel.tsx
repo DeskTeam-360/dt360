@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { ServicesTestimonial } from "@/data/servicesPage";
 import { cn } from "@/lib/utils";
 
@@ -11,20 +11,40 @@ type Props = {
 
 export function ServicesTestimonialsCarousel({ items }: Props) {
   const [index, setIndex] = useState(0);
+  const [trailPadPx, setTrailPadPx] = useState(0);
   const viewportRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);
   const count = items.length;
+
+  /** Ruang ekstra di akhir track agar slide terakhir bisa di-scroll ke tengah (bukan nempel kanan). */
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    const firstSlide = slideRefs.current[0];
+    if (!viewport || !firstSlide) return;
+
+    const measure = () => {
+      setTrailPadPx(Math.max(0, (viewport.clientWidth - firstSlide.offsetWidth) / 2));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(viewport);
+    ro.observe(firstSlide);
+    return () => ro.disconnect();
+  }, [count]);
 
   const scrollToSlide = (targetIndex: number) => {
     const viewport = viewportRef.current;
     const targetSlide = slideRefs.current[targetIndex];
     if (!viewport || !targetSlide) return;
 
+    const vRect = viewport.getBoundingClientRect();
+    const sRect = targetSlide.getBoundingClientRect();
+    const slideLeftInContent = viewport.scrollLeft + (sRect.left - vRect.left);
+    const desiredLeft = slideLeftInContent - (viewport.clientWidth - targetSlide.offsetWidth) / 2;
+    const maxLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
     viewport.scrollTo({
-      left:
-        targetSlide.offsetLeft -
-        viewport.offsetLeft -
-        (viewport.clientWidth - targetSlide.clientWidth) / 2,
+      left: Math.min(Math.max(0, desiredLeft), maxLeft),
       behavior: "smooth",
     });
     setIndex(targetIndex);
@@ -67,7 +87,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
               ref={(element) => {
                 slideRefs.current[slideIndex] = element;
               }}
-              className="flex w-[86%] shrink-0 snap-center sm:w-[82%] lg:w-[74%]"
+              className="flex w-[86%] shrink-0 snap-center snap-always sm:w-[82%] lg:w-[74%]"
               aria-roledescription="slide"
             >
               <div className="relative flex h-full w-full overflow-visible rounded-[30px] bg-transparent px-6 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14">
@@ -107,6 +127,11 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
               </div>
             </article>
           ))}
+          <div
+            className="shrink-0 snap-none"
+            style={{ width: trailPadPx }}
+            aria-hidden
+          />
         </div>
       </div>
 

@@ -49,7 +49,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-[0.95fr_1.1fr] lg:gap-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-8 lg:grid-cols-[0.95fr_1.1fr] lg:gap-10">
         <div className="flex justify-center lg:justify-start">
           {isWebDev ? (
             <SafeImage
