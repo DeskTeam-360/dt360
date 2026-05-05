@@ -183,11 +183,10 @@ export function TeamMembers() {
                       priority={member.id === "1"}
                     />
                   </div>
-                  {/* Hidden: foto aset sudah punya chip bawaan. Hapus `hidden` di bawah untuk menampilkan lagi overlay nama|role. */}
+                  {/* Overlay chip nama | role (di atas foto, z-[2]); warna per anggota dari `labelClass` di data */}
                   <div
                     className={cn(
-                      "hidden",
-                      // Chip sticks to the left; offset only from bottom; top-right corner rounded
+                      // Chip menempel kiri bawah; sudut kanan atas membulat
                       "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-bl-none rounded-br-none rounded-tl-none rounded-tr-[1.35rem] px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:rounded-tr-[1.75rem] sm:py-2.5 sm:pr-5",
                       member.labelClass,
                     )}
