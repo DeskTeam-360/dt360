@@ -114,7 +114,7 @@ export function TeamMembers() {
       <Container className="max-w-7xl">
         <h2
           id="team-heading"
-          className="text-center text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.5rem]"
+          className="text-center font-bold tracking-tight"
         >
           <span className="text-[#0b0d2a]">Team </span>
           <span className="bg-gradient-to-r from-[#e4277a] to-[#ff4d8d] bg-clip-text text-transparent">

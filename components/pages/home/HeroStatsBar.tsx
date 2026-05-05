@@ -18,12 +18,12 @@ const statLabelHoverStacked =
   "font-[var(--font-montserrat)] text-center text-[20px] font-semibold leading-tight text-white/90";
 
 const statTextBlock = cn(
-  "max-w-[12rem] text-pretty text-center font-[var(--font-montserrat)] text-[20px] font-semibold leading-snug text-white/95",
+  "max-w-full text-pretty text-center font-[var(--font-montserrat)] text-[20px] font-semibold leading-snug text-white/95",
 );
 
 /** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
 const hoverOverlayOuter = cn(
-  "pointer-events-none absolute left-1 right-1 top-1/2 z-30 -translate-y-1/2",
+  "pointer-events-none absolute left-1 right-1 top-1/2 z-10 -translate-y-1/2",
   "opacity-0 transition-opacity duration-50 ease-out",
   "group-hover:opacity-100",
   "motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:group-hover:opacity-100",
@@ -54,7 +54,7 @@ const textLayoutOverlay =
 
 function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; isLast: boolean }) {
   const outer = cn(
-    "group relative z-0 overflow-visible p-0 hover:z-40",
+    "group relative z-0 overflow-visible p-0 hover:z-10",
     !isLast && "border-b border-white lg:border-b-0",
     index <= 2 && "lg:border-r lg:border-r-white",
   );
