@@ -63,13 +63,13 @@ export function Navbar() {
             >
               <Link
                 href="/"
-                className="text-sm font-medium text-white transition-colors hover:text-white/80"
+                className="font-nav-primary text-white transition-colors hover:text-white/80"
               >
                 Home
               </Link>
               <Link
                 href="/how-it-works"
-                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+                className="font-nav-primary text-white/90 transition-colors hover:text-white"
               >
                 How it Works
               </Link>
@@ -77,13 +77,13 @@ export function Navbar() {
               <NavDropdown label="Showcase" items={navShowcase} />
               <Link
                 href="/blog"
-                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+                className="font-nav-primary text-white/90 transition-colors hover:text-white"
               >
                 Blog
               </Link>
               <Link
                 href="/about"
-                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+                className="font-nav-primary text-white/90 transition-colors hover:text-white"
               >
                 About
               </Link>
@@ -94,13 +94,13 @@ export function Navbar() {
             <div className="hidden items-center gap-5 lg:flex">
               <Link
                 href="/login"
-                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
+                className="font-nav-primary text-white/90 transition-colors hover:text-white"
               >
                 Log in
               </Link>
               <Link
                 href="/book-a-call"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
+                className="font-nav-primary inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2.5 py-2.5 text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />
@@ -135,7 +135,7 @@ export function Navbar() {
               aria-hidden
             />
             <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-4 py-4">
-              <span className="text-sm font-semibold text-white">Menu</span>
+              <span className="font-nav-primary text-white">Menu</span>
               <button
                 type="button"
                 className="rounded-lg p-2 text-white hover:bg-white/10"
@@ -167,7 +167,7 @@ export function Navbar() {
               <Link
                 href="/book-a-call"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-4 py-3 text-center text-sm font-semibold text-white shadow-md"
+                className="font-nav-primary mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2 py-3 text-center text-white shadow-md"
               >
                 Book a call
                 <ChevronsRight className="size-4" aria-hidden />
@@ -193,7 +193,7 @@ function MobileLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="rounded-lg px-3 py-2.5 text-sm font-medium text-white/90 hover:bg-white/5"
+      className="font-nav-primary rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/5"
     >
       {children}
     </Link>
@@ -215,7 +215,7 @@ function MobileGroup({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between px-3 py-2.5 text-left text-sm font-medium text-white"
+        className="font-nav-primary flex w-full items-center justify-between px-3 py-2.5 text-left text-white"
         aria-expanded={open}
       >
         {title}
@@ -228,7 +228,7 @@ function MobileGroup({
               key={item.href}
               href={item.href}
               onClick={onPick}
-              className="block px-5 py-2 text-sm text-white/75 hover:text-white"
+              className="font-nav-primary block px-5 py-2 text-white/75 hover:text-white"
             >
               {item.label}
             </Link>

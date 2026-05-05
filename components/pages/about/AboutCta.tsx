@@ -25,7 +25,7 @@ export function AboutCta() {
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
               <Link
                 href="/book-a-call"
-                className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-6 py-4 text-[16px] font-[var(--font-poppins)] font-bold text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(240,87,58,0.25)] hover:-translate-y-1"
+                className="font-button group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-3 py-4 text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(240,87,58,0.25)] hover:-translate-y-1"
               >
                 Book a Free Strategy Call
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#F0573A] transition-colors">
@@ -35,7 +35,7 @@ export function AboutCta() {
               
               <Link
                 href="/how-it-works"
-                className="group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#7547C5] px-6 py-4 text-[16px] font-[var(--font-poppins)] font-bold text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(117,71,197,0.25)] hover:-translate-y-1"
+                className="font-button group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#7547C5] px-3 py-4 text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(117,71,197,0.25)] hover:-translate-y-1"
               >
                 See How It Works
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#7547C5] transition-colors">

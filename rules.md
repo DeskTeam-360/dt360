@@ -137,3 +137,4 @@ B Montserrat Bold 20px
 
 for Navbar font
 Montserrat Bold 14px
+Max-width container 1440px

@@ -1,15 +1,30 @@
 import type { HeroStatItem } from "@/data/home";
 import { heroStats } from "@/data/home";
+import { fontRussoOne } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-const valueLg = "text-4xl font-bold leading-[0.95] tracking-tight text-white sm:text-5xl sm:leading-none";
-const caption = "text-left text-xs font-normal leading-tight text-white/90 sm:text-sm";
-const textBlock = "text-center text-sm font-normal leading-snug text-white/95 sm:text-base";
+/** Angka besar (8+, 400+, 1-3): Russo One 64px — `className` next/font menjamin font-family computed (var saja bisa turun ke Montserrat). */
+const statValue = cn(
+  fontRussoOne.className,
+  "shrink-0 tabular-nums text-[64px] font-normal leading-none tracking-tight text-white",
+  "max-sm:text-[2.5rem] max-sm:leading-none",
+);
+
+/** Label & salinan teks seluler ke-4: Montserrat 20 semibold. */
+const statLabel = "text-left font-[var(--font-montserrat)] text-[20px] font-semibold leading-tight text-white/90";
+
+/** Label di overlay hover sel “side”: tengah, stack vertikal bersama angka. */
+const statLabelHoverStacked =
+  "font-[var(--font-montserrat)] text-center text-[20px] font-semibold leading-tight text-white/90";
+
+const statTextBlock = cn(
+  "max-w-[12rem] text-pretty text-center font-[var(--font-montserrat)] text-[20px] font-semibold leading-snug text-white/95",
+);
 
 /** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
 const hoverOverlayOuter = cn(
   "pointer-events-none absolute left-1 right-1 top-1/2 z-30 -translate-y-1/2",
-  "opacity-0 transition-opacity duration-300 ease-out",
+  "opacity-0 transition-opacity duration-50 ease-out",
   "group-hover:opacity-100",
   "motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:group-hover:opacity-100",
 );
@@ -17,29 +32,29 @@ const hoverOverlayOuter = cn(
 /** Isi salinan: scale hover (transform terpisah dari translate pusat). */
 const hoverOverlayInner = cn(
   "origin-center rounded-2xl bg-[#10103a] shadow-[0_0_40px_0_rgba(1,211,252,0.48)] ring-2 ring-[#01d3fc]",
-  "scale-100 transition-transform duration-300 ease-out",
+  "scale-100 transition-transform duration-50 ease-out",
   "group-hover:scale-[1.25]",
   "motion-reduce:scale-100 motion-reduce:group-hover:scale-100",
 );
 
-const sideLayout = "flex min-h-[5.5rem] flex-row items-center justify-center gap-2.5 px-3 py-4 sm:min-h-[5.75rem] sm:gap-3.5 sm:px-4 sm:py-5 lg:min-h-[5.5rem] lg:py-4";
+const sideLayout =
+  "flex min-h-[6.25rem] flex-row items-center justify-center gap-2.5 px-3 py-4 sm:min-h-[6.5rem] sm:gap-3.5 sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-4 lg:py-4";
 
 const textLayout =
-  "flex min-h-[5.5rem] flex-col items-center justify-center gap-0.5 px-3 py-4 text-center sm:min-h-[5.75rem] sm:px-4 sm:py-5 lg:min-h-[5.5rem] lg:py-4";
+  "flex min-h-[6.25rem] flex-col items-center justify-center gap-1 px-3 py-4 text-center sm:min-h-[6.5rem] sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
 
-/**
- * Salinan hover: min-h & py vertikal = **1.5×** dari overlay pertama (6.75rem / 7rem, py 1.25rem / 1.5rem).
- * 6.75×1.5 = 10.125rem, 7×1.5 = 10.5rem.
- */
-const sideLayoutOverlay =
-  "flex min-h-[10.125rem] flex-row items-center justify-center gap-2.5 px-3 py-[1.875rem] sm:min-h-[10.5rem] sm:gap-3.5 sm:px-4 sm:py-[2.25rem] lg:min-h-[10.125rem] lg:py-[1.875rem]";
+/** Overlay hover untuk sel “side”: angka di atas, teks di bawah (bukan samping-samping). */
+const sideLayoutOverlay = cn(
+  "flex min-h-[10rem] flex-col items-center justify-center gap-2 px-3 py-[1.875rem] text-center",
+  "sm:min-h-[10.25rem] sm:gap-2.5 sm:px-4 sm:py-[2.25rem] lg:min-h-[10rem] lg:py-[1.875rem]",
+);
 
 const textLayoutOverlay =
-  "flex min-h-[10.125rem] flex-col items-center justify-center gap-0.5 px-3 py-[1.875rem] text-center sm:min-h-[10.5rem] sm:px-4 sm:py-[2.25rem] lg:min-h-[10.125rem] lg:py-[1.875rem]";
+  "flex min-h-[9.5rem] flex-col items-center justify-center gap-1 px-3 py-[1.875rem] text-center sm:min-h-[9.75rem] sm:px-4 sm:py-[2.25rem] lg:min-h-[9.5rem] lg:gap-1.5 lg:py-[1.875rem]";
 
 function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; isLast: boolean }) {
   const outer = cn(
-    "group relative z-0 overflow-visible p-2 hover:z-40 sm:p-3 lg:p-4",
+    "group relative z-0 overflow-visible p-0 hover:z-40",
     !isLast && "border-b border-white lg:border-b-0",
     index <= 2 && "lg:border-r lg:border-r-white",
   );
@@ -48,18 +63,18 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
     return (
       <div className={outer}>
         <div className={cn("relative z-0", sideLayout)}>
-          <span className={cn("shrink-0 tabular-nums", valueLg)}>{stat.value}</span>
-          <div className={cn("flex min-w-0 flex-col justify-center gap-0", caption)}>
-            <span>{stat.labelLine1}</span>
-            <span>{stat.labelLine2}</span>
+          <span className={statValue}>{stat.value}</span>
+          <div className="flex min-w-0 flex-col justify-center gap-0">
+            <p className={statLabel}>{stat.labelLine1}</p>
+            <p className={statLabel}>{stat.labelLine2}</p>
           </div>
         </div>
         <div aria-hidden className={hoverOverlayOuter}>
           <div className={cn(hoverOverlayInner, sideLayoutOverlay)}>
-            <span className={cn("shrink-0 tabular-nums", valueLg)}>{stat.value}</span>
-            <div className={cn("flex min-w-0 flex-col justify-center gap-0", caption)}>
-              <span>{stat.labelLine1}</span>
-              <span>{stat.labelLine2}</span>
+            <span className={cn(statValue, "text-center")}>{stat.value}</span>
+            <div className="flex min-w-0 flex-col items-center justify-center gap-0">
+              <p className={statLabelHoverStacked}>{stat.labelLine1}</p>
+              <p className={statLabelHoverStacked}>{stat.labelLine2}</p>
             </div>
           </div>
         </div>
@@ -70,13 +85,13 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
   return (
     <div className={outer}>
       <div className={cn("relative z-0", textLayout)}>
-        <p className={cn("max-w-[12rem] text-pretty", textBlock)}>{stat.line1}</p>
-        <p className={cn("max-w-[12rem] text-pretty", textBlock)}>{stat.line2}</p>
+        <p className={statTextBlock}>{stat.line1}</p>
+        <p className={statTextBlock}>{stat.line2}</p>
       </div>
       <div aria-hidden className={hoverOverlayOuter}>
         <div className={cn(hoverOverlayInner, textLayoutOverlay)}>
-          <p className={cn("max-w-[12rem] text-pretty", textBlock)}>{stat.line1}</p>
-          <p className={cn("max-w-[12rem] text-pretty", textBlock)}>{stat.line2}</p>
+          <p className={statTextBlock}>{stat.line1}</p>
+          <p className={statTextBlock}>{stat.line2}</p>
         </div>
       </div>
     </div>

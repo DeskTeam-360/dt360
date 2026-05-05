@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Poppins, Montserrat, Russo_One } from "next/font/google";
+import { Geist, Geist_Mono, Poppins, Montserrat } from "next/font/google";
+import { fontRussoOne } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
@@ -26,12 +27,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-});
-
-const russoOne = Russo_One({
-  variable: "--font-russo-one",
-  subsets: ["latin"],
-  weight: ["400"],
 });
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
@@ -133,7 +128,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${russoOne.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <OrganizationJsonLd />

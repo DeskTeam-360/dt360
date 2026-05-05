@@ -8,8 +8,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /** Body / UI: Montserrat (AGENTS — P & default) */
+  --font-sans: var(--font-montserrat);
   --font-mono: var(--font-geist-mono);
+  /** Headings H1–H4: Poppins (via base layer + arbitrary var di komponen legacy) */
+  --font-heading: var(--font-poppins);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +25,109 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  /** AGENTS: P — Montserrat Medium 18px */
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/**
+ * Tipografi global (AGENTS.md Global Font Setting).
+ * Ukuran maks = nilai rules; `clamp` mengecilkan di layar sempit agar tidak overflow.
+ */
+@layer base {
+  h1 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem);
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw + 0.85rem, 3rem);
+    line-height: 1.18;
+  }
+
+  h4 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw + 0.65rem, 2.25rem);
+    line-height: 1.22;
+  }
+
+  h5 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1vw + 0.9rem, 1.5rem);
+    line-height: 1.3;
+  }
+
+  h6 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.6vw + 0.82rem, 1.125rem);
+    line-height: 1.35;
+  }
+
+  p {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  /** AGENTS: B — Montserrat Bold; ukuran ikut konteks induk (biasanya 18px di body) */
+  strong,
+  b {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+/** Navbar (AGENTS): Montserrat Bold 14px — tautan utama header */
+.font-nav-primary {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/** AGENTS: B — Montserrat Bold 20px; untuk blok aksen/teks utama (bukan semua `<strong>`) */
+.font-body-emphasis {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/** CTA / `<Button>` — Montserrat Bold 20px */
+.font-button {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/**
+ * Fallback Russo via variabel (opsional).
+ * Prefer `fontRussoOne.className` dari `@/lib/fonts` pada teks yang harus pakai Russo One — lebih andal daripada `font-family: var(...)` saja.
+ */
+.font-russo-one {
+  font-family: var(--font-russo-one), sans-serif;
+}
+
+/** Home only: standard container width 1440px. */
+.home-page .max-w-7xl {
+  max-width: 1440px;
 }
 
 @keyframes home-marquee {

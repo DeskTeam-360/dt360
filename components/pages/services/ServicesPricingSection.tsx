@@ -181,7 +181,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                   <div className={`my-12 h-[5px] w-full ${plan.dividerClass}`} aria-hidden />
                   <button
                     type="button"
-                    className={`group mt-auto inline-flex w-fit items-center justify-center gap-2 self-center rounded-full bg-white px-7 py-3 text-[20px] font-extrabold tracking-wide shadow-[0_4px_10px_rgba(0,0,0,0.15)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-95 hover:shadow-[0_10px_22px_-8px_rgba(0,0,0,0.35)] ${plan.accentClass}`}
+                    className={`font-button group mt-auto inline-flex w-fit items-center justify-center gap-2 self-center rounded-full bg-white px-3.5 py-3 tracking-wide shadow-[0_4px_10px_rgba(0,0,0,0.15)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-95 hover:shadow-[0_10px_22px_-8px_rgba(0,0,0,0.35)] ${plan.accentClass}`}
                   >
                     GET STARTED
                     <span
@@ -203,7 +203,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           <div className="mt-10 flex justify-center md:mt-12 lg:mt-14">
             <Link
               href="#"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-8 py-3.5 text-center text-[18px] font-extrabold tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] sm:text-[20px]"
+              className="font-button group inline-flex items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
             >
               See Full Pricing &amp; Plans &raquo;
             </Link>
@@ -221,7 +221,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
             <div className="shrink-0 md:pl-2">
               <Link
                 href="#"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-6 py-3.5 text-center text-[20px] font-extrabold tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
               >
                 See Full Pricing & Plans
                 <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>

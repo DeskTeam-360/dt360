@@ -7,7 +7,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ children, className, type = "button", ...props }: ButtonProps) {
   return (
-    <button type={type} className={cn("inline-flex items-center justify-center", className)} {...props}>
+    <button type={type} className={cn("font-button inline-flex items-center justify-center", className)} {...props}>
       {children}
     </button>
   );

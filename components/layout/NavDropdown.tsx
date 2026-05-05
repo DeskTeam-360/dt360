@@ -15,13 +15,13 @@ export function NavDropdown({ label, items, href, className }: NavDropdownProps)
       {href ? (
         <Link
           href={href}
-          className="flex items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-white"
+          className="font-nav-primary flex items-center gap-1 text-white/90 transition-colors hover:text-white"
         >
           {label}
           <ChevronDown className="size-3.5 opacity-70" aria-hidden />
         </Link>
       ) : (
-        <span className="flex cursor-default items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-white">
+        <span className="font-nav-primary flex cursor-default items-center gap-1 text-white/90 transition-colors hover:text-white">
           {label}
           <ChevronDown className="size-3.5 opacity-70" aria-hidden />
         </span>
@@ -35,7 +35,7 @@ export function NavDropdown({ label, items, href, className }: NavDropdownProps)
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="block px-4 py-2.5 text-sm text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+                className="font-nav-primary block px-4 py-2.5 text-white/80 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </Link>

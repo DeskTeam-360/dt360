@@ -27,18 +27,18 @@ export function HeroCtaLink({ variant, className, children, ...linkProps }: Hero
     <Link
       {...linkProps}
       className={cn(
-        "group inline-flex w-full min-w-0 rounded-xl pb-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#11104C] sm:w-auto",
+        "group inline-flex w-full min-w-0 rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#11104C] sm:w-auto",
         className,
       )}
     >
       <span
         className={cn(
-          "inline-flex min-h-[3rem] w-full min-w-0 items-center justify-between gap-3 rounded-xl px-6 py-3.5 text-sm font-semibold text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:px-7 sm:py-3.5",
+          "font-button inline-flex h-[52px] w-full min-w-0 items-center justify-between gap-3 rounded-[10px] px-3 text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:w-auto",
           variantClass[variant],
         )}
       >
         <span className="min-w-0 text-left">{children}</span>
-        <CircleChevronRight className="size-9 shrink-0 text-white" strokeWidth={1.65} aria-hidden />
+        <CircleChevronRight className="size-8 shrink-0 text-white" strokeWidth={1.65} aria-hidden />
       </span>
     </Link>
   );

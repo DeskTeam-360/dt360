@@ -1,6 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { numbersThatMatter } from "@/data/about";
+import { fontRussoOne } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 
 export function AboutNumbersThatMatter() {
   return (
@@ -62,7 +64,12 @@ export function AboutNumbersThatMatter() {
                     />
                   </div>
                 )}
-                <p className="font-[var(--font-russo-one)] text-5xl lg:text-[64px] lg:leading-[80px] uppercase text-white drop-shadow-lg tracking-wider">
+                <p
+                  className={cn(
+                    fontRussoOne.className,
+                    "text-5xl lg:text-[64px] lg:leading-[80px] uppercase text-white drop-shadow-lg tracking-wider",
+                  )}
+                >
                   {item.value}
                 </p>
                 <p className="mt-4 font-[var(--font-montserrat)] text-[16px] lg:text-[18px] font-semibold leading-[30px] text-white/90">

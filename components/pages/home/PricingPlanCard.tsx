@@ -110,7 +110,7 @@ export function PricingPlanCardComponent({ plan, ctaLabel }: Props) {
       <div className="relative z-[1] mt-8 flex w-full justify-center pt-8 before:absolute before:inset-x-0 before:-top-[3px] before:h-[3px] before:bg-white/40 before:shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
         <Link
           href={plan.ctaHref}
-          className="inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-white px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.12em] shadow-[0_2px_16px_rgba(0,0,0,0.12)] transition hover:brightness-[1.03] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]"
+          className="font-button inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-white px-2.5 py-2.5 uppercase tracking-[0.12em] shadow-[0_2px_16px_rgba(0,0,0,0.12)] transition hover:brightness-[1.03] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]"
           style={{ color: plan.buttonTextColor }}
         >
           <span className="shrink-0">{ctaLabel}</span>
