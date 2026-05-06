@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const platformLogos = [
-  { src: "/images/dt360-wordpress-logo.png", alt: "WordPress", width: 218, height: 53 },
+  { src: "/images/dt360-Wordpress-logo.png", alt: "WordPress", width: 218, height: 53 },
   { src: "/images/dt360-webflow-logo.png", alt: "Webflow", width: 211, height: 50 },
   { src: "/images/dt360-gohighlevel-logo.png", alt: "GoHighLevel", width: 79, height: 54 },
   { src: "/images/dt360-woocommerce-logo.png", alt: "WooCommerce", width: 170, height: 48 },
