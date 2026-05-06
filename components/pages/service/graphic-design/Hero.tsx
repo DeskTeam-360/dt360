@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceHeroIncludedChecklist } from "@/components/pages/service/shared/ServiceHeroIncludedChecklist";
 
 const includedItems = [
   "Ad creatives for Facebook, Instagram, Google, and LinkedIn",
@@ -16,14 +16,6 @@ const includedItems = [
 ];
 
 export function Hero() {
-  const [pageIndex, setPageIndex] = useState(0);
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(includedItems.length / itemsPerPage);
-  const visibleItems = useMemo(
-    () => includedItems.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage),
-    [pageIndex],
-  );
-
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 lg:pt-40 lg:pb-14 2xl:pb-16">
       <SafeImage
@@ -98,38 +90,7 @@ export function Hero() {
               className="h-auto w-full max-w-[620px]"
             />
           </div>
-          <div className="mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none">
-            {visibleItems.map((item) => (
-              <div
-                key={item}
-                className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
-              >
-                <SafeImage
-                  src="/images/Service - Checklist.png"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
-                />
-                <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">
-                  {item}
-                </p>
-              </div>
-            ))}
-            <div className="flex items-center justify-center gap-2 pt-2">
-              {Array.from({ length: totalPages }).map((_, dotIndex) => (
-                <button
-                  key={`dot-${dotIndex}`}
-                  type="button"
-                  onClick={() => setPageIndex(dotIndex)}
-                  aria-label={`Show list page ${dotIndex + 1}`}
-                  className={`h-2 w-2 rounded-full transition ${
-                    pageIndex === dotIndex ? "bg-[#f6b22e]" : "bg-white/40"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+          <ServiceHeroIncludedChecklist items={includedItems} />
         </div>
       </Container>
     </section>
