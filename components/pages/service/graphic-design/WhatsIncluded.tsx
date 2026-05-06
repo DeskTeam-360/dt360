@@ -34,23 +34,21 @@ export function WhatsIncluded() {
         className="pointer-events-none absolute -right-24 top-1/2 z-[1] hidden h-auto w-[320px] -translate-y-1/2 rotate-180 opacity-85 lg:block"
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(255,47,179,0.16),transparent_45%)]" aria-hidden />
-      <Container className="relative z-10 max-w-[1400px] !px-20">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12 2xl:gap-16">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
+        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 lg:grid-cols-2 lg:gap-x-24 lg:gap-y-20 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
+          <h2 className="type-rule-h2 col-span-full max-w-lg leading-tight text-white lg:max-w-2xl lg:leading-[1.02]">
+            We Handle All of Your <span className="text-[#f6b22e]">Graphic Design</span> Needs
+          </h2>
           <div>
-            <h2 className="max-w-lg text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:max-w-2xl lg:text-[64px] lg:leading-[1.02]">
-              We Handle All of Your <span className="text-[#f6b22e]">Graphic Design</span> Needs
-            </h2>
-            <div className="mt-6">
-              <SafeImage
-                src="/images/Service - Graphic Whats Included.png"
-                alt="Graphic design workstation illustration"
-                width={760}
-                height={620}
-                className="h-auto w-full max-w-[620px]"
-              />
-            </div>
+            <SafeImage
+              src="/images/Service - Graphic Whats Included.png"
+              alt="Graphic design workstation illustration"
+              width={760}
+              height={620}
+              className="h-auto w-full max-w-[620px]"
+            />
           </div>
-          <div className="space-y-3 sm:space-y-4">
+          <div className="mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none">
             {visibleItems.map((item) => (
               <div
                 key={item}
@@ -63,7 +61,7 @@ export function WhatsIncluded() {
                   height={40}
                   className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
                 />
-                <p className="text-base leading-relaxed text-white/95 sm:text-lg lg:text-[24px] lg:leading-tight">
+                <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">
                   {item}
                 </p>
               </div>

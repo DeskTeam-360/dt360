@@ -112,7 +112,7 @@ export function ServicesHowItWorks({
             : "pt-[72px] md:pt-[88px] lg:pt-[100px]",
         )}
       >
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-[1440px]">
           <h2
             id="services-how-it-works-heading"
             className="text-center text-[64px] font-extrabold leading-tight tracking-tight text-white"
@@ -124,7 +124,7 @@ export function ServicesHowItWorks({
 
       <div
         className={cn(
-          "relative mx-auto w-full max-w-6xl px-5 pb-0 pt-0 max-md:pt-28 md:px-10 md:pt-8 lg:px-10 lg:pt-0",
+          "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 max-md:pt-28 md:px-10 md:pt-8 lg:px-10 lg:pt-0",
           overlappedByTestimonialSection ? "z-30" : "z-[25]",
         )}
       >

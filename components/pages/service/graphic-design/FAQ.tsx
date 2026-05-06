@@ -54,7 +54,7 @@ export function FAQ() {
         height={512}
         className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
-      <Container className="relative z-10 max-w-[1300px] !px-10 lg:!px-20">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
@@ -66,7 +66,7 @@ export function FAQ() {
             />
           </div>
           <div>
-            <h2 className="text-3xl font-extrabold leading-tight text-[#11114d] sm:text-4xl lg:text-5xl 2xl:text-6xl">
+            <h2 className="type-rule-h2 leading-tight text-[#11114d]">
               Got Questions? <span className="text-[#e62a98]">Good</span>
             </h2>
             <div className="mt-5 space-y-3 sm:mt-6">
@@ -78,12 +78,12 @@ export function FAQ() {
                     <button
                       type="button"
                       onClick={() => toggleItem(index)}
-                      className={`flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left font-semibold ${
+                      className={`flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left ${
                         isOpen ? "bg-[#FFEDC0] text-[#1E1E1E]" : "bg-[#7D8BF0] text-white"
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="text-[24px] leading-tight">{item.question}</span>
+                      <span className="type-rule-h5 leading-tight">{item.question}</span>
                       <span
                         className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
                           isOpen ? "rotate-180" : "rotate-0"
@@ -102,7 +102,7 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="mt-2 px-2 text-[18px] leading-relaxed text-[#11114d]">{item.answer}</p>
+                      <p className="type-rule-p mt-2 px-2 text-[#11114d]">{item.answer}</p>
                     ) : null}
                   </div>
                 );

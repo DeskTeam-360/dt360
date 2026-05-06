@@ -35,11 +35,11 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[-20px] top-[12%] z-[1] hidden h-auto w-[40%] opacity-55 sm:block"
       />
 
-      <Container className="relative z-10 max-w-[1200px] !px-10 lg:!px-20">
-        <h2 className="text-center text-3xl font-extrabold leading-tight text-[#1a1a4b] sm:text-4xl lg:text-[3rem] lg:leading-[1.08] 2xl:text-[3.25rem]">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
+        <h2 className="type-rule-h2 text-center leading-tight text-[#1a1a4b] lg:leading-[1.08]">
           From <span className="text-[#e62a98]">7-Year-Old Website</span> to 200+ Monthly Recurring Students
         </h2>
-        <p className="mx-auto mt-6 max-w-[820px] text-center text-base font-semibold leading-relaxed text-[#1a1a4b]/90 sm:text-lg lg:text-xl">
+        <p className="type-rule-p mx-auto mt-6 max-w-[820px] text-center text-[#1a1a4b]/90">
           Special Ed Resource had the same website for 7 years. Luke Dalien sent us a task. We rebuilt it. Within
           months, they went from zero recurring digital revenue to 200+ monthly paying students.
         </p>
@@ -65,11 +65,11 @@ export function Testimonials() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(135deg,#7e78d2_0%,#e8a8c8_55%,#f2a1c2_100%)] px-6 py-8 text-white shadow-[0_20px_50px_rgba(26,26,75,0.2)] sm:px-8 sm:py-10 lg:max-w-[720px] lg:px-[50px] lg:py-[40px]">
-              <p className="text-base italic leading-relaxed sm:text-lg lg:text-[30px] lg:leading-[1.12]">
+              <p className="type-rule-h4 italic leading-relaxed lg:leading-[1.12]">
                 &ldquo;There&apos;s no way in hell I could&apos;ve done it without your team, so thank you for saving my
                 sanity.&rdquo;
               </p>
-              <p className="text-sm font-bold text-[#1a1a4b] sm:text-lg lg:text-[26px] lg:leading-tight">
+              <p className="type-rule-h5 text-[#1a1a4b] lg:leading-tight">
                 Luke Dalien, Special Ed Resource
               </p>
             </div>

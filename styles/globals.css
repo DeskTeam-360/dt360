@@ -94,6 +94,68 @@ body {
   }
 }
 
+/**
+ * rules.md Global Font Setting — utilitas untuk halaman services
+ * (nilai & clamp selaras @layer base; dipakai bila perlu eksplisit di luar tag semantik).
+ */
+@layer components {
+  .type-rule-h1 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem);
+    line-height: 1.1;
+  }
+
+  .type-rule-h2 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  .type-rule-h3 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw + 0.85rem, 3rem);
+    line-height: 1.18;
+  }
+
+  .type-rule-h4 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw + 0.65rem, 2.25rem);
+    line-height: 1.22;
+  }
+
+  .type-rule-h5 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1vw + 0.9rem, 1.5rem);
+    line-height: 1.3;
+  }
+
+  .type-rule-h6 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.6vw + 0.82rem, 1.125rem);
+    line-height: 1.35;
+  }
+
+  .type-rule-p {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  .type-rule-b {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+}
+
 /** Navbar (AGENTS): Montserrat Bold 14px — tautan utama header */
 .font-nav-primary {
   font-family: var(--font-montserrat), system-ui, sans-serif;

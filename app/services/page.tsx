@@ -64,7 +64,7 @@ export default function ServicesPage() {
           className="object-cover object-bottom"
           style={{ objectPosition: "bottom center" }}
         />
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row lg:items-center lg:gap-6">
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 lg:flex-row lg:items-center lg:gap-6">
           <div className="max-w-xl text-white">
             <h1 className="text-[70px] font-extrabold leading-[1.05] tracking-tight">
               <span className="text-[#f336b6]">All Services</span>
@@ -113,7 +113,7 @@ export default function ServicesPage() {
           className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] lg:w-[340px]"
         />
 
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative mx-auto max-w-[1440px]">
           <div className="text-center">
             <h2 className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
               <span className="text-[#ef2fa9]">Core Services,</span> Everything<br />You Need to Scale
@@ -182,7 +182,7 @@ export default function ServicesPage() {
           className="pointer-events-none absolute left-[-240px] top-[-220px] aspect-square h-[90%] rounded-full bg-[radial-gradient(circle,rgba(170,239,255,0.85)_0%,rgba(170,239,255,0.35)_45%,rgba(170,239,255,0)_75%)]"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-6xl px-5 text-center md:px-10 lg:px-10">
+        <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 lg:px-10">
           <h2 id="services-testimonials-heading" className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
             <span className="text-[#ef2fa9]">Proven Results</span>
             <br />

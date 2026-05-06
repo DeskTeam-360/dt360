@@ -31,7 +31,7 @@ export function Hero() {
   const visibleItems = useMemo(() => includedPages[pageIndex] ?? [], [pageIndex]);
 
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-20 pt-32 text-white sm:pb-24 lg:pt-40 lg:pb-28 2xl:pb-32">
+    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 lg:pt-40 lg:pb-14 2xl:pb-16">
       <SafeImage
         src="/images/Service - Ellipse Red.png"
         alt=""
@@ -50,19 +50,19 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(220,56,255,0.32),transparent_40%),radial-gradient(circle_at_0%_100%,rgba(61,43,190,0.45),transparent_48%)]"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1400px] !px-10 lg:!px-20">
-        <div className="grid items-center gap-8 pb-10 lg:grid-cols-2 lg:gap-12 lg:pb-14 2xl:gap-16 2xl:pb-20">
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
+        <div className="grid items-center gap-8 pb-8 lg:grid-cols-2 lg:gap-12 lg:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="max-w-xl">
-            <h1 className="text-4xl font-extrabold leading-[1.03] tracking-tight sm:text-5xl lg:text-[76px]">
-              <span className="block text-[28px] font-semibold leading-tight text-white sm:text-[32px] lg:text-[40px] lg:leading-snug">
+            <h1 className="tracking-tight text-white">
+              <span className="type-rule-h4 block leading-tight lg:leading-snug">
                 Stop Paying $50/hr for
               </span>
-              <span className="mt-1 block text-[#ef2f9e]">Web Development</span>
-              <span className="mt-1 block text-[28px] font-semibold leading-tight text-white sm:text-[32px] lg:text-[40px] lg:leading-snug">
+              <span className="type-rule-h1 mt-1 block text-[#ef2f9e] leading-[1.03]">Web Development</span>
+              <span className="type-rule-h4 mt-1 block leading-tight lg:leading-snug">
                 That Takes 3 Weeks
               </span>
             </h1>
-            <p className="mt-4 max-w-lg text-sm font-semibold leading-relaxed text-white/85 sm:text-base lg:max-w-xl lg:text-[18px]">
+            <p className="type-rule-p mt-4 max-w-lg text-white/85 lg:max-w-xl">
               There&apos;s a better way to get web work done. Not cheaper freelancers. Not a retainer agency with a
               10-person email chain. A flat-rate, dedicated web team that knows your brand and turns tasks around in
               1-3 days.
@@ -95,21 +95,19 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(255,47,179,0.16),transparent_45%)]"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1400px] !px-10 pb-12 sm:pb-16 lg:!px-20 lg:pb-20 2xl:pb-28">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12 2xl:gap-16">
+      <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 lg:!px-20 lg:pb-10">
+        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 lg:grid-cols-2 lg:gap-x-24 lg:gap-y-20 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
+          <h2 className="type-rule-h2 col-span-full max-w-lg leading-tight text-white lg:max-w-2xl lg:leading-[1.02]">
+            We Handle All of Your <span className="text-[#f6b22e]">Web Development</span> Needs
+          </h2>
           <div>
-            <h2 className="max-w-lg text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:max-w-2xl lg:text-[64px] lg:leading-[1.02]">
-              We Handle All of Your <span className="text-[#f6b22e]">Web Development</span> Needs
-            </h2>
-            <div className="mt-6">
-              <SafeImage
-                src="/images/Service/web-development-we-handle.png"
-                alt="3D illustration of a developer at a multi-monitor desk with BUILD A WEBSITE on screen, Elementor, Divi, Duda, and responsive devices"
-                width={760}
-                height={620}
-                className="h-auto w-full max-w-[620px]"
-              />
-            </div>
+            <SafeImage
+              src="/images/Service/web-development-we-handle.png"
+              alt="3D illustration of a developer at a multi-monitor desk with BUILD A WEBSITE on screen, Elementor, Divi, Duda, and responsive devices"
+              width={760}
+              height={620}
+              className="h-auto w-full max-w-[620px]"
+            />
           </div>
           <div className="mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none">
             {visibleItems.map((item) => (
@@ -124,7 +122,7 @@ export function Hero() {
                   height={40}
                   className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
                 />
-                <p className="text-base leading-relaxed text-white/95 sm:text-lg lg:text-[24px] lg:leading-tight">
+                <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">
                   {item}
                 </p>
               </div>
