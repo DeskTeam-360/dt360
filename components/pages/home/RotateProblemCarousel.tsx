@@ -100,7 +100,7 @@ export function RotateProblemCarousel() {
                       aria-hidden
                     />
                     <span
-                      className="relative z-[2] flex h-full w-[344px] max-h-full flex-col items-start justify-start gap-16 overflow-y-auto py-16 pl-[42px] pr-4 text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased"
+                      className="relative z-[2] flex h-full w-[344px] max-h-full flex-col items-start justify-start gap-16 overflow-y-auto py-16 pl-[42px] pr-[22px] text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased"
                       aria-hidden={!isCenter}
                     >
                       <span className="font-[var(--font-poppins)] text-[48px] font-semibold leading-[52px] tracking-tight text-white">

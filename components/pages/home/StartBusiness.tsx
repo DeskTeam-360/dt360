@@ -18,7 +18,7 @@ export function StartBusiness() {
   return (
     <section
       id="start-business"
-      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24"
+      className="overflow-x-hidden bg-[rgba(252,252,255,1)] py-16 sm:py-20 lg:py-24"
       aria-labelledby="start-business-heading"
     >
       <Container className="max-w-7xl">
@@ -52,7 +52,7 @@ export function StartBusiness() {
 
           <h2
             id="start-business-heading"
-            className="relative z-10 mx-auto max-w-4xl text-center text-3xl font-bold leading-tight tracking-tight text-[#0f1030] sm:text-4xl sm:leading-[1.12] lg:text-[2.65rem] lg:leading-[1.08]"
+            className="relative z-10 mx-auto max-w-4xl text-center tracking-tight text-[#0f1030]"
           >
             {headlineBefore}
             <span className="text-[#e4277a]">{headlineHighlight}</span>
@@ -63,7 +63,7 @@ export function StartBusiness() {
           </p>
         </div>
 
-        <div className="relative z-10 mx-auto mt-10 w-full max-w-5xl sm:mt-14 lg:max-w-6xl">
+        <div className="relative z-10 mt-10 w-full sm:mt-14">
           <video
             className="block h-auto w-full"
             aria-label={illustrationAlt}

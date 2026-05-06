@@ -78,21 +78,18 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const body = (
     <p
       className={cn(
-        "text-left text-sm leading-relaxed text-white/90 sm:text-[0.9375rem]",
+        "text-left text-white/90",
       )}
     >
       {card.description}
     </p>
   );
   const title = (
-    <h3
-      className={cn(
-        "text-left font-bold leading-snug tracking-tight text-white",
-        isTallLeft ? "text-2xl" : "text-xl sm:text-2xl",
-      )}
+    <h4
+      className="text-left tracking-tight text-white"
     >
       {card.title}
-    </h3>
+    </h4>
   );
 
   const wideMagentaEmpty =
@@ -119,7 +116,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
           "origin-center transform-gpu transition-transform duration-300 ease-out hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
         (isWideMagenta || isWideOrange) && "lg:z-[1] lg:hover:z-[12]",
         isTallLeft
-          ? "grid items-stretch justify-items-stretch gap-5 overflow-visible rounded-3xl p-0 max-lg:grid-rows-[auto_auto] max-lg:gap-5 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-6"
+          ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-5 max-lg:grid-rows-[auto_auto] max-lg:gap-0 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
           : cn(
               "flex h-full min-h-0 flex-col items-stretch justify-start overflow-visible p-0 text-left",
               isWideMagenta
@@ -156,7 +153,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
               />
             )}
           </div>
-          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 py-6 sm:gap-3.5 sm:py-8 lg:gap-4 lg:px-10 lg:py-8">
+          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 pt-0 pb-6 sm:gap-3.5 sm:pt-0 sm:pb-8 lg:gap-4 lg:px-10 lg:pt-0 lg:pb-8">
             {title}
             {body}
           </div>
@@ -166,7 +163,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       {card.placement === "wide-magenta" && (card.title || card.description || card.mediaSrc) ? (
         <div
           className={cn(
-            "box-border ml-0 mr-auto w-full min-w-0 max-w-6xl px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
+            "box-border ml-0 mr-auto min-h-[265px] w-full min-w-0 max-w-6xl px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
           )}
         >
           <div className="grid h-full min-h-0 w-full min-w-0 grid-cols-1 justify-items-start gap-6 lg:grid-cols-2 lg:items-center lg:gap-8">
@@ -224,7 +221,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       {card.placement === "wide-orange" && (card.title || card.description || card.mediaSrc) ? (
         <div
           className={cn(
-            "box-border mx-auto w-full min-w-0 max-w-6xl self-center px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
+            "box-border mx-auto min-h-[265px] w-full min-w-0 max-w-6xl self-center px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
           )}
         >
           <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
@@ -308,12 +305,12 @@ export function InsourcingBetter() {
       <Container className="relative max-w-7xl">
         <h2
           id="insourcing-better-heading"
-          className="mx-auto max-w-4xl text-center text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]"
+          className="mx-auto max-w-4xl text-center tracking-tight text-white"
         >
           <span className="block">{titleLine1}</span>
           <span className="mt-2 block text-white lg:mt-3">{titleLine2}</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl text-pretty text-center text-base leading-relaxed text-white/85 sm:mt-8 sm:text-lg sm:leading-relaxed">
+        <p className="mx-auto mt-6 max-w-6xl text-pretty text-center text-base leading-relaxed text-white/85 sm:mt-8 sm:text-lg sm:leading-relaxed">
           {subheading}
         </p>
 

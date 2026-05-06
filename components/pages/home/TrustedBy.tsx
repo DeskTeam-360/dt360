@@ -31,10 +31,10 @@ function LogoRow({
             <Image
               src={logo.imageSrc}
               alt={ariaHidden ? "" : logo.alt}
-              width={220}
-              height={56}
-              className="h-10 w-auto max-w-[11rem] object-contain opacity-90 sm:h-12 sm:max-w-[13rem]"
-              sizes="(max-width: 768px) 140px, 220px"
+              width={400}
+              height={104}
+              className="h-[104px] w-auto max-w-[18rem] object-contain opacity-90 sm:max-w-[22rem]"
+              sizes="(max-width: 768px) 180px, 280px"
             />
           </div>
         </li>

@@ -23,7 +23,7 @@ const statTextBlock = cn(
 
 /** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
 const hoverOverlayOuter = cn(
-  "pointer-events-none absolute left-1 right-1 top-1/2 z-10 -translate-y-1/2",
+  "pointer-events-none absolute left-1 right-1 top-1/2 z-10 -translate-y-1/2 px-4",
   "opacity-0 transition-opacity duration-50 ease-out",
   "group-hover:opacity-100",
   "motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:group-hover:opacity-100",
@@ -41,7 +41,7 @@ const sideLayout =
   "flex min-h-[6.25rem] flex-row items-center justify-center gap-2.5 px-3 py-4 sm:min-h-[6.5rem] sm:gap-3.5 sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-4 lg:py-4";
 
 const textLayout =
-  "flex min-h-[6.25rem] flex-col items-center justify-center gap-1 px-3 py-4 text-center sm:min-h-[6.5rem] sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
+  "mx-auto flex w-fit min-h-[6.25rem] flex-col items-start justify-center gap-1 px-4 py-4 text-center sm:min-h-[6.5rem] sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
 
 /** Overlay hover untuk sel “side”: angka di atas, teks di bawah (bukan samping-samping). */
 const sideLayoutOverlay = cn(
@@ -50,11 +50,12 @@ const sideLayoutOverlay = cn(
 );
 
 const textLayoutOverlay =
-  "flex min-h-[9.5rem] flex-col items-center justify-center gap-1 px-3 py-[1.875rem] text-center sm:min-h-[9.75rem] sm:px-4 sm:py-[2.25rem] lg:min-h-[9.5rem] lg:gap-1.5 lg:py-[1.875rem]";
+  "flex min-h-[9.5rem] flex-col items-start justify-center gap-1 px-3 py-[1.875rem] text-center sm:min-h-[9.75rem] sm:px-[30px] sm:py-[2.25rem] lg:min-h-[9.5rem] lg:gap-1.5 lg:py-[1.875rem]";
 
 function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; isLast: boolean }) {
   const outer = cn(
-    "group relative z-0 overflow-visible p-0 hover:z-10",
+    "group relative z-0 overflow-visible hover:z-10",
+    stat.layout === "text" ? "w-full text-center px-4 py-0" : "p-0",
     !isLast && "border-b border-white lg:border-b-0",
     index <= 2 && "lg:border-r lg:border-r-white",
   );
@@ -64,18 +65,16 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
       <div className={outer}>
         <div className={cn("relative z-0", sideLayout)}>
           <span className={statValue}>{stat.value}</span>
-          <div className="flex min-w-0 flex-col justify-center gap-0">
-            <p className={statLabel}>{stat.labelLine1}</p>
-            <p className={statLabel}>{stat.labelLine2}</p>
-          </div>
+          <p className={cn(statLabel, "min-w-0")}>
+            {stat.labelLine1} {stat.labelLine2}
+          </p>
         </div>
         <div aria-hidden className={hoverOverlayOuter}>
           <div className={cn(hoverOverlayInner, sideLayoutOverlay)}>
             <span className={cn(statValue, "text-center")}>{stat.value}</span>
-            <div className="flex min-w-0 flex-col items-center justify-center gap-0">
-              <p className={statLabelHoverStacked}>{stat.labelLine1}</p>
-              <p className={statLabelHoverStacked}>{stat.labelLine2}</p>
-            </div>
+            <p className={cn(statLabelHoverStacked, "min-w-0 max-w-full text-pretty")}>
+              {stat.labelLine1} {stat.labelLine2}
+            </p>
           </div>
         </div>
       </div>
