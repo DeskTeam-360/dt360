@@ -5,11 +5,13 @@ import { PlatformsSupported } from "@/components/pages/service/email-funnels/Pla
 export default function EmailFunnelsPage() {
   return (
     <main className="bg-white">
-      <Hero />
-      <div className="-mt-px">
+      <div className="mx-0 px-0">
+        <Hero />
+      </div>
+      <div className="-mt-px mx-0 px-0">
         <PlatformsSupported />
       </div>
-      <div className="-mt-px">
+      <div className="-mt-px mx-0 px-0">
         <FAQ />
       </div>
     </main>

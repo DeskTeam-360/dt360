@@ -112,10 +112,7 @@ export function TeamMembers() {
       aria-labelledby="team-heading"
     >
       <Container className="max-w-7xl">
-        <h2
-          id="team-heading"
-          className="text-center font-bold tracking-tight"
-        >
+        <h2 id="team-heading" className="text-center tracking-tight">
           <span className="text-[#0b0d2a]">Team </span>
           <span className="bg-gradient-to-r from-[#e4277a] to-[#ff4d8d] bg-clip-text text-transparent">
             Members

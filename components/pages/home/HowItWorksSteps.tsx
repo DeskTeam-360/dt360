@@ -48,7 +48,7 @@ export function HowItWorksSteps() {
       <Container className="relative z-10 max-w-7xl">
         <h2
           id="how-it-works-steps-heading"
-          className="mx-auto max-w-4xl text-center text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.1rem]"
+          className="mx-auto max-w-4xl text-center leading-tight tracking-tight text-white"
         >
           <span className="block">{titleLine1}</span>
           <span className="block">{titleLine2}</span>
@@ -82,8 +82,8 @@ export function HowItWorksSteps() {
                   {step.number}
                 </div>
                 <div className="pt-1">
-                  <h3 className="text-3xl font-bold leading-tight text-white sm:text-[2.05rem]">{step.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-white/88 sm:text-lg">{step.description}</p>
+                  <h3 className="leading-tight text-white">{step.title}</h3>
+                  <p className="mt-2 leading-[2.5em] text-white/88">{step.description}</p>
                 </div>
               </article>
             ))}
@@ -91,7 +91,7 @@ export function HowItWorksSteps() {
         </div>
 
         <div className="mx-auto mt-10 w-full max-w-5xl rounded-xl border border-white/55 px-6 py-4 text-center sm:mt-12 sm:px-8">
-          <p className="text-base leading-relaxed text-white/95 sm:text-lg">
+          <p className="leading-relaxed text-white/95">
             <span className="font-extrabold">Agencies:</span> We work under your brand as your invisible back-office.
             Your clients never know we exist.
           </p>

@@ -58,7 +58,7 @@ export function TrustedBy() {
       <Container className="relative max-w-7xl">
         <h2
           id="trusted-by-heading"
-          className="mx-auto max-w-4xl text-center text-lg font-medium leading-snug text-zinc-800 sm:text-xl sm:leading-snug"
+          className="mx-auto max-w-4xl text-center text-base font-medium leading-snug text-zinc-800 sm:leading-snug lg:text-lg"
         >
           <span className="block">{headlineLine1}</span>
           <span className="mt-2 block text-zinc-800">

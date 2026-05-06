@@ -25,7 +25,7 @@ export function AboutTeamPeople() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24 relative">
 
           <div className="relative z-10 pt-10 lg:pt-0">
-            <h2 className="text-5xl font-[var(--font-poppins)] font-bold leading-[1.15] text-[#11104C] md:text-6xl lg:text-[72px] lg:leading-[1.1]">
+            <h2 className="font-[var(--font-poppins)] leading-[1.15] text-[#11104C] lg:leading-[1.1]">
               The People<br />
               Who Actually<br />
               <span className="text-[#e3058d]">Do Your Work</span>
@@ -56,7 +56,7 @@ export function AboutTeamPeople() {
             </div>
             
             <div className="w-full text-left">
-              <h3 className="font-[var(--font-montserrat)] text-[18px] md:text-[24px] lg:text-[28px] font-bold text-[#505FAA] uppercase tracking-wide">
+              <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[0].name}
               </h3>
               <p className="font-[var(--font-montserrat)] text-[13px] lg:text-[16px] italic font-semibold text-[#505FAA] uppercase mt-1 mb-4">
@@ -78,7 +78,7 @@ export function AboutTeamPeople() {
             </div>
             
             <div className="w-full text-left">
-              <h3 className="font-[var(--font-montserrat)] text-[18px] md:text-[24px] lg:text-[28px] font-bold text-[#505FAA] uppercase tracking-wide">
+              <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[1].name}
               </h3>
               <p className="font-[var(--font-montserrat)] text-[13px] lg:text-[16px] italic font-semibold text-[#505FAA] uppercase mt-1 mb-4">
@@ -92,7 +92,7 @@ export function AboutTeamPeople() {
 
           {/* Card 3: Indonesia Team */}
           <div className="w-full bg-[#4A1587] rounded-[30px] lg:rounded-[40px] p-10 lg:p-14 shadow-2xl flex flex-col items-center justify-center text-center mt-4 transition-transform hover:-translate-y-2 duration-300">
-            <h3 className="font-[var(--font-montserrat)] text-[20px] md:text-[26px] lg:text-[30px] font-bold text-[#e3058d] uppercase tracking-wide">
+            <h3 className="type-rule-h4 uppercase tracking-wide text-[#e3058d]">
               {teamPeople[2].name}
             </h3>
             <p className="font-[var(--font-montserrat)] text-[13px] md:text-[16px] lg:text-[18px] text-white font-medium mt-4 lg:mt-6 max-w-3xl leading-[1.8]">
@@ -115,7 +115,7 @@ export function AboutTeamPeople() {
           </div>
 
           <div className="text-left">
-            <h2 className="text-4xl font-[var(--font-poppins)] font-bold leading-tight text-[#11104C] lg:text-[50px] lg:leading-[60px] mb-8">
+            <h2 className="font-[var(--font-poppins)] mb-8 leading-tight text-[#11104C] lg:leading-[1.15]">
               What Makes The Team Defferent
             </h2>
             <ul className="space-y-4 lg:space-y-6">

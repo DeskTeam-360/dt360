@@ -14,7 +14,7 @@ export function AboutNumbersThatMatter() {
       </div>
 
       <Container className="relative z-30 max-w-[1440px] px-6 lg:px-20">
-        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-none sm:text-5xl lg:text-[64px] lg:leading-none -mt-4 lg:-mt-8">
+        <h2 className="font-[var(--font-poppins)] text-center leading-none -mt-4 lg:-mt-8 lg:leading-none">
           The Numbers That Matter
         </h2>
         <div className="mt-10 lg:mt-16 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">

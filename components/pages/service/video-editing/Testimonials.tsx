@@ -33,7 +33,7 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[-10px] top-[5%] z-[1] hidden h-auto w-[45%] opacity-85 sm:block"
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-        <h2 className="type-rule-h2 text-center leading-tight text-[#11114d] lg:leading-[1.02]">
+        <h2 className="type-rule-h2 text-center leading-tight text-[#1a1a4b] lg:leading-[1.08]">
           From 1 Webinar to <span className="text-[#e62a98]">10 Pieces</span>
           <br />
           of Content
@@ -60,11 +60,11 @@ export function Testimonials() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(135deg,#7976BA_0%,#E595BB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="type-rule-h4 italic leading-relaxed lg:leading-[1.06]">
+              <p className="type-rule-p font-montserrat !text-[32px] !font-semibold italic leading-relaxed lg:leading-[1.6]">
                 “DeskTeam360 takes our webinar recordings and turns them into YouTube videos, social clips, and ad
                 creatives. What used to take me 8 hours now takes 15 minutes to brief.”
               </p>
-              <p className="type-rule-h6 text-[#1b2272] lg:leading-none">
+              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#1a1a4b] lg:leading-tight pt-2">
                 Multiple DeskTeam360 clients
               </p>
             </div>

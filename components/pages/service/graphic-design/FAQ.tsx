@@ -23,11 +23,7 @@ const faqs = [
 ];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number>(0);
-
-  const toggleItem = (index: number) => {
-    setOpenIndex((current) => (current === index ? -1 : index));
-  };
+  const [openId, setOpenId] = useState<string>(faqs[0].question);
 
   return (
     <section className="relative overflow-visible py-20 sm:py-24 lg:py-28 2xl:py-36">
@@ -69,28 +65,30 @@ export function FAQ() {
             <h2 className="type-rule-h2 leading-tight text-[#11114d]">
               Got Questions? <span className="text-[#e62a98]">Good</span>
             </h2>
-            <div className="mt-5 space-y-3 sm:mt-6">
-              {faqs.map((item, index) => {
-                const isOpen = openIndex === index;
+            <div className="mt-6 space-y-4">
+              {faqs.map((item) => {
+                const isOpen = openId === item.question;
 
                 return (
-                  <div key={item.question} className="rounded-xl bg-transparent p-0">
+                  <article key={item.question} className="rounded-[16px]">
                     <button
                       type="button"
-                      onClick={() => toggleItem(index)}
-                      className={`flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left ${
-                        isOpen ? "bg-[#FFEDC0] text-[#1E1E1E]" : "bg-[#7D8BF0] text-white"
+                      onClick={() => setOpenId((prev) => (prev === item.question ? "" : item.question))}
+                      className={`group flex w-full items-center justify-between rounded-[16px] px-5 py-4 text-left transition duration-300 ease-out ${
+                        isOpen
+                          ? "bg-[#FFEDC0] text-[#1d2357]"
+                          : "bg-[#7D8BF0] text-white hover:bg-[#FFEDC0] hover:text-[#1d2357]"
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="type-rule-h5 leading-tight">{item.question}</span>
+                      <span className="type-rule-h5 pr-3 leading-tight">{item.question}</span>
                       <span
-                        className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
-                          isOpen ? "rotate-180" : "rotate-0"
+                        className={`shrink-0 transition-transform duration-300 ${
+                          isOpen ? "rotate-180 text-[#1d2357]" : "text-white group-hover:text-[#1d2357]"
                         }`}
                         aria-hidden
                       >
-                        <svg viewBox="0 0 24 24" className="h-[24px] w-[24px]" fill="none">
+                        <svg width={22} height={22} viewBox="0 0 24 24" fill="none">
                           <path
                             d="M6 9L12 15L18 9"
                             stroke="currentColor"
@@ -102,9 +100,11 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="type-rule-p mt-2 px-2 text-[#11114d]">{item.answer}</p>
+                      <div className="px-5 pb-2 pt-3">
+                        <p className="text-[#24285e]">{item.answer}</p>
+                      </div>
                     ) : null}
-                  </div>
+                  </article>
                 );
               })}
             </div>

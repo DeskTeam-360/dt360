@@ -33,7 +33,7 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[-10px] top-[5%] z-[1] hidden h-auto w-[45%] opacity-85 sm:block"
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-        <h2 className="type-rule-h2 text-center leading-tight text-[#11114d] lg:leading-[1.02]">
+        <h2 className="type-rule-h2 text-center leading-tight text-[#1a1a4b] lg:leading-[1.08]">
           <span className="text-[#e62a98]">Saving $20,000/Month</span> in
           <br />
           Contractor Costs
@@ -60,11 +60,11 @@ export function Testimonials() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(135deg,#7976BA_0%,#E595BB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="type-rule-h4 italic leading-relaxed lg:leading-[1.06]">
+              <p className="type-rule-p font-montserrat !text-[32px] !font-semibold italic leading-relaxed lg:leading-[1.6]">
                 “I&apos;m saving at least $20,000 monthly compared to what I was paying individual contractors - and the
                 quality and reliability is better.”
               </p>
-              <p className="type-rule-h6 text-[#1b2272] lg:leading-none">
+              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#1a1a4b] lg:leading-tight pt-2">
                 <span className="font-bold">Gaynor Meilke,</span>{" "}
                 <span className="font-medium">Charisma Ink</span>
               </p>

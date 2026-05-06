@@ -95,7 +95,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       className={cn(
         "relative overflow-hidden bg-white",
         isWebDev
-          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[280px] lg:-mt-[140px] lg:pb-[100px] lg:pt-[300px] 2xl:pt-[320px]"
+          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[420px] lg:-mt-[140px] lg:pb-[100px] lg:pt-[300px] 2xl:pt-[320px]"
           : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] lg:mt-0 lg:pb-[100px] lg:pt-[200px]",
       )}
       aria-labelledby={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
@@ -131,7 +131,10 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 lg:px-10">
         <h2
           id={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
-          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] lg:mt-0"
+          className={cn(
+            "relative z-[1] text-center leading-tight tracking-tight text-[#101651] max-md:mt-0 md:mt-12 md:pt-[100px] lg:mt-0 lg:pt-0",
+            isWebDev ? "pt-[580px]" : "pt-[180px]",
+          )}
         >
           {isWebDev ? (
             <>
@@ -165,7 +168,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                     className="h-auto w-[68%] max-w-[366px] object-contain"
                     sizes="(min-width: 1024px) 23vw, 60vw"
                   />
-                  <span className="text-[24px] font-bold leading-none text-white/95">{plan.tasks}</span>
+                  <span className="type-rule-h5 leading-none text-white/95">{plan.tasks}</span>
                 </div>
                 <div className="flex flex-1 flex-col px-6 pb-7 pt-14">
                   <p
@@ -212,9 +215,9 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
             <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
               {FEATURE_ITEMS.map((label) => (
-                <li key={label} className="flex items-start gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
-                  <CheckIcon className="mt-0.5 shrink-0" />
-                  <span>{label}</span>
+                <li key={label} className="flex items-center gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
+                  <CheckIcon className="shrink-0" />
+                  <span className="text-[18px] leading-[1.8em]">{label}</span>
                 </li>
               ))}
             </ul>

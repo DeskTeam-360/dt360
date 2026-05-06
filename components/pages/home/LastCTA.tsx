@@ -22,12 +22,12 @@ export function LastCTA() {
         <div className="relative isolate">
           {/* Hanya blok teks yang menentukan tinggi section (lg+). */}
           <div className="relative z-10 max-w-3xl pt-4 pb-10 lg:max-w-[54%] lg:pr-8 lg:pt-6 xl:max-w-[56%]">
-            <h2 className="max-w-3xl text-balance text-4xl font-bold leading-[1.06] tracking-tight text-[#11104C] sm:text-5xl lg:text-[3.3rem]">
+            <h2 className="max-w-3xl text-balance leading-[1.06] tracking-tight text-[#11104C]">
               <span>{headingBefore}</span>
               <span className="text-[#E3058D]">{headingHighlight}</span>
               <span>{headingAfter}</span>
             </h2>
-            <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[#11104C] sm:text-lg">
+            <p className="mt-5 max-w-2xl text-pretty leading-relaxed text-[#11104C]">
               {subheading}
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap">

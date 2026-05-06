@@ -77,7 +77,7 @@ function HowItWorksCard({ step, stepIndex }: { step: HowItWorksStep; stepIndex: 
           className="absolute left-0 top-0 z-20 h-auto w-full -translate-y-1/2 object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]"
         />
       </div>
-      <p className="relative z-0 mx-0 mt-1 flex max-w-[28ch] flex-col justify-center overflow-visible px-5 pb-8 pt-2 text-left text-[20px] font-semibold leading-snug text-white max-md:mt-10 sm:px-7 max-md:min-h-0 max-md:flex-none md:min-h-0 md:flex-1 lg:min-h-0 lg:flex-1">
+      <p className="relative z-0 mx-0 mt-1 flex max-w-[28ch] flex-col justify-start overflow-visible px-5 pb-8 pt-2 text-left text-[20px] font-semibold leading-[2.5em] text-white max-md:mt-10 sm:px-7 max-md:min-h-0 max-md:flex-none md:min-h-0 md:flex-1 lg:min-h-0 lg:flex-1">
         {step.description}
       </p>
     </article>
@@ -115,7 +115,7 @@ export function ServicesHowItWorks({
         <div className="mx-auto max-w-[1440px]">
           <h2
             id="services-how-it-works-heading"
-            className="text-center text-[64px] font-extrabold leading-tight tracking-tight text-white"
+            className="text-center leading-tight tracking-tight text-white pb-10"
           >
             How It <span className="text-[#ef2fa9]">Works</span>
           </h2>

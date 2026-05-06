@@ -76,21 +76,13 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const isWideOrange = card.placement === "wide-orange";
   const tone = isTallLeft ? "bg-[#1E1D76] shadow-lg shadow-black/20" : toneClass(card.tone);
   const body = (
-    <p
-      className={cn(
-        "text-left text-sm leading-relaxed text-white/90 sm:text-[0.9375rem]",
-      )}
-    >
+    <p className={cn("text-left text-sm leading-relaxed text-white/90 max-sm:text-[0.9375rem]")}>
       {card.description}
     </p>
   );
   const title = (
-    <h3
-      className={cn(
-        "text-left font-bold leading-snug tracking-tight text-white",
-        isTallLeft ? "text-2xl" : "text-xl sm:text-2xl",
-      )}
-    >
+    /** Judul kartu: skala H5 (Montserrat Bold 24px), bukan heading section H3 */
+    <h3 className="type-rule-h5 text-left leading-snug tracking-tight text-white">
       {card.title}
     </h3>
   );
@@ -308,12 +300,12 @@ export function InsourcingBetter() {
       <Container className="relative max-w-7xl">
         <h2
           id="insourcing-better-heading"
-          className="mx-auto max-w-4xl text-center text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]"
+          className="mx-auto max-w-4xl text-center leading-tight tracking-tight text-white lg:leading-[1.12]"
         >
           <span className="block">{titleLine1}</span>
           <span className="mt-2 block text-white lg:mt-3">{titleLine2}</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl text-pretty text-center text-base leading-relaxed text-white/85 sm:mt-8 sm:text-lg sm:leading-relaxed">
+        <p className="mx-auto mt-6 max-w-3xl text-pretty text-center leading-relaxed text-white/85 sm:mt-8 sm:leading-relaxed">
           {subheading}
         </p>
 

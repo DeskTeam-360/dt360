@@ -54,11 +54,11 @@ export function Hero() {
         <div className="grid items-center gap-8 pb-8 lg:grid-cols-2 lg:gap-12 lg:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="max-w-xl">
             <h1 className="tracking-tight text-white">
-              <span className="type-rule-h4 block leading-tight lg:leading-snug">
+              <span className="type-rule-h4 !text-[36px] block leading-tight lg:leading-snug mb-3">
                 Stop Paying $50/hr for
               </span>
               <span className="type-rule-h1 mt-1 block text-[#ef2f9e] leading-[1.03]">Web Development</span>
-              <span className="type-rule-h4 mt-1 block leading-tight lg:leading-snug">
+              <span className="type-rule-h4 !text-[36px] mt-1 block leading-tight lg:leading-snug mt-3">
                 That Takes 3 Weeks
               </span>
             </h1>
@@ -122,7 +122,7 @@ export function Hero() {
                   height={40}
                   className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
                 />
-                <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">
+                <p className="type-rule-h5 !font-medium leading-relaxed text-white/95 lg:leading-tight">
                   {item}
                 </p>
               </div>

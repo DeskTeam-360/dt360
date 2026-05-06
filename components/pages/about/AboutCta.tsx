@@ -14,7 +14,7 @@ export function AboutCta() {
         <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
           
           <div className="pt-10 pb-10 lg:pb-20">
-            <h2 className="text-4xl font-[var(--font-poppins)] font-bold leading-[1.2] text-[#11104C] sm:text-5xl lg:text-[54px] lg:leading-[64px]">
+            <h2 className="font-[var(--font-poppins)] leading-[1.2] text-[#11104C] lg:leading-[1.15]">
               <span className="text-[#E3058D]">{aboutCta.titleLead}</span>
               {aboutCta.titleTail}
             </h2>

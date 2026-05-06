@@ -64,32 +64,30 @@ export default function ServicesPage() {
           className="object-cover object-bottom"
           style={{ objectPosition: "bottom center" }}
         />
-        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 lg:flex-row lg:items-center lg:gap-6">
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col justify-center gap-10 lg:flex-row lg:items-center lg:gap-6 max-w-[1440px] lg:px-10 px-5">
           <div className="max-w-xl text-white">
-            <h1 className="text-[70px] font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="leading-[1.05] tracking-tight">
               <span className="text-[#f336b6]">All Services</span>
               <br />
               One Team
               <br />
               One Flat Rate
             </h1>
-            <p className="mt-6 text-2xl font-semibold leading-snug text-white/95">
+            <p className="mt-6 text-[24px] font-semibold leading-snug text-white/95">
             Stop Paying $50/hr for Web Work That Takes 3 Weeks
             </p>
-            <p className="mt-6 max-w-lg text-lg leading-8 text-white/85">
+            <p className="mt-6 max-w-lg leading-8 text-white/85">
             There&apos;s a better way to get web work done. Not cheaper freelancers. Not a retainer agency with a 10-person email chain. A flat-rate, dedicated web team that knows your brand and turns tasks around in 1-3 days.
             </p>
           </div>
-          <div
-            className="relative z-[1300] mx-auto mb-[-65px] w-full self-end lg:mx-0 lg:w-[50%]"
-          >
+          <div className="relative z-[80] mx-auto mb-[-65px] w-full self-end lg:-mb-[75px] lg:mx-0 lg:w-[50%]">
             <Image
               src="/images/dt360-service-hero-image.png"
               alt="DT360 services team illustration"
               width={736}
               height={758}
               priority
-              className="h-auto w-full"
+              className="relative z-[90] h-auto w-full"
             />
           </div>
         </div>
@@ -113,14 +111,14 @@ export default function ServicesPage() {
           className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] lg:w-[340px]"
         />
 
-        <div className="relative mx-auto max-w-[1440px]">
+        <div className="relative mx-auto max-w-[1440px] lg:px-10 px-5">
           <div className="text-center">
-            <h2 className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+            <h2 className="leading-tight tracking-tight text-[#101651]">
               <span className="text-[#ef2fa9]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
-            <p className="mt-4 text-xl font-semibold text-[#1a1a1a]">
+            <h5 className="mt-4 text-[#1a1a1a]">
               Pick the plan that fits. We handle the rest.
-            </p>
+            </h5>
           </div>
 
           <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -155,10 +153,10 @@ export default function ServicesPage() {
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
-                    <h3 className="mt-6 max-w-[14ch] text-[36px] font-bold leading-tight">{service.title}</h3>
+                    <h4 className="mt-6 max-w-[14ch] leading-tight">{service.title}</h4>
                     <Link
                       href={service.href}
-                      className="mt-auto w-fit pt-3 text-[18px] font-semibold transition duration-300 ease-out hover:translate-x-1"
+                      className="mt-auto w-fit pt-3 font-semibold transition duration-300 ease-out hover:translate-x-1"
                     >
                       View Service &gt;&gt;
                     </Link>
@@ -175,7 +173,7 @@ export default function ServicesPage() {
       </div>
 
       <section
-        className="relative z-10 overflow-x-hidden bg-white pb-[80px] pt-[220px] md:pb-[90px] md:pt-[230px] lg:pb-[100px] lg:pt-[240px]"
+        className="relative z-10 overflow-x-hidden bg-white pb-[80px] pt-[200px] md:pb-[90px] md:pt-[210px] lg:pb-[100px] lg:pt-[220px]"
         aria-labelledby="services-testimonials-heading"
       >
         <div
@@ -183,7 +181,7 @@ export default function ServicesPage() {
           aria-hidden
         />
         <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 lg:px-10">
-          <h2 id="services-testimonials-heading" className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+          <h2 id="services-testimonials-heading" className="leading-tight tracking-tight text-[#101651]">
             <span className="text-[#ef2fa9]">Proven Results</span>
             <br />
             Real Business

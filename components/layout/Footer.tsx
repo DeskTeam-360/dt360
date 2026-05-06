@@ -22,7 +22,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-8 xl:gap-14">
           <div className="sm:col-span-2 lg:col-span-1">
             <DeskTeamLogo />
-            <p className="mt-6 max-w-xs text-2xl font-bold leading-tight tracking-tight sm:text-[1.65rem] sm:leading-snug">
+            <p className="type-rule-h5 mt-6 max-w-xs leading-tight tracking-tight sm:leading-snug">
               Stop Outsourcing
               <br />
               Start Insourcing
@@ -30,7 +30,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Services">
-            <h3 className="text-base font-bold text-white">Services</h3>
+            <h3 className="text-sm font-bold text-white sm:text-[15px]">Services</h3>
             <ul className="mt-5 space-y-3 text-sm text-white/85 sm:text-[0.9375rem]">
               {footerServices.map((item) => (
                 <li key={item.label}>
@@ -43,7 +43,7 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Company">
-            <h3 className="text-base font-bold text-white">Company</h3>
+            <h3 className="text-sm font-bold text-white sm:text-[15px]">Company</h3>
             <ul className="mt-5 space-y-3 text-sm text-white/85 sm:text-[0.9375rem]">
               {footerCompany.map((item) => (
                 <li key={item.href + item.label}>
@@ -56,7 +56,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <h3 className="text-base font-bold text-white">Follow Us on</h3>
+            <h3 className="text-sm font-bold text-white sm:text-[15px]">Follow Us on</h3>
             <ul className="mt-5 flex flex-wrap gap-3" aria-label="Social media">
               {footerSocial.map((item) => (
                 <li key={item.label}>

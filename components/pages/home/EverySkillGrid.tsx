@@ -111,7 +111,7 @@ function ServiceCardContent({
     <>
       <h3
         className={cn(
-          "whitespace-pre-line text-[2.15rem] font-bold leading-[1.12] tracking-[-0.01em] sm:text-[2.45rem]",
+          "whitespace-pre-line leading-[1.12] tracking-[-0.01em]",
           text === "light" ? "text-white" : "text-[#101651]",
         )}
       >
@@ -119,7 +119,7 @@ function ServiceCardContent({
       </h3>
       <p
         className={cn(
-          "mt-3 text-[1.05rem] leading-[1.5] sm:text-[1.15rem]",
+          "mt-3 leading-[1.5]",
           text === "light" ? "text-white/95" : "text-[#2a2f61]",
         )}
       >
@@ -151,10 +151,10 @@ export function EverySkillGrid() {
 
       <Container className="relative z-10 max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-10">
-          <h2 className="max-w-xl text-balance text-4xl font-bold leading-[1.04] tracking-tight text-[#101651] sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-xl text-balance leading-[1.04] tracking-tight text-[#101651]">
             Every Skill You Need. <span className="text-[#D80B8C]">One Team.</span> One Bill
           </h2>
-          <p className="max-w-lg text-base leading-relaxed text-[#2a2f61] sm:text-lg">
+          <p className="max-w-lg leading-relaxed text-[#2a2f61]">
             DeskTeam360 replaces freelancer chaos with a dedicated team that already knows how to work together - all
             managed by a US-based account manager so you never have to coordinate anything.
           </p>

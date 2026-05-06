@@ -43,7 +43,7 @@ export function FAQ() {
           </div>
 
           <div className="order-1 lg:order-2">
-            <h2 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem]">
+            <h2 className="text-balance tracking-tight text-white">
               <span>{headingStart} </span>
               <span className="text-[#E3058D]">{headingHighlight}</span>
             </h2>

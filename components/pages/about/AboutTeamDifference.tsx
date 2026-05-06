@@ -20,7 +20,7 @@ export function AboutTeamDifference() {
             </div>
           </div>
           <div className="lg:pl-8">
-            <h2 className="text-4xl font-[var(--font-poppins)] font-bold leading-tight text-[#11104C] sm:text-5xl lg:text-[64px] lg:leading-[80px]">
+            <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104C] lg:leading-[1.12]">
               What Makes The Team Different
             </h2>
             <ul className="mt-12 space-y-6">

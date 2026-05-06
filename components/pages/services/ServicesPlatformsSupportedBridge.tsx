@@ -12,8 +12,10 @@ const platformLogos = [
 export function ServicesPlatformsSupportedBridge() {
   return (
     <div className="relative z-20 -mt-[72px] px-5 md:px-10 lg:-mt-[88px] lg:px-10">
-      <div className="mx-auto w-full max-w-[1440px] rounded-[28px] border border-[#d8dbef] bg-white p-[40px] shadow-[0_0_22px_rgba(189,200,252,0.75),0_16px_40px_rgba(16,22,81,0.18)]">
-        <h2 className="text-center text-2xl font-extrabold tracking-[0.14em] text-[#3f4f9a]">PLATFORMS SUPPORTED</h2>
+      <div className="mx-auto w-full max-w-[1440px] rounded-[28px] border border-[#d8dbef] bg-white p-[40px] shadow-[0_0_22px_rgba(189,200,252,0.75),0_16px_40px_rgba(16,22,81,0.18)] max-w-[1440px] ">
+        <p className="type-rule-h5 text-center uppercase tracking-[0.14em] text-[#3f4f9a] pb-3">
+          PLATFORMS SUPPORTED
+        </p>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-[40px] lg:flex-nowrap">
           {platformLogos.map((logo) => (
             <div

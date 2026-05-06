@@ -5,11 +5,13 @@ import { Testimonials } from "@/components/pages/service/graphic-design/Testimon
 export default function GraphicDesignPage() {
   return (
     <main className="bg-white">
-      <Hero />
-      <div className="-mt-px">
+      <div className="mx-0 px-0">
+        <Hero />
+      </div>
+      <div className="-mt-px mx-0 px-0">
         <Testimonials />
       </div>
-      <div className="-mt-px">
+      <div className="-mt-px mx-0 px-0">
         <FAQ />
       </div>
     </main>
