@@ -71,7 +71,7 @@ export function RotateProblemCarousel() {
                     }}
                     className={cn(
                       // backface-hidden + translateZ moderat mengurangi blur teks di layer GPU (Chrome/Edge)
-                      "absolute inset-0 overflow-hidden rounded-xl border-2 border-white/95 text-left shadow-2xl shadow-black/25 outline-none transition-[transform,opacity] duration-500 ease-out [backface-visibility:hidden] focus-visible:ring-2 focus-visible:ring-[#e4277a] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                      "absolute inset-0 overflow-hidden rounded-none text-left shadow-2xl shadow-black/25 outline-none transition-[transform,opacity] duration-500 ease-out [backface-visibility:hidden] focus-visible:ring-2 focus-visible:ring-[#e4277a] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                       isCenter ? "z-30 cursor-default" : "z-20 cursor-pointer hover:brightness-[1.02]",
                     )}
                     style={{
@@ -79,8 +79,8 @@ export function RotateProblemCarousel() {
                       transform: isCenter
                         ? "translateZ(0) rotateY(0deg) scale(1)"
                         : isRight
-                          ? "translateX(62%) translateZ(-48px) rotateY(-26deg) scale(0.88)"
-                          : "translateX(-62%) translateZ(-48px) rotateY(26deg) scale(0.88)",
+                          ? "translateX(84%) translateZ(-48px) rotateY(0deg) scale(0.88)"
+                          : "translateX(-84%) translateZ(-48px) rotateY(0deg) scale(0.88)",
                     }}
                     aria-label={isCenter ? undefined : `Show card: ${card.title}`}
                     aria-current={isCenter ? "true" : undefined}
@@ -100,13 +100,13 @@ export function RotateProblemCarousel() {
                       aria-hidden
                     />
                     <span
-                      className="relative z-[2] flex h-full max-h-full flex-col justify-center overflow-y-auto p-12 sm:p-16 lg:max-w-[58%] [transform:translate3d(0,0,0.1px)] antialiased"
+                      className="relative z-[2] flex h-full w-[344px] max-h-full flex-col items-start justify-start gap-16 overflow-y-auto py-16 pl-[42px] pr-4 text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased"
                       aria-hidden={!isCenter}
                     >
-                      <span className="text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-[2rem] sm:leading-[1.08] lg:text-[2.25rem] lg:leading-[1.06]">
+                      <span className="font-[var(--font-poppins)] text-[48px] font-semibold leading-[52px] tracking-tight text-white">
                         {card.title}
                       </span>
-                      <span className="mt-5 text-pretty text-[0.9375rem] font-normal leading-[1.55] text-white sm:mt-6 sm:text-base sm:leading-[1.5] lg:mt-7 lg:text-[1.0625rem] lg:leading-[1.5]">
+                      <span className="text-pretty text-[18px] font-normal leading-[30px] text-white">
                         {card.description}
                       </span>
                     </span>
