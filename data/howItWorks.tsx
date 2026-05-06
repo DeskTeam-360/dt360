@@ -19,6 +19,11 @@ export type HowItWorksDontItem = {
   label: string;
   /** Target for “View Details >>” */
   detailHref: string;
+  /** Degrees for border `linear-gradient(...)` */
+  borderGradientDeg: number;
+  /** `/images/…` — top circle icon */
+  iconSrc: string;
+  iconAlt: string;
 };
 
 export type HowItWorksTeamStripMember = {
@@ -127,11 +132,46 @@ export const howItWorksDontSection = {
   intro:
     "DeskTeam360 is not a replacement for your marketing strategist, business coach, or ads manager. We're built to implement - fast, reliably, and at scale. Here's what falls outside our scope:",
   items: [
-    { id: "copy", label: "Sales Copy", detailHref: "/services/graphic-design" },
-    { id: "paid", label: "Paid Media Management", detailHref: "/services" },
-    { id: "social", label: "Social Media Replies and Community", detailHref: "/services/social-media-content" },
-    { id: "seo", label: "Off-Page SEO", detailHref: "/services" },
-    { id: "cube", label: "3D Design & Animation", detailHref: "/services/graphic-design" },
+    {
+      id: "copy",
+      label: "Sales Copy",
+      detailHref: "/services/graphic-design",
+      borderGradientDeg: 35,
+      iconSrc: "/images/How it works - Icon Sales Copy.png",
+      iconAlt: "Sales copy",
+    },
+    {
+      id: "paid",
+      label: "Paid Media Management",
+      detailHref: "/services",
+      borderGradientDeg: 180,
+      iconSrc: "/images/How it works - Icon Paid Media management.png",
+      iconAlt: "Paid media management",
+    },
+    {
+      id: "social",
+      label: "Social Media Replies and Community",
+      detailHref: "/services/social-media-content",
+      borderGradientDeg: 225,
+      iconSrc: "/images/How it works - Icon Social Media replies.png",
+      iconAlt: "Social media replies",
+    },
+    {
+      id: "seo",
+      label: "Off-Page SEO",
+      detailHref: "/services",
+      borderGradientDeg: 10,
+      iconSrc: "/images/How it works - Icon Off Page SEO.png",
+      iconAlt: "Off-page SEO",
+    },
+    {
+      id: "cube",
+      label: "3D Design & Animation",
+      detailHref: "/services/graphic-design",
+      borderGradientDeg: 180,
+      iconSrc: "/images/How it works - Icon 3D Design.png",
+      iconAlt: "3D design",
+    },
   ] satisfies HowItWorksDontItem[],
   /** Banner: accent (#F5B419) through colon; remainder white. */
   bannerTextAccent:
