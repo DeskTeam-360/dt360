@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceHeroIncludedChecklist } from "@/components/pages/service/shared/ServiceHeroIncludedChecklist";
 
 const includedItems = [
   "Feed post graphics - single images, carousels, quote cards",
@@ -88,30 +89,7 @@ export function Hero() {
               className="h-auto w-full max-w-[560px]"
             />
           </div>
-          <div className="mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none">
-            {includedItems.map((item) => (
-              <div
-                key={item}
-                className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
-              >
-                <SafeImage
-                  src="/images/Service - Checklist.png"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
-                />
-                <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">
-                  {item}
-                </p>
-              </div>
-            ))}
-            <div className="flex items-center justify-center gap-1 pt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
-              <span className="h-1.5 w-1.5 rounded-full bg-[#f6b22e]" />
-              <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
-            </div>
-          </div>
+          <ServiceHeroIncludedChecklist items={includedItems} />
         </div>
       </Container>
     </section>
