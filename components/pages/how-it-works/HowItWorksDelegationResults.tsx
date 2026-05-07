@@ -1,5 +1,4 @@
-import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
-import { servicesTestimonials } from "@/data/servicesPage";
+import { ServicesTestimonialsCarouselLoader } from "@/components/pages/services/ServicesTestimonialsCarouselLoader";
 import { howItWorksDelegation } from "@/data/howItWorks";
 
 export function HowItWorksDelegationResults() {
@@ -25,7 +24,7 @@ export function HowItWorksDelegationResults() {
           <span className="text-[#ef2fa9]">{titleHighlight2}</span>
         </h2>
       </div>
-      <ServicesTestimonialsCarousel items={servicesTestimonials} />
+      <ServicesTestimonialsCarouselLoader />
     </section>
   );
 }

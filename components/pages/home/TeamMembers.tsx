@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
-import { teamMembers } from "@/data/home";
+import type { TeamMember } from "@/data/home";
 import { cn } from "@/lib/utils";
 
 /** ~ card width (280) + gap between cards */
@@ -23,7 +23,11 @@ type MouseDragState = {
   startScrollLeft: number;
 };
 
-export function TeamMembers() {
+type Props = {
+  members: TeamMember[];
+};
+
+export function TeamMembers({ members }: Props) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const mouseDragRef = useRef<MouseDragState | null>(null);
   const [mouseDragging, setMouseDragging] = useState(false);
@@ -166,7 +170,7 @@ export function TeamMembers() {
           onPointerCancel={onScrollerPointerUp}
           onLostPointerCapture={onScrollerLostPointerCapture}
         >
-            {teamMembers.map((member) => (
+            {members.map((member) => (
               <article
                 key={member.id}
                 className="w-[min(100%,280px)] shrink-0 snap-center sm:w-[280px]"
@@ -178,7 +182,7 @@ export function TeamMembers() {
                       src={member.imageSrc}
                       alt={`${member.name}, ${member.role}`}
                       fill
-                      className="object-cover object-left-bottom scale-100"
+                      className="object-cover object-center-center scale-100"
                       sizes="(max-width: 640px) 85vw, 280px"
                       priority={member.id === "1"}
                     />

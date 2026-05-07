@@ -5,8 +5,7 @@ import { ServicesFloatingFeaturesBar } from "@/components/pages/services/Service
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
-import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
-import { servicesTestimonials } from "@/data/servicesPage";
+import { ServicesTestimonialsSection } from "@/components/pages/services/ServicesTestimonialsSection";
 
 const coreServices = [
   {
@@ -189,7 +188,7 @@ export default function ServicesPage() {
             Real Business
           </h2>
         </div>
-        <ServicesTestimonialsCarousel items={servicesTestimonials} />
+        <ServicesTestimonialsSection />
       </section>
 
       <ServicesHowItWorks />

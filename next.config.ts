@@ -1,5 +1,17 @@
 import type { NextConfig } from "next";
 
+const wpRest =
+  process.env.WORDPRESS_REST_BASE_URL?.trim() || process.env.NEXT_PUBLIC_WORDPRESS_REST_BASE_URL?.trim();
+let wpImageHost: string | undefined;
+if (wpRest) {
+  try {
+    const protoSplit = wpRest.includes("://") ? wpRest : `https://${wpRest}`;
+    wpImageHost = new URL(protoSplit).hostname;
+  } catch {
+    wpImageHost = undefined;
+  }
+}
+
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
@@ -11,6 +23,9 @@ const nextConfig: NextConfig = {
         hostname: "placehold.co",
         pathname: "/**",
       },
+      ...(wpImageHost
+        ? ([{ protocol: "https" as const, hostname: wpImageHost, pathname: "/**" as const }] as const)
+        : []),
     ],
   },
 };

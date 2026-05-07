@@ -34,8 +34,10 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
   }, [count]);
 
   const scrollToSlide = (targetIndex: number) => {
+    if (count === 0) return;
+    const normalized = ((targetIndex % count) + count) % count;
     const viewport = viewportRef.current;
-    const targetSlide = slideRefs.current[targetIndex];
+    const targetSlide = slideRefs.current[normalized];
     if (!viewport || !targetSlide) return;
 
     const vRect = viewport.getBoundingClientRect();
@@ -47,28 +49,35 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
       left: Math.min(Math.max(0, desiredLeft), maxLeft),
       behavior: "smooth",
     });
-    setIndex(targetIndex);
+    setIndex(normalized);
   };
+
+  const goNext = () => scrollToSlide(index + 1);
+  const goPrev = () => scrollToSlide(index - 1);
 
   const handleScroll = () => {
     const viewport = viewportRef.current;
     if (!viewport) return;
 
-    const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
+    /** Pakai rect viewport (bukan offsetLeft) — offsetParent bisa beda antar engine/layout sehingga dot aktif/gesture bisa “aneh” di Chrome vs lainnya. */
+    const vRect = viewport.getBoundingClientRect();
+    const centerX = vRect.left + vRect.width / 2;
+
     let nearestIndex = 0;
     let nearestDistance = Number.POSITIVE_INFINITY;
 
     slideRefs.current.forEach((slide, slideIndex) => {
       if (!slide) return;
-      const slideCenter = slide.offsetLeft - viewport.offsetLeft + slide.clientWidth / 2;
-      const distance = Math.abs(slideCenter - viewportCenter);
+      const sRect = slide.getBoundingClientRect();
+      const slideCenterX = sRect.left + sRect.width / 2;
+      const distance = Math.abs(slideCenterX - centerX);
       if (distance < nearestDistance) {
         nearestDistance = distance;
         nearestIndex = slideIndex;
       }
     });
 
-    if (nearestIndex !== index) setIndex(nearestIndex);
+    setIndex((prev) => (nearestIndex !== prev ? nearestIndex : prev));
   };
 
   if (count === 0) return null;
@@ -135,20 +144,71 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
         </div>
       </div>
 
-      <div className="mt-10 flex items-center justify-center gap-3 sm:mt-12">
-        {items.map((item, dotIndex) => (
+      <div
+        className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:mt-12 sm:gap-4"
+        role="group"
+        aria-label="Testimonial carousel controls"
+      >
+        {count > 1 ? (
+          // <button
+          //   type="button"
+          //   onClick={goPrev}
+          //   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#c6d2df] text-[#101651] transition hover:border-[#aebdd0] hover:bg-[#f0f4f8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]"
+          //   aria-label="Previous testimonial"
+          // >
+ 
+          // </button>
+
+<button
+type="button"
+onClick={goPrev}
+className={cn(
+  "flex h-12 w-12 items-center justify-center rounded-full border border-zinc-300/80 bg-zinc-200 text-zinc-700",
+  "transition hover:bg-zinc-300/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]",
+)}
+aria-label="Previous testimonial"
+>
+<svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+</button>
+        ) : null}
+
+
+
+        <div className="flex items-center justify-center gap-3">
+          {items.map((item, dotIndex) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => scrollToSlide(dotIndex)}
+              className={cn(
+                "h-3 w-3 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]",
+                dotIndex === index ? "bg-[#e4277a]" : "bg-[#c6d2df] hover:bg-[#aebdd0]",
+              )}
+              aria-label={`Show testimonial ${dotIndex + 1}`}
+              aria-current={dotIndex === index ? "true" : undefined}
+            />
+          ))}
+        </div>
+        {count > 1 ? (
+      
           <button
-            key={item.id}
-            type="button"
-            onClick={() => scrollToSlide(dotIndex)}
-            className={cn(
-              "h-3 w-3 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]",
-              dotIndex === index ? "bg-[#e4277a]" : "bg-[#c6d2df] hover:bg-[#aebdd0]",
-            )}
-            aria-label={`Show testimonial ${dotIndex + 1}`}
-            aria-current={dotIndex === index ? "true" : undefined}
-          />
-        ))}
+          type="button"
+          onClick={goNext}
+          className={cn(
+            "flex h-12 w-12 items-center justify-center rounded-full bg-[#E3058D] text-white shadow-md shadow-[#E3058D]/25",
+            "transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]",
+          )}
+          aria-label="Next testimonial"
+        >
+          <span className="text-lg font-semibold" aria-hidden>
+          <svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </button>
+        ) : null}
       </div>
     </div>
   );

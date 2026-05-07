@@ -3,6 +3,8 @@ import { Container } from "@/components/shared/Container";
 import { socialProofSection } from "@/data/home";
 import { SocialProofMarquee } from "./HomeMarquee";
 import { SocialProofTestimonialCarousel } from "./SocialProofTestimonialCarousel";
+import { ServicesTestimonialsCarouselLoader } from "@/components/pages/services/ServicesTestimonialsCarouselLoader";
+// import { SocialProofTestimonialCarouselLoader } from "../services/SocialProofTestimonialCarouselLoader";
 
 export function SocialProofTestimonials() {
   const { headlineLine1, headlineLine2, headlineHighlight, imageSrc, imageAlt, testimonials } =
@@ -40,7 +42,8 @@ export function SocialProofTestimonials() {
       </Container>
 
       <div className="w-full">
-        <SocialProofTestimonialCarousel items={testimonials} />
+        {/* <SocialProofTestimonialCarousel items={testimonials} /> */}
+        <ServicesTestimonialsCarouselLoader />
       </div>
 
       <SocialProofMarquee />
