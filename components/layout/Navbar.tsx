@@ -36,7 +36,6 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHomePage, pathname]);
-  const finalScrolled = isHomePage ? false : scrolled;
   return (
     <>
       <header
@@ -69,7 +68,10 @@ export function Navbar() {
               </Link>
               <Link
                 href="/how-it-works"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn(
+                  "font-nav-primary transition-colors hover:text-white",
+                  pathname === "/how-it-works" ? "text-white" : "text-white/90",
+                )}
               >
                 How it Works
               </Link>

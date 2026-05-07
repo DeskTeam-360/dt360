@@ -1,0 +1,89 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { cn } from "@/lib/utils";
+
+export type ServiceHeroIncludedChecklistProps = {
+  /** All bullet strings; component slices into pages of `itemsPerPage`. */
+  items: readonly string[];
+  /** How many checklist rows per “page” before the next dot. Default 4. */
+  itemsPerPage?: number;
+  /** Starting page (0-based). Clamped if out of range. */
+  initialPageIndex?: number;
+  className?: string;
+};
+
+/**
+ * “What’s included” checklist + dot pagination for service hero sections.
+ * Add more strings to `items` — extra pages appear automatically (no manual dot count).
+ */
+export function ServiceHeroIncludedChecklist({
+  items,
+  itemsPerPage = 4,
+  initialPageIndex = 0,
+  className,
+}: ServiceHeroIncludedChecklistProps) {
+  const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
+  const [pageIndex, setPageIndex] = useState(initialPageIndex);
+  /** Clamped so the view stays valid if `items` / `totalPages` shrinks (no effect + setState). */
+  const safePageIndex = Math.min(Math.max(0, pageIndex), Math.max(0, totalPages - 1));
+
+  const visibleItems = useMemo(
+    () =>
+      items.slice(safePageIndex * itemsPerPage, (safePageIndex + 1) * itemsPerPage),
+    [items, itemsPerPage, safePageIndex],
+  );
+
+  const showDots = totalPages > 1;
+
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none",
+        className,
+      )}
+    >
+      <div className="space-y-3 sm:space-y-4" role="list" aria-label="What is included">
+        {visibleItems.map((item, idx) => (
+          <div
+            key={`${safePageIndex}-${idx}`}
+            role="listitem"
+            className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
+          >
+            <SafeImage
+              src="/images/Service - Checklist.png"
+              alt=""
+              width={40}
+              height={40}
+              className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
+            />
+            <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">{item}</p>
+          </div>
+        ))}
+      </div>
+      {showDots ? (
+        <div
+          className="flex items-center justify-center gap-2 pt-2"
+          role="tablist"
+          aria-label="Included items pages"
+        >
+          {Array.from({ length: totalPages }, (_, dotIndex) => (
+            <button
+              key={dotIndex}
+              type="button"
+              role="tab"
+              aria-selected={safePageIndex === dotIndex}
+              aria-label={`Page ${dotIndex + 1} of ${totalPages}`}
+              onClick={() => setPageIndex(dotIndex)}
+              className={cn(
+                "h-2 w-2 shrink-0 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
+                safePageIndex === dotIndex ? "bg-[#f6b22e]" : "bg-white/40 hover:bg-white/55",
+              )}
+            />
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}

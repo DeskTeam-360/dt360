@@ -18,7 +18,7 @@ export function StartBusiness() {
   return (
     <section
       id="start-business"
-      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24"
+      className="overflow-x-hidden bg-[rgba(252,252,255,1)] py-16 sm:py-20 lg:py-24"
       aria-labelledby="start-business-heading"
     >
       <Container className="max-w-7xl">
@@ -63,7 +63,7 @@ export function StartBusiness() {
           </p>
         </div>
 
-        <div className="relative z-10 mx-auto mt-10 w-full max-w-5xl sm:mt-14 lg:max-w-6xl">
+        <div className="relative z-10 mt-10 w-full sm:mt-14">
           <video
             className="block h-auto w-full"
             aria-label={illustrationAlt}
