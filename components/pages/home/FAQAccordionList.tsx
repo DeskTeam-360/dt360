@@ -22,12 +22,26 @@ export function FAQAccordionList({ items }: Props) {
               id={`${item.id}-trigger`}
               aria-expanded={isOpen}
               aria-controls={`${item.id}-panel`}
-              className="flex w-full items-center justify-between gap-4 rounded-2xl bg-white px-6 py-4 text-left text-[#11104C] shadow-sm transition hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="group flex w-full items-center justify-between gap-4 rounded-2xl bg-white px-6 py-4 text-left text-[#11104C] shadow-sm transition hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
               <span className="text-base font-semibold sm:text-xl">{item.question}</span>
-              <span className="shrink-0 text-2xl leading-none text-[#11104C]" aria-hidden>
-                {isOpen ? "⌃" : "⌄"}
+              <span
+                className={cn(
+                  "shrink-0 text-[#11104C] transition-transform duration-300",
+                  isOpen && "rotate-180",
+                )}
+                aria-hidden
+              >
+                <svg width={22} height={22} viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M6 9l6 6 6-6"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             </button>
             <div

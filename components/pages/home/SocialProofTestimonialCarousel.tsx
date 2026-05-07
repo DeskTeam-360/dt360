@@ -18,27 +18,28 @@ type Props = {
 
 function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
   return (
-    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-14 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[5.5rem] font-serif leading-none text-[#D8D8D8] sm:text-[6.5rem]"
-        aria-hidden
-      >
-        &ldquo;
-      </div>
-      <div className="relative z-[1] grid gap-6 sm:grid-cols-[minmax(0,11rem)_1fr] sm:items-start sm:gap-8">
-        <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl sm:mx-0">
+    <div className="relative flex h-full w-full overflow-visible rounded-[30px] bg-transparent px-6 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14">
+      <Image
+        src="/images/dt360-bg-testimonials-v2.png"
+        alt=""
+        fill
+        className="pointer-events-none rounded-[30px] object-cover object-top"
+        sizes="(max-width: 640px) 60vw, (max-width: 1440px) 56vw, 28vw"
+      />
+      <div className="relative z-[1] grid h-full gap-8 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-center sm:gap-10">
+        <div className="mx-auto aspect-square w-full max-w-[12rem] overflow-hidden rounded-2xl bg-neutral-200 sm:mx-0">
           <Image
             src={item.imageSrc}
             alt={item.imageAlt}
             width={320}
             height={320}
             className="h-full w-full object-cover"
-            sizes="(max-width: 1440px) 60vw, 28vw"
+            sizes="(max-width: 640px) 220px, 192px"
           />
         </div>
-        <div className="min-w-0 pt-0 sm:pt-1">
+        <div className="min-w-0 pt-0 sm:pt-2">
           <p className="text-base leading-relaxed text-[#2a2f61] sm:text-lg">{item.quote}</p>
-          <p className="mt-4 text-base font-bold text-[#101651] sm:text-lg">{item.attribution}</p>
+          <p className="mt-5 text-base font-bold text-[#101651] sm:text-lg">{item.attribution}</p>
         </div>
       </div>
     </div>

@@ -129,7 +129,7 @@ export const heroContent: HeroContent = {
   headlineLine1: "Stop Outsourcing",
   headlineLine2: "Start Insourcing",
   subheading:
-    "AI specialists, developers, designers, and video editors - all working together in one office, not scattered across Upwork. Flat-rate subscription. US-based account manager. Zero hiring headaches. And you never manage another vendor again.",
+    "AI specialists, developers, designers, and video editors - all working together in one office, not scattered across Upwork. Flat-rate subscription. North American account manager. Zero hiring headaches. And you never manage another vendor again.",
   primaryCta: {
     href: "/#pricing",
     label: "See Plans & Pricing",
@@ -291,9 +291,9 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "one-office",
       placement: "compact",
       tone: "dark",
-      title: "One Office. One Team Leader",
+      title: "One Office, One Team Leader",
       description:
-        "Team members work together in-office under a unified leader. You get clear accountability—not a black hole of anonymous freelancers.",
+        "Every team member works in our office with a team leader who holds them accountable. No wondering if work is getting done - there's someone watching the floor, not just pinging a Slack channel.",
     },
     {
       id: "shifts",
@@ -301,7 +301,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       tone: "dark",
       title: "Day & Night Shifts",
       description:
-        "Shifts run around the clock in the same building, so work keeps moving—even when you're off the clock.",
+        "Our team runs day and night shifts so work gets done on your schedule - not theirs. No time zone headaches. Submit a task at 5pm, wake up to it done.",
       mediaSrc: "/images/home-InsourcingBetter-grid3.png",
       mediaAlt: "Sun and moon icons with arrows representing day and night shifts.",
     },
@@ -325,7 +325,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
 };
 
 export const howItWorksSection: HowItWorksSection = {
-  titleLine1: "Three Steps. No Meetings.",
+  titleLine1: "Three Steps, No Meetings,",
   titleLine2: "No Micromanaging",
   steps: [
     {
@@ -340,7 +340,7 @@ export const howItWorksSection: HowItWorksSection = {
       number: "2",
       title: "We Handle Everything",
       description:
-        "Your US-based account manager assigns the right specialist, manages the timeline, and QAs the work before you see it. No standups. No Slack chasing.",
+        "Your North American account manager assigns the right specialist, manages the timeline, and QAs the work before you see it. No standups. No Slack chasing.",
     },
     {
       id: "review-move-on",
@@ -446,9 +446,9 @@ export type FaqSection = {
 };
 
 export const pricingSection: PricingSection = {
-  headlineLine1: "One Team.",
-  headlineHighlight: "Three Plans.",
-  headlineLine2: "Pick Your Speed.",
+  headlineLine1: "One Team,",
+  headlineHighlight: "Three Plans,",
+  headlineLine2: "Pick Your Speed",
   subheading:
     "Every plan includes the full team - graphic design, web development, video editing, marketing tech, team leader, and a dedicated account manager. The only difference is how many tasks run at once.",
   ctaLabel: "GET STARTED",
@@ -465,7 +465,7 @@ export const pricingSection: PricingSection = {
       features: [
         "1 active task at a time",
         "Full team access - all 8 services",
-        "US-based account manager",
+        "North American account manager",
         "1-3 business day turnaround",
         "Unlimited revisions",
         "30-day money-back guarantee",

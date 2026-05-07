@@ -9,6 +9,11 @@ const includedItems = [
   "Instagram and Facebook story templates",
   "Reels and TikTok cover graphics",
   "LinkedIn post graphics and banners",
+  "YouTube thumbnails and channel art",
+  "Twitter/X graphics and headers",
+  "Social media ad creatives",
+  "Profile photos and cover image refreshes",
+  "Branded content templates for ongoing use"
 ];
 
 export function Hero() {

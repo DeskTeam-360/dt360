@@ -8,7 +8,12 @@ const includedItems = [
   "Email campaign builds and sends - newsletters, promotions, broadcasts",
   "Automation sequences - welcome series, drip campaigns, lead nurture",
   "GoHighLevel funnel and workflow builds",
-  "Landing page design and development"
+  "Landing page design and development",
+  "A/B testing setup and management",
+  "Newsletter design and templating",
+  "Lead magnet delivery sequences",
+  "Re-engagement campaigns",
+  "Webinar registration and follow-up sequences"
 ];
 
 export function Hero() {

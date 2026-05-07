@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { ServicesTestimonial } from "@/data/servicesPage";
 import { cn } from "@/lib/utils";
 
@@ -70,6 +70,14 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
 
     if (nearestIndex !== index) setIndex(nearestIndex);
   };
+
+  useEffect(() => {
+    if (count <= 1) return;
+    const timerId = window.setInterval(() => {
+      scrollToSlide((index + 1) % count);
+    }, 1500);
+    return () => window.clearInterval(timerId);
+  }, [count, index]);
 
   if (count === 0) return null;
 
