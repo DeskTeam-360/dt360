@@ -78,7 +78,8 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const body = (
     <p
       className={cn(
-        "text-left text-white/90",
+        "type-rule-p text-left text-pretty text-white/90",
+        isTallLeft && "max-w-prose",
       )}
     >
       {card.description}
@@ -86,7 +87,10 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   );
   const title = (
     <h4
-      className="text-left tracking-tight text-white"
+      className={cn(
+        "type-rule-h4 text-left tracking-tight text-balance text-white",
+        isTallLeft && "leading-snug lg:leading-tight",
+      )}
     >
       {card.title}
     </h4>
@@ -116,7 +120,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
           "origin-center transform-gpu transition-transform duration-300 ease-out hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
         (isWideMagenta || isWideOrange) && "lg:z-[1] lg:hover:z-[12]",
         isTallLeft
-          ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-5 max-lg:grid-rows-[auto_auto] max-lg:gap-0 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
+          ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-4 max-lg:grid-rows-[auto_auto] max-lg:gap-0 sm:pt-5 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
           : cn(
               "flex h-full min-h-0 flex-col items-stretch justify-start overflow-visible p-0 text-left",
               isWideMagenta
@@ -136,7 +140,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
     >
       {card.placement === "tall-left" ? (
         <>
-          <div className="relative flex min-h-[14rem] w-full min-w-0 flex-col items-start justify-center self-stretch overflow-visible rounded-t-2xl bg-[#1E1D76] p-0 sm:min-h-[16rem] lg:h-full lg:min-h-0">
+          <div className="relative flex min-h-[14rem] w-full min-w-0 flex-col items-start justify-center self-stretch overflow-visible rounded-t-3xl bg-[#1E1D76] p-0 sm:min-h-[16rem] lg:h-full lg:min-h-0">
             {card.mediaSrc ? (
               <BentoMedia
                 src={card.mediaSrc}
@@ -153,7 +157,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
               />
             )}
           </div>
-          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 pt-0 pb-6 sm:gap-3.5 sm:pt-0 sm:pb-8 lg:gap-4 lg:px-10 lg:pt-0 lg:pb-8">
+          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 pt-1 pb-6 sm:gap-3.5 sm:pt-0 sm:pb-8 lg:gap-4 lg:px-10 lg:pt-0 lg:pb-9">
             {title}
             {body}
           </div>
