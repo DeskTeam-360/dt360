@@ -74,6 +74,8 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const isTallLeft = card.placement === "tall-left";
   const isWideMagenta = card.placement === "wide-magenta";
   const isWideOrange = card.placement === "wide-orange";
+  /** Konten teks + foto hanya di panel putih kanan, area orange kiri kosong. */
+  const isWideOrangeWhitePanel = card.placement === "wide-orange" && card.id === "us-managers";
   const tone = isTallLeft ? "bg-[#1E1D76] shadow-lg shadow-black/20" : toneClass(card.tone);
   const body = (
     <p
@@ -222,27 +224,72 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
         </div>
       ) : null}
 
-      {card.placement === "wide-orange" && (card.title || card.description || card.mediaSrc) ? (
+      {card.placement === "wide-orange" ? (
         <div
           className={cn(
-            "box-border mx-auto min-h-[265px] w-full min-w-0 max-w-6xl self-center px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
+            "flex min-h-[14rem] w-full flex-1 flex-col lg:min-h-0 lg:flex-row lg:items-stretch",
           )}
         >
-          <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
-            {(card.title || card.description) && (
-              <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 sm:gap-3.5 lg:max-w-none lg:gap-4">
-                {card.title ? title : null}
-                {card.description ? body : null}
-              </div>
-            )}
-            {card.mediaSrc ? (
-              <BentoMedia
-                src={card.mediaSrc}
-                alt={card.mediaAlt ?? ""}
-                className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
-                sizes="(max-width: 1024px) 92vw, 280px"
-              />
+          <div className="box-border flex min-w-0 flex-1 flex-col justify-center px-8 py-6 sm:py-8 lg:min-h-0 lg:px-10 lg:py-8">
+            {card.title || card.description || card.mediaSrc ? (
+              !isWideOrangeWhitePanel ? (
+                <div className="mx-auto grid h-full min-h-0 w-full min-w-0 max-w-6xl gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
+                  {(card.title || card.description) && (
+                    <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 sm:gap-3.5 lg:max-w-none lg:gap-4">
+                      {card.title ? title : null}
+                      {card.description ? body : null}
+                    </div>
+                  )}
+                  {card.mediaSrc ? (
+                    <BentoMedia
+                      src={card.mediaSrc}
+                      alt={card.mediaAlt ?? ""}
+                      className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
+                      sizes="(max-width: 1024px) 92vw, 280px"
+                    />
+                  ) : null}
+                </div>
+              ) : null
             ) : null}
+          </div>
+          {/* Blok putih kanan — max-width 62% dari kontainer referensi 1440px */}
+          <div
+            className={cn(
+              "ml-auto w-full max-w-[min(100%,calc(1440px*0.62))] shrink-0",
+              "min-h-[10rem] sm:min-h-[12rem] lg:min-h-full",
+              "rounded-b-[1rem] lg:rounded-b-none lg:rounded-r-[1rem]",
+            )}
+          >
+            <div className="flex h-full min-h-0 w-full flex-col p-0">
+              {isWideOrangeWhitePanel && card.mediaSrc ? (
+                <div className="grid min-h-0 flex-1 grid-cols-1 gap-0 lg:grid-cols-2 lg:items-stretch">
+                  <div className="flex min-h-0 min-w-0 flex-col justify-center gap-3 sm:gap-4 lg:gap-4">
+                    {card.title ? (
+                      <h4 className="type-rule-h4 text-left tracking-tight text-balance text-white">
+                        {card.title}
+                      </h4>
+                    ) : null}
+                    {card.description ? (
+                      <p className="type-rule-p text-left text-pretty text-white/90">{card.description}</p>
+                    ) : null}
+                  </div>
+                  <div className="relative min-h-[14rem] w-full lg:h-full lg:min-h-0">
+                    <Image
+                      src={card.mediaSrc}
+                      alt={card.mediaAlt ?? ""}
+                      fill
+                      className="object-contain object-center"
+                      sizes="(max-width: 1024px) 96vw, 480px"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="grid h-full min-h-[8rem] grid-cols-1 gap-0 lg:grid-cols-2">
+                  <div className="bg-[#f5f7ff]" aria-hidden />
+                  <div className="bg-[#eef2ff]" aria-hidden />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ) : null}

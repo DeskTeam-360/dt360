@@ -291,9 +291,9 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "one-office",
       placement: "compact",
       tone: "dark",
-      title: "One Office. One Team Leader",
+      title: "One Office, One Team Leader",
       description:
-        "Team members work together in-office under a unified leader. You get clear accountability—not a black hole of anonymous freelancers.",
+        "Every team member works in our office with a team leader who holds them accountable. No wondering if work is getting done - there's someone watching the floor, not just pinging a Slack channel.",
     },
     {
       id: "shifts",
@@ -301,7 +301,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       tone: "dark",
       title: "Day & Night Shifts",
       description:
-        "Shifts run around the clock in the same building, so work keeps moving—even when you're off the clock.",
+        "Our team runs day and night shifts so work gets done on your schedule - not theirs. No time zone headaches. Submit a task at 5pm, wake up to it done.",
       mediaSrc: "/images/home-InsourcingBetter-grid3.png",
       mediaAlt: "Sun and moon icons with arrows representing day and night shifts.",
     },
@@ -309,9 +309,11 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "us-managers",
       placement: "wide-orange",
       tone: "orange",
-      /** Sementara dikosongkan — bentuk kartu (placement) tetap; isi akan diisi lagi nanti. */
-      title: "",
-      description: "",
+      title: "US-Based Account Managers",
+      description:
+        "Your dedicated account manager speaks fluent English and bridges any language gaps with the production team. They help you get the most out of the service - so you can focus on growing your business.",
+      mediaSrc: "/images/home-InsourcingBetter-grid5.png",
+      mediaAlt: "US-based account manager.",
     },
     {
       id: "better-over-time",
@@ -319,7 +321,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       tone: "dark",
       title: "Your Team Gets Better Over Time",
       description:
-        "Work with the same people month after month. Speed goes up, rework goes down, and quality becomes what you can rely on.",
+        "You work with the same people every month - not a revolving door of strangers. They learn your brand, your preferences, your standards. The longer you stay, the faster and better the work gets.",
     },
   ],
 };
@@ -356,7 +358,7 @@ export const socialProofSection: SocialProofSection = {
   headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
   headlineLine2: "Then They",
   headlineHighlight: "Found Us",
-  imageSrc: "/images/home-SocialProofTestimonials-ImageMain.png",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-01.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
     {
@@ -556,35 +558,35 @@ export const faqSection: FaqSection = {
 /** Team cards — screenshot-style names/roles; images under `/public/images/`. */
 export const teamMembers: TeamMember[] = [
   {
-        id: "1",
+    id: "1",
         name: "ADE",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ADE.png",
         labelClass: "bg-[#9F731B]",
-      },
-      {
-        id: "2",
+  },
+  {
+    id: "2",
         name: "ARDELLA",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ARDELLA.png",
         labelClass: "bg-[#A70767]",
-      },
-      {
-        id: "3",
+  },
+  {
+    id: "3",
         name: "ASIF",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ASIF.png",
         labelClass: "bg-[#3D109A]",
-      },
-      {
-        id: "4",
+  },
+  {
+    id: "4",
         name: "BIANCA",
         role: "DEVELOPER",
         imageSrc: "/images/teams/BIANCA.png",
         labelClass: "bg-[#C5540A]",
-      },
-     {
-          id: "5",
+  },
+  {
+    id: "5",
           name: "GABRIELLE",
           role: "DEVELOPER",
           imageSrc: "/images/teams/GABRIELLE.png",
@@ -806,5 +808,5 @@ export const teamMembers: TeamMember[] = [
         role: "DEVELOPER",
         imageSrc: "/images/teams/YOSKI.png",
         labelClass: "bg-[#A70767]",
-      },
+  },
 ];
