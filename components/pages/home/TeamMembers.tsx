@@ -7,8 +7,8 @@ import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
 import { cn } from "@/lib/utils";
 
-/** ~ card width (280) + gap between cards */
-const SCROLL_STEP = 312;
+/** ~ card width (300) + gap between cards */
+const SCROLL_STEP = 316;
 
 function centerHorizontalScroll(el: HTMLDivElement | null) {
   if (!el) return;
@@ -149,12 +149,12 @@ export function TeamMembers() {
         <div
           ref={scrollerRef}
           className={cn(
-            "team-members-scroller-peek flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-8 [&::-webkit-scrollbar]:hidden",
+            "team-members-scroller-peek flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden",
             // Desktop: klik–geser horizontal (mouse); sentuh tetap native (pointerType touch diabaikan)
             "cursor-grab select-none",
             mouseDragging && "cursor-grabbing snap-none",
             // ≥1440px: padding horizontal lebih kecil → lebih banyak kartu penuh terlihat
-            "min-[1440px]:px-10 min-[1440px]:scroll-pl-10 min-[1440px]:scroll-pr-10 xl:px-14 xl:scroll-pl-14 xl:scroll-pr-14 2xl:px-20 2xl:scroll-pl-20 2xl:scroll-pr-20",
+            "min-[1440px]:px-6 min-[1440px]:scroll-pl-6 min-[1440px]:scroll-pr-6 xl:px-10 xl:scroll-pl-10 xl:scroll-pr-10 2xl:px-14 2xl:scroll-pl-14 2xl:scroll-pr-14",
           )}
           tabIndex={0}
           role="region"
@@ -169,9 +169,9 @@ export function TeamMembers() {
             {teamMembers.map((member) => (
               <article
                 key={member.id}
-                className="w-[min(100%,280px)] shrink-0 snap-center sm:w-[280px]"
+                className="w-[min(100%,300px)] shrink-0 snap-center sm:w-[300px]"
               >
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white">
+                <div className="relative aspect-square w-full overflow-hidden rounded-none bg-white">
                   {/* Photo fills the whole tile; label sits above the image layer */}
                   <div className="absolute inset-0 z-[1] overflow-hidden">
                     <SafeImage
@@ -179,15 +179,14 @@ export function TeamMembers() {
                       alt={`${member.name}, ${member.role}`}
                       fill
                       className="object-cover object-left-bottom scale-100"
-                      sizes="(max-width: 640px) 85vw, 280px"
+                      sizes="(max-width: 640px) 90vw, 300px"
                       priority={member.id === "1"}
                     />
                   </div>
                   {/* Overlay chip nama | role (di atas foto, z-[2]); warna per anggota dari `labelClass` di data */}
                   <div
                     className={cn(
-                      // Chip menempel kiri bawah; sudut kanan atas membulat
-                      "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-bl-none rounded-br-none rounded-tl-none rounded-tr-[1.35rem] px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:rounded-tr-[1.75rem] sm:py-2.5 sm:pr-5",
+                      "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-none px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",
                       member.labelClass,
                     )}
                   >

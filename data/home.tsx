@@ -198,7 +198,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "The Freelancer Lottery",
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
-    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small.png",
+    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small-copy.png",
   },
 ];
 

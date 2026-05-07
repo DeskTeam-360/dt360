@@ -7,6 +7,15 @@ import { Container } from "@/components/shared/Container";
 import { rotateProblemCards } from "@/data/home";
 import { cn } from "@/lib/utils";
 
+/** Figma: active (center) 611×688; inactive target ~464×610. */
+const ACTIVE_W = 611;
+const ACTIVE_H = 688;
+/**
+ * Skala samping harus **seragam** (s,s) agar foto `object-cover` tidak ter-stretch vertikal.
+ * Pakai min(lebar, tinggi) relatif ke frame aktif → kartu samping lebih pendek dari 610px tapi proporsi benar.
+ */
+const INACTIVE_SCALE = Math.min(464 / ACTIVE_W, 610 / ACTIVE_H);
+
 export function RotateProblemCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -38,11 +47,11 @@ export function RotateProblemCarousel() {
       <Container className="relative z-10 max-w-7xl px-4 py-0 sm:px-6">
         <div className="mx-auto flex w-full max-w-[min(100%,1100px)] flex-col items-center">
           <div
-            className="relative w-[min(560px,calc(100vw-2rem))] shrink-0 [aspect-ratio:464/610]"
+            className="relative isolate w-[min(611px,calc(100vw-2rem))] shrink-0 [aspect-ratio:611/688]"
             style={{ perspective: "1400px" }}
           >
             <div
-              className="relative h-full w-full [transform-style:preserve-3d]"
+              className="relative h-full min-h-0 w-full min-w-0 [transform-style:preserve-3d]"
               onTouchStart={(e) => {
                 touchStartX.current = e.touches[0]?.clientX ?? null;
               }}
@@ -79,28 +88,24 @@ export function RotateProblemCarousel() {
                       transform: isCenter
                         ? "translateZ(0) rotateY(0deg) scale(1)"
                         : isRight
-                          ? "translateX(84%) translateZ(-48px) rotateY(0deg) scale(0.88)"
-                          : "translateX(-84%) translateZ(-48px) rotateY(0deg) scale(0.88)",
+                          ? `translateX(84%) translateZ(-48px) rotateY(0deg) scale(${INACTIVE_SCALE})`
+                          : `translateX(-84%) translateZ(-48px) rotateY(0deg) scale(${INACTIVE_SCALE})`,
                     }}
                     aria-label={isCenter ? undefined : `Show card: ${card.title}`}
                     aria-current={isCenter ? "true" : undefined}
                   >
-                    <span className="pointer-events-none absolute inset-0 z-0">
+                    <span className="pointer-events-none absolute inset-0 z-0 block min-h-0 min-w-0 overflow-hidden">
                       <Image
                         src={card.imageSrc}
                         alt=""
                         fill
-                        className="object-cover object-bottom"
-                        sizes="(max-width: 640px) 92vw, 560px"
+                        className="h-full w-full object-cover object-center"
+                        sizes="(max-width: 640px) 92vw, 611px"
                         priority={i === 0}
                       />
                     </span>
                     <span
-                      className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/55 via-black/25 to-transparent sm:from-black/45"
-                      aria-hidden
-                    />
-                    <span
-                      className="relative z-[2] flex h-full w-[344px] max-h-full flex-col items-start justify-start gap-16 overflow-y-auto py-16 pl-[42px] pr-[22px] text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased"
+                      className="relative z-[2] box-border flex h-full min-h-0 w-full max-w-[min(453px,calc(100%-2.5rem))] flex-col items-start justify-start gap-10 overflow-y-auto self-stretch px-10 pb-12 pt-12 text-[18px] leading-[30px] sm:gap-12 sm:px-12 sm:pb-14 sm:pt-14 [transform:translate3d(0,0,0.1px)] antialiased"
                       aria-hidden={!isCenter}
                     >
                       <span className="font-[var(--font-poppins)] text-[48px] font-semibold leading-[52px] tracking-tight text-white">

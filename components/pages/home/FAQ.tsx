@@ -31,7 +31,7 @@ export function FAQ() {
 
       <Container className="relative z-[1] max-w-7xl">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div className="order-2 lg:order-1">
+          <div className="order-2 flex justify-center lg:order-1 lg:-ml-[calc((100vw-min(100vw,80rem))/2+1.5rem)] lg:mr-0 lg:justify-start">
             <Image
               src="/images/home-faq-imageleft.png"
               alt="FAQ illustration with design and development tools."
