@@ -5,7 +5,7 @@ import { ServicesFloatingFeaturesBar } from "@/components/pages/services/Service
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
-import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
+import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
 import { servicesTestimonials } from "@/data/servicesPage";
 
 const coreServices = [
@@ -50,6 +50,25 @@ const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
 
 const OVERLAY_LAYER_CLASS =
   "pointer-events-none absolute z-0 h-[28%] min-h-[76px] w-[38%] min-w-[108px] bg-[color-mix(in_oklab,#ffffff82_24%,transparent)] backdrop-blur-[1px] lg:h-[26%] lg:w-[36%]";
+
+/** Split a service title into exactly two lines (first line gets extra word when odd). */
+function renderTwoLineTitle(title: string) {
+  const words = title.split(" ");
+  const mid = Math.ceil(words.length / 2);
+  const line1 = words.slice(0, mid).join(" ");
+  const line2 = words.slice(mid).join(" ");
+  return (
+    <>
+      {line1}
+      {line2 && (
+        <>
+          <br />
+          {line2}
+        </>
+      )}
+    </>
+  );
+}
 
 export default function ServicesPage() {
   return (
@@ -116,9 +135,9 @@ export default function ServicesPage() {
             <h2 className="leading-tight tracking-tight text-[#101651]">
               <span className="text-[#ef2fa9]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
-            <h5 className="mt-4 text-[#1a1a1a]">
+            <p className="type-rule-h5 mt-4 text-[#1a1a1a]">
               Pick the plan that fits. We handle the rest.
-            </h5>
+            </p>
           </div>
 
           <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -153,7 +172,9 @@ export default function ServicesPage() {
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
-                    <h4 className="mt-6 max-w-[14ch] leading-tight">{service.title}</h4>
+                    <h3 className="type-rule-h4 mt-6 leading-tight">
+                      {renderTwoLineTitle(service.title)}
+                    </h3>
                     <Link
                       href={service.href}
                       className="mt-auto w-fit pt-3 font-semibold transition duration-300 ease-out hover:translate-x-1"
@@ -172,23 +193,12 @@ export default function ServicesPage() {
         <ServicesFloatingFeaturesBar />
       </div>
 
-      <section
-        className="relative z-10 overflow-x-hidden bg-white pb-[80px] pt-[200px] md:pb-[90px] md:pt-[210px] lg:pb-[100px] lg:pt-[220px]"
-        aria-labelledby="services-testimonials-heading"
-      >
-        <div
-          className="pointer-events-none absolute left-[-240px] top-[-220px] aspect-square h-[90%] rounded-full bg-[radial-gradient(circle,rgba(170,239,255,0.85)_0%,rgba(170,239,255,0.35)_45%,rgba(170,239,255,0)_75%)]"
-          aria-hidden
-        />
-        <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 lg:px-10">
-          <h2 id="services-testimonials-heading" className="leading-tight tracking-tight text-[#101651]">
-            <span className="text-[#ef2fa9]">Proven Results</span>
-            <br />
-            Real Business
-          </h2>
-        </div>
-        <ServicesTestimonialsCarousel items={servicesTestimonials} />
-      </section>
+      <TestimonialsSection
+        headingId="services-testimonials-heading"
+        headingAccent="Proven Results"
+        headingTrailing="Real Business"
+        items={servicesTestimonials}
+      />
 
       <ServicesHowItWorks />
 

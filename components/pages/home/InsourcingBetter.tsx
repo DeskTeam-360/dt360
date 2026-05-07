@@ -84,7 +84,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
     /** Judul kartu: skala H5 (Montserrat Bold 24px), bukan heading section H3 */
     <h3 className="type-rule-h5 text-left leading-snug tracking-tight text-white">
       {card.title}
-    </h4>
+    </h3>
   );
 
   const wideMagentaEmpty =

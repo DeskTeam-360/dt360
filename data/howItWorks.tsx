@@ -45,27 +45,38 @@ export const howItWorksHero = {
 };
 
 export const howItWorksTaskSection = {
-  titleBefore: "Submitting a Task Takes About ",
+  titleBefore: (
+    <>
+      Submitting a Task
+      <br />
+      Takes About{" "}
+    </>
+  ),
   titleHighlight: "2 Minutes",
   steps: [
     {
       id: "s1",
       title: "Tell Us What You Need",
-      body: "Brief the task—what you’re trying to accomplish, deadlines, brands, assets, links, examples. The clearer the request, the faster we start.",
+      body: `Drop your task into our request system. Write it out, record a Loom video, attach a doc - whatever works for you. The more context you give, the better the output. Even a quick voice note gets the job done.
+
+Examples of what people submit: "Redesign our homepage," "Cut this 45-minute webinar into 5 social clips," "Build this GoHighLevel workflow," "Create 10 social graphics for next month."`,
+ 
       stepLabel: "Step 1",
       gradientClass: "bg-gradient-to-b from-[#ff9f4d] via-[#f0732b] to-[#e8561a]",
     },
     {
       id: "s2",
       title: "Your Account Manager Handles Everything",
-      body: "Your US manager triages priority, assigns the right specialist, confirms scope, and keeps everything moving—you do not babysit freelancers or chase status updates.",
+      body: "Your North American account manager reads your task, assigns it to the right specialist, sets a realistic timeline, and reviews the work before it ever reaches you. You don't deal with the team directly unless you want to. That's what the account manager is there for.",
+ 
       stepLabel: "Step 2",
       gradientClass: "bg-gradient-to-b from-[#f04aab] via-[#c93fbe] to-[#7f3dbf]",
     },
     {
       id: "s3",
       title: "Work Lands in Your Inbox in 1-3 Days",
-      body: "Deliverables arrive on time for review. Want tweaks? Unlimited revisions ship without surprise fees—we refine until it matches what you approved in the brief.",
+      body: "Most tasks are done in 1-3 business days and some even faster. You review it, request changes if needed, and we revise until it's exactly right. Unlimited revisions - no caps, no attitude. Then your next task starts.",
+ 
       stepLabel: "Step 3",
       gradientClass: "bg-gradient-to-b from-[#7f4bdc] via-[#4b35b9] to-[#1f2ca3]",
     },

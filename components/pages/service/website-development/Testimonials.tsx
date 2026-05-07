@@ -44,7 +44,7 @@ export function Testimonials() {
           months, they went from zero recurring digital revenue to 200+ monthly paying students.
         </p>
 
-        <div className="relative z-30 mx-auto mt-12 max-w-[1040px] sm:mt-14 lg:mt-16">
+        <div className="relative z-30 mx-auto mt-16 max-w-[1040px] sm:mt-18 lg:mt-20">
           <div className="relative z-30 flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-12">
             <div className="relative h-[228px] w-[228px] shrink-0 sm:h-[238px] sm:w-[238px] lg:h-[246px] lg:w-[246px]">
               <SafeImage

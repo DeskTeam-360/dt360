@@ -128,7 +128,7 @@ About; path url: /about
 Global Font Setting:
 H1 Poppins Bold 76px
 H2 Poppins SemiBold 64px
-H3 Poppins SemiBold 48px
+H3 Poppins SemiBold 48px 
 H4 Poppins SemiBold 36px
 H5 Montserrat Bold 24px
 H6 Montserrat Bold 18px

@@ -58,7 +58,7 @@ export function ServiceHeroIncludedChecklist({
               height={40}
               className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
             />
-            <p className="type-rule-h5 leading-relaxed text-white/95 lg:leading-tight">{item}</p>
+            <p className="type-rule-h5 font-medium leading-relaxed text-white/95 lg:leading-tight">{item}</p>
           </div>
         ))}
       </div>
