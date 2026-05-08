@@ -15,8 +15,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
-  const showSolidHeader = isHomePage || scrolled;
+  const showSolidHeader = scrolled;
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -28,14 +27,13 @@ export function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    if (isHomePage) return;
     const onScroll = () => {
       setScrolled(window.scrollY > SCROLL_SOLID_THRESHOLD_PX);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHomePage, pathname]);
+  }, [pathname]);
   return (
     <>
       <header
