@@ -159,7 +159,7 @@ export const lastCtaContent: LastCtaContent = {
     variant: "secondary",
   },
   note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
-  imageSrc: "/images/Home-cta-imageright.png",
+  imageSrc: "/images/Home-cta-imageright1.png",
   imageAlt: "Senior professional holding a laptop, ready to support your team.",
 };
 

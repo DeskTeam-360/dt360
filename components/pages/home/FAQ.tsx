@@ -9,7 +9,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="relative isolate overflow-hidden bg-[#11104C] py-16 sm:py-20 lg:py-24"
+      className="relative isolate overflow-hidden bg-[#11104C] py-20 sm:py-24 lg:py-[122px]"
       aria-label="Frequently asked questions"
     >
       <div
@@ -33,7 +33,7 @@ export function FAQ() {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="order-2 lg:order-1">
             <Image
-              src="/images/home-faq-imageleft.png"
+              src="/images/home-faq-imageleft1.png"
               alt="FAQ illustration with design and development tools."
               width={900}
               height={980}
@@ -43,7 +43,7 @@ export function FAQ() {
           </div>
 
           <div className="order-1 lg:order-2">
-            <h2 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-[4rem]">
+            <h2 className="text-balance text-white">
               <span>{headingStart} </span>
               <span className="text-[#E3058D]">{headingHighlight}</span>
             </h2>
