@@ -12,11 +12,11 @@ export function FAQAccordionList({ items }: Props) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <div className="mt-7 space-y-4 sm:mt-8">
+    <div className="mt-24 space-y-3 sm:mt-28">
       {items.map((item) => {
         const isOpen = openId === item.id;
         return (
-          <article key={item.id}>
+          <article key={item.id} className="rounded-xl bg-transparent p-0">
             <button
               type="button"
               id={`${item.id}-trigger`}
@@ -54,7 +54,7 @@ export function FAQAccordionList({ items }: Props) {
               )}
             >
               <div className="overflow-hidden">
-                <p className="px-6 pb-1 pt-4 text-lg leading-relaxed text-white/90">{item.answer}</p>
+                <p className="type-rule-p mt-2 px-2 text-[#E8ECFF]">{item.answer}</p>
               </div>
             </div>
           </article>

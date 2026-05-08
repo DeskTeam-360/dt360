@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-10 sm:pt-14 lg:pt-16"
+      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-16"
       aria-labelledby="hero-heading"
     >
       {/* Same Figma corner treatment as navbar — continues the cyan “arc” into hero */}

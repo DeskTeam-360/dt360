@@ -74,11 +74,14 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const isTallLeft = card.placement === "tall-left";
   const isWideMagenta = card.placement === "wide-magenta";
   const isWideOrange = card.placement === "wide-orange";
+  /** Konten teks + foto hanya di panel putih kanan, area orange kiri kosong. */
+  const isWideOrangeWhitePanel = card.placement === "wide-orange" && card.id === "us-managers";
   const tone = isTallLeft ? "bg-[#1E1D76] shadow-lg shadow-black/20" : toneClass(card.tone);
   const body = (
     <p
       className={cn(
-        "text-left text-white/90",
+        "type-rule-p text-left text-pretty text-white/90",
+        isTallLeft && "max-w-prose",
       )}
     >
       {card.description}
@@ -86,7 +89,10 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   );
   const title = (
     <h4
-      className="text-left tracking-tight text-white"
+      className={cn(
+        "type-rule-h4 text-left tracking-tight text-balance text-white",
+        isTallLeft && "leading-snug lg:leading-tight",
+      )}
     >
       {card.title}
     </h4>
@@ -116,7 +122,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
           "origin-center transform-gpu transition-transform duration-300 ease-out hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
         (isWideMagenta || isWideOrange) && "lg:z-[1] lg:hover:z-[12]",
         isTallLeft
-          ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-5 max-lg:grid-rows-[auto_auto] max-lg:gap-0 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
+          ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-4 max-lg:grid-rows-[auto_auto] max-lg:gap-0 sm:pt-5 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
           : cn(
               "flex h-full min-h-0 flex-col items-stretch justify-start overflow-visible p-0 text-left",
               isWideMagenta
@@ -136,7 +142,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
     >
       {card.placement === "tall-left" ? (
         <>
-          <div className="relative flex min-h-[14rem] w-full min-w-0 flex-col items-start justify-center self-stretch overflow-visible rounded-t-2xl bg-[#1E1D76] p-0 sm:min-h-[16rem] lg:h-full lg:min-h-0">
+          <div className="relative flex min-h-[14rem] w-full min-w-0 flex-col items-start justify-center self-stretch overflow-visible rounded-t-3xl bg-[#1E1D76] p-0 sm:min-h-[16rem] lg:h-full lg:min-h-0">
             {card.mediaSrc ? (
               <BentoMedia
                 src={card.mediaSrc}
@@ -153,7 +159,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
               />
             )}
           </div>
-          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 pt-0 pb-6 sm:gap-3.5 sm:pt-0 sm:pb-8 lg:gap-4 lg:px-10 lg:pt-0 lg:pb-8">
+          <div className="flex w-full min-w-0 flex-col items-start gap-3 px-8 pt-1 pb-6 sm:gap-3.5 sm:pt-0 sm:pb-8 lg:gap-4 lg:px-10 lg:pt-0 lg:pb-9">
             {title}
             {body}
           </div>
@@ -218,27 +224,72 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
         </div>
       ) : null}
 
-      {card.placement === "wide-orange" && (card.title || card.description || card.mediaSrc) ? (
+      {card.placement === "wide-orange" ? (
         <div
           className={cn(
-            "box-border mx-auto min-h-[265px] w-full min-w-0 max-w-6xl self-center px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
+            "flex min-h-[14rem] w-full flex-1 flex-col lg:min-h-0 lg:flex-row lg:items-stretch",
           )}
         >
-          <div className="grid h-full min-h-0 w-full min-w-0 gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
-            {(card.title || card.description) && (
-              <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 sm:gap-3.5 lg:max-w-none lg:gap-4">
-                {card.title ? title : null}
-                {card.description ? body : null}
-              </div>
-            )}
-            {card.mediaSrc ? (
-              <BentoMedia
-                src={card.mediaSrc}
-                alt={card.mediaAlt ?? ""}
-                className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
-                sizes="(max-width: 1024px) 92vw, 280px"
-              />
+          <div className="box-border flex min-w-0 flex-1 flex-col justify-center lg:min-h-0">
+            {card.title || card.description || card.mediaSrc ? (
+              !isWideOrangeWhitePanel ? (
+                <div className="mx-auto grid h-full min-h-0 w-full min-w-0 max-w-6xl gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">
+                  {(card.title || card.description) && (
+                    <div className="flex min-w-0 w-full max-w-lg flex-col items-start justify-center gap-3 sm:gap-3.5 lg:max-w-none lg:gap-4">
+                      {card.title ? title : null}
+                      {card.description ? body : null}
+                    </div>
+                  )}
+                  {card.mediaSrc ? (
+                    <BentoMedia
+                      src={card.mediaSrc}
+                      alt={card.mediaAlt ?? ""}
+                      className="mx-auto aspect-[4/5] w-full max-w-[13rem] max-h-[17rem] sm:max-w-[14rem] sm:max-h-[18rem] lg:max-h-[16rem] lg:max-w-[15rem] xl:max-h-[18rem] xl:max-w-[16rem]"
+                      sizes="(max-width: 1024px) 92vw, 280px"
+                    />
+                  ) : null}
+                </div>
+              ) : null
             ) : null}
+          </div>
+          {/* Blok putih kanan — max-width 62% dari kontainer referensi 1440px */}
+          <div
+            className={cn(
+              "ml-auto w-full max-w-[min(100%,calc(1440px*0.62))] shrink-0",
+              "min-h-[10rem] sm:min-h-[12rem] lg:min-h-full",
+              "rounded-b-[1rem] lg:rounded-b-none lg:rounded-r-[1rem]",
+            )}
+          >
+            <div className="flex h-full min-h-0 w-full flex-col p-0">
+              {isWideOrangeWhitePanel && card.mediaSrc ? (
+                <div className="grid min-h-0 flex-1 grid-cols-1 gap-0 lg:grid-cols-2 lg:items-stretch">
+                  <div className="flex min-h-0 min-w-0 flex-col justify-center gap-3 sm:gap-4 lg:gap-4">
+                    {card.title ? (
+                      <h4 className="type-rule-h4 text-left tracking-tight text-balance text-white">
+                        {card.title}
+                      </h4>
+                    ) : null}
+                    {card.description ? (
+                      <p className="type-rule-p text-left text-pretty text-white/90">{card.description}</p>
+                    ) : null}
+                  </div>
+                  <div className="relative min-h-[14rem] w-full lg:h-full lg:min-h-0">
+                    <Image
+                      src={card.mediaSrc}
+                      alt={card.mediaAlt ?? ""}
+                      fill
+                      className="object-contain object-center"
+                      sizes="(max-width: 1024px) 96vw, 480px"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="grid h-full min-h-[8rem] grid-cols-1 gap-0 lg:grid-cols-2">
+                  <div className="bg-[#f5f7ff]" aria-hidden />
+                  <div className="bg-[#eef2ff]" aria-hidden />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ) : null}

@@ -3,8 +3,12 @@ import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 
-/** One rounded leaf style: 3 rounded corners, 1 sharp (0) — increased radius */
-const r = "5rem";
+/** One rounded leaf style: 3 rounded corners, 1 sharp (0) */
+const r = "70px";
+
+/** Padding dalam sel kartu/logo (bilah skill) */
+const cardPaddingPx = "35px";
+const cardPaddingRightPx = "23px";
 
 /** All grid cells share the same size behavior: at md+, column width = height (square like the logo cell) */
 const gridCellSizeClass =
@@ -39,7 +43,7 @@ const cells: Cell[] = [
     id: "web-design",
     title: "Web Design &\nDevelopment",
     description:
-      "WordPress, React, and other CMSs, landing pages, redesigns, bug fixes, WooCommerce, custom features",
+      "WordPress, React, and other CMS's, landing pages, redesigns, bug fixes, WooCommerce, custom features",
     bg: "bg-[#7547C5]",
     text: "light",
   },
@@ -75,7 +79,7 @@ const cells: Cell[] = [
     id: "crm-marketing",
     title: "CRM &\nMarketing Tech",
     description:
-      "GoHighLevel, HubSpot, and other CRMs, Zapier, Make, ActiveCampaign, and other email software, integrations, API work",
+      "GoHighLevel, HubSpot, and other CRM's, Zapier, Make, ActiveCampaign, and other email software, integrations, API work",
     bg: "bg-[#C7B3F2]",
     text: "dark",
   },
@@ -111,7 +115,7 @@ function ServiceCardContent({
     <>
       <h3
         className={cn(
-          "whitespace-pre-line text-[2.15rem] font-bold leading-[1.12] tracking-[-0.01em] sm:text-[2.45rem]",
+          "whitespace-pre-line text-[36px]",
           text === "light" ? "text-white" : "text-[#101651]",
         )}
       >
@@ -119,7 +123,7 @@ function ServiceCardContent({
       </h3>
       <p
         className={cn(
-          "mt-3 text-[1.05rem] leading-[1.5] sm:text-[1.15rem]",
+          "mt-3",
           text === "light" ? "text-white/95" : "text-[#2a2f61]",
         )}
       >
@@ -167,9 +171,14 @@ export function EverySkillGrid() {
               return (
                 <div
                   key="logo-cell"
-                  className={cn("flex h-full items-center justify-center overflow-hidden bg-white p-3 sm:p-4", gridCellSizeClass)}
+                  className={cn(
+                    "group flex h-full items-center justify-center overflow-hidden bg-white",
+                    gridCellSizeClass,
+                  )}
                   style={
                     {
+                      padding: cardPaddingPx,
+                      paddingRight: cardPaddingRightPx,
                       // Sharp corners: top-left + bottom-right — other corners rounded
                       borderTopLeftRadius: 0,
                       borderTopRightRadius: r,
@@ -183,7 +192,7 @@ export function EverySkillGrid() {
                     alt="DeskTeam360"
                     width={480}
                     height={300}
-                    className="h-[90%] w-auto max-h-full object-contain"
+                    className="h-[90%] w-auto max-h-full object-contain transform-gpu [transform:rotateY(0deg)] group-hover:[animation:logo-flip-once_600ms_ease-out_1] motion-reduce:transition-none motion-reduce:transform-none motion-reduce:group-hover:animate-none"
                     sizes="(max-width: 768px) 75vw, 480px"
                   />
                 </div>
@@ -193,7 +202,7 @@ export function EverySkillGrid() {
               <article
                 key={item.id}
                 className={cn(
-                  "relative flex h-full flex-col overflow-hidden p-[3rem]",
+                  "group relative flex h-full flex-col overflow-hidden p-[35px] pr-[23px]",
                   gridCellSizeClass,
                   item.bg,
                 )}
@@ -261,37 +270,49 @@ export function EverySkillGrid() {
               >
                 {item.id === "email-funnels" && (
                   <div
-                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] rounded-tr-[5rem] bg-white/10"
+                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] origin-bottom-left rounded-tr-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "ai-automation" && (
+                  <div
+                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] origin-bottom-right rounded-tl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
+                    aria-hidden
+                  />
+                )}
+                {item.id === "web-design" && (
+                  <div
+                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] origin-top-right rounded-bl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}
                 {item.id === "graphic-design" && (
                   <div
-                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] rounded-tl-[5rem] bg-white/10"
+                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] origin-bottom-right rounded-tl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}
                 {item.id === "video-editing" && (
                   <div
-                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] rounded-bl-[5rem] bg-white/10"
+                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] origin-top-right rounded-bl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}
                 {item.id === "social-media" && (
                   <div
-                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] rounded-tl-[5rem] bg-white/10"
+                    className="pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] origin-bottom-right rounded-tl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}
                 {item.id === "crm-marketing" && (
                   <div
-                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] rounded-bl-[5rem] bg-white/10"
+                    className="pointer-events-none absolute right-0 top-0 h-[7.5rem] w-[7.5rem] origin-top-right rounded-bl-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}
                 {item.id === "maintenance" && (
                   <div
-                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] rounded-tr-[5rem] bg-white/10"
+                    className="pointer-events-none absolute bottom-0 left-0 h-[7.5rem] w-[7.5rem] origin-bottom-left rounded-tr-[70px] bg-white/10 transition-all duration-100 ease-out group-hover:h-full group-hover:w-full group-hover:rounded-none group-hover:bg-white/15 motion-reduce:transition-none"
                     aria-hidden
                   />
                 )}

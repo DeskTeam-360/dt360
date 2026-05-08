@@ -6,7 +6,7 @@ function MarqueeSegment() {
     <>
       {homeMarqueeItems.map((item) => (
         <Fragment key={item.id}>
-          <span className="inline-flex max-w-none shrink-0 items-baseline gap-0 whitespace-nowrap px-6 text-sm font-medium tracking-tight text-white sm:px-10 sm:text-[0.9375rem] md:text-base">
+          <span className="inline-flex max-w-none shrink-0 items-baseline gap-0 whitespace-nowrap px-6 text-[20px] leading-[30px] font-medium tracking-tight text-white sm:px-10">
             <span className="font-bold">{item.leadBold}</span>
             <span>{item.rest}</span>
           </span>
