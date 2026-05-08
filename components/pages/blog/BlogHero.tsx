@@ -67,7 +67,6 @@ export function BlogHero() {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  textFillColor: 'transparent',
                   WebkitTextStroke: '2px #FFFFFF',
                   paintOrder: 'stroke fill',
                   filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))',
