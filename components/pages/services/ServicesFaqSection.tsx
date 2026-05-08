@@ -73,13 +73,8 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
         </div>
 
         <div>
-<<<<<<< HEAD
-          <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-tight tracking-tight text-[#101651] md:text-[64px] xl:text-left">
-            Got Questions? <span className="text-[#E3058D]">Good</span>
-=======
           <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] md:text-[64px] xl:text-left">
             Got Questions? <span className="text-[#ef2fa9]">Good</span>
->>>>>>> 76fbd0e (fix in service page)
           </h2>
 
           <div className="mt-6 space-y-4">
