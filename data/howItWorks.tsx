@@ -86,14 +86,14 @@ Examples of what people submit: "Redesign our homepage," "Cut this 45-minute web
 export const howItWorksMeetSection = {
   titleBefore: "We ",
   titleHighlight: "Meet You",
-  titleAfter: " Where You Are",
+  titleAfter: " Where\nYou Are",
   floatingImageSrc: "/images/How it works - Graphic Illust.png",
   floatingImageAlt: "Floating device illustration",
   cards: [
     {
       id: "web",
       title: "Website Tasks",
-      iconSrc: "/images/How it works - Graphic Code.png",
+      iconSrc: "/images/dt360-How-it-works-Icon-website-task.png",
       iconAlt: "Website code icon",
       bullets: ["Landing pages, site updates & cleanup", "Funnels, integrations & QA passes", "WordPress/Webflow upkeep & bug fixes"],
     },
