@@ -61,7 +61,7 @@ const PLANS = [
 
 const FEATURE_ITEMS = [
   "All Services Included",
-  "North America Account Manager",
+  "North American Account Manager",
   "1-3 Day Turnaround",
   "Unlimited Revisions",
   "Month-to-Month",
