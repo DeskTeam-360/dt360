@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import type { PricingPlanCard } from "@/data/home";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +55,7 @@ function CtaCircleChevron({ className }: { className?: string }) {
       <path
         d="M4 3.25 8 6.5 4 9.75"
         stroke="currentColor"
-        strokeWidth="1.15"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -63,10 +64,15 @@ function CtaCircleChevron({ className }: { className?: string }) {
 }
 
 export function PricingPlanCardComponent({ plan, ctaLabel }: Props) {
+  const ctaStyle = {
+    "--plan-accent": plan.buttonTextColor,
+  } as CSSProperties;
+
   return (
     <article
       className={cn(
         "relative flex min-h-[32rem] flex-col overflow-hidden rounded-[14px] px-7 pb-8 pt-28 shadow-xl",
+        "transform-gpu transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100",
         "sm:min-h-[36rem]",
       )}
       style={{ background: plan.cardBackground }}
@@ -96,7 +102,7 @@ export function PricingPlanCardComponent({ plan, ctaLabel }: Props) {
         role="presentation"
       />
 
-      <ul className="relative z-[1] flex flex-1 flex-col gap-4 px-2 text-[14.4px] leading-snug text-white sm:px-3">
+      <ul className="type-rule-p relative z-[1] flex flex-1 flex-col gap-4 px-2 text-white sm:px-3">
         {plan.features.map((line) => (
           <li key={line} className="flex gap-2.5">
             <span className="mt-0.5 shrink-0 font-semibold opacity-95" aria-hidden>
@@ -110,8 +116,8 @@ export function PricingPlanCardComponent({ plan, ctaLabel }: Props) {
       <div className="relative z-[1] mt-8 flex w-full justify-center pt-8 before:absolute before:inset-x-0 before:-top-[3px] before:h-[3px] before:bg-white/40 before:shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
         <Link
           href={plan.ctaHref}
-          className="font-button inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-white px-2.5 py-2.5 uppercase tracking-[0.12em] shadow-[0_2px_16px_rgba(0,0,0,0.12)] transition hover:brightness-[1.03] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]"
-          style={{ color: plan.buttonTextColor }}
+          className="font-button inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-white px-2.5 py-2.5 uppercase tracking-[0.12em] text-[var(--plan-accent)] shadow-[0_2px_16px_rgba(0,0,0,0.12)] transition-colors duration-300 hover:bg-[var(--plan-accent)] hover:text-white hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#101651]"
+          style={ctaStyle}
         >
           <span className="shrink-0">{ctaLabel}</span>
           <span

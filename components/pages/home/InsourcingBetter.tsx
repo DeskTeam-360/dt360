@@ -230,7 +230,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
             "flex min-h-[14rem] w-full flex-1 flex-col lg:min-h-0 lg:flex-row lg:items-stretch",
           )}
         >
-          <div className="box-border flex min-w-0 flex-1 flex-col justify-center px-8 py-6 sm:py-8 lg:min-h-0 lg:px-10 lg:py-8">
+          <div className="box-border flex min-w-0 flex-1 flex-col justify-center lg:min-h-0">
             {card.title || card.description || card.mediaSrc ? (
               !isWideOrangeWhitePanel ? (
                 <div className="mx-auto grid h-full min-h-0 w-full min-w-0 max-w-6xl gap-6 lg:grid-cols-2 lg:items-center lg:justify-items-stretch lg:gap-8">

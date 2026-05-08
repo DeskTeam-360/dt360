@@ -20,7 +20,7 @@ function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
   return (
     <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-14 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
       <div
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[5.5rem] font-serif leading-none text-[#D8D8D8] sm:text-[6.5rem]"
+        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[5.5rem] leading-none text-[#D8D8D8] sm:text-[6.5rem]"
         aria-hidden
       >
         &ldquo;
@@ -37,8 +37,10 @@ function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
           />
         </div>
         <div className="min-w-0 pt-0 sm:pt-1">
-          <p className="text-base leading-relaxed text-[#2a2f61] sm:text-lg">{item.quote}</p>
-          <p className="mt-4 text-base font-bold text-[#101651] sm:text-lg">{item.attribution}</p>
+          <p className="type-rule-p text-pretty text-[#2a2f61]">{item.quote}</p>
+          <p className="mt-4 type-rule-p text-[#101651]">
+            <strong>{item.attribution}</strong>
+          </p>
         </div>
       </div>
     </div>
