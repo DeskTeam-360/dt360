@@ -3,10 +3,12 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 type DeskTeamLogoProps = {
   variant?: "header" | "footer";
+  tone?: "light" | "dark";
 };
 
-export function DeskTeamLogo({ variant = "header" }: DeskTeamLogoProps) {
+export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLogoProps) {
   const isFooter = variant === "footer";
+  const logoSrc = isFooter ? "/images/logo-white.png" : tone === "dark" ? "/images/logo-black.png" : "/images/logo-white.png";
   return (
     <Link
       href="/"
@@ -17,7 +19,7 @@ export function DeskTeamLogo({ variant = "header" }: DeskTeamLogoProps) {
       }
     >
       <SafeImage
-        src="/images/logo-white.png"
+        src={logoSrc}
         alt="DeskTeam360"
         width={168}
         height={40}

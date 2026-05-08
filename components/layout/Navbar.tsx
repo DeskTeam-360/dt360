@@ -16,6 +16,14 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const showSolidHeader = scrolled;
+  const isShowcaseOrBlog = pathname === "/showcase" || pathname === "/blog";
+  const useDarkTopNav = isShowcaseOrBlog && !scrolled;
+  const desktopLinkClass = useDarkTopNav
+    ? "text-[#11104C]/90 hover:text-[#11104C]"
+    : "text-white/90 hover:text-white";
+  const desktopHomeClass = useDarkTopNav
+    ? "text-[#11104C] hover:text-[#11104C]/80"
+    : "text-white hover:text-white/80";
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -52,7 +60,7 @@ export function Navbar() {
         />
         <Container className="relative z-10 max-w-7xl">
           <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-            <DeskTeamLogo />
+            <DeskTeamLogo tone={useDarkTopNav ? "dark" : "light"} />
 
             <nav
               className="hidden items-center gap-8 lg:flex"
@@ -60,46 +68,61 @@ export function Navbar() {
             >
               <Link
                 href="/"
-                className="font-nav-primary text-white transition-colors hover:text-white/80"
+                className={cn("font-nav-primary transition-colors", desktopHomeClass)}
               >
                 Home
               </Link>
               <Link
                 href="/how-it-works"
                 className={cn(
-                  "font-nav-primary transition-colors hover:text-white",
-                  pathname === "/how-it-works" ? "text-white" : "text-white/90",
+                  "font-nav-primary transition-colors",
+                  pathname === "/how-it-works"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
                 )}
               >
                 How it Works
               </Link>
-              <NavDropdown label="Services" href="/services" items={navServices} />
+              <NavDropdown
+                label="Services"
+                href="/services"
+                items={navServices}
+                triggerClassName={desktopLinkClass}
+              />
               <Link
                 href="/showcase"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Showcase
               </Link>
               <Link
                 href="/blog"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Blog
               </Link>
               <Link
                 href="/about"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 About
               </Link>
             </nav>
 
-            <div className="hidden h-6 w-px shrink-0 bg-white/25 lg:block" aria-hidden />
+            <div
+              className={cn(
+                "hidden h-6 w-px shrink-0 lg:block",
+                useDarkTopNav ? "bg-[#11104C]/20" : "bg-white/25",
+              )}
+              aria-hidden
+            />
 
             <div className="hidden items-center gap-5 lg:flex">
               <Link
                 href="/login"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Log in
               </Link>
@@ -114,7 +137,10 @@ export function Navbar() {
 
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-lg p-2 text-white hover:bg-white/10 lg:hidden"
+              className={cn(
+                "inline-flex items-center justify-center rounded-lg p-2 lg:hidden",
+                useDarkTopNav ? "text-[#11104C] hover:bg-black/10" : "text-white hover:bg-white/10",
+              )}
               onClick={() => setMobileOpen(true)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"

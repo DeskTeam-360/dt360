@@ -11,6 +11,15 @@ export function ShowcaseHero() {
       className="relative overflow-hidden bg-white pt-16 pb-12 lg:pt-24 lg:pb-16"
       aria-labelledby="showcase-hero-heading"
     >
+      <div
+        className="pointer-events-none absolute right-0 top-0 z-0 h-[1266px] w-[1266px] translate-x-[78%] -translate-y-[27%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(227,5,141,0.4) 0%, rgba(227,5,141,0) 100%)",
+        }}
+        aria-hidden
+      />
+
       {/* Decorative side backgrounds: each image protrudes ~10% outside container */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute left-0 top-[8%] w-[min(28vw,22rem)] -translate-x-[10%]">
@@ -34,7 +43,7 @@ export function ShowcaseHero() {
       </div>
 
       {/* Main container */}
-      <Container className="relative z-10 max-w-7xl">
+      <Container className="relative z-10 flex min-h-[80vh] items-center justify-center max-w-7xl">
         {/* Sub-container (text block) */}
         <div className="mx-auto w-full max-w-4xl text-center">
           <h1
