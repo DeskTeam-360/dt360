@@ -16,7 +16,7 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[#11104C] text-white">
-      <Container className="relative max-w-7xl pb-8 pt-16 sm:pb-10 sm:pt-20 lg:pb-12 lg:pt-24">
+      <Container className="relative max-w-7xl pb-8 pt-16 sm:pb-10 sm:pt-20 lg:pb-12 lg:pt-28">
         <FooterScrollTop />
 
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-8 xl:gap-14">

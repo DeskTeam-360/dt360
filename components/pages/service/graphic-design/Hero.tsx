@@ -9,10 +9,11 @@ const includedItems = [
   "Social media graphics - feed posts, carousels, stories, reels covers",
   "Logos and branding materials",
   "Ebooks, lead magnets, and workbooks",
-  "Brand guideline decks and visual identity refreshes",
-  "Sales page graphics, banner sets, and display ads",
-  "Podcast covers, YouTube thumbnails, and web assets",
-  "Presentation slides, event collateral, and print-ready files",
+  "Presentation decks and pitch decks",
+  "Print materials - flyers, brochures, business cards, banners",
+  "Infographics and data visualization",
+  "Motion graphics and GIF animations",
+  "Canva template design and customization"
 ];
 
 export function Hero() {

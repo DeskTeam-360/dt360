@@ -138,11 +138,11 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         >
           {isWebDev ? (
             <>
-              One Team. <span className="text-[#ef2fa9]">Three Plans.</span><br/>Pick Your Speed.
+              One Team, <span className="text-[#ef2fa9]">Three Plans,</span><br/>Pick Your Speed
             </>
           ) : (
             <>
-              Simple Pricing.
+              Simple Pricing,
               <br />
               <span className="text-[#ef2fa9]">All-Inclusive</span>
             </>

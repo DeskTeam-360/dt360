@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 
@@ -23,6 +23,14 @@ export function WhatsIncluded() {
     () => includedItems.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage),
     [pageIndex],
   );
+
+  useEffect(() => {
+    if (totalPages <= 1) return;
+    const timerId = window.setInterval(() => {
+      setPageIndex((prev) => (prev + 1) % totalPages);
+    }, 6000);
+    return () => window.clearInterval(timerId);
+  }, [totalPages]);
 
   return (
     <div className="relative overflow-hidden bg-transparent py-10 text-white sm:py-14 lg:py-18 2xl:py-24">

@@ -18,20 +18,20 @@ function PlanRibbon({
   fillColor: string;
 }) {
   return (
-    <div className="absolute left-0 top-8 z-10 w-[min(248px,calc(100%-1.5rem))] drop-shadow-[2px_4px_12px_rgba(0,0,0,0.16)]">
+    <div className="absolute left-0 top-8 z-10 w-[min(276px,calc(100%-1.5rem))] drop-shadow-[2px_4px_12px_rgba(0,0,0,0.16)]">
       <div className="relative h-14 w-full">
         <svg
           className="absolute inset-0 h-14 w-full font-sans"
-          viewBox="0 0 248 56"
+          viewBox="0 0 276 56"
           preserveAspectRatio="xMinYMid meet"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
-          <path fill={fillColor} d="M0 0 H228 L204 28 L228 56 H0 Z" stroke="none" />
+          <path fill={fillColor} d="M0 0 H256 L232 28 L256 56 H0 Z" stroke="none" />
         </svg>
         <span
           id={labelledById}
-          className="pointer-events-none absolute left-0 top-0 flex h-14 w-full items-center whitespace-nowrap pl-5 pr-10 text-[19.2px] font-bold uppercase tracking-[0.06em] text-white"
+          className="pointer-events-none absolute left-0 top-0 flex h-14 w-full items-center whitespace-nowrap pl-5 pr-[2em] text-[19.2px] font-bold uppercase tracking-[0.06em] text-white"
         >
           {title}
         </span>

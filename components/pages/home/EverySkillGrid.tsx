@@ -151,12 +151,12 @@ export function EverySkillGrid() {
 
       <Container className="relative z-10 max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-10">
-          <h2 className="max-w-xl text-balance leading-[1.04] tracking-tight text-[#101651]">
-            Every Skill You Need. <span className="text-[#D80B8C]">One Team.</span> One Bill
+          <h2 className="max-w-xl text-balance text-4xl font-bold leading-[1.04] tracking-tight text-[#101651] sm:text-5xl lg:text-6xl">
+            Every Skill You Need, <span className="text-[#D80B8C]">One Team,</span> One Bill
           </h2>
           <p className="max-w-lg leading-relaxed text-[#2a2f61]">
             DeskTeam360 replaces freelancer chaos with a dedicated team that already knows how to work together - all
-            managed by a US-based account manager so you never have to coordinate anything.
+            managed by a North American account manager so you never have to coordinate anything.
           </p>
         </div>
 
