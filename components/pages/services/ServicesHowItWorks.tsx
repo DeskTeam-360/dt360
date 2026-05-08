@@ -14,7 +14,7 @@ type HowItWorksStep = {
   number: string;
   headerSrc: string;
   headerAlt: string;
-  description: string;
+  description: ReactNode;
   cardBodyClass: string;
 };
 
