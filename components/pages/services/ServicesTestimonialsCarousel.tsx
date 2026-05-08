@@ -74,11 +74,11 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
   if (count === 0) return null;
 
   return (
-    <div className="mt-12 w-full sm:mt-14 lg:mt-16">
+    <div className="mt-12 w-full sm:mt-14 xl:mt-16">
       <div
         ref={viewportRef}
         onScroll={handleScroll}
-        className="relative w-full snap-x snap-mandatory overflow-x-auto overflow-y-visible px-[7%] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:px-[9%] lg:px-[13%]"
+        className="relative w-full snap-x snap-mandatory overflow-x-auto overflow-y-visible px-[7%] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:px-[9%] xl:px-[13%]"
       >
         <div className="flex items-stretch gap-[60px] pb-2">
           {items.map((item, slideIndex) => (
@@ -87,7 +87,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
               ref={(element) => {
                 slideRefs.current[slideIndex] = element;
               }}
-              className="flex w-[86%] shrink-0 snap-center snap-always sm:w-[82%] lg:w-[74%]"
+              className="flex w-[86%] shrink-0 snap-center snap-always sm:w-[82%] xl:w-[74%]"
               aria-roledescription="slide"
             >
               <div className="relative flex h-full w-full overflow-visible rounded-[30px] bg-transparent px-6 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14">
@@ -96,7 +96,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
                   alt=""
                   fill
                   className="pointer-events-none rounded-[30px] object-cover object-top"
-                  sizes="(max-width: 640px) 86vw, (max-width: 1024px) 82vw, 74vw"
+                  sizes="(max-width: 640px) 86vw, (max-width: 1279px) 82vw, 74vw"
                 />
                 <div className="relative z-[1] grid h-full gap-8 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-center sm:gap-10">
                   <div className="mx-auto aspect-square w-full max-w-[12rem] overflow-hidden rounded-2xl bg-neutral-200 sm:mx-0">

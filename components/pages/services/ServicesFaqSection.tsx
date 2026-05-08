@@ -40,7 +40,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
   const illustrationSrc = isWebDev ? FAQ_ILLUSTRATION_WEB_DEV : FAQ_ILLUSTRATION_DEFAULT;
 
   return (
-    <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-[88px] md:px-10 md:pb-[96px] md:pt-[100px] lg:px-10 lg:pb-[120px] lg:pt-[110px]">
+    <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-[88px] md:px-10 md:pb-[96px] md:pt-[100px] xl:px-10 xl:pb-[120px] xl:pt-[110px]">
       <Image
         src="/images/dt360-faq-bg-service.png"
         alt=""
@@ -49,8 +49,8 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-8 lg:grid-cols-[0.95fr_1.1fr] lg:gap-10">
-        <div className="flex justify-center lg:justify-start">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-8 xl:grid-cols-[0.95fr_1.1fr] xl:gap-10">
+        <div className="flex justify-center xl:justify-start">
           {isWebDev ? (
             <SafeImage
               src={illustrationSrc}
@@ -58,7 +58,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
               width={640}
               height={640}
               className="h-auto w-full max-w-[560px] object-contain"
-              sizes="(min-width: 1024px) 40vw, 85vw"
+              sizes="(min-width: 1280px) 40vw, 85vw"
             />
           ) : (
             <Image
@@ -67,13 +67,13 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
               width={609}
               height={739}
               className="h-auto w-full max-w-[520px] object-contain"
-              sizes="(min-width: 1024px) 40vw, 85vw"
+              sizes="(min-width: 1280px) 40vw, 85vw"
             />
           )}
         </div>
 
         <div>
-          <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] md:text-[64px] lg:text-left">
+          <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] md:text-[64px] xl:text-left">
             Got Questions? <span className="text-[#ef2fa9]">Good</span>
           </h2>
 
