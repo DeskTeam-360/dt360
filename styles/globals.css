@@ -40,8 +40,16 @@ body {
   h1 {
     font-family: var(--font-poppins), system-ui, sans-serif;
     font-weight: 700;
-    font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem);
+    /** AGENTS: H1 Poppins Bold — maks 76px; di bawah 1024px fluid */
+    font-size: clamp(2.5rem, 5vw + 1rem, 76px);
     line-height: 1.1;
+  }
+
+  /** Desktop lg+: ukuran penuh 76px (clamp vw baru mencapai ~76px di ~1200px viewport). */
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 76px;
+    }
   }
 
   h2 {
@@ -102,8 +110,15 @@ body {
   .type-rule-h1 {
     font-family: var(--font-poppins), system-ui, sans-serif;
     font-weight: 700;
-    font-size: clamp(2.5rem, 5vw + 1rem, 4.75rem);
+    /** AGENTS: H1 — maks 76px (Poppins Bold); di bawah 1024px fluid */
+    font-size: clamp(2.5rem, 5vw + 1rem, 76px);
     line-height: 1.1;
+  }
+
+  @media (min-width: 1024px) {
+    .type-rule-h1 {
+      font-size: 76px;
+    }
   }
 
   .type-rule-h2 {
@@ -153,6 +168,24 @@ body {
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.45;
+  }
+
+  /**
+   * Wrapper `app/services/layout.tsx` — `/services` & semua `/services/*`.
+   * Kurangi orphan baris: judul `balance`, isi paragraf/list `pretty`.
+   */
+  .services-route-typography h1,
+  .services-route-typography h2,
+  .services-route-typography h3,
+  .services-route-typography h4,
+  .services-route-typography h5,
+  .services-route-typography h6 {
+    text-wrap: balance;
+  }
+
+  .services-route-typography p,
+  .services-route-typography li {
+    text-wrap: pretty;
   }
 }
 

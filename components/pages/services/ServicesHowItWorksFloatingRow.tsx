@@ -46,10 +46,10 @@ export function ServicesHowItWorksFloatingRow({
       const h = Math.ceil(el.getBoundingClientRect().height);
       const clamped = Math.max(0, Math.min(1, overlapFraction));
       const fullPx = Math.round(h * clamped);
-      const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      /** Mobile & tablet: less negative top, full negative bottom. Desktop (lg+): unified overlap. */
-      if (isTablet || isMobile) {
+      /** Mobile, tablet & narrow desktop (&lt;1280px): less negative top. Full desktop (xl+): unified overlap. */
+      const isDesktopLayout = window.matchMedia("(min-width: 1280px)").matches;
+      if (!isDesktopLayout) {
         setOverlapTopPx(Math.round(h * Math.min(clamped, 0.12)));
         setOverlapBottomPx(fullPx);
       } else {
@@ -63,15 +63,15 @@ export function ServicesHowItWorksFloatingRow({
 
     const ro = new ResizeObserver(() => update());
     ro.observe(el);
-    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const mqXl = window.matchMedia("(min-width: 1280px)");
     const mqMd = window.matchMedia("(min-width: 768px)");
     const mqMaxMd = window.matchMedia("(max-width: 767px)");
-    mqLg.addEventListener("change", update);
+    mqXl.addEventListener("change", update);
     mqMd.addEventListener("change", update);
     mqMaxMd.addEventListener("change", update);
     return () => {
       ro.disconnect();
-      mqLg.removeEventListener("change", update);
+      mqXl.removeEventListener("change", update);
       mqMd.removeEventListener("change", update);
       mqMaxMd.removeEventListener("change", update);
     };
