@@ -4,7 +4,7 @@ import { aboutHero } from "@/data/about";
 
 export function AboutHeroStory() {
   return (
-    <section className="relative overflow-hidden bg-[#11104C] pt-14 text-white lg:pt-24 lg:pb-0">
+    <section className="relative overflow-hidden bg-[#11104C] pt-32 lg:pt-[144px] text-white lg:pb-0">
       {/* Exact overlapping background gradients */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute top-[10%] left-[-20%] w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.4)_0%,transparent_50%)] mix-blend-screen blur-[100px]" />

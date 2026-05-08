@@ -7,7 +7,7 @@ import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { NavDropdown } from "./NavDropdown";
-import { navServices, navShowcase, type NavMenuItem } from "@/data/nav";
+import { navServices, type NavMenuItem } from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
 
@@ -74,7 +74,12 @@ export function Navbar() {
                 How it Works
               </Link>
               <NavDropdown label="Services" href="/services" items={navServices} />
-              <NavDropdown label="Showcase" items={navShowcase} />
+              <Link
+                href="/showcase"
+                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+              >
+                Showcase
+              </Link>
               <Link
                 href="/blog"
                 className="font-nav-primary text-white/90 transition-colors hover:text-white"
@@ -153,7 +158,9 @@ export function Navbar() {
                 How it Works
               </MobileLink>
               <MobileGroup title="Services" items={navServices} onPick={() => setMobileOpen(false)} />
-              <MobileGroup title="Showcase" items={navShowcase} onPick={() => setMobileOpen(false)} />
+              <MobileLink href="/showcase" onNavigate={() => setMobileOpen(false)}>
+                Showcase
+              </MobileLink>
               <MobileLink href="/blog" onNavigate={() => setMobileOpen(false)}>
                 Blog
               </MobileLink>
