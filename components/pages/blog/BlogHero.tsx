@@ -67,10 +67,10 @@ export function BlogHero() {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  // @ts-ignore
+                  // @ts-expect-error
                   textFillColor: 'transparent',
                   WebkitTextStroke: '2px #FFFFFF',
-                  // @ts-ignore
+                  // @ts-expect-error
                   paintOrder: 'stroke fill',
                   filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))',
                   width: 'fit-content',
