@@ -4,8 +4,8 @@ import { SafeImage } from '@/components/shared/SafeImage';
 
 export function DownloadCTA() {
   return (
-    <section className="w-full relative my-16 md:my-24">
-      <div className="relative w-full min-h-[400px] md:min-h-[500px] flex items-center overflow-hidden">
+    <section className="w-full relative bg-white">
+      <div className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         {/* Torn Edge Background Image */}
         <SafeImage
           src="/images/blog/Download BG.png"
@@ -15,7 +15,7 @@ export function DownloadCTA() {
         />
 
         {/* Content Container */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-20 md:py-32">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-28 md:py-40">
           <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
             
             {/* Left Side: Icon and Title */}
