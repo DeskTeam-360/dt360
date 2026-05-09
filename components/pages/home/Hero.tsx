@@ -28,12 +28,12 @@ export function Hero() {
           <div className="relative z-20 lg:pr-4">
             <h1
               id="hero-heading"
-              className="text-balance text-4xl font-bold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-[3.35rem] xl:leading-[1.05]"
+              className="type-rule-h1 text-balance text-white"
             >
               <span className="block">{headlineLine1}</span>
-              <span className="mt-2 block text-white lg:mt-3">{headlineLine2}</span>
+              <span className="mt-2 block lg:mt-3">{headlineLine2}</span>
             </h1>
-            <p className="mt-6 max-w-full text-pretty text-base font-normal leading-relaxed text-white/90 sm:mt-8 sm:text-lg sm:leading-relaxed">
+            <p className="type-rule-p mt-6 max-w-full text-pretty text-white/90 sm:mt-8">
               {subheading}
             </p>
             <HeroActions />

@@ -1,24 +1,20 @@
 import type { HeroStatItem } from "@/data/home";
 import { heroStats } from "@/data/home";
-import { fontRussoOne } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-/** Angka besar (8+, 400+, 1-3): Russo One 64px — `className` next/font menjamin font-family computed (var saja bisa turun ke Montserrat). */
+/** Angka besar (8+, 400+, 1-3): selaras global H2 — Poppins SemiBold hingga 64px. */
 const statValue = cn(
-  fontRussoOne.className,
-  "shrink-0 tabular-nums text-[64px] font-normal leading-none tracking-tight text-white",
-  "max-sm:text-[2.5rem] max-sm:leading-none",
+  "type-rule-h2 shrink-0 tabular-nums leading-none tracking-tight text-white",
 );
 
-/** Label & salinan teks seluler ke-4: Montserrat 20 semibold. */
-const statLabel = "text-left font-[var(--font-montserrat)] text-[20px] font-semibold leading-tight text-white/90";
+/** Label & salinan teks sel ke-4: selaras global B — Montserrat Bold 20px. */
+const statLabel = cn("type-rule-b text-left leading-tight text-white/90");
 
 /** Label di overlay hover sel “side”: tengah, stack vertikal bersama angka. */
-const statLabelHoverStacked =
-  "font-[var(--font-montserrat)] text-center text-[20px] font-semibold leading-tight text-white/90";
+const statLabelHoverStacked = cn("type-rule-b text-center leading-tight text-white/90");
 
 const statTextBlock = cn(
-  "max-w-full text-pretty text-center font-[var(--font-montserrat)] text-[20px] font-semibold leading-snug text-white/95",
+  "type-rule-b max-w-full text-pretty text-center leading-snug text-white/95",
 );
 
 /** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
@@ -39,6 +35,10 @@ const hoverOverlayInner = cn(
 
 const sideLayout =
   "flex min-h-[6.25rem] flex-row items-center justify-center gap-2.5 px-3 py-4 sm:min-h-[6.5rem] sm:gap-3.5 sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-4 lg:py-4";
+
+/** Sel `clients` (400+ / Clients Served): normal state — stack vertikal, angka + label benar-benar tengah sel. */
+const sideLayoutColumnCentered =
+  "flex min-h-[6.25rem] flex-col items-center justify-center gap-1 px-3 py-4 text-center sm:min-h-[6.5rem] sm:gap-1.5 sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
 
 const textLayout =
   "mx-auto flex w-fit min-h-[6.25rem] flex-col items-start justify-center gap-1 px-4 py-4 text-center sm:min-h-[6.5rem] sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
@@ -61,11 +61,19 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
   );
 
   if (stat.layout === "side") {
+    const isClientsColumn = stat.id === "clients";
     return (
       <div className={outer}>
-        <div className={cn("relative z-0", sideLayout)}>
-          <span className={statValue}>{stat.value}</span>
-          <p className={cn(statLabel, "min-w-0")}>
+        <div className={cn("relative z-0", isClientsColumn ? sideLayoutColumnCentered : sideLayout)}>
+          <span className={cn(statValue, isClientsColumn && "text-center")}>{stat.value}</span>
+          <p
+            className={cn(
+              "min-w-0 max-w-full",
+              isClientsColumn
+                ? "type-rule-b text-center leading-tight text-white/90"
+                : statLabel,
+            )}
+          >
             {stat.labelLine1} {stat.labelLine2}
           </p>
         </div>

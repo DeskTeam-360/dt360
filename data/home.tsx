@@ -129,7 +129,7 @@ export const heroContent: HeroContent = {
   headlineLine1: "Stop Outsourcing",
   headlineLine2: "Start Insourcing",
   subheading:
-    "AI specialists, developers, designers, and video editors - all working together in one office, not scattered across Upwork. Flat-rate subscription. US-based account manager. Zero hiring headaches. And you never manage another vendor again.",
+    "AI specialists, developers, designers, and video editors - all working together in one office, not scattered across Upwork. Flat-rate subscription. North American account manager. Zero hiring headaches. And you never manage another vendor again.",
   primaryCta: {
     href: "/#pricing",
     label: "See Plans & Pricing",
