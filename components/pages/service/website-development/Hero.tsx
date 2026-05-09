@@ -6,23 +6,21 @@ import { ServiceHeroIncludedChecklist } from "@/components/pages/service/shared/
 
 const includedPages = [
   [
-    "Custom WordPress themes, child themes, and template tweaks",
-    "Performance tuning, Core Web Vitals, and speed optimization",
-    "HTML/CSS/JavaScript fixes and front-end bug resolution",
-    "DNS, SSL, hosting migrations, and go-live support",
-  ],
-  [
     "Full website builds and redesigns - WordPress, Webflow, custom",
     "Landing pages and sales funnels",
     "GoHighLevel page builds and customizations",
     "WooCommerce and e-commerce builds",
   ],
   [
-    "Schema markup, SEO-ready structure, and analytics setup",
-    "Form builds, CRM embeds, and third-party API integrations",
-    "Mobile-responsive layouts and accessibility improvements",
-    "Staging workflows, backups, and safe update cadence",
+    "Website speed optimization and Core Web Vitals fixes",
+    "Security updates and malware protection",
+    "Bug fixes and development requests",
+    "Content updates, image swaps, copy changes",
   ],
+  [
+    "API integrations and custom functionality",
+    "Monthly website maintenance and backups"
+  ]
 ];
 
 const includedItems = includedPages.flat();

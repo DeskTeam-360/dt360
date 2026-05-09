@@ -9,6 +9,11 @@ const includedItems = [
   "Security monitoring and malware scanning",
   "Website speed optimization and Core Web Vitals maintenance",
   "Daily or weekly automated backups",
+  "Uptime monitoring - we know if your site goes down before you do",
+  "Broken link and 404 error monitoring",
+  "Database optimization and cleanup",
+  "SSL certificate management and renewal",
+  "Monthly maintenance report delivered to your inbox"
 ];
 
 export function Hero() {

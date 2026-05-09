@@ -9,6 +9,10 @@ const includedItems = [
   "Workflow automation builds - GoHighLevel, Zapier, Make, n8n",
   "AI powered lead qualification and follow-up sequences",
   "Process documentation and automation planning",
+  "AI content generation workflows and prompt libraries",
+  "Automated reporting and dashboard builds",
+  "AI integration with existing CRM and marketing tools",
+  "Recurring automation monitoring and optimization"
 ];
 
 export function Hero() {

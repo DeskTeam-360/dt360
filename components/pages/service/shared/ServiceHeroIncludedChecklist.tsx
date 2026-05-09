@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +36,14 @@ export function ServiceHeroIncludedChecklist({
   );
 
   const showDots = totalPages > 1;
+
+  useEffect(() => {
+    if (!showDots) return;
+    const timerId = window.setInterval(() => {
+      setPageIndex((prev) => (prev + 1) % totalPages);
+    }, 6000);
+    return () => window.clearInterval(timerId);
+  }, [showDots, totalPages]);
 
   return (
     <div

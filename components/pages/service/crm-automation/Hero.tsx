@@ -9,6 +9,11 @@ const includedItems = [
   "HubSpot configuration and workflow builds",
   "Zapier and Make (Integromat) automation builds",
   "ActiveCampaign and Keap automation sequences",
+  "API integrations and webhook setups",
+  "CRM data migration and cleanup",
+  "Reporting dashboards and pipeline tracking",
+  "Chatbot and AI assistant configuration",
+  "System integrations between platforms"
 ];
 
 export function Hero() {

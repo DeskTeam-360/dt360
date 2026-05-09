@@ -9,10 +9,11 @@ const includedItems = [
   "Short-form content - Reels, TikTok, YouTube Shorts",
   "Webinar and course content editing",
   "Ad video cuts - Facebook, Instagram, YouTube pre-roll",
-  "Podcast highlight reels and audiogram-style cuts",
-  "Captions, subtitles, and SRT delivery for multiple platforms",
-  "Color correction, audio cleanup, and B-roll stitching",
-  "Logo intros, lower-thirds, and branded motion templates",
+  "Thumbnail design",
+  "Subtitle and caption files - .SRT and burned in",
+  "Content repurposing - long video into 5-10 short clips",
+  "Motion graphics and lower thirds",
+  "Podcast video production"
 ];
 
 export function Hero() {
