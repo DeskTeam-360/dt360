@@ -24,7 +24,7 @@ export function Hero() {
       />
 
       <Container className="relative z-10 max-w-7xl">
-        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,60%)_minmax(0,40%)] lg:items-center lg:gap-0 xl:gap-0">
+        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,652px)] lg:items-center lg:gap-0 xl:gap-0">
           <div className="relative z-20 lg:pr-4">
             <h1
               id="hero-heading"
@@ -47,7 +47,7 @@ export function Hero() {
               className="absolute inset-16 translate-x-2 translate-y-3 scale-80 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.22)_0%,transparent_55%)] blur-3xl"
               aria-hidden
             />
-            <div className="relative isolate w-full min-h-[280px] max-w-[560px] py-4 sm:py-6 lg:py-8">
+            <div className="relative isolate w-full min-h-[280px] max-w-[652px] py-4 sm:py-6 lg:py-8">
               <video
                 className="relative z-[-1] h-auto w-full origin-center scale-[1.2]"
                 aria-label="Collaborative digital team: designer, developer, and video editor working together on digital projects."

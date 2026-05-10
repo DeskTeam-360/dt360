@@ -20,7 +20,7 @@ export function Pricing() {
           {subheading}
         </p>
 
-        <div className="mb-12 mt-12 grid gap-6 sm:mt-14 md:grid-cols-3 md:gap-7 lg:mt-16 lg:gap-8">
+        <div className="mb-12 mt-12 grid gap-3.5 sm:mt-14 md:grid-cols-3 lg:mt-16">
           {plans.map((plan) => (
             <PricingPlanCardComponent key={plan.id} plan={plan} ctaLabel={ctaLabel} />
           ))}

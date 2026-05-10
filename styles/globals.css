@@ -128,6 +128,25 @@ body {
     line-height: 1.15;
   }
 
+  /**
+   * Hero stats bar (homepage): angka memakai ukuran/skala sama H2,
+   * famili Russo One (Google) — variabel `--font-russo-one` dari `app/layout.tsx`.
+   */
+  .type-rule-h2-hero-stats {
+    font-family: var(--font-russo-one), sans-serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  /** AGENTS: H2 — Poppins SemiBold 64px; di lg+ ukuran nominal tetap 64px (bukan hanya max clamp). */
+  @media (min-width: 1024px) {
+    .type-rule-h2,
+    .type-rule-h2-hero-stats {
+      font-size: 64px;
+    }
+  }
+
   .type-rule-h3 {
     font-family: var(--font-poppins), system-ui, sans-serif;
     font-weight: 600;

@@ -104,6 +104,8 @@ export type StartBusinessContent = {
   headlineBefore: string;
   headlineHighlight: string;
   headlineAfter: string;
+  /** Baris kedua judul (setelah `<br />`). */
+  headlineSecondLine: string;
   subheading: string;
   illustrationSrc: string;
   illustrationAlt: string;
@@ -114,7 +116,8 @@ export type StartBusinessContent = {
 export const startBusinessContent: StartBusinessContent = {
   headlineBefore: "You ",
   headlineHighlight: "Didn't",
-  headlineAfter: " Start a Business to Chase Freelancers",
+  headlineAfter: " Start a Business",
+  headlineSecondLine: "to Chase Freelancers",
   subheading:
     "Somewhere between managing vendors, chasing revisions, and watching invoices pile up—you stopped doing the work that actually grows your company.",
   illustrationSrc: "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite.png",
@@ -309,11 +312,11 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "us-managers",
       placement: "wide-orange",
       tone: "orange",
-      title: "US-Based Account Managers",
+      title: "North American Account Managers",
       description:
         "Your dedicated account manager speaks fluent English and bridges any language gaps with the production team. They help you get the most out of the service - so you can focus on growing your business.",
       mediaSrc: "/images/home-InsourcingBetter-grid5.png",
-      mediaAlt: "US-based account manager.",
+      mediaAlt: "North American account manager.",
     },
     {
       id: "better-over-time",
@@ -327,7 +330,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
 };
 
 export const howItWorksSection: HowItWorksSection = {
-  titleLine1: "Three Steps. No Meetings.",
+  titleLine1: "Three Steps, No Meetings,",
   titleLine2: "No Micromanaging",
   steps: [
     {
@@ -342,7 +345,7 @@ export const howItWorksSection: HowItWorksSection = {
       number: "2",
       title: "We Handle Everything",
       description:
-        "Your US-based account manager assigns the right specialist, manages the timeline, and QAs the work before you see it. No standups. No Slack chasing.",
+        "Your North American account manager assigns the right specialist, manages the timeline, and QAs the work before you see it. No standups. No Slack chasing.",
     },
     {
       id: "review-move-on",
@@ -448,8 +451,8 @@ export type FaqSection = {
 };
 
 export const pricingSection: PricingSection = {
-  headlineLine1: "One Team.",
-  headlineHighlight: "Three Plans.",
+  headlineLine1: "One Team,",
+  headlineHighlight: "Three Plans,",
   headlineLine2: "Pick Your Speed.",
   subheading:
     "Every plan includes the full team - graphic design, web development, video editing, marketing tech, team leader, and a dedicated account manager. The only difference is how many tasks run at once.",
@@ -467,7 +470,7 @@ export const pricingSection: PricingSection = {
       features: [
         "1 active task at a time",
         "Full team access - all 8 services",
-        "US-based account manager",
+        "North American account manager",
         "1-3 business day turnaround",
         "Unlimited revisions",
         "30-day money-back guarantee",

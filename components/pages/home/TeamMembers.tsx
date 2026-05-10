@@ -171,7 +171,7 @@ export function TeamMembers() {
                 key={member.id}
                 className="w-[min(100%,280px)] shrink-0 snap-center sm:w-[280px]"
               >
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white">
+                <div className="relative aspect-square w-full overflow-hidden rounded-none bg-white">
                   {/* Photo fills the whole tile; label sits above the image layer */}
                   <div className="absolute inset-0 z-[1] overflow-hidden">
                     <SafeImage

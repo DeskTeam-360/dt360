@@ -9,6 +9,7 @@ export function StartBusiness() {
     headlineBefore,
     headlineHighlight,
     headlineAfter,
+    headlineSecondLine,
     subheading,
     illustrationAlt,
     decorTopLeftSrc,
@@ -57,6 +58,8 @@ export function StartBusiness() {
             {headlineBefore}
             <span className="text-[#e4277a]">{headlineHighlight}</span>
             {headlineAfter}
+            <br />
+            {headlineSecondLine}
           </h2>
           <p className="relative z-10 mx-auto mt-6 max-w-3xl text-pretty text-center text-base leading-relaxed text-zinc-700 sm:mt-8 sm:text-lg sm:leading-relaxed">
             {subheading}

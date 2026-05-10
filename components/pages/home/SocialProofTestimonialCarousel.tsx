@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { SafeImage } from "@/components/shared/SafeImage";
 import {
   useCallback,
   useLayoutEffect,
@@ -20,10 +21,17 @@ function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
   return (
     <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-14 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
       <div
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[5.5rem] leading-none text-[#D8D8D8] sm:text-[6.5rem]"
+        className="pointer-events-none absolute left-1/2 top-0 z-0 flex w-[120px] -translate-x-1/2 justify-center bg-white"
         aria-hidden
       >
-        &ldquo;
+        <SafeImage
+          src="/images/home-testimonial-quote1.png"
+          alt=""
+          width={120}
+          height={104}
+          className="h-auto w-[120px] max-w-[120px] object-contain object-top"
+          sizes="120px"
+        />
       </div>
       <div className="relative z-[1] grid gap-6 sm:grid-cols-[minmax(0,11rem)_1fr] sm:items-start sm:gap-8">
         <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl sm:mx-0">
@@ -52,7 +60,7 @@ const SLIDE_GAP = "1rem"; /* = Tailwind gap-4 */
 
 function subscribeWideMode(onStoreChange: () => void) {
   if (typeof window === "undefined") return () => {};
-  const mq = window.matchMedia("(min-width: 1441px)");
+  const mq = window.matchMedia("(min-width: 1680px)");
   mq.addEventListener("change", onStoreChange);
   window.addEventListener("resize", onStoreChange);
   return () => {
@@ -62,7 +70,7 @@ function subscribeWideMode(onStoreChange: () => void) {
 }
 
 function getWideModeSnapshot() {
-  return typeof window !== "undefined" && window.matchMedia("(min-width: 1441px)").matches;
+  return typeof window !== "undefined" && window.matchMedia("(min-width: 1680px)").matches;
 }
 
 function getWideModeServerSnapshot() {
@@ -71,7 +79,7 @@ function getWideModeServerSnapshot() {
 
 /**
  * Strip triple + anchor index untuk loop tanpa loncat besar.
- * Narrow: peek 20/60/20; wide: tiga kolom penuh + geser.
+ * Narrow: peek 20/60/20; wide (min-width 1680px): tiga kolom penuh + geser.
  */
 export function SocialProofTestimonialCarousel({ items }: Props) {
   const count = items.length;
@@ -192,7 +200,7 @@ export function SocialProofTestimonialCarousel({ items }: Props) {
 
   return (
     <div className="mt-12 sm:mt-14 lg:mt-16">
-      <div className="w-full px-0 min-[1441px]:px-8 min-[1600px]:px-12">
+      <div className="w-full px-0 min-[1680px]:px-8 min-[1800px]:px-12">
         <div ref={viewportRef} className="relative w-full overflow-hidden">
           <div
             data-carousel-track
