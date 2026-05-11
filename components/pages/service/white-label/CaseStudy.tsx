@@ -3,7 +3,7 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 export function CaseStudy() {
   return (
-    <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28 2xl:py-36">
+    <section className="relative overflow-hidden bg-white pt-10 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28 2xl:pt-16 2xl:pb-36">
       {/* Bottom-left: red radial behind decorative image (~10% larger) — visible all breakpoints */}
       <SafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"

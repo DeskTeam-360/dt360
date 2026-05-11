@@ -160,7 +160,7 @@ export function EverySkillGrid() {
           </h2>
           <p className="max-w-lg text-[#2a2f61]">
             DeskTeam360 replaces the freelancer chaos with a dedicated team that already knows how to work together - all
-            managed by a US-based account manager so you never have to coordinate anything.
+            managed by a North American account manager so you never have to coordinate anything.
           </p>
         </div>
 

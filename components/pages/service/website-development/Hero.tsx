@@ -105,7 +105,7 @@ export function Hero() {
               className="h-auto w-full max-w-[620px]"
             />
           </div>
-          <ServiceHeroIncludedChecklist items={includedItems} itemsPerPage={4} initialPageIndex={1} />
+          <ServiceHeroIncludedChecklist items={includedItems} initialPageIndex={1} />
         </div>
       </Container>
     </section>

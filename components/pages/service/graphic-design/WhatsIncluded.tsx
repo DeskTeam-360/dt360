@@ -17,11 +17,16 @@ const includedItems = [
 
 export function WhatsIncluded() {
   const [pageIndex, setPageIndex] = useState(0);
-  const itemsPerPage = 4;
+  const itemsPerPage = 5;
   const totalPages = Math.ceil(includedItems.length / itemsPerPage);
   const visibleItems = useMemo(
     () => includedItems.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage),
-    [pageIndex],
+    [includedItems, pageIndex, itemsPerPage],
+  );
+
+  const rowSlots = useMemo(
+    () => Array.from({ length: itemsPerPage }, (_, i) => visibleItems[i] ?? null),
+    [visibleItems, itemsPerPage],
   );
 
   useEffect(() => {
@@ -57,24 +62,34 @@ export function WhatsIncluded() {
             />
           </div>
           <div className="w-full min-w-0 space-y-3 sm:space-y-4">
-            {visibleItems.map((item) => (
-              <div
-                key={item}
-                className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
-              >
-                <SafeImage
-                  src="/images/Service - Checklist.png"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
-                />
-                <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">
-                  {item}
-                </p>
-              </div>
-            ))}
-            <div className="flex items-center justify-center gap-2 pt-2">
+            {rowSlots.map((item, idx) =>
+              item !== null ? (
+                <div
+                  key={`${pageIndex}-${item}-${idx}`}
+                  className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
+                >
+                  <SafeImage
+                    src="/images/Service - Checklist.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
+                  />
+                  <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">
+                    {item}
+                  </p>
+                </div>
+              ) : (
+                <div
+                  key={`pad-${pageIndex}-${idx}`}
+                  aria-hidden
+                  className="pointer-events-none relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 opacity-0 sm:py-4 sm:pl-16 sm:pr-4"
+                >
+                  <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">&nbsp;</p>
+                </div>
+              ),
+            )}
+            <div className="flex min-h-[2rem] items-center justify-center gap-2 pt-2">
               {Array.from({ length: totalPages }).map((_, dotIndex) => (
                 <button
                   key={`dot-${dotIndex}`}

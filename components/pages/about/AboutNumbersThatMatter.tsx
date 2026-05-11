@@ -4,6 +4,20 @@ import { numbersThatMatter } from "@/data/about";
 import { fontRussoOne } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
+const CARD_FILL_BG = "linear-gradient(225deg, #11104C 21%, #201E7A 100%)";
+/** Border: 0% #7547C5 → 46% #fff → 100% #7547C5 @ 35deg (cards idx 0 & 4) */
+const CARD_BORDER_GRADIENT_PURPLE =
+  "linear-gradient(35deg, #7547C5 0%, #ffffff 46%, #7547C5 100%)";
+/** Border: 0% #A1E6FF → 46% #fff → 100% #A1E6FF @ 35deg (card idx 2) */
+const CARD_BORDER_GRADIENT_CYAN =
+  "linear-gradient(35deg, #A1E6FF 0%, #ffffff 46%, #A1E6FF 100%)";
+/** Border: 0% #FB3A1E → 46% #ffcccc → 100% #FB3A1E @ 35deg (card idx 1) */
+const CARD_BORDER_GRADIENT_RED =
+  "linear-gradient(35deg, #FB3A1E 0%, #ffcccc 46%, #FB3A1E 100%)";
+/** Border: 0% #E61E98 → 46% #ffdef2 → 100% #E61E98 @ 35deg (cards idx 3 & 5) */
+const CARD_BORDER_GRADIENT_PINK =
+  "linear-gradient(35deg, #E61E98 0%, #ffdef2 46%, #E61E98 100%)";
+
 export function AboutNumbersThatMatter() {
   return (
     <section className="relative z-20 bg-[#11104C] pt-0 pb-0 text-white">
@@ -18,31 +32,31 @@ export function AboutNumbersThatMatter() {
           The Numbers That Matter
         </h2>
         <div className="mt-10 lg:mt-16 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">
-          {numbersThatMatter.map((item, idx) => (
+          {numbersThatMatter.map((item, idx) => {
+            const borderGradient =
+              idx === 1
+                ? CARD_BORDER_GRADIENT_RED
+                : idx === 2
+                  ? CARD_BORDER_GRADIENT_CYAN
+                  : idx === 3 || idx === 5
+                    ? CARD_BORDER_GRADIENT_PINK
+                    : CARD_BORDER_GRADIENT_PURPLE;
+            return (
             <div
               key={item.value + item.label}
-              className="relative rounded-[30px] border border-solid bg-[linear-gradient(225deg,#11104C_21%,#201E7A_100%)] p-6 lg:p-8 min-h-[210px] flex flex-col justify-center backdrop-blur-xl transition-transform hover:-translate-y-2 duration-300"
+              className="relative rounded-[30px] border-2 border-transparent p-6 lg:p-8 min-h-[210px] flex flex-col justify-center backdrop-blur-xl transition-transform hover:-translate-y-2 duration-300"
               style={{
-                borderColor:
-                  idx === 0
-                    ? "rgba(117, 71, 197, 0.5)"
-                    : idx === 1
-                      ? "rgba(251, 58, 30, 0.5)"
-                      : idx === 2
-                        ? "rgba(161, 230, 255, 0.5)"
-                        : idx === 3
-                          ? "rgba(230, 30, 152, 0.5)"
-                          : idx === 4
-                            ? "rgba(117, 71, 197, 0.5)"
-                            : "rgba(117, 71, 197, 0.5)",
-                borderWidth: idx === 4 ? "4px" : "2px",
+                border: "2px solid transparent",
+                backgroundImage: `${CARD_FILL_BG}, ${borderGradient}`,
+                backgroundOrigin: "border-box",
+                backgroundClip: "padding-box, border-box",
                 boxShadow: "0px 20px 50px rgba(0, 0, 0, 0.2)",
               }}
             >
               {/* Inner glow specific to each card */}
               <div className="absolute inset-0 rounded-[30px] opacity-20 pointer-events-none mix-blend-overlay"
                    style={{
-                     background: `radial-gradient(circle at top right, ${idx === 1 ? '#FB3A1E' : idx === 2 ? '#A1E6FF' : idx === 3 ? '#E61E98' : '#7547C5'}, transparent 70%)`
+                     background: `radial-gradient(circle at top right, ${idx === 1 ? '#FB3A1E' : idx === 2 ? '#A1E6FF' : idx === 3 || idx === 5 ? '#E61E98' : '#7547C5'}, transparent 70%)`
                    }}
               />
               <div className="relative z-10">
@@ -77,7 +91,8 @@ export function AboutNumbersThatMatter() {
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Container>
 
