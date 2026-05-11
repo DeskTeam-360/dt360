@@ -104,6 +104,8 @@ export type StartBusinessContent = {
   headlineBefore: string;
   headlineHighlight: string;
   headlineAfter: string;
+  /** Baris kedua judul (setelah `<br />`). */
+  headlineSecondLine: string;
   subheading: string;
   illustrationSrc: string;
   illustrationAlt: string;
@@ -114,7 +116,8 @@ export type StartBusinessContent = {
 export const startBusinessContent: StartBusinessContent = {
   headlineBefore: "You ",
   headlineHighlight: "Didn't",
-  headlineAfter: " Start a Business to Chase Freelancers",
+  headlineAfter: " Start a Business",
+  headlineSecondLine: "to Chase Freelancers",
   subheading:
     "Somewhere between managing vendors, chasing revisions, and watching invoices pile up—you stopped doing the work that actually grows your company.",
   illustrationSrc: "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite.png",
@@ -159,7 +162,7 @@ export const lastCtaContent: LastCtaContent = {
     variant: "secondary",
   },
   note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
-  imageSrc: "/images/Home-cta-imageright.png",
+  imageSrc: "/images/Home-cta-imageright1.png",
   imageAlt: "Senior professional holding a laptop, ready to support your team.",
 };
 
@@ -198,7 +201,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "The Freelancer Lottery",
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
-    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small-copy.png",
+    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small.png",
   },
 ];
 
@@ -309,9 +312,11 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       id: "us-managers",
       placement: "wide-orange",
       tone: "orange",
-      /** Sementara dikosongkan — bentuk kartu (placement) tetap; isi akan diisi lagi nanti. */
-      title: "",
-      description: "",
+      title: "North American Account Managers",
+      description:
+        "Your dedicated account manager speaks fluent English and bridges any language gaps with the production team. They help you get the most out of the service - so you can focus on growing your business.",
+      mediaSrc: "/images/home-InsourcingBetter-grid5.png",
+      mediaAlt: "North American account manager.",
     },
     {
       id: "better-over-time",
@@ -319,7 +324,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       tone: "dark",
       title: "Your Team Gets Better Over Time",
       description:
-        "Work with the same people month after month. Speed goes up, rework goes down, and quality becomes what you can rely on.",
+        "You work with the same people every month - not a revolving door of strangers. They learn your brand, your preferences, your standards. The longer you stay, the faster and better the work gets.",
     },
   ],
 };
@@ -356,7 +361,7 @@ export const socialProofSection: SocialProofSection = {
   headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
   headlineLine2: "Then They",
   headlineHighlight: "Found Us",
-  imageSrc: "/images/home-SocialProofTestimonials-ImageMain.png",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-01.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
     {
@@ -448,7 +453,7 @@ export type FaqSection = {
 export const pricingSection: PricingSection = {
   headlineLine1: "One Team,",
   headlineHighlight: "Three Plans,",
-  headlineLine2: "Pick Your Speed",
+  headlineLine2: "Pick Your Speed.",
   subheading:
     "Every plan includes the full team - graphic design, web development, video editing, marketing tech, team leader, and a dedicated account manager. The only difference is how many tasks run at once.",
   ctaLabel: "GET STARTED",
@@ -556,35 +561,35 @@ export const faqSection: FaqSection = {
 /** Team cards — screenshot-style names/roles; images under `/public/images/`. */
 export const teamMembers: TeamMember[] = [
   {
-        id: "1",
+    id: "1",
         name: "ADE",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ADE.png",
         labelClass: "bg-[#9F731B]",
-      },
-      {
-        id: "2",
+  },
+  {
+    id: "2",
         name: "ARDELLA",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ARDELLA.png",
         labelClass: "bg-[#A70767]",
-      },
-      {
-        id: "3",
+  },
+  {
+    id: "3",
         name: "ASIF",
         role: "DEVELOPER",
         imageSrc: "/images/teams/ASIF.png",
         labelClass: "bg-[#3D109A]",
-      },
-      {
-        id: "4",
+  },
+  {
+    id: "4",
         name: "BIANCA",
         role: "DEVELOPER",
         imageSrc: "/images/teams/BIANCA.png",
         labelClass: "bg-[#C5540A]",
-      },
-     {
-          id: "5",
+  },
+  {
+    id: "5",
           name: "GABRIELLE",
           role: "DEVELOPER",
           imageSrc: "/images/teams/GABRIELLE.png",
@@ -806,5 +811,5 @@ export const teamMembers: TeamMember[] = [
         role: "DEVELOPER",
         imageSrc: "/images/teams/YOSKI.png",
         labelClass: "bg-[#A70767]",
-      },
+  },
 ];

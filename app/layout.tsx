@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Poppins, Montserrat } from "next/font/google";
-import { fontRussoOne } from "@/lib/fonts";
+import { fontReadexPro, fontRussoOne } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
@@ -128,7 +128,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} ${fontReadexPro.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
         <OrganizationJsonLd />

@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-10 sm:pt-14 lg:pt-16"
+      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-16"
       aria-labelledby="hero-heading"
     >
       {/* Same Figma corner treatment as navbar — continues the cyan “arc” into hero */}
@@ -24,13 +24,16 @@ export function Hero() {
       />
 
       <Container className="relative z-10 max-w-7xl">
-        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,60%)_minmax(0,40%)] lg:items-center lg:gap-0 xl:gap-0">
+        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,652px)] lg:items-center lg:gap-0 xl:gap-0">
           <div className="relative z-20 lg:pr-4">
-            <h1 id="hero-heading" className="text-balance leading-[1.06] tracking-tight text-white">
+            <h1
+              id="hero-heading"
+              className="type-rule-h1 text-balance text-white"
+            >
               <span className="block">{headlineLine1}</span>
-              <span className="mt-2 block text-white lg:mt-3">{headlineLine2}</span>
+              <span className="mt-2 block lg:mt-3">{headlineLine2}</span>
             </h1>
-            <p className="mt-6 max-w-full text-pretty leading-relaxed text-white/90 sm:mt-8 sm:leading-relaxed">
+            <p className="type-rule-p mt-6 max-w-full text-pretty text-white/90 sm:mt-8">
               {subheading}
             </p>
             <HeroActions />
@@ -44,7 +47,7 @@ export function Hero() {
               className="absolute inset-16 translate-x-2 translate-y-3 scale-80 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.22)_0%,transparent_55%)] blur-3xl"
               aria-hidden
             />
-            <div className="relative isolate w-full min-h-[280px] max-w-[560px] py-4 sm:py-6 lg:py-8">
+            <div className="relative isolate w-full min-h-[280px] max-w-[652px] py-4 sm:py-6 lg:py-8">
               <video
                 className="relative z-[-1] h-auto w-full origin-center scale-[1.2]"
                 aria-label="Collaborative digital team: designer, developer, and video editor working together on digital projects."

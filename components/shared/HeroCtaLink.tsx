@@ -38,13 +38,13 @@ export function HeroCtaLink({
     <Link
       {...linkProps}
       className={cn(
-        "group inline-flex w-full min-w-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#11104C] sm:w-auto",
+        "group inline-flex w-full min-w-0 rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#11104C] sm:w-auto",
         className,
       )}
     >
       <span
         className={cn(
-          "font-button inline-flex h-[52px] w-full min-w-0 items-center gap-3 rounded-2xl px-3 text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:w-auto",
+          "font-button inline-flex h-[52px] w-full min-w-0 items-center gap-3 rounded-[10px] px-3 text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:w-auto",
           showChevron ? "justify-between" : "justify-center px-6",
           variantClass[variant],
         )}

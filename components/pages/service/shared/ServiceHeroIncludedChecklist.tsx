@@ -48,7 +48,7 @@ export function ServiceHeroIncludedChecklist({
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-xl space-y-3 sm:max-w-2xl sm:space-y-4 lg:mx-0 lg:max-w-none",
+        "w-full min-w-0 space-y-3 sm:space-y-4",
         className,
       )}
     >
@@ -66,7 +66,7 @@ export function ServiceHeroIncludedChecklist({
               height={40}
               className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
             />
-            <p className="type-rule-h5 font-medium leading-relaxed text-white/95 lg:leading-tight">{item}</p>
+            <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">{item}</p>
           </div>
         ))}
       </div>

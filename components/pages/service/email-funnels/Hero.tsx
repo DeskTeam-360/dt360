@@ -18,28 +18,28 @@ const includedItems = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 lg:pt-40 lg:pb-14 2xl:pb-16">
+    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
       <SafeImage
         src="/images/Service - Ellipse Red.png"
         alt=""
         width={380}
         height={380}
-        className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] lg:w-[360px]"
+        className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
       <SafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={420}
         height={420}
-        className="pointer-events-none absolute -left-24 top-[calc(var(--spacing)*30)] z-[5] h-auto w-[260px] opacity-90 sm:w-[320px] lg:w-[390px]"
+        className="pointer-events-none absolute -left-24 top-[calc(var(--spacing)*30)] z-[5] h-auto w-[260px] opacity-90 sm:w-[320px] xl:w-[390px]"
       />
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(220,56,255,0.32),transparent_40%),radial-gradient(circle_at_0%_100%,rgba(61,43,190,0.45),transparent_48%)]"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-        <div className="grid items-center gap-8 pb-8 lg:grid-cols-2 lg:gap-12 lg:pb-10 2xl:gap-16 2xl:pb-12">
-          <div className="max-w-xl">
+      <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
+        <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
+          <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               <span className="block">Get Your Funnels Built</span>
               <span className="block text-[#ef2f9e]">Your Emails Sent</span>
@@ -47,7 +47,7 @@ export function Hero() {
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Your Automation Running
             </p>
-            <p className="type-rule-p mt-4 max-w-lg text-white/85 lg:max-w-xl">
+            <p className="type-rule-p mt-4 w-full max-w-none text-white/85">
               Most business owners have a list of email campaigns they need to build and funnels sitting half-finished
               in GoHighLevel. Your DeskTeam360 subscription means those off your plate - and keeps them off.
             </p>
@@ -73,18 +73,18 @@ export function Hero() {
         alt=""
         width={460}
         height={460}
-        className="pointer-events-none absolute right-0 top-[75%] z-[1] hidden h-auto w-[320px] rotate-180 opacity-85 lg:block"
+        className="pointer-events-none absolute right-0 top-[75%] z-[1] hidden h-auto w-[320px] rotate-180 opacity-85 xl:block"
       />
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(255,47,179,0.16),transparent_45%)]"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 lg:!px-20 lg:pb-10">
-        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 lg:grid-cols-2 lg:gap-x-24 lg:gap-y-20 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
-          <h2 className="type-rule-h2 col-span-full max-w-lg leading-tight text-white lg:max-w-2xl lg:leading-[1.02]">
+      <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 xl:!px-20 xl:pb-10">
+        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
+          <h2 className="type-rule-h2 col-span-full w-full max-w-none min-w-0 leading-tight text-white xl:max-w-2xl xl:leading-[1.02]">
             We Handle All of Your <span className="text-[#f6b22e]">Funnels Built</span> Needs
           </h2>
-          <div>
+          <div className="flex w-full justify-center">
             <SafeImage
               src="/images/Email - Whats Included.png"
               alt="Email and funnels workstation illustration"

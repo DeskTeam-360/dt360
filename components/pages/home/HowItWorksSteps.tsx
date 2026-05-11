@@ -48,14 +48,14 @@ export function HowItWorksSteps() {
       <Container className="relative z-10 max-w-7xl">
         <h2
           id="how-it-works-steps-heading"
-          className="mx-auto max-w-4xl text-center leading-tight tracking-tight text-white"
+          className="mx-auto max-w-4xl text-center text-white"
         >
           <span className="block">{titleLine1}</span>
           <span className="block">{titleLine2}</span>
         </h2>
 
         <div className="mt-12 grid gap-10 sm:mt-14 lg:grid-cols-3 lg:items-center lg:gap-14">
-          <div className="relative mx-auto w-full max-w-[34rem] lg:col-span-2 lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-[34rem] lg:col-span-2 lg:mx-0 lg:ml-auto lg:w-[1000px] lg:max-w-none lg:-translate-x-20 lg:justify-self-end">
             <div
               className="pointer-events-none absolute left-[34%] top-[calc(64%+50px)] z-0 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
@@ -70,28 +70,34 @@ export function HowItWorksSteps() {
               width={900}
               height={980}
               className="relative z-[1] h-auto w-full"
-              sizes="(max-width: 1024px) 92vw, 560px"
+              sizes="(max-width: 1024px) 92vw, 1000px"
               priority={false}
             />
           </div>
 
           <div className="mx-auto grid w-full max-w-3xl gap-6 sm:gap-7 lg:col-span-1">
-            {steps.map((step) => (
-              <article key={step.id} className="flex gap-5 sm:gap-6">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-white/70 text-5xl font-bold leading-none text-white sm:h-[5.5rem] sm:w-[5.5rem] sm:text-6xl">
+            {steps.map((step, index) => (
+              <article key={step.id} className="relative flex gap-5 sm:gap-6">
+                <div className="font-russo-one flex h-[144px] w-[115px] shrink-0 items-center justify-center rounded-[30px] border-2 border-[#A1E6FF] px-[22px] text-[72px] leading-none text-white sm:h-[144px] sm:w-[115px] sm:text-[96px] lg:h-[144px] lg:w-[115px] lg:text-[128px]">
                   {step.number}
                 </div>
+                {index < steps.length - 1 && (
+                  <div
+                    className="pointer-events-none absolute left-[57.5px] top-[144px] bottom-[-1.5rem] w-[2px] -translate-x-1/2 bg-[#A1E6FF] sm:bottom-[-1.75rem]"
+                    aria-hidden
+                  />
+                )}
                 <div className="pt-1">
-                  <h3 className="leading-tight text-white">{step.title}</h3>
-                  <p className="mt-2 leading-[2.5em] text-white/88">{step.description}</p>
+                  <h3 className="text-white">{step.title}</h3>
+                  <p className="mt-2 text-white/88">{step.description}</p>
                 </div>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="mx-auto mt-10 w-full max-w-5xl rounded-xl border border-white/55 px-6 py-4 text-center sm:mt-12 sm:px-8">
-          <p className="leading-relaxed text-white/95">
+        <div className="mx-auto mt-10 w-full max-w-5xl rounded-[10px] border border-white p-[22px] text-center sm:mt-12">
+          <p className="text-white/95">
             <span className="font-extrabold">Agencies:</span> We work under your brand as your invisible back-office.
             Your clients never know we exist.
           </p>

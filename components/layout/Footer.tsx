@@ -16,22 +16,22 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[#11104C] text-white">
-      <Container className="relative max-w-7xl pb-8 pt-16 sm:pb-10 sm:pt-20 lg:pb-12 lg:pt-28">
+      <Container className="relative max-w-7xl pb-0 pt-16 sm:pb-0 sm:pt-20 lg:pb-0 lg:pt-24">
         <FooterScrollTop />
 
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-8 xl:gap-14">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 xl:gap-14">
           <div className="sm:col-span-2 lg:col-span-1">
-            <DeskTeamLogo />
-            <p className="type-rule-h5 mt-6 max-w-xs leading-tight tracking-tight sm:leading-snug">
+            <DeskTeamLogo variant="footer" />
+            <h4 className="mt-12 w-full font-normal text-white">
               Stop Outsourcing
               <br />
-              Start Insourcing
-            </p>
+              <span className="tracking-[0.05em]">Start Insourcing</span>
+            </h4>
           </div>
 
           <nav aria-label="Services">
-            <h3 className="text-sm font-bold text-white sm:text-[15px]">Services</h3>
-            <ul className="mt-5 space-y-3 text-sm text-white/85 sm:text-[0.9375rem]">
+            <b className="font-body-emphasis text-white">Services</b>
+            <ul className="type-rule-p mt-5 space-y-1 text-white/85">
               {footerServices.map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="transition hover:text-white">
@@ -43,8 +43,8 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Company">
-            <h3 className="text-sm font-bold text-white sm:text-[15px]">Company</h3>
-            <ul className="mt-5 space-y-3 text-sm text-white/85 sm:text-[0.9375rem]">
+            <b className="font-body-emphasis text-white">Company</b>
+            <ul className="type-rule-p mt-5 space-y-1 text-white/85">
               {footerCompany.map((item) => (
                 <li key={item.href + item.label}>
                   <Link href={item.href} className="transition hover:text-white">
@@ -56,8 +56,8 @@ export function Footer() {
           </nav>
 
           <div>
-            <h3 className="text-sm font-bold text-white sm:text-[15px]">Follow Us on</h3>
-            <ul className="mt-5 flex flex-wrap gap-3" aria-label="Social media">
+            <b className="font-body-emphasis text-white">Follow Us on</b>
+            <ul className="my-10 flex flex-wrap gap-3" aria-label="Social media">
               {footerSocial.map((item) => (
                 <li key={item.label}>
                   <a
@@ -72,7 +72,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <ul className="mt-8 space-y-2.5 text-sm text-white/80">
+            <ul className="mt-8 space-y-[11px] text-[14px] leading-[1.5] text-white/80">
               {footerLegal.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="transition hover:text-white">
@@ -84,7 +84,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/25 pt-8 text-center text-sm text-white/90 sm:mt-14 sm:pt-9">
+        <div className="type-rule-p mt-12 border-t border-white/25 py-5 text-center text-white/90 sm:mt-14">
           {year} {siteConfig.name}. All rights reserved.
         </div>
       </Container>

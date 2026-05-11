@@ -14,9 +14,7 @@ import { LastCTA } from "@/components/pages/home/LastCTA";
 export default function Home() {
   return (
     <main className="home-page flex flex-col">
-      <div className="bg-[#11104C] pt-16 lg:pt-[72px]">
-        <Hero />
-      </div>
+      <Hero />
       <TeamMembers />
       <TrustedBy />
       <StartBusiness />
