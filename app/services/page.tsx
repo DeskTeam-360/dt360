@@ -62,7 +62,7 @@ export default function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[80px] pt-[160px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[160px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[120px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
@@ -74,7 +74,7 @@ export default function ServicesPage() {
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
           <div className="max-w-xl text-white">
             <h1 className="type-rule-h1 font-extrabold leading-[1.05] tracking-tight text-white">
-              <span className="text-[#E3058D]">All Services</span>
+              <span className="text-[#f336b6]">All Services</span>
               <br />
               One Team
               <br />

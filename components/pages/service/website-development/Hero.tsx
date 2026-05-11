@@ -47,13 +47,13 @@ export function Hero() {
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
-      <div className="grid items-center gap-8 pb-16 xl:grid-cols-2 xl:gap-12 xl:pb-20 2xl:gap-16 2xl:pb-24">
+        <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="tracking-tight text-white">
               <span className="type-rule-h4 block leading-tight xl:leading-snug">
                 Stop Paying $50/hr for
               </span>
-              <span className="type-rule-h1 mt-1 block text-[#E3058D] leading-[1.03]">Web Development</span>
+              <span className="type-rule-h1 mt-1 block text-[#ef2f9e] leading-[1.03]">Web Development</span>
               <span className="type-rule-h4 mt-1 block leading-tight xl:leading-snug">
                 That Takes 3 Weeks
               </span>
@@ -94,7 +94,7 @@ export function Hero() {
       <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 xl:!px-20 xl:pb-10">
         <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
           <h2 className="type-rule-h2 col-span-full w-full max-w-none min-w-0 leading-tight text-white xl:max-w-2xl xl:leading-[1.02]">
-            We Handle All of Your <span className="text-[#F5B419]">Web Development</span> Needs
+            We Handle All of Your <span className="text-[#f6b22e]">Web Development</span> Needs
           </h2>
           <div className="flex w-full justify-center">
             <SafeImage

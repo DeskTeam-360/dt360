@@ -38,7 +38,7 @@ export function Hero() {
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
-        <div className="grid items-center gap-8 pb-16 xl:grid-cols-2 xl:gap-12 xl:pb-20 2xl:gap-16 2xl:pb-24">
+        <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               <span className="block">Hand Off Your</span>
@@ -81,9 +81,9 @@ export function Hero() {
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 xl:!px-20 xl:pb-10">
-        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-10 sm:gap-y-14 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-22 2xl:gap-x-32 2xl:gap-y-26">
+        <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
           <h2 className="type-rule-h2 col-span-full w-full max-w-none min-w-0 leading-tight text-white xl:max-w-2xl xl:leading-[1.02]">
-            We Handle All of Your <span className="text-[#F5B419]">Video Editing</span> Needs
+            We Handle All of Your <span className="text-[#f6b22e]">Video Editing</span> Needs
           </h2>
           <div className="flex w-full justify-center">
             <SafeImage

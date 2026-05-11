@@ -131,7 +131,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 xl:px-10">
         <h2
           id={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
-          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] xl:mt-0"
+          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] xl:mt-0"
         >
           {isWebDev ? (
             <>
@@ -208,7 +208,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           </div>
         ) : (
           <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 xl:mt-14 xl:flex-row xl:items-center xl:justify-between">
-            <ul className="flex flex-1 flex-col gap-y-3 sm:block sm:columns-2 sm:[column-gap:2.5rem] sm:[&>li]:mb-3 sm:[&>li:last-child]:mb-0">
+            <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
               {FEATURE_ITEMS.map((label) => (
                 <li
                   key={label}
