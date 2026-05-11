@@ -8,35 +8,42 @@ import { ServicesPricingSection } from "@/components/pages/services/ServicesPric
 import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
 import { servicesTestimonials } from "@/data/servicesPage";
 
-const coreServices = [
+/** Asset filename: `Service Box - {title}.webp` — encode untuk URL aman (spasi, tanda kurung, dll.) */
+function serviceBoxWebpPath(serviceTitle: string) {
+  return `/images/${encodeURIComponent(`Service Box - ${serviceTitle}.webp`)}`;
+}
+
+const coreServiceCards = [
   {
     no: "01",
     title: "Web Design & Development",
     bg: "from-[#7c3aed] via-[#3b2e95] to-[#081c73]",
-    icon: "/images/dt360-web-dev-logo.png",
     href: "#",
   },
-  { no: "02", title: "Graphic Design", bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]", icon: "/images/dt360-graphic-design-logo.png", href: "#" },
-  { no: "03", title: "Video Editing", bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]", icon: "/images/dt360-video-editing-logo.png", href: "#" },
-  { no: "04", title: "Email & Funnels", bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]", icon: "/images/dt360-email-funnel-logo.png", href: "#" },
-  { no: "05", title: "CRM & Automation", bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]", icon: "/images/dt360-crm-logo.png", href: "#" },
+  { no: "02", title: "Graphic Design", bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]", href: "#" },
+  { no: "03", title: "Video Editing", bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]", href: "#" },
+  { no: "04", title: "Email & Funnels", bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]", href: "#" },
+  { no: "05", title: "CRM & Automation", bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]", href: "#" },
   {
     no: "06",
     title: "Social Media Content",
     bg: "from-[#f7b462] via-[#ec8d45] to-[#de6f31]",
-    icon: "/images/dt360-social-media-content-logo.png",
     href: "#",
   },
   {
     no: "07",
     title: "Website Maintenance",
     bg: "from-[#64ade5] via-[#2c7ec7] to-[#0a4f96]",
-    icon: "/images/dt360-website-maintenance-logo.png",
     href: "#",
   },
-  { no: "08", title: "AI & Automation", bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]", icon: "/images/dt360-ai-automation-logo.png", href: "#" },
-  { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", icon: "/images/dt360-whitelabel-logo.png", href: "#" },
-];
+  { no: "08", title: "AI & Automation", bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]", href: "#" },
+  { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", href: "#" },
+] as const;
+
+const coreServices = coreServiceCards.map((s) => ({
+  ...s,
+  icon: serviceBoxWebpPath(s.title),
+}));
 
 /** White overlay position + corner radius pointing toward card center */
 const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
@@ -55,7 +62,7 @@ export default function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[120px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[80px] pt-[160px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[160px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
@@ -67,7 +74,7 @@ export default function ServicesPage() {
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
           <div className="max-w-xl text-white">
             <h1 className="type-rule-h1 font-extrabold leading-[1.05] tracking-tight text-white">
-              <span className="text-[#f336b6]">All Services</span>
+              <span className="text-[#E3058D]">All Services</span>
               <br />
               One Team
               <br />
@@ -76,7 +83,7 @@ export default function ServicesPage() {
             <p className="mt-6 text-2xl font-semibold leading-snug text-white/95 text-balance">
               Stop Paying $50/hr for Web&nbsp;Work That Takes 3&nbsp;Weeks
             </p>
-            <p className="mt-6 max-w-lg text-lg leading-8 text-white/85">
+            <p className="mt-6 max-w-lg text-lg leading-8 text-white/85 pb-12">
             There&apos;s a better way to get web work done. Not cheaper freelancers. Not a retainer agency with a 10-person email chain. A flat-rate, dedicated web team that knows your brand and turns tasks around in 1-3 days.
             </p>
           </div>
@@ -116,7 +123,7 @@ export default function ServicesPage() {
         <div className="relative mx-auto max-w-[1440px]">
           <div className="text-center">
             <h2 className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
-              <span className="text-[#ef2fa9]">Core Services,</span> Everything<br />You Need to Scale
+              <span className="text-[#E3058D]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
             <p className="mt-4 text-xl font-semibold text-[#1a1a1a]">
               Pick the plan that fits. We handle the rest.
@@ -152,6 +159,8 @@ export default function ServicesPage() {
                         alt={`${service.title} icon`}
                         width={200}
                         height={200}
+                        sizes="200px"
+                        unoptimized
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
@@ -179,12 +188,12 @@ export default function ServicesPage() {
         aria-labelledby="services-testimonials-heading"
       >
         <div
-          className="pointer-events-none absolute left-[-240px] top-[-220px] aspect-square h-[90%] rounded-full bg-[radial-gradient(circle,rgba(170,239,255,0.85)_0%,rgba(170,239,255,0.35)_45%,rgba(170,239,255,0)_75%)]"
+          className="pointer-events-none absolute left-[-240px] top-[-220px] aspect-square h-[90%] rounded-full bg-[radial-gradient(circle,rgba(170,239,255,0.85)_0%,rgba(170,239,255,0.35)_45%,rgba(170,239,255,0)_75%)] min-[2560px]:top-[-10px] min-[2560px]:aspect-auto min-[2560px]:h-full min-[2560px]:w-[45vw]"
           aria-hidden
         />
         <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 xl:px-10">
           <h2 id="services-testimonials-heading" className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
-            <span className="text-[#ef2fa9]">Proven Results</span>
+            <span className="text-[#E3058D]">Proven Results</span>
             <br />
             Real Business
           </h2>

@@ -4,26 +4,26 @@ import { SafeImage } from "@/components/shared/SafeImage";
 export function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-[#f9f6ff] py-20 sm:py-24 lg:py-28 2xl:py-36">
-      <SafeImage
+<SafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
         alt=""
         width={420}
         height={420}
-        className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-25)] hidden h-auto w-[300px] opacity-85 sm:block lg:w-[420px]"
+        className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
       <SafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
-        width={500}
-        height={500}
-        className="pointer-events-none absolute -right-24 top-[-10%] hidden h-auto w-[300px] opacity-70 sm:block lg:w-[420px]"
+        width={600}
+        height={600}
+        className="pointer-events-none absolute right-[-8%] top-[-20%] hidden h-auto w-[20vw] opacity-50 sm:block lg:w-[30vw]"
       />
       <SafeImage
-        src="/images/Service - Testimonial Graphic BG Right.png"
+        src={`/images/${encodeURIComponent("bubble service testimonial.png")}`}
         alt=""
-        width={420}
-        height={420}
-        className="pointer-events-none absolute right-[calc(var(--spacing)*-75)] top-[-30%] hidden h-auto w-[45%] opacity-85 sm:block"
+        width={140}
+        height={220}
+        className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
       <SafeImage
         src="/images/Service - Testimonial Graphic Oval Purple.png"
@@ -33,8 +33,8 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[-10px] top-[5%] z-[1] hidden h-auto w-[45%] opacity-85 sm:block"
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-        <h2 className="type-rule-h2 text-center leading-tight text-[#1a1a4b] lg:leading-[1.08]">
-          From 1 Webinar to <span className="text-[#e62a98]">10 Pieces</span>
+        <h2 className="type-rule-h2 font-bold text-center leading-tight text-[#1B1464] lg:leading-[1.08]">
+          From 1 Webinar to <span className="text-[#E3058D]">10 Pieces</span>
           <br />
           of Content
         </h2>
@@ -59,12 +59,12 @@ export function Testimonials() {
                 />
               </div>
             </div>
-            <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(135deg,#7976BA_0%,#E595BB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
+            <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(180deg,#5F69AD_0%,#FFA2DB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
               <p className="type-rule-p font-montserrat !text-[32px] !font-semibold italic leading-relaxed lg:leading-[1.6]">
                 “DeskTeam360 takes our webinar recordings and turns them into YouTube videos, social clips, and ad
                 creatives. What used to take me 8 hours now takes 15 minutes to brief.”
               </p>
-              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#1a1a4b] lg:leading-tight pt-2">
+              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#3F4A83] lg:leading-tight pt-2">
                 Multiple DeskTeam360 clients
               </p>
             </div>

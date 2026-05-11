@@ -73,8 +73,8 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
         </div>
 
         <div>
-          <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] md:text-[64px] xl:text-left">
-            Got Questions? <span className="text-[#ef2fa9]">Good</span>
+          <h2 className="pb-10 text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-tight tracking-tight text-[#101651] md:text-[64px] xl:text-left">
+            Got Questions? <span className="text-[#E3058D]">Good</span>
           </h2>
 
           <div className="mt-6 space-y-4">
@@ -92,7 +92,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
                     }`}
                     aria-expanded={isOpen}
                   >
-                    <span className="pr-3 text-[24px] font-extrabold leading-tight">{item.question}</span>
+                    <span className="pr-3 text-[24px] font-semibold leading-tight">{item.question}</span>
                     <span
                       className={`shrink-0 transition-transform duration-300 ${
                         isOpen ? "rotate-180 text-[#1d2357]" : "text-white group-hover:text-[#1d2357]"

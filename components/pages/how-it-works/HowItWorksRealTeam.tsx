@@ -14,7 +14,7 @@ export function HowItWorksRealTeam() {
           <div>
             <h2 id="how-it-works-real-team-heading" className="type-rule-h2 tracking-tight text-[#101651]">
               {titleBefore}
-              <span className="text-[#ef2fa9]">{titleHighlight}</span>
+              <span className="text-[#E3058D]">{titleHighlight}</span>
             </h2>
             <ul className="mt-8 space-y-4">
               {bullets.map((line) => (

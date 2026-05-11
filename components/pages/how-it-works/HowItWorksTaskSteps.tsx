@@ -26,7 +26,7 @@ export function HowItWorksTaskSteps() {
           className="type-rule-h2 text-center font-semibold tracking-tight text-white pb-5"
         >
           {titleBefore}
-          <span className="text-[#f336b6]">{titleHighlight}</span>
+          <span className="text-[#E3058D]">{titleHighlight}</span>
         </h2>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
           {steps.map((step, i) => {

@@ -42,7 +42,7 @@ export function TestimonialsSection({
       />
       <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 lg:px-10">
         <h2 id={headingId} className="leading-tight tracking-tight text-[#101651]">
-          <span className="text-[#ef2fa9]">{headingAccent}</span>
+          <span className="text-[#E3058D]">{headingAccent}</span>
           <br />
           {headingTrailing}
         </h2>

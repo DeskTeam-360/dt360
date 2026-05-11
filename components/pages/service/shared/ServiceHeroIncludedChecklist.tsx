@@ -66,7 +66,7 @@ export function ServiceHeroIncludedChecklist({
               height={40}
               className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
             />
-            <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">{item}</p>
+            <p className="type-rule-h5 font-light leading-relaxed text-white/95 xl:leading-tight">{item}</p>
           </div>
         ))}
       </div>
@@ -86,7 +86,7 @@ export function ServiceHeroIncludedChecklist({
               onClick={() => setPageIndex(dotIndex)}
               className={cn(
                 "h-2 w-2 shrink-0 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
-                safePageIndex === dotIndex ? "bg-[#f6b22e]" : "bg-white/40 hover:bg-white/55",
+                safePageIndex === dotIndex ? "bg-[#F5B419]" : "bg-white/40 hover:bg-white/55",
               )}
             />
           ))}

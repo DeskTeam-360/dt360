@@ -11,7 +11,7 @@ export function WebDesignDevelopmentTestimonialAndHowSection() {
       <div className="relative z-20 -mt-[120px]">
         <Testimonials />
       </div>
-      <div className="relative z-10 -mt-[100px] lg:-mt-[120px]">
+      <div className="relative z-10 -mt-[230px] lg:-mt-[240px]">
         <ServicesHowItWorks overlappedByTestimonialSection />
       </div>
     </section>

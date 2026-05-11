@@ -45,7 +45,7 @@ export function WhatsIncluded() {
       <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
         <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
           <h2 className="type-rule-h2 col-span-full w-full max-w-none min-w-0 leading-tight text-white xl:max-w-2xl xl:leading-[1.02]">
-            We Handle All of Your <span className="text-[#f6b22e]">Graphic Design</span> Needs
+            We Handle All of Your <span className="text-[#F5B419]">Graphic Design</span> Needs
           </h2>
           <div className="flex w-full justify-center">
             <SafeImage
@@ -82,7 +82,7 @@ export function WhatsIncluded() {
                   onClick={() => setPageIndex(dotIndex)}
                   aria-label={`Show list page ${dotIndex + 1}`}
                   className={`h-2 w-2 rounded-full transition ${
-                    pageIndex === dotIndex ? "bg-[#f6b22e]" : "bg-white/40"
+                    pageIndex === dotIndex ? "bg-[#F5B419]" : "bg-white/40"
                   }`}
                 />
               ))}
