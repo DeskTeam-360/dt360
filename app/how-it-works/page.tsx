@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function HowItWorksPage() {
   return (
-    <main className="min-w-0 overflow-x-hidden pt-16 lg:pt-[72px]">
+    <main className="min-w-0 overflow-x-hidden pt-0">
       <HowItWorksHero />
       <HowItWorksTaskSteps />
       <HowItWorksMeetGrid />
