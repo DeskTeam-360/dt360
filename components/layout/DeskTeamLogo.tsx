@@ -14,21 +14,21 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
       href="/"
       className={
         isFooter
-          ? "relative block min-h-0 w-full max-h-[35px] items-center lg:h-10 lg:max-h-none lg:w-[168px] lg:shrink-0"
-          : "relative flex min-h-0 w-full max-h-[35px] items-center lg:h-10 lg:max-h-none lg:w-[168px] lg:shrink-0"
+          ? "relative block h-9 w-[80%] shrink-0 sm:h-10"
+          : "relative flex h-9 w-[180px] shrink-0 items-center justify-center sm:h-10 sm:w-[180px]"
       }
     >
       <SafeImage
         src={logoSrc}
         alt="DeskTeam360"
-        width={168}
-        height={35}
+        width={180}
+        height={43}
         className={
           isFooter
-            ? "h-fit w-full max-h-[35px] object-contain object-left lg:max-h-none lg:h-10 lg:w-auto"
-            : "h-auto w-full max-h-[35px] object-contain object-left lg:max-h-none lg:h-10 lg:w-auto"
+            ? "h-fit w-auto object-contain object-left"
+            : "h-auto max-h-full w-auto max-w-full object-contain object-center"
         }
-        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "(max-width: 640px) 100vw, 25vw"}
+        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "180px"}
         priority
       />
     </Link>

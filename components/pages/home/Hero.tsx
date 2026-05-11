@@ -62,7 +62,7 @@ export function Hero() {
             </div>
           </div>
         </div>
-        <HeroStatsBar className="mt-14 sm:mt-16 lg:mt-20" />
+        <HeroStatsBar className="mt-[50px]" />
       </Container>
 
       {/* Transisi hero → putih: satu busur lebar (setengah elips), bukan gelombang */}

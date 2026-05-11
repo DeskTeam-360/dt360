@@ -55,9 +55,9 @@ export function HowItWorksSteps() {
         </h2>
 
         <div className="mt-12 grid gap-10 sm:mt-14 lg:grid-cols-3 lg:items-center lg:gap-14">
-          <div className="relative mx-auto w-full max-w-[34rem] lg:col-span-2 lg:mx-0 lg:ml-auto lg:w-[1000px] lg:max-w-none lg:-translate-x-20 lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-[34rem] lg:col-span-2 lg:mx-0 lg:ml-auto lg:w-[1000px] lg:max-w-none lg:-translate-x-43 lg:justify-self-end">
             <div
-              className="pointer-events-none absolute left-[34%] top-[calc(64%+50px)] z-0 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              className="pointer-events-none absolute left-[34%] top-[calc(64%+50px)] z-0 h-[902px] w-[902px] -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 background:
                   "radial-gradient(circle, rgba(237,141,83,0.34) 0%, rgba(237,141,83,0.18) 32%, rgba(244,142,80,0) 50%)",

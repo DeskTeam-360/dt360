@@ -46,9 +46,7 @@ function PlanRibbon({
 function CtaCircleChevron({ className }: { className?: string }) {
   return (
     <svg
-      className={className}
-      width="13"
-      height="13"
+      className={cn("size-[80%] shrink-0", className)}
       viewBox="0 0 13 13"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +55,7 @@ function CtaCircleChevron({ className }: { className?: string }) {
       <path
         d="M4 3.25 8 6.5 4 9.75"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -128,7 +126,7 @@ export function PricingPlanCardComponent({ plan, ctaLabel }: Props) {
         >
           <span className="shrink-0">{ctaLabel}</span>
           <span
-            className="flex size-8 shrink-0 items-center justify-center rounded-full border border-current text-current"
+            className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-current text-current"
             aria-hidden
           >
             <CtaCircleChevron className="translate-x-px" />
