@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { insourcingBetterSection, type InsourcingBentoCard } from "@/data/home";
@@ -103,15 +102,6 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const wideOrangeEmpty =
     isWideOrange && !card.title && !card.description && !card.mediaSrc;
 
-  const wideMagentaBgStyle: CSSProperties | undefined = isWideMagenta
-    ? {
-        backgroundImage: "url('/images/home-InsourcingBetter-grid2.png')",
-        backgroundSize: "auto 100%",
-        backgroundPosition: "right 14px center",
-        backgroundRepeat: "no-repeat",
-      }
-    : undefined;
-
   return (
     <article
       className={cn(
@@ -138,7 +128,6 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
                   : "rounded-2xl lg:rounded-[1rem]",
             ),
       )}
-      style={wideMagentaBgStyle}
     >
       {card.placement === "tall-left" ? (
         <>
@@ -167,33 +156,29 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       ) : null}
 
       {card.placement === "wide-magenta" && (card.title || card.description || card.mediaSrc) ? (
-        <div
-          className={cn(
-            "box-border ml-0 mr-auto min-h-[265px] w-full min-w-0 max-w-6xl px-8 py-6 sm:py-8 lg:px-10 lg:py-8",
-          )}
-        >
-          <div className="grid h-full min-h-0 w-full min-w-0 grid-cols-1 justify-items-start gap-6 lg:grid-cols-2 lg:items-center lg:gap-8">
-            {(card.title || card.description) && (
-              <div className="flex min-w-0 w-full max-w-full flex-col items-start justify-center gap-3 sm:gap-3.5 lg:col-start-1 lg:min-w-0 lg:gap-4">
-                {card.title ? title : null}
-                {card.description ? body : null}
-              </div>
-            )}
-            {card.mediaSrc ? (
-              <div className="flex w-full min-w-0 justify-start lg:col-start-2">
-                <BentoMedia
-                  src={card.mediaSrc}
-                  alt={card.mediaAlt ?? ""}
-                  className="aspect-[5/4] max-h-[12rem] w-full max-w-sm sm:max-h-[13rem] lg:max-h-[11rem] xl:max-h-[13rem]"
-                  sizes="(max-width: 1024px) 92vw, 320px"
-                />
-              </div>
-            ) : (
-              <div
-                className="hidden min-h-0 w-full min-w-0 lg:col-start-2 lg:block"
-                aria-hidden
-              />
-            )}
+        <div className="box-border flex h-full min-h-0 w-full max-w-6xl min-w-0 flex-1 flex-col items-start justify-start lg:min-h-0">
+          <div className="w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 py-8 pl-10">
+            <div className="grid w-full min-w-0 grid-cols-1 items-start gap-6 sm:gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8">
+              {(card.title || card.description) && (
+                <div className="flex min-w-0 flex-col items-start justify-center gap-3 sm:gap-3.5 lg:gap-4">
+                  {card.title ? title : null}
+                  {card.description ? body : null}
+                </div>
+              )}
+              {card.mediaSrc ? (
+                <div className="relative min-h-[14rem] w-full min-w-0 overflow-visible lg:h-full lg:min-h-0">
+                  <div className="absolute top-1/2 left-0 h-[150%] w-[150%] max-w-none -translate-y-1/2">
+                    <Image
+                      src={card.mediaSrc}
+                      alt={card.mediaAlt ?? ""}
+                      fill
+                      className="object-contain object-left"
+                      sizes="(max-width: 1024px) 96vw, 480px"
+                    />
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       ) : null}

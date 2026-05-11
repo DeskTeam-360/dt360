@@ -173,7 +173,7 @@ export const heroStats: HeroStatItem[] = [
   { id: "revisions", layout: "text", line1: "Unlimited Revisions", line2: "Included" },
 ];
 
-/** Carousel “rotate cards” — outsourcing pain points (464×610 artwork). */
+/** Carousel “rotate cards” — outsourcing pain points (611×688 artwork). */
 export type RotateProblemCard = {
   id: string;
   title: string;
@@ -187,21 +187,21 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "Death by a Thousand Invoices",
     description:
       "Your graphic designer bills hourly. Your web developer charges \"project management\" on top of dev time. Your video editor has a revision surcharge. Every task feels like opening your wallet and hoping for the best.",
-    imageSrc: "/images/home-rotatecard-DeathbyaThousandInvoices-small.png",
+    imageSrc: "/images/home-rotatecard-Card-1.png",
   },
   {
     id: "vendors",
     title: "Five Vendors, Nobody Talking",
     description:
       "One person handles graphics. Another does web updates. A third builds funnels. Someone else edits video. They've never spoken to each other. And you're the human glue - the project manager you never signed up to be.",
-    imageSrc: "/images/home-rotatecard-FiveVendorsNobodyTalking-small.png",
+    imageSrc: "/images/home-rotatecard-Card-2.png",
   },
   {
     id: "lottery",
     title: "The Freelancer Lottery",
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
-    imageSrc: "/images/home-rotatecard-TheFreelancerLottery-small.png",
+    imageSrc: "/images/home-rotatecard-Card-3.png",
   },
 ];
 
@@ -289,6 +289,8 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       title: "Built-In Redundancy",
       description:
         "New computers. Three different internet providers. Two backup power sources. When someone's out sick or on vacation, the team keeps moving - you never feel the gap.",
+      mediaSrc: "/images/home-InsourcingBetter-grid2-rev2.png",
+      mediaAlt: "Office infrastructure, backups, and redundant systems.",
     },
     {
       id: "one-office",
