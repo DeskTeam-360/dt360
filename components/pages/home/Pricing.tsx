@@ -28,7 +28,7 @@ export function Pricing() {
 
       </Container>
 
-      <div className="relative mt-12 w-full bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
+      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
         <div
           className="pointer-events-none absolute inset-x-0 -top-[45px] h-[68px]"
           style={{
@@ -57,7 +57,7 @@ export function Pricing() {
                 alt="Risk-free guarantee icon."
                 width={110}
                 height={110}
-                className="h-auto w-14 shrink-0 sm:w-16 lg:w-20"
+                className="h-auto w-[110px] shrink-0"
               />
               <h3 className="text-[60px] font-normal leading-[64px] tracking-tight text-white">
                 <span className="block">

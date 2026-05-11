@@ -30,7 +30,7 @@ export function SocialProofMarquee() {
         background: "linear-gradient(to right, #E3058D 0%, #7547C5 100%)",
       }}
     >
-      <div className="relative flex w-max py-3 home-marquee-track sm:py-3.5 md:py-4">
+      <div className="relative flex h-[106px] w-max items-center home-marquee-track">
         <div className="flex shrink-0 items-center">
           <MarqueeSegment />
         </div>
