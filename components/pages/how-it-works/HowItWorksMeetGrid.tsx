@@ -1,3 +1,4 @@
+import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksMeetSection } from "@/data/howItWorks";
