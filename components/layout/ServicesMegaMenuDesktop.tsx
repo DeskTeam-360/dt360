@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,16 +21,11 @@ export function ServicesMegaMenuDesktop({
   useDarkTopNav,
   servicesRouteActive = false,
 }: Props) {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => setOpen(false), []);
-
-  useEffect(() => {
-    close();
-  }, [pathname, close]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");

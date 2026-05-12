@@ -88,6 +88,7 @@ export function Navbar() {
                 How it Works
               </Link>
               <ServicesMegaMenuDesktop
+                key={pathname}
                 triggerClassName={desktopLinkClass}
                 useDarkTopNav={useDarkTopNav}
                 servicesRouteActive={pathname.startsWith("/services")}
