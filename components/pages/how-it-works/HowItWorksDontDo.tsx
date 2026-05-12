@@ -13,12 +13,12 @@ function DontScopeCard({ item }: { item: HowItWorksDontItem }) {
         style={{ background: borderGradient }}
       >
         <div className="relative flex h-full min-h-0 w-full flex-col items-center justify-center gap-y-4 rounded-[59px] bg-[#02063B] px-2.5 py-7 text-center">
-          <h3 className="text-balance text-[18px] font-bold leading-snug tracking-tight text-white">
+          <h3 className="text-balance text-[0.8125rem] font-bold leading-snug tracking-tight text-white">
             {item.label}
           </h3>
           <Link
             href={item.detailHref}
-            className="text-[16px] font-semibold text-white underline-offset-2 transition hover:underline"
+            className="text-[0.6875rem] font-semibold text-white underline-offset-2 transition hover:underline"
           >
             View Details &gt;&gt;
           </Link>
@@ -57,17 +57,17 @@ export function HowItWorksDontDo() {
           aria-hidden
         />
 
-        <Container className="relative z-[1] max-w-[1440px] px-5 pb-12 text-center md:px-10 lg:pb-14 lg:px-10">
-          <p className="type-rule-h4 font-bold tracking-wide text-[#ff9f6e]">{kicker}</p>
+        <Container className="relative z-[1] mx-auto max-w-[1440px] px-5 pb-12 text-center md:px-10 lg:pb-14 lg:px-10">
+          <p className="text-[36px] font-bold leading-tight tracking-wide text-[#ff9f6e]">{kicker}</p>
           <h2
             id="how-it-works-dont-heading"
-            className="type-rule-h2 mx-auto mt-4 max-w-4xl tracking-tight text-white"
+            className="type-rule-h2 mx-auto mt-4 max-w-4xl font-extrabold tracking-tight text-white"
           >
             {titleBefore}
             <span className="text-[#ee3eb8]">{titleHighlight}</span>
             {titleAfter}
           </h2>
-          <p className="type-rule-p mx-auto mt-6 max-w-3xl text-white/92">{intro}</p>
+          <p className="mx-auto mt-6 max-w-3xl text-lg font-medium leading-relaxed text-white/92">{intro}</p>
 
           {/* Dua baris flex: jarak antar baris lebih besar; jarak antar kartu per baris */}
           <div className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-y-[2.875rem] md:gap-y-[4.025rem]">
@@ -88,7 +88,7 @@ export function HowItWorksDontDo() {
           className="relative z-[1] mt-10 border-t border-black bg-[linear-gradient(45deg,#4F0FB3_0%,#A4199A_65%,#D21E8C_84%,#F7515D_100%)] px-4 py-8 sm:mt-14 sm:px-8 lg:py-10"
           aria-label={`${bannerTextAccent}${bannerTextRest}`}
         >
-          <p className="type-rule-p mx-auto max-w-[1100px] text-center font-semibold">
+          <p className="mx-auto max-w-[1100px] text-center text-[26px] font-semibold leading-relaxed">
             <span className="text-[#F5B419]">{bannerTextAccent}</span>
             <span className="text-white">{bannerTextRest}</span>
           </p>

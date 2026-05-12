@@ -12,13 +12,13 @@ export function HowItWorksRealTeam() {
       <Container className="max-w-[1440px] lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-16">
           <div>
-            <h2 id="how-it-works-real-team-heading" className="type-rule-h2 tracking-tight text-[#101651]">
+            <h2 id="how-it-works-real-team-heading" className="type-rule-h2 font-extrabold tracking-tight text-[#101651]">
               {titleBefore}
               <span className="text-[#E3058D]">{titleHighlight}</span>
             </h2>
             <ul className="mt-8 space-y-4">
               {bullets.map((line) => (
-                <li key={line} className="type-rule-p flex gap-3 text-[#2a2f61]">
+                <li key={line} className="flex gap-3 text-lg font-medium leading-snug text-[#2a2f61]">
                   <CircleCheck className="mt-0.5 size-6 shrink-0 fill-[#22c55e] text-white" aria-hidden />
                   <span>{line}</span>
                 </li>
@@ -33,7 +33,6 @@ export function HowItWorksRealTeam() {
                   alt={photoAlt}
                   width={900}
                   height={600}
-                  unoptimized
                   className="h-auto w-full object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />

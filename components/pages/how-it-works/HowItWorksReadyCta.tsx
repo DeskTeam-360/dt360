@@ -14,10 +14,10 @@ export function HowItWorksReadyCta() {
       <Container className="relative max-w-[1440px] lg:px-10">
         <div className="flex w-full flex-col lg:min-h-[min(440px,48vh)] lg:flex-row lg:items-stretch">
           <div className="flex w-full flex-col justify-center px-1 py-5 sm:py-6 lg:w-[60%] lg:max-w-[60%] lg:flex-none lg:py-8 lg:pr-8 xl:py-10">
-            <h2 id="how-it-works-ready-heading" className="type-rule-h2 tracking-tight text-white">
+            <h2 id="how-it-works-ready-heading" className="type-rule-h2 font-bold tracking-tight text-white">
               {title}
             </h2>
-            <p className="type-rule-p mt-5 max-w-xl text-white/95">{body}</p>
+            <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white/95">{body}</p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
               <HeroCtaLink
                 href={primaryCta.href}
