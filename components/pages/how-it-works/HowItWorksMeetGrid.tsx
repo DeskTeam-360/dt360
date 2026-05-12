@@ -1,6 +1,7 @@
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksMeetSection } from "@/data/howItWorks";
+import { cn } from "@/lib/utils";
 
 export function HowItWorksMeetGrid() {
   const { titleBefore, titleHighlight, titleAfter, cards } = howItWorksMeetSection;
@@ -52,15 +53,31 @@ export function HowItWorksMeetGrid() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 pt-20">
-          {cards.map((card) => (
+          {cards.map((card) => {
+            const wideIconCard = card.id === "crm" || card.id === "email";
+            return (
             <article
               key={card.id}
               className="relative flex min-h-[280px] flex-col rounded-[30px] border-[5px] border-white bg-white/60 p-7 shadow-[0_16px_40px_-24px_rgba(16,22,81,0.35)]"
             >
               <div className="flex items-center justify-between gap-4">
                 <h3 className="type-rule-h5 text-left text-black">{card.title}</h3>
-                <div className="flex h-[65px] w-[65px] items-center justify-center">
-                  <SafeImage src={card.iconSrc} alt={card.iconAlt} width={65} height={65} className="h-[65px] w-auto object-contain" />
+                <div
+                  className={cn(
+                    "flex shrink-0 items-center justify-center",
+                    wideIconCard ? "w-[70px] self-stretch" : "h-[70px] w-[70px]",
+                  )}
+                >
+                  <SafeImage
+                    src={card.iconSrc}
+                    alt={card.iconAlt}
+                    width={70}
+                    height={wideIconCard ? 50 : 70}
+                    className={cn(
+                      "object-contain",
+                      wideIconCard ? "h-auto w-full max-h-full max-w-[70px]" : "h-[70px] w-[70px]",
+                    )}
+                  />
                 </div>
               </div>
               <ul className="mt-5 space-y-3 text-left">
@@ -79,7 +96,8 @@ export function HowItWorksMeetGrid() {
                 ))}
               </ul>
             </article>
-          ))}
+            );
+          })}
         </div>
       </Container>
     </section>
