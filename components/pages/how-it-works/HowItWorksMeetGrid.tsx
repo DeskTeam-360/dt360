@@ -8,7 +8,7 @@ export function HowItWorksMeetGrid() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#fff] py-20 lg:py-28"
+      className="relative overflow-hidden bg-[#f3f6fb] py-20 lg:py-28"
       aria-labelledby="how-it-works-meet-heading"
     >
       <div
@@ -47,7 +47,7 @@ export function HowItWorksMeetGrid() {
           </div>
           <h2
             id="how-it-works-meet-heading"
-            className="type-rule-h2 max-w-4xl tracking-tight text-[#101651]"
+            className="type-rule-h2 max-w-4xl font-extrabold tracking-tight text-[#101651]"
           >
             {titleBefore}
             <span className="text-[#E3058D]">{titleHighlight}</span>
@@ -64,10 +64,10 @@ export function HowItWorksMeetGrid() {
               <div className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center">
                 <SafeImage src={card.iconSrc} alt={card.iconAlt} width={56} height={56} className="object-contain" />
               </div>
-              <h3 className="type-rule-h5 pr-16 text-left text-[#101651]">{card.title}</h3>
+              <h3 className="pr-16 text-left text-2xl font-bold leading-tight text-[#101651]">{card.title}</h3>
               <ul className="mt-5 space-y-3 text-left">
                 {card.bullets.map((line) => (
-                  <li key={line} className="type-rule-p flex gap-3 text-[#2a2f61]">
+                  <li key={line} className="flex gap-3 text-base font-medium leading-snug text-[#2a2f61]">
                     <CircleCheck className="mt-0.5 size-[1.125rem] shrink-0 fill-[#22c55e] text-white" aria-hidden />
                     <span>{line}</span>
                   </li>
