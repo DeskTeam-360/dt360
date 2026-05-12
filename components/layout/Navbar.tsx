@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
-import { NavDropdown } from "./NavDropdown";
+import { ServicesMegaMenuDesktop } from "./ServicesMegaMenuDesktop";
 import { navServices, type NavMenuItem } from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
@@ -87,11 +87,10 @@ export function Navbar() {
               >
                 How it Works
               </Link>
-              <NavDropdown
-                label="Services"
-                href="/services"
-                items={navServices}
+              <ServicesMegaMenuDesktop
                 triggerClassName={desktopLinkClass}
+                useDarkTopNav={useDarkTopNav}
+                servicesRouteActive={pathname.startsWith("/services")}
               />
               <Link
                 href="/showcase"
@@ -268,6 +267,16 @@ function MobileGroup({
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/services"
+            onClick={onPick}
+            className="font-nav-primary mx-3 mt-2 flex items-center justify-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-center text-sm font-bold uppercase tracking-[0.06em] text-white hover:bg-white/10"
+          >
+            See Our Plans
+            <span aria-hidden className="text-base leading-none">
+              →
+            </span>
+          </Link>
         </div>
       ) : null}
     </div>
