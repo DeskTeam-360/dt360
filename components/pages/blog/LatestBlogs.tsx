@@ -23,11 +23,17 @@ const DUMMY_POSTS = Array.from({ length: 15 }).map((_, i) => {
   };
 });
 
-export function LatestBlogs() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = 3;
+interface LatestBlogsProps {
+  posts?: BlogPost[];
+}
 
-  const currentPosts = DUMMY_POSTS.slice(currentPage * 5, (currentPage + 1) * 5);
+export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  const displayPosts = posts.length > 0 ? posts : DUMMY_POSTS;
+  const totalPages = Math.max(1, Math.ceil(displayPosts.length / 5));
+
+  const currentPosts = displayPosts.slice(currentPage * 5, (currentPage + 1) * 5);
   const highlighted = currentPosts[0];
   const secondPost = currentPosts[1];
   const remainingPosts = currentPosts.slice(2);

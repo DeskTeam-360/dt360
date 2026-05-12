@@ -17,10 +17,15 @@ const MOCK_FEATURED_POSTS: Record<string, BlogPost> = {
   "Scaling": { ...FEATURED_POST, title: "Scaling Your Operations Without Breaking the Bank", category: "Scaling", image: "/images/blog/blog-featured.png" },
 };
 
-export function FeaturedBlog() {
+interface FeaturedBlogProps {
+  featuredPostsMap: Record<string, BlogPost>;
+  categories: string[];
+}
+
+export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps) {
   const [selectedCategory, setSelectedCategory] = useState("All Posts");
   
-  const currentPost = MOCK_FEATURED_POSTS[selectedCategory] || FEATURED_POST;
+  const currentPost = featuredPostsMap[selectedCategory] || featuredPostsMap["All Posts"] || FEATURED_POST;
 
   return (
     <section className="relative pt-0 pb-16 bg-white overflow-hidden -mt-[2px] z-20">
@@ -39,7 +44,7 @@ export function FeaturedBlog() {
 
         {/* Category Pills */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10 md:mb-16">
-          {CATEGORIES.map((category) => (
+          {(categories.length > 0 ? categories : CATEGORIES).map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
