@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Poppins, Montserrat } from "next/font/google";
 import { fontReadexPro, fontRussoOne } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
+import { GlobalSameRouteClickHandler } from "@/components/layout/GlobalSameRouteClickHandler";
 import { Navbar } from "@/components/layout/Navbar";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { getMetadataBase, getSiteUrl, siteConfig } from "@/config/site";
@@ -132,6 +133,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-sans">
         <OrganizationJsonLd />
+        <GlobalSameRouteClickHandler />
         <Navbar />
         {children}
         <Footer />
