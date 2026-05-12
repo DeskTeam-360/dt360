@@ -13,20 +13,9 @@ type SafeImageProps = {
   className?: string;
   sizes?: string;
   priority?: boolean;
-  unoptimized?: boolean;
 };
 
-export function SafeImage({
-  src,
-  alt,
-  fill,
-  width,
-  height,
-  className,
-  sizes,
-  priority,
-  unoptimized,
-}: SafeImageProps) {
+export function SafeImage({ src, alt, fill, width, height, className, sizes, priority }: SafeImageProps) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -57,7 +46,7 @@ export function SafeImage({
       height={fill ? undefined : height}
       sizes={sizes}
       priority={priority}
-      unoptimized={isSvg || unoptimized}
+      unoptimized={isSvg}
       draggable={false}
       className={className}
       onError={() => setFailed(true)}

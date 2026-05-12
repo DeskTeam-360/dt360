@@ -58,7 +58,7 @@ export const howItWorksTaskSection = {
     {
       id: "s2",
       title: "Your Account Manager Handles Everything",
-      body: "Your North American manager triages priority, assigns the right specialist, confirms scope, and keeps everything moving—you do not babysit freelancers or chase status updates.",
+      body: "Your US manager triages priority, assigns the right specialist, confirms scope, and keeps everything moving—you do not babysit freelancers or chase status updates.",
       stepLabel: "Step 2",
       gradientClass: "bg-gradient-to-b from-[#f04aab] via-[#c93fbe] to-[#7f3dbf]",
     },
