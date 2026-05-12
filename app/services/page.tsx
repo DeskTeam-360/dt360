@@ -5,38 +5,45 @@ import { ServicesFloatingFeaturesBar } from "@/components/pages/services/Service
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
-import { TestimonialsSection } from "@/components/shared/TestimonialsSection";
+import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
 import { servicesTestimonials } from "@/data/servicesPage";
 
-const coreServices = [
+/** Asset filename: `Service Box - {title}.webp` — encode untuk URL aman (spasi, tanda kurung, dll.) */
+function serviceBoxWebpPath(serviceTitle: string) {
+  return `/images/${encodeURIComponent(`Service Box - ${serviceTitle}.webp`)}`;
+}
+
+const coreServiceCards = [
   {
     no: "01",
     title: "Web Design & Development",
     bg: "from-[#7c3aed] via-[#3b2e95] to-[#081c73]",
-    icon: "/images/dt360-web-dev-logo.png",
     href: "#",
   },
-  { no: "02", title: "Graphic Design", bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]", icon: "/images/dt360-graphic-design-logo.png", href: "#" },
-  { no: "03", title: "Video Editing", bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]", icon: "/images/dt360-video-editing-logo.png", href: "#" },
-  { no: "04", title: "Email & Funnels", bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]", icon: "/images/dt360-email-funnel-logo.png", href: "#" },
-  { no: "05", title: "CRM & Automation", bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]", icon: "/images/dt360-crm-logo.png", href: "#" },
+  { no: "02", title: "Graphic Design", bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]", href: "#" },
+  { no: "03", title: "Video Editing", bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]", href: "#" },
+  { no: "04", title: "Email & Funnels", bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]", href: "#" },
+  { no: "05", title: "CRM & Automation", bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]", href: "#" },
   {
     no: "06",
     title: "Social Media Content",
     bg: "from-[#f7b462] via-[#ec8d45] to-[#de6f31]",
-    icon: "/images/dt360-social-media-content-logo.png",
     href: "#",
   },
   {
     no: "07",
     title: "Website Maintenance",
     bg: "from-[#64ade5] via-[#2c7ec7] to-[#0a4f96]",
-    icon: "/images/dt360-website-maintenance-logo.png",
     href: "#",
   },
-  { no: "08", title: "AI & Automation", bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]", icon: "/images/dt360-ai-automation-logo.png", href: "#" },
-  { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", icon: "/images/dt360-whitelabel-logo.png", href: "#" },
-];
+  { no: "08", title: "AI & Automation", bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]", href: "#" },
+  { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", href: "#" },
+] as const;
+
+const coreServices = coreServiceCards.map((s) => ({
+  ...s,
+  icon: serviceBoxWebpPath(s.title),
+}));
 
 /** White overlay position + corner radius pointing toward card center */
 const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
@@ -49,32 +56,13 @@ const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
 };
 
 const OVERLAY_LAYER_CLASS =
-  "pointer-events-none absolute z-0 h-[28%] min-h-[76px] w-[38%] min-w-[108px] bg-[color-mix(in_oklab,#ffffff82_24%,transparent)] backdrop-blur-[1px] lg:h-[26%] lg:w-[36%]";
-
-/** Split a service title into exactly two lines (first line gets extra word when odd). */
-function renderTwoLineTitle(title: string) {
-  const words = title.split(" ");
-  const mid = Math.ceil(words.length / 2);
-  const line1 = words.slice(0, mid).join(" ");
-  const line2 = words.slice(mid).join(" ");
-  return (
-    <>
-      {line1}
-      {line2 && (
-        <>
-          <br />
-          {line2}
-        </>
-      )}
-    </>
-  );
-}
+  "pointer-events-none absolute z-0 h-[28%] min-h-[76px] w-[38%] min-w-[108px] bg-[color-mix(in_oklab,#ffffff82_24%,transparent)] backdrop-blur-[1px] xl:h-[26%] xl:w-[36%]";
 
 export default function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 lg:px-10 lg:pb-[80px] lg:pt-[120px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[120px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
@@ -83,30 +71,32 @@ export default function ServicesPage() {
           className="object-cover object-bottom"
           style={{ objectPosition: "bottom center" }}
         />
-        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col justify-center gap-10 lg:flex-row lg:items-center lg:gap-6 max-w-[1440px] lg:px-10 px-5">
+        <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
           <div className="max-w-xl text-white">
-            <h1 className="leading-[1.05] tracking-tight">
+            <h1 className="type-rule-h1 font-extrabold leading-[1.05] tracking-tight text-white">
               <span className="text-[#f336b6]">All Services</span>
               <br />
               One Team
               <br />
               One Flat Rate
             </h1>
-            <p className="mt-6 text-[24px] font-semibold leading-snug text-white/95">
-            Stop Paying $50/hr for Web Work That Takes 3 Weeks
+            <p className="mt-6 text-2xl font-semibold leading-snug text-white/95 text-balance">
+              Stop Paying $50/hr for Web&nbsp;Work That Takes 3&nbsp;Weeks
             </p>
-            <p className="mt-6 max-w-lg leading-8 text-white/85">
+            <p className="mt-6 max-w-lg text-lg leading-8 text-white/85 pb-12">
             There&apos;s a better way to get web work done. Not cheaper freelancers. Not a retainer agency with a 10-person email chain. A flat-rate, dedicated web team that knows your brand and turns tasks around in 1-3 days.
             </p>
           </div>
-          <div className="relative z-[80] mx-auto mb-[-65px] w-full self-end lg:-mb-[75px] lg:mx-0 lg:w-[50%]">
+          <div
+            className="relative z-[1300] mx-auto mb-[-65px] w-full self-end xl:mx-0 xl:w-[50%]"
+          >
             <Image
-              src="/images/dt360-service-hero-image.png"
+              src="/images/Main Service - Hero.png"
               alt="DT360 services team illustration"
               width={736}
               height={758}
               priority
-              className="relative z-[90] h-auto w-full"
+              className="h-auto w-full"
             />
           </div>
         </div>
@@ -114,33 +104,33 @@ export default function ServicesPage() {
 
       <ServicesPlatformsSupportedBridge />
 
-      <section className="relative z-10 mt-[-76px] overflow-x-hidden bg-white px-5 pb-[80px] pt-[148px] md:px-10 md:pt-[160px] lg:px-10 lg:pb-[80px] lg:pt-[180px]">
+      <section className="relative z-10 mt-[-76px] overflow-x-hidden bg-white px-5 pb-[80px] pt-[148px] md:px-10 md:pt-[160px] xl:px-10 xl:pb-[80px] xl:pt-[180px]">
         <Image
           src="/images/dt360-topbubble.png"
           alt=""
           width={540}
           height={714}
-          className="pointer-events-none absolute right-0 top-0 h-auto w-[260px] opacity-95 md:w-[340px] lg:w-[440px]"
+          className="pointer-events-none absolute right-0 top-0 h-auto w-[260px] opacity-95 md:w-[340px] xl:w-[440px]"
         />
         <Image
           src="/images/dt360-bottom-bubble.png"
           alt=""
           width={382}
           height={576}
-          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] lg:w-[340px]"
+          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] xl:w-[340px]"
         />
 
-        <div className="relative mx-auto max-w-[1440px] lg:px-10 px-5">
+        <div className="relative mx-auto max-w-[1440px]">
           <div className="text-center">
-            <h2 className="leading-tight tracking-tight text-[#101651]">
-              <span className="text-[#ef2fa9]">Core Services,</span> Everything<br />You Need to Scale
+            <h2 className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+              <span className="text-[#E3058D]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
-            <p className="type-rule-h5 mt-4 text-[#1a1a1a]">
+            <p className="mt-4 text-xl font-semibold text-[#1a1a1a]">
               Pick the plan that fits. We handle the rest.
             </p>
           </div>
 
-          <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
             {coreServices.map((service, index) => {
               const overlayPosition = SERVICE_OVERLAY_POSITION_CLASS[service.no];
               return (
@@ -169,15 +159,15 @@ export default function ServicesPage() {
                         alt={`${service.title} icon`}
                         width={200}
                         height={200}
+                        sizes="200px"
+                        unoptimized
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
-                    <h3 className="type-rule-h4 mt-6 leading-tight">
-                      {renderTwoLineTitle(service.title)}
-                    </h3>
+                    <h3 className="mt-6 max-w-[14ch] text-[36px] font-bold leading-tight">{service.title}</h3>
                     <Link
                       href={service.href}
-                      className="mt-auto w-fit pt-3 font-semibold transition duration-300 ease-out hover:translate-x-1"
+                      className="mt-auto w-fit pt-3 text-[18px] font-semibold transition duration-300 ease-out hover:translate-x-1"
                     >
                       View Service &gt;&gt;
                     </Link>
@@ -193,12 +183,23 @@ export default function ServicesPage() {
         <ServicesFloatingFeaturesBar />
       </div>
 
-      <TestimonialsSection
-        headingId="services-testimonials-heading"
-        headingAccent="Proven Results"
-        headingTrailing="Real Business"
-        items={servicesTestimonials}
-      />
+      <section
+        className="relative z-10 overflow-x-hidden bg-white pb-[80px] pt-[220px] md:pb-[90px] md:pt-[230px] xl:pb-[100px] xl:pt-[240px]"
+        aria-labelledby="services-testimonials-heading"
+      >
+        <div
+          className="pointer-events-none absolute left-[-240px] top-[-220px] aspect-square h-[90%] rounded-full bg-[radial-gradient(circle,rgba(170,239,255,0.85)_0%,rgba(170,239,255,0.35)_45%,rgba(170,239,255,0)_75%)] min-[2560px]:top-[-10px] min-[2560px]:aspect-auto min-[2560px]:h-full min-[2560px]:w-[45vw]"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 xl:px-10">
+          <h2 id="services-testimonials-heading" className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+            <span className="text-[#E3058D]">Proven Results</span>
+            <br />
+            Real Business
+          </h2>
+        </div>
+        <ServicesTestimonialsCarousel items={servicesTestimonials} />
+      </section>
 
       <ServicesHowItWorks />
 

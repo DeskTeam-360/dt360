@@ -3,22 +3,20 @@ import { heroStats } from "@/data/home";
 import { fontRussoOne } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-/** Angka besar (8+, 400+, 1-3): Russo One 64px — `className` next/font menjamin font-family computed (var saja bisa turun ke Montserrat). */
+/** Angka besar (8+, 400+, 1-3): ukuran selaras H2, famili Russo One (next/font/google). */
 const statValue = cn(
   fontRussoOne.className,
-  "shrink-0 tabular-nums text-[64px] font-normal leading-none tracking-tight text-white",
-  "max-sm:text-[2.5rem] max-sm:leading-none",
+  "type-rule-h2-hero-stats shrink-0 tabular-nums leading-none tracking-tight text-white",
 );
 
-/** Label & salinan teks seluler ke-4: Montserrat 20 semibold. */
-const statLabel = "text-left font-[var(--font-montserrat)] text-[20px] font-semibold leading-tight text-white/90";
+/** Label & salinan teks sel ke-4: selaras global B — Montserrat Bold 20px. */
+const statLabel = cn("type-rule-b text-left leading-tight text-white/90");
 
 /** Label di overlay hover sel “side”: tengah, stack vertikal bersama angka. */
-const statLabelHoverStacked =
-  "font-[var(--font-montserrat)] text-center text-[20px] font-semibold leading-tight text-white/90";
+const statLabelHoverStacked = cn("type-rule-b text-center leading-tight text-white/90");
 
 const statTextBlock = cn(
-  "max-w-full text-pretty text-center font-[var(--font-montserrat)] text-[20px] font-semibold leading-snug text-white/95",
+  "type-rule-b max-w-full text-pretty text-center leading-snug text-white/95",
 );
 
 /** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
@@ -50,7 +48,7 @@ const sideLayoutOverlay = cn(
 );
 
 const textLayoutOverlay =
-  "flex min-h-[9.5rem] flex-col items-start justify-center gap-1 px-3 py-[1.875rem] text-center sm:min-h-[9.75rem] sm:px-[30px] sm:py-[2.25rem] lg:min-h-[9.5rem] lg:gap-1.5 lg:py-[1.875rem]";
+  "flex min-h-[9.5rem] flex-col items-center justify-center gap-1 px-0 py-[1.875rem] text-center sm:min-h-[9.75rem] sm:py-[2.25rem] lg:min-h-[9.5rem] lg:gap-1.5 lg:py-[1.875rem]";
 
 function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; isLast: boolean }) {
   const outer = cn(
@@ -66,7 +64,9 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
         <div className={cn("relative z-0", sideLayout)}>
           <span className={statValue}>{stat.value}</span>
           <p className={cn(statLabel, "min-w-0")}>
-            {stat.labelLine1} {stat.labelLine2}
+            {stat.labelLine1}
+            <br />
+            {stat.labelLine2}
           </p>
         </div>
         <div aria-hidden className={hoverOverlayOuter}>
@@ -89,8 +89,11 @@ function StatCell({ stat, index, isLast }: { stat: HeroStatItem; index: number; 
       </div>
       <div aria-hidden className={hoverOverlayOuter}>
         <div className={cn(hoverOverlayInner, textLayoutOverlay)}>
-          <p className={statTextBlock}>{stat.line1}</p>
-          <p className={statTextBlock}>{stat.line2}</p>
+          <p className={cn(statTextBlock, "text-left")}>
+            {stat.line1}
+            <br />
+            {stat.line2}
+          </p>
         </div>
       </div>
     </div>

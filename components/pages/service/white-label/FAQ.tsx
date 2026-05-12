@@ -31,21 +31,22 @@ export function FAQ() {
           className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center"
         />
       </div>
+      
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
       <SafeImage
         src="/images/Service - Graphic Code.png"
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-12 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <SafeImage
         src="/images/Service - Graphic Design.png"
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
-      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">
             <SafeImage
@@ -57,8 +58,8 @@ export function FAQ() {
             />
           </div>
           <div>
-            <h2 className="type-rule-h2 leading-tight text-[#11114d]">
-              Got Questions? <span className="text-[#e62a98]">Good</span>
+            <h2 className="type-rule-h2 leading-tight text-[#11104C]">
+              Got Questions? <span className="text-[#E3058D]">Good</span>
             </h2>
             <div className="mt-6 space-y-4">
               {faqs.map((item) => {
@@ -76,7 +77,7 @@ export function FAQ() {
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="type-rule-h5 pr-3 leading-tight">{item.question}</span>
+                      <span className="type-rule-h5 pr-3 font-semibold leading-tight">{item.question}</span>
                       <span
                         className={`shrink-0 transition-transform duration-300 ${
                           isOpen ? "rotate-180 text-[#1d2357]" : "text-white group-hover:text-[#1d2357]"

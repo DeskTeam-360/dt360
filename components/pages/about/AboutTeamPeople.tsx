@@ -46,16 +46,21 @@ export function AboutTeamPeople() {
         {/* Cards */}
         <div className="flex flex-col gap-8 lg:gap-10 w-full max-w-[1050px] mx-auto mt-10">
           
-          {/* Card 1: Jeremy */}
-          <div className="relative w-[90%] lg:w-[85%] self-end bg-[#FBE4E1] rounded-[30px] lg:rounded-[40px] p-8 lg:p-12 pl-20 md:pl-32 lg:pl-44 shadow-lg flex items-center min-h-[180px] lg:min-h-[220px] ml-auto mr-0 transition-transform hover:-translate-y-2 duration-300">
-            {/* Image */}
-            <div className="absolute left-[-40px] md:left-[-80px] lg:left-[-110px] top-1/2 -translate-y-1/2">
-              <div className="relative w-[120px] h-[120px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] rounded-full border-4 border-white shadow-[0_10px_30px_rgba(251,58,30,0.3)] bg-[#FF5A36] overflow-hidden">
-                <SafeImage src="/images/about-jeremy-headshot.png" alt="Jeremy" width={220} height={220} className="w-full h-full object-cover" />
+          {/* Card 1: Jeremy — flex items-center supaya lingkaran sejajar vertikal dengan teks */}
+          <div className="relative z-10 flex w-[90%] flex-row items-center self-end overflow-visible rounded-[30px] bg-[#FBE4E1] py-8 pl-6 pr-8 shadow-lg min-h-[180px] transition-transform duration-300 hover:-translate-y-2 md:py-10 md:pl-8 md:pr-10 lg:w-[85%] lg:min-h-[220px] lg:rounded-[40px] lg:py-12 lg:pl-10 lg:pr-12 ml-auto mr-0">
+            <div className="relative z-10 shrink-0 -ml-[52px] md:-ml-[100px] lg:-ml-[120px] flex items-center justify-center self-center">
+              <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-white bg-[#FF5A36] shadow-[0_10px_30px_rgba(251,58,30,0.3)] md:h-[180px] md:w-[180px] lg:h-[220px] lg:w-[220px]">
+                <SafeImage
+                  src="/images/about-jeremy-headshot.png"
+                  alt="Jeremy"
+                  fill
+                  sizes="(max-width: 767px) 120px, (max-width: 1023px) 180px, 220px"
+                  className="object-cover object-[50%_38%] !top-[3px] md:!top-[2px] lg:!top-[3px]"
+                />
               </div>
             </div>
-            
-            <div className="w-full text-left">
+
+            <div className="min-w-0 flex-1 pl-3 text-left md:pl-5 lg:pl-8">
               <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[0].name}
               </h3>
@@ -69,15 +74,8 @@ export function AboutTeamPeople() {
           </div>
 
           {/* Card 2: JD */}
-          <div className="relative w-[90%] lg:w-[85%] self-start bg-[#F4CCEC] rounded-[30px] lg:rounded-[40px] p-8 lg:p-12 pr-20 md:pr-32 lg:pr-44 shadow-lg flex items-center min-h-[180px] lg:min-h-[220px] mr-auto ml-0 transition-transform hover:-translate-y-2 duration-300">
-            {/* Image */}
-            <div className="absolute right-[-40px] md:right-[-80px] lg:right-[-110px] top-1/2 -translate-y-1/2">
-              <div className="relative w-[120px] h-[120px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] rounded-full border-4 border-white shadow-[0_10px_30px_rgba(227,5,141,0.3)] bg-[#D61877] overflow-hidden">
-                <SafeImage src="/images/about-jd-headshot.png" alt="JD" width={220} height={220} className="w-full h-full object-cover" />
-              </div>
-            </div>
-            
-            <div className="w-full text-left">
+          <div className="relative z-10 flex w-[90%] flex-row items-center self-start overflow-visible rounded-[30px] bg-[#F4CCEC] py-8 pl-8 pr-6 shadow-lg min-h-[180px] transition-transform duration-300 hover:-translate-y-2 md:py-10 md:pl-10 md:pr-8 lg:w-[85%] lg:min-h-[220px] lg:rounded-[40px] lg:py-12 lg:pl-12 lg:pr-10 mr-auto ml-0">
+            <div className="min-w-0 flex-1 pr-3 text-left md:pr-5 lg:pr-8">
               <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[1].name}
               </h3>
@@ -87,6 +85,18 @@ export function AboutTeamPeople() {
               <p className="font-[var(--font-montserrat)] text-[13px] md:text-[15px] lg:text-[16px] font-medium text-black leading-relaxed">
                 {teamPeople[1].desc}
               </p>
+            </div>
+
+            <div className="relative z-10 shrink-0 -mr-[52px] md:-mr-[100px] lg:-mr-[120px] flex items-center justify-center self-center">
+              <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-white bg-[#D61877] shadow-[0_10px_30px_rgba(227,5,141,0.3)] md:h-[180px] md:w-[180px] lg:h-[220px] lg:w-[220px]">
+                <SafeImage
+                  src="/images/about-jd-headshot.png"
+                  alt="JD"
+                  fill
+                  sizes="(max-width: 767px) 120px, (max-width: 1023px) 180px, 220px"
+                  className="object-cover object-[50%_38%] !top-[3px] md:!top-[2px] lg:!top-[3px]"
+                />
+              </div>
             </div>
           </div>
 

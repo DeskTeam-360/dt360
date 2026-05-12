@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { SafeImage } from "@/components/shared/SafeImage";
 import {
   useCallback,
   useLayoutEffect,
@@ -18,28 +19,36 @@ type Props = {
 
 function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
   return (
-    <div className="relative flex h-full w-full overflow-visible rounded-[30px] bg-transparent px-6 pb-8 pt-12 sm:px-10 sm:pb-10 sm:pt-14">
-      <Image
-        src="/images/dt360-bg-testimonials-v2.png"
-        alt=""
-        fill
-        className="pointer-events-none rounded-[30px] object-cover object-top"
-        sizes="(max-width: 640px) 60vw, (max-width: 1440px) 56vw, 28vw"
-      />
-      <div className="relative z-[1] grid h-full gap-8 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-center sm:gap-10">
-        <div className="mx-auto aspect-square w-full max-w-[12rem] overflow-hidden rounded-2xl bg-neutral-200 sm:mx-0">
+    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-14 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 z-0 flex w-[120px] -translate-x-1/2 justify-center bg-white"
+        aria-hidden
+      >
+        <SafeImage
+          src="/images/home-testimonial-quote1.png"
+          alt=""
+          width={120}
+          height={104}
+          className="h-auto w-[120px] max-w-[120px] object-contain object-top"
+          sizes="120px"
+        />
+      </div>
+      <div className="relative z-[1] grid gap-6 sm:grid-cols-[minmax(0,11rem)_1fr] sm:items-start sm:gap-8">
+        <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl sm:mx-0">
           <Image
             src={item.imageSrc}
             alt={item.imageAlt}
             width={320}
             height={320}
             className="h-full w-full object-cover"
-            sizes="(max-width: 640px) 220px, 192px"
+            sizes="(max-width: 1440px) 60vw, 28vw"
           />
         </div>
-        <div className="min-w-0 pt-0 sm:pt-2">
-          <p className="text-base leading-relaxed text-[#2a2f61] sm:text-lg">{item.quote}</p>
-          <p className="mt-5 text-base font-bold text-[#101651] sm:text-lg">{item.attribution}</p>
+        <div className="min-w-0 pt-0 sm:pt-1">
+          <p className="type-rule-p text-pretty text-[#2a2f61]">{item.quote}</p>
+          <p className="mt-4 type-rule-p text-[#101651]">
+            <strong>{item.attribution}</strong>
+          </p>
         </div>
       </div>
     </div>
@@ -51,7 +60,7 @@ const SLIDE_GAP = "1rem"; /* = Tailwind gap-4 */
 
 function subscribeWideMode(onStoreChange: () => void) {
   if (typeof window === "undefined") return () => {};
-  const mq = window.matchMedia("(min-width: 1441px)");
+  const mq = window.matchMedia("(min-width: 1680px)");
   mq.addEventListener("change", onStoreChange);
   window.addEventListener("resize", onStoreChange);
   return () => {
@@ -61,7 +70,7 @@ function subscribeWideMode(onStoreChange: () => void) {
 }
 
 function getWideModeSnapshot() {
-  return typeof window !== "undefined" && window.matchMedia("(min-width: 1441px)").matches;
+  return typeof window !== "undefined" && window.matchMedia("(min-width: 1680px)").matches;
 }
 
 function getWideModeServerSnapshot() {
@@ -70,7 +79,7 @@ function getWideModeServerSnapshot() {
 
 /**
  * Strip triple + anchor index untuk loop tanpa loncat besar.
- * Narrow: peek 20/60/20; wide: tiga kolom penuh + geser.
+ * Narrow: peek 20/60/20; wide (min-width 1680px): tiga kolom penuh + geser.
  */
 export function SocialProofTestimonialCarousel({ items }: Props) {
   const count = items.length;
@@ -191,7 +200,7 @@ export function SocialProofTestimonialCarousel({ items }: Props) {
 
   return (
     <div className="mt-12 sm:mt-14 lg:mt-16">
-      <div className="w-full px-0 min-[1441px]:px-8 min-[1600px]:px-12">
+      <div className="w-full px-0 min-[1680px]:px-8 min-[1800px]:px-12">
         <div ref={viewportRef} className="relative w-full overflow-hidden">
           <div
             data-carousel-track

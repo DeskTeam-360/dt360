@@ -10,20 +10,17 @@ export function Pricing() {
   return (
     <section id="pricing" className="bg-white pt-14 sm:pt-16 lg:pt-20" aria-labelledby="pricing-heading">
       <Container className="max-w-7xl pb-12">
-        <h2
-          id="pricing-heading"
-          className="mx-auto max-w-4xl text-balance text-center leading-[1.08] tracking-tight text-[#101651]"
-        >
+        <h2 id="pricing-heading" className="mx-auto max-w-4xl text-balance text-center text-[#101651]">
           <span className="block sm:inline">{headlineLine1} </span>
           <span className="block text-[#E3058D] sm:inline">{headlineHighlight} </span>
           <span className="block sm:inline">{headlineLine2}</span>
         </h2>
 
-        <p className="mx-auto mt-6 max-w-3xl text-center leading-relaxed text-zinc-600 sm:mt-8">
+        <p className="type-rule-p mx-auto mt-6 max-w-3xl text-center text-zinc-600 sm:mt-8">
           {subheading}
         </p>
 
-        <div className="mb-12 mt-12 grid gap-6 sm:mt-14 md:grid-cols-3 md:gap-7 lg:mt-16 lg:gap-8">
+        <div className="mb-12 mt-12 grid gap-3.5 sm:mt-14 md:grid-cols-3 lg:mt-16">
           {plans.map((plan) => (
             <PricingPlanCardComponent key={plan.id} plan={plan} ctaLabel={ctaLabel} />
           ))}
@@ -31,7 +28,7 @@ export function Pricing() {
 
       </Container>
 
-      <div className="relative mt-12 w-full bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
+      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
         <div
           className="pointer-events-none absolute inset-x-0 -top-[45px] h-[68px]"
           style={{
@@ -52,7 +49,7 @@ export function Pricing() {
           }}
           aria-hidden
         />
-        <Container className="max-w-7xl">
+        <Container className="max-w-7xl py-[40px]">
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
             <div className="flex items-center gap-4 sm:gap-6">
               <Image
@@ -60,17 +57,18 @@ export function Pricing() {
                 alt="Risk-free guarantee icon."
                 width={110}
                 height={110}
-                className="h-auto w-14 shrink-0 sm:w-16 lg:w-20"
+                className="h-auto w-[110px] shrink-0"
               />
-              <h3 className="leading-tight tracking-tight">
+              <h3 className="text-[60px] font-normal leading-[64px] tracking-tight text-white">
                 <span className="block">
-                  Try It <span className="font-bold">Risk-Free</span>
+                  <span className="font-normal">Try It </span>
+                  <strong>Risk-Free</strong>
                 </span>
-                <span className="block font-medium">for 30 Days</span>
+                <span className="block font-normal">for 30 Days</span>
               </h3>
             </div>
 
-            <p className="max-w-2xl leading-relaxed text-white/95">
+            <p className="max-w-2xl text-[20px] leading-[30px] text-white/95">
               Not the right fit? Full refund within the first 30 days. No awkward conversations. No
               cancellation hoops. No contracts - ever. Cancel any month, for any reason. We&apos;ve been at
               this since 2018. We don&apos;t need lock-in contracts to keep people. We keep them by doing work

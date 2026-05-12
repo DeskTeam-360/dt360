@@ -9,6 +9,7 @@ export function StartBusiness() {
     headlineBefore,
     headlineHighlight,
     headlineAfter,
+    headlineSecondLine,
     subheading,
     illustrationAlt,
     decorTopLeftSrc,
@@ -57,23 +58,27 @@ export function StartBusiness() {
             {headlineBefore}
             <span className="text-[#e4277a]">{headlineHighlight}</span>
             {headlineAfter}
+            <br />
+            {headlineSecondLine}
           </h2>
           <p className="relative z-10 mx-auto mt-6 max-w-3xl text-pretty text-center leading-relaxed text-zinc-700 sm:mt-8 sm:leading-relaxed">
             {subheading}
           </p>
         </div>
 
-        <div className="relative z-10 mt-10 w-full sm:mt-14">
-          <video
-            className="block h-auto w-full"
-            aria-label={illustrationAlt}
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            <source src={START_BUSINESS_VIDEO_SRC} type="video/webm" />
-          </video>
+        <div className="relative z-10 mt-10 w-full min-w-0 overflow-x-hidden sm:mt-14">
+          <div className="relative left-1/2 w-[110%] -translate-x-1/2">
+            <video
+              className="block h-auto w-full"
+              aria-label={illustrationAlt}
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src={START_BUSINESS_VIDEO_SRC} type="video/webm" />
+            </video>
+          </div>
         </div>
       </Container>
     </section>

@@ -12,32 +12,35 @@ export function FAQAccordionList({ items }: Props) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <div className="mt-7 space-y-4 sm:mt-8">
+    <div className="mt-24 space-y-3 sm:mt-28">
       {items.map((item) => {
         const isOpen = openId === item.id;
         return (
-          <article key={item.id}>
+          <article key={item.id} className="rounded-xl bg-transparent p-0">
             <button
               type="button"
               id={`${item.id}-trigger`}
               aria-expanded={isOpen}
               aria-controls={`${item.id}-panel`}
-              className="group flex w-full items-center justify-between gap-4 rounded-2xl bg-white px-6 py-4 text-left text-[#11104C] shadow-sm transition hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className={cn(
+                "flex w-full items-center justify-between gap-4 rounded-xl bg-white px-4 py-3 text-left text-[#11104C] shadow-sm transition hover:bg-zinc-50",
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
+              )}
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
-              <span className="text-base font-semibold sm:text-xl">{item.question}</span>
+              <b className="leading-tight">{item.question}</b>
               <span
                 className={cn(
-                  "shrink-0 text-[#11104C] transition-transform duration-300",
-                  isOpen && "rotate-180",
+                  "flex h-6 w-6 shrink-0 items-center justify-center transition-transform",
+                  isOpen ? "rotate-180" : "rotate-0",
                 )}
                 aria-hidden
               >
-                <svg width={22} height={22} viewBox="0 0 24 24" fill="none">
+                <svg viewBox="0 0 24 24" className="h-[24px] w-[24px]" fill="none">
                   <path
-                    d="M6 9l6 6 6-6"
+                    d="M6 9L12 15L18 9"
                     stroke="currentColor"
-                    strokeWidth={2.5}
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
@@ -54,7 +57,7 @@ export function FAQAccordionList({ items }: Props) {
               )}
             >
               <div className="overflow-hidden">
-                <p className="px-6 pb-1 pt-4 text-lg leading-relaxed text-white/90">{item.answer}</p>
+                <p className="type-rule-p mt-2 px-2 text-[#E8ECFF]">{item.answer}</p>
               </div>
             </div>
           </article>

@@ -25,7 +25,7 @@ const PLANS = [
     period: "/month",
     ribbonClass: "bg-[#1e3a5f]",
     ribbonCutClass: "border-l-[#6d4df6]",
-    gradientClass: "from-[#c4b5fd] via-[#8b5cf6] to-[#4c1d95]",
+    gradientClass: "from-[#BD62FF] to-[#7E5BFD]",
     dividerClass: "bg-[#b28cff]",
     accentClass: "text-[#5b21b6]",
   },
@@ -39,7 +39,7 @@ const PLANS = [
     period: "/month",
     ribbonClass: "bg-[#7f1d1d]",
     ribbonCutClass: "border-l-[#f97316]",
-    gradientClass: "from-[#fb923c] via-[#f43f5e] to-[#be123c]",
+    gradientClass: "from-[#FF8B52] to-[#EE4176]",
     dividerClass: "bg-[#ff8d4f]",
     accentClass: "text-[#be123c]",
   },
@@ -53,7 +53,7 @@ const PLANS = [
     period: "/month",
     ribbonClass: "bg-[#134e4a]",
     ribbonCutClass: "border-l-[#84cc16]",
-    gradientClass: "from-[#d9f99d] via-[#4ade80] to-[#0f766e]",
+    gradientClass: "from-[#9DC54E] to-[#1D8A7D]",
     dividerClass: "bg-[#7cd44e]",
     accentClass: "text-[#0f766e]",
   },
@@ -61,7 +61,7 @@ const PLANS = [
 
 const FEATURE_ITEMS = [
   "All Services Included",
-  "North America Account Manager",
+  "North American Account Manager",
   "1-3 Day Turnaround",
   "Unlimited Revisions",
   "Month-to-Month",
@@ -95,8 +95,8 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       className={cn(
         "relative overflow-hidden bg-white",
         isWebDev
-          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[420px] lg:-mt-[140px] lg:pb-[100px] lg:pt-[300px] 2xl:pt-[320px]"
-          : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] lg:mt-0 lg:pb-[100px] lg:pt-[200px]",
+          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[280px] xl:-mt-[140px] xl:pb-[100px] xl:pt-[300px] 2xl:pt-[320px]"
+          : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] xl:mt-0 xl:pb-[100px] xl:pt-[200px]",
       )}
       aria-labelledby={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
     >
@@ -104,9 +104,9 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         <SafeImage
           src="/images/Service/web-design-dev-pricing-bottom-left.png"
           alt=""
-          width={900}
-          height={900}
-          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[45%] max-w-none object-contain object-left-bottom"
+          width={500}
+          height={500}
+          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
         />
       ) : null}
       {/* Radial pink — kiri bawah, lebih besar */}
@@ -125,37 +125,34 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         alt=""
         width={540}
         height={714}
-        className="pointer-events-none absolute right-0 top-0 z-[1] h-auto w-[min(52vw,420px)] max-w-none opacity-95 md:w-[min(44vw,480px)] lg:w-[min(38vw,520px)]"
+        className="pointer-events-none absolute right-0 top-0 z-[1] h-auto w-[min(52vw,420px)] max-w-none opacity-95 md:w-[min(44vw,480px)] xl:w-[min(38vw,520px)]"
       />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 xl:px-10">
         <h2
           id={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
-          className={cn(
-            "relative z-[1] text-center leading-tight tracking-tight text-[#101651] max-md:mt-0 md:mt-12 md:pt-[100px] lg:mt-0 lg:pt-0",
-            isWebDev ? "pt-[580px]" : "pt-[180px]",
-          )}
+          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] xl:mt-0"
         >
           {isWebDev ? (
             <>
-              One Team, <span className="text-[#ef2fa9]">Three Plans,</span><br/>Pick Your Speed
+              One Team, <span className="text-[#E3058D]">Three Plans,</span><br/>Pick Your Speed
             </>
           ) : (
             <>
               Simple Pricing,
               <br />
-              <span className="text-[#ef2fa9]">All-Inclusive</span>
+              <span className="text-[#E3058D]">All-Inclusive</span>
             </>
           )}
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 gap-3 md:mt-12 md:grid-cols-1 md:gap-3 lg:mt-14 lg:grid-cols-3 lg:gap-3">
+        <div className="mt-10 grid grid-cols-1 gap-3 md:mt-12 md:grid-cols-1 md:gap-3 xl:mt-14 xl:grid-cols-3 xl:gap-3">
           {PLANS.map((plan) => {
             return (
               <article
                 key={plan.id}
                 className={cn(
-                  "mx-auto flex h-full min-h-[370px] w-full flex-col overflow-hidden rounded-[14px] bg-gradient-to-b p-0 text-white shadow-[0_12px_26px_-10px_rgba(16,22,81,0.35)] transition duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_38px_-14px_rgba(16,22,81,0.45)] md:max-w-[450px] lg:max-w-none",
+                  "mx-auto flex h-full min-h-[370px] w-full flex-col overflow-hidden rounded-[14px] bg-gradient-to-b p-0 text-white shadow-[0_12px_26px_-10px_rgba(16,22,81,0.35)] transition duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_38px_-14px_rgba(16,22,81,0.45)] md:max-w-[450px] xl:max-w-none",
                   plan.gradientClass,
                 )}
               >
@@ -166,14 +163,12 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                     width={366}
                     height={78}
                     className="h-auto w-[68%] max-w-[366px] object-contain"
-                    sizes="(min-width: 1024px) 23vw, 60vw"
+                    sizes="(min-width: 1280px) 23vw, 60vw"
                   />
-                  <span className="type-rule-h5 leading-none text-white/95">{plan.tasks}</span>
+                  <span className="text-[24px] font-bold leading-none text-white/95">{plan.tasks}</span>
                 </div>
-                <div className="flex flex-1 flex-col px-6 pb-7 pt-14">
-                  <p
-                    className="inline-flex items-end whitespace-nowrap font-extrabold leading-none tracking-tight text-[72px]"
-                  >
+                <div className="flex flex-1 flex-col items-center px-6 pb-7 pt-14">
+                  <p className="inline-flex w-full items-end justify-center whitespace-nowrap font-extrabold leading-none tracking-tight text-[72px]">
                     <span className={readexPro.className}>{plan.price}</span>
                     <span
                       className={`${montserrat.className} ml-1 text-[18px] tracking-normal font-bold text-white/90`}
@@ -181,7 +176,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                       {plan.period}
                     </span>
                   </p>
-                  <div className={`my-12 h-[5px] w-full ${plan.dividerClass}`} aria-hidden />
+                  <div className={cn(`my-12 h-[5px] w-full self-stretch ${plan.dividerClass}`)} aria-hidden />
                   <button
                     type="button"
                     className={`font-button group mt-auto inline-flex w-fit items-center justify-center gap-2 self-center rounded-full bg-white px-3.5 py-3 tracking-wide shadow-[0_4px_10px_rgba(0,0,0,0.15)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-95 hover:shadow-[0_10px_22px_-8px_rgba(0,0,0,0.35)] ${plan.accentClass}`}
@@ -203,28 +198,31 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         </div>
 
         {isWebDev ? (
-          <div className="mt-10 flex justify-center md:mt-12 lg:mt-14">
+          <div className="mt-10 flex justify-center md:mt-12 xl:mt-14">
             <Link
               href="#"
-              className="font-button group inline-flex items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
+              className="font-button group inline-flex items-center justify-center gap-2 rounded-[10px] bg-[#E6236D] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
             >
               See Full Pricing &amp; Plans &raquo;
             </Link>
           </div>
         ) : (
-          <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 xl:mt-14 xl:flex-row xl:items-center xl:justify-between">
             <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
               {FEATURE_ITEMS.map((label) => (
-                <li key={label} className="flex items-center gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
-                  <CheckIcon className="shrink-0" />
-                  <span className="text-[18px] leading-[1.8em]">{label}</span>
+                <li
+                  key={label}
+                  className="type-rule-p flex items-start gap-3 break-inside-avoid text-left text-[#101651]"
+                >
+                  <CheckIcon className="mt-0.5 shrink-0" />
+                  <span>{label}</span>
                 </li>
               ))}
             </ul>
             <div className="shrink-0 md:pl-2">
               <Link
                 href="#"
-                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E3058D] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
               >
                 See Full Pricing & Plans
                 <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>

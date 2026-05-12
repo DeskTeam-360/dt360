@@ -6,7 +6,7 @@ function MarqueeSegment() {
     <>
       {homeMarqueeItems.map((item) => (
         <Fragment key={item.id}>
-          <span className="inline-flex max-w-none shrink-0 items-baseline gap-0 whitespace-nowrap px-6 text-sm font-medium tracking-tight text-white sm:px-10 sm:text-[0.9375rem] md:text-base">
+          <span className="inline-flex max-w-none shrink-0 items-baseline gap-2 whitespace-nowrap px-6 text-[20px] leading-[30px] font-medium tracking-tight text-white sm:gap-2.5 sm:px-10">
             <span className="font-bold">{item.leadBold}</span>
             <span>{item.rest}</span>
           </span>
@@ -30,11 +30,11 @@ export function SocialProofMarquee() {
         background: "linear-gradient(to right, #E3058D 0%, #7547C5 100%)",
       }}
     >
-      <div className="relative flex w-max py-3 home-marquee-track sm:py-3.5 md:py-4">
-        <div className="flex shrink-0 items-center">
+      <div className="relative flex h-[106px] w-max items-center home-marquee-track">
+        <div className="flex shrink-0 items-center gap-6 sm:gap-8">
           <MarqueeSegment />
         </div>
-        <div className="flex shrink-0 items-center" aria-hidden>
+        <div className="flex shrink-0 items-center gap-6 sm:gap-8" aria-hidden>
           <MarqueeSegment />
         </div>
       </div>

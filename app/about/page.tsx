@@ -7,7 +7,7 @@ import { AboutTeamPeople } from "@/components/pages/about/AboutTeamPeople";
 
 export default function AboutPage() {
   return (
-    <main className="flex flex-col pt-16 lg:pt-[72px] bg-white w-full overflow-hidden">
+    <main className="flex flex-col bg-white w-full overflow-hidden">
       <AboutHeroStory />
       <AboutStoryTimeline />
       <AboutNumbersThatMatter />

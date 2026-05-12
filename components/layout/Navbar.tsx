@@ -7,7 +7,7 @@ import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { NavDropdown } from "./NavDropdown";
-import { navServices, navShowcase, type NavMenuItem } from "@/data/nav";
+import { navServices, type NavMenuItem } from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
 
@@ -15,8 +15,15 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
-  const showSolidHeader = isHomePage || scrolled;
+  const showSolidHeader = scrolled;
+  const isShowcaseOrBlog = pathname === "/showcase" || pathname === "/blog";
+  const useDarkTopNav = isShowcaseOrBlog && !scrolled;
+  const desktopLinkClass = useDarkTopNav
+    ? "text-[#11104C]/90 hover:text-[#11104C]"
+    : "text-white/90 hover:text-white";
+  const desktopHomeClass = useDarkTopNav
+    ? "text-[#11104C] hover:text-[#11104C]/80"
+    : "text-white hover:text-white/80";
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -28,14 +35,13 @@ export function Navbar() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    if (isHomePage) return;
     const onScroll = () => {
       setScrolled(window.scrollY > SCROLL_SOLID_THRESHOLD_PX);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHomePage, pathname]);
+  }, [pathname]);
   return (
     <>
       <header
@@ -52,9 +58,11 @@ export function Navbar() {
           )}
           aria-hidden
         />
-        <Container className="relative z-10 max-w-7xl">
+        <Container className="relative z-10 max-w-7xl py-5 lg:py-0">
           <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-            <DeskTeamLogo />
+            <div className="flex min-h-0 min-w-0 flex-1 items-center lg:flex-none">
+              <DeskTeamLogo tone={useDarkTopNav ? "dark" : "light"} />
+            </div>
 
             <nav
               className="hidden items-center gap-8 lg:flex"
@@ -62,41 +70,61 @@ export function Navbar() {
             >
               <Link
                 href="/"
-                className="font-nav-primary text-white transition-colors hover:text-white/80"
+                className={cn("font-nav-primary transition-colors", desktopHomeClass)}
               >
                 Home
               </Link>
               <Link
                 href="/how-it-works"
                 className={cn(
-                  "font-nav-primary transition-colors hover:text-white",
-                  pathname === "/how-it-works" ? "text-white" : "text-white/90",
+                  "font-nav-primary transition-colors",
+                  pathname === "/how-it-works"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
                 )}
               >
                 How it Works
               </Link>
-              <NavDropdown label="Services" href="/services" items={navServices} />
-              <NavDropdown label="Showcase" items={navShowcase} />
+              <NavDropdown
+                label="Services"
+                href="/services"
+                items={navServices}
+                triggerClassName={desktopLinkClass}
+              />
+              <Link
+                href="/showcase"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
+              >
+                Showcase
+              </Link>
               <Link
                 href="/blog"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Blog
               </Link>
               <Link
                 href="/about"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 About
               </Link>
             </nav>
 
-            <div className="hidden h-6 w-px shrink-0 bg-white/25 lg:block" aria-hidden />
+            <div
+              className={cn(
+                "hidden h-6 w-px shrink-0 lg:block",
+                useDarkTopNav ? "bg-[#11104C]/20" : "bg-white/25",
+              )}
+              aria-hidden
+            />
 
             <div className="hidden items-center gap-5 lg:flex">
               <Link
                 href="/login"
-                className="font-nav-primary text-white/90 transition-colors hover:text-white"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Log in
               </Link>
@@ -111,13 +139,16 @@ export function Navbar() {
 
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-lg p-2 text-white hover:bg-white/10 lg:hidden"
+              className={cn(
+                "inline-flex items-center justify-center rounded-lg p-2 lg:hidden",
+                useDarkTopNav ? "text-[#11104C] hover:bg-black/10" : "text-white hover:bg-white/10",
+              )}
               onClick={() => setMobileOpen(true)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
               aria-label="Open menu"
             >
-              <MenuIcon className="size-6" />
+              <MenuIcon className="size-8" />
             </button>
           </div>
         </Container>
@@ -155,7 +186,9 @@ export function Navbar() {
                 How it Works
               </MobileLink>
               <MobileGroup title="Services" items={navServices} onPick={() => setMobileOpen(false)} />
-              <MobileGroup title="Showcase" items={navShowcase} onPick={() => setMobileOpen(false)} />
+              <MobileLink href="/showcase" onNavigate={() => setMobileOpen(false)}>
+                Showcase
+              </MobileLink>
               <MobileLink href="/blog" onNavigate={() => setMobileOpen(false)}>
                 Blog
               </MobileLink>

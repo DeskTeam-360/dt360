@@ -7,21 +7,30 @@ type NavDropdownProps = {
   items: NavMenuItem[];
   href?: string;
   className?: string;
+  triggerClassName?: string;
 };
 
-export function NavDropdown({ label, items, href, className }: NavDropdownProps) {
+export function NavDropdown({ label, items, href, className, triggerClassName }: NavDropdownProps) {
   return (
     <div className={cn("group relative", className)}>
       {href ? (
         <Link
           href={href}
-          className="font-nav-primary flex items-center gap-1 text-white/90 transition-colors hover:text-white"
+          className={cn(
+            "font-nav-primary flex items-center gap-1 transition-colors",
+            triggerClassName ?? "text-white/90 hover:text-white",
+          )}
         >
           {label}
           <ChevronDown className="size-3.5 opacity-70" aria-hidden />
         </Link>
       ) : (
-        <span className="font-nav-primary flex cursor-default items-center gap-1 text-white/90 transition-colors hover:text-white">
+        <span
+          className={cn(
+            "font-nav-primary flex cursor-default items-center gap-1 transition-colors",
+            triggerClassName ?? "text-white/90 hover:text-white",
+          )}
+        >
           {label}
           <ChevronDown className="size-3.5 opacity-70" aria-hidden />
         </span>
