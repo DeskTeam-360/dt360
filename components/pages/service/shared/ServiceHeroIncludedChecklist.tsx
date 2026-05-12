@@ -73,7 +73,7 @@ export function ServiceHeroIncludedChecklist({
                 height={40}
                 className="absolute left-[-18px] top-1/2 h-[40px] w-[40px] -translate-y-1/2"
               />
-              <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">{item}</p>
+              <p className="type-rule-h5 leading-relaxed font-light text-white/95 xl:leading-tight">{item}</p>
             </div>
           ) : (
             <div
@@ -81,7 +81,7 @@ export function ServiceHeroIncludedChecklist({
               aria-hidden
               className="pointer-events-none relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 opacity-0 sm:py-4 sm:pl-16 sm:pr-4"
             >
-              <p className="type-rule-h5 leading-relaxed text-white/95 xl:leading-tight">&nbsp;</p>
+              <p className="type-rule-h5 leading-relaxed font-light text-white/95 xl:leading-tight">&nbsp;</p>
             </div>
           ),
         )}
