@@ -42,7 +42,7 @@ export function Hero() {
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               <span className="block">Get Your Funnels Built</span>
-              <span className="block text-[#ef2f9e]">Your Emails Sent</span>
+              <span className="block text-[#E3058D]">Your Emails Sent</span>
             </h1>
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Your Automation Running

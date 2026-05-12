@@ -41,7 +41,7 @@ export function Hero() {
         <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
-              Your <span className="text-[#ef2f9e]">CRM &amp; Automation</span> Should Work for You
+              Your <span className="text-[#E3058D]">CRM &amp; Automation</span> Should Work for You
             </h1>
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Not the Other Way Around

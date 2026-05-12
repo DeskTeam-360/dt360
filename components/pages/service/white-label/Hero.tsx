@@ -36,7 +36,7 @@ export function Hero() {
         <div className="grid items-start gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="relative z-10 w-full min-w-0 translate-y-[1.5em]">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
-              Grow Your <span className="text-[#ef2f9e]">Agency</span>
+              Grow Your <span className="text-[#E3058D]">Agency</span>
             </h1>
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Without Growing Your Payroll
@@ -52,7 +52,7 @@ export function Hero() {
               aria-hidden
             />
             <SafeImage
-              src="/images/White Label - Hero.png"
+              src="/images/Service - White Label - hero.png"
               alt="Hero illustration for white label agency service"
               width={820}
               height={620}

@@ -128,12 +128,21 @@ About; path url: /about
 Global Font Setting:
 H1 Poppins Bold 76px
 H2 Poppins SemiBold 64px
-H3 Poppins SemiBold 48px
+H3 Poppins SemiBold 48px 
 H4 Poppins SemiBold 36px
 H5 Montserrat Bold 24px
 H6 Montserrat Bold 18px
 P Montserrat Medium 18px
 B Montserrat Bold 20px
+
+Global Font Setting tablet and mobile:
+H1 Poppins Bold 56px
+H2 Poppins SemiBold 48px
+H3 Poppins SemiBold 40px
+H4 Poppins SemiBold 30px
+
+Line Height:
+p line-height 1.9em
 
 for Navbar font
 Montserrat Bold 14px

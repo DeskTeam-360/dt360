@@ -8,5 +8,6 @@ type HeadingProps = {
 };
 
 export function Heading({ as: Tag = "h2", children, className }: HeadingProps) {
-  return <Tag className={cn("font-semibold tracking-tight", className)}>{children}</Tag>;
+  /** Berat & ukuran dari `@layer base` (`globals.css`) per level heading */
+  return <Tag className={cn("tracking-tight", className)}>{children}</Tag>;
 }

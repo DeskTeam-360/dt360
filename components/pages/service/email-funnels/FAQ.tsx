@@ -18,11 +18,7 @@ const faqs = [
 ];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number>(0);
-
-  const toggleItem = (index: number) => {
-    setOpenIndex((current) => (current === index ? -1 : index));
-  };
+  const [openId, setOpenId] = useState<string>(faqs[0].question);
 
   return (
     <section className="relative overflow-visible py-20 sm:py-24 lg:py-28 2xl:py-36">
@@ -35,21 +31,22 @@ export function FAQ() {
           className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center"
         />
       </div>
+     
+      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
       <SafeImage
         src="/images/Service - Graphic Code.png"
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-12 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <SafeImage
         src="/images/Service - Graphic Design.png"
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-12 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-14 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-16 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
-      <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[540px]">
             <SafeImage
@@ -61,31 +58,33 @@ export function FAQ() {
             />
           </div>
           <div>
-            <h2 className="type-rule-h2 leading-tight text-[#11114d]">
-              Got Questions? <span className="text-[#e62a98]">Good</span>
+            <h2 className="type-rule-h2 leading-tight text-[#11104C]">
+              Got Questions? <span className="text-[#E3058D]">Good</span>
             </h2>
-            <div className="mt-5 space-y-3 sm:mt-6">
-              {faqs.map((item, index) => {
-                const isOpen = openIndex === index;
+            <div className="mt-6 space-y-4">
+              {faqs.map((item) => {
+                const isOpen = openId === item.question;
 
                 return (
-                  <div key={item.question} className="rounded-xl bg-transparent p-0">
+                  <article key={item.question} className="rounded-[16px]">
                     <button
                       type="button"
-                      onClick={() => toggleItem(index)}
-                      className={`flex w-full items-center justify-between gap-4 rounded-xl px-4 py-3 text-left ${
-                        isOpen ? "bg-[#FFEDC0] text-[#1E1E1E]" : "bg-[#7D8BF0] text-white"
+                      onClick={() => setOpenId((prev) => (prev === item.question ? "" : item.question))}
+                      className={`group flex w-full items-center justify-between rounded-[16px] px-5 py-4 text-left transition duration-300 ease-out ${
+                        isOpen
+                          ? "bg-[#FFEDC0] text-[#1d2357]"
+                          : "bg-[#7D8BF0] text-white hover:bg-[#FFEDC0] hover:text-[#1d2357]"
                       }`}
                       aria-expanded={isOpen}
                     >
-                      <span className="type-rule-h5 leading-tight">{item.question}</span>
+                      <span className="type-rule-h5 pr-3 font-semibold leading-tight">{item.question}</span>
                       <span
-                        className={`flex h-6 w-6 shrink-0 items-center justify-center transition-transform ${
-                          isOpen ? "rotate-180" : "rotate-0"
+                        className={`shrink-0 transition-transform duration-300 ${
+                          isOpen ? "rotate-180 text-[#1d2357]" : "text-white group-hover:text-[#1d2357]"
                         }`}
                         aria-hidden
                       >
-                        <svg viewBox="0 0 24 24" className="h-[24px] w-[24px]" fill="none">
+                        <svg width={22} height={22} viewBox="0 0 24 24" fill="none">
                           <path
                             d="M6 9L12 15L18 9"
                             stroke="currentColor"
@@ -97,9 +96,11 @@ export function FAQ() {
                       </span>
                     </button>
                     {isOpen ? (
-                      <p className="type-rule-p mt-2 px-2 text-[#11114d]">{item.answer}</p>
+                      <div className="px-5 pb-2 pt-3">
+                        <p className="text-[#24285e]">{item.answer}</p>
+                      </div>
                     ) : null}
-                  </div>
+                  </article>
                 );
               })}
             </div>

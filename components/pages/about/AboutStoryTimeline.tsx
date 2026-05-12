@@ -27,7 +27,7 @@ export function AboutStoryTimeline() {
           {/* Content */}
           <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start pb-20">
             <div className="pt-2">
-              <h2 className="text-3xl font-[var(--font-poppins)] font-bold leading-tight text-[#11104c] sm:text-4xl lg:text-[50px] lg:leading-[60px]">
+              <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104c] lg:leading-[1.15]">
                 {mistake.title}
               </h2>
               <div className="mt-8 space-y-6 font-[var(--font-montserrat)] text-[15px] lg:text-[16px] font-semibold leading-[30px] text-black/80">
@@ -66,7 +66,7 @@ export function AboutStoryTimeline() {
           {/* Content */}
           <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start pb-20">
             <div className="pt-2">
-              <h2 className="text-3xl font-[var(--font-poppins)] font-bold leading-tight text-[#11104c] sm:text-4xl lg:text-[50px] lg:leading-[60px]">
+              <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104c] lg:leading-[1.15]">
                 {parkingLot.title}
               </h2>
               <div className="mt-8 space-y-6 font-[var(--font-montserrat)] text-[15px] lg:text-[16px] font-semibold leading-[30px] text-black/80">
@@ -94,7 +94,7 @@ export function AboutStoryTimeline() {
 
           {/* Content */}
           <article className="flex-1 pb-10 pt-2 lg:pt-4">
-            <h2 className="text-3xl font-[var(--font-poppins)] font-bold leading-tight text-[#11104c] sm:text-4xl lg:text-[50px] lg:leading-[60px]">
+            <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104c] lg:leading-[1.15]">
               {millionDollar.title}
             </h2>
             <div className="mt-8 space-y-6 font-[var(--font-montserrat)] text-[15px] lg:text-[16px] font-semibold leading-[30px] text-black/80">

@@ -104,9 +104,9 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         <SafeImage
           src="/images/Service/web-design-dev-pricing-bottom-left.png"
           alt=""
-          width={900}
-          height={900}
-          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[45%] max-w-none object-contain object-left-bottom"
+          width={500}
+          height={500}
+          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
         />
       ) : null}
       {/* Radial pink — kiri bawah, lebih besar */}
@@ -135,13 +135,13 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         >
           {isWebDev ? (
             <>
-              One Team, <span className="text-[#ef2fa9]">Three Plans,</span><br/>Pick Your Speed
+              One Team, <span className="text-[#E3058D]">Three Plans,</span><br/>Pick Your Speed
             </>
           ) : (
             <>
               Simple Pricing,
               <br />
-              <span className="text-[#ef2fa9]">All-Inclusive</span>
+              <span className="text-[#E3058D]">All-Inclusive</span>
             </>
           )}
         </h2>
@@ -201,7 +201,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           <div className="mt-10 flex justify-center md:mt-12 xl:mt-14">
             <Link
               href="#"
-              className="font-button group inline-flex items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
+              className="font-button group inline-flex items-center justify-center gap-2 rounded-[10px] bg-[#E6236D] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
             >
               See Full Pricing &amp; Plans &raquo;
             </Link>
@@ -210,7 +210,10 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 xl:mt-14 xl:flex-row xl:items-center xl:justify-between">
             <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
               {FEATURE_ITEMS.map((label) => (
-                <li key={label} className="flex items-start gap-3 text-left text-[15px] font-semibold text-[#101651] sm:text-base">
+                <li
+                  key={label}
+                  className="type-rule-p flex items-start gap-3 break-inside-avoid text-left text-[#101651]"
+                >
                   <CheckIcon className="mt-0.5 shrink-0" />
                   <span>{label}</span>
                 </li>
@@ -219,7 +222,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
             <div className="shrink-0 md:pl-2">
               <Link
                 href="#"
-                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#ef2fa9] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E3058D] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
               >
                 See Full Pricing & Plans
                 <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>

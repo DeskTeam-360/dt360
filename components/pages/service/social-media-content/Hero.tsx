@@ -42,7 +42,7 @@ export function Hero() {
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               <span className="block">Consistent </span>
-              <span className="block text-[#ef2f9e]">Social Media Content</span>
+              <span className="block text-[#E3058D]">Social Media Content</span>
             </h1>
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Without the Chaos

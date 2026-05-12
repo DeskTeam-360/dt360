@@ -6,14 +6,16 @@ import { WhoItsFor } from "@/components/pages/service/white-label/WhoItsFor";
 export default function WhiteLabelPage() {
   return (
     <main className="bg-white">
-      <Hero />
-      <div className="-mt-px">
+      <div className="mx-0 px-0">
+        <Hero />
+      </div>
+      <div className="-mt-px mx-0 px-0">
         <WhoItsFor />
       </div>
-      <div className="-mt-px">
+      <div className="-mt-px mx-0 px-0">
         <CaseStudy />
       </div>
-      <div className="-mt-px">
+      <div className="-mt-px mx-0 px-0">
         <FAQ />
       </div>
     </main>

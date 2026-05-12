@@ -92,7 +92,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
                     }`}
                     aria-expanded={isOpen}
                   >
-                    <span className="pr-3 text-[24px] font-extrabold leading-tight">{item.question}</span>
+                    <span className="pr-3 text-[24px] font-semibold leading-tight">{item.question}</span>
                     <span
                       className={`shrink-0 transition-transform duration-300 ${
                         isOpen ? "rotate-180 text-[#1d2357]" : "text-white group-hover:text-[#1d2357]"

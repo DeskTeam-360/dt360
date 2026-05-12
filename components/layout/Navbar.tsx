@@ -58,9 +58,11 @@ export function Navbar() {
           )}
           aria-hidden
         />
-        <Container className="relative z-10 max-w-7xl">
+        <Container className="relative z-10 max-w-7xl py-5 lg:py-0">
           <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-            <DeskTeamLogo tone={useDarkTopNav ? "dark" : "light"} />
+            <div className="flex min-h-0 min-w-0 flex-1 items-center lg:flex-none">
+              <DeskTeamLogo tone={useDarkTopNav ? "dark" : "light"} />
+            </div>
 
             <nav
               className="hidden items-center gap-8 lg:flex"
@@ -146,7 +148,7 @@ export function Navbar() {
               aria-controls="mobile-nav"
               aria-label="Open menu"
             >
-              <MenuIcon className="size-6" />
+              <MenuIcon className="size-8" />
             </button>
           </div>
         </Container>

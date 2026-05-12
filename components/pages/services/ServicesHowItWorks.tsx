@@ -122,7 +122,7 @@ export function ServicesHowItWorks({
             id="services-how-it-works-heading"
             className="text-center text-[64px] font-extrabold leading-tight tracking-tight text-white"
           >
-            How It <span className="text-[#ef2fa9]">Works</span>
+            How It <span className="text-[#E3058D]">Works</span>
           </h2>
         </div>
       </div>

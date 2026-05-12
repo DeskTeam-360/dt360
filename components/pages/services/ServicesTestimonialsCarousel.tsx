@@ -106,7 +106,7 @@ export function ServicesTestimonialsCarousel({ items }: Props) {
                   className="pointer-events-none rounded-[30px] object-cover object-top"
                   sizes="(max-width: 640px) 86vw, (max-width: 1279px) 82vw, 74vw"
                 />
-                <div className="relative z-[1] grid h-full gap-8 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-center sm:gap-10">
+                <div className="relative z-[1] grid h-full gap-8 pt-[100px] sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-center sm:gap-10 sm:pt-0">
                   <div className="mx-auto aspect-square w-full max-w-[12rem] overflow-hidden rounded-2xl bg-neutral-200 sm:mx-0">
                     {item.imageSrc ? (
                       <Image

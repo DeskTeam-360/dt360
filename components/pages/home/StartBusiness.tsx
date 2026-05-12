@@ -53,7 +53,7 @@ export function StartBusiness() {
 
           <h2
             id="start-business-heading"
-            className="relative z-10 mx-auto max-w-4xl text-center tracking-tight text-[#0f1030]"
+            className="relative z-10 mx-auto max-w-4xl text-center leading-tight tracking-tight text-[#0f1030] sm:leading-[1.12] lg:leading-[1.08]"
           >
             {headlineBefore}
             <span className="text-[#e4277a]">{headlineHighlight}</span>
@@ -61,7 +61,7 @@ export function StartBusiness() {
             <br />
             {headlineSecondLine}
           </h2>
-          <p className="relative z-10 mx-auto mt-6 max-w-3xl text-pretty text-center text-base leading-relaxed text-zinc-700 sm:mt-8 sm:text-lg sm:leading-relaxed">
+          <p className="relative z-10 mx-auto mt-6 max-w-3xl text-pretty text-center leading-relaxed text-zinc-700 sm:mt-8 sm:leading-relaxed">
             {subheading}
           </p>
         </div>

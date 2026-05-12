@@ -17,7 +17,9 @@ export default function HowItWorksPage() {
   return (
     <main className="min-w-0 overflow-x-hidden pt-0">
       <HowItWorksHero />
-      <HowItWorksTaskSteps />
+      <div className="mb-[-100px]">
+        <HowItWorksTaskSteps />
+      </div>
       <HowItWorksMeetGrid />
       <HowItWorksDontDo />
       <HowItWorksRealTeam />

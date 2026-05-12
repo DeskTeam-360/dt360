@@ -3,7 +3,7 @@ import { SafeImage } from "@/components/shared/SafeImage";
 
 export function CaseStudy() {
   return (
-    <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28 2xl:py-36">
+    <section className="relative overflow-hidden bg-white pt-10 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28 2xl:pt-16 2xl:pb-36">
       {/* Bottom-left: red radial behind decorative image (~10% larger) — visible all breakpoints */}
       <SafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
@@ -35,8 +35,8 @@ export function CaseStudy() {
         className="pointer-events-none absolute top-0 right-[-5rem] z-[1] h-auto max-w-none opacity-95 w-[min(52vw,200px)] sm:w-[min(46vw,260px)] md:w-[min(42vw,340px)] lg:top-[-5rem] lg:right-[-13rem] lg:w-[min(38vw,520px)]"
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-        <h2 className="type-rule-h3 text-center tracking-wide text-[#11114d]">
-          CASE <span className="text-[#e62a98]">STUDY</span>
+        <h2 className="type-rule-h2 font-bold text-center tracking-wide text-[#1B1464]">
+          CASE <span className="text-[#E3058D]">STUDY</span>
         </h2>
         <div className="mx-auto mt-12 max-w-[1040px] sm:mt-14">
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-12">
@@ -58,11 +58,11 @@ export function CaseStudy() {
                 />
               </div>
             </div>
-            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[linear-gradient(135deg,#7976BA_0%,#E595BB_100%)] px-6 py-8 text-white shadow-xl sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="type-rule-h5 leading-tight lg:leading-snug">
+            <div className="flex w-full flex-col gap-4 rounded-2xl bg-[linear-gradient(360deg,#5F69AD_0%,#FFA2DB_100%)] px-6 py-8 text-white shadow-xl sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
+              <p className="type-rule-h5 text-[28px] leading-tight lg:leading-snug">
                 Duct Tape Marketing – From Capacity-Constrained to Full-Service
               </p>
-              <p className="type-rule-p leading-relaxed">
+              <p className="type-rule-p text-[24px] leading-relaxed">
                 DeskTeam360 cleared the backlog that was throttling new client work. By routing web, design, and campaign
                 production through a white-label desk, the team expanded offer breadth without adding headcount - and
                 clients still saw Duct Tape&apos;s brand on every deliverable.

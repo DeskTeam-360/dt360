@@ -7,18 +7,20 @@ import { ServicesPricingSection } from "@/components/pages/services/ServicesPric
 export default function WebDesignDevelopmentPage() {
   return (
     <main className="relative bg-white">
-      <div className="relative z-10">
+      <div className="relative z-10 mx-0 px-0">
         <Hero />
       </div>
-      <ServicesPlatformsSupportedBridge />
-      <div className="relative">
+      <div className="mx-0 px-0">
+        <ServicesPlatformsSupportedBridge />
+      </div>
+      <div className="relative mx-0 px-0">
         <WebDesignDevelopmentTestimonialAndHowSection />
-        <div className="relative z-0">
+        <div className="relative z-0 mx-0 px-0">
           <ServicesPricingSection variant="webDesignDevelopment" />
         </div>
       </div>
 
-      <div className="-mt-px">
+      <div className="-mt-px mx-0 px-0">
         <ServicesFaqSection variant="webDesignDevelopment" />
       </div>
     </main>

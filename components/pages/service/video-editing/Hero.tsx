@@ -42,7 +42,7 @@ export function Hero() {
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               <span className="block">Hand Off Your</span>
-              <span className="block text-[#ef2f9e]">Video Editing</span>
+              <span className="block text-[#E3058D]">Video Editing</span>
             </h1>
             <p className="type-rule-h4 mt-4 leading-tight text-white">
               Get Your Time Back
@@ -53,7 +53,7 @@ export function Hero() {
               us the raw file, tell us what you need, and wake up to a finished cut.
             </p>
           </div>
-          <div className="relative mx-auto w-full max-w-[640px]">
+          <div className="relative mx-auto w-full max-w-[640px] lg:-mb-[150px]">
             <div
               className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
               aria-hidden

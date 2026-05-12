@@ -15,7 +15,7 @@ export function AboutHeroStory() {
       <Container className="relative z-[10] max-w-[1440px] px-6 lg:px-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div className="pb-10 lg:pb-[140px] w-full max-w-[791px]">
-            <h1 className="text-3xl font-[var(--font-poppins)] font-bold sm:text-4xl lg:text-[50px] lg:leading-[64px] text-white max-w-[600px]">
+            <h1 className="font-[var(--font-poppins)] leading-tight text-white max-w-[600px] lg:leading-[1.12]">
               {aboutHero.title}
             </h1>
             <div className="mt-6 max-w-[643px] font-[var(--font-montserrat)] font-semibold text-[16px] leading-[30px] text-white/90">

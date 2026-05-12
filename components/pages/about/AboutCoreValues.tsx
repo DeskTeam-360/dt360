@@ -7,7 +7,7 @@ export function AboutCoreValues() {
     <section className="relative overflow-hidden bg-[#11104C] py-16 lg:py-32 text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(227,5,141,0.4),transparent_45%),radial-gradient(circle_at_70%_80%,rgba(0,200,244,0.25),transparent_40%)]" />
       <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
-        <h2 className="text-center font-[var(--font-poppins)] text-4xl font-bold leading-tight sm:text-5xl lg:text-[64px] lg:leading-[80px]">
+        <h2 className="font-[var(--font-poppins)] text-center leading-tight lg:leading-[1.12]">
           We Run This Business the Way <span className="text-[#E3058D]">We Want to Be Treated</span>
         </h2>
         <div className="mt-24 grid gap-8 gap-y-16 lg:gap-8 lg:grid-cols-3 max-w-[1200px] mx-auto">
@@ -44,7 +44,7 @@ export function AboutCoreValues() {
                    />
                 </div>
 
-                <h3 className="font-[var(--font-poppins)] text-[20px] lg:text-[22px] font-bold leading-[30px] text-white">
+                <h3 className="type-rule-h5 leading-snug text-white">
                   {value.title}
                 </h3>
                 

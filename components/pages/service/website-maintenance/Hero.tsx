@@ -41,7 +41,7 @@ export function Hero() {
         <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
-              Your <span className="text-[#ef2f9e]">Website Maintenance </span> Shouldn&apos;t Be a Second Job
+              Your <span className="text-[#E3058D]">Website Maintenance </span> Shouldn&apos;t Be a Second Job
             </h1>
             <p className="type-rule-p mt-4 w-full max-w-none text-white/85">
               WordPress updates, security patches, and speed issues quietly pile up in the background. Your DeskTeam360

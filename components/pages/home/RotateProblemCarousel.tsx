@@ -7,6 +7,15 @@ import { Container } from "@/components/shared/Container";
 import { rotateProblemCards } from "@/data/home";
 import { cn } from "@/lib/utils";
 
+/** Figma: active (center) 611×688; inactive target ~464×610. */
+const ACTIVE_W = 611;
+const ACTIVE_H = 688;
+/**
+ * Skala samping harus **seragam** (s,s) agar foto `object-cover` tidak ter-stretch vertikal.
+ * Pakai min(lebar, tinggi) relatif ke frame aktif → kartu samping lebih pendek dari 610px tapi proporsi benar.
+ */
+const INACTIVE_SCALE = Math.min(464 / ACTIVE_W, 610 / ACTIVE_H);
+
 export function RotateProblemCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -42,7 +51,7 @@ export function RotateProblemCarousel() {
             style={{ perspective: "1400px" }}
           >
             <div
-              className="relative h-full w-full [transform-style:preserve-3d]"
+              className="relative h-full min-h-0 w-full min-w-0 [transform-style:preserve-3d]"
               onTouchStart={(e) => {
                 touchStartX.current = e.touches[0]?.clientX ?? null;
               }}
@@ -79,13 +88,13 @@ export function RotateProblemCarousel() {
                       transform: isCenter
                         ? "translateZ(0) rotateY(0deg) scale(1)"
                         : isRight
-                          ? "translateX(84%) translateZ(-48px) rotateY(0deg) scale(0.88)"
-                          : "translateX(-84%) translateZ(-48px) rotateY(0deg) scale(0.88)",
+                          ? `translateX(84%) translateZ(-48px) rotateY(0deg) scale(${INACTIVE_SCALE})`
+                          : `translateX(-84%) translateZ(-48px) rotateY(0deg) scale(${INACTIVE_SCALE})`,
                     }}
                     aria-label={isCenter ? undefined : `Show card: ${card.title}`}
                     aria-current={isCenter ? "true" : undefined}
                   >
-                    <span className="pointer-events-none absolute inset-0 z-0">
+                    <span className="pointer-events-none absolute inset-0 z-0 block min-h-0 min-w-0 overflow-hidden">
                       <Image
                         src={card.imageSrc}
                         alt=""
