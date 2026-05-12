@@ -22,7 +22,7 @@ export function HowItWorksDelegationResults() {
           {titleBefore}
           <span className="text-[#8b5cf6]">{titleHighlight1}</span>
           {titleMiddle}
-          <span className="text-[#E3058D]">{titleHighlight2}</span>
+          <span className="text-[#ef2fa9]">{titleHighlight2}</span>
         </h2>
       </div>
       <ServicesTestimonialsCarousel items={servicesTestimonials} />

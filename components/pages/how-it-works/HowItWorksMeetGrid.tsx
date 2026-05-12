@@ -46,7 +46,7 @@ export function HowItWorksMeetGrid() {
             className="relative z-10 type-rule-h2 max-w-4xl whitespace-pre-line tracking-tight text-[#101651]"
           >
             {titleBefore}
-            <span className="text-[#E3058D]">{titleHighlight}</span>
+            <span className="text-[#ef2fa9]">{titleHighlight}</span>
             {titleAfter}
           </h2>
         </div>
