@@ -1,7 +1,8 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
 
-const API_URL = process.env.WORDPRESS_API_URL || 'https://deskteam360.com/endpoint';
+const API_URL =
+  process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
 const API_USER = process.env.WORDPRESS_USER;
 const API_TOKEN = process.env.WORDPRESS_AUTH_TOKEN;
 
@@ -27,6 +28,30 @@ const client = new GraphQLClient(API_URL, {
   headers: getAuthHeader(),
 });
 
+/** Shape of a post node returned by our WPGraphQL queries */
+type WpPostNode = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt?: string;
+  content?: string;
+  date?: string;
+  featuredImage?: { node?: { sourceUrl?: string } };
+  author?: { node?: { name?: string } };
+  categories?: { nodes?: Array<{ name?: string }> };
+};
+
+type WpCategoryNameNode = { name?: string };
+
+type GetAllBlogDataResponse = {
+  posts?: { nodes?: WpPostNode[] };
+  categories?: { nodes?: WpCategoryNameNode[] };
+};
+
+type GetPostBySlugResponse = {
+  post?: WpPostNode | null;
+};
+
 // Helper to calculate read time
 const calculateReadTime = (content: string): string => {
   const wordsPerMinute = 200;
@@ -36,15 +61,15 @@ const calculateReadTime = (content: string): string => {
 };
 
 // Helper to map WordPress post to BlogPost type
-const mapPost = (post: any): BlogPost => {
+const mapPost = (post: WpPostNode): BlogPost => {
   return {
     id: post.id,
     slug: post.slug,
     title: post.title,
-    excerpt: post.excerpt?.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...', // Strip HTML
+    excerpt: `${(post.excerpt?.replace(/<[^>]*>?/gm, '') ?? '').slice(0, 160)}...`, // Strip HTML
     content: post.content,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
-    category: post.categories?.nodes[0]?.name || 'Uncategorized',
+    category: post.categories?.nodes?.[0]?.name || 'Uncategorized',
     author: post.author?.node?.name || 'Admin',
     readTime: calculateReadTime(post.content || ''),
     date: post.date,
@@ -89,15 +114,21 @@ export const getBlogData = async () => {
   `;
 
   try {
-    const data: any = await client.request(query, { first: 100 });
-    
+    const data = await client.request<GetAllBlogDataResponse>(query, { first: 100 });
+
     // Parse categories
-    const allCategories = data.categories?.nodes
-      .map((c: any) => c.name)
-      .filter((name: string) => {
-        const lowerName = name.toLowerCase();
-        return !lowerName.includes('case study') && !lowerName.includes('case-study') && lowerName !== 'uncategorized';
-      }) || [];
+    const allCategories =
+      data.categories?.nodes
+        ?.map((c) => c.name)
+        .filter((name): name is string => typeof name === 'string' && name.length > 0)
+        .filter((name) => {
+          const lowerName = name.toLowerCase();
+          return (
+            !lowerName.includes('case study') &&
+            !lowerName.includes('case-study') &&
+            lowerName !== 'uncategorized'
+          );
+        }) ?? [];
     
     const categories = ['All Posts', ...allCategories];
 
@@ -175,7 +206,7 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   `;
 
   try {
-    const data: any = await client.request(query, { id: slug });
+    const data = await client.request<GetPostBySlugResponse>(query, { id: slug });
     return data.post ? mapPost(data.post) : null;
   } catch (error) {
     console.error('Error fetching post by slug:', error);
