@@ -61,7 +61,8 @@ export function BlogPostContent() {
 
         {/* Decorative Icon - Left Side */}
         <div className="absolute left-[-20px] md:left-[20px] top-[10%] w-[149px] h-[174px] pointer-events-none hidden lg:block z-[-1]">
-          <SafeImage src="/images/blog/blog-icon-website-design.png" alt="" fill className="object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/blog/blog-icon-website-design.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
         </div>
 
         {/* Rotated Decorative Image - Right Side */}
@@ -70,7 +71,8 @@ export function BlogPostContent() {
             <div className="rotate-[-42.51deg]">
               <div className="w-[542.557px] h-[254.598px] relative">
                 <div className="absolute inset-0 opacity-50 overflow-hidden pointer-events-none">
-                  <SafeImage src="/images/blog/blog-decorative-image.png" alt="" className="h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/blog/blog-decorative-image.png" alt="" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
                 </div>
               </div>
             </div>

@@ -6,14 +6,16 @@ import { SafeImage } from "@/components/shared/SafeImage";
 import Link from "next/link";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { BlogPost } from "@/data/blog";
-import parse, { HTMLReactParserOptions, Element, Text, domToReact } from 'html-react-parser';
+import parse, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser';
 import { DOMNode } from 'html-react-parser';
 
 // Helper to extract plain text from an HTML node for searching keywords like "Pro tip"
 const extractText = (node: DOMNode): string => {
-  if (node instanceof Text) return node.data || '';
-  if (node instanceof Element && node.children) {
-    return (node.children as DOMNode[]).map(extractText).join('');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nodeAsAny = node as any;
+  if (nodeAsAny.type === 'text') return nodeAsAny.data || '';
+  if (nodeAsAny.children) {
+    return (nodeAsAny.children as DOMNode[]).map(extractText).join('');
   }
   return '';
 };
@@ -36,40 +38,44 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
         let results: Element[] = [];
         if (!nodes) return results;
         for (const node of nodes) {
-          if (node instanceof Element && names.includes(node.name)) {
-            results.push(node);
-          } else if (node instanceof Element && node.children) {
-            results = results.concat(findRecursive(node.children as DOMNode[], names));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const nodeAsAny = node as any;
+          if (nodeAsAny.type === 'tag' && names.includes(nodeAsAny.name)) {
+            results.push(nodeAsAny);
+          } else if (nodeAsAny.children) {
+            results = results.concat(findRecursive(nodeAsAny.children as DOMNode[], names));
           }
         }
         return results;
       };
 
-      if (domNode instanceof Element) {
-        const className = domNode.attribs?.class || '';
-        const id = domNode.attribs?.id || '';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const domNodeAsAny = domNode as any;
+      if (domNodeAsAny.type === 'tag') {
+        const className = domNodeAsAny.attribs?.class || '';
+        const id = domNodeAsAny.attribs?.id || '';
 
         // Hide redundant WordPress related posts section and headings
         if (className.includes('dt360-related-posts')) {
           return null;
         }
-        if (domNode.name === 'h2' || domNode.name === 'h3') {
-          const text = extractText(domNode).toLowerCase().trim();
+        if (domNodeAsAny.name === 'h2' || domNodeAsAny.name === 'h3') {
+          const text = extractText(domNodeAsAny).toLowerCase().trim();
           if (text === 'you might also like') {
             return null;
           }
         }
 
         // Handle Blockquote
-        if (domNode.name === 'blockquote') {
-          const textContent = extractText(domNode).toLowerCase();
+        if (domNodeAsAny.name === 'blockquote') {
+          const textContent = extractText(domNodeAsAny).toLowerCase();
           
           if (textContent.includes('pro tip:')) {
             // Pro Tip Style
             return (
               <div className="bg-[#E6236D] rounded-[35px] p-8 md:p-12 my-12">
                 <div className="text-white text-lg md:text-2xl font-semibold font-montserrat">
-                  {domToReact(domNode.children as DOMNode[], options)}
+                  {domToReact(domNodeAsAny.children as DOMNode[], options)}
                 </div>
               </div>
             );
@@ -78,7 +84,7 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
             return (
               <div className="bg-[#45108B] rounded-[35px] p-8 md:p-12 my-12 text-center">
                 <div className="text-white text-2xl md:text-3xl font-bold font-montserrat">
-                  {domToReact(domNode.children as DOMNode[], options)}
+                  {domToReact(domNodeAsAny.children as DOMNode[], options)}
                 </div>
               </div>
             );
@@ -87,8 +93,8 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
 
         // Handle Author Box
         if (className.includes('dt360-author-box')) {
-          const images = findRecursive(domNode.children as DOMNode[], ['img']);
-          const textElements = findRecursive(domNode.children as DOMNode[], ['h2', 'h3', 'p']);
+          const images = findRecursive(domNodeAsAny.children as DOMNode[], ['img']);
+          const textElements = findRecursive(domNodeAsAny.children as DOMNode[], ['h2', 'h3', 'p']);
           const actualImg = images[0];
 
           return (
@@ -105,16 +111,18 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
               )}
               <div className="flex-grow text-center md:text-left">
                 {textElements.map((child: Element, idx: number) => {
-                  if (child.name === 'h2' || child.name === 'h3') {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const childAsAny = child as any;
+                  if (childAsAny.name === 'h2' || childAsAny.name === 'h3') {
                     return (
                       <h3 key={idx} className="text-[#11104C] text-2xl md:text-3xl font-bold font-poppins mb-2">
-                        {domToReact(child.children as DOMNode[], options)}
+                        {domToReact(childAsAny.children as DOMNode[], options)}
                       </h3>
                     );
                   }
                   return (
                     <p key={idx} className="text-[#5F69AD] text-lg md:text-xl font-medium font-montserrat leading-relaxed mb-4 last:mb-0">
-                      {domToReact(child.children as DOMNode[], options)}
+                      {domToReact(childAsAny.children as DOMNode[], options)}
                     </p>
                   );
                 })}
@@ -125,7 +133,7 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
 
         // Handle Table of Contents
         if (className.includes('dt360-toc')) {
-          const links = findRecursive(domNode.children as DOMNode[], ['a']);
+          const links = findRecursive(domNodeAsAny.children as DOMNode[], ['a']);
           
           return (
             <div className="bg-[#F8F9FF] rounded-[35px] p-8 md:p-12 my-12 max-w-full md:max-w-[75%] mx-auto">
@@ -176,28 +184,31 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
             shortTextColor = "text-[#45108B]";
           }
 
-          const content = (domNode.children as DOMNode[]).map((child: DOMNode, idx: number) => {
-            if (child instanceof Element) {
-              if (child.name === 'h2') {
+          const content = (domNodeAsAny.children as DOMNode[]).map((child: DOMNode, idx: number) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const childAsAny = child as any;
+            if (childAsAny.type === 'tag') {
+              if (childAsAny.name === 'h2') {
                 return (
                   <h2 key={idx} className="text-white text-2xl md:text-4xl font-bold font-poppins mb-4">
-                    {domToReact(child.children as DOMNode[], options)}
+                    {domToReact(childAsAny.children as DOMNode[], options)}
                   </h2>
                 );
               }
-              if (child.name === 'p') {
-                const text = extractText(child).trim();
+              if (childAsAny.name === 'p') {
+                const text = extractText(childAsAny).trim();
                 const isShort = text.length > 0 && text.length < 100;
                 const pColor = className.includes('outline') ? 'text-[#11104C]' : 'text-white';
                 
                 return (
                   <p key={idx} className={`font-montserrat leading-relaxed mb-4 ${isShort ? `${shortTextColor} text-xl md:text-2xl font-bold` : `${pColor} text-lg md:text-xl font-medium`}`}>
-                    {domToReact(child.children as DOMNode[], options)}
+                    {domToReact(childAsAny.children as DOMNode[], options)}
                   </p>
                 );
               }
-              if (child.name === 'a') {
-                const { href, ...linkProps } = child.attribs || {};
+              if (childAsAny.name === 'a') {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { href, class: _class, style: _style, ...linkProps } = childAsAny.attribs || {};
                 const btnBg = className.includes('cta-secondary') ? 'bg-[#45108B]' : 'bg-[#e3058d]';
                 return (
                   <div key={idx} className="mt-6">
@@ -206,17 +217,17 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                       {...linkProps}
                       className={`${btnBg} text-white px-8 py-4 md:px-10 md:py-5 rounded-[15px] font-bold text-xl md:text-2xl transition-all hover:opacity-90 hover:scale-105 shadow-lg font-montserrat inline-block`}
                     >
-                      {domToReact(child.children as DOMNode[], options)}
+                      {domToReact(childAsAny.children as DOMNode[], options)}
                     </Link>
                   </div>
                 );
               }
             }
-            if (child instanceof Text && child.data.trim()) {
+            if (childAsAny.type === 'text' && childAsAny.data.trim()) {
               const textColor = className.includes('outline') ? 'text-[#11104C]' : 'text-white';
               return (
                 <p key={idx} className={`${textColor} text-lg md:text-xl font-medium font-montserrat mb-4`}>
-                  {child.data.trim()}
+                  {childAsAny.data.trim()}
                 </p>
               );
             }
@@ -231,64 +242,66 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
         }
 
         // Handle Headings
-        if (domNode.name === 'h2') {
-          const text = extractText(domNode);
+        if (domNodeAsAny.name === 'h2') {
+          const text = extractText(domNodeAsAny);
           const generatedId = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-          const idToUse = domNode.attribs?.id || generatedId;
+          const idToUse = domNodeAsAny.attribs?.id || generatedId;
           
           return (
             <h2 id={idToUse} className="text-[#11104C] text-[32px] md:text-[48px] font-bold mb-8 mt-16 font-poppins scroll-mt-24">
-              {domToReact(domNode.children as DOMNode[], options)}
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </h2>
           );
         }
-        if (domNode.name === 'h3') {
-          const text = extractText(domNode);
+        if (domNodeAsAny.name === 'h3') {
+          const text = extractText(domNodeAsAny);
           const generatedId = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-          const idToUse = domNode.attribs?.id || generatedId;
-
+          const idToUse = domNodeAsAny.attribs?.id || generatedId;
+ 
           return (
             <h3 id={idToUse} className="text-[#11104C] text-2xl md:text-4xl font-bold mb-6 mt-8 font-poppins scroll-mt-24">
-              {domToReact(domNode.children as DOMNode[], options)}
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </h3>
           );
         }
 
         // Handle Paragraphs
-        if (domNode.name === 'p') {
+        if (domNodeAsAny.name === 'p') {
           // Check if parent is blockquote
-          const isInsideBlockquote = domNode.parent && (domNode.parent as Element).name === 'blockquote';
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const isInsideBlockquote = domNodeAsAny.parent && (domNodeAsAny.parent as any).name === 'blockquote';
           
           if (isInsideBlockquote) {
             return (
               <p className="text-white leading-[1.5em] mb-0 font-montserrat font-semibold">
-                {domToReact(domNode.children as DOMNode[], options)}
+                {domToReact(domNodeAsAny.children as DOMNode[], options)}
               </p>
             );
           }
 
           return (
             <p className="text-black leading-[1.9em] mb-8 font-montserrat font-semibold text-[18px]">
-              {domToReact(domNode.children as DOMNode[], options)}
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </p>
           );
         }
 
         // Handle Strong/B
-        if (domNode.name === 'strong' || domNode.name === 'b') {
+        if (domNodeAsAny.name === 'strong' || domNodeAsAny.name === 'b') {
           return (
             <strong className="font-extrabold">
-              {domToReact(domNode.children as DOMNode[], options)}
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </strong>
           );
         }
 
         // Handle Links
-        if (domNode.name === 'a') {
-          const { href, ...props } = domNode.attribs || {};
+        if (domNodeAsAny.name === 'a') {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { href, class: _class, style: _style, ...props } = domNodeAsAny.attribs || {};
           return (
             <Link href={href || '#'} {...props} className="text-black underline hover:text-[#E6236D] transition-colors font-montserrat">
-              {domToReact(domNode.children as DOMNode[], options)}
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </Link>
           );
         }
@@ -349,7 +362,8 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
 
         {/* Decorative Icon - Left Side */}
         <div className="absolute left-[-20px] md:left-[20px] top-[10%] w-[149px] h-[174px] pointer-events-none hidden lg:block z-[-1]">
-          <SafeImage src="/images/blog/blog-icon-website-design.png" alt="" fill className="object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/blog/blog-icon-website-design.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
         </div>
 
         {/* Rotated Decorative Image - Right Side */}
@@ -358,7 +372,8 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
             <div className="rotate-[-42.51deg]">
               <div className="w-[542.557px] h-[254.598px] relative">
                 <div className="absolute inset-0 opacity-50 overflow-hidden pointer-events-none">
-                  <SafeImage src="/images/blog/blog-decorative-image.png" alt="" className="h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/blog/blog-decorative-image.png" alt="" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
                 </div>
               </div>
             </div>
