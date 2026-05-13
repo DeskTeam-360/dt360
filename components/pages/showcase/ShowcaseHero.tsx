@@ -1,67 +1,114 @@
-import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
-import { showcaseHeroContent } from "@/data/showcase";
+"use client";
 
+import { useMemo, useState } from "react";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { showcaseHeroContent, showcaseCategories, showcaseItems } from "@/data/showcase";
+import { cn } from "@/lib/utils";
+import { ShowcaseCarousel } from "./ShowcaseCarousel";
+
+/**
+ * Hero Showcase — disusun mengacu artboard ~1440×1062 (proporsi canvas desain).
+ * Ornamen (gradient + gambar) boleh overlap ke luar frame; tidak dipotong `overflow-hidden`.
+ */
 export function ShowcaseHero() {
   const { titleLine1, titleLine2, description } = showcaseHeroContent;
+  const [activeCategory, setActiveCategory] = useState<string>(showcaseCategories[0]);
+
+  const filteredItems = useMemo(() => {
+    if (activeCategory === "All Work") return showcaseItems;
+    return showcaseItems.filter((item) =>
+      item.categories.includes(activeCategory),
+    );
+  }, [activeCategory]);
 
   return (
     <section
       id="showcase-hero"
-      className="relative overflow-hidden bg-white pt-16 pb-12 text-black lg:pt-24 lg:pb-16"
+      className="relative min-h-screen overflow-x-clip overflow-y-visible bg-white text-[#11104C]"
       aria-labelledby="showcase-hero-heading"
     >
-      {/* Main container */}
-      <Container className="relative z-10 flex min-h-[80vh] items-center justify-center max-w-7xl">
-        {/* Decorative side backgrounds: bounded by main container */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <div
-            className="absolute right-0 top-0 h-[1266px] w-[1266px] translate-x-[78%] -translate-y-[27%]"
-            style={{
-              background:
-                "radial-gradient(closest-side, rgba(227,5,141,0.4) 0%, rgba(227,5,141,0) 100%)",
-            }}
-            aria-hidden
-          />
+      {/* Radial washes — di level section supaya bisa overlap keluar max-w container */}
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_100%_0%,rgba(227,5,141,0.42)_0%,rgba(227,5,141,0.12)_42%,transparent_72%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_0%_50%,rgba(0,200,244,0.4)_0%,rgba(0,200,244,0.1)_40%,transparent_70%)]" />
+      </div>
+
+      {/* Frame desain 1440px — pusat halaman; ornamen relatif ke sini */}
+      <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-[100px] sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
+
+        {/* Gambar samping — bleed keluar frame; di ≥1440 ukuran & offset lebih dekat ke canvas */}
         <div
-          className="absolute left-0 top-0 h-[1266px] w-[1266px] -translate-x-[78%] -translate-y-[5%]"
-          style={{
-            background:
-              "radial-gradient(closest-side, rgba(0,200,244,0.4) 0%, rgba(1,211,252,0) 100%)",
-          }}
+          className="pointer-events-none absolute z-[1] left-[-12%] top-[6%] w-[min(42vw,22rem)] sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
-        />
-        <div className="absolute left-[-20%] top-[8%] w-[min(28vw,22rem)]">
-            <SafeImage
-              src="/images/showcase-hero-bgleft-1.png"
-              alt=""
-              width={360}
-              height={430}
-              className="h-auto w-full object-contain"
-            />
-          </div>
-        <div className="absolute right-[-20%] top-[18%] w-[min(30vw,24rem)]">
-            <SafeImage
-              src="/images/showcase-hero-bgright-1.png"
-              alt=""
-              width={400}
-              height={450}
-              className="h-auto w-full object-contain"
-            />
+        >
+          <SafeImage
+            src="/images/showcase-hero-bgleft-1.png"
+            alt=""
+            width={400}
+            height={480}
+            className="h-auto w-full object-contain select-none"
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
+          aria-hidden
+        >
+          <SafeImage
+            src="/images/showcase-hero-bgright-1.png"
+            alt=""
+            width={440}
+            height={500}
+            className="h-auto w-full object-contain select-none"
+          />
+        </div>
+
+        {/* Konten teks */}
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center py-12 text-center">
+          <h1 id="showcase-hero-heading" className="type-rule-h1 text-balance text-[#11104C]">
+            <span className="block tracking-tight">{titleLine1}</span>
+            <span className="mt-2 block tracking-tight lg:mt-3">{titleLine2}</span>
+          </h1>
+          <p className="type-rule-p mx-auto mt-10 w-full max-w-[590px] text-pretty text-[#11104C]/90">
+            {description}
+          </p>
+
+          {/* Filter buttons */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            {showcaseCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={cn(
+                  "rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200",
+                  activeCategory === cat
+                    ? "bg-gradient-to-r from-[#E3058D] to-[#E3058D] text-white shadow-md"
+                    : "border border-[#11104C]/20 bg-white text-[#11104C] hover:border-[#11104C]/40 hover:shadow-sm"
+                )}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Sub-container (text block) */}
-        <div className="relative z-10 mx-auto w-full text-center">
-          <h1 id="showcase-hero-heading" className="text-balance">
-            <span className="block">{titleLine1}</span>
-            <span className="mt-2 block">{titleLine2}</span>
-          </h1>
-          <p className="type-rule-p mx-auto mt-12 max-w-3xl text-pretty text-black/90">
-            {description}
-          </p>
+        {/* Showcase carousel */}
+        <div className="relative z-10 w-full pb-16">
+          <ShowcaseCarousel items={filteredItems} />
         </div>
-      </Container>
+      </div>
+
+      {/* Arc divider — melengkung ke atas, transparan di atas, #EEEEEE di bawah */}
+      <div className="relative z-10 w-full" aria-hidden>
+        <svg
+          className="block h-6 w-full"
+          viewBox="0 0 1440 24"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0,24 C0,24 720,-24 1440,24 L1440,24 L0,24 Z" fill="#EEEEEE" />
+        </svg>
+      </div>
     </section>
   );
 }
