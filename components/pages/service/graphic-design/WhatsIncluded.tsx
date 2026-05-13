@@ -21,7 +21,7 @@ export function WhatsIncluded() {
   const totalPages = Math.ceil(includedItems.length / itemsPerPage);
   const visibleItems = useMemo(
     () => includedItems.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage),
-    [includedItems, pageIndex, itemsPerPage],
+    [pageIndex, itemsPerPage],
   );
 
   const rowSlots = useMemo(

@@ -130,8 +130,9 @@ export default function RootLayout({
     <html
       lang={siteConfig.language}
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} ${fontReadexPro.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         <OrganizationJsonLd />
         <GlobalSameRouteClickHandler />
         <Navbar />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLClient, gql } from 'graphql-request';
 
 const API_URL = 'https://clone.deskteam360.com/endpoint';

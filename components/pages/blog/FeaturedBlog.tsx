@@ -7,15 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const MOCK_FEATURED_POSTS: Record<string, BlogPost> = {
-  "All Posts": FEATURED_POST,
-  "Delegation": { ...FEATURED_POST, title: "How to Delegate Tasks Effectively (Without Losing Your Mind)", category: "Delegation", image: "/images/blog/blog-delegate.png" },
-  "Outsourcing": { ...FEATURED_POST, title: "Outsourcing 101: What to Look for and When to Avoid", category: "Outsourcing", image: "/images/blog/blog-marketing.png" },
-  "Agency Growth": { ...FEATURED_POST, title: "How to Scale Your Agency Without Hiring Full-time staff", category: "Agency Growth", image: "/images/blog/blog-scale.png" },
-  "Comparisons": { ...FEATURED_POST, title: "DeskTeam360 vs Design Pickle: Which Is Right For You?", category: "Comparisons", image: "/images/blog/blog-comparison.png" },
-  "Pricing & Cost": { ...FEATURED_POST, title: "How Much Does Website Maintenance Actually Cost?", category: "Pricing & Cost", image: "/images/blog/blog-website.png" },
-  "Scaling": { ...FEATURED_POST, title: "Scaling Your Operations Without Breaking the Bank", category: "Scaling", image: "/images/blog/blog-featured.png" },
-};
+
 
 interface FeaturedBlogProps {
   featuredPostsMap: Record<string, BlogPost>;

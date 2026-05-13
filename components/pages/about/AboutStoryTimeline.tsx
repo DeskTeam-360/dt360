@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Container } from "@/components/shared/Container";
 import { aboutTimeline } from "@/data/about";
 import { AboutAssetImage } from "./AboutAssetImage";

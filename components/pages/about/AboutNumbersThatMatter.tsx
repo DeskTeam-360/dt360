@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { numbersThatMatter } from "@/data/about";
