@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
 
