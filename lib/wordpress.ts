@@ -65,7 +65,16 @@ const mapPost = (post: WpPostNode): BlogPost => {
     id: post.id,
     slug: post.slug,
     title: post.title,
-    excerpt: `${(post.excerpt?.replace(/<[^>]*>?/gm, '') ?? '').slice(0, 160)}...`, // Strip HTML
+    excerpt: (post.excerpt?.replace(/<[^>]*>?/gm, '') ?? '')
+      .replace(/&#8211;/g, '–')
+      .replace(/&#8217;/g, "'")
+      .replace(/&#8220;/g, '"')
+      .replace(/&#8221;/g, '"')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .trim(), // Strip HTML and decode entities
     content: post.content,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
     category: post.categories?.nodes?.[0]?.name || 'Uncategorized',

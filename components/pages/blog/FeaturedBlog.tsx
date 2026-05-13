@@ -6,6 +6,7 @@ import { SafeImage } from '@/components/shared/SafeImage';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 
 
@@ -82,12 +83,14 @@ export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps
 
               {/* Action row aligned horizontally */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-auto">
-                <button className="bg-[#e3058d] text-white px-6 py-3 md:px-8 md:py-4 rounded-[30px] font-bold text-[18px] md:text-[20px] flex items-center gap-3 hover:bg-[#d11f62] transition-colors">
-                  Read Post
-                  <div className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-white flex items-center justify-center">
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 stroke-[3]" />
-                  </div>
-                </button>
+                <Link href={`/blog/${currentPost.slug}`}>
+                  <button className="bg-[#e3058d] text-white px-6 py-3 md:px-8 md:py-4 rounded-[30px] font-bold text-[18px] md:text-[20px] flex items-center gap-3 hover:bg-[#d11f62] transition-colors">
+                    Read Post
+                    <div className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-white flex items-center justify-center">
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 stroke-[3]" />
+                    </div>
+                  </button>
+                </Link>
                 
                 <div className="flex items-center gap-4 text-[#e3058d] font-semibold text-[16px] md:text-[20px]">
                   <span>{currentPost.readTime}</span>

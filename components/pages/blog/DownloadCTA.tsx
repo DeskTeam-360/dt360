@@ -2,7 +2,23 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { SafeImage } from '@/components/shared/SafeImage';
 
-export function DownloadCTA() {
+interface DownloadCTAProps {
+  title?: string;
+  subtitle?: React.ReactNode;
+  description?: string;
+  buttonText?: string;
+  subtext?: string;
+  showSubtext?: boolean;
+}
+
+export function DownloadCTA({
+  title = "Free Download:",
+  subtitle = <React.Fragment>The Ultimate Task<br />Delegation Template</React.Fragment>,
+  description = "The exact framework I use with 400+ clients. Multi-sensory, step-by-step delegation that actually gets done right. Loom video + written outline + checklist - all in one template.",
+  buttonText = "Download Free",
+  subtext = "No credit card. No catch. Just the template.",
+  showSubtext = true
+}: DownloadCTAProps = {}) {
   return (
     <section className="w-full relative bg-white">
       <div className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
@@ -11,7 +27,7 @@ export function DownloadCTA() {
           src="/images/blog/Download BG.png"
           alt="Download Background"
           fill
-          className="object-fill object-center z-0"
+          className="object-cover md:object-fill object-center z-0"
         />
 
         {/* Content Container */}
@@ -30,10 +46,10 @@ export function DownloadCTA() {
               </div>
               <div className="text-white">
                 <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] font-bold font-heading mb-1">
-                  Free Download:
+                  {title}
                 </h2>
                 <p className="text-[28px] md:text-[32px] lg:text-[40px] leading-[1.2] font-heading font-medium">
-                  The Ultimate Task<br />Delegation Template
+                  {subtitle}
                 </p>
               </div>
             </div>
@@ -41,20 +57,22 @@ export function DownloadCTA() {
             {/* Right Side: Text and CTA */}
             <div className="text-white">
               <p className="text-[16px] md:text-[18px] lg:text-[20px] leading-[1.5] font-semibold mb-8">
-                The exact framework I use with 400+ clients. Multi-sensory, step-by-step delegation that actually gets done right. Loom video + written outline + checklist - all in one template.
+                {description}
               </p>
 
               <div className="flex flex-col xl:flex-row items-start xl:items-center gap-4 xl:gap-6">
                 <button className="bg-white text-[#11104c] px-6 py-3 md:px-8 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-gray-100 transition-colors flex-shrink-0">
-                  Download Free
+                  {buttonText}
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
                     <ChevronRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
                   </div>
                 </button>
 
-                <p className="text-[12px] md:text-[14px] text-white/90 leading-tight font-medium">
-                  No credit card. No catch. Just the template.
-                </p>
+                {showSubtext && (
+                  <p className="text-[12px] md:text-[14px] text-white/90 leading-tight font-medium">
+                    {subtext}
+                  </p>
+                )}
               </div>
             </div>
             

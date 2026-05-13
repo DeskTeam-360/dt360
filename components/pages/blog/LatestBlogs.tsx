@@ -6,6 +6,7 @@ import { SafeImage } from '@/components/shared/SafeImage';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 // Generate 15 dummy posts to fill 3 pages (5 posts per page)
 const DUMMY_POSTS = Array.from({ length: 15 }).map((_, i) => {
@@ -96,12 +97,14 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
                     <p className="text-black/80 group-hover:text-white/80 text-[14px] md:text-[16px] leading-[1.6] md:leading-[28px] mb-8 font-medium transition-colors duration-300">
                       {highlighted.excerpt}
                     </p>
-                    <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 self-end transition-colors mt-auto">
-                      Read Post
-                      <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
-                      </div>
-                    </button>
+                    <Link href={`/blog/${highlighted.slug}`} className="self-end mt-auto">
+                      <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 transition-colors">
+                        Read Post
+                        <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
+                          <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
+                        </div>
+                      </button>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -180,12 +183,14 @@ function BlogCard({ post }: { post: BlogPost }) {
           {post.title}
         </h3>
         <div className="mt-auto">
-          <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[14px] md:text-[16px] flex items-center gap-3 transition-colors">
-            Read Post
-            <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
-              <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
-            </div>
-          </button>
+          <Link href={`/blog/${post.slug}`}>
+            <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[14px] md:text-[16px] flex items-center gap-3 transition-colors">
+              Read Post
+              <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
+                <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
+              </div>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
