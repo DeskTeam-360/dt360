@@ -37,7 +37,7 @@ export function FAQ() {
               alt="FAQ illustration with design and development tools."
               width={900}
               height={980}
-              className="h-auto w-full max-w-[34rem]"
+              className="h-auto w-full max-w-full lg:max-w-[34rem]"
               sizes="(max-width: 1024px) 90vw, 560px"
             />
           </div>

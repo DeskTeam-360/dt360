@@ -44,7 +44,7 @@ export function HeroCtaLink({
     >
       <span
         className={cn(
-          "font-button inline-flex h-[52px] w-full min-w-0 items-center gap-3 rounded-[10px] px-3 text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:w-auto",
+          "font-button inline-flex min-h-[52px] w-full min-w-0 items-center gap-3 rounded-[10px] px-3 py-3 text-white transition-[transform,box-shadow,background-color] duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transition-colors motion-reduce:group-hover:translate-y-0 sm:w-auto sm:py-0 sm:h-[52px]",
           showChevron ? "justify-between" : "justify-center px-6",
           variantClass[variant],
         )}

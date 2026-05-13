@@ -33,8 +33,8 @@ function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
           sizes="120px"
         />
       </div>
-      <div className="relative z-[1] grid gap-6 sm:grid-cols-[minmax(0,11rem)_1fr] sm:items-start sm:gap-8">
-        <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl sm:mx-0">
+      <div className="relative z-[1] grid gap-6 lg:grid-cols-[minmax(0,11rem)_1fr] lg:items-start lg:gap-8">
+        <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl lg:mx-0">
           <Image
             src={item.imageSrc}
             alt={item.imageAlt}
@@ -44,7 +44,7 @@ function TestimonialSlideCard({ item }: { item: SocialProofTestimonial }) {
             sizes="(max-width: 1440px) 60vw, 28vw"
           />
         </div>
-        <div className="min-w-0 pt-0 sm:pt-1">
+        <div className="min-w-0 pt-0 lg:pt-1">
           <p className="type-rule-p text-pretty text-[#2a2f61]">{item.quote}</p>
           <p className="mt-4 type-rule-p text-[#101651]">
             <strong>{item.attribution}</strong>

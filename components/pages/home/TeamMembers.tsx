@@ -108,7 +108,7 @@ export function TeamMembers() {
   return (
     <section
       id="team"
-      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24"
+      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24 mt-[-2px]"
       aria-labelledby="team-heading"
     >
       <Container className="max-w-7xl">
@@ -123,7 +123,7 @@ export function TeamMembers() {
       {/* Full-bleed slider: di bawah 1440px padding = setengah kartu di tepi + snap center; ≥1440px padding lebih kecil agar lebih banyak kartu penuh terlihat */}
       <div
         className={cn(
-          "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14",
+          "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full",
         )}
       >
         <button

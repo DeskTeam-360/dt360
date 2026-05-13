@@ -8,7 +8,7 @@ export function Pricing() {
     pricingSection;
 
   return (
-    <section id="pricing" className="bg-white pt-14 sm:pt-16 lg:pt-20" aria-labelledby="pricing-heading">
+    <section id="pricing" className="bg-white pt-14 sm:pt-16 lg:pt-20 mt-[-1px]" aria-labelledby="pricing-heading">
       <Container className="max-w-7xl pb-12">
         <h2 id="pricing-heading" className="mx-auto max-w-4xl text-balance text-center text-[#101651]">
           <span className="block sm:inline">{headlineLine1} </span>
@@ -20,7 +20,7 @@ export function Pricing() {
           {subheading}
         </p>
 
-        <div className="mb-12 mt-12 grid gap-3.5 sm:mt-14 md:grid-cols-3 lg:mt-16">
+        <div className="mb-12 mt-12 grid gap-3.5 sm:mt-14 md:grid-cols-1 lg:grid-cols-3 lg:mt-16">
           {plans.map((plan) => (
             <PricingPlanCardComponent key={plan.id} plan={plan} ctaLabel={ctaLabel} />
           ))}
@@ -57,9 +57,9 @@ export function Pricing() {
                 alt="Risk-free guarantee icon."
                 width={110}
                 height={110}
-                className="h-auto w-[110px] shrink-0"
+                className="h-auto w-[60px] shrink-0 sm:w-[80px] lg:w-[110px]"
               />
-              <h3 className="text-[60px] font-normal leading-[64px] tracking-tight text-white">
+              <h3 className="text-[36px] font-normal leading-[40px] tracking-tight text-white sm:text-[48px] sm:leading-[52px] lg:text-[60px] lg:leading-[64px]">
                 <span className="block">
                   <span className="font-normal">Try It </span>
                   <strong>Risk-Free</strong>

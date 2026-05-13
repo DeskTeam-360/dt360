@@ -164,7 +164,7 @@ export function Navbar() {
           />
           <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-[#11104C] shadow-2xl">
             <div
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_20%_200%_at_0%_0%,rgba(0,200,244,0.45)_0%,rgba(0,200,244,0.1)_14%,transparent_28%),radial-gradient(ellipse_36%_48%_at_-4%_-4%,rgba(0,200,244,0.2)_0%,transparent_32%)]"
+              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(140%_60%_at_100%_0%,#1e50a099_0%,#143c824d_50%,#0000_70%)]"
               aria-hidden
             />
             <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-4 py-4">

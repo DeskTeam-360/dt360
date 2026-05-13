@@ -117,12 +117,12 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
               "flex h-full min-h-0 flex-col items-stretch justify-start overflow-visible p-0 text-left",
               isWideMagenta
                 ? cn(
-                    "rounded-2xl lg:w-[calc(100%+theme(spacing.6)+max(0px,(100vw-80rem)/2))] lg:rounded-l-[1rem] lg:rounded-r-none lg:mr-[calc(-1*(theme(spacing.6)+max(0px,(100vw-80rem)/2))))]",
+                    "rounded-2xl lg:w-[calc(100%+theme(spacing.6)-1em)] lg:rounded-[1rem] lg:mr-[calc(-1*(theme(spacing.6)-1em))]",
                     wideMagentaEmpty && "min-h-[14rem] lg:min-h-[18rem]",
                   )
                 : isWideOrange
                   ? cn(
-                      "rounded-2xl lg:w-[calc(100%+theme(spacing.6)+max(0px,(100vw-80rem)/2))] lg:rounded-l-none lg:rounded-r-[1rem] lg:ml-[calc(-1*(theme(spacing.6)+max(0px,(100vw-80rem)/2))))]",
+                      "rounded-2xl lg:w-[calc(100%+theme(spacing.6)-1em)] lg:rounded-[1rem] lg:ml-[calc(-1*(theme(spacing.6)-1em))]",
                       wideOrangeEmpty && "min-h-[14rem] lg:min-h-[18rem]",
                     )
                   : "rounded-2xl lg:rounded-[1rem]",
@@ -167,7 +167,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
               )}
               {card.mediaSrc ? (
                 <div className="relative min-h-[14rem] w-full min-w-0 overflow-visible lg:h-full lg:min-h-0">
-                  <div className="absolute top-1/2 left-0 h-[150%] w-[150%] max-w-none -translate-y-1/2">
+                  <div className="absolute top-1/2 left-0 h-full w-full max-w-none -translate-y-1/2">
                     <Image
                       src={card.mediaSrc}
                       alt={card.mediaAlt ?? ""}
@@ -247,7 +247,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
           >
             <div className="flex h-full min-h-0 w-full flex-col p-0">
               {isWideOrangeWhitePanel && card.mediaSrc ? (
-                <div className="grid min-h-0 flex-1 grid-cols-1 gap-0 lg:grid-cols-2 lg:items-stretch">
+                <div className="grid min-h-0 flex-1 grid-cols-1 gap-0 px-8 pt-6 pb-0 sm:pt-8 sm:pb-0 lg:grid-cols-2 lg:items-stretch lg:px-10 lg:py-8">
                   <div className="flex min-h-0 min-w-0 flex-col justify-center gap-3 sm:gap-4 lg:gap-4">
                     {card.title ? (
                       <h4 className="type-rule-h4 text-left tracking-tight text-balance text-white">

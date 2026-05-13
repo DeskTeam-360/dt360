@@ -17,7 +17,7 @@ function LogoRow({
   return (
     <ul
       className={cn(
-        "flex shrink-0 list-none items-center gap-x-14 gap-y-8 px-8 sm:gap-x-16 sm:px-12 lg:gap-x-20",
+        "flex shrink-0 list-none items-center gap-x-8 gap-y-8 px-4 sm:gap-x-16 sm:px-12 lg:gap-x-20",
       )}
       aria-hidden={ariaHidden ? true : undefined}
       aria-label={ariaHidden ? undefined : "Client logos"}
@@ -33,7 +33,7 @@ function LogoRow({
               alt={ariaHidden ? "" : logo.alt}
               width={400}
               height={104}
-              className="h-[104px] w-auto max-w-[18rem] object-contain opacity-90 sm:max-w-[22rem]"
+              className="h-[70px] w-auto max-w-[10rem] object-contain opacity-90 sm:h-[104px] sm:max-w-[22rem]"
               sizes="(max-width: 768px) 180px, 280px"
             />
           </div>
@@ -48,7 +48,7 @@ export function TrustedBy() {
 
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-20 lg:py-24"
+      className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-20 lg:py-24 mt-[-1px]"
       aria-labelledby="trusted-by-heading"
     >
       <div
@@ -70,7 +70,7 @@ export function TrustedBy() {
 
       {/* Marquee + fade: lebar viewport penuh (keluar dari max-w container). */}
       <div
-        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-6 sm:mt-14 sm:py-8"
+        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-6 sm:mt-14 sm:py-8 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full"
         role="presentation"
         aria-label="Client logos marquee"
       >

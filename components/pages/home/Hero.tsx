@@ -14,7 +14,7 @@ export function Hero() {
     >
       {/* Same Figma corner treatment as navbar — continues the cyan “arc” into hero */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_0%_0%,rgba(0,200,244,0.5)_0%,transparent_50%)]" 
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_0%_0%,rgba(0,200,244,0.5)_0%,transparent_30%)] lg:bg-[radial-gradient(ellipse_100%_100%_at_0%_0%,rgba(0,200,244,0.5)_0%,transparent_50%)]"
         aria-hidden
       />
       {/* Warm orange wash — bottom-left, behind CTA / stats (Figma-style) */}
@@ -25,7 +25,7 @@ export function Hero() {
 
       <Container className="relative z-10 max-w-7xl">
         <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,652px)] lg:items-center lg:gap-0 xl:gap-0">
-          <div className="relative z-20 lg:pr-4">
+          <div className="relative z-20 pt-[1em] lg:pt-0 lg:pr-4">
             <h1
               id="hero-heading"
               className="type-rule-h1 text-balance text-white"
@@ -71,7 +71,7 @@ export function Hero() {
         aria-hidden
       >
         <svg
-          className="block h-12 w-full sm:h-14 lg:h-16"
+          className="block h-[calc(var(--spacing)*19)] w-full sm:h-14 lg:h-16"
           viewBox="0 0 1440 100"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"

@@ -28,7 +28,7 @@ export function FAQAccordionList({ items }: Props) {
               )}
               onClick={() => setOpenId(isOpen ? null : item.id)}
             >
-              <b className="leading-tight">{item.question}</b>
+              <b className="text-[24px] leading-tight">{item.question}</b>
               <span
                 className={cn(
                   "flex h-6 w-6 shrink-0 items-center justify-center transition-transform",

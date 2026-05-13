@@ -47,10 +47,10 @@ export function LastCTA() {
                 {secondaryCta.label}
               </HeroCtaLink>
             </div>
-            <p className="mt-3 pb-10 text-[16px] italic text-[#11104C]">{note}</p>
+            <p className="mt-3 pb-4 text-[16px] italic text-[#11104C] sm:pb-6 lg:pb-10">{note}</p>
           </div>
 
-          <div className="relative z-[2] mx-auto mt-10 flex w-full max-w-[33rem] justify-center lg:absolute lg:-top-60 lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:w-auto lg:max-w-none lg:items-end lg:justify-end">
+          <div className="relative z-[2] mx-auto mt-4 flex w-full max-w-[33rem] justify-center sm:mt-6 lg:absolute lg:-top-60 lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:w-auto lg:max-w-none lg:items-end lg:justify-end">
             <Image
               src={imageSrc}
               alt={imageAlt}

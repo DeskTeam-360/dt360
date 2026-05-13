@@ -47,7 +47,7 @@ export function RotateProblemCarousel() {
       <Container className="relative z-10 max-w-7xl px-4 py-0 sm:px-6">
         <div className="mx-auto flex w-full max-w-[min(100%,1100px)] flex-col items-center">
           <div
-            className="relative mx-auto h-[688px] w-[611px] max-w-[calc(100vw-2rem)] shrink-0"
+            className="relative mx-auto h-[480px] w-full max-w-[calc(100vw-2rem)] shrink-0 sm:h-[580px] sm:w-[500px] lg:h-[688px] lg:w-[611px]"
             style={{ perspective: "1400px" }}
           >
             <div
@@ -105,10 +105,10 @@ export function RotateProblemCarousel() {
                       />
                     </span>
                     <span
-                      className="relative z-[2] flex h-full w-[344px] max-h-full flex-col items-start justify-start gap-16 overflow-y-auto py-16 pl-[42px] pr-[22px] text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased"
+                      className="relative z-[2] flex h-full w-full max-h-full flex-col items-start justify-start gap-8 overflow-y-auto py-10 pl-6 pr-4 text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased sm:w-[344px] sm:gap-12 sm:py-12 sm:pl-8 sm:pr-5 lg:gap-16 lg:py-16 lg:pl-[42px] lg:pr-[22px]"
                       aria-hidden={!isCenter}
                     >
-                      <span className="font-[var(--font-poppins)] text-[48px] font-semibold leading-[52px] tracking-tight text-white">
+                      <span className="font-[var(--font-poppins)] text-[32px] font-semibold leading-[36px] tracking-tight text-white sm:text-[40px] sm:leading-[44px] lg:text-[48px] lg:leading-[52px]">
                         {card.title}
                       </span>
                       <span className="text-pretty text-[18px] font-normal leading-[30px] text-white">
