@@ -2,12 +2,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
 
-<<<<<<< Updated upstream
-const API_URL =
-  process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
-=======
-const API_URL = process.env.WORDPRESS_URL || process.env.WORDPRESS_API_URL || 'https://deskteam360.com/endpoint';
->>>>>>> Stashed changes
+const API_URL = process.env.WORDPRESS_URL || process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
 const API_USER = process.env.WORDPRESS_USER;
 const API_TOKEN = process.env.WORDPRESS_AUTH_TOKEN;
 
