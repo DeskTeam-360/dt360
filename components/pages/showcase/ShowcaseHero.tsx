@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { showcaseHeroContent } from "@/data/showcase";
 import type { ShowcaseItem } from "@/data/showcase";
@@ -11,11 +11,18 @@ type Props = {
   categories: string[];
   itemsByCategory: Record<string, ShowcaseItem[]>;
   allItems: ShowcaseItem[];
+  activeCategory: string;
+  onCategoryChange: (cat: string) => void;
 };
 
-export function ShowcaseHero({ categories, itemsByCategory, allItems }: Props) {
+export function ShowcaseHero({
+  categories,
+  itemsByCategory,
+  allItems,
+  activeCategory,
+  onCategoryChange,
+}: Props) {
   const { titleLine1, titleLine2, description } = showcaseHeroContent;
-  const [activeCategory, setActiveCategory] = useState<string>(categories[0] ?? "All Work");
 
   const filteredItems = useMemo(() => {
     return itemsByCategory[activeCategory] ?? allItems.slice(0, 5);
@@ -27,7 +34,7 @@ export function ShowcaseHero({ categories, itemsByCategory, allItems }: Props) {
       className="relative min-h-screen overflow-x-clip overflow-y-visible bg-white text-[#11104C]"
       aria-labelledby="showcase-hero-heading"
     >
-      {/* Radial washes — di level section supaya bisa overlap keluar max-w container */}
+      {/* Radial washes */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_100%_0%,rgba(227,5,141,0.42)_0%,rgba(227,5,141,0.12)_42%,transparent_72%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_0%_50%,rgba(0,200,244,0.4)_0%,rgba(0,200,244,0.1)_40%,transparent_70%)]" />
@@ -78,7 +85,7 @@ export function ShowcaseHero({ categories, itemsByCategory, allItems }: Props) {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => onCategoryChange(cat)}
                 className={cn(
                   "rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200",
                   activeCategory === cat

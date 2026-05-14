@@ -305,6 +305,32 @@ body {
   }
 }
 
+/* ── Showcase gallery marquee ── */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="marquee-left"],
+  [style*="marquee-right"] {
+    animation: none !important;
+  }
+}
+
 /** TeamMembers full-bleed: <1440px padding ≈ setengah kartu 280px di tepi + snap selaras */
 @media (max-width: 1439px) {
   .team-members-scroller-peek {

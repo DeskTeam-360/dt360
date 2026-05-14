@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getShowcaseData } from "@/lib/wordpress";
-import { ShowcaseHero } from "@/components/pages/showcase/ShowcaseHero";
+import { ShowcaseContent } from "@/components/pages/showcase/ShowcaseContent";
 
 export const metadata: Metadata = {
   title: "Showcase",
@@ -12,16 +12,11 @@ export default async function ShowcasePage() {
 
   return (
     <main className="flex flex-col overflow-x-visible bg-white">
-      <ShowcaseHero
+      <ShowcaseContent
         categories={categories}
         itemsByCategory={itemsByCategory}
         allItems={allItems}
       />
-      <section className="bg-[#EEEEEE]">
-        <div className="mx-auto w-full max-w-[1440px] px-4 py-16 sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
-          {/* Konten section berikutnya */}
-        </div>
-      </section>
     </main>
   );
 }
