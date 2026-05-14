@@ -192,14 +192,17 @@ export const howItWorksDontSection = {
 };
 
 export const howItWorksRealTeam = {
-  titleBefore: "A Real Team. A Real Office. ",
-  titleHighlight: "Every Day.",
+  titleLine1: "A Real Team,",
+  titleLine2: "A Real Office",
+  titleLine3: "Every Day",
+  quote: "Not an algorithm. Not a freelancer marketplace. A real team in a real office in Indonesia that shows up every single day.",
   bullets: [
-    "Full-time specialists in one building—not distributed gig workers",
-    "US account managers who own requests, revisions, and deadlines",
-    "Team leader coverage so work keeps moving when someone is out",
-    "Redundant systems (power, internet, hardware) to protect throughput",
-    "Shifts that keep production moving while you are offline",
+    "One physical office – everyone works together under the same roof, with the same standards",
+    "Day shift and night shift – your time zone is always covered",
+    "A team leader on the floor every day holding people accountable",
+    "Your US-based account manager handles all communication – no language barriers",
+    "3 separate internet providers and 2 backup power sources – no excuses, no downtime",
+    "Same team every month – they learn your brand, your preferences, your standards over time",
   ],
   photoSrc: "/images/How it works - Real Team.png",
   photoAlt: "DeskTeam360 team group photo in the office",

@@ -28,7 +28,7 @@ export function HowItWorksTaskSteps() {
           {titleBefore}
           <span className="text-[#f336b6]">{titleHighlight}</span>
         </h2>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+        <div className="relative mt-12 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-1 lg:mt-12 lg:grid-cols-3 lg:gap-8">
           {steps.map((step, i) => {
             const iconSrc = STEP_ICON_SRCS[i] ?? STEP_ICON_SRCS[2];
             return (
