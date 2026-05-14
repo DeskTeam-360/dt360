@@ -2,24 +2,24 @@
 
 import { useMemo, useState } from "react";
 import { SafeImage } from "@/components/shared/SafeImage";
-import { showcaseHeroContent, showcaseCategories, showcaseItems } from "@/data/showcase";
+import { showcaseHeroContent } from "@/data/showcase";
+import type { ShowcaseItem } from "@/data/showcase";
 import { cn } from "@/lib/utils";
 import { ShowcaseCarousel } from "./ShowcaseCarousel";
 
-/**
- * Hero Showcase — disusun mengacu artboard ~1440×1062 (proporsi canvas desain).
- * Ornamen (gradient + gambar) boleh overlap ke luar frame; tidak dipotong `overflow-hidden`.
- */
-export function ShowcaseHero() {
+type Props = {
+  categories: string[];
+  itemsByCategory: Record<string, ShowcaseItem[]>;
+  allItems: ShowcaseItem[];
+};
+
+export function ShowcaseHero({ categories, itemsByCategory, allItems }: Props) {
   const { titleLine1, titleLine2, description } = showcaseHeroContent;
-  const [activeCategory, setActiveCategory] = useState<string>(showcaseCategories[0]);
+  const [activeCategory, setActiveCategory] = useState<string>(categories[0] ?? "All Work");
 
   const filteredItems = useMemo(() => {
-    if (activeCategory === "All Work") return showcaseItems;
-    return showcaseItems.filter((item) =>
-      item.categories.includes(activeCategory),
-    );
-  }, [activeCategory]);
+    return itemsByCategory[activeCategory] ?? allItems.slice(0, 5);
+  }, [activeCategory, itemsByCategory, allItems]);
 
   return (
     <section
@@ -33,10 +33,10 @@ export function ShowcaseHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_0%_50%,rgba(0,200,244,0.4)_0%,rgba(0,200,244,0.1)_40%,transparent_70%)]" />
       </div>
 
-      {/* Frame desain 1440px — pusat halaman; ornamen relatif ke sini */}
+      {/* Frame desain 1440px */}
       <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-0 sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
 
-        {/* Gambar samping — bleed keluar frame; di ≥1440 ukuran & offset lebih dekat ke canvas */}
+        {/* Gambar samping */}
         <div
           className="pointer-events-none absolute z-[1] left-[-12%] top-[6%] w-[min(42vw,22rem)] sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
@@ -74,7 +74,7 @@ export function ShowcaseHero() {
 
           {/* Filter buttons */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {showcaseCategories.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
@@ -98,7 +98,7 @@ export function ShowcaseHero() {
         </div>
       </div>
 
-      {/* Arc divider — melengkung ke atas, transparan di atas, #EEEEEE di bawah */}
+      {/* Arc divider */}
       <div className="relative z-10 w-full" aria-hidden>
         <svg
           className="block h-6 w-full"

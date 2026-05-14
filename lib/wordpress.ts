@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
+import type { ShowcaseItem } from '@/data/showcase';
 
 const API_URL = process.env.WORDPRESS_URL || process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
 const API_USER = process.env.WORDPRESS_USER;
@@ -219,5 +220,94 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   } catch (error) {
     console.error('Error fetching post by slug:', error);
     return null;
+  }
+};
+
+// ─── Showcase ────────────────────────────────────────────────────────────────
+
+type WpShowcaseNode = {
+  id: string;
+  title: string;
+  slug: string;
+  featuredImage?: { node?: { sourceUrl?: string } };
+  showcaseCategories?: { nodes?: Array<{ name?: string }> };
+};
+
+type GetShowcaseResponse = {
+  contentNodes?: {
+    nodes?: WpShowcaseNode[];
+  };
+};
+
+const mapShowcase = (node: WpShowcaseNode): ShowcaseItem => ({
+  id: node.id,
+  title: node.title,
+  image: node.featuredImage?.node?.sourceUrl || '/images/showcase/placeholder.png',
+  categories: [
+    'All Work',
+    ...(node.showcaseCategories?.nodes
+      ?.map((c) => c.name)
+      .filter((n): n is string => typeof n === 'string' && n.length > 0) ?? []),
+  ],
+});
+
+export const getShowcaseData = async () => {
+  const query = gql`
+    query GetShowcaseData($first: Int!) {
+      contentNodes(
+        where: { contentTypes: DT360_SHOWCASE, orderby: { field: DATE, order: DESC } }
+        first: $first
+      ) {
+        nodes {
+          id
+          ... on Showcase {
+            title
+            slug
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            showcaseCategories {
+              nodes {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await client.request<GetShowcaseResponse>(query, { first: 300 });
+    const allItems = (data.contentNodes?.nodes ?? []).map(mapShowcase);
+
+    const categorySet = new Set<string>();
+    allItems.forEach((item) =>
+      item.categories.forEach((c) => categorySet.add(c)),
+    );
+    categorySet.delete('All Work');
+    const categories = ['All Work', ...Array.from(categorySet).sort()];
+
+    const itemsByCategory: Record<string, ShowcaseItem[]> = {};
+    for (const cat of categories) {
+      if (cat === 'All Work') {
+        itemsByCategory[cat] = allItems.slice(0, 5);
+      } else {
+        itemsByCategory[cat] = allItems
+          .filter((item) => item.categories.includes(cat))
+          .slice(0, 5);
+      }
+    }
+
+    return {
+      allItems,
+      categories,
+      itemsByCategory,
+    };
+  } catch (error) {
+    console.error('Error fetching showcase data:', error);
+    return { allItems: [], categories: ['All Work'], itemsByCategory: {} };
   }
 };
