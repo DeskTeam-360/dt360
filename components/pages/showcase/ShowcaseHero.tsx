@@ -34,7 +34,7 @@ export function ShowcaseHero() {
       </div>
 
       {/* Frame desain 1440px — pusat halaman; ornamen relatif ke sini */}
-      <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-[100px] sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
+      <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-0 sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
 
         {/* Gambar samping — bleed keluar frame; di ≥1440 ukuran & offset lebih dekat ke canvas */}
         <div
