@@ -59,9 +59,9 @@ export function BlogHero() {
           <div className="flex justify-end">
             <div className="w-full">
               <h1
-                className="font-bold text-right font-heading whitespace-nowrap mb-12"
+                className="font-bold text-right font-heading mb-12"
                 style={{
-                  fontSize: '63px',
+                  fontSize: 'clamp(36px, 8vw, 63px)',
                   lineHeight: '1.2',
                   background: 'linear-gradient(90deg, #11104C 0%, #30439E 100%)',
                   WebkitBackgroundClip: 'text',
@@ -95,7 +95,7 @@ export function BlogHero() {
       </div>
 
       {/* Decorative Icon - Half in Hero, Half in Featured Section */}
-      <div className="absolute -bottom-[20px] md:-bottom-[8px] left-0 right-0 z-20">
+      <div className="absolute -bottom-[10px] md:-bottom-[8px] left-0 right-0 z-20">
         <div className="flex justify-center">
           <div className="relative w-[120px] h-[120px] md:w-[208px] md:h-[208px] flex items-center justify-center">
             <SafeImage

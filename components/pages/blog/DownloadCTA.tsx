@@ -31,7 +31,7 @@ export function DownloadCTA({
         />
 
         {/* Content Container */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-28 md:py-40">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-35 md:py-40">
           <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
             
             {/* Left Side: Icon and Title */}
