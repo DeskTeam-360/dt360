@@ -137,7 +137,7 @@ export function EverySkillGrid() {
   return (
     <section
       id="every-skill"
-      className="relative overflow-x-hidden pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28"
+      className="relative overflow-x-hidden pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 mt-[-1px] min-[2560px]:mt-0"
       style={{
         background: "linear-gradient(90deg, #FFFFFF 0%, #CBDCFF 50%, #FFFFFF 100%)",
       }}
@@ -153,19 +153,19 @@ export function EverySkillGrid() {
         </svg>
       </div>
 
-      <Container className="relative z-10 max-w-7xl !px-6 sm:!px-10 md:!px-14 lg:!px-[180px]">
+      <Container className="relative z-10 max-w-7xl !px-6 sm:!px-10 md:!px-[calc(var(--spacing)*6)] lg:!px-[180px]">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
-          <h2 className="max-w-xl text-balance text-[#101651] lg:self-start">
+          <h2 className="max-w-full text-balance text-[#101651] lg:max-w-xl lg:self-start">
             Every Skill You Need, <span className="text-[#D80B8C]">One Team,</span> One Bill
           </h2>
-          <p className="max-w-lg text-[#2a2f61]">
+          <p className="max-w-full text-[#2a2f61] lg:max-w-lg">
             DeskTeam360 replaces the freelancer chaos with a dedicated team that already knows how to work together - all
             managed by a North American account manager so you never have to coordinate anything.
           </p>
         </div>
 
         {/* 3x3: one column on mobile, 3 columns from md (tablet) and up — gaps separate tiles per design */}
-        <div className="mt-10 grid min-h-0 grid-cols-1 gap-[6px] sm:mt-12 md:grid-cols-3">
+        <div className="mt-10 grid min-h-0 grid-cols-1 gap-[6px] sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
           {cells.map((item) => {
             if (item.kind === "logo") {
               return (
@@ -205,6 +205,7 @@ export function EverySkillGrid() {
                   "group relative flex h-full flex-col overflow-hidden p-[35px] pr-[23px]",
                   gridCellSizeClass,
                   item.bg,
+                  item.id === "maintenance" && "md:col-span-2 lg:col-span-1",
                 )}
                 style={
                   {

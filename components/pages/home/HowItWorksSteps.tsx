@@ -8,7 +8,7 @@ export function HowItWorksSteps() {
   return (
     <section
       id="how-it-works-steps"
-      className="relative isolate overflow-x-hidden py-16 sm:py-20 lg:py-24"
+      className="relative isolate overflow-x-hidden py-16 sm:py-20 lg:py-24 mt-[-1px] min-[2560px]:mt-[-3px]"
       style={{
         backgroundColor: "#11104C",
         backgroundImage:
