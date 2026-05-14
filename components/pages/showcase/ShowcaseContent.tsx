@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { ShowcaseItem } from "@/data/showcase";
 import { ShowcaseHero } from "./ShowcaseHero";
 import { ShowcaseGallery } from "./ShowcaseGallery";
+import { ShowcaseClientStories } from "./ShowcaseClientStories";
+import { ShowcaseCTA } from "./ShowcaseCTA";
 
 type Props = {
   categories: string[];
@@ -27,6 +29,8 @@ export function ShowcaseContent({ categories, itemsByCategory, allItems }: Props
         allItems={allItems}
         activeCategory={activeCategory}
       />
+      <ShowcaseClientStories />
+      <ShowcaseCTA />
     </>
   );
 }

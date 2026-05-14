@@ -95,3 +95,59 @@ export const showcaseGalleryItems: ShowcaseItem[] = [
   { id: "gallery-29", title: "NextGen Fitness - Promo Video Thumb",         image: "/images/showcase/Showcase4.png", categories: ["All Work", "Video"] },
   { id: "gallery-30", title: "Alpha Consulting - Brand Identity",           image: "/images/showcase/Showcase5.png", categories: ["All Work", "Branding", "Graphic Design"] },
 ];
+
+export type ClientStory = {
+  id: string;
+  highlight: string;
+  quote: string;
+  attribution: string;
+  imageSrc: string;
+  imageAlt: string;
+  caseStudyHref: string;
+};
+
+export const clientStories: ClientStory[] = [
+  {
+    id: "relish-studio",
+    highlight: "Relish Studio - our revenue went up by 10%-20% in 2023",
+    quote:
+      "This was due to the company's quality service. In addition, we know that things are getting done and having that peace of mind is a huge benefit. Not only does it help us stay focused on the things that matter most, but it also gives us predictability when organizing our monthly expenses.",
+    attribution: "Stuart Swineford, Relish Studio",
+    imageSrc: "/images/Showcase - Behind The Work.png",
+    imageAlt: "Stuart Swineford from Relish Studio",
+    caseStudyHref: "/showcase/relish-studio",
+  },
+  {
+    id: "convert-on-command",
+    highlight: "Convert on Command - saved $20K/month vs. previous vendors",
+    quote:
+      "DeskTeam360 has been a game-changer for our business. The quality of work, the speed of delivery, and the reliability of the team have exceeded our expectations consistently.",
+    attribution: "Zach S., Convert on Command",
+    imageSrc: "/images/showcase/showcase-testimonial-convert.png",
+    imageAlt: "Zach S. from Convert on Command",
+    caseStudyHref: "/showcase/convert-on-command",
+  },
+];
+
+export type ShowcaseCtaContent = {
+  headingHighlight: string;
+  headingLine2: string;
+  description: string;
+  primaryCta: { href: string; label: string };
+  secondaryCta: { href: string; label: string };
+  note: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+export const showcaseCtaContent: ShowcaseCtaContent = {
+  headingHighlight: "Like What You See?",
+  headingLine2: "Let's Talk About What We Can Build for You",
+  description:
+    "Every project in this showcase started with a conversation. A 30-minute strategy call where we figured out whether DeskTeam360 was the right fit. Most of the time, it was.",
+  primaryCta: { href: "/book-a-call", label: "Book a Free Strategy Call" },
+  secondaryCta: { href: "/#pricing", label: "See Plans & Pricing" },
+  note: "30-day money-back guarantee - No contracts - Cancel anytime",
+  imageSrc: "/images/Showcase - CTA.png",
+  imageAlt: "DeskTeam360 team member smiling with arms crossed.",
+};
