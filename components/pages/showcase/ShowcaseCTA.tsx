@@ -18,7 +18,7 @@ export function ShowcaseCTA() {
   return (
     <section
       id="showcase-cta"
-      className="relative isolate overflow-hidden bg-[#E8E3F3] py-16 pb-0 sm:py-20 sm:pb-0 lg:overflow-visible lg:py-0"
+      className="relative isolate overflow-visible bg-[#E8E3F3] py-16 pb-0 sm:py-20 sm:pb-0 lg:overflow-x-clip lg:py-0"
     >
       <div
         className="pointer-events-none absolute right-0 top-1/2 -z-[1] h-[600px] w-[600px] -translate-y-1/2 translate-x-[20%] opacity-40"
@@ -38,8 +38,8 @@ export function ShowcaseCTA() {
       />
 
       <Container className="relative z-[1] max-w-7xl">
-        <div className="relative isolate">
-          <div className="relative z-10 max-w-3xl pt-4 pb-6 lg:max-w-[56%] lg:pr-8 lg:pt-10 lg:pb-10">
+        <div className="relative grid items-end gap-6 lg:min-h-[min(28rem,50vh)] lg:grid-cols-[minmax(0,56%)_minmax(280px,1fr)] lg:gap-8">
+          <div className="relative z-10 pt-4 pb-6 lg:pr-8 lg:pt-10 lg:pb-10">
             <div className="max-w-3xl text-balance">
               <span className="block font-[var(--font-poppins)] text-[40px] font-bold leading-tight text-[#2C3C91] sm:text-[50px] lg:text-[60px]">{headingHighlight}</span>
               <h2 className="mt-1 text-[28px] font-bold leading-tight text-black sm:text-[32px] lg:text-[36px]">{headingLine2}</h2>
@@ -58,14 +58,15 @@ export function ShowcaseCTA() {
             <p className="mt-3 text-[16px] italic text-[#11104C]/70">{note}</p>
           </div>
 
-          <div className="relative z-[2] mx-auto mt-6 flex w-full max-w-[18.4rem] justify-center sm:max-w-[23rem] lg:absolute lg:bottom-0 lg:right-[-15em] lg:mx-0 lg:mt-0 lg:w-auto lg:max-w-none lg:items-end lg:justify-end">
+          <div className="relative z-[2] mx-auto mt-6 flex w-full max-w-[18.4rem] justify-center sm:max-w-[23rem] lg:mx-0 lg:mt-0 lg:flex lg:w-auto lg:max-w-none lg:justify-self-end">
             <Image
               src={imageSrc}
               alt={imageAlt}
               width={480}
               height={560}
-              className="relative z-[2] h-auto w-full max-w-full object-contain object-bottom lg:w-auto lg:max-h-[120%]"
-              sizes="(max-width: 1024px) 60vw, 400px"
+              className="relative z-[2] h-auto w-full max-w-full object-contain object-bottom lg:max-h-[min(560px,calc(120vh-12rem))] lg:w-auto"
+              sizes="(max-width: 1023px) 90vw, (max-width: 1366px) 38vw, 400px"
+              loading="eager"
             />
           </div>
         </div>

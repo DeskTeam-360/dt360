@@ -1,6 +1,7 @@
 export type MegaServiceItem = {
   href: string;
   label: string;
+  /** Teks biasa; pola **highlight** akan dirender sebagai tebal (lihat `formatInlineBoldStars`). */
   description: string;
   /** Path under /public */
   iconSrc: string;
@@ -12,31 +13,32 @@ export const megaServiceColumns: [MegaServiceItem[], MegaServiceItem[]] = [
     {
       href: "/services/ai-automation",
       label: "AI & Automation",
-      description: "Agents, training, chatbots, and workflow automation to scale without extra headcount.",
+      description:
+        "We deploy intelligent workflows** and AI tools** to optimize your operations for **efficient results.**",
       iconSrc: "/images/navbar/nav-services-icon-ai-automation.png",
     },
     {
       href: "/services/web-design-development",
       label: "Web Design & Development",
-      description: "WordPress, React, landing pages, redesigns, WooCommerce, and custom features.",
+      description: "We deliver custom, high performance web solutions designed to drive **measurable results.**",
       iconSrc: "/images/navbar/nav-services-icon-web-design-development.png",
     },
     {
       href: "/services/crm-automation",
       label: "CRM & Marketing Tech",
-      description: "GoHighLevel, HubSpot, Zapier, Make, integrations, and API work.",
+      description: "We optimize your customer reach and systems to drive **higher conversion results.**",
       iconSrc: "/images/navbar/nav-services-icon-crm-automation.png",
     },
     {
       href: "/services/email-funnels",
       label: "Email & Funnels",
-      description: "Campaign builds, automation sequences, nurture flows, and A/B testing.",
+      description: "We design strategic sequences and funnels to maximize engagement and **revenue results.**",
       iconSrc: "/images/navbar/nav-services-icon-email-funnels.png",
     },
     {
       href: "/services/white-label",
       label: "White Label",
-      description: "Deliver our bench under your brand with one predictable partnership.",
+      description: "We scale and deliver premium results for your clients, **completely under your brand.**",
       iconSrc: "/images/navbar/nav-services-icon-white-label.png",
     },
   ],
@@ -44,25 +46,25 @@ export const megaServiceColumns: [MegaServiceItem[], MegaServiceItem[]] = [
     {
       href: "/services/graphic-design",
       label: "Graphic Design",
-      description: "Ads, social graphics, branding, print, decks, and presentations.",
+      description: "We create impactful visuals and branding that deliver **lasting professional results.**",
       iconSrc: "/images/navbar/nav-services-icon-graphic-design.png",
     },
     {
       href: "/services/video-editing",
       label: "Video Editing",
-      description: "YouTube, short-form reels, ad cuts, thumbnails, and motion graphics.",
+      description: "We craft high-impact motion content and professional edits to deliver **creative results.**",
       iconSrc: "/images/navbar/nav-services-icon-video-editing.png",
     },
     {
       href: "/services/social-media-content",
       label: "Social Media Content",
-      description: "Carousels, stories, templates, and scheduling-ready branded assets.",
+      description: "We create high-engagement content designed to grow your audience and deliver **viral results.**",
       iconSrc: "/images/navbar/nav-services-icon-social-media-content.png",
     },
     {
       href: "/services/website-maintenance",
       label: "Website Maintenance",
-      description: "Updates, security, speed, backups—your stack stays current.",
+      description: "We provide proactive updateds and security to ensure your platform delivers **reliable results.**",
       iconSrc: "/images/navbar/nav-services-icon-website-maintenance.png",
     },
   ],
