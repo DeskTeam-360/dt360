@@ -8,15 +8,17 @@ export function HowItWorksMeetGrid() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#fff] pb-20 pt-[220px] lg:pb-28"
+      className="relative z-0 overflow-hidden bg-[#fff] pb-24 pt-20 md:px-0 md:py-0 md:pb-[10em] lg:pb-28 lg:pt-[220px]"
       aria-labelledby="how-it-works-meet-heading"
     >
       <div
-        className="pointer-events-none absolute -left-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full bg-[radial-gradient(circle,rgba(0,200,244,0.4)_0%,transparent_70%)]"
+        className="pointer-events-none absolute -left-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full"
+        style={{ backgroundImage: "radial-gradient(circle, #00c8f466 0%, #0000 60%)" }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full bg-[radial-gradient(circle,rgba(227,5,141,0.48)_0%,transparent_72%)]"
+        className="pointer-events-none absolute -right-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full"
+        style={{ backgroundImage: "radial-gradient(circle, #e3058d7a 0%, #0000 60%)" }}
         aria-hidden
       />
 
@@ -52,7 +54,7 @@ export function HowItWorksMeetGrid() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 pt-20">
+        <div className="mt-14 grid grid-cols-1 gap-6 pt-12 sm:grid-cols-2 sm:pt-14 md:pt-16 lg:grid-cols-3 lg:gap-8 lg:pt-20">
           {cards.map((card) => {
             const wideIconCard = card.id === "crm" || card.id === "email";
             return (

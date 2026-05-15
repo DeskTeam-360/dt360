@@ -12,8 +12,8 @@ export function HowItWorksReadyCta() {
       aria-labelledby="how-it-works-ready-heading"
     >
       <Container className="relative max-w-[1440px] lg:px-10">
-        <div className="flex w-full flex-col lg:min-h-[min(440px,48vh)] lg:flex-row lg:items-stretch">
-          <div className="flex w-full flex-col justify-center px-1 py-5 sm:py-6 lg:w-[60%] lg:max-w-[60%] lg:flex-none lg:py-8 lg:pr-8 xl:py-10">
+        <div className="flex w-full flex-col lg:grid lg:min-h-[min(440px,48vh)] lg:grid-cols-[minmax(0,60%)_minmax(0,40%)] lg:items-stretch">
+          <div className="order-1 flex w-full flex-col justify-center px-1 pt-5 pb-0 sm:pt-6 sm:pb-0 lg:order-1 lg:w-auto lg:max-w-none lg:flex-none lg:pt-8 lg:pb-0 lg:pr-8 xl:pt-10 xl:pb-0">
             <h2 id="how-it-works-ready-heading" className="type-rule-h2 tracking-tight text-white">
               {title}
             </h2>
@@ -36,14 +36,14 @@ export function HowItWorksReadyCta() {
             </p>
           </div>
 
-          <div className="relative mt-4 min-h-[320px] w-full shrink-0 sm:mt-5 sm:min-h-[360px] lg:mt-0 lg:min-h-[500px] lg:w-[40%] lg:max-w-[40%]">
-            <div className="absolute inset-x-[-6%] bottom-0 top-[-9rem] flex items-end justify-center sm:inset-x-[-4%] sm:top-[-11rem] lg:inset-x-0 lg:top-[-19rem] xl:top-[-22rem]">
+          <div className="order-2 mt-8 flex w-full justify-center px-2 pb-0 lg:order-2 lg:relative lg:mt-0 lg:min-h-[500px] lg:items-end lg:justify-center lg:px-0">
+            <div className="relative flex w-full max-w-md items-end justify-center lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-[-18rem] lg:max-w-none xl:top-[-22rem]">
               <SafeImage
                 src={imageSrc}
                 alt={imageAlt}
                 width={800}
                 height={980}
-                className="h-auto w-full max-w-full max-h-[560px] object-contain object-bottom sm:max-h-[620px] lg:max-h-[min(92vh,840px)]"
+                className="h-auto w-full max-h-[560px] object-contain object-bottom sm:max-h-[620px] lg:max-h-[min(92vh,840px)]"
                 sizes="(max-width:1024px) 100vw, 40vw"
                 priority={false}
               />

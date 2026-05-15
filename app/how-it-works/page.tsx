@@ -22,8 +22,23 @@ export default function HowItWorksPage() {
       </div>
       <HowItWorksMeetGrid />
       <HowItWorksDontDo />
-      <HowItWorksRealTeam />
-      <HowItWorksDelegationResults />
+      <section
+        className="relative isolate overflow-x-hidden bg-white"
+        aria-labelledby="how-it-works-real-team-heading"
+      >
+        <div
+          className="pointer-events-none absolute left-0 top-0 bottom-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/How it works - Background Ornament.png')",
+            right: "-20em",
+          }}
+          aria-hidden
+        />
+        <div className="relative z-10">
+          <HowItWorksRealTeam />
+          <HowItWorksDelegationResults />
+        </div>
+      </section>
       <HowItWorksReadyCta />
     </main>
   );

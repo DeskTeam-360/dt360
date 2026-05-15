@@ -1,20 +1,54 @@
 import Image from "next/image";
+import { Fragment } from "react";
 import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksRealTeam } from "@/data/howItWorks";
 
+const planCards = [
+  {
+    label: "Every plan\nincludes:",
+    bg: "#4F0FB3",
+    type: "label" as const,
+  },
+  {
+    label: "1 North American\nAccount Manager",
+    imageSrc: "/images/Strip Row - JD.png",
+    bg: "#6312AD",
+    type: "card" as const,
+  },
+  {
+    label: "1 Team Leader",
+    imageSrc: "/images/Strip Row - Team Leader.png",
+    bg: "#8815A2",
+    type: "card" as const,
+  },
+  {
+    label: "2 Designers\n2 Developers\n2 Technical VAs",
+    imageSrc: "/images/Strip Row - Team.png",
+    bg: "#A4199A",
+    type: "card" as const,
+  },
+  {
+    label: "Plus weekly AMA\ncalls with Jeremy\nKenerson.",
+    imageSrc: "/images/Strip Row - Jeremy.png",
+    bg: "#E43775",
+    type: "card" as const,
+  },
+];
+
 export function HowItWorksRealTeam() {
-  const { titleBefore, titleHighlight, bullets, photoSrc, photoAlt, stripMembers } = howItWorksRealTeam;
+  const { titleLine1, titleLine2, titleLine3, quote, bullets, photoSrc, photoAlt } = howItWorksRealTeam;
 
   return (
-    <section className="bg-white pb-0 pt-20 lg:pt-28" aria-labelledby="how-it-works-real-team-heading">
+    <div className="bg-transparent pb-0 pt-20 lg:pt-28">
       <Container className="max-w-[1440px] lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-16">
           <div>
-            <h2 id="how-it-works-real-team-heading" className="type-rule-h2 tracking-tight text-[#101651]">
-              {titleBefore}
-              <span className="text-[#ef2fa9]">{titleHighlight}</span>
+            <h2 id="how-it-works-real-team-heading" className="tracking-tight">
+              <span className="block type-rule-h2 text-[#101651]">{titleLine1}</span>
+              <span className="block type-rule-h2 text-[#7547C5]">{titleLine2}</span>
+              <span className="block type-rule-h2 text-[#E3058D]">{titleLine3}</span>
             </h2>
             <ul className="mt-8 space-y-4">
               {bullets.map((line) => (
@@ -25,37 +59,72 @@ export function HowItWorksRealTeam() {
               ))}
             </ul>
           </div>
-          <div className="relative">
-            <div className="rounded-[28px] bg-gradient-to-br from-[#c026d3] via-[#a855f7] to-[#e11d48] p-[10px] shadow-2xl">
-              <div className="overflow-hidden rounded-[22px] bg-[#11104C]">
-                <SafeImage
-                  src={photoSrc}
-                  alt={photoAlt}
-                  width={900}
-                  height={600}
-                  unoptimized
-                  className="h-auto w-full object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
+          <div className="relative flex flex-col gap-6">
+            {/* Quote row */}
+            <div className="flex items-stretch gap-0 rounded-xl bg-transparent px-6 py-5">
+              <div className="w-1 shrink-0 rounded-full bg-[#ED63B7]" />
+              <p className="pl-5 text-[18px] font-bold leading-[1.6] text-[#11104C]">
+                {quote}
+              </p>
+            </div>
+
+            {/* Photo */}
+            <div className="overflow-hidden rounded-[22px] shadow-none">
+              <SafeImage
+                src={photoSrc}
+                alt={photoAlt}
+                width={900}
+                height={600}
+                unoptimized
+                className="h-auto w-full object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
       </Container>
 
-      <div className="mt-14 bg-gradient-to-r from-[#5b21b6] via-[#7c3aed] to-[#db2777] py-10 lg:py-12">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-8 px-5 lg:gap-12 lg:px-10">
-          {stripMembers.map((m) => (
-            <div key={m.id} className="flex w-[140px] flex-col items-center text-center sm:w-[150px]">
-              <div className="relative size-24 overflow-hidden rounded-full border-4 border-white/90 shadow-lg sm:size-28">
-                <Image src={m.imageSrc} alt="" fill className="object-cover" sizes="112px" />
+      {/* Every plan includes — cards row */}
+      <Container className="mt-14 max-w-[1440px] px-5 lg:px-10">
+        <div className="relative flex flex-col lg:flex-row lg:items-stretch">
+          {planCards.map((card, i) => (
+            <Fragment key={i}>
+              <div
+                className={`flex min-h-0 w-full flex-col items-center justify-center gap-3 rounded-[20px] px-5 py-5 text-center text-white lg:min-w-0 lg:flex-1 lg:flex-row lg:items-center lg:gap-3 lg:text-left ${
+                  card.type === "label" ? "font-bold" : ""
+                }`}
+                style={{ backgroundColor: card.bg }}
+              >
+                {card.type === "card" && card.imageSrc && (
+                  <div className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-14">
+                    <Image src={card.imageSrc} alt="" fill className="object-cover" sizes="64px" />
+                  </div>
+                )}
+                <span className="text-[18px] font-bold leading-tight whitespace-pre-line">
+                  {card.label}
+                </span>
               </div>
-              <p className="mt-3 text-sm font-bold tracking-wide text-white">{m.name}</p>
-              <p className="mt-1 text-xs font-semibold uppercase leading-tight text-white/85">{m.title}</p>
-            </div>
+              {i < planCards.length - 1 ? (
+                <div
+                  className="mx-auto h-[2px] w-[70%] shrink-0 rounded-full bg-white lg:hidden"
+                  aria-hidden
+                />
+              ) : null}
+            </Fragment>
+          ))}
+          {planCards.slice(0, -1).map((_, i) => (
+            <div
+              key={`strip-vdiv-${i}`}
+              className="pointer-events-none absolute top-[15%] z-10 hidden h-[70%] w-[2px] rounded-full bg-white lg:block"
+              style={{
+                left: `${((i + 1) / planCards.length) * 100}%`,
+                transform: "translateX(-50%)",
+              }}
+              aria-hidden
+            />
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </div>
   );
 }
