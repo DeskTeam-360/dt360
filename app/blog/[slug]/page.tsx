@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPostBySlug, getBlogData } from '@/lib/wordpress';
+import { getPostBySlug, getBlogLatestPostsPoolForRelated } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 
 type Props = {
@@ -27,9 +27,9 @@ export async function generateMetadata(
 
 export default async function SingleBlogPage({ params }: Props) {
   const resolvedParams = await params;
-  const [post, allBlogData] = await Promise.all([
+  const [post, latestPostsPool] = await Promise.all([
     getPostBySlug(resolvedParams.slug),
-    getBlogData()
+    getBlogLatestPostsPoolForRelated(),
   ]);
 
   if (!post) {
@@ -53,13 +53,13 @@ export default async function SingleBlogPage({ params }: Props) {
   }
 
   // Get the actual post objects for the extracted slugs from our dataset
-  let relatedPosts = allBlogData.latestPosts.filter(p => relatedSlugs.includes(p.slug));
-  
+  let relatedPosts = latestPostsPool.filter((p) => relatedSlugs.includes(p.slug));
+
   // If we found fewer than 3, fill up with latest posts (excluding the current one and ones already found)
   if (relatedPosts.length < 3) {
-    const foundSlugs = relatedPosts.map(p => p.slug);
-    const additional = allBlogData.latestPosts
-      .filter(p => p.slug !== resolvedParams.slug && !foundSlugs.includes(p.slug))
+    const foundSlugs = relatedPosts.map((p) => p.slug);
+    const additional = latestPostsPool
+      .filter((p) => p.slug !== resolvedParams.slug && !foundSlugs.includes(p.slug))
       .slice(0, 3 - relatedPosts.length);
     relatedPosts = [...relatedPosts, ...additional];
   }

@@ -1,6 +1,9 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
 import type { ShowcaseItem } from '@/data/showcase';
+import { BLOG_ROUTE_REVALIDATE_SECONDS } from '@/lib/blog-revalidate';
 
 const API_URL = process.env.WORDPRESS_URL || process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
 const API_USER = process.env.WORDPRESS_USER;
@@ -27,6 +30,26 @@ const getAuthHeader = (): Record<string, string> => {
 const client = new GraphQLClient(API_URL, {
   headers: getAuthHeader(),
 });
+
+const WORDPRESS_BLOG_CACHE_TAG = 'wordpress-blog';
+
+/**
+ * Data Cache Next.js (TTL = BLOG_REVALIDATE_SECONDS).
+ * Di luar konteks Next (mis. skrip scratch), fallback ke pemanggilan langsung.
+ */
+async function fetchWordPressCached<T>(
+  cacheKey: string[],
+  producer: () => Promise<T>,
+): Promise<T> {
+  try {
+    return await unstable_cache(producer, cacheKey, {
+      revalidate: BLOG_ROUTE_REVALIDATE_SECONDS,
+      tags: [WORDPRESS_BLOG_CACHE_TAG, cacheKey.join(':')],
+    })();
+  } catch {
+    return producer();
+  }
+}
 
 /** Shape of a post node returned by our WPGraphQL queries */
 type WpPostNode = {
@@ -56,33 +79,103 @@ type GetPostBySlugResponse = {
 const calculateReadTime = (content: string): string => {
   const wordsPerMinute = 200;
   const words = content ? content.split(/\s+/).length : 0;
-  const minutes = Math.ceil(words / wordsPerMinute);
+  const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
   return `${minutes} min read`;
+};
+
+const stripExcerptHtml = (excerpt?: string): string =>
+  (excerpt?.replace(/<[^>]*>?/gm, '') ?? '')
+    .replace(/&#8211;/g, '–')
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .trim();
+
+/** Same rules as getBlogData: featured slots vs "latest" pool (untuk related posts di detail). */
+const partitionBlogPostsForListing = (
+  allPosts: BlogPost[],
+  categoryNodes: WpCategoryNameNode[] | undefined,
+): { featuredPostsMap: Record<string, BlogPost>; latestPosts: BlogPost[]; categories: string[] } => {
+  const allCategories =
+    categoryNodes
+      ?.map((c) => c.name)
+      .filter((name): name is string => typeof name === 'string' && name.length > 0)
+      .filter((name) => {
+        const lowerName = name.toLowerCase();
+        return (
+          !lowerName.includes('case study') &&
+          !lowerName.includes('case-study') &&
+          lowerName !== 'uncategorized'
+        );
+      }) ?? [];
+
+  const categories = ['All Posts', ...allCategories];
+
+  const validPosts = allPosts.filter((post: BlogPost) => {
+    const categoryName = post.category.toLowerCase();
+    return !categoryName.includes('case study') && !categoryName.includes('case-study');
+  });
+
+  const featuredPostsMap: Record<string, BlogPost> = {};
+  const usedPostIds = new Set<string>();
+
+  if (validPosts.length > 0) {
+    featuredPostsMap['All Posts'] = validPosts[0];
+    usedPostIds.add(validPosts[0].id);
+  }
+
+  categories.forEach((category) => {
+    if (category === 'All Posts') return;
+
+    const latestInCategory = validPosts.find((post: BlogPost) => post.category === category);
+    if (latestInCategory) {
+      featuredPostsMap[category] = latestInCategory;
+      usedPostIds.add(latestInCategory.id);
+    }
+  });
+
+  const latestPosts = validPosts.filter((post: BlogPost) => !usedPostIds.has(post.id));
+
+  return { featuredPostsMap, latestPosts, categories };
 };
 
 // Helper to map WordPress post to BlogPost type
 const mapPost = (post: WpPostNode): BlogPost => {
+  const excerpt = stripExcerptHtml(post.excerpt);
   return {
     id: post.id,
     slug: post.slug,
     title: post.title,
-    excerpt: (post.excerpt?.replace(/<[^>]*>?/gm, '') ?? '')
-      .replace(/&#8211;/g, '–')
-      .replace(/&#8217;/g, "'")
-      .replace(/&#8220;/g, '"')
-      .replace(/&#8221;/g, '"')
-      .replace(/&amp;/g, '&')
-      .replace(/&quot;/g, '"')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .trim(), // Strip HTML and decode entities
+    excerpt,
     content: post.content,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
     category: post.categories?.nodes?.[0]?.name || 'Uncategorized',
     author: post.author?.node?.name || 'Admin',
-    readTime: calculateReadTime(post.content || ''),
+    readTime: calculateReadTime(post.content || excerpt),
     date: post.date,
     tagColor: 'bg-[#f0573a]', // Default color
+  };
+};
+
+/** Tanpa `content` — untuk pool related di halaman detail (hemat bandwidth & parse WP). */
+const mapPostLite = (post: WpPostNode): BlogPost => {
+  const excerpt = stripExcerptHtml(post.excerpt);
+  return {
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt,
+    content: undefined,
+    image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    category: post.categories?.nodes?.[0]?.name || 'Uncategorized',
+    author: post.author?.node?.name || 'Admin',
+    readTime: calculateReadTime(excerpt),
+    date: post.date,
+    tagColor: 'bg-[#f0573a]',
   };
 };
 
@@ -125,59 +218,16 @@ export const getBlogData = async () => {
   try {
     const data = await client.request<GetAllBlogDataResponse>(query, { first: 100 });
 
-    // Parse categories
-    const allCategories =
-      data.categories?.nodes
-        ?.map((c) => c.name)
-        .filter((name): name is string => typeof name === 'string' && name.length > 0)
-        .filter((name) => {
-          const lowerName = name.toLowerCase();
-          return (
-            !lowerName.includes('case study') &&
-            !lowerName.includes('case-study') &&
-            lowerName !== 'uncategorized'
-          );
-        }) ?? [];
-    
-    const categories = ['All Posts', ...allCategories];
-
-    // Parse posts
     const allPosts = (data.posts?.nodes || []).map(mapPost);
-    
-    // 1. Filter out case studies
-    const validPosts = allPosts.filter((post: BlogPost) => {
-      const categoryName = post.category.toLowerCase();
-      return !categoryName.includes('case study') && !categoryName.includes('case-study');
-    });
-
-    // 2. Extract latest post of each category for FeaturedBlog
-    const featuredPostsMap: Record<string, BlogPost> = {};
-    const usedPostIds = new Set<string>();
-
-    // "All Posts" gets the absolute latest post
-    if (validPosts.length > 0) {
-      featuredPostsMap['All Posts'] = validPosts[0];
-      usedPostIds.add(validPosts[0].id);
-    }
-
-    // For each valid category, find the latest post
-    categories.forEach(category => {
-      if (category === 'All Posts') return;
-      
-      const latestInCategory = validPosts.find((post: BlogPost) => post.category === category);
-      if (latestInCategory) {
-        featuredPostsMap[category] = latestInCategory;
-        usedPostIds.add(latestInCategory.id);
-      }
-    });
-
-    // 3. The rest go to LatestBlogs
-    const latestPosts = validPosts.filter((post: BlogPost) => !usedPostIds.has(post.id));
+    const { featuredPostsMap, latestPosts, categories } = partitionBlogPostsForListing(
+      allPosts,
+      data.categories?.nodes,
+    );
 
     return {
       featuredPostsMap,
       latestPosts,
-      categories
+      categories,
     };
   } catch (error) {
     console.error('Error fetching blog data:', error);
@@ -185,8 +235,62 @@ export const getBlogData = async () => {
   }
 };
 
-export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
-  const query = gql`
+/**
+ * Pool post untuk blok "You Might Also Like" di `/blog/[slug]`.
+ * Query ringan (tanpa field `content`) — logika featured vs latest sama dengan getBlogData.
+ */
+export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost[]> => {
+  return fetchWordPressCached(['wp', 'blog-related-pool'], async () => {
+    const query = gql`
+    query GetBlogPostsForRelated($first: Int!) {
+      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          slug
+          title
+          excerpt
+          date
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          author {
+            node {
+              name
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+      categories(first: 100) {
+        nodes {
+          name
+        }
+      }
+    }
+  `;
+
+    try {
+      const data = await client.request<GetAllBlogDataResponse>(query, { first: 100 });
+      const allPosts = (data.posts?.nodes || []).map(mapPostLite);
+      const { latestPosts } = partitionBlogPostsForListing(allPosts, data.categories?.nodes);
+      return latestPosts;
+    } catch (error) {
+      console.error('Error fetching blog pool for related:', error);
+      return [];
+    }
+  });
+});
+
+/** Satu request: `generateMetadata` + page memakai hasil yang sama (tanpa dua kali hit WP). */
+export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
+  return fetchWordPressCached(['wp', 'post', slug], async () => {
+    const query = gql`
     query GetPostBySlug($id: ID!) {
       post(id: $id, idType: SLUG) {
         id
@@ -214,14 +318,15 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
     }
   `;
 
-  try {
-    const data = await client.request<GetPostBySlugResponse>(query, { id: slug });
-    return data.post ? mapPost(data.post) : null;
-  } catch (error) {
-    console.error('Error fetching post by slug:', error);
-    return null;
-  }
-};
+    try {
+      const data = await client.request<GetPostBySlugResponse>(query, { id: slug });
+      return data.post ? mapPost(data.post) : null;
+    } catch (error) {
+      console.error('Error fetching post by slug:', error);
+      return null;
+    }
+  });
+});
 
 // ─── Showcase ────────────────────────────────────────────────────────────────
 
