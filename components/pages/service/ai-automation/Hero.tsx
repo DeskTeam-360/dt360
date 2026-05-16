@@ -15,6 +15,9 @@ const includedItems = [
   "Recurring automation monitoring and optimization"
 ];
 
+const HERO_ART_SRC =
+  "/images/Service%20-%20AI%20%26%20Automation%20-%20Hero.png";
+
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
@@ -37,7 +40,7 @@ export function Hero() {
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
-        <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
+        <div className="grid items-center gap-8 pb-8 xl:grid-cols-[minmax(0,1fr)_minmax(280px,1fr)] xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               AI Should Make Your <span className="text-[#E3058D]">Business Run Itself</span>
@@ -51,17 +54,18 @@ export function Hero() {
               workflow.
             </p>
           </div>
-          <div className="relative mx-auto w-full max-w-[640px]">
+          <div className="relative isolate mx-auto w-full min-w-0 max-w-[640px] xl:justify-self-center">
             <div
-              className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
+              className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
               aria-hidden
             />
             <SafeImage
-              src="/images/Service - AI & Automation - Hero.png"
+              src={HERO_ART_SRC}
               alt="Hero illustration for AI and automation service"
               width={820}
               height={620}
               priority
+              sizes="(max-width: 1279px) 100vw, 640px"
               className="relative z-10 h-auto w-full"
             />
           </div>

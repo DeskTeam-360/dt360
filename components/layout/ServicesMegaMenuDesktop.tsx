@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, formatInlineBoldStars } from "@/lib/utils";
 import { megaServiceColumns, megaServicesFeatured } from "@/data/navMegaServices";
 
 const PANEL_ID = "services-mega-panel";
@@ -165,7 +165,7 @@ export function ServicesMegaMenuDesktop({
                                   {item.label}
                                 </span>
                                 <span className="mt-1 block text-sm font-medium leading-snug text-zinc-600">
-                                  {item.description}
+                                  {formatInlineBoldStars(item.description)}
                                 </span>
                               </span>
                             </Link>
