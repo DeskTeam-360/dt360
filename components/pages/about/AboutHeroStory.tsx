@@ -13,8 +13,8 @@ export function AboutHeroStory() {
 
       {/* Container z-[10] so everything inside it sits above the background wave z-[3] */}
       <Container className="relative z-[10] max-w-[1440px] px-6 lg:px-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div className="pb-10 lg:pb-[140px] w-full max-w-[791px]">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+          <div className="pb-10 lg:pb-[80px] w-full max-w-[791px]">
             <h1 className="font-[var(--font-poppins)] leading-tight text-white max-w-[600px] lg:leading-[1.12]">
               {aboutHero.title}
             </h1>
@@ -26,18 +26,19 @@ export function AboutHeroStory() {
               {aboutHero.founder}
             </p>
           </div>
-          {/* Image wrapper */}
-          <div className="relative h-[400px] lg:h-[650px] lg:-mr-[100px] w-full flex justify-end items-end">
+          {/* Image wrapper — kanan atas (area sejajar judul), memanjang ke bawah section */}
+          <div className="relative flex min-h-[400px] h-full w-full justify-end self-stretch lg:-mr-[100px] lg:-mt-12 lg:h-[calc(100%+3rem)]">
+            <div className="relative flex h-full w-full justify-end items-end">
             <SafeImage
               src="/images/about-ceo-hero-image.png"
               alt="Jeremy Kenerson portrait"
               width={492}
               height={733}
               priority
-              className="object-contain object-bottom h-full w-auto"
+              className="h-full w-auto max-h-full object-contain object-bottom"
             />
             {/* Professional Team icon at bottom left of CEO image (Shrunken & Shifted Left) */}
-            <div className="absolute left-[-25%] lg:left-[-15%] bottom-[5%] lg:bottom-[10%] z-20 w-[60px] lg:w-[75px] -translate-y-[20px]">
+            <div className="absolute left-[-25%] lg:left-[-15%] bottom-[8%] lg:bottom-[12%] z-20 w-[60px] lg:w-[75px]">
               <SafeImage
                 src="/images/about-icon-professional-team.png"
                 alt="Professional Team Icon"
@@ -45,6 +46,7 @@ export function AboutHeroStory() {
                 height={75}
                 className="object-contain drop-shadow-xl"
               />
+            </div>
             </div>
           </div>
         </div>

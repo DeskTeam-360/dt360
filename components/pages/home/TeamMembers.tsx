@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 /** ~ card width (300) + gap between cards */
 const SCROLL_STEP = 316;
+const SCROLL_EDGE_THRESHOLD = 8;
 
 function centerHorizontalScroll(el: HTMLDivElement | null) {
   if (!el) return;
@@ -23,10 +24,28 @@ type MouseDragState = {
   startScrollLeft: number;
 };
 
+function readScrollEdges(el: HTMLDivElement) {
+  const max = el.scrollWidth - el.clientWidth;
+  if (max <= SCROLL_EDGE_THRESHOLD) {
+    return { atStart: true, atEnd: true };
+  }
+  return {
+    atStart: el.scrollLeft <= SCROLL_EDGE_THRESHOLD,
+    atEnd: el.scrollLeft >= max - SCROLL_EDGE_THRESHOLD,
+  };
+}
+
 export function TeamMembers() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const mouseDragRef = useRef<MouseDragState | null>(null);
   const [mouseDragging, setMouseDragging] = useState(false);
+  const [scrollEdges, setScrollEdges] = useState({ atStart: false, atEnd: false });
+
+  const syncScrollEdges = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setScrollEdges(readScrollEdges(el));
+  }, []);
 
   const endMouseDrag = useCallback((el: HTMLDivElement, pointerId: number) => {
     const d = mouseDragRef.current;
@@ -51,7 +70,10 @@ export function TeamMembers() {
     const el = scrollerRef.current;
     if (!el) return;
 
-    const apply = () => centerHorizontalScroll(el);
+    const apply = () => {
+      centerHorizontalScroll(el);
+      syncScrollEdges();
+    };
 
     apply();
     const raf = requestAnimationFrame(apply);
@@ -61,13 +83,15 @@ export function TeamMembers() {
 
     const onResize = () => apply();
     window.addEventListener("resize", onResize);
+    el.addEventListener("scroll", syncScrollEdges, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("resize", onResize);
+      el.removeEventListener("scroll", syncScrollEdges);
     };
-  }, []);
+  }, [syncScrollEdges]);
 
   const onScrollerPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
@@ -94,11 +118,15 @@ export function TeamMembers() {
     el.scrollLeft = d.startScrollLeft - (e.clientX - d.startX);
   }, []);
 
-  const onScrollerPointerUp = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    endMouseDrag(el, e.pointerId);
-  }, [endMouseDrag]);
+  const onScrollerPointerUp = useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      endMouseDrag(el, e.pointerId);
+      syncScrollEdges();
+    },
+    [endMouseDrag, syncScrollEdges],
+  );
 
   const onScrollerLostPointerCapture = useCallback(() => {
     mouseDragRef.current = null;
@@ -126,22 +154,26 @@ export function TeamMembers() {
           "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full",
         )}
       >
-        <button
-          type="button"
-          onClick={() => scrollByDir(-1)}
-          className="absolute left-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:left-6 md:flex sm:h-14 sm:w-10"
-          aria-label="Show previous team members"
-        >
-          <ChevronLeft className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByDir(1)}
-          className="absolute right-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:right-6 md:flex sm:h-14 sm:w-10"
-          aria-label="Show next team members"
-        >
-          <ChevronRight className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
-        </button>
+        {!scrollEdges.atStart ? (
+          <button
+            type="button"
+            onClick={() => scrollByDir(-1)}
+            className="absolute left-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:left-6 md:flex sm:h-14 sm:w-10"
+            aria-label="Show previous team members"
+          >
+            <ChevronLeft className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+          </button>
+        ) : null}
+        {!scrollEdges.atEnd ? (
+          <button
+            type="button"
+            onClick={() => scrollByDir(1)}
+            className="absolute right-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:right-6 md:flex sm:h-14 sm:w-10"
+            aria-label="Show next team members"
+          >
+            <ChevronRight className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
+          </button>
+        ) : null}
 
         <div
           ref={scrollerRef}
