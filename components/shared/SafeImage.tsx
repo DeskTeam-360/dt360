@@ -55,7 +55,7 @@ export function SafeImage({
   return (
     <Image
       key={src}
-      src={src}
+      src={failed ? fallbackSrc : src}
       alt={alt}
       fill={fill}
       width={fill ? undefined : width}
