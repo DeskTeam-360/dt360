@@ -4,7 +4,7 @@ import { teamPeople, teamDifferencePoints } from "@/data/about";
 
 export function AboutTeamPeople() {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[250px] lg:pt-[380px] pb-20 lg:pb-32 overflow-hidden">
+    <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[250px] lg:pt-[380px] pb-20 lg:pb-32 overflow-x-clip">
       
       {/* 1. Bubble Background - Tempel di tepi kiri screen */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] lg:top-0 lg:w-[800px] lg:h-[800px] opacity-80 pointer-events-none z-0">
@@ -25,20 +25,22 @@ export function AboutTeamPeople() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24 relative">
 
           <div className="relative z-10 pt-10 lg:pt-0">
-            <h2 className="font-[var(--font-poppins)] leading-[1.15] text-[#11104C] lg:leading-[1.1]">
+            <h2 className="type-rule-h2 font-semibold leading-[1.15] text-[#11104C] lg:leading-[1.1]">
               The People<br />
               Who Actually<br />
               <span className="text-[#e3058d]">Do Your Work</span>
             </h2>
           </div>
 
-          <div className="relative z-10 w-full rounded-[20px] lg:rounded-[30px] border-[3px] border-[#00AEEE] overflow-hidden shadow-[0_20px_50px_rgba(0,174,238,0.2)]">
-            <SafeImage 
-              src="/images/about-deskteam-people.png" 
-              alt="DeskTeam360 People" 
-              width={800} height={600} 
-              className="w-full h-auto object-cover" 
-            />
+          <div className="group relative z-10 -mr-6 w-[calc(100%+1.5rem)] rounded-tl-[50px] transition-[transform,shadow] duration-300 ease-out group-hover:shadow-[0_20px_50px_rgba(0,174,238,0.2)] lg:-mr-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
+            <div className="overflow-hidden rounded-tl-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
+              <SafeImage 
+                src="/images/about-deskteam-people.png" 
+                alt="DeskTeam360 People" 
+                width={800} height={600} 
+                className="w-full h-auto object-cover rounded-tl-[50px]" 
+              />
+            </div>
           </div>
           
         </div>
@@ -61,7 +63,7 @@ export function AboutTeamPeople() {
             </div>
 
             <div className="min-w-0 flex-1 pl-3 text-left md:pl-5 lg:pl-8">
-              <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
+              <h3 className="font-[var(--font-montserrat)] text-[30px] font-bold uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[0].name}
               </h3>
               <p className="font-[var(--font-montserrat)] text-[13px] lg:text-[16px] italic font-semibold text-[#505FAA] uppercase mt-1 mb-4">
@@ -76,7 +78,7 @@ export function AboutTeamPeople() {
           {/* Card 2: JD */}
           <div className="relative z-10 flex w-[90%] flex-row items-center self-start overflow-visible rounded-[30px] bg-[#F4CCEC] py-8 pl-8 pr-6 shadow-lg min-h-[180px] transition-transform duration-300 hover:-translate-y-2 md:py-10 md:pl-10 md:pr-8 lg:w-[85%] lg:min-h-[220px] lg:rounded-[40px] lg:py-12 lg:pl-12 lg:pr-10 mr-auto ml-0">
             <div className="min-w-0 flex-1 pr-3 text-left md:pr-5 lg:pr-8">
-              <h3 className="type-rule-h5 uppercase tracking-wide text-[#505FAA]">
+              <h3 className="font-[var(--font-montserrat)] text-[30px] font-bold uppercase tracking-wide text-[#505FAA]">
                 {teamPeople[1].name}
               </h3>
               <p className="font-[var(--font-montserrat)] text-[13px] lg:text-[16px] italic font-semibold text-[#505FAA] uppercase mt-1 mb-4">
@@ -102,7 +104,7 @@ export function AboutTeamPeople() {
 
           {/* Card 3: Indonesia Team */}
           <div className="w-full bg-[#4A1587] rounded-[30px] lg:rounded-[40px] p-10 lg:p-14 shadow-2xl flex flex-col items-center justify-center text-center mt-4 transition-transform hover:-translate-y-2 duration-300">
-            <h3 className="type-rule-h4 uppercase tracking-wide text-[#e3058d]">
+            <h3 className="font-[var(--font-montserrat)] text-[30px] font-bold uppercase tracking-wide text-[#e3058d]">
               {teamPeople[2].name}
             </h3>
             <p className="font-[var(--font-montserrat)] text-[13px] md:text-[16px] lg:text-[18px] text-white font-medium mt-4 lg:mt-6 max-w-3xl leading-[1.8]">
@@ -113,20 +115,22 @@ export function AboutTeamPeople() {
         </div>
 
         {/* What Makes The Team Different Block */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-12 lg:mt-16 w-full max-w-[1200px] mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-12 lg:mt-16 w-full relative z-10">
           
-          <div className="relative w-full rounded-[20px] lg:rounded-[30px] overflow-hidden shadow-2xl">
-            <SafeImage 
-              src="/images/about-deskteam-team-gather.png" 
-              alt="Team Gathering" 
-              width={800} height={600} 
-              className="w-full h-auto object-cover" 
-            />
+          <div className="group relative z-10 -ml-6 w-[calc(100%+1.5rem)] rounded-tr-[50px] border border-solid border-[#7547C5] transition-transform duration-300 ease-out lg:-ml-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:!-ml-[150px] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
+            <div className="overflow-hidden rounded-tr-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
+              <SafeImage 
+                src="/images/about - what makes the team different.png" 
+                alt="Team Gathering" 
+                width={800} height={600} 
+                className="w-full h-auto object-cover rounded-tr-[50px]" 
+              />
+            </div>
           </div>
 
           <div className="text-left">
-            <h2 className="font-[var(--font-poppins)] mb-8 leading-tight text-[#11104C] lg:leading-[1.15]">
-              What Makes The Team Defferent
+            <h2 className="type-rule-h2 font-semibold mb-8 leading-tight text-[#11104C] lg:leading-[1.15]">
+              What Makes The Team Different
             </h2>
             <ul className="space-y-4 lg:space-y-6">
               {teamDifferencePoints.map((point) => (

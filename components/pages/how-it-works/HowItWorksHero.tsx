@@ -7,7 +7,7 @@ export function HowItWorksHero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#02063B] px-[20px] pb-[240px] pt-[100px] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
+      className="relative overflow-hidden bg-[#02063B] px-[20px] pb-[480px] pt-[100px] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
       aria-labelledby="how-it-works-hero-heading"
     >
       <div

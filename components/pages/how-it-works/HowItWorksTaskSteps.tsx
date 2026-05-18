@@ -20,7 +20,7 @@ export function HowItWorksTaskSteps() {
         className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/5 to-transparent"
         aria-hidden
       />
-      <Container className="relative z-20 -mt-20 max-w-[1440px] lg:-mt-110 lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
+      <Container className="relative z-20 -mt-[200px] max-w-[1440px] lg:-mt-110 lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
         <h2
           id="how-it-works-task-heading"
           className="type-rule-h2 text-center font-semibold tracking-tight text-white pb-5"

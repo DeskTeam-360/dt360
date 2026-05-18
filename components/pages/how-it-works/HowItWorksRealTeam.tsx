@@ -43,7 +43,7 @@ export function HowItWorksRealTeam() {
   return (
     <div className="bg-transparent pb-0 pt-20 lg:pt-28">
       <Container className="max-w-[1440px] lg:px-10">
-        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-16">
+        <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-16">
           <div>
             <h2 id="how-it-works-real-team-heading" className="tracking-tight">
               <span className="block type-rule-h2 text-[#101651]">{titleLine1}</span>
@@ -59,7 +59,7 @@ export function HowItWorksRealTeam() {
               ))}
             </ul>
           </div>
-          <div className="relative flex flex-col gap-6">
+          <div className="relative flex h-full flex-col justify-end gap-6">
             {/* Quote row */}
             <div className="flex items-stretch gap-0 rounded-xl bg-transparent px-6 py-5">
               <div className="w-1 shrink-0 rounded-full bg-[#ED63B7]" />

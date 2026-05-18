@@ -37,11 +37,11 @@ export const howItWorksHero = {
   title: "How DeskTeam360 Works",
   subtitle: "What We Do, What We Don't, and Every Tool We Support",
   paragraphs: [
-    "DeskTeam360 is a flat-rate subscription that gives you designers, developers, video editors, and marketing technology specialists in one real office—coordinated by a US-based account manager. You do not hire, onboard, or wrangle invoices for one-off freelancers.",
+    "DeskTeam360 is a flat-rate subscription that gives you designers, developers, video editors, and marketing technology specialists in one real office—coordinated by a North American account manager. You do not hire, onboard, or wrangle invoices for one-off freelancers.",
     "You tell us what needs to be built, fixed, or shipped. Your account manager routes the work, keeps quality consistent, and brings it back to your inbox—most tasks in one to three business days—with unlimited revisions so your queue never stalls.",
   ],
-  heroImageSrc: "/images/How it works - Hero.png",
-  heroImageAlt: "DeskTeam360 dashboard with supported tools and team member",
+  heroImageSrc: "/images/how it works/How it work - Hero Banner.png",
+  heroImageAlt: "DeskTeam360 task dashboard with account manager and supported tools",
 };
 
 export const howItWorksTaskSection = {
@@ -200,11 +200,11 @@ export const howItWorksRealTeam = {
     "One physical office – everyone works together under the same roof, with the same standards",
     "Day shift and night shift – your time zone is always covered",
     "A team leader on the floor every day holding people accountable",
-    "Your US-based account manager handles all communication – no language barriers",
+    "Your North American account manager handles all communication – no language barriers",
     "3 separate internet providers and 2 backup power sources – no excuses, no downtime",
     "Same team every month – they learn your brand, your preferences, your standards over time",
   ],
-  photoSrc: "/images/How it works - Real Team.png",
+  photoSrc: "/images/how it works/How it work - Real Team-v2.png",
   photoAlt: "DeskTeam360 team group photo in the office",
   stripMembers: [
     { id: "lex", name: "LEX", title: "ACCOUNT MANAGER", imageSrc: "/images/teams/LEX.png" },

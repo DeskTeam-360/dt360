@@ -1,5 +1,5 @@
 export const aboutHero = {
-  title: "I Spent $1M+ Trying to Solve This Problem. Then I Built the Solution.",
+  title: "I Spent $1M+ Trying to Solve This Problem, Then I Built the Solution",
   founder: "Jeremy Kenerson, Founder",
   intro:
     "12 years. Over 200 freelancers. Every outsourcing platform, every virtual team service, every shortcut I could find. Some of it worked great. A lot of it did not. The stuff that did not work? I wrote the book on it - or at least, I lived it.",

@@ -24,22 +24,22 @@ export function HowItWorksMeetGrid() {
 
       <Container className="relative z-10 max-w-[1440px] lg:px-10">
         <div className="relative flex flex-col items-center text-center">
-          <div className="pointer-events-none absolute -left-10 top-1/2 z-0 hidden w-[min(28vw,340px)] -translate-y-1/2 lg:block xl:-left-20">
+          <div className="pointer-events-none absolute -left-10 top-1/2 z-0 hidden w-[min(28vw,500px)] -translate-y-1/2 lg:block xl:-left-20">
             <SafeImage
-              src="/images/dt360-We-Meet-You-Where-You-Are-left.png"
+              src="/images/how it works/dt360 buble with computer.png"
               alt=""
-              width={340}
-              height={442}
-              className="h-auto w-full bg-transparent opacity-90 mix-blend-screen"
+              width={500}
+              height={842}
+              className="-ml-[150px] h-auto w-full bg-transparent opacity-90 mix-blend-screen"
               aria-hidden
             />
           </div>
-          <div className="pointer-events-none absolute -right-10 top-1/2 z-0 hidden w-[min(28vw,340px)] -translate-y-1/2 lg:block xl:-right-20">
+          <div className="pointer-events-none absolute -right-10 top-1/2 z-0 hidden w-[min(28vw,500px)] translate-x-[150px] -translate-y-[calc(50%+50px)] lg:block xl:-right-20">
             <SafeImage
-              src="/images/how-it-works-meet-bg-right.png"
+              src="/images/how it works/dt360 buble with tablet.png"
               alt=""
-              width={340}
-              height={442}
+              width={500}
+              height={842}
               className="h-auto w-full bg-transparent opacity-90 mix-blend-screen"
               aria-hidden
             />
@@ -84,7 +84,7 @@ export function HowItWorksMeetGrid() {
               </div>
               <ul className="mt-5 space-y-3 text-left">
                 {card.bullets.map((line) => (
-                  <li key={line} className="type-rule-p flex justify-center gap-3 text-black">
+                  <li key={line} className="type-rule-p flex items-start justify-start gap-3 text-black">
                     <SafeImage
                       src="/images/how-it-works-black-checklist.png"
                       alt=""

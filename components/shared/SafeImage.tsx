@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type SafeImageProps = {
@@ -29,6 +29,10 @@ export function SafeImage({
 }: SafeImageProps) {
   const [failed, setFailed] = useState(false);
 
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
   if (failed) {
     return (
       <div
@@ -50,6 +54,7 @@ export function SafeImage({
 
   return (
     <Image
+      key={src}
       src={src}
       alt={alt}
       fill={fill}

@@ -123,7 +123,7 @@ export const clientStories: ClientStory[] = [
     quote:
       "DeskTeam360 has been a game-changer for our business. The quality of work, the speed of delivery, and the reliability of the team have exceeded our expectations consistently.",
     attribution: "Zach S., Convert on Command",
-    imageSrc: "/images/showcase/showcase-testimonial-convert.png",
+    imageSrc: "/images/showcase/Image - Zach Schuenke - no border.png",
     imageAlt: "Zach S. from Convert on Command",
     caseStudyHref: "/showcase/convert-on-command",
   },

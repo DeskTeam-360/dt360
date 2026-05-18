@@ -24,8 +24,28 @@ export function ServicesMegaMenuDesktop({
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const hoverCloseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const close = useCallback(() => setOpen(false), []);
+
+  const clearHoverClose = useCallback(() => {
+    if (hoverCloseRef.current) {
+      clearTimeout(hoverCloseRef.current);
+      hoverCloseRef.current = null;
+    }
+  }, []);
+
+  const openMenu = useCallback(() => {
+    clearHoverClose();
+    setOpen(true);
+  }, [clearHoverClose]);
+
+  const scheduleClose = useCallback(() => {
+    clearHoverClose();
+    hoverCloseRef.current = setTimeout(() => setOpen(false), 200);
+  }, [clearHoverClose]);
+
+  useEffect(() => () => clearHoverClose(), [clearHoverClose]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
@@ -48,15 +68,6 @@ export function ServicesMegaMenuDesktop({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, close]);
-
-  useEffect(() => {
-    if (!open) return;
-    const t = window.setTimeout(() => {
-      const first = panelRef.current?.querySelector<HTMLElement>("a[href], button:not([disabled])");
-      first?.focus();
-    }, 0);
-    return () => window.clearTimeout(t);
-  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -87,7 +98,11 @@ export function ServicesMegaMenuDesktop({
   };
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
       <button
         ref={triggerRef}
         type="button"
@@ -105,9 +120,13 @@ export function ServicesMegaMenuDesktop({
               : "text-[#fde047] underline decoration-white/30 underline-offset-4"),
         )}
         aria-expanded={open}
-        aria-haspopup="dialog"
+        aria-haspopup="true"
         aria-controls={PANEL_ID}
-        onClick={() => setOpen((v) => !v)}
+        onFocus={openMenu}
+        onBlur={(e) => {
+          if (panelRef.current?.contains(e.relatedTarget as Node)) return;
+          scheduleClose();
+        }}
       >
         Services
         <ChevronDown
@@ -128,8 +147,7 @@ export function ServicesMegaMenuDesktop({
           <div
             ref={panelRef}
             id={PANEL_ID}
-            role="dialog"
-            aria-modal="true"
+            role="region"
             aria-label="Services menu"
             tabIndex={-1}
             className="fixed left-0 right-0 z-[45] max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[#101651]/10 bg-white shadow-xl lg:top-[72px] lg:max-h-[calc(100dvh-72px)]"

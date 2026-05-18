@@ -101,6 +101,7 @@ export function ShowcaseClientStories() {
             {/* Person photo */}
             <div className="h-[180px] w-[180px] shrink-0 overflow-hidden rounded-2xl sm:h-[200px] sm:w-[200px] lg:self-center">
               <SafeImage
+                key={story.imageSrc}
                 src={story.imageSrc}
                 alt={story.imageAlt}
                 width={400}
