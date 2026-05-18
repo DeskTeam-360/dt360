@@ -40,7 +40,7 @@ export const howItWorksHero = {
     "DeskTeam360 is a flat-rate subscription that gives you designers, developers, video editors, and marketing technology specialists in one real office—coordinated by a North American account manager. You do not hire, onboard, or wrangle invoices for one-off freelancers.",
     "You tell us what needs to be built, fixed, or shipped. Your account manager routes the work, keeps quality consistent, and brings it back to your inbox—most tasks in one to three business days—with unlimited revisions so your queue never stalls.",
   ],
-  heroImageSrc: "/images/how it works/How it works - Hero new_1.png",
+  heroImageSrc: "/images/how it works/How-it-works-Hero new_1.png",
   heroImageAlt: "DeskTeam360 task dashboard with account manager and supported tools",
 };
 
