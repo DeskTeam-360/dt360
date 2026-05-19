@@ -1,49 +1,6 @@
-import Link from "next/link";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
-import { howItWorksDontSection, type HowItWorksDontItem } from "@/data/howItWorks";
-
-function DontScopeCard({ item }: { item: HowItWorksDontItem }) {
-  const borderGradient = `linear-gradient(${item.borderGradientDeg}deg, #FB3A1E 0%, #e3058d 33%, #7547c5 100%)`;
-
-  return (
-    <div className="relative h-[15em] w-[15em] shrink-0">
-      <div
-        className="flex h-full w-full flex-col overflow-hidden rounded-[60px] p-px shadow-[0_0_20px_-6px_rgba(236,72,153,0.35)]"
-        style={{ background: borderGradient }}
-      >
-        <div className="relative flex h-full min-h-0 w-full flex-col items-center justify-center gap-y-4 rounded-[59px] bg-[#02063B] px-2.5 py-7 text-center">
-          <h3 className="text-balance text-[18px] font-bold leading-snug tracking-tight text-white">
-            {item.label}
-          </h3>
-          <Link
-            href={item.detailHref}
-            className="text-[16px] font-semibold text-white underline-offset-2 transition hover:underline"
-          >
-            View Details &gt;&gt;
-          </Link>
-        </div>
-      </div>
-      {/* X — di luar overflow gradient supaya lingkaran penuh; di atas tepi bawah kartu */}
-      <span
-        className="absolute bottom-0 left-1/2 z-[99] flex size-14 -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full bg-[#e11d48] text-[3rem] font-bold leading-none text-white shadow-md"
-        aria-hidden
-      >
-        ×
-      </span>
-      {/* Icon — white ring, overlaps top border */}
-      <div className="pointer-events-none absolute left-1/2 top-0 z-[98] flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-solid border-white bg-[#02063B] shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
-        <SafeImage
-          src={item.iconSrc}
-          alt={item.iconAlt}
-          width={35}
-          height={35}
-          className="h-[35px] w-[35px] object-contain"
-        />
-      </div>
-    </div>
-  );
-}
+import { howItWorksDontSection } from "@/data/howItWorks";
+import { HowItWorksDontCards } from "@/components/pages/how-it-works/HowItWorksDontCards";
 
 export function HowItWorksDontDo() {
   const { kicker, titleBefore, titleHighlight, titleAfter, intro, items, bannerTextAccent, bannerTextRest } =
@@ -51,14 +8,14 @@ export function HowItWorksDontDo() {
 
   return (
     <section
-      className="relative z-10 isolate bg-[#231d62] pb-0 md:bg-white lg:bg-[#231d62]"
+      className="relative z-10 isolate bg-transparent pb-0 -mt-[160px]"
       aria-labelledby="how-it-works-dont-heading"
     >
       <div
         className="relative -mt-[2.5rem] overflow-hidden bg-gradient-to-b from-[#231d62] via-[#181547] to-[#0f0c32] pt-14 shadow-[0_-12px_40px_-28px_rgba(15,12,42,0.35)] sm:-mt-[2.5rem] sm:pt-[3.25rem] md:-mt-[3.75rem] md:pt-[3.75rem] lg:-mt-16 lg:pt-20"
         style={{
-          borderTopLeftRadius: "50% 4rem",
-          borderTopRightRadius: "50% 4rem",
+          borderTopLeftRadius: "100% 20rem",
+          borderTopRightRadius: "100% 20rem",
         }}
       >
         <div
@@ -67,7 +24,7 @@ export function HowItWorksDontDo() {
         />
 
         <Container className="relative z-[1] max-w-[1440px] px-5 pb-12 text-center md:px-10 lg:pb-14 lg:px-10">
-          <p className="type-rule-h4 font-bold tracking-wide text-[#ff9f6e]">{kicker}</p>
+          <p className="type-rule-h4 font-bold tracking-wide text-[#F8673E]">{kicker}</p>
           <h2
             id="how-it-works-dont-heading"
             className="type-rule-h2 mx-auto mt-4 w-full max-w-full tracking-tight text-white md:w-[80%] lg:w-[50%]"
@@ -78,19 +35,7 @@ export function HowItWorksDontDo() {
           </h2>
           <p className="type-rule-p mx-auto mt-6 max-w-3xl text-white/92">{intro}</p>
 
-          {/* Dua baris flex: jarak antar baris lebih besar; jarak antar kartu per baris — mobile: gap-y besar karena overlay ikon/X */}
-          <div className="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-y-[2.875rem] max-md:gap-y-24 md:gap-y-[4.025rem]">
-            <div className="flex flex-wrap justify-center gap-x-[1.54rem] gap-y-24 md:gap-[1.925rem]">
-              {items.slice(0, 3).map((item) => (
-                <DontScopeCard key={item.id} item={item} />
-              ))}
-            </div>
-            <div className="flex flex-wrap justify-center gap-x-[1.54rem] gap-y-24 md:gap-[1.925rem]">
-              {items.slice(3).map((item) => (
-                <DontScopeCard key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
+          <HowItWorksDontCards items={items} />
         </Container>
 
         <div

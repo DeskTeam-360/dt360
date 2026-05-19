@@ -17,6 +17,8 @@ export type HowItWorksMeetCard = {
 export type HowItWorksDontItem = {
   id: string;
   label: string;
+  /** Shown on the back of the card when flipped on hover */
+  description: string;
   /** Target for “View Details >>” */
   detailHref: string;
   /** Degrees for border `linear-gradient(...)` */
@@ -146,41 +148,51 @@ export const howItWorksDontSection = {
     {
       id: "copy",
       label: "Sales Copy",
+      description:
+        "We build the pages, funnels, and email sequences. We don't write sales pages, cold email copy, or conversion-focused ad copy. The words need to come from you or your copywriter.",
       detailHref: "/services/graphic-design",
       borderGradientDeg: 35,
-      iconSrc: "/images/How it works - Icon Sales Copy.png",
+      iconSrc: "/images/how it works/How it works - Icon Sales (no background).png",
       iconAlt: "Sales copy",
     },
     {
       id: "paid",
       label: "Paid Media Management",
+      description:
+        "We can set up your ad accounts, build your creatives, and configure your campaigns. We don't manage ongoing paid media spend, optimization, or bid management.",
       detailHref: "/services",
       borderGradientDeg: 180,
-      iconSrc: "/images/How it works - Icon Paid Media management.png",
+      iconSrc: "/images/how it works/How it works - Icon Paid Media management (no background).png",
       iconAlt: "Paid media management",
     },
     {
       id: "social",
       label: "Social Media Replies and Community",
+      description:
+        "We create the content and graphics. Responding to comments, DMs, and managing your online community is outside our scope.",
       detailHref: "/services/social-media-content",
       borderGradientDeg: 225,
-      iconSrc: "/images/How it works - Icon Social Media replies.png",
+      iconSrc: "/images/how it works/How it works - Icon Social Media replies (no background).png",
       iconAlt: "Social media replies",
     },
     {
       id: "seo",
       label: "Off-Page SEO",
+      description:
+        "Link building, outreach, and domain authority work is outside what we do. On-page SEO is fully covered.",
       detailHref: "/services",
       borderGradientDeg: 10,
-      iconSrc: "/images/How it works - Icon Off Page SEO.png",
+      iconSrc: "/images/how it works/How it works - Icon Off Page SEO (no background).png",
       iconAlt: "Off-page SEO",
     },
     {
       id: "cube",
       label: "3D Design & Animation",
+      description:
+        "Standard graphic design and 2D motion graphics are included. Complex 3D rendering and 3D modeling are not.",
       detailHref: "/services/graphic-design",
       borderGradientDeg: 180,
-      iconSrc: "/images/How it works - Icon 3D Design.png",
+      iconSrc: "/images/how it works/How it works - Icon 3D Design (no background).png",
       iconAlt: "3D design",
     },
   ] satisfies HowItWorksDontItem[],

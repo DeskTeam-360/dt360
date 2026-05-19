@@ -8,7 +8,7 @@ export function HowItWorksMeetGrid() {
 
   return (
     <section
-      className="relative z-0 overflow-hidden bg-[#fff] pb-24 pt-20 md:px-0 md:py-0 md:pb-[10em] lg:pb-28 lg:pt-[220px]"
+      className="relative z-0 overflow-hidden bg-[#fff] pb-54 pt-20 md:px-0 md:py-0 md:pb-[13em] lg:pb-68 lg:pt-[220px]"
       aria-labelledby="how-it-works-meet-heading"
     >
       <div
