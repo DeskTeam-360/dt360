@@ -31,7 +31,7 @@ export type FooterSocial = {
   icon: "instagram" | "linkedin" | "facebook";
 };
 
-/** Ganti URL ke profil resmi saat tersedia. */
+/** Replace URL with official profile when available. */
 export const footerSocial: FooterSocial[] = [
   { label: "Instagram", href: "https://www.instagram.com/", icon: "instagram" },
   { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" },

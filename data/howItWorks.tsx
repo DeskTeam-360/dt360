@@ -234,6 +234,42 @@ export const howItWorksDelegation = {
   titleHighlight2: "Start Delegating",
 };
 
+export type HowItWorksTestimonial = {
+  id: string;
+  quote: string;
+  attribution: string;
+  /** Path under `/public` — add when portrait assets are available */
+  imageSrc?: string;
+  imageAlt: string;
+};
+
+export const howItWorksTestimonials: HowItWorksTestimonial[] = [
+  {
+    id: "convert-on-command",
+    quote:
+      "Freed Up 16 Hours A Week & Added $160k A Month To My Bottom Line",
+    attribution: "Zach Schuenke, Convert on Command",
+    imageSrc: "/images/how it works/testimonial-zach-schuenke.png",
+    imageAlt: "Portrait of Zach Schuenke, Convert on Command",
+  },
+  {
+    id: "my-site-ranked",
+    quote:
+      "I Was Able To Eliminate Frustrations From Working With People Overseas To Being Able To Do More Quality Work",
+    attribution: "Michael Quinn, My Site Ranked",
+    imageSrc: "/images/how it works/testimonial-michael-quinn.png",
+    imageAlt: "Portrait of Michael Quinn, My Site Ranked",
+  },
+  {
+    id: "sidecar-marketing",
+    quote:
+      "DeskTeam360 Has Helped Sidecar Marketing Solutions Save Thousands Of Dollars a Month and Free Countless Hours A Week!",
+    attribution: "Rebekah Rius, Sidecar Marketing Solutions",
+    imageSrc: "/images/how it works/testimonial-rebekah-rius.png",
+    imageAlt: "Portrait of Rebekah Rius, Sidecar Marketing Solutions",
+  },
+];
+
 export const howItWorksReadyCta = {
   title: "Ready to Hand Off the Work?",
   body: "Book a short call and we will map the work you want off your plate. See how a single flat rate replaces a stack of vendors—and still hits a 1–3 day cadence with real people in one office.",

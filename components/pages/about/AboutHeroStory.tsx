@@ -26,7 +26,7 @@ export function AboutHeroStory() {
               {aboutHero.founder}
             </p>
           </div>
-          {/* Image wrapper — kanan atas (area sejajar judul), memanjang ke bawah section */}
+          {/* Image wrapper — top right (aligned with title area), extends to bottom of section */}
           <div className="relative flex min-h-[400px] h-full w-full justify-end self-stretch lg:-mr-[100px] lg:-mt-12 lg:h-[calc(100%+3rem)]">
             <div className="relative flex h-full w-full justify-end items-end">
             <SafeImage

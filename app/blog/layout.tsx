@@ -1,7 +1,7 @@
 /**
- * ISR segmen `/blog` (nilai harus literal agar dikenali Next.js).
- * Default 600 detik = default `BLOG_REVALIDATE_SECONDS` di `lib/blog-revalidate.ts`.
- * Ubah angka di sini jika ingin interval full-route berbeda dari Data Cache.
+ * ISR segment for `/blog` (value must be a literal so Next.js recognizes it).
+ * Default 600 seconds = default `BLOG_REVALIDATE_SECONDS` in `lib/blog-revalidate.ts`.
+ * Change the number here if you want a full-route interval different from the Data Cache.
  */
 export const revalidate = 600;
 

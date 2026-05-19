@@ -40,10 +40,10 @@ export function ShowcaseHero({
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_78%_72%_at_0%_50%,rgba(0,200,244,0.4)_0%,rgba(0,200,244,0.1)_40%,transparent_70%)]" />
       </div>
 
-      {/* Frame desain 1440px */}
+      {/* 1440px design frame */}
       <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-0 sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
 
-        {/* Gambar samping */}
+        {/* Side image */}
         <div
           className="pointer-events-none absolute z-[1] left-[-12%] top-[6%] w-[min(42vw,22rem)] sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
@@ -69,7 +69,7 @@ export function ShowcaseHero({
           />
         </div>
 
-        {/* Konten teks */}
+        {/* Text content */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center py-12 text-center">
           <h1 id="showcase-hero-heading" className="type-rule-h1 text-balance text-[#11104C]">
             <span className="block tracking-tight">{titleLine1}</span>

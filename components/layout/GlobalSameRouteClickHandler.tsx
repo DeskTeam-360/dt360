@@ -30,8 +30,8 @@ function isSameDocumentUrl(anchor: HTMLAnchorElement, loc: Location): boolean {
 }
 
 /**
- * Delegasi klik (capture): tautan internal ke URL yang sama persis dengan halaman
- * aktif → scroll ke atas + refresh RSC (tanpa hard reload).
+ * Click delegation (capture): internal links to the exact same URL as the active page
+ * → scroll to top + refresh RSC (no hard reload).
  */
 export function GlobalSameRouteClickHandler() {
   const router = useRouter();

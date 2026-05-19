@@ -3,23 +3,23 @@ import { heroStats } from "@/data/home";
 import { fontRussoOne } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
-/** Angka besar (8+, 400+, 1-3): ukuran selaras H2, famili Russo One (next/font/google). */
+/** Large numbers (8+, 400+, 1-3): size aligned with H2, Russo One family (next/font/google). */
 const statValue = cn(
   fontRussoOne.className,
   "type-rule-h2-hero-stats shrink-0 tabular-nums leading-none tracking-tight text-white",
 );
 
-/** Label & salinan teks sel ke-4: selaras global B — Montserrat Bold 20px. */
+/** Label & copy for 4th cell: aligned with global B — Montserrat Bold 20px. */
 const statLabel = cn("type-rule-b text-left leading-tight text-white/90");
 
-/** Label di overlay hover sel “side”: tengah, stack vertikal bersama angka. */
+/** Label on hover overlay for “side” cells: centered, stacked vertically with number. */
 const statLabelHoverStacked = cn("type-rule-b text-center leading-tight text-white/90");
 
 const statTextBlock = cn(
   "type-rule-b max-w-full text-pretty text-center leading-snug text-white/95",
 );
 
-/** Wrapper salinan: diposisikan di tengah vertikal sel (`top-1/2` + `-translate-y-1/2`). */
+/** Copy wrapper: vertically centered in cell (`top-1/2` + `-translate-y-1/2`). */
 const hoverOverlayOuter = cn(
   "pointer-events-none absolute left-1 right-1 top-1/2 z-10 -translate-y-1/2 px-4",
   "opacity-0 transition-opacity duration-50 ease-out",
@@ -27,7 +27,7 @@ const hoverOverlayOuter = cn(
   "motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:group-hover:opacity-100",
 );
 
-/** Isi salinan: scale hover (transform terpisah dari translate pusat). */
+/** Copy content: hover scale (transform separate from center translate). */
 const hoverOverlayInner = cn(
   "origin-center rounded-2xl bg-[#10103a] shadow-[0_0_40px_0_rgba(1,211,252,0.48)] ring-2 ring-[#01d3fc]",
   "scale-100 transition-transform duration-50 ease-out",
@@ -41,7 +41,7 @@ const sideLayout =
 const textLayout =
   "mx-auto flex w-fit min-h-[6.25rem] flex-col items-start justify-center gap-1 px-4 py-4 text-center sm:min-h-[6.5rem] sm:px-4 sm:py-5 lg:min-h-[6.25rem] lg:gap-1.5 lg:py-4";
 
-/** Overlay hover untuk sel “side”: angka di atas, teks di bawah (bukan samping-samping). */
+/** Hover overlay for “side” cells: number on top, text below (not side-by-side). */
 const sideLayoutOverlay = cn(
   "flex min-h-[10rem] flex-col items-center justify-center gap-2 px-3 py-[1.875rem] text-center",
   "sm:min-h-[10.25rem] sm:gap-2.5 sm:px-4 sm:py-[2.25rem] lg:min-h-[10rem] lg:py-[1.875rem]",

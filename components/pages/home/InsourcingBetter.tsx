@@ -73,7 +73,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
   const isTallLeft = card.placement === "tall-left";
   const isWideMagenta = card.placement === "wide-magenta";
   const isWideOrange = card.placement === "wide-orange";
-  /** Konten teks + foto hanya di panel putih kanan, area orange kiri kosong. */
+  /** Text + photo content only in right white panel; left orange area empty. */
   const isWideOrangeWhitePanel = card.placement === "wide-orange" && card.id === "us-managers";
   const tone = isTallLeft ? "bg-[#1E1D76] shadow-lg shadow-black/20" : toneClass(card.tone);
   const body = (
@@ -216,7 +216,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
           )}
         >
          
-          {/* Blok putih kanan — max-width 62% dari kontainer referensi 1440px */}
+          {/* Right white block — max-width 62% of 1440px reference container */}
           <div
             className={cn(
               "flex h-full w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 flex-col px-8 pt-8 lg:px-0 lg:pl-10",

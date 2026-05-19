@@ -8,6 +8,6 @@ type HeadingProps = {
 };
 
 export function Heading({ as: Tag = "h2", children, className }: HeadingProps) {
-  /** Berat & ukuran dari `@layer base` (`globals.css`) per level heading */
+  /** Weight & size from `@layer base` (`globals.css`) per heading level */
   return <Tag className={cn("tracking-tight", className)}>{children}</Tag>;
 }

@@ -1,13 +1,13 @@
 export type MegaServiceItem = {
   href: string;
   label: string;
-  /** Teks biasa; pola **highlight** akan dirender sebagai tebal (lihat `formatInlineBoldStars`). */
+  /** Plain text; **highlight** pattern renders as bold (see `formatInlineBoldStars`). */
   description: string;
   /** Path under /public */
   iconSrc: string;
 };
 
-/** Kolom kiri / kanan mengikuti layout desain mega-menu Services. */
+/** Left / right columns follow Services mega-menu design layout. */
 export const megaServiceColumns: [MegaServiceItem[], MegaServiceItem[]] = [
   [
     {

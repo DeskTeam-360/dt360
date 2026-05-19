@@ -20,7 +20,7 @@ function MarqueeSegment() {
   );
 }
 
-/** Running text gradient — pakai bersama `<section>` Social Proof (bukan landmark sendiri). */
+/** Running text gradient — use inside `<section>` Social Proof (not its own landmark). */
 export function SocialProofMarquee() {
   return (
     <div
@@ -42,7 +42,7 @@ export function SocialProofMarquee() {
   );
 }
 
-/** Alias lama untuk impor konsisten opsional */
+/** Legacy alias for optional consistent imports */
 export function HomeMarquee() {
   return <SocialProofMarquee />;
 }

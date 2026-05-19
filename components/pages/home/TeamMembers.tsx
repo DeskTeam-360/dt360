@@ -148,7 +148,7 @@ export function TeamMembers() {
         </h2>
       </Container>
 
-      {/* Full-bleed slider: di bawah 1440px padding = setengah kartu di tepi + snap center; ≥1440px padding lebih kecil agar lebih banyak kartu penuh terlihat */}
+      {/* Full-bleed slider: below 1440px padding = half card at edge + snap center; ≥1440px smaller padding so more full cards show */}
       <div
         className={cn(
           "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full",
@@ -179,10 +179,10 @@ export function TeamMembers() {
           ref={scrollerRef}
           className={cn(
             "team-members-scroller-peek flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden",
-            // Desktop: klik–geser horizontal (mouse); sentuh tetap native (pointerType touch diabaikan)
+            // Desktop: click-drag horizontal (mouse); touch stays native (touch pointerType ignored)
             "cursor-grab select-none",
             mouseDragging && "cursor-grabbing snap-none",
-            // ≥1440px: padding horizontal lebih kecil → lebih banyak kartu penuh terlihat
+            // ≥1440px: smaller horizontal padding → more full cards visible
             "min-[1440px]:px-6 min-[1440px]:scroll-pl-6 min-[1440px]:scroll-pr-6 xl:px-10 xl:scroll-pl-10 xl:scroll-pr-10 2xl:px-14 2xl:scroll-pl-14 2xl:scroll-pr-14",
           )}
           tabIndex={0}
@@ -212,7 +212,7 @@ export function TeamMembers() {
                       priority={member.id === "1"}
                     />
                   </div>
-                  {/* Overlay chip nama | role (di atas foto, z-[2]); warna per anggota dari `labelClass` di data */}
+                  {/* Name | role overlay chip (on photo, z-[2]); color per member from `labelClass` in data */}
                   <div
                     className={cn(
                       "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-none px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",

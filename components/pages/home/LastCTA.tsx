@@ -29,7 +29,7 @@ export function LastCTA() {
       </div>
       <Container className="relative z-[1] max-w-7xl">
         <div className="relative isolate">
-          {/* Hanya blok teks yang menentukan tinggi section (lg+). */}
+          {/* Only the text block sets section height (lg+). */}
           <div className="relative z-10 max-w-3xl pt-4 pb-10 lg:max-w-[54%] lg:pr-8 lg:pt-6 xl:max-w-[56%]">
             <h2 className="max-w-3xl text-balance text-[#11104C]">
               <span>{headingBefore}</span>

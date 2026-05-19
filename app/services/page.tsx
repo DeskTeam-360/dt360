@@ -8,7 +8,7 @@ import { ServicesPricingSection } from "@/components/pages/services/ServicesPric
 import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
 import { servicesTestimonials } from "@/data/servicesPage";
 
-/** Asset filename: `Service Box - {title}.webp` — encode untuk URL aman (spasi, tanda kurung, dll.) */
+/** Asset filename: `Service Box - {title}.webp` — encode for a safe URL (spaces, parentheses, etc.) */
 function serviceBoxWebpPath(serviceTitle: string) {
   return `/images/${encodeURIComponent(`Service Box - ${serviceTitle}.webp`)}`;
 }
@@ -18,26 +18,56 @@ const coreServiceCards = [
     no: "01",
     title: "Web Design & Development",
     bg: "from-[#7c3aed] via-[#3b2e95] to-[#081c73]",
-    href: "#",
+    href: "/services/web-design-development",
   },
-  { no: "02", title: "Graphic Design", bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]", href: "#" },
-  { no: "03", title: "Video Editing", bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]", href: "#" },
-  { no: "04", title: "Email & Funnels", bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]", href: "#" },
-  { no: "05", title: "CRM & Automation", bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]", href: "#" },
+  {
+    no: "02",
+    title: "Graphic Design",
+    bg: "from-[#f9b15e] via-[#ef8a3a] to-[#db6e2f]",
+    href: "/services/graphic-design",
+  },
+  {
+    no: "03",
+    title: "Video Editing",
+    bg: "from-[#ea4b99] via-[#8d3d9f] to-[#162d7e]",
+    href: "/services/video-editing",
+  },
+  {
+    no: "04",
+    title: "Email & Funnels",
+    bg: "from-[#5fc7c6] via-[#2f9faa] to-[#0e6284]",
+    href: "/services/email-funnels",
+  },
+  {
+    no: "05",
+    title: "CRM & Automation",
+    bg: "from-[#8f6ef3] via-[#5144b8] to-[#1a2d83]",
+    href: "/services/crm-automation",
+  },
   {
     no: "06",
     title: "Social Media Content",
     bg: "from-[#f7b462] via-[#ec8d45] to-[#de6f31]",
-    href: "#",
+    href: "/services/social-media-content",
   },
   {
     no: "07",
     title: "Website Maintenance",
     bg: "from-[#64ade5] via-[#2c7ec7] to-[#0a4f96]",
-    href: "#",
+    href: "/services/website-maintenance",
   },
-  { no: "08", title: "AI & Automation", bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]", href: "#" },
-  { no: "09", title: "White label (for Agencies)", bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]", href: "#" },
+  {
+    no: "08",
+    title: "AI & Automation",
+    bg: "from-[#a07af5] via-[#6546bd] to-[#36246f]",
+    href: "/services/ai-automation",
+  },
+  {
+    no: "09",
+    title: "White label (for Agencies)",
+    bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]",
+    href: "/services/white-label",
+  },
 ] as const;
 
 const coreServices = coreServiceCards.map((s) => ({

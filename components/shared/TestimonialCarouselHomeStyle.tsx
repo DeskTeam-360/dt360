@@ -68,7 +68,7 @@ function TestimonialSlideCard({ item }: { item: HomeStyleTestimonialItem }) {
   );
 }
 
-/** Jarak antar slot slide — harus sama dengan `gap-*` di flex (narrow). */
+/** Gap between slide slots — must match `gap-*` on flex (narrow). */
 const SLIDE_GAP = "1rem"; /* = Tailwind gap-4 */
 
 function subscribeWideMode(onStoreChange: () => void) {
@@ -91,8 +91,8 @@ function getWideModeServerSnapshot() {
 }
 
 /**
- * Carousel testimonial gaya homepage: peek 20/60/20 (narrow), tiga kolom (≥1680px),
- * prev/next manual, tidak autoplay.
+ * Homepage-style testimonial carousel: peek 20/60/20 (narrow), three columns (≥1680px),
+ * manual prev/next, no autoplay.
  */
 export function TestimonialCarouselHomeStyle({ items }: Props) {
   const count = items.length;

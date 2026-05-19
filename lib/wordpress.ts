@@ -35,7 +35,7 @@ const WORDPRESS_BLOG_CACHE_TAG = 'wordpress-blog';
 
 /**
  * Data Cache Next.js (TTL = BLOG_REVALIDATE_SECONDS).
- * Di luar konteks Next (mis. skrip scratch), fallback ke pemanggilan langsung.
+ * Outside a Next context (e.g. scratch script), falls back to a direct call.
  */
 async function fetchWordPressCached<T>(
   cacheKey: string[],
@@ -95,7 +95,7 @@ const stripExcerptHtml = (excerpt?: string): string =>
     .replace(/&gt;/g, '>')
     .trim();
 
-/** Same rules as getBlogData: featured slots vs "latest" pool (untuk related posts di detail). */
+/** Same rules as getBlogData: featured slots vs "latest" pool (for related posts on detail). */
 const partitionBlogPostsForListing = (
   allPosts: BlogPost[],
   categoryNodes: WpCategoryNameNode[] | undefined,
@@ -161,7 +161,7 @@ const mapPost = (post: WpPostNode): BlogPost => {
   };
 };
 
-/** Tanpa `content` — untuk pool related di halaman detail (hemat bandwidth & parse WP). */
+/** Without `content` — for related pool on detail page (saves bandwidth & WP parse). */
 const mapPostLite = (post: WpPostNode): BlogPost => {
   const excerpt = stripExcerptHtml(post.excerpt);
   return {
@@ -236,8 +236,8 @@ export const getBlogData = async () => {
 };
 
 /**
- * Pool post untuk blok "You Might Also Like" di `/blog/[slug]`.
- * Query ringan (tanpa field `content`) — logika featured vs latest sama dengan getBlogData.
+ * Post pool for the "You Might Also Like" block on `/blog/[slug]`.
+ * Lightweight query (no `content` field) — featured vs latest logic matches getBlogData.
  */
 export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost[]> => {
   return fetchWordPressCached(['wp', 'blog-related-pool'], async () => {
@@ -287,7 +287,7 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
   });
 });
 
-/** Satu request: `generateMetadata` + page memakai hasil yang sama (tanpa dua kali hit WP). */
+/** Single request: `generateMetadata` + page share the same result (no double WP hit). */
 export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
   return fetchWordPressCached(['wp', 'post', slug], async () => {
     const query = gql`

@@ -12,7 +12,7 @@ const PANEL_ID = "services-mega-panel";
 type Props = {
   triggerClassName: string;
   useDarkTopNav: boolean;
-  /** Halaman di bawah /services — penanda visual pada label Services */
+  /** Pages under /services — visual marker on Services label */
   servicesRouteActive?: boolean;
 };
 

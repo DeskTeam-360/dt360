@@ -9,7 +9,7 @@ type Props = {
   ctaLabel: string;
 };
 
-/** Ribbon dengan bentuk takik kanan ke dalam (sama untuk semua plan, beda warna). */
+/** Ribbon with right inward notch (same for all plans, different colors). */
 function PlanRibbon({
   title,
   labelledById,
@@ -29,7 +29,7 @@ function PlanRibbon({
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
         >
-          {/* Takik kanan: kedalaman horizontal ~20px (puncak di tengah vertikal 59px) */}
+          {/* Right notch: ~20px horizontal depth (peak at vertical center 59px) */}
           <path fill={fillColor} d="M0 0 H312.581 L292.581 29.5 L312.581 59 H0 Z" stroke="none" />
         </svg>
         <span

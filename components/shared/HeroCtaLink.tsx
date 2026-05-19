@@ -8,7 +8,7 @@ const variantClass = {
     "bg-[#e4277a] shadow-[0_4px_24px_-4px_rgba(228,39,122,0.55)] group-hover:bg-[#f0308a] group-hover:shadow-[0_14px_44px_-6px_rgba(228,39,122,0.62)]",
   secondary:
     "bg-[#FF7A32] shadow-[0_4px_24px_-4px_rgba(255,122,50,0.45)] group-hover:bg-[#ff8f4d] group-hover:shadow-[0_14px_44px_-6px_rgba(255,122,50,0.58)]",
-  /** Transparan + border pink seperti CTA sekunder pada hero How It Works */
+  /** Transparent + pink border like secondary CTA on How It Works hero */
   outlinePink:
     "border-2 border-[#f054b9] bg-white/5 shadow-none backdrop-blur-[2px] group-hover:bg-white/10 group-hover:border-[#ff73c9]",
 } as const;
@@ -23,9 +23,9 @@ export type HeroCtaLinkProps = Omit<ComponentProps<typeof Link>, "className"> & 
 };
 
 /**
- * Hero CTA: kotak rounded + label + ikon chevron dalam lingkaran (Lucide).
- * Hover slide + shadow diterapkan pada span dalam + `group-hover`, supaya area klik `<Link>`
- * tidak ikut bergerak (menghindari “lompat-lompat” di tepi tombol).
+ * Hero CTA: rounded box + label + chevron icon in a circle (Lucide).
+ * Hover slide + shadow on inner span + `group-hover` so the `<Link>` click area
+ * does not move (avoids “jumping” at the button edge).
  */
 export function HeroCtaLink({
   variant,

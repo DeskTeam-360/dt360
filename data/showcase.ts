@@ -28,7 +28,7 @@ export type ShowcaseItem = {
   categories: string[];
 };
 
-/** Items untuk carousel hero (5 item) */
+/** Items for hero carousel (5 items) */
 export const showcaseItems: ShowcaseItem[] = [
   {
     id: "showcase-1",
@@ -62,7 +62,7 @@ export const showcaseItems: ShowcaseItem[] = [
   },
 ];
 
-/** Items untuk gallery grid marquee (scroll baris bergantian) */
+/** Items for gallery grid marquee (alternating row scroll) */
 export const showcaseGalleryItems: ShowcaseItem[] = [
   { id: "gallery-1",  title: "Fruit Juicy Drink - Product Label",           image: "/images/showcase/Showcase1.png", categories: ["All Work", "Graphic Design", "Branding"] },
   { id: "gallery-2",  title: "Edt Academy - Website",                       image: "/images/showcase/Showcase2.png", categories: ["All Work", "Websites"] },

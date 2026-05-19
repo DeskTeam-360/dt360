@@ -11,7 +11,7 @@ function LogoRow({
 }: {
   logos: TrustedByLogo[];
   ariaHidden?: boolean;
-  /** Segmen salinan (untuk key unik); undefined = segmen pertama. */
+  /** Copy segment (for unique key); undefined = first segment. */
   dupIndex?: number;
 }) {
   return (
@@ -68,13 +68,13 @@ export function TrustedBy() {
         </h2>
       </Container>
 
-      {/* Marquee + fade: lebar viewport penuh (keluar dari max-w container). */}
+      {/* Marquee + fade: full viewport width (breaks out of max-w container). */}
       <div
         className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-6 sm:mt-14 sm:py-8 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full"
         role="presentation"
         aria-label="Client logos marquee"
       >
-        {/* Tepi: satu warna dasar area logo (~#f4f7f9) → transparan (tanpa putih #fff agar tidak “ngeblok”). */}
+        {/* Edge fade: logo area base color (~#f4f7f9) → transparent (no #fff white so it does not block). */}
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 sm:w-28 lg:w-40"
           style={{

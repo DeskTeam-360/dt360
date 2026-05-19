@@ -109,12 +109,12 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
           className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
         />
       ) : null}
-      {/* Radial pink — kiri bawah, lebih besar */}
+      {/* Radial pink — bottom left, larger */}
       <div
         className="pointer-events-none absolute -bottom-[24%] -left-[18%] aspect-square w-[75%] min-w-[520px] rounded-full bg-[radial-gradient(circle,rgba(227,5,141,0.4)_0%,rgba(227,5,141,0.18)_32%,rgba(227,5,141,0.06)_52%,transparent_72%)]"
         aria-hidden
       />
-      {/* Radial biru — kanan atas, di belakang bubble */}
+      {/* Radial blue — top right, behind bubble */}
       <div
         className="pointer-events-none absolute -right-[8%] -top-[14%] z-0 aspect-square h-[45%] min-h-[260px] rounded-full bg-[radial-gradient(circle,rgba(0,200,244,0.4)_0%,rgba(0,200,244,0.16)_38%,transparent_68%)]"
         aria-hidden

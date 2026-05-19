@@ -6,7 +6,7 @@ export function AboutTeamPeople() {
   return (
     <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[250px] lg:pt-[380px] pb-20 lg:pb-32 overflow-x-clip">
       
-      {/* 1. Bubble Background - Tempel di tepi kiri screen */}
+      {/* 1. Bubble background — flush to left screen edge */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] lg:top-0 lg:w-[800px] lg:h-[800px] opacity-80 pointer-events-none z-0">
         <SafeImage 
           src="/images/about-bubble-bg.png" 
@@ -16,7 +16,7 @@ export function AboutTeamPeople() {
         />
       </div>
 
-      {/* 2. Gradasi lingkaran smooth pink di sebelah kiri */}
+      {/* 2. Smooth pink circular gradient on the left */}
       <div className="absolute top-[10%] -left-[10%] w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] rounded-full bg-[radial-gradient(circle_at_center,rgba(244,204,236,0.8)_0%,transparent_70%)] blur-[80px] pointer-events-none z-0"></div>
 
       <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
@@ -48,7 +48,7 @@ export function AboutTeamPeople() {
         {/* Cards */}
         <div className="flex flex-col gap-8 lg:gap-10 w-full max-w-[1050px] mx-auto mt-10">
           
-          {/* Card 1: Jeremy — flex items-center supaya lingkaran sejajar vertikal dengan teks */}
+          {/* Card 1: Jeremy — flex items-center so circle aligns vertically with text */}
           <div className="relative z-10 flex w-[90%] flex-row items-center self-end overflow-visible rounded-[30px] bg-[#FBE4E1] py-8 pl-6 pr-8 shadow-lg min-h-[180px] transition-transform duration-300 hover:-translate-y-2 md:py-10 md:pl-8 md:pr-10 lg:w-[85%] lg:min-h-[220px] lg:rounded-[40px] lg:py-12 lg:pl-10 lg:pr-12 ml-auto mr-0">
             <div className="relative z-10 shrink-0 -ml-[52px] md:-ml-[100px] lg:-ml-[120px] flex items-center justify-center self-center">
               <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-white bg-[#FF5A36] shadow-[0_10px_30px_rgba(251,58,30,0.3)] md:h-[180px] md:w-[180px] lg:h-[220px] lg:w-[220px]">

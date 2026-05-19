@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 const ACTIVE_W = 611;
 const ACTIVE_H = 688;
 /**
- * Skala samping harus **seragam** (s,s) agar foto `object-cover` tidak ter-stretch vertikal.
- * Pakai min(lebar, tinggi) relatif ke frame aktif → kartu samping lebih pendek dari 610px tapi proporsi benar.
+ * Side scale must be **uniform** (s,s) so `object-cover` photos are not stretched vertically.
+ * Use min(width, height) relative to the active frame → side cards shorter than 610px but correct proportions.
  */
 const INACTIVE_SCALE = Math.min(464 / ACTIVE_W, 610 / ACTIVE_H);
 
@@ -79,7 +79,7 @@ export function RotateProblemCarousel() {
                       if (!isCenter) setActiveIndex(i);
                     }}
                     className={cn(
-                      // backface-hidden + translateZ moderat mengurangi blur teks di layer GPU (Chrome/Edge)
+                      // backface-hidden + moderate translateZ reduces text blur on GPU layer (Chrome/Edge)
                       "absolute inset-0 overflow-hidden rounded-none text-left shadow-2xl shadow-black/25 outline-none transition-[transform,opacity] duration-500 ease-out [backface-visibility:hidden] focus-visible:ring-2 focus-visible:ring-[#e4277a] focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                       isCenter ? "z-30 cursor-default" : "z-20 cursor-pointer hover:brightness-[1.02]",
                     )}

@@ -6,7 +6,7 @@ export function cn(...parts: (string | false | null | undefined)[]) {
 
 const NBSP = "\u00A0";
 
-/** Gabungkan N kata terakhir dengan non-breaking space agar tidak jadi orphan. */
+/** Join the last N words with non-breaking space to avoid an orphan line. */
 export function tieLastWords(text: string, wordCount: number): string {
   if (wordCount <= 0) return text;
   const words = text.trim().split(/\s+/);
@@ -15,14 +15,14 @@ export function tieLastWords(text: string, wordCount: number): string {
 }
 
 type AvoidOrphansOptions = {
-  /** Berapa kata terakhir yang tidak boleh terpisah (default: 2). */
+  /** How many trailing words must not break apart (default: 2). */
   tieCount?: number;
 };
 
 /**
- * Kurangi orphan baris terakhir dengan mengikat hanya 2 (atau 3) kata terakhir.
- * Tidak mengikat seluruh klauzul setelah `&` — itu membuat satu kata pendek
- * tertinggal di baris atas (mis. "Workflows," sendirian).
+ * Reduce last-line orphans by tying only the last 2 (or 3) words.
+ * Does not tie the whole clause after `&` — that leaves a short word
+ * alone on the line above (e.g. "Workflows," by itself).
  */
 export function avoidOrphansInPhrase(text: string, options?: AvoidOrphansOptions): string {
   const s = text.trim();
@@ -34,8 +34,8 @@ export function avoidOrphansInPhrase(text: string, options?: AvoidOrphansOptions
 }
 
 /**
- * Pecah string dengan pola `**snippet**` jadi fragmen teks + <strong>.
- * Satu tingkat saja (tanpa nesting); untuk mega-menu Services dll.
+ * Split a string on `**snippet**` into text fragments + <strong>.
+ * Single level only (no nesting); for Services mega-menu, etc.
  */
 export function formatInlineBoldStars(text: string): ReactNode {
   const segments = text.split(/(\*\*[^*]+\*\*)/g);

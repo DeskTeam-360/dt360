@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   images: {
     unoptimized: true,
-    /** Ganti file di `public/` dengan nama path sama: cache optimizer default 4h; 0 = lebih cepat ambil versi baru */
+    /** Replace a file in `public/` with the same path name: optimizer cache default 4h; 0 = pick up new version sooner */
     minimumCacheTTL: 0,
     remotePatterns: [
       {

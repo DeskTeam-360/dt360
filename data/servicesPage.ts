@@ -39,28 +39,28 @@ export const servicesFloatingFeatures: ServicesFloatingFeature[] = [
 
 export const servicesTestimonials: ServicesTestimonial[] = [
   {
-    id: "1",
+    id: "tobie-group",
     quote:
-      "I was spending 20+ hours a week managing designers and developers. Now I send a task and it gets done. DeskTeam360 gave me my time back.",
-    attribution: "Luke Dalien, Special Ed Resource",
-    imageSrc: "/images/dt360-luke.png",
-    imageAlt: "Portrait of Luke Dalien",
+      '"One of Those Consistent Pieces We Can Rely On" – How The Tobie Group Transformed from Ad Agency to Full-Service Provider with DeskTeam360',
+    attribution: "Ryan Burch, Tobie Group",
+    imageSrc: "/images/services/testimonial-ryan-burch.png",
+    imageAlt: "Portrait of Ryan Burch, Tobie Group",
   },
   {
-    id: "2",
+    id: "duct-tape-marketing",
     quote:
-      "Saving at least $20,000 monthly compared to what I was paying individual contractors - and the quality and reliability is better.",
-    attribution: "Gaynor Milky, Charisma Ink",
-    imageSrc: "/images/dt360-gaynor.webp",
-    imageAlt: "Portrait of Gaynor Milky",
+      "See How Duct Tape Marketing Was Able to Get Better Quality Projects, Done Faster & Less Expensive Than Their Previous Provider!",
+    attribution: "Sara Nay, Duct Tape Marketing",
+    imageSrc: "/images/services/testimonial-sara-nay.png",
+    imageAlt: "Portrait of Sara Nay, Duct Tape Marketing",
   },
   {
-    id: "3",
+    id: "charisma-ink",
     quote:
-      "We went from barely keeping up with client work to running a full-service agency. We save a minimum of 10-15 hours a week.",
-    attribution: "Andreas Fanelli, Libra Growth Labs",
-    imageSrc: "/images/dt360-fanelli.png",
-    imageAlt: "Portrait of Andreas Fanelli",
+      "With The Help Of DeskTeam360, Charisma Ink. Is Saving $20,000 A Month Without The Stress Or Hassle Of The Hiring Process!",
+    attribution: "Gaynor Meilke, Charisma Ink",
+    imageSrc: "/images/services/testimonial-gaynor-meilke.png",
+    imageAlt: "Portrait of Gaynor Meilke, Charisma Ink",
   },
 ];
 

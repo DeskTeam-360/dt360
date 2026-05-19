@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 /** One rounded leaf style: 3 rounded corners, 1 sharp (0) */
 const r = "70px";
 
-/** Padding dalam sel kartu/logo (bilah skill) */
+/** Inner padding for card/logo cell (skill bar) */
 const cardPaddingPx = "35px";
 const cardPaddingRightPx = "23px";
 

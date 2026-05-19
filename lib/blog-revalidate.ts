@@ -1,9 +1,9 @@
 /**
- * TTL Data Cache (`unstable_cache` di `lib/wordpress.ts`) untuk query blog WP.
- * Min 60. Default 600 (10 menit) jika env tidak di-set.
+ * Data Cache TTL (`unstable_cache` in `lib/wordpress.ts`) for WP blog queries.
+ * Min 60. Default 600 (10 minutes) if env is not set.
  *
- * Catatan: `app/blog/layout.tsx` memakai `export const revalidate = 600` (literal, syarat Next.js);
- * jika mengubah default di sini secara signifikan, pertimbangkan menyesuaikan layout agar full-route ISR selaras.
+ * Note: `app/blog/layout.tsx` uses `export const revalidate = 600` (literal, Next.js requirement);
+ * if you change the default here significantly, consider updating the layout so full-route ISR stays aligned.
  */
 export const BLOG_ROUTE_REVALIDATE_SECONDS = Math.max(
   60,

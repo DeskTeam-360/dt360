@@ -11,7 +11,7 @@
   /** Body / UI: Montserrat (AGENTS — P & default) */
   --font-sans: var(--font-montserrat);
   --font-mono: var(--font-geist-mono);
-  /** Headings H1–H4: Poppins (via base layer + arbitrary var di komponen legacy) */
+  /** Headings H1–H4: Poppins (via base layer + arbitrary var in legacy components) */
   --font-heading: var(--font-poppins);
 }
 
@@ -33,19 +33,19 @@ body {
 }
 
 /**
- * Tipografi global (AGENTS.md Global Font Setting).
- * Ukuran maks = nilai rules; `clamp` mengecilkan di layar sempit agar tidak overflow.
+ * Global typography (AGENTS.md Global Font Setting).
+ * Max size = rules values; `clamp` scales down on narrow screens to avoid overflow.
  */
 @layer base {
   h1 {
     font-family: var(--font-poppins), system-ui, sans-serif;
     font-weight: 700;
-    /** AGENTS: H1 Poppins Bold — maks 76px; di bawah 1024px fluid */
+    /** AGENTS: H1 Poppins Bold — max 76px; fluid below 1024px */
     font-size: clamp(2.5rem, 5vw + 1rem, 76px);
     line-height: 1.1;
   }
 
-  /** Desktop lg+: ukuran penuh 76px (clamp vw baru mencapai ~76px di ~1200px viewport). */
+  /** Desktop lg+: full 76px size (clamp vw reaches ~76px at ~1200px viewport). */
   @media (min-width: 1024px) {
     h1 {
       font-size: 76px;
@@ -94,7 +94,7 @@ body {
     line-height: 30px;
   }
 
-  /** AGENTS: B — Montserrat Bold; ukuran ikut konteks induk (biasanya 18px di body) */
+  /** AGENTS: B — Montserrat Bold; size follows parent context (usually 18px in body) */
   strong,
   b {
     font-family: var(--font-montserrat), system-ui, sans-serif;
@@ -103,14 +103,14 @@ body {
 }
 
 /**
- * rules.md Global Font Setting — utilitas untuk halaman services
- * (nilai & clamp selaras @layer base; dipakai bila perlu eksplisit di luar tag semantik).
+ * rules.md Global Font Setting — utilities for services pages
+ * (values & clamp aligned with @layer base; use when explicit styling outside semantic tags is needed).
  */
 @layer components {
   .type-rule-h1 {
     font-family: var(--font-poppins), system-ui, sans-serif;
     font-weight: 700;
-    /** AGENTS: H1 — maks 76px (Poppins Bold); di bawah 1024px fluid */
+    /** AGENTS: H1 — max 76px (Poppins Bold); fluid below 1024px */
     font-size: clamp(2.5rem, 5vw + 1rem, 76px);
     line-height: 1.1;
   }
@@ -129,8 +129,8 @@ body {
   }
 
   /**
-   * Hero stats bar (homepage): angka memakai ukuran/skala sama H2,
-   * famili Russo One (Google) — variabel `--font-russo-one` dari `app/layout.tsx`.
+   * Hero stats bar (homepage): numbers use same size/scale as H2,
+   * Russo One family (Google) — `--font-russo-one` variable from `app/layout.tsx`.
    */
   .type-rule-h2-hero-stats {
     font-family: var(--font-russo-one), sans-serif;
@@ -139,7 +139,7 @@ body {
     line-height: 1.15;
   }
 
-  /** AGENTS: H2 — Poppins SemiBold 64px; di lg+ ukuran nominal tetap 64px (bukan hanya max clamp). */
+  /** AGENTS: H2 — Poppins SemiBold 64px; at lg+ nominal size stays 64px (not only max clamp). */
   @media (min-width: 1024px) {
     .type-rule-h2,
     .type-rule-h2-hero-stats {
@@ -190,8 +190,8 @@ body {
   }
 
   /**
-   * Wrapper `app/services/layout.tsx` — `/services` & semua `/services/*`.
-   * Kurangi orphan baris: judul `balance`, isi paragraf/list `pretty`.
+   * Wrapper `app/services/layout.tsx` — `/services` & all `/services/*`.
+   * Reduce line orphans: headings `balance`, paragraph/list copy `pretty`.
    */
   .services-route-typography h1,
   .services-route-typography h2,
@@ -208,14 +208,14 @@ body {
   }
 }
 
-/** Navbar (AGENTS): Montserrat Bold 14px — tautan utama header */
+/** Navbar (AGENTS): Montserrat Bold 14px — primary header links */
 .font-nav-primary {
   font-family: var(--font-montserrat), system-ui, sans-serif;
   font-size: 14px;
   font-weight: 700;
 }
 
-/** AGENTS: B — Montserrat Bold 20px; untuk blok aksen/teks utama (bukan semua `<strong>`) */
+/** AGENTS: B — Montserrat Bold 20px; accent / primary text blocks (not every `<strong>`) */
 .font-body-emphasis {
   font-family: var(--font-montserrat), system-ui, sans-serif;
   font-size: 1.25rem;
@@ -232,8 +232,8 @@ body {
 }
 
 /**
- * Fallback Russo via variabel (opsional).
- * Prefer `fontRussoOne.className` dari `@/lib/fonts` pada teks yang harus pakai Russo One — lebih andal daripada `font-family: var(...)` saja.
+ * Russo fallback via CSS variable (optional).
+ * Prefer `fontRussoOne.className` from `@/lib/fonts` for text that must use Russo One — more reliable than `font-family: var(...)` alone.
  */
 .font-russo-one {
   font-family: var(--font-russo-one), sans-serif;
@@ -275,8 +275,8 @@ body {
 }
 
 /**
- * Trusted-by: beberapa segmen identik; geser tepat 1 segmen per siklus
- * (translate = -100% / jumlah segmen) agar loop mulus tanpa “jeda” kosong.
+ * Trusted-by: several identical segments; shift exactly 1 segment per cycle
+ * (translate = -100% / segment count) for a seamless loop without empty “gaps”.
  */
 @keyframes trusted-by-marquee {
   from {
@@ -331,7 +331,7 @@ body {
   }
 }
 
-/** TeamMembers full-bleed: <1440px padding ≈ setengah kartu 280px di tepi + snap selaras */
+/** TeamMembers full-bleed: <1440px padding ≈ half 280px card at edge + aligned snap */
 @media (max-width: 1439px) {
   .team-members-scroller-peek {
     padding-left: max(1rem, calc(50vw - 140px));

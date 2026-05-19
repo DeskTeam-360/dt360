@@ -46,7 +46,7 @@ export type TeamMember = {
   id: string;
   name: string;
   role: string;
-  /** Path under `public/images/` (foto tim: `public/images/teams/…`) */
+  /** Path under `public/images/` (team photos: `public/images/teams/…`) */
   imageSrc: string;
   /** Bottom-left pill: `NAME | ROLE` */
   labelClass: string;
@@ -104,7 +104,7 @@ export type StartBusinessContent = {
   headlineBefore: string;
   headlineHighlight: string;
   headlineAfter: string;
-  /** Baris kedua judul (setelah `<br />`). */
+  /** Second title line (after `<br />`). */
   headlineSecondLine: string;
   subheading: string;
   illustrationSrc: string;
@@ -393,7 +393,7 @@ export const socialProofSection: SocialProofSection = {
   ],
 };
 
-/** Baris teks berjalan di bawah homepage — angka/metrik di awal baris ditampilkan bold. */
+/** Running text row below homepage — numbers/metrics at the start of each line are shown bold. */
 export type HomeMarqueeItem = {
   id: string;
   leadBold: string;
@@ -423,7 +423,7 @@ export type PricingPlanCard = {
   name: string;
   ribbonColor: string;
   ribbonFoldColor: string;
-  /** CSS `background` untuk isi kartu (solid atau gradient) */
+  /** CSS `background` for card fill (solid or gradient) */
   cardBackground: string;
   price: string;
   buttonTextColor: string;

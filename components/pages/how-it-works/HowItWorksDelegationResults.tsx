@@ -1,6 +1,5 @@
 import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
-import { servicesTestimonials } from "@/data/servicesPage";
-import { howItWorksDelegation } from "@/data/howItWorks";
+import { howItWorksDelegation, howItWorksTestimonials } from "@/data/howItWorks";
 
 export function HowItWorksDelegationResults() {
   const { titleBefore, titleHighlight1, titleMiddle, titleHighlight2 } = howItWorksDelegation;
@@ -21,7 +20,7 @@ export function HowItWorksDelegationResults() {
           <span className="text-[#ef2fa9]">{titleHighlight2}</span>
         </h2>
       </div>
-      <ServicesTestimonialsCarousel items={servicesTestimonials} />
+      <ServicesTestimonialsCarousel items={howItWorksTestimonials} />
     </div>
   );
 }

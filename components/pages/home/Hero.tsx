@@ -65,7 +65,7 @@ export function Hero() {
         <HeroStatsBar className="mt-[50px]" />
       </Container>
 
-      {/* Transisi hero → putih: satu busur lebar (setengah elips), bukan gelombang */}
+      {/* Hero → white transition: one wide arc (half ellipse), not a wave */}
       <div
         className="relative z-10 mt-20 w-full text-white sm:mt-12 lg:mt-20"
         aria-hidden
