@@ -15,14 +15,14 @@ export const footerCompany: FooterSimpleLink[] = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/showcase", label: "Showcase" },
   { href: "/blog", label: "Blog" },
-  { href: "/#case-studies", label: "Case Studies" },
+  { href: "/", label: "Case Studies" },
   { href: "/book-a-call", label: "Contact" },
 ];
 
 export const footerLegal: FooterSimpleLink[] = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms & Conditions" },
-  { href: "/affiliate-program", label: "Affiliate Program" },
+  { href: "/", label: "Privacy Policy" },
+  { href: "/", label: "Terms & Conditions" },
+  { href: "/", label: "Affiliate Program" },
 ];
 
 export type FooterSocial = {

@@ -139,7 +139,7 @@ export const heroContent: HeroContent = {
     variant: "primary",
   },
   secondaryCta: {
-    href: "/#how-it-works",
+    href: "/how-it-works",
     label: "Watch How It Works - 5 Minutes",
     variant: "secondary",
   },
