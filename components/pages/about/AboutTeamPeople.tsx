@@ -141,7 +141,13 @@ export function AboutTeamPeople() {
                   <span className="flex-shrink-0 mt-1 w-[20px] h-[20px] rounded-[4px] bg-[#e3058d] text-white flex items-center justify-center text-[12px] font-bold shadow-md">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </span>
-                  {point}
+                  <span
+                    className={
+                      point === teamDifferencePoints[0] ? "min-w-0 [text-wrap:pretty]" : undefined
+                    }
+                  >
+                    {point}
+                  </span>
                 </li>
               ))}
             </ul>

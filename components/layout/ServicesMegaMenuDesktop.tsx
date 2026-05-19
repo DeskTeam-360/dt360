@@ -22,7 +22,7 @@ export function ServicesMegaMenuDesktop({
   servicesRouteActive = false,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLAnchorElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const hoverCloseRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -103,9 +103,9 @@ export function ServicesMegaMenuDesktop({
       onMouseEnter={openMenu}
       onMouseLeave={scheduleClose}
     >
-      <button
+      <Link
         ref={triggerRef}
-        type="button"
+        href="/services"
         className={cn(
           "font-nav-primary flex items-center gap-1 rounded-lg px-1 py-0.5 text-left transition-colors",
           triggerClassName,
@@ -122,6 +122,7 @@ export function ServicesMegaMenuDesktop({
         aria-expanded={open}
         aria-haspopup="true"
         aria-controls={PANEL_ID}
+        onClick={close}
         onFocus={openMenu}
         onBlur={(e) => {
           if (panelRef.current?.contains(e.relatedTarget as Node)) return;
@@ -133,7 +134,7 @@ export function ServicesMegaMenuDesktop({
           className={cn("size-3.5 shrink-0 opacity-80 transition-transform duration-200", open && "rotate-180")}
           aria-hidden
         />
-      </button>
+      </Link>
 
       {open ? (
         <>

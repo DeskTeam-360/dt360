@@ -247,15 +247,24 @@ function MobileGroup({
   const [open, setOpen] = useState(false);
   return (
     <div className="rounded-lg border border-white/5 bg-white/[0.03]">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="font-nav-primary flex w-full items-center justify-between px-3 py-2.5 text-left text-white"
-        aria-expanded={open}
-      >
-        {title}
-        <ChevronSmall className={cn("size-4 transition", open && "rotate-180")} />
-      </button>
+      <div className="flex w-full items-stretch">
+        <Link
+          href="/services"
+          onClick={onPick}
+          className="font-nav-primary min-w-0 flex-1 px-3 py-2.5 text-left text-white hover:bg-white/5"
+        >
+          {title}
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex shrink-0 items-center justify-center px-3 py-2.5 text-white hover:bg-white/5"
+          aria-expanded={open}
+          aria-label={`${open ? "Collapse" : "Expand"} ${title} submenu`}
+        >
+          <ChevronSmall className={cn("size-4 transition", open && "rotate-180")} />
+        </button>
+      </div>
       {open ? (
         <div className="border-t border-white/5 pb-2 pt-1">
           {items.map((item) => (

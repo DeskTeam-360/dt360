@@ -36,14 +36,14 @@ function MarqueeRow({
         {doubled.map((item, i) => (
           <div
             key={`${item.id}-${i}`}
-            className="relative h-[220px] w-[320px] flex-shrink-0 overflow-hidden rounded-xl sm:h-[260px] sm:w-[380px] lg:h-[280px] lg:w-[420px]"
+            className="relative h-[260px] w-[360px] flex-shrink-0 overflow-hidden rounded-xl sm:h-[300px] sm:w-[440px] lg:h-[340px] lg:w-[500px]"
           >
             <Image
               src={item.image}
               alt={item.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
+              className="!inset-x-0 !bottom-auto !top-0 !h-[122%] !w-full max-w-none object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes="(max-width: 640px) 360px, (max-width: 1024px) 440px, 500px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100">
               <span className="absolute bottom-4 left-4 right-4 text-sm font-semibold text-white drop-shadow-md">
