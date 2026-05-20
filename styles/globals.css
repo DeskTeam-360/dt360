@@ -331,12 +331,13 @@ body {
   }
 }
 
-/** TeamMembers full-bleed: <1440px padding ≈ half 280px card at edge + aligned snap */
+/**
+ * TeamMembers full-bleed (<1440px): hanya scroll-padding (tidak menambah scrollWidth).
+ * Padding pada box membuat area kosong ikut ter-scroll di mobile/tablet.
+ */
 @media (max-width: 1439px) {
   .team-members-scroller-peek {
-    padding-left: max(1rem, calc(50vw - 140px));
-    padding-right: max(1rem, calc(50vw - 140px));
-    scroll-padding-left: max(1rem, calc(50vw - 140px));
-    scroll-padding-right: max(1rem, calc(50vw - 140px));
+    scroll-padding-inline: max(1rem, calc(50vw - min(150px, 50vw - 2rem)));
+    overscroll-behavior-x: none;
   }
 }

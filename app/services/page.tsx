@@ -64,7 +64,7 @@ const coreServiceCards = [
   },
   {
     no: "09",
-    title: "White label (for Agencies)",
+    title: "White Label (for Agencies)",
     bg: "from-[#ec85c8] via-[#9155b2] to-[#16307c]",
     href: "/services/white-label",
   },

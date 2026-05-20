@@ -7,16 +7,8 @@ import { SafeImage } from "@/components/shared/SafeImage";
 import { teamMembers } from "@/data/home";
 import { cn } from "@/lib/utils";
 
-/** ~ card width (300) + gap between cards */
-const SCROLL_STEP = 316;
-const SCROLL_EDGE_THRESHOLD = 8;
-
-function centerHorizontalScroll(el: HTMLDivElement | null) {
-  if (!el) return;
-  const max = el.scrollWidth - el.clientWidth;
-  if (max <= 0) return;
-  el.scrollLeft = max / 2;
-}
+const MEMBER_COUNT = teamMembers.length;
+const INITIAL_INDEX = Math.floor(MEMBER_COUNT / 2);
 
 type MouseDragState = {
   pointerId: number;
@@ -24,28 +16,127 @@ type MouseDragState = {
   startScrollLeft: number;
 };
 
-function readScrollEdges(el: HTMLDivElement) {
-  const max = el.scrollWidth - el.clientWidth;
-  if (max <= SCROLL_EDGE_THRESHOLD) {
-    return { atStart: true, atEnd: true };
-  }
-  return {
-    atStart: el.scrollLeft <= SCROLL_EDGE_THRESHOLD,
-    atEnd: el.scrollLeft >= max - SCROLL_EDGE_THRESHOLD,
-  };
-}
-
 export function TeamMembers() {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<Array<HTMLElement | null>>([]);
   const mouseDragRef = useRef<MouseDragState | null>(null);
+  const programmaticScrollRef = useRef(false);
+  const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeIndexRef = useRef(INITIAL_INDEX);
   const [mouseDragging, setMouseDragging] = useState(false);
-  const [scrollEdges, setScrollEdges] = useState({ atStart: false, atEnd: false });
+  const [activeIndex, setActiveIndex] = useState(INITIAL_INDEX);
 
-  const syncScrollEdges = useCallback(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    setScrollEdges(readScrollEdges(el));
-  }, []);
+  activeIndexRef.current = activeIndex;
+
+  /** Posisi slide dalam track scroll (akurat di mobile/tablet). */
+  const getSlideOffsetInScroller = useCallback(
+    (viewport: HTMLDivElement, slide: HTMLElement) => {
+      const vRect = viewport.getBoundingClientRect();
+      const sRect = slide.getBoundingClientRect();
+      return viewport.scrollLeft + (sRect.left - vRect.left);
+    },
+    [],
+  );
+
+  /** ScrollLeft agar kartu `index` berada di tengah viewport. */
+  const getCenterScrollForIndex = useCallback(
+    (viewport: HTMLDivElement, index: number) => {
+      const slide = slideRefs.current[index];
+      if (!slide) return 0;
+      const slideLeft = getSlideOffsetInScroller(viewport, slide);
+      return slideLeft + slide.offsetWidth / 2 - viewport.clientWidth / 2;
+    },
+    [getSlideOffsetInScroller],
+  );
+
+  /** Batas scroll: kartu pertama & terakhir ter-center — tidak masuk spacer kosong. */
+  const getScrollBounds = useCallback(
+    (viewport: HTMLDivElement) => {
+      const min = Math.max(0, getCenterScrollForIndex(viewport, 0));
+      const max = Math.max(min, getCenterScrollForIndex(viewport, MEMBER_COUNT - 1));
+      return { min, max };
+    },
+    [getCenterScrollForIndex],
+  );
+
+  const clampScrollLeft = useCallback(
+    (el: HTMLDivElement) => {
+      const { min, max } = getScrollBounds(el);
+      if (el.scrollLeft < min) el.scrollLeft = min;
+      if (el.scrollLeft > max) el.scrollLeft = max;
+    },
+    [getScrollBounds],
+  );
+
+  const findNearestIndex = useCallback((viewport: HTMLDivElement) => {
+    const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
+    let nearestIndex = 0;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+
+    slideRefs.current.forEach((slide, slideIndex) => {
+      if (!slide) return;
+      const slideLeft = getSlideOffsetInScroller(viewport, slide);
+      const slideCenter = slideLeft + slide.offsetWidth / 2;
+      const distance = Math.abs(slideCenter - viewportCenter);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = slideIndex;
+      }
+    });
+
+    return nearestIndex;
+  }, [getSlideOffsetInScroller]);
+
+  const scrollToIndex = useCallback(
+    (targetIndex: number, behavior: ScrollBehavior = "smooth") => {
+      const viewport = scrollerRef.current;
+      const slide = slideRefs.current[targetIndex];
+      if (!viewport || !slide) return;
+
+      const index = Math.max(0, Math.min(targetIndex, MEMBER_COUNT - 1));
+      const { min, max } = getScrollBounds(viewport);
+      const desiredLeft = getCenterScrollForIndex(viewport, index);
+
+      programmaticScrollRef.current = true;
+      viewport.scrollTo({
+        left: Math.min(Math.max(min, desiredLeft), max),
+        behavior,
+      });
+      setActiveIndex(index);
+    },
+    [getCenterScrollForIndex, getScrollBounds],
+  );
+
+  const onScrollSettled = useCallback(() => {
+    const viewport = scrollerRef.current;
+    if (!viewport) return;
+
+    clampScrollLeft(viewport);
+    if (programmaticScrollRef.current) return;
+
+    const nearest = findNearestIndex(viewport);
+    const { min, max } = getScrollBounds(viewport);
+    const current = viewport.scrollLeft;
+
+    if (current < min - 2 || current > max + 2) {
+      scrollToIndex(nearest, "auto");
+      return;
+    }
+
+    if (nearest !== activeIndexRef.current) {
+      setActiveIndex(nearest);
+    }
+  }, [findNearestIndex, clampScrollLeft, getScrollBounds, scrollToIndex]);
+
+  const onScrollEnd = useCallback(() => {
+    programmaticScrollRef.current = false;
+    onScrollSettled();
+  }, [onScrollSettled]);
+
+  const scheduleScrollSettled = useCallback(() => {
+    if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+    scrollEndTimerRef.current = setTimeout(onScrollSettled, 120);
+  }, [onScrollSettled]);
 
   const endMouseDrag = useCallback((el: HTMLDivElement, pointerId: number) => {
     const d = mouseDragRef.current;
@@ -59,39 +150,49 @@ export function TeamMembers() {
     }
   }, []);
 
-  const scrollByDir = useCallback((dir: -1 | 1) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * SCROLL_STEP, behavior: "smooth" });
-  }, []);
+  const goPrev = useCallback(() => {
+    scrollToIndex(activeIndex - 1);
+  }, [activeIndex, scrollToIndex]);
 
-  /** Default view starts centered on the members row, not from the left. */
+  const goNext = useCallback(() => {
+    scrollToIndex(activeIndex + 1);
+  }, [activeIndex, scrollToIndex]);
+
+  /** Default view: kartu tengah ter-center; resize mengikuti index aktif tanpa reset ke max/2. */
   useLayoutEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
     const apply = () => {
-      centerHorizontalScroll(el);
-      syncScrollEdges();
+      scrollToIndex(activeIndexRef.current, "auto");
     };
 
     apply();
     const raf = requestAnimationFrame(apply);
 
-    const ro = new ResizeObserver(apply);
+    const ro = new ResizeObserver(() => apply());
     ro.observe(el);
 
     const onResize = () => apply();
     window.addEventListener("resize", onResize);
-    el.addEventListener("scroll", syncScrollEdges, { passive: true });
+
+    const onScroll = () => {
+      clampScrollLeft(el);
+      scheduleScrollSettled();
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+
+    el.addEventListener("scrollend", onScrollEnd);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("resize", onResize);
-      el.removeEventListener("scroll", syncScrollEdges);
+      el.removeEventListener("scroll", onScroll);
+      el.removeEventListener("scrollend", onScrollEnd);
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
     };
-  }, [syncScrollEdges]);
+  }, [scrollToIndex, scheduleScrollSettled, onScrollSettled, onScrollEnd, clampScrollLeft]);
 
   const onScrollerPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
@@ -116,22 +217,26 @@ export function TeamMembers() {
     const el = scrollerRef.current;
     if (!el) return;
     el.scrollLeft = d.startScrollLeft - (e.clientX - d.startX);
-  }, []);
+    clampScrollLeft(el);
+  }, [clampScrollLeft]);
 
   const onScrollerPointerUp = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       const el = scrollerRef.current;
       if (!el) return;
       endMouseDrag(el, e.pointerId);
-      syncScrollEdges();
+      scheduleScrollSettled();
     },
-    [endMouseDrag, syncScrollEdges],
+    [endMouseDrag, scheduleScrollSettled],
   );
 
   const onScrollerLostPointerCapture = useCallback(() => {
     mouseDragRef.current = null;
     setMouseDragging(false);
   }, []);
+
+  const atStart = activeIndex <= 0;
+  const atEnd = activeIndex >= MEMBER_COUNT - 1;
 
   return (
     <section
@@ -154,20 +259,20 @@ export function TeamMembers() {
           "relative mt-12 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 left-1/2 lg:mt-14 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full",
         )}
       >
-        {!scrollEdges.atStart ? (
+        {!atStart ? (
           <button
             type="button"
-            onClick={() => scrollByDir(-1)}
+            onClick={goPrev}
             className="absolute left-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:left-6 md:flex sm:h-14 sm:w-10"
             aria-label="Show previous team members"
           >
             <ChevronLeft className="size-5 shrink-0" strokeWidth={2.25} aria-hidden />
           </button>
         ) : null}
-        {!scrollEdges.atEnd ? (
+        {!atEnd ? (
           <button
             type="button"
-            onClick={() => scrollByDir(1)}
+            onClick={goNext}
             className="absolute right-3 top-1/2 z-10 hidden h-12 w-9 -translate-y-1/2 items-center justify-center rounded-2xl border border-white/50 bg-white/40 text-zinc-500 shadow-sm backdrop-blur-md transition hover:bg-white/50 hover:text-zinc-600 min-[1440px]:right-6 md:flex sm:h-14 sm:w-10"
             aria-label="Show next team members"
           >
@@ -178,11 +283,9 @@ export function TeamMembers() {
         <div
           ref={scrollerRef}
           className={cn(
-            "team-members-scroller-peek flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden",
-            // Desktop: click-drag horizontal (mouse); touch stays native (touch pointerType ignored)
+            "team-members-scroller-peek flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-none pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-4 [&::-webkit-scrollbar]:hidden",
             "cursor-grab select-none",
             mouseDragging && "cursor-grabbing snap-none",
-            // ≥1440px: smaller horizontal padding → more full cards visible
             "min-[1440px]:px-6 min-[1440px]:scroll-pl-6 min-[1440px]:scroll-pr-6 xl:px-10 xl:scroll-pl-10 xl:scroll-pr-10 2xl:px-14 2xl:scroll-pl-14 2xl:scroll-pr-14",
           )}
           tabIndex={0}
@@ -195,41 +298,42 @@ export function TeamMembers() {
           onPointerCancel={onScrollerPointerUp}
           onLostPointerCapture={onScrollerLostPointerCapture}
         >
-            {teamMembers.map((member) => (
-              <article
-                key={member.id}
-                className="w-[min(100%,300px)] shrink-0 snap-center sm:w-[300px]"
-              >
-                <div className="relative aspect-square w-full overflow-hidden rounded-none bg-white">
-                  {/* Photo fills the whole tile; label sits above the image layer */}
-                  <div className="absolute inset-0 z-[1] overflow-hidden">
-                    <SafeImage
-                      src={member.imageSrc}
-                      alt={`${member.name}, ${member.role}`}
-                      fill
-                      className="object-cover object-left-bottom scale-100"
-                      sizes="(max-width: 640px) 90vw, 300px"
-                      priority={member.id === "1"}
-                    />
-                  </div>
-                  {/* Name | role overlay chip (on photo, z-[2]); color per member from `labelClass` in data */}
-                  <div
-                    className={cn(
-                      "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-none px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",
-                      member.labelClass,
-                    )}
-                  >
-                    <p className="text-[10px] font-bold uppercase leading-tight tracking-wide text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)] sm:text-xs">
-                      <span>{member.name}</span>
-                      <span className="mx-2 font-normal text-white" aria-hidden>
-                        |
-                      </span>
-                      <span className="inline sm:whitespace-nowrap">{member.role}</span>
-                    </p>
-                  </div>
+          {teamMembers.map((member, index) => (
+            <article
+              key={member.id}
+              ref={(el) => {
+                slideRefs.current[index] = el;
+              }}
+              className="w-[min(100%,300px)] shrink-0 snap-center sm:w-[300px]"
+            >
+              <div className="relative aspect-square w-full overflow-hidden rounded-none bg-white">
+                <div className="absolute inset-0 z-[1] overflow-hidden">
+                  <SafeImage
+                    src={member.imageSrc}
+                    alt={`${member.name}, ${member.role}`}
+                    fill
+                    className="object-cover object-left-bottom scale-100"
+                    sizes="(max-width: 640px) 90vw, 300px"
+                    priority={member.id === "1"}
+                  />
                 </div>
-              </article>
-            ))}
+                <div
+                  className={cn(
+                    "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-none px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",
+                    member.labelClass,
+                  )}
+                >
+                  <p className="text-[10px] font-bold uppercase leading-tight tracking-wide text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)] sm:text-xs">
+                    <span>{member.name}</span>
+                    <span className="mx-2 font-normal text-white" aria-hidden>
+                      |
+                    </span>
+                    <span className="inline sm:whitespace-nowrap">{member.role}</span>
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

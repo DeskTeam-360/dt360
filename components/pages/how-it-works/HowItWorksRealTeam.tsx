@@ -4,7 +4,10 @@ import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksRealTeam } from "@/data/howItWorks";
+import { cn } from "@/lib/utils";
 
+/** Label column is 40% narrower than plan cards on desktop (0.6 vs 1 flex share). */
+const STRIP_LABEL_FLEX = 0.6;
 const planCards = [
   {
     label: "Every plan\nincludes:",
@@ -19,13 +22,13 @@ const planCards = [
   },
   {
     label: "1 Team Leader",
-    imageSrc: "/images/Strip Row - Team Leader.png",
+    imageSrc: "/images/How it works - TL Strip.png",
     bg: "#8815A2",
     type: "card" as const,
   },
   {
     label: "2 Designers\n2 Developers\n2 Technical VAs",
-    imageSrc: "/images/Strip Row - Team.png",
+    imageSrc: "/images/How it works - Dev Strip.png",
     bg: "#A4199A",
     type: "card" as const,
   },
@@ -90,11 +93,21 @@ export function HowItWorksRealTeam() {
           {planCards.map((card, i) => (
             <Fragment key={i}>
               <div
-                className={`flex min-h-0 w-full flex-col items-center justify-center gap-3 rounded-[20px] px-5 py-5 text-center text-white lg:min-w-0 lg:flex-1 lg:flex-row lg:items-center lg:gap-3 lg:text-left ${
-                  card.type === "label" ? "font-bold" : ""
-                }`}
+                className={cn(
+                  "relative flex min-h-0 w-full flex-col items-center justify-center gap-3 rounded-[20px] px-5 py-5 text-center text-white",
+                  "lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:text-left",
+                  card.type === "label"
+                    ? "font-bold lg:flex-[0.6] lg:px-3 lg:py-6"
+                    : "lg:flex-1 lg:px-4 lg:py-6",
+                )}
                 style={{ backgroundColor: card.bg }}
               >
+                {i > 0 ? (
+                  <div
+                    className="pointer-events-none absolute top-[15%] left-0 z-10 hidden h-[70%] w-[2px] -translate-x-1/2 rounded-full bg-white lg:block"
+                    aria-hidden
+                  />
+                ) : null}
                 {card.type === "card" && card.imageSrc && (
                   <div className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-14">
                     <Image src={card.imageSrc} alt="" fill className="object-cover" sizes="64px" />
@@ -111,17 +124,6 @@ export function HowItWorksRealTeam() {
                 />
               ) : null}
             </Fragment>
-          ))}
-          {planCards.slice(0, -1).map((_, i) => (
-            <div
-              key={`strip-vdiv-${i}`}
-              className="pointer-events-none absolute top-[15%] z-10 hidden h-[70%] w-[2px] rounded-full bg-white lg:block"
-              style={{
-                left: `${((i + 1) / planCards.length) * 100}%`,
-                transform: "translateX(-50%)",
-              }}
-              aria-hidden
-            />
           ))}
         </div>
       </Container>

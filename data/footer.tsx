@@ -12,17 +12,17 @@ export const footerServices: FooterSimpleLink[] = [
 
 export const footerCompany: FooterSimpleLink[] = [
   { href: "/about", label: "About" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/#showcase", label: "Showcase" },
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/showcase", label: "Showcase" },
   { href: "/blog", label: "Blog" },
-  { href: "/#case-studies", label: "Case Studies" },
+  { href: "/", label: "Case Studies" },
   { href: "/book-a-call", label: "Contact" },
 ];
 
 export const footerLegal: FooterSimpleLink[] = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms & Conditions" },
-  { href: "/affiliate-program", label: "Affiliate Program" },
+  { href: "/", label: "Privacy Policy" },
+  { href: "/", label: "Terms & Conditions" },
+  { href: "/", label: "Affiliate Program" },
 ];
 
 export type FooterSocial = {
@@ -33,7 +33,7 @@ export type FooterSocial = {
 
 /** Replace URL with official profile when available. */
 export const footerSocial: FooterSocial[] = [
-  { label: "Instagram", href: "https://www.instagram.com/", icon: "instagram" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" },
-  { label: "Facebook", href: "https://www.facebook.com/", icon: "facebook" },
+  { label: "Instagram", href: "https://www.instagram.com/deskteam360/", icon: "instagram" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/deskteam360/", icon: "linkedin" },
+  { label: "Facebook", href: "https://www.facebook.com/deskteam360", icon: "facebook" },
 ];
