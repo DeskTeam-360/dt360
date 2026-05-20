@@ -35,12 +35,7 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
   const totalPages = Math.max(1, Math.ceil(displayPosts.length / 5));
 
   const currentPosts = displayPosts.slice(currentPage * 5, (currentPage + 1) * 5);
-  const highlighted = currentPosts[0] ? {
-    ...currentPosts[0],
-    excerpt: currentPosts[0].excerpt.length > 130 
-      ? currentPosts[0].excerpt.slice(0, 130).trim() + '...' 
-      : currentPosts[0].excerpt
-  } : null;
+  const highlighted = currentPosts[0];
   const secondPost = currentPosts[1];
   const remainingPosts = currentPosts.slice(2);
 
@@ -103,7 +98,7 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
                       {highlighted.excerpt}
                     </p>
                     <Link href={`/blog/${highlighted.slug}`} className="self-end mt-auto">
-                      <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 transition-colors">
+                      <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 transition-colors cursor-pointer">
                         Read Post
                         <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
                           <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
@@ -136,7 +131,7 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
               "w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all",
               currentPage === 0 
                 ? "bg-[#e2e2e2] text-[#acacac] cursor-not-allowed" 
-                : "bg-[#e3058d] text-white hover:bg-[#d10481] shadow-lg hover:shadow-xl"
+                : "bg-[#e3058d] text-white hover:bg-[#d10481] shadow-lg hover:shadow-xl cursor-pointer"
             )}
           >
             <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" />
@@ -148,7 +143,7 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
               "w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all",
               currentPage === totalPages - 1 
                 ? "bg-[#e2e2e2] text-[#acacac] cursor-not-allowed" 
-                : "bg-[#e3058d] text-white hover:bg-[#d10481] shadow-lg hover:shadow-xl"
+                : "bg-[#e3058d] text-white hover:bg-[#d10481] shadow-lg hover:shadow-xl cursor-pointer"
             )}
           >
             <ChevronRight className="w-6 h-6 md:w-7 md:h-7" />
@@ -189,7 +184,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         </h3>
         <div className="mt-auto">
           <Link href={`/blog/${post.slug}`}>
-            <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[14px] md:text-[16px] flex items-center gap-3 transition-colors">
+            <button className="border-2 border-[#7547c5] text-[#7547c5] group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] px-6 py-2 md:py-3 rounded-[10px] font-bold text-[14px] md:text-[16px] flex items-center gap-3 transition-colors cursor-pointer">
               Read Post
               <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
                 <ArrowRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />

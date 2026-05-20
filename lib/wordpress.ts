@@ -64,7 +64,7 @@ type WpPostNode = {
   categories?: { nodes?: Array<{ name?: string }> };
 };
 
-type WpCategoryNameNode = { name?: string };
+type WpCategoryNameNode = { name?: string; count?: number };
 
 type GetAllBlogDataResponse = {
   posts?: { nodes?: WpPostNode[] };
@@ -83,84 +83,46 @@ const calculateReadTime = (content: string): string => {
   return `${minutes} min read`;
 };
 
-const decodeHtmlEntities = (str?: string): string => {
-  if (!str) return '';
-  return str
-    .replace(/&raquo;/g, '»')
-    .replace(/&middot;/g, '·')
-    .replace(/&nbsp;/g, ' ')
+const stripExcerptHtml = (excerpt?: string): string =>
+  (excerpt?.replace(/<[^>]*>?/gm, '') ?? '')
+    .replace(/&#8211;/g, '–')
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
     .replace(/&amp;/g, '&')
     .replace(/&quot;/g, '"')
-    .replace(/&ldquo;/g, '“')
-    .replace(/&rdquo;/g, '”')
-    .replace(/&lsquo;/g, '‘')
-    .replace(/&rsquo;/g, '’')
-    .replace(/&hellip;/g, '…')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
-    .replace(/&#8211;/g, '–')
-    .replace(/&#8212;/g, '—')
-    .replace(/&#8216;/g, '‘')
-    .replace(/&#8217;/g, '’')
-    .replace(/&#8220;/g, '“')
-    .replace(/&#8221;/g, '”')
-    .replace(/&#8230;/g, '…')
-    .replace(/&#038;/g, '&')
-    .replace(/&#39;/g, "'")
-    .replace(/&#x27;/g, "'");
-};
-
-const stripExcerptHtml = (excerpt?: string): string => {
-  const stripped = (excerpt?.replace(/<[^>]*>?/gm, '') ?? '').trim();
-  return decodeHtmlEntities(stripped);
-};
+    .trim();
 
 /** Same rules as getBlogData: featured slots vs "latest" pool (for related posts on detail). */
-const CATEGORY_MAP: Record<string, string> = {
-  'delegation': 'Delegation',
-  'outsourcing': 'Outsourcing',
-  'comparisons': 'Comparisons',
-  'scaling': 'Scaling',
-  'pricing-cost': 'Pricing & cost'
-};
-
-const getCategoryFromSlugs = (categories?: { nodes?: Array<{ name?: string, slug?: string }> }): string | null => {
-  if (!categories?.nodes) return null;
-  for (const cat of categories.nodes) {
-    if (cat.slug && CATEGORY_MAP[cat.slug.toLowerCase()]) {
-      return CATEGORY_MAP[cat.slug.toLowerCase()];
-    }
-  }
-  return null;
-};
-
-const getCategoryTagColor = (category: string): string => {
-  switch (category) {
-    case 'Delegation':
-      return 'bg-[#f0573a]';
-    case 'Comparisons':
-      return 'bg-[#7547c5]';
-    case 'Outsourcing':
-      return 'bg-[#e3058d]';
-    case 'Scaling':
-      return 'bg-[#f5b419]';
-    case 'Pricing & cost':
-      return 'bg-[#00a896]';
-    default:
-      return 'bg-[#7547c5]';
-  }
-};
-
 const partitionBlogPostsForListing = (
   allPosts: BlogPost[],
   categoryNodes: WpCategoryNameNode[] | undefined,
 ): { featuredPostsMap: Record<string, BlogPost>; latestPosts: BlogPost[]; categories: string[] } => {
-  const displayCategories = ['All Posts', ...Object.values(CATEGORY_MAP)];
-
-  // Filter valid posts: only those that have one of the matched categories
   const validPosts = allPosts.filter((post: BlogPost) => {
-    return Object.values(CATEGORY_MAP).includes(post.category);
+    const validCats = (post.categories || []).filter(c => {
+      const lower = c.toLowerCase();
+      return !lower.includes('case study') && !lower.includes('case-study') && lower !== 'uncategorized';
+    });
+    return validCats.length > 0;
   });
+
+  const allCategories =
+    categoryNodes
+      ?.filter((c) => (c.count ?? 0) > 0)
+      .map((c) => c.name)
+      .filter((name): name is string => typeof name === 'string' && name.length > 0)
+      .filter((name) => {
+        const lowerName = name.toLowerCase();
+        return (
+          !lowerName.includes('case study') &&
+          !lowerName.includes('case-study') &&
+          lowerName !== 'uncategorized'
+        );
+      }) ?? [];
+
+  const categories = ['All Posts', ...allCategories];
 
   const featuredPostsMap: Record<string, BlogPost> = {};
   const usedPostIds = new Set<string>();
@@ -170,10 +132,12 @@ const partitionBlogPostsForListing = (
     usedPostIds.add(validPosts[0].id);
   }
 
-  displayCategories.forEach((category) => {
+  categories.forEach((category) => {
     if (category === 'All Posts') return;
 
-    const latestInCategory = validPosts.find((post: BlogPost) => post.category === category);
+    const latestInCategory = validPosts.find((post: BlogPost) => 
+      post.categories?.some(c => c.toLowerCase() === category.toLowerCase())
+    );
     if (latestInCategory) {
       featuredPostsMap[category] = latestInCategory;
       usedPostIds.add(latestInCategory.id);
@@ -182,171 +146,114 @@ const partitionBlogPostsForListing = (
 
   const latestPosts = validPosts.filter((post: BlogPost) => !usedPostIds.has(post.id));
 
-  return { featuredPostsMap, latestPosts, categories: displayCategories };
+  return { featuredPostsMap, latestPosts, categories };
 };
 
 // Helper to map WordPress post to BlogPost type
 const mapPost = (post: WpPostNode): BlogPost => {
   const excerpt = stripExcerptHtml(post.excerpt);
-  const category = getCategoryFromSlugs(post.categories) || 'Uncategorized';
+  const categoriesList = post.categories?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
+  const validCategory = categoriesList.find(c => {
+    const lower = c.toLowerCase();
+    return !lower.includes('case study') && !lower.includes('case-study') && lower !== 'uncategorized';
+  }) || categoriesList[0] || 'Uncategorized';
+
   return {
     id: post.id,
     slug: post.slug,
-    title: decodeHtmlEntities(post.title),
+    title: post.title,
     excerpt,
     content: post.content,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
-    category,
+    category: validCategory,
+    categories: categoriesList,
     author: post.author?.node?.name || 'Admin',
     readTime: calculateReadTime(post.content || excerpt),
     date: post.date,
-    tagColor: getCategoryTagColor(category),
+    tagColor: 'bg-[#f0573a]', // Default color
   };
 };
 
 /** Without `content` — for related pool on detail page (saves bandwidth & WP parse). */
 const mapPostLite = (post: WpPostNode): BlogPost => {
   const excerpt = stripExcerptHtml(post.excerpt);
-  const category = getCategoryFromSlugs(post.categories) || 'Uncategorized';
+  const categoriesList = post.categories?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
+  const validCategory = categoriesList.find(c => {
+    const lower = c.toLowerCase();
+    return !lower.includes('case study') && !lower.includes('case-study') && lower !== 'uncategorized';
+  }) || categoriesList[0] || 'Uncategorized';
+
   return {
     id: post.id,
     slug: post.slug,
-    title: decodeHtmlEntities(post.title),
+    title: post.title,
     excerpt,
     content: undefined,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
-    category,
+    category: validCategory,
+    categories: categoriesList,
     author: post.author?.node?.name || 'Admin',
     readTime: calculateReadTime(excerpt),
     date: post.date,
-    tagColor: getCategoryTagColor(category),
+    tagColor: 'bg-[#f0573a]',
   };
 };
 
-interface PaginatedPostsResponse {
-  posts?: {
-    pageInfo?: {
-      hasNextPage?: boolean;
-      endCursor?: string;
-    };
-    nodes?: WpPostNode[];
-  };
-}
-
-/**
- * Helper to fetch all WordPress posts using paginated requests to bypass the 100-post limit.
- */
-async function fetchAllPostsFromWordPress(includeContent: boolean = true): Promise<BlogPost[]> {
-  const query = includeContent 
-    ? gql`
-        query GetAllBlogData($first: Int!, $after: String) {
-          posts(first: $first, where: { orderby: { field: DATE, order: DESC } }, after: $after) {
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-            nodes {
-              id
-              slug
-              title
-              excerpt
-              content
-              date
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
-              author {
-                node {
-                  name
-                }
-              }
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
-            }
-          }
-        }
-      `
-    : gql`
-        query GetBlogPostsForRelated($first: Int!, $after: String) {
-          posts(first: $first, where: { orderby: { field: DATE, order: DESC } }, after: $after) {
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-            nodes {
-              id
-              slug
-              title
-              excerpt
-              date
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
-              author {
-                node {
-                  name
-                }
-              }
-              categories {
-                nodes {
-                  name
-                  slug
-                }
-              }
-            }
-          }
-        }
-      `;
-
-  const mapper = includeContent ? mapPost : mapPostLite;
-  let allPosts: BlogPost[] = [];
-  let hasNextPage = true;
-  let after: string | null = null;
-  let pageCount = 0;
-
-  // Fetch in chunks of 100 to avoid high response payloads, up to a safety limit
-  while (hasNextPage && pageCount < 10) {
-    pageCount++;
-    const response: PaginatedPostsResponse = await client.request<PaginatedPostsResponse>(query, { first: 100, after });
-
-    const nodes = response.posts?.nodes || [];
-    const mapped = nodes.map(mapper);
-    allPosts = [...allPosts, ...mapped];
-
-    hasNextPage = response.posts?.pageInfo?.hasNextPage || false;
-    after = response.posts?.pageInfo?.endCursor || null;
-  }
-
-  return allPosts;
-}
-
 export const getBlogData = async () => {
-  return fetchWordPressCached(['wp', 'blog-data-all-v2'], async () => {
-    try {
-      const allPosts = await fetchAllPostsFromWordPress(true);
-      const { featuredPostsMap, latestPosts, categories } = partitionBlogPostsForListing(
-        allPosts,
-        undefined,
-      );
-
-      return {
-        featuredPostsMap,
-        latestPosts,
-        categories,
-      };
-    } catch (error) {
-      console.error('Error fetching blog data:', error);
-      return { featuredPostsMap: {}, latestPosts: [], categories: ['All Posts'] };
+  const query = gql`
+    query GetAllBlogData($first: Int!) {
+      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          slug
+          title
+          excerpt
+          content
+          date
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          author {
+            node {
+              name
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+      categories(first: 100) {
+        nodes {
+          name
+          count
+        }
+      }
     }
-  });
+  `;
+
+  try {
+    const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
+
+    const allPosts = (data.posts?.nodes || []).map(mapPost);
+    const { featuredPostsMap, latestPosts, categories } = partitionBlogPostsForListing(
+      allPosts,
+      data.categories?.nodes,
+    );
+
+    return {
+      featuredPostsMap,
+      latestPosts,
+      categories,
+    };
+  } catch (error) {
+    console.error('Error fetching blog data:', error);
+    return { featuredPostsMap: {}, latestPosts: [], categories: ['All Posts'] };
+  }
 };
 
 /**
@@ -354,10 +261,46 @@ export const getBlogData = async () => {
  * Lightweight query (no `content` field) — featured vs latest logic matches getBlogData.
  */
 export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost[]> => {
-  return fetchWordPressCached(['wp', 'blog-related-pool-v2'], async () => {
+  return fetchWordPressCached(['wp', 'blog-related-pool'], async () => {
+    const query = gql`
+    query GetBlogPostsForRelated($first: Int!) {
+      posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          id
+          slug
+          title
+          excerpt
+          date
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          author {
+            node {
+              name
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+      categories(first: 100) {
+        nodes {
+          name
+          count
+        }
+      }
+    }
+  `;
+
     try {
-      const allPosts = await fetchAllPostsFromWordPress(false);
-      const { latestPosts } = partitionBlogPostsForListing(allPosts, undefined);
+      const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
+      const allPosts = (data.posts?.nodes || []).map(mapPostLite);
+      const { latestPosts } = partitionBlogPostsForListing(allPosts, data.categories?.nodes);
       return latestPosts;
     } catch (error) {
       console.error('Error fetching blog pool for related:', error);
@@ -368,7 +311,7 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
 
 /** Single request: `generateMetadata` + page share the same result (no double WP hit). */
 export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
-  return fetchWordPressCached(['wp', 'post-v2', slug], async () => {
+  return fetchWordPressCached(['wp', 'post', slug], async () => {
     const query = gql`
     query GetPostBySlug($id: ID!) {
       post(id: $id, idType: SLUG) {
@@ -391,7 +334,6 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
         categories {
           nodes {
             name
-            slug
           }
         }
       }
