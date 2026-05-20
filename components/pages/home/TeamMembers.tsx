@@ -26,7 +26,9 @@ export function TeamMembers() {
   const [mouseDragging, setMouseDragging] = useState(false);
   const [activeIndex, setActiveIndex] = useState(INITIAL_INDEX);
 
-  activeIndexRef.current = activeIndex;
+  useLayoutEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   /** Posisi slide dalam track scroll (akurat di mobile/tablet). */
   const getSlideOffsetInScroller = useCallback(

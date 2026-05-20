@@ -6,8 +6,6 @@ import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksRealTeam } from "@/data/howItWorks";
 import { cn } from "@/lib/utils";
 
-/** Label column is 40% narrower than plan cards on desktop (0.6 vs 1 flex share). */
-const STRIP_LABEL_FLEX = 0.6;
 const planCards = [
   {
     label: "Every plan\nincludes:",
