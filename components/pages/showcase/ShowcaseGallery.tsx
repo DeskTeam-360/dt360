@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import type { ShowcaseItem } from "@/data/showcase";
+import { ImageLightbox } from "@/components/shared/ImageLightbox";
 
 const ITEMS_PER_ROW = 5;
 const INITIAL_ROWS = 3;
@@ -17,10 +18,12 @@ function MarqueeRow({
   items,
   direction,
   speed = 30,
+  onItemClick,
 }: {
   items: ShowcaseItem[];
   direction: "left" | "right";
   speed?: number;
+  onItemClick: (item: ShowcaseItem) => void;
 }) {
   const doubled = [...items, ...items];
   const dur = items.length * speed;
@@ -36,7 +39,8 @@ function MarqueeRow({
         {doubled.map((item, i) => (
           <div
             key={`${item.id}-${i}`}
-            className="relative h-[260px] w-[360px] flex-shrink-0 overflow-hidden rounded-xl sm:h-[300px] sm:w-[440px] lg:h-[340px] lg:w-[500px]"
+            onClick={() => onItemClick(item)}
+            className="relative h-[260px] w-[360px] flex-shrink-0 overflow-hidden rounded-xl sm:h-[300px] sm:w-[440px] lg:h-[340px] lg:w-[500px] cursor-pointer"
           >
             <Image
               src={item.image}
@@ -59,6 +63,7 @@ function MarqueeRow({
 
 export function ShowcaseGallery({ allItems, activeCategory }: Props) {
   const [visibleRows, setVisibleRows] = useState(INITIAL_ROWS);
+  const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null);
 
   const filteredItems = useMemo(() => {
     if (activeCategory === "All Work") return allItems;
@@ -94,6 +99,7 @@ export function ShowcaseGallery({ allItems, activeCategory }: Props) {
             key={`row-${rowIdx}-${activeCategory}`}
             items={rowItems}
             direction={rowIdx % 2 === 0 ? "left" : "right"}
+            onItemClick={setSelectedItem}
           />
         ))}
       </div>
@@ -109,6 +115,13 @@ export function ShowcaseGallery({ allItems, activeCategory }: Props) {
           </button>
         </div>
       )}
+
+      <ImageLightbox
+        isOpen={!!selectedItem}
+        src={selectedItem?.image || ""}
+        alt={selectedItem?.title || ""}
+        onClose={() => setSelectedItem(null)}
+      />
     </section>
   );
 }

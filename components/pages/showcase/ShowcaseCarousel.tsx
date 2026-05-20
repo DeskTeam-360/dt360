@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ShowcaseItem } from "@/data/showcase";
+import { ImageLightbox } from "@/components/shared/ImageLightbox";
 
 const CARD_W = 520;
 const CARD_H = 380;
@@ -35,6 +36,7 @@ type Props = {
 
 export function ShowcaseCarousel({ items }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null);
   const touchStartX = useRef<number | null>(null);
   const count = items.length;
 
@@ -105,11 +107,12 @@ export function ShowcaseCarousel({ items }: Props) {
                 type="button"
                 onClick={() => {
                   if (!isCenter) setActiveIndex(index);
+                  else setSelectedItem(item);
                 }}
                 className={cn(
                   "absolute inset-0 overflow-hidden rounded-2xl shadow-xl shadow-black/15 outline-none transition-all duration-500 ease-out [backface-visibility:hidden]",
                   isCenter
-                    ? "z-30 cursor-default ring-0"
+                    ? "z-30 cursor-pointer ring-0"
                     : "cursor-pointer hover:brightness-105",
                   position === "hidden" && "pointer-events-none",
                 )}
@@ -143,7 +146,7 @@ export function ShowcaseCarousel({ items }: Props) {
           <button
             type="button"
             onClick={() => go(-1)}
-            className="flex size-10 items-center justify-center rounded-full border border-[#11104C]/15 bg-white text-[#11104C] shadow-sm transition hover:bg-gray-50 hover:shadow-md"
+            className="flex size-10 items-center justify-center rounded-full border border-[#11104C]/15 bg-white text-[#11104C] shadow-sm transition hover:bg-gray-50 hover:shadow-md cursor-pointer"
             aria-label="Previous"
           >
             <ChevronLeft className="size-5" strokeWidth={2} />
@@ -151,13 +154,20 @@ export function ShowcaseCarousel({ items }: Props) {
           <button
             type="button"
             onClick={() => go(1)}
-            className="flex size-10 items-center justify-center rounded-full border border-[#11104C]/15 bg-white text-[#11104C] shadow-sm transition hover:bg-gray-50 hover:shadow-md"
+            className="flex size-10 items-center justify-center rounded-full border border-[#11104C]/15 bg-white text-[#11104C] shadow-sm transition hover:bg-gray-50 hover:shadow-md cursor-pointer"
             aria-label="Next"
           >
             <ChevronRight className="size-5" strokeWidth={2} />
           </button>
         </div>
       )}
+
+      <ImageLightbox
+        isOpen={!!selectedItem}
+        src={selectedItem?.image || ""}
+        alt={selectedItem?.title || ""}
+        onClose={() => setSelectedItem(null)}
+      />
     </div>
   );
 }
