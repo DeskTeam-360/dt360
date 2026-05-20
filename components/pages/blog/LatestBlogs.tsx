@@ -35,7 +35,12 @@ export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
   const totalPages = Math.max(1, Math.ceil(displayPosts.length / 5));
 
   const currentPosts = displayPosts.slice(currentPage * 5, (currentPage + 1) * 5);
-  const highlighted = currentPosts[0];
+  const highlighted = currentPosts[0] ? {
+    ...currentPosts[0],
+    excerpt: currentPosts[0].excerpt.length > 130 
+      ? currentPosts[0].excerpt.slice(0, 130).trim() + '...' 
+      : currentPosts[0].excerpt
+  } : null;
   const secondPost = currentPosts[1];
   const remainingPosts = currentPosts.slice(2);
 

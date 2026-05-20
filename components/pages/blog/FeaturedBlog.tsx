@@ -18,7 +18,7 @@ interface FeaturedBlogProps {
 export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps) {
   const [selectedCategory, setSelectedCategory] = useState("All Posts");
   
-  const currentPost = featuredPostsMap[selectedCategory] || featuredPostsMap["All Posts"] || FEATURED_POST;
+  const currentPost = featuredPostsMap[selectedCategory] || (selectedCategory === "All Posts" ? FEATURED_POST : null);
 
   return (
     <section className="relative pt-0 pb-16 bg-white overflow-hidden -mt-[2px] z-20">
@@ -55,62 +55,77 @@ export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps
 
         {/* Featured Article with Animation */}
         <AnimatePresence mode="wait">
-          <motion.div 
-            key={selectedCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-[#fffaed] border border-[#11104c] rounded-[20px] md:rounded-[30px] overflow-hidden grid lg:grid-cols-2"
-          >
-            <div className="p-6 md:p-12 lg:pr-6 flex flex-col justify-center order-2 lg:order-1">
-              <div className="flex gap-3 mb-4 md:mb-6">
-                <span className="bg-[#f0573a] text-white px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[14px] md:text-[16px] uppercase tracking-wider">
-                  Featured
-                </span>
-                <span className="bg-[#201f60] text-[#8491e8] px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[14px] md:text-[16px] uppercase tracking-wider">
-                  {currentPost.category}
-                </span>
-              </div>
+          {currentPost ? (
+            <motion.div 
+              key={selectedCategory}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#fffaed] border border-[#11104c] rounded-[20px] md:rounded-[30px] overflow-hidden grid lg:grid-cols-2"
+            >
+              <div className="p-6 md:p-12 lg:pr-6 flex flex-col justify-center order-2 lg:order-1">
+                <div className="flex gap-3 mb-4 md:mb-6">
+                  <span className="bg-[#f0573a] text-white px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[14px] md:text-[16px] uppercase tracking-wider">
+                    Featured
+                  </span>
+                  <span className="bg-[#201f60] text-[#8491e8] px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[14px] md:text-[16px] uppercase tracking-wider">
+                    {currentPost.category}
+                  </span>
+                </div>
 
-              <h3 className="text-[28px] md:text-[44px] lg:text-[52px] leading-[1.1] font-bold text-[#11104c] mb-4 md:mb-6 font-heading">
-                {currentPost.title}
-              </h3>
+                <h3 className="text-[28px] md:text-[44px] lg:text-[52px] leading-[1.1] font-bold text-[#11104c] mb-4 md:mb-6 font-heading">
+                  {currentPost.title}
+                </h3>
 
-              <p className="text-[16px] md:text-[18px] leading-[1.6] md:leading-[30px] text-black font-semibold mb-8">
-                {currentPost.excerpt}
-              </p>
+                <p className="text-[16px] md:text-[18px] leading-[1.6] md:leading-[30px] text-black font-semibold mb-8">
+                  {currentPost.excerpt}
+                </p>
 
-              {/* Action row aligned horizontally */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-auto">
-                <Link href={`/blog/${currentPost.slug}`}>
-                  <button className="bg-[#e3058d] text-white px-6 py-3 md:px-8 md:py-4 rounded-[30px] font-bold text-[18px] md:text-[20px] flex items-center gap-3 hover:bg-[#d11f62] transition-colors">
-                    Read Post
-                    <div className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-white flex items-center justify-center">
-                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 stroke-[3]" />
-                    </div>
-                  </button>
-                </Link>
-                
-                <div className="flex items-center gap-4 text-[#e3058d] font-semibold text-[16px] md:text-[20px]">
-                  <span>{currentPost.readTime}</span>
-                  <span className="text-[#e3058d]/50">|</span>
-                  <span>{currentPost.author}</span>
+                {/* Action row aligned horizontally */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-auto">
+                  <Link href={`/blog/${currentPost.slug}`}>
+                    <button className="bg-[#e3058d] text-white px-6 py-3 md:px-8 md:py-4 rounded-[30px] font-bold text-[18px] md:text-[20px] flex items-center gap-3 hover:bg-[#d11f62] transition-colors">
+                      Read Post
+                      <div className="w-6 h-6 md:w-7 md:h-7 rounded-full border-2 border-white flex items-center justify-center">
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 stroke-[3]" />
+                      </div>
+                    </button>
+                  </Link>
+                  
+                  <div className="flex items-center gap-4 text-[#e3058d] font-semibold text-[16px] md:text-[20px]">
+                    <span>{currentPost.readTime}</span>
+                    <span className="text-[#e3058d]/50">|</span>
+                    <span>{currentPost.author}</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="p-6 md:p-12 lg:pl-6 order-1 lg:order-2 h-[300px] sm:h-[400px] lg:h-auto min-h-[300px]">
-              <div className="relative w-full h-full rounded-[15px] md:rounded-[20px] overflow-hidden">
-                <SafeImage
-                  src={currentPost.image}
-                  alt={currentPost.title}
-                  fill
-                  className="object-cover"
-                />
+              <div className="p-6 md:p-12 lg:pl-6 order-1 lg:order-2 h-[300px] sm:h-[400px] lg:h-auto min-h-[300px]">
+                <div className="relative w-full h-full rounded-[15px] md:rounded-[20px] overflow-hidden">
+                  <SafeImage
+                    src={currentPost.image}
+                    alt={currentPost.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div 
+              key={`empty-${selectedCategory}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="bg-[#fffaed] border border-[#11104c] rounded-[20px] md:rounded-[30px] p-12 text-center"
+            >
+              <p className="text-[20px] md:text-[24px] font-bold text-[#11104c]">
+                No posts found for {selectedCategory} yet. Check back later!
+              </p>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </section>

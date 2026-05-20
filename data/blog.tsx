@@ -17,10 +17,9 @@ export const CATEGORIES = [
   "All Posts",
   "Delegation",
   "Outsourcing",
-  "Agency Growth",
   "Comparisons",
-  "Pricing & Cost",
   "Scaling",
+  "Pricing & cost",
 ];
 
 export const AUTHOR_INFO = {
@@ -94,7 +93,7 @@ export const LATEST_POSTS: BlogPost[] = [
     title: "How to Scale Your Agency Without Hiring Full-time staff",
     excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel convallis ante.",
     image: "/images/blog/blog-scale.png",
-    category: "Agency Growth",
+    category: "Scaling",
     author: "Jeremy Kenerson",
     readTime: "8 min read",
     tagColor: "bg-[#f5b419]",
