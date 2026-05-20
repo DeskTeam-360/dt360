@@ -83,17 +83,35 @@ const calculateReadTime = (content: string): string => {
   return `${minutes} min read`;
 };
 
+const decodeHtmlEntities = (text: string): string => {
+  const entities: Record<string, string> = {
+    '&amp;': '&',
+    '&quot;': '"',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&#8211;': '–',
+    '&#8212;': '—',
+    '&#8216;': "'",
+    '&#8217;': "'",
+    '&#8220;': '"',
+    '&#8221;': '"',
+    '&#8230;': '...',
+    '&hellip;': '...',
+    '&middot;': '·',
+    '&raquo;': '»',
+    '&laquo;': '«',
+    '&nbsp;': ' ',
+    '&copy;': '©',
+    '&reg;': '®',
+    '&trade;': '™',
+    '&#038;': '&',
+    '&#039;': "'",
+  };
+  return text.replace(/&[#a-zA-Z0-9]+;/g, (match) => entities[match] || match);
+};
+
 const stripExcerptHtml = (excerpt?: string): string =>
-  (excerpt?.replace(/<[^>]*>?/gm, '') ?? '')
-    .replace(/&#8211;/g, '–')
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .trim();
+  decodeHtmlEntities(excerpt?.replace(/<[^>]*>?/gm, '') ?? '').trim();
 
 /** Same rules as getBlogData: featured slots vs "latest" pool (for related posts on detail). */
 const partitionBlogPostsForListing = (
@@ -161,7 +179,7 @@ const mapPost = (post: WpPostNode): BlogPost => {
   return {
     id: post.id,
     slug: post.slug,
-    title: post.title,
+    title: decodeHtmlEntities(post.title || ''),
     excerpt,
     content: post.content,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
@@ -186,7 +204,7 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
   return {
     id: post.id,
     slug: post.slug,
-    title: post.title,
+    title: decodeHtmlEntities(post.title || ''),
     excerpt,
     content: undefined,
     image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
