@@ -21,7 +21,7 @@ export const footerCompany: FooterSimpleLink[] = [
 
 export const footerLegal: FooterSimpleLink[] = [
   { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/", label: "Terms & Conditions" },
+  { href: "/terms-conditions", label: "Terms & Conditions" },
   { href: "/", label: "Affiliate Program" },
 ];
 
