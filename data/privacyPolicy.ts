@@ -162,7 +162,7 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
     paragraphs: [
       "If you have any questions about this Privacy Policy, please contact us:",
       "By email: support@deskteam360.com",
-      "By visiting this page on our website: https://deskteam360.com/contact",
+      "By visiting this page on our website: /contact",
     ],
   },
 ];

@@ -16,7 +16,8 @@ export const footerCompany: FooterSimpleLink[] = [
   { href: "/showcase", label: "Showcase" },
   { href: "/blog", label: "Blog" },
   { href: "/", label: "Case Studies" },
-  { href: "/book-a-call", label: "Contact" },
+  { href: "/book-a-call", label: "Book a Call" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export const footerLegal: FooterSimpleLink[] = [

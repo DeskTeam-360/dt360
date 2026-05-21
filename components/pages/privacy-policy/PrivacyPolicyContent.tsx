@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
+import { sitePaths } from "@/config/urls";
 import { privacyPolicyMeta, privacyPolicySections } from "@/data/privacyPolicy";
 
 export function PrivacyPolicyContent() {
@@ -73,7 +74,7 @@ export function PrivacyPolicyContent() {
           <p className="type-rule-p mx-auto mt-14 max-w-[800px] border-t border-[#11104C]/10 pt-8 text-center text-[#11104C]/70">
             Questions?{" "}
             <Link
-              href="https://deskteam360.com/book-a-call/"
+              href={sitePaths.bookACall}
               className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
             >
               Book a call
@@ -86,12 +87,12 @@ export function PrivacyPolicyContent() {
               support@deskteam360.com
             </a>
             , or visit{" "}
-            <a
-              href="https://deskteam360.com/contact"
+            <Link
+              href={sitePaths.contact}
               className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
             >
               our contact page
-            </a>
+            </Link>
             .
           </p>
         </Container>
