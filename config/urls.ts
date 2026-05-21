@@ -7,4 +7,5 @@ export const externalUrls = {
 export const sitePaths = {
   contact: "/contact",
   bookACall: "/book-a-call",
+  affiliateProgram: "/affiliate-program",
 } as const;
