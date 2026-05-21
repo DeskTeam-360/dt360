@@ -200,7 +200,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         {isWebDev ? (
           <div className="mt-10 flex justify-center md:mt-12 xl:mt-14">
             <Link
-              href="#"
+              href="/#pricing"
               className="font-button group inline-flex items-center justify-center gap-2 rounded-[10px] bg-[#E6236D] px-4 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)]"
             >
               See Full Pricing &amp; Plans &raquo;
@@ -221,7 +221,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
             </ul>
             <div className="shrink-0 md:pl-2">
               <Link
-                href="#"
+                href="/#pricing"
                 className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E3058D] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
               >
                 See Full Pricing & Plans
