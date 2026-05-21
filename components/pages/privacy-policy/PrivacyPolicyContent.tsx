@@ -17,7 +17,7 @@ export function PrivacyPolicyContent() {
             {privacyPolicyMeta.intro}
           </p>
           <p className="mt-4 font-[var(--font-montserrat)] text-sm font-semibold text-white/60">
-            Last updated: {privacyPolicyMeta.lastUpdated}
+            Effective date: {privacyPolicyMeta.lastUpdated}
           </p>
         </Container>
       </section>
@@ -78,12 +78,19 @@ export function PrivacyPolicyContent() {
             >
               Book a call
             </Link>{" "}
-            or email{" "}
+            , email{" "}
             <a
-              href="mailto:privacy@deskteam360.com"
+              href="mailto:support@deskteam360.com"
               className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
             >
-              privacy@deskteam360.com
+              support@deskteam360.com
+            </a>
+            , or visit{" "}
+            <a
+              href="https://deskteam360.com/contact"
+              className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
+            >
+              our contact page
             </a>
             .
           </p>

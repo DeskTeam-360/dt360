@@ -13,9 +13,16 @@ export function TermsConditionsContent() {
           <h1 className="type-rule-h1 mt-3 text-balance text-white">
             {termsConditionsMeta.title}
           </h1>
-          <p className="type-rule-p mt-6 max-w-[720px] text-pretty text-white/85">
-            {termsConditionsMeta.intro}
-          </p>
+          <div className="mt-6 max-w-[720px] space-y-4">
+            {termsConditionsMeta.introParagraphs.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="type-rule-p text-pretty text-white/85"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
           <p className="mt-4 font-[var(--font-montserrat)] text-sm font-semibold text-white/60">
             Last updated: {termsConditionsMeta.lastUpdated}
           </p>
@@ -66,6 +73,14 @@ export function TermsConditionsContent() {
                     ))}
                   </ul>
                 ) : null}
+                {section.paragraphsAfterList?.map((paragraph, paragraphIndex) => (
+                  <p
+                    key={`${section.id}-after-${paragraphIndex}`}
+                    className="type-rule-p mt-4 text-pretty text-[#11104C]/90"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </article>
             ))}
           </div>
@@ -78,12 +93,19 @@ export function TermsConditionsContent() {
             >
               Book a call
             </Link>{" "}
-            or email{" "}
+            , email{" "}
             <a
-              href="mailto:legal@deskteam360.com"
+              href="mailto:support@deskteam360.com"
               className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
             >
-              legal@deskteam360.com
+              support@deskteam360.com
+            </a>
+            , or visit{" "}
+            <a
+              href="https://deskteam360.com/contact"
+              className="font-semibold text-[#E3058D] underline-offset-2 hover:underline"
+            >
+              our contact page
             </a>
             .
           </p>
