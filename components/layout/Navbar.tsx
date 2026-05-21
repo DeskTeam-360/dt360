@@ -7,6 +7,7 @@ import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { ServicesMegaMenuDesktop } from "./ServicesMegaMenuDesktop";
+import { externalUrls, sitePaths } from "@/config/urls";
 import { navServices, type NavMenuItem } from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
@@ -123,13 +124,13 @@ export function Navbar() {
 
             <div className="hidden items-center gap-5 lg:flex">
               <Link
-                href="https://deskteam360.com/customer"
+                href={externalUrls.customerPortal}
                 className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Log in
               </Link>
               <Link
-                href="https://deskteam360.com/book-a-call/"
+                href={sitePaths.bookACall}
                 className="font-nav-primary inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2.5 py-2.5 text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
               >
                 Book a call
@@ -196,11 +197,11 @@ export function Navbar() {
                 About
               </MobileLink>
               <hr className="my-3 border-white/10" />
-              <MobileLink href="https://deskteam360.com/customer" onNavigate={() => setMobileOpen(false)}>
+              <MobileLink href={externalUrls.customerPortal} onNavigate={() => setMobileOpen(false)}>
                 Log in
               </MobileLink>
               <Link
-                href="https://deskteam360.com/book-a-call/"
+                href={sitePaths.bookACall}
                 onClick={() => setMobileOpen(false)}
                 className="font-nav-primary mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2 py-3 text-center text-white shadow-md"
               >

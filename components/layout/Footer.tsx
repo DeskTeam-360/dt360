@@ -74,7 +74,7 @@ export function Footer() {
             </ul>
             <ul className="mt-8 space-y-[11px] text-[14px] leading-[1.5] text-white/80">
               {footerLegal.map((item) => (
-                <li key={item.href}>
+                <li key={item.label}>
                   <Link href={item.href} className="transition hover:text-white">
                     {item.label}
                   </Link>

@@ -16,13 +16,13 @@ export const footerCompany: FooterSimpleLink[] = [
   { href: "/showcase", label: "Showcase" },
   { href: "/blog", label: "Blog" },
   { href: "/", label: "Case Studies" },
-  { href: "/book-a-call", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export const footerLegal: FooterSimpleLink[] = [
-  { href: "/", label: "Privacy Policy" },
-  { href: "/", label: "Terms & Conditions" },
-  { href: "/", label: "Affiliate Program" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-conditions", label: "Terms & Conditions" },
+  { href: "/affiliate-program", label: "Affiliate Program" },
 ];
 
 export type FooterSocial = {

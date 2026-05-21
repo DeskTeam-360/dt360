@@ -1,3 +1,5 @@
+import { pricingCheckoutUrls } from "@/config/urls";
+
 export type HeroCta = {
   href: string;
   label: string;
@@ -468,7 +470,7 @@ export const pricingSection: PricingSection = {
       cardBackground: "linear-gradient(180deg, #BD62FF 0%, #7E5BFD 100%)",
       price: "1,497",
       buttonTextColor: "#5D3FD3",
-      ctaHref: "/book-a-call",
+      ctaHref: pricingCheckoutUrls.entrepreneur,
       features: [
         "1 active task at a time",
         "Full team access - all 8 services",
@@ -486,7 +488,7 @@ export const pricingSection: PricingSection = {
       cardBackground: "linear-gradient(180deg, #FF8B52 0%, #EE4176 100%)",
       price: "2,994",
       buttonTextColor: "#E3058D",
-      ctaHref: "/book-a-call",
+      ctaHref: pricingCheckoutUrls.marketer,
       features: [
         "2 active tasks at a time",
         "Full team access - all 8 services",
@@ -504,7 +506,7 @@ export const pricingSection: PricingSection = {
       cardBackground: "linear-gradient(180deg, #9DC54E 0%, #1D8A7D 100%)",
       price: "4,491",
       buttonTextColor: "#0F766E",
-      ctaHref: "/book-a-call",
+      ctaHref: pricingCheckoutUrls.agency,
       features: [
         "3 active tasks at a time",
         "Full team access - all 8 services",
