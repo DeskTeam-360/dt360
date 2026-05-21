@@ -1,4 +1,5 @@
 import { bookACallGravityForm } from "@/data/bookACall";
+import { contactGravityForm } from "@/data/contact";
 import { getWordPressAuthHeaders, getWordPressSiteOrigin } from "@/lib/wp-auth";
 
 export type BookACallEntryInput = {
@@ -6,6 +7,14 @@ export type BookACallEntryInput = {
   lastName: string;
   email: string;
   recaptchaToken?: string;
+};
+
+export type ContactEntryInput = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  message: string;
 };
 
 export type GravityFormsSubmitResult = {
@@ -56,6 +65,49 @@ export async function submitBookACallEntry(
       Accept: "application/json",
     },
     body: JSON.stringify(buildSubmissionPayload(input)),
+    cache: "no-store",
+  });
+
+  const data = (await response.json()) as GravityFormsSubmitResult & {
+    code?: string;
+    message?: string;
+  };
+
+  if (!response.ok && !data.validation_messages) {
+    throw new Error(data.message || `Gravity Forms request failed (${response.status})`);
+  }
+
+  return data;
+}
+
+function buildContactSubmissionPayload(input: ContactEntryInput): Record<string, string> {
+  const { fieldIds } = contactGravityForm;
+  return {
+    [fieldIds.firstName]: input.firstName.trim(),
+    [fieldIds.lastName]: input.lastName.trim(),
+    [fieldIds.phone]: input.phone.trim(),
+    [fieldIds.email]: input.email.trim(),
+    [fieldIds.message]: input.message.trim(),
+  };
+}
+
+/** Submit Contact page form to Gravity Forms (form 1 on clone WP). */
+export async function submitContactEntry(
+  input: ContactEntryInput,
+): Promise<GravityFormsSubmitResult> {
+  const formId =
+    Number(process.env.GRAVITY_FORMS_CONTACT_ID) || contactGravityForm.formId;
+  const origin = getWordPressSiteOrigin();
+  const url = `${origin}/wp-json/gf/v2/forms/${formId}/submissions`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      ...getWordPressAuthHeaders(),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(buildContactSubmissionPayload(input)),
     cache: "no-store",
   });
 
