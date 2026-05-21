@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Montserrat, Readex_Pro } from "next/font/google";
+import { pricingCheckoutUrls } from "@/config/urls";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +29,7 @@ const PLANS = [
     gradientClass: "from-[#BD62FF] to-[#7E5BFD]",
     dividerClass: "bg-[#b28cff]",
     accentClass: "text-[#5b21b6]",
+    ctaHref: pricingCheckoutUrls.entrepreneur,
   },
   {
     id: "marketer",
@@ -42,6 +44,7 @@ const PLANS = [
     gradientClass: "from-[#FF8B52] to-[#EE4176]",
     dividerClass: "bg-[#ff8d4f]",
     accentClass: "text-[#be123c]",
+    ctaHref: pricingCheckoutUrls.marketer,
   },
   {
     id: "agency",
@@ -56,6 +59,7 @@ const PLANS = [
     gradientClass: "from-[#9DC54E] to-[#1D8A7D]",
     dividerClass: "bg-[#7cd44e]",
     accentClass: "text-[#0f766e]",
+    ctaHref: pricingCheckoutUrls.agency,
   },
 ] as const;
 
@@ -177,8 +181,8 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                     </span>
                   </p>
                   <div className={cn(`my-12 h-[5px] w-full self-stretch ${plan.dividerClass}`)} aria-hidden />
-                  <button
-                    type="button"
+                  <Link
+                    href={plan.ctaHref}
                     className={`font-button group mt-auto inline-flex w-fit items-center justify-center gap-2 self-center rounded-full bg-white px-3.5 py-3 tracking-wide shadow-[0_4px_10px_rgba(0,0,0,0.15)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-95 hover:shadow-[0_10px_22px_-8px_rgba(0,0,0,0.35)] ${plan.accentClass}`}
                   >
                     GET STARTED
@@ -190,7 +194,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                         <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </article>
             );
