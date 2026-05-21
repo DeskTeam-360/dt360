@@ -1,33 +1,99 @@
+import { BookACallForm } from "@/components/pages/book-a-call/BookACallForm";
 import { Container } from "@/components/shared/Container";
-import { bookACallHero } from "@/data/bookACall";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { BOOK_A_CALL_FORM_BG, bookACallHero } from "@/data/bookACall";
 
 /**
- * Book a Call hero — placeholder until final design and booking form are confirmed.
+ * Book a Call — hero, arch transition, and step-1 form in one section.
  */
 export function BookACallHero() {
+  const {
+    title,
+    heroImageSrc,
+    heroImageAlt,
+    heroImageMaxWidth,
+    heroImageMaxWidthSm,
+    heroImageMaxWidthLg,
+    heroImageOverlapMarginBottom,
+  } = bookACallHero;
+
   return (
-    <section className="relative overflow-hidden bg-[#11104C] pt-28 text-white sm:pt-32 lg:pt-[120px]">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute top-[5%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_55%)] blur-3xl" />
-        <div className="absolute right-[-10%] bottom-[-5%] h-[min(800px,70vw)] w-[min(800px,70vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_55%)] blur-3xl" />
+    <section
+      className="relative overflow-x-hidden overflow-y-visible"
+      aria-labelledby="book-a-call-hero-heading"
+    >
+      <div className="relative z-20 bg-[#11104C] pb-0 pt-28 text-white sm:pt-32 lg:pt-[120px]">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute bottom-[0%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl" />
+        </div>
+
+        <Container className="relative z-20 max-w-[1440px] px-6 lg:px-20">
+          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12 xl:gap-16">
+            <div className="relative z-20 md:pb-4 lg:pb-6">
+              <h1
+                id="book-a-call-hero-heading"
+                className="font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white lg:text-[76px]"
+              >
+                {title}
+              </h1>
+            </div>
+            <div
+              className="relative isolate z-40 mx-auto flex w-full max-w-[260px] flex-col items-center justify-center sm:max-w-[280px] md:mx-0 md:ml-auto md:max-w-[300px] lg:max-w-[360px] xl:max-w-[430px]"
+              style={{ marginBottom: heroImageOverlapMarginBottom }}
+            >
+              <div
+                className="pointer-events-none absolute inset-8 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.3)_0%,transparent_60%)] blur-2xl sm:inset-6 lg:inset-8"
+                aria-hidden
+              />
+              <SafeImage
+                src={heroImageSrc}
+                alt={heroImageAlt}
+                width={heroImageMaxWidth}
+                height={520}
+                priority
+                className="relative z-40 mx-auto h-auto w-full max-w-[260px] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)] sm:max-w-[280px] md:max-w-[300px] lg:max-w-[360px] xl:max-w-[430px]"
+                sizes={`(max-width: 640px) ${heroImageMaxWidthSm}px, (max-width: 1024px) ${heroImageMaxWidthLg}px, ${heroImageMaxWidth}px`}
+              />
+            </div>
+          </div>
+        </Container>
+
+        <div className="relative z-0 -mt-2 w-full sm:-mt-4 lg:-mt-6" aria-hidden>
+          <svg
+            className="block h-16 w-full sm:h-20 lg:h-28 xl:h-32"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="book-a-call-arch-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#00C8F4" />
+                <stop offset="45%" stopColor="#9B7DFF" />
+                <stop offset="100%" stopColor="#E3058D" />
+              </linearGradient>
+              <filter id="book-a-call-arch-glow-blur" x="-5%" y="-30%" width="110%" height="160%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path fill={BOOK_A_CALL_FORM_BG} d="M0,88 Q720,4 1440,88 L1440,120 L0,120 Z" />
+            <path
+              d="M0,88 Q720,4 1440,88"
+              fill="none"
+              stroke="url(#book-a-call-arch-glow)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              filter="url(#book-a-call-arch-glow-blur)"
+              opacity="0.95"
+            />
+          </svg>
+        </div>
       </div>
 
-      <Container className="relative z-10 max-w-[1440px] px-6 pb-16 lg:px-20 lg:pb-20">
-        <p className="font-[var(--font-montserrat)] text-sm font-semibold uppercase tracking-wide text-white/70">
-          {bookACallHero.eyebrow}
-        </p>
-        <h1 className="type-rule-h1 mt-3 max-w-[900px] text-balance text-white">
-          {bookACallHero.title}
-        </h1>
-        <p className="type-rule-p mt-6 max-w-[720px] text-pretty text-white/85">
-          {bookACallHero.description}
-        </p>
-      </Container>
-
-      <div
-        className="pointer-events-none absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-        aria-hidden
-      />
+      <BookACallForm />
     </section>
   );
 }

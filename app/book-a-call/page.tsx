@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function BookACallPage() {
   return (
-    <main className="flex min-w-0 flex-col overflow-x-hidden bg-white">
+    <main className="relative flex min-w-0 flex-col overflow-x-hidden overflow-y-visible">
       <BookACallHero />
     </main>
   );
