@@ -43,10 +43,20 @@ function buildSubmissionPayload(input: BookACallEntryInput): Record<string, stri
   };
 
   if (input.recaptchaToken) {
-    payload[fieldIds.captcha] = input.recaptchaToken;
+    appendRecaptchaToken(payload, fieldIds.captcha, input.recaptchaToken);
   }
 
   return payload;
+}
+
+/** GF validates Google tokens via input_* and often expects `g-recaptcha-response` as well. */
+function appendRecaptchaToken(
+  payload: Record<string, string>,
+  captchaInputKey: string,
+  token: string,
+): void {
+  payload[captchaInputKey] = token;
+  payload["g-recaptcha-response"] = token;
 }
 
 /** Submit Book a Call step 1 to Gravity Forms (form 59 on clone WP). */
@@ -92,7 +102,7 @@ function buildContactSubmissionPayload(input: ContactEntryInput): Record<string,
   };
 
   if (input.recaptchaToken) {
-    payload[fieldIds.captcha] = input.recaptchaToken;
+    appendRecaptchaToken(payload, fieldIds.captcha, input.recaptchaToken);
   }
 
   return payload;
