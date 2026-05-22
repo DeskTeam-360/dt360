@@ -25,7 +25,7 @@ export function CaseStudiesHero() {
   return (
     <section
       id="case-studies-hero"
-      className="relative overflow-x-hidden overflow-y-hidden bg-[#0c0820] text-white"
+      className="relative z-20 overflow-x-hidden overflow-y-hidden bg-[#0c0820] text-white"
       aria-labelledby="case-studies-hero-heading"
     >
       {/* Background — cover, top center (no baked-in bottom curve) */}
@@ -41,7 +41,7 @@ export function CaseStudiesHero() {
         />
       </div>
 
-      <div className="relative z-10 pb-[60px] pt-24 sm:pb-[100px] sm:pt-28 lg:pt-32 xl:pt-36 2xl:pt-40">
+      <div className="relative z-10 w-full pb-[40px] pt-24 sm:pb-[60px] sm:pt-28 lg:pb-[80px] lg:pt-32 xl:pt-36 2xl:pt-40">
         <Container className="max-w-[1440px] px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           <div className="mx-auto w-full max-w-full text-center">
             <h1
@@ -160,7 +160,7 @@ export function CaseStudiesHero() {
       </div>
 
       {/* Bottom curve — convex downward transition to white section below */}
-      <div className="relative z-20 -mb-px w-full text-white" aria-hidden>
+      <div className="relative z-20 -mb-px w-full text-[#f8fafe]" aria-hidden>
         <svg
           className="block h-12 w-full sm:h-14 md:h-16 lg:h-20 xl:h-24 2xl:h-28"
           viewBox="0 0 1440 100"

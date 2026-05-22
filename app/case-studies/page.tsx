@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CaseStudiesHero } from "@/components/pages/case-studies/CaseStudiesHero";
-import { CaseStudiesList } from "@/components/pages/case-studies/CaseStudiesList";
+import { DeskTeam360sCaseStudies } from "@/components/pages/case-studies/DeskTeam360sCaseStudies";
+import { HaveQuestionsCTA } from "@/components/pages/case-studies/HaveQuestionsCTA";
 import { siteConfig } from "@/config/site";
 import { getCaseStudyPosts } from "@/lib/wordpress";
 
@@ -16,12 +17,13 @@ export const metadata: Metadata = {
 };
 
 export default async function CaseStudiesPage() {
-  const caseStudyPosts = await getCaseStudyPosts();
+  const { posts, pageInfo } = await getCaseStudyPosts(9);
 
   return (
     <main className="flex w-full flex-col overflow-hidden bg-white">
       <CaseStudiesHero />
-      <CaseStudiesList posts={caseStudyPosts} />
+      <DeskTeam360sCaseStudies initialPosts={posts} initialPageInfo={pageInfo} />
+      <HaveQuestionsCTA />
     </main>
   );
 }

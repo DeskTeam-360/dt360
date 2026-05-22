@@ -118,10 +118,7 @@ const isCaseStudyCategory = (name: string): boolean => {
   return lower.includes('case study') || lower.includes('case-study');
 };
 
-const postHasCaseStudyCategory = (post: WpPostNode): boolean =>
-  (post.categories?.nodes ?? []).some(
-    (n) => typeof n.name === 'string' && n.name.length > 0 && isCaseStudyCategory(n.name),
-  );
+
 
 /** Same rules as getBlogData: featured slots vs "latest" pool (for related posts on detail). */
 const partitionBlogPostsForListing = (
@@ -259,52 +256,69 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
   };
 };
 
-/** Posts in WP category "Case Study" for `/case-studies` listing. */
-export const getCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
-  return fetchWordPressCached(['wp', 'case-study-posts'], async () => {
-    const query = gql`
-      query GetCaseStudyPosts($first: Int!) {
-        posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
-          nodes {
-            id
-            slug
-            title
-            excerpt
-            content
-            date
-            featuredImage {
-              node {
-                sourceUrl
-              }
+export type CaseStudyPageData = {
+  posts: BlogPost[];
+  pageInfo: {
+    endCursor: string | null;
+    hasNextPage: boolean;
+  };
+};
+
+export const getCaseStudyPosts = async (first = 9, after?: string): Promise<CaseStudyPageData> => {
+  const query = gql`
+    query GetCaseStudyPosts($first: Int!, $after: String) {
+      posts(first: $first, after: $after, where: { categoryName: "case-study", orderby: { field: DATE, order: DESC } }) {
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+        nodes {
+          id
+          slug
+          title
+          excerpt
+          content
+          date
+          featuredImage {
+            node {
+              sourceUrl
             }
-            author {
-              node {
-                name
-              }
+          }
+          author {
+            node {
+              name
             }
-            categories {
-              nodes {
-                name
-              }
+          }
+          categories {
+            nodes {
+              name
             }
           }
         }
       }
-    `;
-
-    try {
-      const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(query, {
-        first: 300,
-      });
-      return (data.posts?.nodes ?? [])
-        .filter(postHasCaseStudyCategory)
-        .map(mapCaseStudyPost);
-    } catch (error) {
-      console.error('Error fetching case study posts:', error);
-      return [];
     }
-  });
-});
+  `;
+
+  try {
+    const data = await client.request<{ 
+      posts?: { 
+        pageInfo: { endCursor: string | null; hasNextPage: boolean }; 
+        nodes?: WpPostNode[] 
+      } 
+    }>(query, {
+      first,
+      after,
+    });
+    
+    return {
+      posts: (data.posts?.nodes ?? []).map(mapCaseStudyPost),
+      pageInfo: data.posts?.pageInfo ?? { endCursor: null, hasNextPage: false }
+    };
+  } catch (error) {
+    console.error('Error fetching case study posts:', error);
+    return { posts: [], pageInfo: { endCursor: null, hasNextPage: false } };
+  }
+};
 
 export const getBlogData = async () => {
   const query = gql`
