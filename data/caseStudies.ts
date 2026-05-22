@@ -23,3 +23,11 @@ export const caseStudiesHero = {
     codeGraphicAlt: "",
   },
 } as const;
+
+export const caseStudiesListSection = {
+  title: "Customer Success Stories",
+  subtitle: "Real results from teams using DeskTeam360",
+  emptyMessage: "No case studies published yet. Check back soon.",
+  readLabel: "Read Case Study",
+  categoryLabel: "Case Study",
+} as const;

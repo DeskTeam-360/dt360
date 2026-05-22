@@ -113,6 +113,16 @@ const decodeHtmlEntities = (text: string): string => {
 const stripExcerptHtml = (excerpt?: string): string =>
   decodeHtmlEntities(excerpt?.replace(/<[^>]*>?/gm, '') ?? '').trim();
 
+const isCaseStudyCategory = (name: string): boolean => {
+  const lower = name.toLowerCase();
+  return lower.includes('case study') || lower.includes('case-study');
+};
+
+const postHasCaseStudyCategory = (post: WpPostNode): boolean =>
+  (post.categories?.nodes ?? []).some(
+    (n) => typeof n.name === 'string' && n.name.length > 0 && isCaseStudyCategory(n.name),
+  );
+
 /** Same rules as getBlogData: featured slots vs "latest" pool (for related posts on detail). */
 const partitionBlogPostsForListing = (
   allPosts: BlogPost[],
@@ -171,7 +181,32 @@ const partitionBlogPostsForListing = (
 
   const latestPosts = validPosts.filter((post: BlogPost) => !usedPostIds.has(post.id));
 
-  return { featuredPostsMap, latestPosts, categories };
+  return { featuredPostsMap, latestPosts, categories   };
+};
+
+/** Case Study category posts (excluded from main blog listing). */
+const mapCaseStudyPost = (post: WpPostNode): BlogPost => {
+  const excerpt = stripExcerptHtml(post.excerpt);
+  const categoriesList =
+    post.categories?.nodes
+      ?.map((n) => n.name)
+      .filter((n): n is string => typeof n === 'string' && n.length > 0) ?? [];
+  const caseStudyCats = categoriesList.filter(isCaseStudyCategory);
+
+  return {
+    id: post.id,
+    slug: post.slug,
+    title: decodeHtmlEntities(post.title || ''),
+    excerpt,
+    content: post.content,
+    image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    category: caseStudyCats[0] || 'Case Study',
+    categories: caseStudyCats.length > 0 ? caseStudyCats : ['Case Study'],
+    author: post.author?.node?.name || 'Admin',
+    readTime: calculateReadTime(post.content || excerpt),
+    date: post.date,
+    tagColor: 'bg-[#e3058d]',
+  };
 };
 
 // Helper to map WordPress post to BlogPost type
@@ -223,6 +258,53 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
     tagColor: 'bg-[#f0573a]',
   };
 };
+
+/** Posts in WP category "Case Study" for `/case-studies` listing. */
+export const getCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
+  return fetchWordPressCached(['wp', 'case-study-posts'], async () => {
+    const query = gql`
+      query GetCaseStudyPosts($first: Int!) {
+        posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+          nodes {
+            id
+            slug
+            title
+            excerpt
+            content
+            date
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+              }
+            }
+            categories {
+              nodes {
+                name
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    try {
+      const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(query, {
+        first: 300,
+      });
+      return (data.posts?.nodes ?? [])
+        .filter(postHasCaseStudyCategory)
+        .map(mapCaseStudyPost);
+    } catch (error) {
+      console.error('Error fetching case study posts:', error);
+      return [];
+    }
+  });
+});
 
 export const getBlogData = async () => {
   const query = gql`

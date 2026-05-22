@@ -125,10 +125,7 @@ export function CaseStudiesHero() {
 
         {/* Let it Grow — glass box below wave + characters */}
         <Container className="relative z-20 max-w-[1440px] px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
-          <div
-            id="case-studies-stories"
-            className="mx-auto w-full max-w-4xl scroll-mt-28 xl:max-w-5xl 2xl:max-w-6xl"
-          >
+          <div className="mx-auto w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl">
             <div className="relative overflow-visible">
               <SafeImage
                 src={letItGrow.squareGraphicSrc}

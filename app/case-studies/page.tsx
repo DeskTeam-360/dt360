@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { CaseStudiesHero } from "@/components/pages/case-studies/CaseStudiesHero";
+import { CaseStudiesList } from "@/components/pages/case-studies/CaseStudiesList";
 import { siteConfig } from "@/config/site";
+import { getCaseStudyPosts } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -13,10 +15,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+  const caseStudyPosts = await getCaseStudyPosts();
+
   return (
     <main className="flex w-full flex-col overflow-hidden bg-white">
       <CaseStudiesHero />
+      <CaseStudiesList posts={caseStudyPosts} />
     </main>
   );
 }
