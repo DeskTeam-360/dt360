@@ -13,6 +13,7 @@ export type ContactApiBody = {
   phone?: string;
   email?: string;
   message?: string;
+  recaptchaToken?: string;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,6 +49,7 @@ export async function POST(request: Request) {
   const phone = body.phone?.trim() ?? "";
   const email = body.email?.trim() ?? "";
   const message = body.message?.trim() ?? "";
+  const recaptchaToken = body.recaptchaToken?.trim();
 
   if (!firstName || !lastName || !phone || !email || !message) {
     return NextResponse.json(
@@ -60,6 +62,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: "Please enter a valid email address." }, { status: 400 });
   }
 
+  if (!recaptchaToken) {
+    return NextResponse.json(
+      { ok: false, message: "Please complete the reCAPTCHA verification.", fieldErrors: { captcha: "Please complete the reCAPTCHA verification." } },
+      { status: 400 },
+    );
+  }
+
   try {
     const result = await submitContactEntry({
       firstName,
@@ -67,6 +76,7 @@ export async function POST(request: Request) {
       phone,
       email,
       message,
+      recaptchaToken,
     });
 
     if (!result.is_valid) {

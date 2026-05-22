@@ -35,6 +35,7 @@ export const contactForm = {
   emailPlaceholder: "Email",
   messageLabel: "Message",
   messagePlaceholder: "Your message",
+  captchaLabel: "Captcha",
   submitLabel: "Send Message",
   successMessage: "Thank you! Your message has been received. We will respond ASAP.",
 } as const;
@@ -48,6 +49,7 @@ export const contactGravityForm = {
     phone: "input_4",
     email: "input_5",
     message: "input_6",
+    captcha: "input_8",
   },
 } as const;
 

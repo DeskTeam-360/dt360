@@ -1,9 +1,12 @@
 "use client";
 
 import { CircleChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { BookACallRecaptcha } from "@/components/pages/book-a-call/BookACallRecaptcha";
 import { contactForm } from "@/data/contact";
 import type { ContactFieldErrors } from "@/lib/contact-errors";
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "";
 
 const inputClass =
   "w-full rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium leading-normal text-[#11104C] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#30439E] focus:ring-2 focus:ring-[#30439E]/15";
@@ -22,6 +25,7 @@ export function ContactForm() {
     emailPlaceholder,
     messageLabel,
     messagePlaceholder,
+    captchaLabel,
     submitLabel,
     successMessage,
   } = contactForm;
@@ -31,10 +35,18 @@ export function ContactForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleRecaptchaChange = useCallback((token: string | null) => {
+    setRecaptchaToken(token);
+    if (token) {
+      setFieldErrors((prev) => ({ ...prev, captcha: undefined }));
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -60,6 +72,18 @@ export function ContactForm() {
       return;
     }
 
+    if (!recaptchaSiteKey) {
+      setFormMessage(
+        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
+      );
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setFieldErrors({ captcha: "Please complete the reCAPTCHA verification." });
+      return;
+    }
+
     setFieldErrors({});
     setIsSubmitting(true);
 
@@ -73,6 +97,7 @@ export function ContactForm() {
           phone: phone.trim(),
           email: email.trim(),
           message: message.trim(),
+          recaptchaToken,
         }),
       });
 
@@ -97,6 +122,7 @@ export function ContactForm() {
       setPhone("");
       setEmail("");
       setMessage("");
+      setRecaptchaToken(null);
     } catch {
       setFormMessage("Unable to send your message. Please try again later.");
     } finally {
@@ -222,6 +248,22 @@ export function ContactForm() {
           required
           disabled={isSubmitting}
         />
+      </div>
+
+      <div>
+        <p className={labelClass}>{captchaLabel}</p>
+        {fieldErrors.captcha ? (
+          <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+            {fieldErrors.captcha}
+          </p>
+        ) : null}
+        {recaptchaSiteKey ? (
+          <BookACallRecaptcha siteKey={recaptchaSiteKey} onChange={handleRecaptchaChange} />
+        ) : (
+          <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+            reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).
+          </p>
+        )}
       </div>
 
       <button

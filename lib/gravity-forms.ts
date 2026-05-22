@@ -15,6 +15,7 @@ export type ContactEntryInput = {
   phone: string;
   email: string;
   message: string;
+  recaptchaToken?: string;
 };
 
 export type GravityFormsSubmitResult = {
@@ -82,13 +83,19 @@ export async function submitBookACallEntry(
 
 function buildContactSubmissionPayload(input: ContactEntryInput): Record<string, string> {
   const { fieldIds } = contactGravityForm;
-  return {
+  const payload: Record<string, string> = {
     [fieldIds.firstName]: input.firstName.trim(),
     [fieldIds.lastName]: input.lastName.trim(),
     [fieldIds.phone]: input.phone.trim(),
     [fieldIds.email]: input.email.trim(),
     [fieldIds.message]: input.message.trim(),
   };
+
+  if (input.recaptchaToken) {
+    payload[fieldIds.captcha] = input.recaptchaToken;
+  }
+
+  return payload;
 }
 
 /** Submit Contact page form to Gravity Forms (form 1 on clone WP). */
