@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { bookACallSkipRecaptcha } from "@/lib/book-a-call-config";
 import {
   extractBookACallFieldErrors,
   hasBookACallFieldErrors,
@@ -19,22 +18,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function buildValidationErrorResponse(fieldErrors: BookACallFieldErrors) {
   let message = "Please fix the errors below and try again.";
-
-  if (bookACallSkipRecaptcha && fieldErrors.captcha) {
-    const onlyCaptcha =
-      fieldErrors.captcha &&
-      !fieldErrors.name &&
-      !fieldErrors.email &&
-      !fieldErrors.other?.length;
-
-    if (onlyCaptcha) {
-      message =
-        "Gravity Forms still requires CAPTCHA. In WordPress, open Form #59 (Book A Call) and remove or disable the CAPTCHA field—or set NEXT_PUBLIC_BOOK_A_CALL_SKIP_RECAPTCHA=false and complete reCAPTCHA on this page.";
-    }
-  }
-
   const listed = listBookACallFieldErrorMessages(fieldErrors);
-  if (listed.length > 0 && !message.includes(listed[0])) {
+  if (listed.length > 0) {
     message = listed.length === 1 ? listed[0] : message;
   }
 
@@ -73,9 +58,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: "Please enter a valid email address." }, { status: 400 });
   }
 
-  if (!bookACallSkipRecaptcha && !recaptchaToken) {
+  if (!recaptchaToken) {
     return NextResponse.json(
-      { ok: false, message: "Please complete the reCAPTCHA verification." },
+      {
+        ok: false,
+        message: "Please complete the reCAPTCHA verification.",
+        fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
+      },
       { status: 400 },
     );
   }
@@ -85,7 +74,7 @@ export async function POST(request: Request) {
       firstName,
       lastName,
       email,
-      recaptchaToken: bookACallSkipRecaptcha ? undefined : recaptchaToken,
+      recaptchaToken,
     });
 
     if (!result.is_valid) {

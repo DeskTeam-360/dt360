@@ -7,14 +7,11 @@ import { BookACallRecaptcha } from "@/components/pages/book-a-call/BookACallReca
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHero } from "@/data/bookACall";
-import { bookACallSkipRecaptcha } from "@/lib/book-a-call-config";
 import { listBookACallFieldErrorMessages, type BookACallFieldErrors } from "@/lib/book-a-call-errors";
 
 const heroOverlapHeight = Math.abs(bookACallHero.heroImageOverlapMarginBottom);
 
-const recaptchaSiteKey = bookACallSkipRecaptcha
-  ? ""
-  : (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "");
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "";
 
 const inputClass =
   "w-full rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium leading-normal text-[#11104C] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#30439E] focus:ring-2 focus:ring-[#30439E]/15";
@@ -64,6 +61,7 @@ export function BookACallForm() {
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
   const handleRecaptchaChange = useCallback((token: string | null) => {
     setRecaptchaToken(token);
@@ -77,14 +75,14 @@ export function BookACallForm() {
     setFormMessage(null);
     setFieldErrors({});
 
-    if (!bookACallSkipRecaptcha && !recaptchaSiteKey) {
+    if (!recaptchaSiteKey) {
       setFormMessage(
         "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
       );
       return;
     }
 
-    if (!bookACallSkipRecaptcha && !recaptchaToken) {
+    if (!recaptchaToken) {
       setFieldErrors({ captcha: "Please complete the reCAPTCHA verification." });
       return;
     }
@@ -99,7 +97,7 @@ export function BookACallForm() {
           firstName,
           lastName,
           email,
-          ...(bookACallSkipRecaptcha ? {} : { recaptchaToken }),
+          recaptchaToken,
         }),
       });
 
@@ -113,12 +111,17 @@ export function BookACallForm() {
       if (!response.ok || !data.ok) {
         setFieldErrors(data.fieldErrors ?? {});
         setFormMessage(data.message ?? "Submission failed. Please try again.");
+        if (data.fieldErrors?.captcha) {
+          setRecaptchaToken(null);
+          setRecaptchaResetKey((k) => k + 1);
+        }
         return;
       }
 
       setShowBooking(true);
       setFormMessage(null);
       setFieldErrors({});
+      setRecaptchaToken(null);
     } catch {
       setFormMessage("Connection failed. Check your network and try again.");
     } finally {
@@ -279,25 +282,27 @@ export function BookACallForm() {
                     />
                   </div>
 
-                  {!bookACallSkipRecaptcha ? (
-                    <div>
-                      <span id="book-a-call-captcha-label" className={labelClass}>
-                        {fields.captchaLabel}
-                      </span>
-                      {fieldErrors.captcha ? (
-                        <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
-                          {fieldErrors.captcha}
-                        </p>
-                      ) : null}
-                      {recaptchaSiteKey ? (
-                        <BookACallRecaptcha siteKey={recaptchaSiteKey} onChange={handleRecaptchaChange} />
-                      ) : (
-                        <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#555]">
-                          reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).
-                        </p>
-                      )}
-                    </div>
-                  ) : null}
+                  <div>
+                    <span id="book-a-call-captcha-label" className={labelClass}>
+                      {fields.captchaLabel}
+                    </span>
+                    {fieldErrors.captcha ? (
+                      <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        {fieldErrors.captcha}
+                      </p>
+                    ) : null}
+                    {recaptchaSiteKey ? (
+                      <BookACallRecaptcha
+                        key={recaptchaResetKey}
+                        siteKey={recaptchaSiteKey}
+                        onChange={handleRecaptchaChange}
+                      />
+                    ) : (
+                      <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).
+                      </p>
+                    )}
+                  </div>
 
                   <button
                     type="submit"
