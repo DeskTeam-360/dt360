@@ -6,10 +6,10 @@ export const affiliateAssets = {
   ornament: "/images/Affiliate - Ornament.png",
 } as const;
 
-/** Sign-up / partner area — update when live affiliate URLs are confirmed. */
+/** Matches live partner-program CTAs (both link to /affiliate-area). */
 export const affiliateUrls = {
-  signUp: "https://deskteam360.com/affiliate-registration/",
-  partnerArea: "https://deskteam360.com/my-account/affiliate-area/",
+  signUp: "https://deskteam360.com/affiliate-area/",
+  partnerArea: "https://deskteam360.com/affiliate-area/",
 } as const;
 
 export const affiliateProgramHero = {
