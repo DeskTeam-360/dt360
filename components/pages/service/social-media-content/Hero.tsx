@@ -59,7 +59,7 @@ export function Hero() {
               aria-hidden
             />
             <SafeImage
-              src="/images/Social - Hero.png"
+              src="/images/Social-Hero-1.png"
               alt="Hero illustration for social media content service"
               width={820}
               height={780}
