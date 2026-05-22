@@ -15,7 +15,7 @@ export const footerCompany: FooterSimpleLink[] = [
   { href: "/how-it-works", label: "How It Works" },
   { href: "/showcase", label: "Showcase" },
   { href: "/blog", label: "Blog" },
-  { href: "/", label: "Case Studies" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/contact", label: "Contact" },
 ];
 

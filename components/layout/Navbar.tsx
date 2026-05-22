@@ -22,10 +22,6 @@ export function Navbar() {
   const desktopLinkClass = useDarkTopNav
     ? "text-[#11104C]/90 hover:text-[#11104C]"
     : "text-white/90 hover:text-white";
-  const desktopHomeClass = useDarkTopNav
-    ? "text-[#11104C] hover:text-[#11104C]/80"
-    : "text-white hover:text-white/80";
-
   useEffect(() => {
     if (!mobileOpen) return;
     const prev = document.body.style.overflow;
@@ -70,10 +66,17 @@ export function Navbar() {
               aria-label="Primary navigation"
             >
               <Link
-                href="/"
-                className={cn("font-nav-primary transition-colors", desktopHomeClass)}
+                href="/case-studies"
+                className={cn(
+                  "font-nav-primary transition-colors",
+                  pathname === "/case-studies"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
+                )}
               >
-                Home
+                Case Studies
               </Link>
               <Link
                 href="/how-it-works"
@@ -180,8 +183,8 @@ export function Navbar() {
               </button>
             </div>
             <nav className="relative z-10 flex flex-1 flex-col gap-1 overflow-y-auto p-4" aria-label="Mobile navigation">
-              <MobileLink href="/" onNavigate={() => setMobileOpen(false)}>
-                Home
+              <MobileLink href="/case-studies" onNavigate={() => setMobileOpen(false)}>
+                Case Studies
               </MobileLink>
               <MobileLink href="/how-it-works" onNavigate={() => setMobileOpen(false)}>
                 How it Works
