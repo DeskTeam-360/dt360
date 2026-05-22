@@ -16,7 +16,7 @@ export function HaveQuestionsCTA() {
         />
       </div>
 
-      <Container className="relative z-10 flex flex-col items-center justify-between gap-12 pt-20 pb-8 md:flex-row md:pt-28 md:pb-12 lg:pt-32 lg:pb-16">
+      <Container className="relative z-10 flex flex-col items-center justify-between gap-12 pt-20 pb-0 md:flex-row md:pt-28 md:pb-12 lg:pt-32 lg:pb-16">
         {/* Left side text and button */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <h2 className="type-rule-h2 font-heading font-semibold text-white mb-6 md:mb-10">
