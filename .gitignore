@@ -48,3 +48,4 @@ next-env.d.ts
 
 #temporary
 /temp/
+.env.local
