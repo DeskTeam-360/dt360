@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { CircleChevronRight } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -34,9 +36,24 @@ export function HeroCtaLink({
   children,
   ...linkProps
 }: HeroCtaLinkProps) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof linkProps.href === 'string' && linkProps.href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = linkProps.href.substring(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    if (linkProps.onClick) {
+      linkProps.onClick(e);
+    }
+  };
+
   return (
     <Link
       {...linkProps}
+      onClick={handleClick}
       className={cn(
         "group inline-flex w-full min-w-0 rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#11104C] sm:w-auto",
         className,
