@@ -87,7 +87,7 @@ export function ShowcaseHero({
                 type="button"
                 onClick={() => onCategoryChange(cat)}
                 className={cn(
-                  "rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200",
+                  "cursor-pointer rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200",
                   activeCategory === cat
                     ? "bg-gradient-to-r from-[#E3058D] to-[#E3058D] text-white shadow-md"
                     : "border border-[#11104C]/20 bg-white text-[#11104C] hover:border-[#11104C]/40 hover:shadow-sm"
