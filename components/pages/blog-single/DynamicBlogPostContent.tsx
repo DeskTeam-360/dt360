@@ -326,8 +326,12 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
       {/* Hero Section */}
       <div className="relative z-10 px-4 md:px-8 lg:px-16 pt-32 pb-4 md:pb-6">
         <div className="max-w-[1200px] mx-auto">
-          <div className="inline-block bg-[#F0573A] text-white px-5 py-1.5 rounded-[15px] font-bold text-base md:text-lg mb-6 uppercase">
-            {post.category}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {(post.categories && post.categories.length > 0 ? post.categories : [post.category]).map((cat) => (
+              <div key={cat} className="inline-block bg-[#F0573A] text-white px-5 py-1.5 rounded-[15px] font-bold text-base md:text-lg uppercase">
+                {cat}
+              </div>
+            ))}
           </div>
 
           <h1 className="text-[#11104C] text-3xl md:text-5xl lg:text-[63px] font-bold leading-tight mb-4 max-w-[1082px] font-poppins">
@@ -459,9 +463,11 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="flex gap-2 mb-4 flex-wrap">
-                      <span className={`text-white px-4 py-1 rounded-[15px] text-sm font-bold uppercase font-montserrat ${related.tagColor || 'bg-[#F0573A]'}`}>
-                        {related.category}
-                      </span>
+                      {(related.categories && related.categories.length > 0 ? related.categories : [related.category]).map((cat) => (
+                        <span key={cat} className={`text-white px-4 py-1 rounded-[15px] text-sm font-bold uppercase font-montserrat ${related.tagColor || 'bg-[#F0573A]'}`}>
+                          {cat}
+                        </span>
+                      ))}
                     </div>
                     <div className="flex items-center gap-2 text-[#5F69AD] text-sm mb-4 font-montserrat font-semibold">
                       <span>{related.readTime}</span>

@@ -1,34 +1,55 @@
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { contactHero } from "@/data/contact";
 
-/**
- * Contact hero — placeholder layout until final design is confirmed.
- * Additional sections (form, office hours, etc.) will be added below.
- */
 export function ContactHero() {
+  const { title, heroImageSrc, heroImageAlt } = contactHero;
+
   return (
-    <section className="relative overflow-hidden bg-[#11104C] pt-28 text-white sm:pt-32 lg:pt-[120px]">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute top-[5%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_55%)] blur-3xl" />
-        <div className="absolute right-[-10%] bottom-[-5%] h-[min(800px,70vw)] w-[min(800px,70vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_55%)] blur-3xl" />
-      </div>
-
-      <Container className="relative z-10 max-w-[1440px] px-6 pb-16 lg:px-20 lg:pb-20">
-        <p className="font-[var(--font-montserrat)] text-sm font-semibold uppercase tracking-wide text-white/70">
-          {contactHero.eyebrow}
-        </p>
-        <h1 className="type-rule-h1 mt-3 max-w-[900px] text-balance text-white">
-          {contactHero.title}
-        </h1>
-        <p className="type-rule-p mt-6 max-w-[720px] text-pretty text-white/85">
-          {contactHero.description}
-        </p>
-      </Container>
-
+    <section
+      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-28 text-white sm:pt-32 lg:pt-[120px]"
+      aria-labelledby="contact-hero-heading"
+    >
       <div
-        className="pointer-events-none absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_0%_0%,rgba(0,200,244,0.25)_0%,transparent_55%)]"
         aria-hidden
       />
+
+      <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
+        <div className="grid min-w-0 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+          <div className="relative z-20 min-w-0 pb-6 lg:pb-10">
+            <h1
+              id="contact-hero-heading"
+              className="font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white lg:text-[76px]"
+            >
+              {title}
+            </h1>
+          </div>
+
+          <div className="relative z-20 min-w-0 w-full lg:mx-0 lg:ml-auto">
+            <SafeImage
+              src={heroImageSrc}
+              alt={heroImageAlt}
+              width={540}
+              height={520}
+              priority
+              className="h-auto w-full max-w-full object-contain"
+              sizes="(max-width: 1024px) 50vw, 540px"
+            />
+          </div>
+        </div>
+      </Container>
+
+      <div className="relative z-0 -mt-1 w-full" aria-hidden>
+        <svg
+          className="block h-16 w-full sm:h-20 lg:h-28 xl:h-32"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path fill="#ffffff" d="M0,88 Q720,4 1440,88 L1440,120 L0,120 Z" />
+        </svg>
+      </div>
     </section>
   );
 }

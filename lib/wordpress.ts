@@ -64,7 +64,7 @@ type WpPostNode = {
   categories?: { nodes?: Array<{ name?: string }> };
 };
 
-type WpCategoryNameNode = { name?: string; count?: number };
+type WpCategoryNameNode = { name?: string; count?: number; posts?: { nodes?: WpPostNode[] } };
 
 type GetAllBlogDataResponse = {
   posts?: { nodes?: WpPostNode[] };
@@ -117,6 +117,7 @@ const stripExcerptHtml = (excerpt?: string): string =>
 const partitionBlogPostsForListing = (
   allPosts: BlogPost[],
   categoryNodes: WpCategoryNameNode[] | undefined,
+  categoryToLatestPostMap?: Record<string, BlogPost>
 ): { featuredPostsMap: Record<string, BlogPost>; latestPosts: BlogPost[]; categories: string[] } => {
   const validPosts = allPosts.filter((post: BlogPost) => {
     const validCats = (post.categories || []).filter(c => {
@@ -152,6 +153,12 @@ const partitionBlogPostsForListing = (
 
   categories.forEach((category) => {
     if (category === 'All Posts') return;
+
+    if (categoryToLatestPostMap && categoryToLatestPostMap[category]) {
+      featuredPostsMap[category] = categoryToLatestPostMap[category];
+      usedPostIds.add(categoryToLatestPostMap[category].id);
+      return;
+    }
 
     const latestInCategory = validPosts.find((post: BlogPost) => 
       post.categories?.some(c => c.toLowerCase() === category.toLowerCase())
@@ -249,6 +256,31 @@ export const getBlogData = async () => {
         nodes {
           name
           count
+          posts(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+            nodes {
+              id
+              slug
+              title
+              excerpt
+              content
+              date
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              author {
+                node {
+                  name
+                }
+              }
+              categories {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -258,9 +290,20 @@ export const getBlogData = async () => {
     const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
 
     const allPosts = (data.posts?.nodes || []).map(mapPost);
+    
+    const categoryToLatestPostMap: Record<string, BlogPost> = {};
+    if (data.categories?.nodes) {
+      data.categories.nodes.forEach(catNode => {
+        if (catNode.name && catNode.posts?.nodes && catNode.posts.nodes.length > 0) {
+          categoryToLatestPostMap[catNode.name] = mapPost(catNode.posts.nodes[0]);
+        }
+      });
+    }
+
     const { featuredPostsMap, latestPosts, categories } = partitionBlogPostsForListing(
       allPosts,
       data.categories?.nodes,
+      categoryToLatestPostMap
     );
 
     return {
@@ -310,6 +353,30 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
         nodes {
           name
           count
+          posts(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
+            nodes {
+              id
+              slug
+              title
+              excerpt
+              date
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              author {
+                node {
+                  name
+                }
+              }
+              categories {
+                nodes {
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -318,7 +385,17 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
     try {
       const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
       const allPosts = (data.posts?.nodes || []).map(mapPostLite);
-      const { latestPosts } = partitionBlogPostsForListing(allPosts, data.categories?.nodes);
+      
+      const categoryToLatestPostMap: Record<string, BlogPost> = {};
+      if (data.categories?.nodes) {
+        data.categories.nodes.forEach(catNode => {
+          if (catNode.name && catNode.posts?.nodes && catNode.posts.nodes.length > 0) {
+            categoryToLatestPostMap[catNode.name] = mapPostLite(catNode.posts.nodes[0]);
+          }
+        });
+      }
+      
+      const { latestPosts } = partitionBlogPostsForListing(allPosts, data.categories?.nodes, categoryToLatestPostMap);
       return latestPosts;
     } catch (error) {
       console.error('Error fetching blog pool for related:', error);

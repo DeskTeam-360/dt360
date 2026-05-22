@@ -1,24 +1,26 @@
 import { NextResponse } from "next/server";
 import {
-  extractBookACallFieldErrors,
-  hasBookACallFieldErrors,
-  listBookACallFieldErrorMessages,
-  type BookACallFieldErrors,
-} from "@/lib/book-a-call-errors";
-import { submitBookACallEntry } from "@/lib/gravity-forms";
+  extractContactFieldErrors,
+  hasContactFieldErrors,
+  listContactFieldErrorMessages,
+  type ContactFieldErrors,
+} from "@/lib/contact-errors";
+import { submitContactEntry } from "@/lib/gravity-forms";
 
-export type BookACallApiBody = {
+export type ContactApiBody = {
   firstName?: string;
   lastName?: string;
+  phone?: string;
   email?: string;
+  message?: string;
   recaptchaToken?: string;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function buildValidationErrorResponse(fieldErrors: BookACallFieldErrors) {
+function buildValidationErrorResponse(fieldErrors: ContactFieldErrors) {
   let message = "Please fix the errors below and try again.";
-  const listed = listBookACallFieldErrorMessages(fieldErrors);
+  const listed = listContactFieldErrorMessages(fieldErrors);
   if (listed.length > 0) {
     message = listed.length === 1 ? listed[0] : message;
   }
@@ -34,22 +36,24 @@ function buildValidationErrorResponse(fieldErrors: BookACallFieldErrors) {
 }
 
 export async function POST(request: Request) {
-  let body: BookACallApiBody;
+  let body: ContactApiBody;
 
   try {
-    body = (await request.json()) as BookACallApiBody;
+    body = (await request.json()) as ContactApiBody;
   } catch {
     return NextResponse.json({ ok: false, message: "Invalid request body." }, { status: 400 });
   }
 
   const firstName = body.firstName?.trim() ?? "";
   const lastName = body.lastName?.trim() ?? "";
+  const phone = body.phone?.trim() ?? "";
   const email = body.email?.trim() ?? "";
+  const message = body.message?.trim() ?? "";
   const recaptchaToken = body.recaptchaToken?.trim();
 
-  if (!firstName || !lastName || !email) {
+  if (!firstName || !lastName || !phone || !email || !message) {
     return NextResponse.json(
-      { ok: false, message: "First name, last name, and email are required." },
+      { ok: false, message: "All fields are required." },
       { status: 400 },
     );
   }
@@ -60,27 +64,25 @@ export async function POST(request: Request) {
 
   if (!recaptchaToken) {
     return NextResponse.json(
-      {
-        ok: false,
-        message: "Please complete the reCAPTCHA verification.",
-        fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
-      },
+      { ok: false, message: "Please complete the reCAPTCHA verification.", fieldErrors: { captcha: "Please complete the reCAPTCHA verification." } },
       { status: 400 },
     );
   }
 
   try {
-    const result = await submitBookACallEntry({
+    const result = await submitContactEntry({
       firstName,
       lastName,
+      phone,
       email,
+      message,
       recaptchaToken,
     });
 
     if (!result.is_valid) {
-      const fieldErrors = extractBookACallFieldErrors(result);
+      const fieldErrors = extractContactFieldErrors(result);
 
-      if (!hasBookACallFieldErrors(fieldErrors)) {
+      if (!hasContactFieldErrors(fieldErrors)) {
         return NextResponse.json(
           {
             ok: false,
@@ -97,12 +99,12 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       entryId: result.entry_id,
-      redirectUrl: result.confirmation_redirect ?? null,
+      confirmationMessage: result.confirmation_message ?? null,
       confirmationType: result.confirmation_type ?? null,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Submission failed.";
-    console.error("[book-a-call]", message);
-    return NextResponse.json({ ok: false, message }, { status: 502 });
+    const errMessage = error instanceof Error ? error.message : "Submission failed.";
+    console.error("[contact]", errMessage);
+    return NextResponse.json({ ok: false, message: errMessage }, { status: 502 });
   }
 }
