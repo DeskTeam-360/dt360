@@ -30,12 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files — do not commit secrets (template stays tracked)
+# env files — never commit secrets (template only: .env.example)
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
 .env*.local
 !.env.example
 
