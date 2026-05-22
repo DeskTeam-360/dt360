@@ -24,7 +24,7 @@ export function Hero() {
       />
 
       <Container className="relative z-10 max-w-7xl">
-        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,652px)] lg:items-center lg:gap-0 xl:gap-0">
+        <div className="grid items-center gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,596px)] lg:items-center lg:gap-0 xl:gap-0">
           <div className="relative z-20 pt-[1em] lg:pt-0 lg:pr-4">
             <h1
               id="hero-heading"
