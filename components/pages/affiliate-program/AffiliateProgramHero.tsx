@@ -1,33 +1,75 @@
+import Link from "next/link";
 import { Container } from "@/components/shared/Container";
+import { HeroCtaLink } from "@/components/shared/HeroCtaLink";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { affiliateProgramHero } from "@/data/affiliateProgram";
 
-/**
- * Affiliate Program hero — placeholder until final design and registration/login UI are confirmed.
- */
 export function AffiliateProgramHero() {
+  const {
+    titleBefore,
+    titleHighlight,
+    description,
+    ctaLabel,
+    ctaHref,
+    existingUserPrefix,
+    existingUserLinkLabel,
+    existingUserLinkHref,
+    heroImageSrc,
+    heroImageAlt,
+  } = affiliateProgramHero;
+
   return (
-    <section className="relative overflow-hidden bg-[#11104C] pt-28 text-white sm:pt-32 lg:pt-[120px]">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute top-[5%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_55%)] blur-3xl" />
-        <div className="absolute right-[-10%] bottom-[-5%] h-[min(800px,70vw)] w-[min(800px,70vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_55%)] blur-3xl" />
-      </div>
-
-      <Container className="relative z-10 max-w-[1440px] px-6 pb-16 lg:px-20 lg:pb-20">
-        <p className="font-[var(--font-montserrat)] text-sm font-semibold uppercase tracking-wide text-white/70">
-          {affiliateProgramHero.eyebrow}
-        </p>
-        <h1 className="type-rule-h1 mt-3 max-w-[900px] text-balance text-white">
-          {affiliateProgramHero.title}
-        </h1>
-        <p className="type-rule-p mt-6 max-w-[720px] text-pretty text-white/85">
-          {affiliateProgramHero.description}
-        </p>
-      </Container>
-
+    <section
+      className="relative overflow-x-hidden bg-[#02063B] pb-[50px] pt-28 text-white sm:pt-32 lg:pt-[120px]"
+      aria-labelledby="affiliate-hero-heading"
+    >
       <div
-        className="pointer-events-none absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_0%_0%,rgba(255,255,255,0.14)_0%,transparent_55%)]"
         aria-hidden
       />
+
+      <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
+        <div className="grid min-w-0 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+          <div className="relative z-20 min-w-0 pb-6 lg:pb-10">
+            <h1
+              id="affiliate-hero-heading"
+              className="type-rule-h1 max-w-[640px] text-balance text-white"
+            >
+              {titleBefore}{" "}
+              <span className="text-[#E3058D]">{titleHighlight}</span>
+            </h1>
+            <p className="type-rule-h4 mt-6 max-w-[560px] text-pretty text-white/90">{description}</p>
+            <div className="mt-8">
+              <HeroCtaLink href={ctaHref} variant="primary" className="sm:min-w-[220px]">
+                {ctaLabel}
+              </HeroCtaLink>
+            </div>
+            <p className="type-rule-p mt-5 font-semibold text-white">
+              {existingUserPrefix}{" "}
+              <Link
+                href={existingUserLinkHref}
+                className="font-semibold text-white underline decoration-white/50 underline-offset-2 transition-colors hover:text-[#E3058D] hover:decoration-[#E3058D]"
+              >
+                {existingUserLinkLabel}
+              </Link>
+            </p>
+          </div>
+
+          <div className="relative z-20 min-w-0 overflow-hidden lg:mx-0 lg:ml-auto">
+            <div className="mx-auto flex w-full justify-center lg:justify-end">
+              <SafeImage
+                src={heroImageSrc}
+                alt={heroImageAlt}
+                width={540}
+                height={480}
+                priority
+                className="h-auto w-[120%] max-w-none origin-center object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)] lg:origin-right"
+                sizes="(max-width: 1024px) 100vw, 648px"
+              />
+            </div>
+          </div>
+        </div>
+      </Container>
     </section>
   );
 }
