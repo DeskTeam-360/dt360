@@ -8,7 +8,11 @@ export function HowItWorksReadyCta() {
 
   return (
     <section
-      className="relative z-20 -mt-16 overflow-visible bg-gradient-to-r from-[#6b21a8] via-[#7c3a9e] to-[#ec4899] pb-0 pt-0 sm:-mt-[4.25rem] lg:-mt-24"
+      className="relative z-20 -mt-16 overflow-visible pb-0 pt-0 sm:-mt-[4.25rem] lg:-mt-24"
+      style={{
+        backgroundImage:
+          "linear-gradient(to top right, #4F0FB3 0%, #A4199A 65%, #D21E8C 84%, #F7515D 100%)",
+      }}
       aria-labelledby="how-it-works-ready-heading"
     >
       <Container className="relative max-w-[1440px] lg:px-10">

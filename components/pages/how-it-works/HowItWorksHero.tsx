@@ -10,12 +10,25 @@ export function HowItWorksHero() {
       className="relative overflow-hidden bg-[#02063B] px-[20px] pb-[480px] pt-[100px] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
       aria-labelledby="how-it-works-hero-heading"
     >
+      {/* Mobile — pink circle atas, cyan circle bawah */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 bg-[url('/images/how%20it%20works/dt360-circle-hero-bg-blue.png')] bg-[length:min(72vw,860px)_auto] bg-left-top bg-no-repeat"
+        className="pointer-events-none absolute left-1/2 top-0 z-0 size-[min(110vw,440px)] -translate-x-1/2 -translate-y-1/2 rounded-full sm:hidden"
+        style={{ backgroundImage: "radial-gradient(circle, #e3058d7a 0%, #0000 60%)" }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute bottom-0 left-0 z-0 aspect-square w-[min(52vw,620px)] translate-y-1/2 bg-[url('/images/how%20it%20works/dt360-circle-hero-bg.png')] bg-contain bg-left-bottom bg-no-repeat"
+        className="pointer-events-none absolute bottom-0 left-1/2 z-0 size-[min(110vw,440px)] -translate-x-1/2 translate-y-1/2 rounded-full sm:hidden"
+        style={{ backgroundImage: "radial-gradient(circle, #00c8f466 0%, #0000 60%)" }}
+        aria-hidden
+      />
+
+      {/* Tablet+ — circle PNG backgrounds */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 hidden bg-[url('/images/how%20it%20works/dt360-circle-hero-bg-blue.png')] bg-[length:min(72vw,860px)_auto] bg-left-top bg-no-repeat sm:block"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 z-0 hidden aspect-square w-[min(52vw,620px)] translate-y-1/2 bg-[url('/images/how%20it%20works/dt360-circle-hero-bg.png')] bg-contain bg-left-bottom bg-no-repeat sm:block"
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] lg:px-10">
@@ -44,7 +57,10 @@ export function HowItWorksHero() {
             />
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-0 left-1/2 z-[1] w-screen -translate-x-1/2 top-[100%]" aria-hidden>
+        <div
+          className="pointer-events-none absolute top-[100%] bottom-0 left-1/2 z-[1] w-screen -translate-x-1/2 min-[2560px]:left-[-115%] min-[2560px]:w-[150vw] min-[2560px]:translate-x-0"
+          aria-hidden
+        >
           <SafeImage
             src="/images/how it works/dt360-arrow-bottom-hero-uploaded-v3-transparent.png"
             alt=""
