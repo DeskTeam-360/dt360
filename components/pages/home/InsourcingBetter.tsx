@@ -107,9 +107,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
       className={cn(
         tone,
         grid,
-        "relative z-0 hover:z-[8]",
-        !(isWideMagenta || isWideOrange) &&
-          "origin-center transform-gpu transition-transform duration-300 ease-out hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
+        "relative z-0 origin-center transform-gpu transition-transform duration-300 ease-out hover:z-[8] hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
         (isWideMagenta || isWideOrange) && "lg:z-[1] lg:hover:z-[12]",
         isTallLeft
           ? "grid items-stretch justify-items-stretch gap-0 overflow-visible rounded-3xl p-0 pt-4 max-lg:grid-rows-[auto_auto] max-lg:gap-0 sm:pt-5 lg:min-h-0 lg:max-h-[min(42rem,90vh)] lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-0"
@@ -157,7 +155,7 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
 
       {card.placement === "wide-magenta" && (card.title || card.description || card.mediaSrc) ? (
         <div className="box-border flex h-full min-h-0 w-full max-w-6xl min-w-0 flex-1 flex-col items-start justify-start lg:min-h-0">
-          <div className="w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 py-8 pl-10">
+          <div className="w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 py-8 px-10 lg:px-0 lg:pl-10">
             <div className="grid w-full min-w-0 grid-cols-1 items-start gap-6 sm:gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8">
               {(card.title || card.description) && (
                 <div className="flex min-w-0 flex-col items-start justify-center gap-3 sm:gap-3.5 lg:gap-4">

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { pricingCheckoutUrls } from "@/config/urls";
 
 export type HeroCta = {
@@ -240,7 +241,7 @@ export type HowItWorksStep = {
   id: string;
   number: "1" | "2" | "3";
   title: string;
-  description: string;
+  description: ReactNode;
 };
 
 export type HowItWorksSection = {
@@ -355,8 +356,14 @@ export const howItWorksSection: HowItWorksSection = {
       id: "review-move-on",
       number: "3",
       title: "Review and Move On",
-      description:
-        "We finish work and start the next task. Work lands in your inbox. Love it? Want changes? Unlimited revisions - no extra charge. Your queue keeps moving.",
+      description: (
+        <>
+          We finish work and start the next task. Work lands in your inbox. Love it? Want changes? Unlimited
+          revisions - no extra charge. Your queue
+          <br />
+          keeps moving.
+        </>
+      ),
     },
   ],
 };
@@ -365,7 +372,7 @@ export const socialProofSection: SocialProofSection = {
   headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
   headlineLine2: "Then They",
   headlineHighlight: "Found Us",
-  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-01.png",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-1.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
     {

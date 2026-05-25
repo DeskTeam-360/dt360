@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
@@ -20,7 +20,7 @@ type Cell =
       kind: "card";
       id: string;
       title: string;
-      description: string;
+      description: ReactNode;
       bg: string;
       text: "light" | "dark";
     };
@@ -33,8 +33,13 @@ const cells: Cell[] = [
     kind: "card",
     id: "ai-automation",
     title: "AI &\nAutomation",
-    description:
-      "AI Agent setup, AI Training, Chatbot setup, workflow automation, process optimization - scale without headcount",
+    description: (
+      <>
+        AI Agent setup, AI Training, Chatbot setup, workflow automation, process optimization - scale
+        <br />
+        without headcount
+      </>
+    ),
     bg: "bg-[#1E1D76]",
     text: "light",
   },
@@ -78,8 +83,14 @@ const cells: Cell[] = [
     kind: "card",
     id: "crm-marketing",
     title: "CRM &\nMarketing Tech",
-    description:
-      "GoHighLevel, HubSpot, and other CRM's, Zapier, Make, ActiveCampaign, and other email software, integrations, API work",
+    description: (
+      <>
+        GoHighLevel, HubSpot, and other CRM&apos;s, Zapier, Make, ActiveCampaign, and other email software,
+        integrations,
+        <br />
+        API work
+      </>
+    ),
     bg: "bg-[#C7B3F2]",
     text: "dark",
   },
@@ -108,7 +119,7 @@ function ServiceCardContent({
   text,
 }: {
   title: string;
-  description: string;
+  description: ReactNode;
   text: "light" | "dark";
 }) {
   return (
