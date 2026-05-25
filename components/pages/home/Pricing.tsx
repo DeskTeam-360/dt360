@@ -28,24 +28,24 @@ export function Pricing() {
 
       </Container>
 
-      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
+      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center overflow-visible bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
         <div
-          className="pointer-events-none absolute inset-x-0 -top-[45px] h-[68px]"
+          className="pointer-events-none absolute left-1/2 -top-[45px] h-[68px] w-[110%] -translate-x-1/2"
           style={{
-            backgroundImage: "url('/images/Home-pricing-border-top.png')",
+            backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "top center",
-            backgroundSize: "100% 68px",
-            backgroundRepeat: "repeat-x",
+            backgroundSize: "100% auto",
+            backgroundRepeat: "no-repeat",
           }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-x-0 -bottom-[45px] z-[1] h-[68px]"
+          className="pointer-events-none absolute bottom-[-45px] left-1/2 z-[1] h-[68px] w-[110%] -translate-x-1/2"
           style={{
-            backgroundImage: "url('/images/Home-pricing-border-bottom.png')",
+            backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "bottom center",
-            backgroundSize: "100% 68px",
-            backgroundRepeat: "repeat-x",
+            backgroundSize: "100% auto",
+            backgroundRepeat: "no-repeat",
           }}
           aria-hidden
         />
