@@ -8,7 +8,7 @@ export function Pricing() {
     pricingSection;
 
   return (
-    <section id="pricing" className="bg-white pt-14 sm:pt-16 lg:pt-20 mt-[-1px]" aria-labelledby="pricing-heading">
+    <section id="pricing" className="mt-[-1px] bg-white pt-14 sm:pt-16 lg:pt-20" aria-labelledby="pricing-heading">
       <Container className="max-w-7xl pb-12">
         <h2 id="pricing-heading" className="mx-auto max-w-4xl text-balance text-center text-[#101651]">
           <span className="block sm:inline">{headlineLine1} </span>
@@ -28,23 +28,23 @@ export function Pricing() {
 
       </Container>
 
-      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center overflow-visible bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
+      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
         <div
-          className="pointer-events-none absolute left-1/2 -top-[45px] h-[68px] w-[110%] -translate-x-1/2"
+          className="pointer-events-none absolute inset-x-0 -top-[45px] h-[68px]"
           style={{
             backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "top center",
-            backgroundSize: "100% auto",
+            backgroundSize: "110% auto",
             backgroundRepeat: "no-repeat",
           }}
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute bottom-[-45px] left-1/2 z-[1] h-[68px] w-[110%] -translate-x-1/2"
+          className="pointer-events-none absolute inset-x-0 bottom-[-45px] z-[1] h-[68px]"
           style={{
             backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "bottom center",
-            backgroundSize: "100% auto",
+            backgroundSize: "110% auto",
             backgroundRepeat: "no-repeat",
           }}
           aria-hidden

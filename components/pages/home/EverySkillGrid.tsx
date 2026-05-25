@@ -137,14 +137,17 @@ export function EverySkillGrid() {
   return (
     <section
       id="every-skill"
-      className="relative overflow-x-hidden pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 mt-[-1px] min-[2560px]:mt-0"
+      className="relative z-[1] -mt-px overflow-x-hidden pb-20 pt-20 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 min-[2560px]:-mt-[3px]"
       style={{
         background: "linear-gradient(90deg, #FFFFFF 0%, #CBDCFF 50%, #FFFFFF 100%)",
       }}
     >
-      <div className="absolute inset-x-0 -top-6 z-0 h-20 sm:-top-7 sm:h-24 lg:-top-8 lg:h-28" aria-hidden>
+      <div
+        className="pointer-events-none absolute inset-x-0 -top-6 z-[2] h-[calc(5rem+2px)] sm:-top-7 sm:h-[calc(6rem+2px)] lg:-top-8 lg:h-[calc(7rem+2px)] min-[2560px]:-top-[34px] min-[2560px]:h-[calc(8.75rem+3px)]"
+        aria-hidden
+      >
         <svg
-          className="block h-full w-full"
+          className="block h-full w-full min-h-full"
           viewBox="0 0 1440 140"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"

@@ -13,7 +13,7 @@ import { LastCTA } from "@/components/pages/home/LastCTA";
 
 export default function Home() {
   return (
-    <main className="home-page flex flex-col">
+    <main className="home-page flex flex-col overflow-x-hidden">
       <Hero />
       <TeamMembers />
       <TrustedBy />

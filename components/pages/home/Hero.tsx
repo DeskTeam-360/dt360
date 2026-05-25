@@ -67,7 +67,7 @@ export function Hero() {
 
       {/* Hero → white transition: one wide arc (half ellipse), not a wave */}
       <div
-        className="relative bottom-[-2px] z-10 mt-20 w-full overflow-y-hidden text-white sm:mt-12 lg:mt-20"
+        className="relative bottom-[-2px] z-50 mt-20 w-full overflow-y-hidden text-white sm:mt-12 lg:mt-20"
         aria-hidden
       >
         <svg
