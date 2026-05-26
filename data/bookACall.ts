@@ -2,8 +2,8 @@
 
 export const BOOK_A_CALL_FORM_BG = "#F5F8FF";
 
-/** TEMP: skip reCAPTCHA UI + Gravity Forms step-1 (testing). Set false before production. */
-export const bookACallRecaptchaDisabled = true;
+/** When true, skips reCAPTCHA UI and Gravity Forms (local testing only). */
+export const bookACallRecaptchaDisabled = false;
 
 export const bookACallHero = {
   title: "Book A Call",

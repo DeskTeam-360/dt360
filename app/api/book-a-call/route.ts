@@ -3,7 +3,6 @@ import { bookACallRecaptchaDisabled } from "@/data/bookACall";
 import {
   extractBookACallFieldErrors,
   hasBookACallFieldErrors,
-  isBookACallCaptchaOnlyError,
   listBookACallFieldErrorMessages,
   type BookACallFieldErrors,
 } from "@/lib/book-a-call-errors";
@@ -47,8 +46,7 @@ export async function POST(request: Request) {
   const firstName = body.firstName?.trim() ?? "";
   const lastName = body.lastName?.trim() ?? "";
   const email = body.email?.trim() ?? "";
-  // TEMP: reCAPTCHA disabled — restore before production
-  // const recaptchaToken = body.recaptchaToken?.trim();
+  const recaptchaToken = body.recaptchaToken?.trim();
 
   if (!firstName || !lastName || !email) {
     return NextResponse.json(
@@ -61,17 +59,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: "Please enter a valid email address." }, { status: 400 });
   }
 
-  // TEMP: reCAPTCHA disabled — restore before production
-  // if (!recaptchaToken) {
-  //   return NextResponse.json(
-  //     {
-  //       ok: false,
-  //       message: "Please complete the reCAPTCHA verification.",
-  //       fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
-  //     },
-  //     { status: 400 },
-  //   );
-  // }
+  if (!recaptchaToken) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Please complete the reCAPTCHA verification.",
+        fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
+      },
+      { status: 400 },
+    );
+  }
 
   try {
     if (bookACallRecaptchaDisabled) {
@@ -88,22 +85,11 @@ export async function POST(request: Request) {
       firstName,
       lastName,
       email,
-      // TEMP: reCAPTCHA disabled — restore before production
-      // recaptchaToken,
+      recaptchaToken,
     });
 
     if (!result.is_valid) {
       const fieldErrors = extractBookACallFieldErrors(result);
-
-      if (bookACallRecaptchaDisabled && isBookACallCaptchaOnlyError(fieldErrors)) {
-        return NextResponse.json({
-          ok: true,
-          entryId: result.entry_id ?? null,
-          redirectUrl: result.confirmation_redirect ?? null,
-          confirmationType: result.confirmation_type ?? null,
-          skippedGravityForms: true,
-        });
-      }
 
       if (!hasBookACallFieldErrors(fieldErrors)) {
         return NextResponse.json(
