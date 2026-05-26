@@ -2,6 +2,9 @@
 
 export const BOOK_A_CALL_FORM_BG = "#F5F8FF";
 
+/** TEMP: skip reCAPTCHA UI + Gravity Forms step-1 (testing). Set false before production. */
+export const bookACallRecaptchaDisabled = true;
+
 export const bookACallHero = {
   title: "Book A Call",
   heroImageSrc: "/images/book-a-call/book-a-call-hero.png",
@@ -33,6 +36,8 @@ export const bookACallForm = {
     captchaLabel: "Captcha",
   },
   submitLabel: "Go to Step 2",
+  successTitle: "Thank you for submitting",
+  successMessage: "We will contact you soon",
   /** Lead Connector booking widget (shown after step 1 submits successfully) */
   bookingIframeSrc: "https://api.leadconnectorhq.com/widget/booking/BvMnlvEIoMKwnPB3eQjZ",
   bookingIframeId: "Ko1nsW2cmgiBMQwJRPv3_1772435790587",

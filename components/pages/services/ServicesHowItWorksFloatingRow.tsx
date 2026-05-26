@@ -20,6 +20,11 @@ type Props = {
   extraNegativeMarginTopPx?: number;
   /** Added only to negative margin-bottom (px); does not affect margin-top */
   extraNegativeMarginBottomPx?: number;
+  /**
+   * Below xl (&lt;1280px): no negative bottom margin — pricing stacks under cards
+   * (web-design-development tablet/mobile).
+   */
+  disableOverlapBelowXl?: boolean;
   className?: string;
 };
 
@@ -28,6 +33,7 @@ export function ServicesHowItWorksFloatingRow({
   overlapFraction = DEFAULT_HOW_IT_WORKS_OVERLAP_FRACTION,
   extraNegativeMarginTopPx = 0,
   extraNegativeMarginBottomPx = 0,
+  disableOverlapBelowXl = false,
   className,
 }: Props) {
   const measureRef = useRef<HTMLDivElement>(null);
@@ -49,14 +55,20 @@ export function ServicesHowItWorksFloatingRow({
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
       /** Mobile, tablet & narrow desktop (&lt;1280px): less negative top. Full desktop (xl+): unified overlap. */
       const isDesktopLayout = window.matchMedia("(min-width: 1280px)").matches;
-      if (!isDesktopLayout) {
+      if (disableOverlapBelowXl && !isDesktopLayout) {
+        /** Mobile: no pull-up — step 1 must not cover the “How It Works” title. Tablet: light split only. */
+        setOverlapTopPx(isMobile ? 0 : Math.round(h * Math.min(clamped, 0.12)));
+        setOverlapBottomPx(0);
+        setMobileExtraBottomPx(0);
+      } else if (!isDesktopLayout) {
         setOverlapTopPx(Math.round(h * Math.min(clamped, 0.12)));
         setOverlapBottomPx(fullPx);
+        setMobileExtraBottomPx(isMobile ? 140 : 0);
       } else {
         setOverlapTopPx(fullPx);
         setOverlapBottomPx(fullPx);
+        setMobileExtraBottomPx(0);
       }
-      setMobileExtraBottomPx(isMobile ? 140 : 0);
     };
 
     update();
@@ -75,7 +87,7 @@ export function ServicesHowItWorksFloatingRow({
       mqMd.removeEventListener("change", update);
       mqMaxMd.removeEventListener("change", update);
     };
-  }, [overlapFraction]);
+  }, [overlapFraction, disableOverlapBelowXl]);
 
   return (
     <div

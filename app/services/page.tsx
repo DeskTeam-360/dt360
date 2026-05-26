@@ -92,14 +92,13 @@ export default function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-[60px] md:px-10 xl:px-10 xl:pb-[80px] xl:pt-[120px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-28 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
           fill
           priority
-          className="object-cover object-bottom"
-          style={{ objectPosition: "bottom center" }}
+          className="object-cover object-[50%_100%] min-[2560px]:object-[50%_92%]"
         />
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
           <div className="max-w-xl text-white">

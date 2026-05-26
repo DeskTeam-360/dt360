@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const platformLogos = [
   { src: "/images/dt360-WordPress-logo.png", alt: "WordPress", width: 218, height: 53 },
@@ -8,10 +9,29 @@ const platformLogos = [
   { src: "/images/dt360-shopify-logo.png", alt: "Shopify", width: 130, height: 53 },
 ];
 
+export type ServicesPlatformsSupportedBridgeOverlap = "default" | "belowChecklist";
+
+type ServicesPlatformsSupportedBridgeProps = {
+  /**
+   * `belowChecklist`: lighter overlap on mobile/tablet so hero dot pagination stays visible
+   * (e.g. `/services/web-design-development`).
+   */
+  overlap?: ServicesPlatformsSupportedBridgeOverlap;
+};
+
 /** Overlapping card between hero and next section (matches main Services page). */
-export function ServicesPlatformsSupportedBridge() {
+export function ServicesPlatformsSupportedBridge({
+  overlap = "default",
+}: ServicesPlatformsSupportedBridgeProps = {}) {
   return (
-    <div className="relative z-20 -mt-[72px] px-5 md:px-10 xl:-mt-[88px] xl:px-10">
+    <div
+      className={cn(
+        "relative z-20 px-5 md:px-10 xl:px-10",
+        overlap === "belowChecklist"
+          ? "-mt-6 max-md:-mt-2 md:-mt-10 xl:-mt-[88px]"
+          : "-mt-[72px] xl:-mt-[88px]",
+      )}
+    >
       <div className="mx-auto w-full max-w-[1440px] rounded-[28px] border border-[#d8dbef] bg-white p-[40px] shadow-[0_0_22px_rgba(189,200,252,0.75),0_16px_40px_rgba(16,22,81,0.18)]">
         <h2 className="text-center text-2xl font-extrabold tracking-[0.14em] text-[#3f4f9a]">PLATFORMS SUPPORTED</h2>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-[40px] xl:flex-nowrap">

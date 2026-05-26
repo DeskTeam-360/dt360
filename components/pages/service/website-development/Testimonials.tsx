@@ -4,7 +4,7 @@ import { SafeImage } from "@/components/shared/SafeImage";
 export function Testimonials() {
   return (
     <section
-      className="relative overflow-x-hidden overflow-y-visible bg-[linear-gradient(180deg,#f9f6ff_0%,#f9f6ff_38%,rgba(249,246,255,0.75)_52%,rgba(249,246,255,0.2)_68%,transparent_88%)] pb-10 pt-36 sm:pb-12 sm:pt-40 lg:pb-14 lg:pt-48 2xl:pb-16 2xl:pt-52"
+      className="relative overflow-x-hidden overflow-y-visible max-md:overflow-x-visible bg-[linear-gradient(180deg,#f9f6ff_0%,#f9f6ff_38%,rgba(249,246,255,0.75)_52%,rgba(249,246,255,0.2)_68%,transparent_88%)] pb-10 pt-36 sm:pb-12 sm:pt-40 lg:pb-14 lg:pt-48 2xl:pb-16 2xl:pt-52"
     >
 <SafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
@@ -81,14 +81,14 @@ export function Testimonials() {
           alt=""
           width={512}
           height={512}
-          className="pointer-events-none absolute z-[1] bottom-18 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:bottom-16 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:bottom-18 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+          className="pointer-events-none absolute z-[1] bottom-18 -left-14 h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:bottom-16 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:bottom-18 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
         />
         <SafeImage
           src="/images/Service - Graphic Design.png"
           alt=""
           width={512}
           height={512}
-          className="pointer-events-none absolute z-[1] bottom-25 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:bottom-23 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:bottom-25 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+          className="pointer-events-none absolute z-[1] bottom-25 -right-14 h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:bottom-23 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:bottom-25 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
         />
       </Container>
     </section>

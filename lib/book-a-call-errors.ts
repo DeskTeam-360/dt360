@@ -68,6 +68,13 @@ export function hasBookACallFieldErrors(errors: BookACallFieldErrors): boolean {
   return Boolean(errors.name || errors.email || errors.captcha || errors.other?.length);
 }
 
+/** True when GF rejected submission only because of reCAPTCHA (used while captcha is disabled). */
+export function isBookACallCaptchaOnlyError(errors: BookACallFieldErrors): boolean {
+  return Boolean(
+    errors.captcha && !errors.name && !errors.email && !(errors.other?.length),
+  );
+}
+
 export function listBookACallFieldErrorMessages(errors: BookACallFieldErrors): string[] {
   const list: string[] = [];
   if (errors.name) list.push(errors.name);
