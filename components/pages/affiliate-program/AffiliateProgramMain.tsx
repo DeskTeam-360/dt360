@@ -75,11 +75,13 @@ export function AffiliateProgramMain() {
     affiliateProgramPartner;
 
   return (
-    <section className="relative overflow-x-hidden bg-white pb-[5em] pt-0" aria-label="Affiliate program details">
-      {/* Segitiga terbalik (#02063B) — kanan */}
+    <section
+      className="relative overflow-x-clip bg-white pb-[5em] pt-0 max-md:-mt-px min-[1440px]:-mt-px min-[2560px]:-mt-[2px]"
+      aria-label="Affiliate program details"
+    >
       <div className="relative z-20 mb-[5em] w-full">
         <div
-          className="relative right-[32%] ml-auto block h-[calc(var(--spacing)*15)] w-[195px] bg-[#02063B] [clip-path:polygon(0_0,100%_0,50%_100%)] md:right-[35%] md:h-[calc(var(--spacing)*25)] md:w-[310px] lg:right-[18%]"
+          className="affiliate-program-triangle block h-[calc(var(--spacing)*15)] w-[195px] bg-[#02063B] shadow-[0_-1px_0_0_#02063B] [clip-path:polygon(0_0,100%_0,50%_100%)] md:h-[calc(var(--spacing)*25)] md:w-[310px] min-[1440px]:shadow-[0_-1px_0_0_#02063B] min-[2560px]:shadow-[0_-2px_0_0_#02063B]"
           aria-hidden
         />
       </div>
@@ -104,18 +106,18 @@ export function AffiliateProgramMain() {
 
       {/* Become a partner — yellow panel flush to viewport left */}
       <div className="relative z-10 min-h-[520px] pt-4 md:min-h-0 lg:pt-8">
-        {/* Ornamen kanan — di bawah segitiga, sejajar Become a Partner */}
+        {/* Ornamen kanan — top sejajar blok Become a Partner */}
         <SafeImage
           src={affiliateAssets.ornament}
           alt=""
           width={360}
           height={480}
-          className="pointer-events-none absolute -top-[15em] -right-[10em] z-[15] h-auto w-[min(320px,32vw)] max-w-[360px] object-contain"
+          className="pointer-events-none absolute top-0 -right-[10em] z-[15] h-auto w-[min(320px,32vw)] max-w-[360px] object-contain"
           sizes="(max-width: 1024px) 40vw, 360px"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute top-0 left-0 z-0 h-[30%] w-[20%] translate-y-0 rounded-r-[35px] bg-[#FFEDC0] md:h-[425px] md:w-[min(88vw,327px)] lg:top-1/2 lg:h-[425px] lg:-translate-y-1/2 lg:w-[25%] lg:max-w-none min-[2560px]:w-[33%]"
+          className="pointer-events-none absolute top-0 left-0 z-0 h-[30%] w-[20%] translate-y-0 rounded-r-[35px] bg-[#FFEDC0] md:h-[425px] md:w-[min(88vw,327px)] lg:top-1/2 lg:h-[425px] lg:-translate-y-1/2 lg:w-[25%] lg:max-w-none min-[2560px]:!w-[35%]"
           aria-hidden
         />
         <Container className="max-w-[1440px] px-6 lg:px-20">
