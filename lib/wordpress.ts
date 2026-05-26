@@ -551,81 +551,181 @@ type WpShowcaseNode = {
   showcaseCategories?: { nodes?: Array<{ name?: string }> };
 };
 
+type WpShowcaseCategoryNode = {
+  name?: string;
+  count?: number;
+};
+
 type GetShowcaseResponse = {
   contentNodes?: {
     nodes?: WpShowcaseNode[];
   };
+  showcaseCategories?: {
+    nodes?: WpShowcaseCategoryNode[];
+  };
 };
+
+const SHOWCASE_ALL_WORK = 'All Work';
+
+/** Sort filter pills: All Work first, then WP taxonomy count (desc), tie-break A–Z. */
+function buildShowcaseCategoryList(
+  taxonomyNodes: WpShowcaseCategoryNode[] | undefined,
+  allItems: ShowcaseItem[],
+): string[] {
+  const fromWp = (taxonomyNodes ?? [])
+    .filter(
+      (node): node is { name: string; count: number } =>
+        typeof node.name === 'string' &&
+        node.name.length > 0 &&
+        node.name !== SHOWCASE_ALL_WORK &&
+        (node.count ?? 0) > 0,
+    )
+    .sort((a, b) => {
+      const byCount = (b.count ?? 0) - (a.count ?? 0);
+      return byCount !== 0 ? byCount : a.name.localeCompare(b.name);
+    })
+    .map((node) => node.name);
+
+  const wpNames = new Set(fromWp);
+  const orphanCounts = new Map<string, number>();
+
+  for (const item of allItems) {
+    for (const cat of item.categories) {
+      if (cat === SHOWCASE_ALL_WORK || wpNames.has(cat)) continue;
+      orphanCounts.set(cat, (orphanCounts.get(cat) ?? 0) + 1);
+    }
+  }
+
+  const orphans = [...orphanCounts.entries()]
+    .sort((a, b) => {
+      const byCount = b[1] - a[1];
+      return byCount !== 0 ? byCount : a[0].localeCompare(b[0]);
+    })
+    .map(([name]) => name);
+
+  if (fromWp.length > 0) {
+    return [SHOWCASE_ALL_WORK, ...fromWp, ...orphans];
+  }
+
+  // Fallback if taxonomy query is empty/unavailable: count from loaded items.
+  const localCounts = new Map<string, number>();
+  for (const item of allItems) {
+    for (const cat of item.categories) {
+      if (cat === SHOWCASE_ALL_WORK) continue;
+      localCounts.set(cat, (localCounts.get(cat) ?? 0) + 1);
+    }
+  }
+
+  const fromItems = [...localCounts.entries()]
+    .sort((a, b) => {
+      const byCount = b[1] - a[1];
+      return byCount !== 0 ? byCount : a[0].localeCompare(b[0]);
+    })
+    .map(([name]) => name);
+
+  return [SHOWCASE_ALL_WORK, ...fromItems];
+}
 
 const mapShowcase = (node: WpShowcaseNode): ShowcaseItem => ({
   id: node.id,
   title: node.title,
   image: node.featuredImage?.node?.sourceUrl || '/images/showcase/placeholder.png',
   categories: [
-    'All Work',
+    SHOWCASE_ALL_WORK,
     ...(node.showcaseCategories?.nodes
       ?.map((c) => c.name)
       .filter((n): n is string => typeof n === 'string' && n.length > 0) ?? []),
   ],
 });
 
-export const getShowcaseData = async () => {
-  const query = gql`
-    query GetShowcaseData($first: Int!) {
-      contentNodes(
-        where: { contentTypes: DT360_SHOWCASE, orderby: { field: DATE, order: DESC } }
-        first: $first
-      ) {
-        nodes {
-          id
-          ... on Showcase {
-            title
-            slug
-            featuredImage {
-              node {
-                sourceUrl
+export const getShowcaseData = cache(async () => {
+  return fetchWordPressCached(['wp', 'showcase'], async () => {
+    const nodesQuery = gql`
+      query GetShowcaseNodes($first: Int!) {
+        contentNodes(
+          where: { contentTypes: DT360_SHOWCASE, orderby: { field: DATE, order: DESC } }
+          first: $first
+        ) {
+          nodes {
+            id
+            ... on Showcase {
+              title
+              slug
+              featuredImage {
+                node {
+                  sourceUrl
+                }
               }
-            }
-            showcaseCategories {
-              nodes {
-                name
+              showcaseCategories {
+                nodes {
+                  name
+                }
               }
             }
           }
         }
       }
-    }
-  `;
+    `;
 
-  try {
-    const data = await client.request<GetShowcaseResponse>(query, { first: 300 });
-    const allItems = (data.contentNodes?.nodes ?? []).map(mapShowcase);
-
-    const categorySet = new Set<string>();
-    allItems.forEach((item) =>
-      item.categories.forEach((c) => categorySet.add(c)),
-    );
-    categorySet.delete('All Work');
-    const categories = ['All Work', ...Array.from(categorySet).sort()];
-
-    const itemsByCategory: Record<string, ShowcaseItem[]> = {};
-    for (const cat of categories) {
-      if (cat === 'All Work') {
-        itemsByCategory[cat] = allItems.slice(0, 5);
-      } else {
-        itemsByCategory[cat] = allItems
-          .filter((item) => item.categories.includes(cat))
-          .slice(0, 5);
+    const categoriesQuery = gql`
+      query GetShowcaseCategoryCounts {
+        showcaseCategories(first: 100, where: { hideEmpty: true }) {
+          nodes {
+            name
+            count
+          }
+        }
       }
-    }
+    `;
 
-    return {
-      allItems,
-      categories,
-      itemsByCategory,
-    };
-  } catch (error) {
-    console.error('Error fetching showcase data:', error);
-    return { allItems: [], categories: ['All Work'], itemsByCategory: {} };
-  }
-};
+    try {
+      const [nodesResult, categoriesResult] = await Promise.allSettled([
+        client.request<{ contentNodes?: { nodes?: WpShowcaseNode[] } }>(nodesQuery, {
+          first: 300,
+        }),
+        client.request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryNode[] } }>(
+          categoriesQuery,
+        ),
+      ]);
+
+      if (nodesResult.status === 'rejected') {
+        throw nodesResult.reason;
+      }
+
+      const allItems = (nodesResult.value.contentNodes?.nodes ?? []).map(mapShowcase);
+      const taxonomyNodes =
+        categoriesResult.status === 'fulfilled'
+          ? categoriesResult.value.showcaseCategories?.nodes
+          : undefined;
+
+      if (categoriesResult.status === 'rejected') {
+        console.warn(
+          'Showcase category counts unavailable; falling back to item-based counts:',
+          categoriesResult.reason,
+        );
+      }
+
+      const categories = buildShowcaseCategoryList(taxonomyNodes, allItems);
+
+      const itemsByCategory: Record<string, ShowcaseItem[]> = {};
+      for (const cat of categories) {
+        if (cat === SHOWCASE_ALL_WORK) {
+          itemsByCategory[cat] = allItems.slice(0, 5);
+        } else {
+          itemsByCategory[cat] = allItems
+            .filter((item) => item.categories.includes(cat))
+            .slice(0, 5);
+        }
+      }
+
+      return {
+        allItems,
+        categories,
+        itemsByCategory,
+      };
+    } catch (error) {
+      console.error('Error fetching showcase data:', error);
+      return { allItems: [], categories: [SHOWCASE_ALL_WORK], itemsByCategory: {} };
+    }
+  });
+});
