@@ -58,7 +58,7 @@ export function ShowcaseCTA() {
             <p className="mt-3 text-[16px] italic text-[#11104C]/70">{note}</p>
           </div>
 
-          <div className="relative z-[2] mx-auto mt-6 flex w-full max-w-[18.4rem] justify-center sm:max-w-[23rem] lg:absolute lg:right-0 lg:bottom-0 lg:top-[-15rem] lg:mx-0 lg:mt-0 lg:flex lg:w-auto lg:max-w-[min(33rem,44vw)] lg:translate-x-[10%] lg:flex-col lg:items-end lg:justify-end">
+          <div className="relative z-[2] mx-auto mt-6 flex w-full max-w-[18.4rem] justify-center sm:max-w-[23rem] lg:absolute lg:right-0 lg:bottom-0 lg:top-[-15rem] lg:mx-0 lg:mt-0 lg:flex lg:w-auto lg:max-w-[min(33rem,44vw)] lg:translate-x-[20%] lg:flex-col lg:items-end lg:justify-end">
             <Image
               src={imageSrc}
               alt={imageAlt}
