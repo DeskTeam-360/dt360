@@ -11,13 +11,34 @@ export function HowItWorksMeetGrid() {
       className="relative z-0 overflow-hidden bg-[#fff] pb-54 pt-20 md:px-0 md:py-0 md:pb-[13em] lg:pb-68 lg:pt-[220px]"
       aria-labelledby="how-it-works-meet-heading"
     >
+      {/* Mobile / tablet — pink kanan-atas, cyan kiri-bawah */}
       <div
-        className="pointer-events-none absolute -left-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full"
+        className="pointer-events-none absolute right-0 z-0 size-[min(100vw,480px)] rounded-full lg:hidden"
+        style={{
+          top: "10em",
+          backgroundImage:
+            "radial-gradient(circle, rgba(227, 5, 141, 0.48) 0%, rgba(0, 0, 0, 0) 60%)",
+        }}
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute left-0 z-0 size-[min(100vw,480px)] rounded-full lg:hidden"
+        style={{
+          bottom: "5em",
+          backgroundImage:
+            "radial-gradient(circle, rgba(0, 200, 244, 0.4) 0%, rgba(0, 0, 0, 0) 60%)",
+        }}
+        aria-hidden
+      />
+
+      {/* Desktop — cyan kiri, pink kanan */}
+      <div
+        className="pointer-events-none absolute -left-[25vw] bottom-0 hidden h-full max-h-full w-[75vw] rounded-full lg:block"
         style={{ backgroundImage: "radial-gradient(circle, #00c8f466 0%, #0000 60%)" }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -right-[25vw] bottom-0 h-[100%] max-h-full w-[75vw] rounded-full"
+        className="pointer-events-none absolute -right-[25vw] bottom-0 hidden h-full max-h-full w-[75vw] rounded-full lg:block"
         style={{ backgroundImage: "radial-gradient(circle, #e3058d7a 0%, #0000 60%)" }}
         aria-hidden
       />

@@ -113,14 +113,14 @@ export function ServicesHowItWorks({
         className={cn(
           "relative z-10 bg-[#0c1030] px-5 pb-22 max-md:pb-28 md:px-10 md:pb-30 xl:px-10 xl:pb-62",
           overlappedByTestimonialSection
-            ? "pt-[150px] md:pt-[160px] xl:pt-[180px]"
+            ? "max-md:pb-36 max-md:pt-24 pt-[150px] md:pt-[160px] xl:pt-[180px]"
             : "pt-[72px] md:pt-[88px] xl:pt-[100px]",
         )}
       >
         <div className="mx-auto max-w-[1440px]">
           <h2
             id="services-how-it-works-heading"
-            className="text-center text-[64px] font-extrabold leading-tight tracking-tight text-white"
+            className="text-center text-[clamp(2.25rem,10vw,4rem)] font-extrabold leading-tight tracking-tight text-white md:text-[64px]"
           >
             How It <span className="text-[#E3058D]">Works</span>
           </h2>
@@ -129,14 +129,17 @@ export function ServicesHowItWorks({
 
       <div
         className={cn(
-          "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 max-md:pt-28 md:px-10 md:pt-8 xl:px-10 xl:pt-0",
-          overlappedByTestimonialSection ? "z-30" : "z-[25]",
+          "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 md:px-10 md:pt-8 xl:px-10 xl:pt-0",
+          overlappedByTestimonialSection
+            ? "z-30 max-md:pt-6 max-md:pb-10 md:pb-16"
+            : "z-[25] max-md:pt-28",
         )}
       >
         <ServicesHowItWorksFloatingRow
           overlapFraction={cardsOverlapFraction}
-          extraNegativeMarginTopPx={30}
-          extraNegativeMarginBottomPx={overlappedByTestimonialSection ? 100 : 30}
+          extraNegativeMarginTopPx={overlappedByTestimonialSection ? 0 : 30}
+          extraNegativeMarginBottomPx={overlappedByTestimonialSection ? 0 : 30}
+          disableOverlapBelowXl={overlappedByTestimonialSection}
         >
           <div className="flex flex-col items-stretch gap-0 overflow-visible drop-shadow-[0_28px_60px_-12px_rgba(0,0,0,0.45)] md:min-h-0 md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-[minmax(0,1fr)_110px_minmax(0,1fr)_110px_minmax(0,1fr)] xl:gap-0 xl:items-stretch">
             {STEPS.map((step, i) => (

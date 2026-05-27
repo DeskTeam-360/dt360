@@ -1,8 +1,7 @@
 "use client";
 
 import { CircleChevronRight } from "lucide-react";
-import { useCallback, useState } from "react";
-import { BookACallBookingEmbed } from "@/components/pages/book-a-call/BookACallBookingEmbed";
+import { useCallback, useEffect, useState } from "react";
 import { BookACallRecaptcha } from "@/components/pages/book-a-call/BookACallRecaptcha";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
@@ -51,6 +50,8 @@ export function BookACallForm() {
     formBubbleAlt,
     fields,
     submitLabel,
+    successTitle,
+    successMessage,
   } = bookACallForm;
 
   const [firstName, setFirstName] = useState("");
@@ -60,8 +61,19 @@ export function BookACallForm() {
   const [fieldErrors, setFieldErrors] = useState<BookACallFieldErrors>({});
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showBooking, setShowBooking] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
+
+  useEffect(() => {
+    const section = document.getElementById("book-a-call-section");
+    if (!section) return;
+    if (isSubmitted) {
+      section.setAttribute("data-submitted", "true");
+    } else {
+      section.removeAttribute("data-submitted");
+    }
+    return () => section.removeAttribute("data-submitted");
+  }, [isSubmitted]);
 
   const handleRecaptchaChange = useCallback((token: string | null) => {
     setRecaptchaToken(token);
@@ -118,7 +130,7 @@ export function BookACallForm() {
         return;
       }
 
-      setShowBooking(true);
+      setIsSubmitted(true);
       setFormMessage(null);
       setFieldErrors({});
       setRecaptchaToken(null);
@@ -131,49 +143,55 @@ export function BookACallForm() {
 
   return (
     <div
-      className={`relative z-10 w-full overflow-x-hidden ${showBooking ? "overflow-y-hidden" : "overflow-y-hidden"}`}
+      className="relative z-10 w-full overflow-x-hidden overflow-y-hidden"
       style={{ marginTop: -heroOverlapHeight }}
-      aria-labelledby={showBooking ? "book-a-call-booking-heading" : "book-a-call-form-heading"}
+      aria-labelledby={
+        isSubmitted ? "book-a-call-success-heading" : "book-a-call-form-heading"
+      }
     >
-      <div
-        className="pointer-events-none absolute left-[-10%] top-[50%] z-[1] sm:left-[-10%] lg:left-[-10%] lg:top-50"
-        aria-hidden
-      >
-        <SafeImage
-          src={formBubbleSrc}
-          alt={formBubbleAlt}
-          width={368}
-          height={368}
-          className="h-auto w-[min(220px,42vw)] max-w-[368px] mix-blend-screen opacity-95 sm:w-[280px] lg:w-[368px]"
-          sizes="(max-width: 1024px) 42vw, 368px"
-        />
-      </div>
+      {!isSubmitted ? (
+        <div
+          className="pointer-events-none absolute left-[-10%] top-[50%] z-[1] sm:left-[-10%] lg:left-[-10%] lg:top-50"
+          aria-hidden
+        >
+          <SafeImage
+            src={formBubbleSrc}
+            alt={formBubbleAlt}
+            width={368}
+            height={368}
+            className="h-auto w-[min(220px,42vw)] max-w-[368px] mix-blend-screen opacity-95 sm:w-[280px] lg:w-[368px]"
+            sizes="(max-width: 1024px) 42vw, 368px"
+          />
+        </div>
+      ) : null}
 
       <div
-        className="pointer-events-none w-full shrink-0"
-        style={{ height: heroOverlapHeight }}
+        className="pointer-events-none w-full shrink-0 min-[2560px]:-mb-1"
+        style={{ height: heroOverlapHeight, backgroundColor: BOOK_A_CALL_FORM_BG }}
         aria-hidden
       />
 
       <div
-        className="relative w-full overflow-x-clip overflow-y-hidden pb-20 pt-[120px] md:pt-28 lg:pt-8 sm:pb-24 lg:pb-28"
+        className="relative w-full overflow-x-clip overflow-y-hidden pb-20 pt-[120px] md:pt-28 sm:pb-24 lg:pt-8 lg:pb-28 min-[2560px]:-mt-1"
         style={{ backgroundColor: BOOK_A_CALL_FORM_BG }}
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="absolute bottom-[-45%] left-[-20%] h-[min(1500px,90vw)] w-[min(1500px,90vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl lg:left-[-25%]" />
-          <div className="absolute top-0 right-[-35%] h-[min(1200px,90vw)] w-[min(1200px,90vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_40%)] blur-3xl lg:top-[-20%]" />
-        </div>
+        {!isSubmitted ? (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+            <div className="absolute bottom-[-45%] left-[-20%] h-[min(1500px,90vw)] w-[min(1500px,90vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl lg:left-[-25%]" />
+            <div className="absolute top-0 right-[-35%] h-[min(1200px,90vw)] w-[min(1200px,90vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_40%)] blur-3xl lg:top-[-20%]" />
+          </div>
+        ) : null}
 
         <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
-          {showBooking ? (
-            <div className="mx-auto w-full max-w-[1100px]">
+          {isSubmitted ? (
+            <div className="mx-auto w-full max-w-[640px] py-8 text-center lg:py-12">
               <h2
-                id="book-a-call-booking-heading"
-                className="sr-only"
+                id="book-a-call-success-heading"
+                className="font-[var(--font-poppins)] text-[32px] font-semibold leading-[1.2] text-[#11104C] sm:text-[40px] lg:text-[48px]"
               >
-                Schedule your call
+                {successTitle}
               </h2>
-              <BookACallBookingEmbed />
+              <p className="type-rule-p mt-6 text-[#11104C]/90">{successMessage}</p>
             </div>
           ) : (
             <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16 xl:gap-20">
@@ -283,9 +301,7 @@ export function BookACallForm() {
                   </div>
 
                   <div>
-                    <span id="book-a-call-captcha-label" className={labelClass}>
-                      {fields.captchaLabel}
-                    </span>
+                    <p className={labelClass}>{fields.captchaLabel}</p>
                     {fieldErrors.captcha ? (
                       <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
                         {fieldErrors.captcha}

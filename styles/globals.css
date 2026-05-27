@@ -341,3 +341,59 @@ body {
     overscroll-behavior-x: none;
   }
 }
+
+/*
+ * Affiliate program — segitiga (ubah `right` di sini).
+ * Harus pakai relative + margin-left: auto — sama seperti Tailwind
+ * `relative ml-auto right-[33%]`; jangan absolute (arti % berbeda).
+ */
+@layer components {
+  .affiliate-program-triangle {
+    position: relative;
+    margin-left: auto;
+    right: 33%;
+  }
+
+  @media (min-width: 768px) {
+    .affiliate-program-triangle {
+      right: 37%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .affiliate-program-triangle {
+      right: 23%;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .affiliate-program-triangle {
+      right: 35%;
+    }
+  }
+
+  /* Book a Call — hide cyan decor after form submit */
+  #book-a-call-section[data-submitted="true"] .book-a-call-arch-glow-stroke,
+  #book-a-call-section[data-submitted="true"] .book-a-call-hero-cyan-glow {
+    display: none;
+  }
+
+  .book-a-call-arch-seam-cover {
+    display: none;
+  }
+
+  @media (min-width: 2560px) {
+    .book-a-call-arch-seam-cover {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 25;
+      height: 4px;
+      transform: translateY(1px);
+      background-color: #f5f8ff;
+      pointer-events: none;
+    }
+  }
+}

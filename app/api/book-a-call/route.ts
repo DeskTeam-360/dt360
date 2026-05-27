@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { bookACallRecaptchaDisabled } from "@/data/bookACall";
 import {
   extractBookACallFieldErrors,
   hasBookACallFieldErrors,
@@ -70,6 +71,16 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (bookACallRecaptchaDisabled) {
+      return NextResponse.json({
+        ok: true,
+        entryId: null,
+        redirectUrl: null,
+        confirmationType: null,
+        skippedGravityForms: true,
+      });
+    }
+
     const result = await submitBookACallEntry({
       firstName,
       lastName,

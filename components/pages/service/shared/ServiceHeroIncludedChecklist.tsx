@@ -88,7 +88,7 @@ export function ServiceHeroIncludedChecklist({
       </div>
       {/* Fixed vertical space for dots so single-page checklists don’t shorten the block vs multi-page. */}
       <div
-        className="flex min-h-[2rem] items-center justify-center gap-2 pt-2"
+        className="flex min-h-[2rem] items-center justify-center gap-2 pt-2 max-md:pb-3"
         role={showDots ? "tablist" : undefined}
         aria-label={showDots ? "Included items pages" : undefined}
       >

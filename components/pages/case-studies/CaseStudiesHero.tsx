@@ -160,7 +160,7 @@ export function CaseStudiesHero() {
       </div>
 
       {/* Bottom curve — convex downward transition to white section below */}
-      <div className="relative z-20 -mb-px w-full text-[#f8fafe]" aria-hidden>
+      <div className="relative z-20 -mb-px w-full text-white" aria-hidden>
         <svg
           className="block h-12 w-full sm:h-14 md:h-16 lg:h-20 xl:h-24 2xl:h-28"
           viewBox="0 0 1440 100"

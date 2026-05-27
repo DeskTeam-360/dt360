@@ -99,19 +99,26 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       className={cn(
         "relative overflow-hidden bg-white",
         isWebDev
-          ? "z-0 isolate pb-[72px] pt-[280px] max-md:pt-[290px] md:-mt-[120px] md:pb-[88px] md:pt-[280px] xl:-mt-[140px] xl:pb-[100px] xl:pt-[300px] 2xl:pt-[320px]"
+          ? "z-10 isolate bg-white pb-[72px] max-md:mt-0 max-md:pt-10 md:mt-0 md:pt-0 md:pb-[88px] lg:pt-0 xl:-mt-[140px] xl:pb-[100px] xl:pt-[300px] 2xl:pt-[320px]"
           : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] xl:mt-0 xl:pb-[100px] xl:pt-[200px]",
       )}
       aria-labelledby={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
     >
       {isWebDev ? (
-        <SafeImage
-          src="/images/Service/web-design-dev-pricing-bottom-left.png"
-          alt=""
-          width={500}
-          height={500}
-          className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
-        />
+        <>
+          {/* Tablet: white bg extends up behind step cards without pulling the title under them */}
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden bg-white md:block md:-top-36 lg:-top-40 xl:hidden"
+            aria-hidden
+          />
+          <SafeImage
+            src="/images/Service/web-design-dev-pricing-bottom-left.png"
+            alt=""
+            width={500}
+            height={500}
+            className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
+          />
+        </>
       ) : null}
       {/* Radial pink — bottom left, larger */}
       <div
@@ -135,7 +142,12 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 xl:px-10">
         <h2
           id={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}
-          className="relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:mt-12 md:text-[64px] xl:mt-0"
+          className={cn(
+            "relative z-[1] text-center text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-[#101651] max-md:mt-0 max-md:pt-0 md:text-[64px] xl:mt-0",
+            isWebDev
+              ? "max-md:mt-0 md:mt-0 md:pt-[13rem] lg:pt-[14rem] xl:mt-0 xl:pt-0"
+              : "md:mt-12",
+          )}
         >
           {isWebDev ? (
             <>

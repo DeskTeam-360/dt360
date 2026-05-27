@@ -19,12 +19,13 @@ export function BookACallHero() {
 
   return (
     <section
+      id="book-a-call-section"
       className="relative overflow-x-hidden overflow-y-visible"
       aria-labelledby="book-a-call-hero-heading"
     >
       <div className="relative z-20 bg-[#11104C] pb-0 pt-28 text-white sm:pt-32 lg:pt-[120px]">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute bottom-[0%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl" />
+          <div className="book-a-call-hero-cyan-glow absolute bottom-[0%] left-[-15%] h-[min(900px,80vw)] w-[min(900px,80vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl" />
         </div>
 
         <Container className="relative z-20 max-w-[1440px] px-6 lg:px-20">
@@ -58,10 +59,10 @@ export function BookACallHero() {
           </div>
         </Container>
 
-        <div className="relative z-0 -mt-2 w-full sm:-mt-4 lg:-mt-6" aria-hidden>
+        <div className="relative z-10 -mt-2 w-full sm:-mt-4 lg:-mt-6" aria-hidden>
           <svg
-            className="block h-16 w-full sm:h-20 lg:h-28 xl:h-32"
-            viewBox="0 0 1440 120"
+            className="relative z-0 block h-16 w-full sm:h-20 lg:h-28 xl:h-32"
+            viewBox="0 0 1440 124"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -71,25 +72,30 @@ export function BookACallHero() {
                 <stop offset="45%" stopColor="#9B7DFF" />
                 <stop offset="100%" stopColor="#E3058D" />
               </linearGradient>
-              <filter id="book-a-call-arch-glow-blur" x="-5%" y="-30%" width="110%" height="160%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
             </defs>
-            <path fill={BOOK_A_CALL_FORM_BG} d="M0,88 Q720,4 1440,88 L1440,120 L0,120 Z" />
+            {/* Extra depth in viewBox removes subpixel gap when stretched on ultra-wide screens */}
+            <path fill={BOOK_A_CALL_FORM_BG} d="M0,88 Q720,4 1440,88 L1440,124 L0,124 Z" />
+            {/* Soft outer stroke + crisp inner stroke (no SVG blur filter — avoids dark band at 2560px) */}
             <path
+              className="book-a-call-arch-glow-stroke"
+              d="M0,88 Q720,4 1440,88"
+              fill="none"
+              stroke="url(#book-a-call-arch-glow)"
+              strokeWidth="12"
+              strokeLinecap="round"
+              opacity="0.45"
+            />
+            <path
+              className="book-a-call-arch-glow-stroke"
               d="M0,88 Q720,4 1440,88"
               fill="none"
               stroke="url(#book-a-call-arch-glow)"
               strokeWidth="5"
               strokeLinecap="round"
-              filter="url(#book-a-call-arch-glow-blur)"
               opacity="0.95"
             />
           </svg>
+          <div className="book-a-call-arch-seam-cover" aria-hidden />
         </div>
       </div>
 

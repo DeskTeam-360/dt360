@@ -11,11 +11,11 @@ export default function WebDesignDevelopmentPage() {
         <Hero />
       </div>
       <div className="mx-0 px-0">
-        <ServicesPlatformsSupportedBridge />
+        <ServicesPlatformsSupportedBridge overlap="belowChecklist" />
       </div>
       <div className="relative mx-0 px-0">
         <WebDesignDevelopmentTestimonialAndHowSection />
-        <div className="relative z-0 mx-0 px-0">
+        <div className="relative z-10 mx-0 px-0">
           <ServicesPricingSection variant="webDesignDevelopment" />
         </div>
       </div>

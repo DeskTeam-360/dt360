@@ -21,7 +21,7 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
   const { readLabel } = caseStudiesListSection;
 
   return (
-    <article className="group flex h-full flex-col rounded-[30px] border border-white/60 bg-white/70 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
+    <article className="group flex h-full flex-col rounded-[30px] border-[5px] border-white bg-white/60 shadow-[0_16px_40px_-24px_rgba(16,22,81,0.35)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-20px_rgba(16,22,81,0.4)]">
       <div className="p-4 pb-0 md:p-5">
         <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] md:h-[240px]">
           <SafeImage
@@ -81,13 +81,32 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
   return (
     <section
       id="case-studies-stories"
-      className="relative z-10 -mt-12 sm:-mt-14 md:-mt-16 lg:-mt-20 xl:-mt-24 2xl:-mt-28 scroll-mt-28 overflow-hidden bg-[#f8fafe] pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-48 lg:pb-24"
+      className="relative z-10 -mt-12 sm:-mt-14 md:-mt-16 lg:-mt-20 xl:-mt-24 2xl:-mt-28 scroll-mt-28 overflow-hidden bg-white pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-48 lg:pb-24"
       aria-labelledby="case-studies-list-heading"
     >
 
 
-      {/* Background Blobs & Images */}
+      {/* Background — radials + fluid images */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute z-0 h-[min(900px,95vw)] w-[min(900px,80vw)] rounded-full opacity-90"
+          style={{
+            top: "6em",
+            right: "-10em",
+            background:
+              "radial-gradient(circle, rgba(0,200,244,0.35) 0%, rgba(0,200,244,0.12) 45%, transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="absolute top-1/2 left-1/2 z-0 h-[min(1000px,100vw)] w-[min(1000px,100vw)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(227,5,141,0.28) 0%, rgba(227,5,141,0.1) 45%, transparent 70%)",
+          }}
+          aria-hidden
+        />
+
         {/* Fluid Background Images */}
         <div className="absolute left-0 top-[5%] h-[500px] w-[300px] opacity-80 md:h-[700px] md:w-[400px] lg:h-[900px] lg:w-[500px] xl:w-[600px]">
           <SafeImage
@@ -105,10 +124,6 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
             className="object-contain object-right-top"
           />
         </div>
-
-        {/* Bottom CSS Blobs */}
-        <div className="absolute bottom-[10%] left-[20%] h-[700px] w-[700px] rounded-full bg-cyan-200/30 blur-[120px]" />
-        <div className="absolute -right-[10%] bottom-[20%] h-[600px] w-[600px] rounded-full bg-purple-300/30 blur-[120px]" />
       </div>
 
       <Container className="relative z-10 max-w-[1440px] px-6 lg:px-12">

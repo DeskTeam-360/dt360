@@ -7,11 +7,11 @@ import { Testimonials } from "@/components/pages/service/website-development/Tes
  */
 export function WebDesignDevelopmentTestimonialAndHowSection() {
   return (
-    <section className="relative z-[5]" aria-label="Client story and how web development works">
-      <div className="relative z-20 -mt-[120px]">
+    <section className="relative z-[5] bg-white max-md:bg-white" aria-label="Client story and how web development works">
+      <div className="relative z-20 max-md:mt-0 -mt-[120px]">
         <Testimonials />
       </div>
-      <div className="relative z-10 -mt-[230px] lg:-mt-[240px]">
+      <div className="relative z-10 max-md:mt-0 -mt-[230px] lg:-mt-[240px]">
         <ServicesHowItWorks overlappedByTestimonialSection />
       </div>
     </section>
