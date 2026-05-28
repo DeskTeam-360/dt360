@@ -79,6 +79,6 @@ export const megaServicesFeatured = {
   bodyLeadBold: "DeskTeam360",
   bodyRest:
     " replaces the freelancer chaos with a dedicated team that already knows how to work together - all managed by a North American account manager so you never have to coordinate anything.",
-  ctaLabel: "See Our Plans",
+  ctaLabel: "See All Services",
   ctaHref: "/services" as const,
 };

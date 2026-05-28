@@ -286,7 +286,7 @@ function MobileGroup({
             onClick={onPick}
             className="font-nav-primary mx-3 mt-2 flex items-center justify-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-center text-sm font-bold uppercase tracking-[0.06em] text-white hover:bg-white/10"
           >
-            See Our Plans
+            See All Services
             <span aria-hidden className="text-base leading-none">
               →
             </span>
