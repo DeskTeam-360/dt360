@@ -2,6 +2,7 @@ import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 import { GraphQLClient, gql } from 'graphql-request';
 import { BlogPost } from '@/data/blog';
+import { socialProofSection, type SocialProofTestimonial } from '@/data/home';
 import type { ShowcaseItem } from '@/data/showcase';
 import { BLOG_ROUTE_REVALIDATE_SECONDS } from '@/lib/blog-revalidate';
 
@@ -636,6 +637,80 @@ const mapShowcase = (node: WpShowcaseNode): ShowcaseItem => ({
       ?.map((c) => c.name)
       .filter((n): n is string => typeof n === 'string' && n.length > 0) ?? []),
   ],
+});
+
+type WpTestimonialNode = {
+  databaseId: number;
+  slug: string;
+  title: string;
+  content?: string;
+  featuredImage?: { node?: { sourceUrl?: string; altText?: string } };
+};
+
+const mapHomeTestimonial = (node: WpTestimonialNode): SocialProofTestimonial => {
+  const attribution = decodeHtmlEntities(node.title?.trim() ?? '');
+  return {
+    id: node.slug || String(node.databaseId),
+    attribution,
+    quote: stripExcerptHtml(node.content),
+    imageSrc: node.featuredImage?.node?.sourceUrl ?? '/images/showcase/placeholder.png',
+    imageAlt: node.featuredImage?.node?.altText?.trim() || `${attribution} portrait.`,
+  };
+};
+
+const HOME_TESTIMONIALS_QUERY = gql`
+  query GetHomeTestimonials($first: Int!, $orderbyField: PostObjectsConnectionOrderbyEnum!) {
+    testimonials(
+      first: $first
+      where: { status: PUBLISH, orderby: { field: $orderbyField, order: ASC } }
+    ) {
+      nodes {
+        databaseId
+        slug
+        title
+        content(format: RAW)
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function fetchPublishedTestimonials(
+  orderbyField: 'MENU_ORDER' | 'DATE',
+): Promise<SocialProofTestimonial[]> {
+  const data = await client.request<{ testimonials?: { nodes?: WpTestimonialNode[] } }>(
+    HOME_TESTIMONIALS_QUERY,
+    { first: 100, orderbyField },
+  );
+  return (data.testimonials?.nodes ?? [])
+    .map(mapHomeTestimonial)
+    .filter((item) => item.quote.length > 0);
+}
+
+/** All published testimonials for the homepage carousel (WP CPT `testimonial`). */
+export const getHomeTestimonials = cache(async (): Promise<SocialProofTestimonial[]> => {
+  return fetchWordPressCached(['wp', 'home-testimonials'], async () => {
+    try {
+      const byMenuOrder = await fetchPublishedTestimonials('MENU_ORDER');
+      if (byMenuOrder.length > 0) return byMenuOrder;
+    } catch (error) {
+      console.warn('Home testimonials (MENU_ORDER) unavailable, retrying DATE:', error);
+    }
+
+    try {
+      const byDate = await fetchPublishedTestimonials('DATE');
+      if (byDate.length > 0) return byDate;
+    } catch (error) {
+      console.error('Error fetching home testimonials:', error);
+    }
+
+    return socialProofSection.testimonials;
+  });
 });
 
 export const getShowcaseData = cache(async () => {

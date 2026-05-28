@@ -1,3 +1,4 @@
+import { getHomeTestimonials } from "@/lib/wordpress";
 import { Hero } from "@/components/pages/home/Hero";
 import { InsourcingBetter } from "@/components/pages/home/InsourcingBetter";
 import { RotateProblemCarousel } from "@/components/pages/home/RotateProblemCarousel";
@@ -11,7 +12,9 @@ import { Pricing } from "@/components/pages/home/Pricing";
 import { FAQ } from "@/components/pages/home/FAQ";
 import { LastCTA } from "@/components/pages/home/LastCTA";
 
-export default function Home() {
+export default async function Home() {
+  const testimonials = await getHomeTestimonials();
+
   return (
     <main className="home-page flex flex-col overflow-x-hidden">
       <Hero />
@@ -22,7 +25,7 @@ export default function Home() {
       <InsourcingBetter />
       <EverySkillGrid />
       <HowItWorksSteps />
-      <SocialProofTestimonials />
+      <SocialProofTestimonials testimonials={testimonials} />
       <Pricing />
       <FAQ />
       <LastCTA />

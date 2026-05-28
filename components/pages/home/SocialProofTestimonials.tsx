@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { Container } from "@/components/shared/Container";
-import { socialProofSection } from "@/data/home";
+import { socialProofSection, type SocialProofTestimonial } from "@/data/home";
 import { SocialProofMarquee } from "./HomeMarquee";
 import { SocialProofTestimonialCarousel } from "./SocialProofTestimonialCarousel";
 
-export function SocialProofTestimonials() {
-  const { headlineLine1, headlineLine2, headlineHighlight, imageSrc, imageAlt, testimonials } =
-    socialProofSection;
+type Props = {
+  testimonials: SocialProofTestimonial[];
+};
+
+export function SocialProofTestimonials({ testimonials }: Props) {
+  const { headlineLine1, headlineLine2, headlineHighlight, imageSrc, imageAlt } = socialProofSection;
 
   return (
     <section
