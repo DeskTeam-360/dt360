@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { TestimonialCarouselHomeStyle } from "@/components/shared/TestimonialCarouselHomeStyle";
 import type { SocialProofTestimonial } from "@/data/home";
 
@@ -18,11 +18,7 @@ function shuffleTestimonials(items: SocialProofTestimonial[]): SocialProofTestim
 }
 
 export function SocialProofTestimonialCarousel({ items }: Props) {
-  const [displayItems, setDisplayItems] = useState<SocialProofTestimonial[]>(items);
-
-  useEffect(() => {
-    setDisplayItems(shuffleTestimonials(items));
-  }, [items]);
+  const displayItems = useMemo(() => shuffleTestimonials(items), [items]);
 
   return <TestimonialCarouselHomeStyle items={displayItems} />;
 }
