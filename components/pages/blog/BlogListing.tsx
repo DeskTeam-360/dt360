@@ -26,7 +26,12 @@ export function BlogListing({ featuredPostsMap, latestPosts, categories }: Props
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
-      <LatestBlogs key={selectedCategory} posts={latestPosts} selectedCategory={selectedCategory} />
+      <LatestBlogs 
+        key={selectedCategory} 
+        posts={latestPosts} 
+        selectedCategory={selectedCategory} 
+        featuredPost={featuredPostsMap[selectedCategory]}
+      />
     </>
   );
 }

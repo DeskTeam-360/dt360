@@ -27,19 +27,25 @@ const DUMMY_POSTS = Array.from({ length: 15 }).map((_, i) => {
 interface LatestBlogsProps {
   posts?: BlogPost[];
   selectedCategory?: string;
+  featuredPost?: BlogPost;
 }
 
-export function LatestBlogs({ posts = [], selectedCategory = "All Posts" }: LatestBlogsProps) {
+export function LatestBlogs({ posts = [], selectedCategory = "All Posts", featuredPost }: LatestBlogsProps) {
   const [currentPage, setCurrentPage] = useState(0);
   
   const displayPosts = posts.length > 0 ? posts : DUMMY_POSTS;
-  const filteredPosts =
+  let filteredPosts =
     selectedCategory === "All Posts"
       ? displayPosts
       : displayPosts.filter((post) => {
           const cats = post.categories && post.categories.length > 0 ? post.categories : [post.category];
           return cats.includes(selectedCategory);
         });
+
+  if (filteredPosts.length === 0 && featuredPost) {
+    filteredPosts = [featuredPost];
+  }
+
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / 5));
 
   const currentPosts = filteredPosts.slice(currentPage * 5, (currentPage + 1) * 5);
@@ -88,12 +94,11 @@ export function LatestBlogs({ posts = [], selectedCategory = "All Posts" }: Late
                       <div className="absolute inset-0 bg-[#11104c]/80 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                     </div>
 
-                    {/* Top Right: Tags */}
                     <div className="relative z-10 flex flex-wrap justify-end gap-3 w-full">
-                      {(highlighted.categories && highlighted.categories.length > 0 ? highlighted.categories : [highlighted.category]).map((cat) => (
+                      {(highlighted.categories && highlighted.categories.length > 0 ? highlighted.categories : [highlighted.category]).map((cat, idx) => (
                         <span key={cat} className={cn(
-                          "text-white px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[12px] md:text-[14px] uppercase tracking-wider shadow-sm",
-                          highlighted.tagColor || "bg-[#f0573a]"
+                          "px-[15px] py-[6px] md:px-[20px] md:py-[8px] rounded-[20px] font-bold text-[12px] md:text-[14px] uppercase tracking-wider shadow-sm",
+                          idx === 0 ? cn("text-white", highlighted.tagColor || "bg-[#f0573a]") : "bg-[#201f60] text-[#8491e8]"
                         )}>
                           {cat}
                         </span>
@@ -188,10 +193,10 @@ function BlogCard({ post }: { post: BlogPost }) {
             className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex flex-wrap gap-2 z-10">
-            {(post.categories && post.categories.length > 0 ? post.categories : [post.category]).map((cat) => (
+            {(post.categories && post.categories.length > 0 ? post.categories : [post.category]).map((cat, idx) => (
               <span key={cat} className={cn(
-                "text-white px-[12px] py-[4px] md:px-[15px] md:py-[6px] rounded-[20px] font-bold text-[10px] md:text-[12px] uppercase tracking-wider",
-                post.tagColor || "bg-[#7547c5]"
+                "px-[12px] py-[4px] md:px-[15px] md:py-[6px] rounded-[20px] font-bold text-[10px] md:text-[12px] uppercase tracking-wider shadow-sm",
+                idx === 0 ? cn("text-white", post.tagColor || "bg-[#7547c5]") : "bg-[#201f60] text-[#8491e8]"
               )}>
                 {cat}
               </span>
