@@ -179,9 +179,6 @@ export default function ServicesPage() {
                         : "flex h-full min-h-0 flex-col"
                     }
                   >
-                    <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-black/25 text-2xl font-extrabold leading-none">
-                      {service.no}
-                    </span>
                     <div className="mt-6 flex h-[200px] w-full items-center justify-center">
                       <Image
                         src={service.icon}
