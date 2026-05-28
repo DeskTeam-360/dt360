@@ -25,6 +25,10 @@ export function HaveQuestionsCTA() {
             <h2 className="type-rule-h2 mb-6 font-heading font-semibold text-white md:mb-10">
               Have Questions?
             </h2>
+            <p className="type-rule-p mb-6 max-w-[44rem] text-white/90 md:mb-8">
+              Let&apos;s map out the tasks you want off your plate. Book a short, no-obligation call
+              to see how our flat-rate team can fit into your workflow.
+            </p>
             <Link
               href="/book-a-call"
               className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-6 py-3 text-[18px] font-bold text-[#11104c] transition-transform hover:scale-105 md:px-8 md:py-4 md:text-[20px]"
