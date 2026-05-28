@@ -12,6 +12,9 @@ import { Pricing } from "@/components/pages/home/Pricing";
 import { FAQ } from "@/components/pages/home/FAQ";
 import { LastCTA } from "@/components/pages/home/LastCTA";
 
+/** ISR for homepage — keeps testimonial carousel in sync with WP (default 10 min). */
+export const revalidate = 600;
+
 export default async function Home() {
   const testimonials = await getHomeTestimonials();
 

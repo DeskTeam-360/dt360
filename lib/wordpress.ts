@@ -42,6 +42,11 @@ async function fetchWordPressCached<T>(
   cacheKey: string[],
   producer: () => Promise<T>,
 ): Promise<T> {
+  // Dev: always hit WP so CMS edits (e.g. new testimonials) show without waiting on Data Cache TTL.
+  if (process.env.NODE_ENV === 'development') {
+    return producer();
+  }
+
   try {
     return await unstable_cache(producer, cacheKey, {
       revalidate: BLOG_ROUTE_REVALIDATE_SECONDS,
