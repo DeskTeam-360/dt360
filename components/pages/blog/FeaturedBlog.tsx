@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { CATEGORIES, FEATURED_POST, BlogPost } from '@/data/blog';
 import { SafeImage } from '@/components/shared/SafeImage';
 import { ArrowRight } from 'lucide-react';
@@ -13,11 +13,16 @@ import Link from 'next/link';
 interface FeaturedBlogProps {
   featuredPostsMap: Record<string, BlogPost>;
   categories: string[];
+  selectedCategory: string;
+  onSelectCategory: (category: string) => void;
 }
 
-export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps) {
-  const [selectedCategory, setSelectedCategory] = useState("All Posts");
-  
+export function FeaturedBlog({
+  featuredPostsMap,
+  categories,
+  selectedCategory,
+  onSelectCategory,
+}: FeaturedBlogProps) {
   const currentPost = featuredPostsMap[selectedCategory] || featuredPostsMap["All Posts"] || FEATURED_POST;
 
   return (
@@ -40,7 +45,7 @@ export function FeaturedBlog({ featuredPostsMap, categories }: FeaturedBlogProps
           {(categories.length > 0 ? categories : CATEGORIES).map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => onSelectCategory(category)}
               className={cn(
                 "px-[15px] py-[8px] md:px-[25px] md:py-[15px] rounded-[30px] font-semibold text-[16px] md:text-[20px] transition-colors border cursor-pointer",
                 selectedCategory === category

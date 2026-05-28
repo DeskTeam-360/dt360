@@ -1,8 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { BlogHero } from '@/components/pages/blog/BlogHero';
-import { FeaturedBlog } from '@/components/pages/blog/FeaturedBlog';
-import { LatestBlogs } from '@/components/pages/blog/LatestBlogs';
+import { BlogListing } from '@/components/pages/blog/BlogListing';
 import { DownloadCTA } from '@/components/pages/blog/DownloadCTA';
 import { AuthorSection } from '@/components/pages/blog/AuthorSection';
 
@@ -19,8 +18,7 @@ export default async function BlogPage() {
   return (
     <main className="flex-grow">
       <BlogHero />
-      <FeaturedBlog featuredPostsMap={featuredPostsMap} categories={categories} />
-      <LatestBlogs posts={latestPosts} />
+      <BlogListing featuredPostsMap={featuredPostsMap} latestPosts={latestPosts} categories={categories} />
       <DownloadCTA />
       <AuthorSection />
     </main>

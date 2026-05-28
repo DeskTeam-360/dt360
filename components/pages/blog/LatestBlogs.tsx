@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LATEST_POSTS, BlogPost } from '@/data/blog';
 import { SafeImage } from '@/components/shared/SafeImage';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -26,15 +26,27 @@ const DUMMY_POSTS = Array.from({ length: 15 }).map((_, i) => {
 
 interface LatestBlogsProps {
   posts?: BlogPost[];
+  selectedCategory?: string;
 }
 
-export function LatestBlogs({ posts = [] }: LatestBlogsProps) {
+export function LatestBlogs({ posts = [], selectedCategory = "All Posts" }: LatestBlogsProps) {
   const [currentPage, setCurrentPage] = useState(0);
   
   const displayPosts = posts.length > 0 ? posts : DUMMY_POSTS;
-  const totalPages = Math.max(1, Math.ceil(displayPosts.length / 5));
+  const filteredPosts =
+    selectedCategory === "All Posts"
+      ? displayPosts
+      : displayPosts.filter((post) => {
+          const cats = post.categories && post.categories.length > 0 ? post.categories : [post.category];
+          return cats.includes(selectedCategory);
+        });
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / 5));
 
-  const currentPosts = displayPosts.slice(currentPage * 5, (currentPage + 1) * 5);
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedCategory]);
+
+  const currentPosts = filteredPosts.slice(currentPage * 5, (currentPage + 1) * 5);
   const highlighted = currentPosts[0];
   const secondPost = currentPosts[1];
   const remainingPosts = currentPosts.slice(2);
