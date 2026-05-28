@@ -562,15 +562,6 @@ type WpShowcaseCategoryNode = {
   count?: number;
 };
 
-type GetShowcaseResponse = {
-  contentNodes?: {
-    nodes?: WpShowcaseNode[];
-  };
-  showcaseCategories?: {
-    nodes?: WpShowcaseCategoryNode[];
-  };
-};
-
 const SHOWCASE_ALL_WORK = 'All Work';
 
 /** Sort filter pills: All Work first, then WP taxonomy count (desc), tie-break A–Z. */

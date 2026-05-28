@@ -372,7 +372,7 @@ export const socialProofSection: SocialProofSection = {
   headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
   headlineLine2: "Then They",
   headlineHighlight: "Found Us",
-  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-1.png",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-2.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
     {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
-import { caseStudiesListSection, dummyCaseStudies } from "@/data/caseStudies";
+import { caseStudiesListSection } from "@/data/caseStudies";
 import type { BlogPost } from "@/data/blog";
 import { useState } from "react";
 import { loadMoreCaseStudies } from "@/app/case-studies/actions";
@@ -54,14 +54,14 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
 }
 
 export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = { endCursor: null, hasNextPage: false } }: Props) {
-  const { title } = caseStudiesListSection;
+  const { title, emptyMessage } = caseStudiesListSection;
   
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
   const [pageInfo, setPageInfo] = useState(initialPageInfo);
   const [isLoading, setIsLoading] = useState(false);
 
-  const displayPosts = posts.length > 0 ? posts : dummyCaseStudies;
-  const hasMore = posts.length > 0 ? pageInfo.hasNextPage : false;
+  const displayPosts = posts;
+  const hasMore = pageInfo.hasNextPage;
 
   const handleLoadMore = async () => {
     if (!pageInfo.endCursor || isLoading) return;
@@ -137,7 +137,7 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
         </div>
 
         {displayPosts.length === 0 ? (
-          <p className="type-rule-p mt-12 text-center text-[#11104c]/70">No case studies published yet.</p>
+          <p className="type-rule-p mt-12 text-center text-[#11104c]/70">{emptyMessage}</p>
         ) : (
           <>
             <ul className="grid list-none grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">

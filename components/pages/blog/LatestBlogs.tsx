@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { LATEST_POSTS, BlogPost } from '@/data/blog';
 import { SafeImage } from '@/components/shared/SafeImage';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -41,10 +41,6 @@ export function LatestBlogs({ posts = [], selectedCategory = "All Posts" }: Late
           return cats.includes(selectedCategory);
         });
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / 5));
-
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [selectedCategory]);
 
   const currentPosts = filteredPosts.slice(currentPage * 5, (currentPage + 1) * 5);
   const highlighted = currentPosts[0];
