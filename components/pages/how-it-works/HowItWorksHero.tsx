@@ -1,13 +1,15 @@
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
-import { howItWorksHero } from "@/data/howItWorks";
+import { HowItWorksTaskVideo } from "@/components/pages/how-it-works/HowItWorksTaskVideo";
+import { howItWorksHero, howItWorksTaskSection } from "@/data/howItWorks";
 
 export function HowItWorksHero() {
   const { title, subtitle, paragraphs, heroImageSrc, heroImageAlt } = howItWorksHero;
+  const { titleBefore, titleHighlight } = howItWorksTaskSection;
 
   return (
     <section
-      className="relative overflow-hidden bg-[#02063B] px-[20px] pb-[480px] pt-[100px] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
+      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-10 pt-[100px] md:pb-[22rem] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
       aria-labelledby="how-it-works-hero-heading"
     >
       {/* Mobile — pink circle atas, cyan circle bawah */}
@@ -71,6 +73,17 @@ export function HowItWorksHero() {
             className="h-auto w-full"
           />
         </div>
+      </Container>
+
+      <Container className="relative z-20 mt-[calc(var(--spacing)*20)] max-w-[1440px] md:mt-[calc(var(--spacing)*42)] lg:mt-[calc(var(--spacing)*55)] lg:px-10">
+        <HowItWorksTaskVideo />
+        <h2
+          id="how-it-works-task-heading"
+          className="type-rule-h2 mt-[calc(var(--spacing)*8)] text-center font-semibold tracking-tight text-white md:hidden"
+        >
+          {titleBefore}
+          <span className="text-[#f336b6]">{titleHighlight}</span>
+        </h2>
       </Container>
     </section>
   );
