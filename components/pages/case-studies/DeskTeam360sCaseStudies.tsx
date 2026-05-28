@@ -33,7 +33,9 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
         </div>
       </div>
       <div className="flex flex-grow flex-col p-6 pt-5 md:p-8 md:pt-6">
-        <h3 className="type-rule-h6 mb-3 font-heading font-bold text-[#11104c]" dangerouslySetInnerHTML={{ __html: post.title }} />
+        <Link href={`/case-studies/${post.slug}`}>
+          <h3 className="type-rule-h6 mb-3 font-heading font-bold text-[#11104c] transition-colors hover:text-[#f0573a]" dangerouslySetInnerHTML={{ __html: post.title }} />
+        </Link>
         {post.excerpt ? (
           <p className="type-rule-p mb-6 line-clamp-4 text-[14px] leading-relaxed text-[#11104c]/80 md:text-[16px]" dangerouslySetInnerHTML={{ __html: post.excerpt }} />
         ) : null}

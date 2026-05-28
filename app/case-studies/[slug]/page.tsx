@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPostBySlug, getBlogLatestPostsPoolForRelated } from '@/lib/wordpress';
+import { getPostBySlug, getCaseStudyPosts } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
 
@@ -26,14 +26,16 @@ export async function generateMetadata(
   };
 }
 
+export const revalidate = 600; // 10 minutes
+
 export default async function SingleCaseStudyPage({ params }: Props) {
   const resolvedParams = await params;
   const results = await Promise.all([
     getPostBySlug(resolvedParams.slug),
-    getBlogLatestPostsPoolForRelated(),
+    getCaseStudyPosts(10),
   ]);
   const post = results[0];
-  const latestPostsPool = results[1];
+  const latestPostsPool = results[1].posts;
 
   if (!post) {
     notFound();

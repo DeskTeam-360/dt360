@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 600; // 10 minutes
+
 export default async function CaseStudiesPage() {
   const { posts, pageInfo } = await getCaseStudyPosts(9);
 
