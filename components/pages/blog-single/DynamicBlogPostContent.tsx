@@ -5,7 +5,7 @@ import svgPaths from "./svg-blog-single";
 import { SafeImage } from "@/components/shared/SafeImage";
 import Link from "next/link";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
-import { BlogPost } from "@/data/blog";
+import { AUTHOR_INFO, BlogPost } from "@/data/blog";
 import parse, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser';
 import { DOMNode } from 'html-react-parser';
 
@@ -96,26 +96,37 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           const images = findRecursive(domNodeAsAny.children as DOMNode[], ['img']);
           const textElements = findRecursive(domNodeAsAny.children as DOMNode[], ['h2', 'h3', 'p']);
           const actualImg = images[0];
+          const authorName = post.author?.trim() || AUTHOR_INFO.name;
+          const hasAuthorNameHeading = textElements.some(
+            (child) =>
+              (child.name === 'h2' || child.name === 'h3') &&
+              extractText(child).trim().toLowerCase() === authorName.toLowerCase(),
+          );
 
           return (
-            <div className="bg-[#F8F9FF] border border-[#C8CEFB] rounded-[30px] p-8 md:p-12 my-12 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+            <div className="author-box bg-[#F8F9FF] border border-[#C8CEFB] rounded-[30px] p-8 md:p-12 my-12 flex flex-col items-start gap-8 md:flex-row md:gap-12">
               {actualImg && (
-                <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden flex-shrink-0 border-4 border-white shadow-lg relative">
+                <div className="relative top-0 mx-auto mt-0 h-32 w-32 flex-shrink-0 self-start overflow-hidden rounded-full border-4 border-white shadow-lg md:mx-0 md:h-48 md:w-48">
                   <SafeImage 
                     src={actualImg.attribs.src} 
                     alt={actualImg.attribs.alt || "Author"} 
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
               )}
-              <div className="flex-grow text-center md:text-left">
+              <div className="flex-grow self-start text-center md:text-left">
+                {!hasAuthorNameHeading && (
+                  <h3 className="text-[#5F69AD] text-2xl md:text-3xl font-bold font-poppins mb-2">
+                    {authorName}
+                  </h3>
+                )}
                 {textElements.map((child: Element, idx: number) => {
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   const childAsAny = child as any;
                   if (childAsAny.name === 'h2' || childAsAny.name === 'h3') {
                     return (
-                      <h3 key={idx} className="text-[#11104C] text-2xl md:text-3xl font-bold font-poppins mb-2">
+                      <h3 key={idx} className="text-[#5F69AD] text-2xl md:text-3xl font-bold font-poppins mb-2">
                         {domToReact(childAsAny.children as DOMNode[], options)}
                       </h3>
                     );
@@ -414,6 +425,12 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                 margin: 3rem 0;
                 width: 100%;
                 height: auto;
+              }
+              .dynamic-prose .author-box img {
+                margin: 0;
+                border-radius: 0;
+                width: 100%;
+                height: 100%;
               }
               /* Force H2 styles to match reference exactly */
               .dynamic-prose h2 {
