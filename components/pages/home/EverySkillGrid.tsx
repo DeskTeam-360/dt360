@@ -124,9 +124,10 @@ function ServiceCardContent({
 }) {
   return (
     <>
+      {/* FIX: was text-[36px] hardcoded — now responsive for iPhone (430px) */}
       <h3
         className={cn(
-          "whitespace-pre-line text-[36px]",
+          "whitespace-pre-line text-[22px] sm:text-[28px] md:text-[30px] lg:text-[36px] leading-tight",
           text === "light" ? "text-white" : "text-[#101651]",
         )}
       >
@@ -134,7 +135,7 @@ function ServiceCardContent({
       </h3>
       <p
         className={cn(
-          "mt-3",
+          "mt-3 text-sm sm:text-base",
           text === "light" ? "text-white/95" : "text-[#2a2f61]",
         )}
       >
@@ -216,7 +217,7 @@ export function EverySkillGrid() {
               <article
                 key={item.id}
                 className={cn(
-                  "group relative flex h-full flex-col overflow-hidden p-[35px] pr-[23px]",
+                  "group relative flex h-full flex-col overflow-hidden p-[28px] pr-[20px] sm:p-[35px] sm:pr-[23px]",
                   gridCellSizeClass,
                   item.bg,
                   item.id === "maintenance" && "md:col-span-2 lg:col-span-1",
