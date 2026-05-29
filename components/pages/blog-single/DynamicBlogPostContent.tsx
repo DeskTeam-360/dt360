@@ -8,6 +8,70 @@ import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AUTHOR_INFO, BlogPost } from "@/data/blog";
 import parse, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser';
 import { DOMNode } from 'html-react-parser';
+import { cn } from '@/lib/utils';
+
+type WpElementAttribs = { class?: string; style?: string };
+
+/** Gutenberg classes + inline `text-align` from WordPress visual editor */
+function wpTextAlignClass(attribs?: WpElementAttribs): string {
+  const cls = attribs?.class ?? '';
+  const style = attribs?.style ?? '';
+  if (cls.includes('has-text-align-center') || /text-align\s*:\s*center/i.test(style)) {
+    return 'text-center';
+  }
+  if (cls.includes('has-text-align-right') || /text-align\s*:\s*right/i.test(style)) {
+    return 'text-right';
+  }
+  if (cls.includes('has-text-align-left') || /text-align\s*:\s*left/i.test(style)) {
+    return 'text-left';
+  }
+  if (cls.includes('has-text-align-justify') || /text-align\s*:\s*justify/i.test(style)) {
+    return 'text-justify';
+  }
+  return '';
+}
+
+/** Preserve inline styles from WordPress HTML (e.g. style="text-align: center;") */
+function parseHtmlStyleAttribute(style?: string): React.CSSProperties | undefined {
+  if (!style?.trim()) return undefined;
+  const result: Record<string, string> = {};
+  for (const part of style.split(';')) {
+    const colon = part.indexOf(':');
+    if (colon === -1) continue;
+    const key = part.slice(0, colon).trim();
+    const value = part.slice(colon + 1).trim();
+    if (!key || !value) continue;
+    const camelKey = key.replace(/-([a-z])/g, (_, ch: string) => ch.toUpperCase());
+    result[camelKey] = value;
+  }
+  return Object.keys(result).length > 0 ? (result as React.CSSProperties) : undefined;
+}
+
+function wpElementPresentation(attribs?: WpElementAttribs) {
+  return {
+    alignClass: wpTextAlignClass(attribs),
+    style: parseHtmlStyleAttribute(attribs?.style),
+  };
+}
+
+/** Alignment on wrapper div (Gutenberg) — inherit for child `p` / headings */
+function wpElementPresentationFromTree(domNode: { attribs?: WpElementAttribs; parent?: unknown }) {
+  const own = wpElementPresentation(domNode.attribs);
+  if (own.alignClass) return own;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let parent = domNode.parent as any;
+  for (let depth = 0; parent && depth < 5; depth += 1) {
+    if (parent.type === 'tag') {
+      const inherited = wpElementPresentation(parent.attribs);
+      if (inherited.alignClass) {
+        return { alignClass: inherited.alignClass, style: own.style ?? inherited.style };
+      }
+    }
+    parent = parent.parent;
+  }
+  return own;
+}
 
 // Helper to extract plain text from an HTML node for searching keywords like "Pro tip"
 const extractText = (node: DOMNode): string => {
@@ -211,8 +275,17 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                 const isShort = text.length > 0 && text.length < 100;
                 const pColor = className.includes('outline') ? 'text-[#11104C]' : 'text-white';
                 
+                const { alignClass, style: childStyle } = wpElementPresentation(childAsAny.attribs);
                 return (
-                  <p key={idx} className={`font-montserrat leading-relaxed mb-4 ${isShort ? `${shortTextColor} text-xl md:text-2xl font-bold` : `${pColor} text-lg md:text-xl font-medium`}`}>
+                  <p
+                    key={idx}
+                    className={cn(
+                      'font-montserrat leading-relaxed mb-4',
+                      isShort ? `${shortTextColor} text-xl md:text-2xl font-bold` : `${pColor} text-lg md:text-xl font-medium`,
+                      alignClass,
+                    )}
+                    style={childStyle}
+                  >
                     {domToReact(childAsAny.children as DOMNode[], options)}
                   </p>
                 );
@@ -257,9 +330,17 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           const text = extractText(domNodeAsAny);
           const generatedId = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
           const idToUse = domNodeAsAny.attribs?.id || generatedId;
-          
+          const { alignClass, style: headingStyle } = wpElementPresentationFromTree(domNodeAsAny);
+
           return (
-            <h2 id={idToUse} className="text-[#11104C] text-[32px] md:text-[48px] font-bold mb-8 mt-16 font-poppins scroll-mt-24">
+            <h2
+              id={idToUse}
+              className={cn(
+                'text-[#11104C] text-[32px] md:text-[48px] font-bold mb-8 mt-16 font-poppins scroll-mt-24',
+                alignClass,
+              )}
+              style={headingStyle}
+            >
               {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </h2>
           );
@@ -268,9 +349,17 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           const text = extractText(domNodeAsAny);
           const generatedId = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
           const idToUse = domNodeAsAny.attribs?.id || generatedId;
- 
+          const { alignClass, style: headingStyle } = wpElementPresentationFromTree(domNodeAsAny);
+
           return (
-            <h3 id={idToUse} className="text-[#11104C] text-2xl md:text-4xl font-bold mb-6 mt-8 font-poppins scroll-mt-24">
+            <h3
+              id={idToUse}
+              className={cn(
+                'text-[#11104C] text-2xl md:text-4xl font-bold mb-6 mt-8 font-poppins scroll-mt-24',
+                alignClass,
+              )}
+              style={headingStyle}
+            >
               {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </h3>
           );
@@ -281,17 +370,27 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           // Check if parent is blockquote
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const isInsideBlockquote = domNodeAsAny.parent && (domNodeAsAny.parent as any).name === 'blockquote';
-          
+          const { alignClass, style: paragraphStyle } = wpElementPresentationFromTree(domNodeAsAny);
+
           if (isInsideBlockquote) {
             return (
-              <p className="text-white leading-[1.5em] mb-0 font-montserrat font-semibold">
+              <p
+                className={cn('text-white leading-[1.5em] mb-0 font-montserrat font-semibold', alignClass)}
+                style={paragraphStyle}
+              >
                 {domToReact(domNodeAsAny.children as DOMNode[], options)}
               </p>
             );
           }
 
           return (
-            <p className="text-black leading-[1.9em] mb-8 font-montserrat font-semibold text-[18px]">
+            <p
+              className={cn(
+                'text-black leading-[1.9em] mb-8 font-montserrat font-semibold text-[18px]',
+                alignClass,
+              )}
+              style={paragraphStyle}
+            >
               {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </p>
           );
@@ -444,6 +543,27 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
               }
               .dt360-related-posts {
                 display: none !important;
+              }
+              /* WordPress block editor alignment (unparsed wrapper elements) */
+              .dynamic-prose .has-text-align-center,
+              .dynamic-prose [style*="text-align: center"],
+              .dynamic-prose [style*="text-align:center"] {
+                text-align: center !important;
+              }
+              .dynamic-prose .has-text-align-right,
+              .dynamic-prose [style*="text-align: right"],
+              .dynamic-prose [style*="text-align:right"] {
+                text-align: right !important;
+              }
+              .dynamic-prose .has-text-align-left,
+              .dynamic-prose [style*="text-align: left"],
+              .dynamic-prose [style*="text-align:left"] {
+                text-align: left !important;
+              }
+              .dynamic-prose .has-text-align-justify,
+              .dynamic-prose [style*="text-align: justify"],
+              .dynamic-prose [style*="text-align:justify"] {
+                text-align: justify !important;
               }
               @media (max-width: 767px) {
                 .dynamic-prose h2 {
