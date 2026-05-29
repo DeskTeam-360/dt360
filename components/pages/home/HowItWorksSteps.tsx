@@ -34,6 +34,7 @@ export function HowItWorksSteps() {
         </svg>
       </div>
 
+      {/* FIX: decorative bg-left image clipped via overflow-x-hidden on section; kept but won't overflow */}
       <div className="pointer-events-none absolute left-0 top-10 z-[1] -translate-x-[20%] sm:top-12 lg:top-14" aria-hidden>
         <Image
           src="/images/Home-HowItWorksStep-BgLeft.png"
@@ -77,13 +78,14 @@ export function HowItWorksSteps() {
 
           <div className="mx-auto grid w-full max-w-3xl gap-6 sm:gap-7 lg:col-span-1">
             {steps.map((step, index) => (
-              <article key={step.id} className="relative flex gap-5 sm:gap-6">
-                <div className="font-russo-one flex h-[144px] w-[115px] shrink-0 items-center justify-center rounded-[30px] border-2 border-[#A1E6FF] px-[22px] text-[72px] leading-none text-white sm:h-[144px] sm:w-[115px] sm:text-[96px] lg:h-[144px] lg:w-[115px] lg:text-[128px]">
+              <article key={step.id} className="relative flex gap-4 sm:gap-5">
+                {/* FIX: step number box — responsive sizing to fit 430px without wrapping */}
+                <div className="font-russo-one flex h-[110px] w-[88px] shrink-0 items-center justify-center rounded-[24px] border-2 border-[#A1E6FF] px-[14px] text-[56px] leading-none text-white sm:h-[144px] sm:w-[115px] sm:rounded-[30px] sm:px-[22px] sm:text-[72px] lg:text-[128px]">
                   {step.number}
                 </div>
                 {index < steps.length - 1 && (
                   <div
-                    className="pointer-events-none absolute left-[57.5px] top-[144px] bottom-[-1.5rem] w-[2px] -translate-x-1/2 bg-[#A1E6FF] sm:bottom-[-1.75rem]"
+                    className="pointer-events-none absolute left-[44px] top-[110px] bottom-[-1.5rem] w-[2px] -translate-x-1/2 bg-[#A1E6FF] sm:left-[57.5px] sm:top-[144px] sm:bottom-[-1.75rem]"
                     aria-hidden
                   />
                 )}
