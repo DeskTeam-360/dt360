@@ -1,20 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { caseStudiesListSection } from "@/data/caseStudies";
 import type { BlogPost } from "@/data/blog";
 import { useState } from "react";
-import { loadMoreCaseStudies } from "@/app/case-studies/actions";
+import { CASE_STUDIES_PAGE_SIZE } from "@/lib/wordpress";
 
 type Props = {
-  initialPosts?: BlogPost[];
-  initialPageInfo?: {
-    endCursor: string | null;
-    hasNextPage: boolean;
-  };
+  posts: BlogPost[];
 };
 
 function CaseStudyCard({ post }: { post: BlogPost }) {
@@ -34,10 +30,16 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
       </div>
       <div className="flex flex-grow flex-col p-6 pt-5 md:p-8 md:pt-6">
         <Link href={`/case-studies/${post.slug}`}>
-          <h3 className="type-rule-h6 mb-3 font-heading font-bold text-[#11104c] transition-colors hover:text-[#f0573a]" dangerouslySetInnerHTML={{ __html: post.title }} />
+          <h3
+            className="type-rule-h6 mb-3 font-heading font-bold text-[#11104c] transition-colors hover:text-[#f0573a]"
+            dangerouslySetInnerHTML={{ __html: post.title }}
+          />
         </Link>
         {post.excerpt ? (
-          <p className="type-rule-p mb-6 line-clamp-4 text-[14px] leading-relaxed text-[#11104c]/80 md:text-[16px]" dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+          <p
+            className="type-rule-p mb-6 line-clamp-4 text-[14px] leading-relaxed text-[#11104c]/80 md:text-[16px]"
+            dangerouslySetInnerHTML={{ __html: post.excerpt }}
+          />
         ) : null}
         <div className="mt-auto">
           <Link
@@ -55,29 +57,19 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
   );
 }
 
-export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = { endCursor: null, hasNextPage: false } }: Props) {
+export function DeskTeam360sCaseStudies({ posts }: Props) {
   const { title, emptyMessage } = caseStudiesListSection;
-  
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
-  const [pageInfo, setPageInfo] = useState(initialPageInfo);
-  const [isLoading, setIsLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(
+    Math.min(CASE_STUDIES_PAGE_SIZE, posts.length),
+  );
 
-  const displayPosts = posts;
-  const hasMore = pageInfo.hasNextPage;
+  const displayPosts = posts.slice(0, visibleCount);
+  const hasMore = visibleCount < posts.length;
 
-  const handleLoadMore = async () => {
-    if (!pageInfo.endCursor || isLoading) return;
-    
-    setIsLoading(true);
-    try {
-      const data = await loadMoreCaseStudies(pageInfo.endCursor);
-      setPosts((prev) => [...prev, ...data.posts]);
-      setPageInfo(data.pageInfo);
-    } catch (error) {
-      console.error("Failed to load more case studies:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleLoadMore = () => {
+    setVisibleCount((current) =>
+      Math.min(current + CASE_STUDIES_PAGE_SIZE, posts.length),
+    );
   };
 
   return (
@@ -86,9 +78,6 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
       className="relative z-10 -mt-12 sm:-mt-14 md:-mt-16 lg:-mt-20 xl:-mt-24 2xl:-mt-28 scroll-mt-28 overflow-hidden bg-white pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-48 lg:pb-24"
       aria-labelledby="case-studies-list-heading"
     >
-
-
-      {/* Background — radials + fluid images */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div
           className="absolute z-0 h-[min(900px,95vw)] w-[min(900px,80vw)] rounded-full opacity-90"
@@ -109,7 +98,6 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
           aria-hidden
         />
 
-        {/* Fluid Background Images */}
         <div className="absolute left-0 top-[5%] h-[500px] w-[300px] opacity-80 md:h-[700px] md:w-[400px] lg:h-[900px] lg:w-[500px] xl:w-[600px]">
           <SafeImage
             src="/images/case-studies/fluid bg left.png"
@@ -154,16 +142,11 @@ export function DeskTeam360sCaseStudies({ initialPosts = [], initialPageInfo = {
                 <button
                   type="button"
                   onClick={handleLoadMore}
-                  disabled={isLoading}
-                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#11104c] px-6 py-2 text-[15px] font-bold text-[#11104c] transition-colors hover:bg-[#11104c] hover:text-white disabled:opacity-70 disabled:cursor-not-allowed md:px-8 md:py-2.5 md:text-[16px]"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#11104c] px-6 py-2 text-[15px] font-bold text-[#11104c] transition-colors hover:bg-[#11104c] hover:text-white md:px-8 md:py-2.5 md:text-[16px]"
                 >
-                  {isLoading ? "Loading..." : "Load More"}
+                  Load More
                   <span className="flex size-5 items-center justify-center rounded-full border border-current md:size-6">
-                    {isLoading ? (
-                      <Loader2 className="size-3 animate-spin md:size-4" aria-hidden />
-                    ) : (
-                      <ChevronDown className="size-3 md:size-4" aria-hidden />
-                    )}
+                    <ChevronDown className="size-3 md:size-4" aria-hidden />
                   </span>
                 </button>
               </div>

@@ -3,7 +3,7 @@ import { CaseStudiesHero } from "@/components/pages/case-studies/CaseStudiesHero
 import { DeskTeam360sCaseStudies } from "@/components/pages/case-studies/DeskTeam360sCaseStudies";
 import { HaveQuestionsCTA } from "@/components/pages/case-studies/HaveQuestionsCTA";
 import { siteConfig } from "@/config/site";
-import { getCaseStudyPosts } from "@/lib/wordpress";
+import { getAllCaseStudyPosts } from "@/lib/wordpress";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 export const revalidate = 600; // 10 minutes
 
 export default async function CaseStudiesPage() {
-  const { posts, pageInfo } = await getCaseStudyPosts(9);
+  const posts = await getAllCaseStudyPosts();
 
   return (
     <main className="flex w-full flex-col overflow-hidden bg-white">
       <CaseStudiesHero />
-      <DeskTeam360sCaseStudies initialPosts={posts} initialPageInfo={pageInfo} />
+      <DeskTeam360sCaseStudies posts={posts} />
       <HaveQuestionsCTA />
     </main>
   );

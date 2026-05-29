@@ -262,69 +262,57 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
   };
 };
 
-export type CaseStudyPageData = {
-  posts: BlogPost[];
-  pageInfo: {
-    endCursor: string | null;
-    hasNextPage: boolean;
-  };
-};
+/** Case Studies list page — items shown per "Load More" click. */
+export const CASE_STUDIES_PAGE_SIZE = 9;
 
-export const getCaseStudyPosts = async (first = 9, after?: string): Promise<CaseStudyPageData> => {
-  const query = gql`
-    query GetCaseStudyPosts($first: Int!, $after: String) {
-      posts(first: $first, after: $after, where: { categoryName: "case-study", orderby: { field: DATE, order: DESC } }) {
-        pageInfo {
-          endCursor
-          hasNextPage
+const CASE_STUDY_POSTS_QUERY = gql`
+  query GetCaseStudyPosts($first: Int!) {
+    posts(
+      first: $first
+      where: { categoryName: "case-study", status: PUBLISH, orderby: { field: DATE, order: DESC } }
+    ) {
+      nodes {
+        id
+        slug
+        title
+        excerpt
+        content
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
         }
-        nodes {
-          id
-          slug
-          title
-          excerpt
-          content
-          date
-          featuredImage {
-            node {
-              sourceUrl
-            }
+        author {
+          node {
+            name
           }
-          author {
-            node {
-              name
-            }
-          }
-          categories {
-            nodes {
-              name
-            }
+        }
+        categories {
+          nodes {
+            name
           }
         }
       }
     }
-  `;
-
-  try {
-    const data = await client.request<{ 
-      posts?: { 
-        pageInfo: { endCursor: string | null; hasNextPage: boolean }; 
-        nodes?: WpPostNode[] 
-      } 
-    }>(query, {
-      first,
-      after,
-    });
-    
-    return {
-      posts: (data.posts?.nodes ?? []).map(mapCaseStudyPost),
-      pageInfo: data.posts?.pageInfo ?? { endCursor: null, hasNextPage: false }
-    };
-  } catch (error) {
-    console.error('Error fetching case study posts:', error);
-    return { posts: [], pageInfo: { endCursor: null, hasNextPage: false } };
   }
-};
+`;
+
+/** All published posts in category `case-study` (WP admin: Case Study). */
+export const getAllCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
+  return fetchWordPressCached(['wp', 'case-studies'], async () => {
+    try {
+      const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
+        CASE_STUDY_POSTS_QUERY,
+        { first: 100 },
+      );
+      return (data.posts?.nodes ?? []).map(mapCaseStudyPost);
+    } catch (error) {
+      console.error('Error fetching case study posts:', error);
+      return [];
+    }
+  });
+});
 
 export const getBlogData = async () => {
   const query = gql`
