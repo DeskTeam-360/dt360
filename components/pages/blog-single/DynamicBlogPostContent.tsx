@@ -55,6 +55,84 @@ function wpElementPresentation(attribs?: WpElementAttribs) {
 }
 
 /** Alignment on wrapper div (Gutenberg) — inherit for child `p` / headings */
+const BLOG_BODY_PARAGRAPH_CLASS =
+  'blog-body-paragraph text-black leading-[1.9em] mb-8 font-montserrat font-semibold text-[18px]';
+
+const BLOG_BODY_LINK_CLASS =
+  'text-[#fe652b] underline hover:opacity-80 transition-colors font-montserrat font-semibold';
+
+const BLOG_INLINE_LINK_CLASS =
+  'text-black underline hover:text-[#E6236D] transition-colors font-montserrat';
+
+const BLOG_TOC_LINK_CLASS =
+  'text-[#45108B] no-underline hover:text-[#E6236D] transition-colors font-montserrat font-semibold text-lg md:text-xl inline-block';
+
+/** “Watch full video” CTA — orange button on its own row, body font size (18px) */
+const BLOG_VIDEO_CTA_BUTTON_CLASS =
+  'blog-video-cta-button block w-fit max-w-full mx-auto my-8 bg-[#F0573A] text-white no-underline hover:bg-[#e04a2f] hover:text-white transition-colors font-montserrat font-bold text-[18px] leading-[1.9em] px-8 py-3 rounded-[10px] text-center';
+
+function isFullVideoCtaHref(href?: string): boolean {
+  if (!href) return false;
+  const hashIndex = href.indexOf('#');
+  if (hashIndex === -1) return false;
+  const hash = href.slice(hashIndex).split('?')[0]?.split('&')[0] ?? '';
+  return hash === '#fullvideo';
+}
+
+/** Table of Contents panel (lavender card) — keep purple links, not body orange/black */
+function isInsideTocPanel(domNode: { parent?: unknown }): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let parent = domNode.parent as any;
+  while (parent?.type === 'tag') {
+    const cls = parent.attribs?.class || '';
+    if (
+      cls.includes('blog-toc-panel') ||
+      cls.includes('dt360-toc') ||
+      (cls.includes('bg-[#F8F9FF]') &&
+        cls.includes('rounded-[35px]') &&
+        cls.includes('md:max-w-[75%]'))
+    ) {
+      return true;
+    }
+    parent = parent.parent;
+  }
+  return false;
+}
+
+/** Next.js `<Link>` often skips in-page hash scrolling — use a native anchor instead */
+function isInPageAnchorHref(href?: string): boolean {
+  if (!href) return false;
+  return href.startsWith('#') || href.includes('#');
+}
+
+/** Orange links only when the direct parent is a body `<p>`, not `div` / `li` / special blocks */
+function isInsideBodyParagraph(domNode: { parent?: unknown }): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const directParent = domNode.parent as any;
+  if (directParent?.type !== 'tag' || directParent.name !== 'p') {
+    return false;
+  }
+
+  let ancestor = directParent.parent;
+  while (ancestor?.type === 'tag') {
+    const name = ancestor.name;
+    const cls = ancestor.attribs?.class || '';
+    if (name === 'blockquote' || name === 'li') return false;
+    if (
+      cls.includes('blog-toc-panel') ||
+      cls.includes('dt360-toc') ||
+      cls.includes('dt360-author-box') ||
+      cls.includes('dt360-callout-') ||
+      cls.includes('dt360-cta-') ||
+      cls.includes('dt360-related-posts')
+    ) {
+      return false;
+    }
+    ancestor = ancestor.parent;
+  }
+  return true;
+}
+
 function wpElementPresentationFromTree(domNode: { attribs?: WpElementAttribs; parent?: unknown }) {
   const own = wpElementPresentation(domNode.attribs);
   if (own.alignClass) return own;
@@ -211,7 +289,7 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           const links = findRecursive(domNodeAsAny.children as DOMNode[], ['a']);
           
           return (
-            <div className="bg-[#F8F9FF] rounded-[35px] p-8 md:p-12 my-12 max-w-full md:max-w-[75%] mx-auto">
+            <div className="blog-toc-panel bg-[#F8F9FF] rounded-[35px] p-8 md:p-12 my-12 max-w-full md:max-w-[75%] mx-auto">
               <h2 className="text-[#11104C] text-2xl md:text-3xl font-bold font-poppins mb-8">
                 Table of Contents
               </h2>
@@ -219,20 +297,39 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                 <ul className="space-y-4">
                   {links.map((link: Element, idx: number) => {
                     const text = extractText(link);
-                    
+                    const tocHref = link.attribs.href;
+                    const tocLinkProps = { className: BLOG_TOC_LINK_CLASS };
+
                     return (
                       <li key={idx} className="list-none">
-                        <Link 
-                          href={link.attribs.href}
-                          className="text-[#45108B] hover:text-[#E6236D] transition-colors font-montserrat font-semibold text-lg md:text-xl inline-block"
-                        >
-                          {text}
-                        </Link>
+                        {isInPageAnchorHref(tocHref) ? (
+                          <a href={tocHref} {...tocLinkProps}>
+                            {text}
+                          </a>
+                        ) : (
+                          <Link href={tocHref || '#'} {...tocLinkProps}>
+                            {text}
+                          </Link>
+                        )}
                       </li>
                     );
                   })}
                 </ul>
               </nav>
+            </div>
+          );
+        }
+
+        // WP TOC panel without dt360-toc class — same lavender card layout
+        if (
+          domNodeAsAny.name === 'div' &&
+          className.includes('bg-[#F8F9FF]') &&
+          className.includes('rounded-[35px]') &&
+          className.includes('md:max-w-[75%]')
+        ) {
+          return (
+            <div className={cn(className, 'blog-toc-panel')}>
+              {domToReact(domNodeAsAny.children as DOMNode[], options)}
             </div>
           );
         }
@@ -385,10 +482,7 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
 
           return (
             <p
-              className={cn(
-                'text-black leading-[1.9em] mb-8 font-montserrat font-semibold text-[18px]',
-                alignClass,
-              )}
+              className={cn(BLOG_BODY_PARAGRAPH_CLASS, alignClass)}
               style={paragraphStyle}
             >
               {domToReact(domNodeAsAny.children as DOMNode[], options)}
@@ -407,11 +501,49 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
 
         // Handle Links
         if (domNodeAsAny.name === 'a') {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { href, class: _class, style: _style, ...props } = domNodeAsAny.attribs || {};
+          const attribs = domNodeAsAny.attribs || {};
+          const { href, class: linkHtmlClass, style: linkStyle, ...restAttribs } = attribs;
+          const children = domToReact(domNodeAsAny.children as DOMNode[], options);
+          const anchorStyle = parseHtmlStyleAttribute(linkStyle);
+
+          if (isFullVideoCtaHref(href) && !isInsideTocPanel(domNodeAsAny)) {
+            return (
+              <a
+                href={href}
+                {...restAttribs}
+                className={BLOG_VIDEO_CTA_BUTTON_CLASS}
+                style={anchorStyle}
+              >
+                {children}
+              </a>
+            );
+          }
+
+          const linkClass = cn(
+            isInsideTocPanel(domNodeAsAny)
+              ? BLOG_TOC_LINK_CLASS
+              : isInsideBodyParagraph(domNodeAsAny)
+                ? BLOG_BODY_LINK_CLASS
+                : BLOG_INLINE_LINK_CLASS,
+            isInsideTocPanel(domNodeAsAny) ? undefined : linkHtmlClass,
+          );
+
+          if (isInPageAnchorHref(href)) {
+            return (
+              <a
+                href={href}
+                {...restAttribs}
+                className={linkClass}
+                style={anchorStyle}
+              >
+                {children}
+              </a>
+            );
+          }
+
           return (
-            <Link href={href || '#'} {...props} className="text-black underline hover:text-[#E6236D] transition-colors font-montserrat">
-              {domToReact(domNodeAsAny.children as DOMNode[], options)}
+            <Link href={href || '#'} {...restAttribs} className={linkClass} style={anchorStyle}>
+              {children}
             </Link>
           );
         }
@@ -502,6 +634,9 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
               .dynamic-prose {
                 scroll-behavior: smooth;
               }
+              .dynamic-prose [id] {
+                scroll-margin-top: 7rem;
+              }
               .dynamic-prose ul, .dynamic-prose ol {
                 list-style-type: disc;
                 padding-left: 1.5rem;
@@ -514,6 +649,64 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
                 font-size: 18px;
                 line-height: 1.9em;
                 margin-bottom: 0.75rem;
+              }
+              .dynamic-prose a {
+                color: black;
+                text-decoration: underline;
+              }
+              .dynamic-prose a:hover {
+                color: #E6236D;
+              }
+              .dynamic-prose p.blog-body-paragraph a,
+              .dynamic-prose p[class*="leading-[1.9em]"] a {
+                color: #fe652b;
+              }
+              .dynamic-prose p.blog-body-paragraph a:hover,
+              .dynamic-prose p[class*="leading-[1.9em]"] a:hover {
+                color: #fe652b;
+                opacity: 0.8;
+              }
+              .dynamic-prose div[class*="leading-[1.9em]"] a {
+                color: black;
+              }
+              .dynamic-prose div[class*="leading-[1.9em]"] a:hover {
+                color: #E6236D;
+                opacity: 1;
+              }
+              .dynamic-prose a.blog-video-cta-button {
+                display: block !important;
+                width: fit-content !important;
+                max-width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                margin-top: 2rem !important;
+                margin-bottom: 2rem !important;
+                color: #fff !important;
+                background-color: #F0573A !important;
+                font-size: 18px !important;
+                line-height: 1.9em !important;
+                font-weight: 700 !important;
+                text-decoration: none !important;
+                text-align: center !important;
+              }
+              .dynamic-prose a.blog-video-cta-button:hover {
+                color: #fff !important;
+                background-color: #e04a2f !important;
+                opacity: 1 !important;
+              }
+              .dynamic-prose .blog-toc-panel a,
+              .dynamic-prose .dt360-toc a {
+                color: #45108B !important;
+                text-decoration: none !important;
+              }
+              .dynamic-prose .blog-toc-panel a:hover,
+              .dynamic-prose .dt360-toc a:hover {
+                color: #E6236D !important;
+                opacity: 1 !important;
+              }
+              .dynamic-prose .author-box a,
+              .dynamic-prose blockquote a {
+                color: inherit;
               }
               .dt360-blog-header, .dt360-blog-featured-img {
                 display: none !important;
