@@ -8,17 +8,62 @@ import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { ServicesMegaMenuDesktop } from "./ServicesMegaMenuDesktop";
 import { externalUrls, sitePaths } from "@/config/urls";
+import { readLightHeroNavFromDocument } from "@/components/layout/LightHeroNavScope";
 import { navServices, type NavMenuItem } from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
 
+/** Top-level app routes — not WordPress blog posts at `/{slug}`. */
+const ROOT_NON_BLOG_ROUTES = new Set([
+  "about",
+  "affiliate-program",
+  "book-a-call",
+  "contact",
+  "how-it-works",
+  "showcase",
+  "services",
+  "case-studies",
+  "blog",
+  "privacy-policy",
+  "terms-conditions",
+]);
+
+/**
+ * Light-hero content detail: blog listing/detail and case study detail only.
+ * Excludes `/case-studies` listing (keeps its existing navbar).
+ */
+function usesBlogStyleNav(pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) return true;
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 2 && segments[0] === "case-studies") {
+    return true;
+  }
+  if (segments.length === 1 && !ROOT_NON_BLOG_ROUTES.has(segments[0]!)) {
+    return true;
+  }
+  return false;
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [lightHeroNavPage, setLightHeroNavPage] = useState(false);
   const pathname = usePathname();
   const showSolidHeader = scrolled;
-  const isShowcaseOrBlog = pathname === "/showcase" || pathname === "/blog";
-  const useDarkTopNav = isShowcaseOrBlog && !scrolled;
+  const isShowcaseOrBlog = pathname === "/showcase" || usesBlogStyleNav(pathname);
+  const useDarkTopNav = (isShowcaseOrBlog || lightHeroNavPage) && !scrolled;
+
+  useEffect(() => {
+    const syncLightHeroNav = () => setLightHeroNavPage(readLightHeroNavFromDocument());
+    syncLightHeroNav();
+    const observer = new MutationObserver(syncLightHeroNav);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-light-hero-nav"],
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
   const desktopLinkClass = useDarkTopNav
     ? "text-[#11104C]/90 hover:text-[#11104C]"
     : "text-white/90 hover:text-white";
