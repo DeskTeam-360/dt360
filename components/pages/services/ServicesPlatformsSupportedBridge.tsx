@@ -26,7 +26,8 @@ export function ServicesPlatformsSupportedBridge({
   return (
     <div
       className={cn(
-        "relative z-20 px-5 md:px-10 xl:px-10",
+        "relative px-5 md:px-10 xl:px-10",
+        overlap === "belowChecklist" ? "z-40" : "z-20",
         overlap === "belowChecklist"
           ? "-mt-6 max-md:-mt-2 md:-mt-10 xl:-mt-[88px]"
           : "-mt-[72px] xl:-mt-[88px]",

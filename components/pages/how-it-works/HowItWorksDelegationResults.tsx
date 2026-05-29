@@ -1,7 +1,12 @@
-import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
-import { howItWorksDelegation, howItWorksTestimonials } from "@/data/howItWorks";
+import { SocialProofTestimonialCarousel } from "@/components/pages/home/SocialProofTestimonialCarousel";
+import type { SocialProofTestimonial } from "@/data/home";
+import { howItWorksDelegation } from "@/data/howItWorks";
 
-export function HowItWorksDelegationResults() {
+type Props = {
+  testimonials: SocialProofTestimonial[];
+};
+
+export function HowItWorksDelegationResults({ testimonials }: Props) {
   const { titleBefore, titleHighlight1, titleMiddle, titleHighlight2 } = howItWorksDelegation;
 
   return (
@@ -20,7 +25,9 @@ export function HowItWorksDelegationResults() {
           <span className="text-[#ef2fa9]">{titleHighlight2}</span>
         </h2>
       </div>
-      <ServicesTestimonialsCarousel items={howItWorksTestimonials} />
+      <div className="mt-10 w-full md:mt-12">
+        <SocialProofTestimonialCarousel items={testimonials} />
+      </div>
     </div>
   );
 }

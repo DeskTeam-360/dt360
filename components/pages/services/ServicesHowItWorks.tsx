@@ -131,7 +131,7 @@ export function ServicesHowItWorks({
         className={cn(
           "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 md:px-10 md:pt-8 xl:px-10 xl:pt-0",
           overlappedByTestimonialSection
-            ? "z-30 max-md:pt-6 max-md:pb-10 md:pb-16"
+            ? "z-30 max-md:pt-6 pb-0"
             : "z-[25] max-md:pt-28",
         )}
       >

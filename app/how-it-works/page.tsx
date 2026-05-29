@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HowItWorksDelegationResults } from "@/components/pages/how-it-works/HowItWorksDelegationResults";
+import { getHomeTestimonials } from "@/lib/wordpress";
 import { HowItWorksDontDo } from "@/components/pages/how-it-works/HowItWorksDontDo";
 import { HowItWorksHero } from "@/components/pages/how-it-works/HowItWorksHero";
 import { HowItWorksMeetGrid } from "@/components/pages/how-it-works/HowItWorksMeetGrid";
@@ -13,7 +14,12 @@ export const metadata: Metadata = {
   description: `${siteConfig.name} — What we do, what we don't, and how tasks get done in days—not weeks.`,
 };
 
-export default function HowItWorksPage() {
+/** ISR — testimonial carousel stays in sync with WP (same as homepage). */
+export const revalidate = 600;
+
+export default async function HowItWorksPage() {
+  const testimonials = await getHomeTestimonials();
+
   return (
     <main className="min-w-0 overflow-x-hidden">
       <HowItWorksHero />
@@ -36,7 +42,7 @@ export default function HowItWorksPage() {
         />
         <div className="relative z-10">
           <HowItWorksRealTeam />
-          <HowItWorksDelegationResults />
+          <HowItWorksDelegationResults testimonials={testimonials} />
         </div>
       </section>
       <HowItWorksReadyCta />

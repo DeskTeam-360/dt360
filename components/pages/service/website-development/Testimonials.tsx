@@ -4,7 +4,7 @@ import { SafeImage } from "@/components/shared/SafeImage";
 export function Testimonials() {
   return (
     <section
-      className="relative overflow-x-hidden overflow-y-visible max-md:overflow-x-visible bg-[linear-gradient(180deg,#f9f6ff_0%,#f9f6ff_38%,rgba(249,246,255,0.75)_52%,rgba(249,246,255,0.2)_68%,transparent_88%)] pb-10 pt-36 sm:pb-12 sm:pt-40 lg:pb-14 lg:pt-48 2xl:pb-16 2xl:pt-52"
+      className="relative overflow-x-clip bg-[linear-gradient(180deg,#f9f6ff_0%,#f9f6ff_38%,rgba(249,246,255,0.75)_52%,rgba(249,246,255,0.2)_68%,transparent_88%)] pb-10 pt-36 sm:pb-12 sm:pt-40 lg:pb-14 lg:pt-48 2xl:pb-16 2xl:pt-52"
     >
 <SafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"

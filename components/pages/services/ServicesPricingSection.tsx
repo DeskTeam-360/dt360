@@ -99,7 +99,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
       className={cn(
         "relative overflow-hidden bg-white",
         isWebDev
-          ? "z-10 isolate bg-white pb-[72px] max-md:mt-0 max-md:pt-10 md:mt-0 md:pt-0 md:pb-[88px] lg:pt-0 xl:-mt-[140px] xl:pb-[100px] xl:pt-[300px] 2xl:pt-[320px]"
+          ? "z-0 isolate bg-white pb-[72px] max-md:mt-0 max-md:pt-10 md:mt-0 md:pt-0 md:pb-[88px] lg:pt-0 xl:-mt-[140px] xl:pb-[100px] xl:pt-[300px] 2xl:pt-[320px]"
           : "z-10 isolate pb-[72px] pt-[160px] max-md:-mt-[16rem] max-md:pt-[58rem] md:-mt-[10rem] md:pb-[88px] md:pt-[420px] xl:mt-0 xl:pb-[100px] xl:pt-[200px]",
       )}
       aria-labelledby={isWebDev ? "web-design-dev-pricing-heading" : "services-pricing-heading"}

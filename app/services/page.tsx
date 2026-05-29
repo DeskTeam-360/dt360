@@ -5,8 +5,8 @@ import { ServicesFloatingFeaturesBar } from "@/components/pages/services/Service
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
-import { ServicesTestimonialsCarousel } from "@/components/pages/services/ServicesTestimonialsCarousel";
-import { servicesTestimonials } from "@/data/servicesPage";
+import { SocialProofTestimonialCarousel } from "@/components/pages/home/SocialProofTestimonialCarousel";
+import { getHomeTestimonials } from "@/lib/wordpress";
 
 /** Asset filename: `Service Box - {title}.webp` — encode for a safe URL (spaces, parentheses, etc.) */
 function serviceBoxWebpPath(serviceTitle: string) {
@@ -88,7 +88,12 @@ const SERVICE_OVERLAY_POSITION_CLASS: Partial<Record<string, string>> = {
 const OVERLAY_LAYER_CLASS =
   "pointer-events-none absolute z-0 h-[28%] min-h-[76px] w-[38%] min-w-[108px] bg-[color-mix(in_oklab,#ffffff82_24%,transparent)] backdrop-blur-[1px] xl:h-[26%] xl:w-[36%]";
 
-export default function ServicesPage() {
+/** ISR — testimonial carousel stays in sync with WP (same as homepage). */
+export const revalidate = 600;
+
+export default async function ServicesPage() {
+  const testimonials = await getHomeTestimonials();
+
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
@@ -224,7 +229,9 @@ export default function ServicesPage() {
             Real Business
           </h2>
         </div>
-        <ServicesTestimonialsCarousel items={servicesTestimonials} />
+        <div className="mt-10 w-full md:mt-12">
+          <SocialProofTestimonialCarousel items={testimonials} />
+        </div>
       </section>
 
       <ServicesHowItWorks />
