@@ -22,7 +22,7 @@ export function HaveQuestionsCTA() {
 
         <Container className="relative z-10 flex flex-col items-center gap-10 px-6 pt-20 pb-12 sm:gap-12 sm:pt-24 md:flex-row md:items-center md:justify-between md:gap-12 md:px-8 md:py-0 md:pt-28 md:pb-14 lg:px-12 lg:pt-32 lg:pb-16">
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <h2 className="type-rule-h2 mb-6 font-heading font-semibold text-white md:mb-10">
+            <h2 className="type-rule-h2 mb-6 font-heading font-semibold text-white md:mb-4">
               Have Questions?
             </h2>
             <p className="type-rule-p mb-6 max-w-[44rem] text-white/90 md:mb-8">
