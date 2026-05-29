@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LightHeroNavScope } from "@/components/layout/LightHeroNavScope";
+import { Animated404 } from "@/components/pages/not-found/Animated404";
 
 export default function NotFound() {
   return (
@@ -15,9 +16,7 @@ export default function NotFound() {
             aria-hidden
           />
           <div className="relative mx-auto max-w-[720px] text-center">
-            <p className="type-rule-h6 mb-3 font-bold uppercase tracking-widest text-[#5F69AD]">
-              404
-            </p>
+            <Animated404 />
             <h1 className="type-rule-h2 font-heading font-bold text-[#11104C]">Page not found</h1>
             <p className="type-rule-p mx-auto mt-6 max-w-md text-[#11104C]/85">
               The page you&apos;re looking for doesn&apos;t exist or may have been moved.
