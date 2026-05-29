@@ -396,4 +396,11 @@ body {
       pointer-events: none;
     }
   }
+
+  /** Blog & case study detail — WP/HTML content utility classes */
+  .dynamic-prose .videoWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
