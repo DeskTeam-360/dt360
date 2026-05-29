@@ -4,8 +4,8 @@ import { LightHeroNavScope } from "@/components/layout/LightHeroNavScope";
 export default function NotFound() {
   return (
     <LightHeroNavScope>
-      <main className="flex-grow bg-white">
-        <section className="relative overflow-hidden bg-[#C8CEFB] px-6 pb-20 pt-32 md:px-12 md:pb-28 md:pt-40">
+      <main className="flex min-h-0 flex-grow flex-col bg-white">
+        <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-[#C8CEFB] px-6 py-16 pt-28 md:px-12 md:py-20 md:pt-36">
           <div
             className="pointer-events-none absolute right-[-10%] top-[-20%] h-[min(80vw,520px)] w-[min(80vw,520px)] rounded-full opacity-40"
             style={{
