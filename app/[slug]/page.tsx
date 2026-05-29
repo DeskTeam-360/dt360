@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props) {
   return generateBlogPostMetadata(slug);
 }
 
-export default async function SingleBlogPage({ params }: Props) {
+export default async function RootBlogPostPage({ params }: Props) {
   const { slug } = await params;
   const data = await getBlogSinglePageData(slug);
 
