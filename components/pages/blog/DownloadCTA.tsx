@@ -9,6 +9,7 @@ interface DownloadCTAProps {
   buttonText?: string;
   subtext?: string;
   showSubtext?: boolean;
+  buttonHref?: string;
 }
 
 export function DownloadCTA({
@@ -17,7 +18,8 @@ export function DownloadCTA({
   description = "The exact framework I use with 400+ clients. Multi-sensory, step-by-step delegation that actually gets done right. Loom video + written outline + checklist - all in one template.",
   buttonText = "Download Free",
   subtext = "No credit card. No catch. Just the template.",
-  showSubtext = true
+  showSubtext = true,
+  buttonHref = "https://start.deskteam360.com/ultimate-task-delegation-template",
 }: DownloadCTAProps = {}) {
   return (
     <section className="w-full relative bg-white">
@@ -61,12 +63,17 @@ export function DownloadCTA({
               </p>
 
               <div className="flex flex-col xl:flex-row items-start xl:items-center gap-4 xl:gap-6">
-                <button className="bg-white text-[#11104c] px-6 py-3 md:px-8 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-gray-100 transition-colors flex-shrink-0 cursor-pointer">
+                <a
+                  href={buttonHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-[#11104c] px-6 py-3 md:px-8 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-gray-100 transition-colors flex-shrink-0 cursor-pointer"
+                >
                   {buttonText}
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">
                     <ChevronRight className="w-3 h-3 md:w-4 md:h-4 stroke-[3]" />
                   </div>
-                </button>
+                </a>
 
                 {showSubtext && (
                   <p className="text-[12px] md:text-[14px] text-white/90 leading-tight font-medium">
