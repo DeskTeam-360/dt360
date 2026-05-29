@@ -325,11 +325,18 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
 /** Case Studies list page — items shown per "Load More" click. */
 export const CASE_STUDIES_PAGE_SIZE = 9;
 
-const CASE_STUDY_POSTS_QUERY = gql`
-  query GetCaseStudyPosts($first: Int!) {
+/** WP category slugs for the Case Studies listing (Case Study + Website Case Study). */
+const CASE_STUDY_CATEGORY_SLUGS = ['case-study', 'website-case-study'] as const;
+
+const CASE_STUDY_POSTS_BY_CATEGORY_QUERY = gql`
+  query GetCaseStudyPostsByCategory($first: Int!, $categoryName: String!) {
     posts(
       first: $first
-      where: { categoryName: "case-study", status: PUBLISH, orderby: { field: DATE, order: DESC } }
+      where: {
+        categoryName: $categoryName
+        status: PUBLISH
+        orderby: { field: DATE, order: DESC }
+      }
     ) {
       nodes {
         id
@@ -358,15 +365,39 @@ const CASE_STUDY_POSTS_QUERY = gql`
   }
 `;
 
-/** All published posts in category `case-study` (WP admin: Case Study). */
+async function fetchCaseStudyPostsForCategory(
+  categorySlug: string,
+  first = 100,
+): Promise<BlogPost[]> {
+  const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
+    CASE_STUDY_POSTS_BY_CATEGORY_QUERY,
+    { first, categoryName: categorySlug },
+  );
+  return (data.posts?.nodes ?? []).map(mapCaseStudyPost);
+}
+
+function mergeCaseStudyPostsByDate(postGroups: BlogPost[][]): BlogPost[] {
+  const byId = new Map<string, BlogPost>();
+  for (const posts of postGroups) {
+    for (const post of posts) {
+      byId.set(post.id, post);
+    }
+  }
+  return Array.from(byId.values()).sort((a, b) => {
+    const aTime = a.date ? new Date(a.date).getTime() : 0;
+    const bTime = b.date ? new Date(b.date).getTime() : 0;
+    return bTime - aTime;
+  });
+}
+
+/** Published posts in `case-study` and `website-case-study` (Case Studies pages). */
 export const getAllCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
-  return fetchWordPressCached(['wp', 'case-studies'], async () => {
+  return fetchWordPressCached(['wp', 'case-studies', 'website-case-study'], async () => {
     try {
-      const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
-        CASE_STUDY_POSTS_QUERY,
-        { first: 100 },
+      const groups = await Promise.all(
+        CASE_STUDY_CATEGORY_SLUGS.map((slug) => fetchCaseStudyPostsForCategory(slug, 100)),
       );
-      return (data.posts?.nodes ?? []).map(mapCaseStudyPost);
+      return mergeCaseStudyPostsByDate(groups);
     } catch (error) {
       console.error('Error fetching case study posts:', error);
       return [];
