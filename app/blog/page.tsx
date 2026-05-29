@@ -13,12 +13,18 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const { featuredPostsMap, latestPosts, categories } = await getBlogData();
+  const { featuredPostsMap, latestPosts, categories, categoryLatestPostsMap } =
+    await getBlogData();
 
   return (
     <main className="flex-grow">
       <BlogHero />
-      <BlogListing featuredPostsMap={featuredPostsMap} latestPosts={latestPosts} categories={categories} />
+      <BlogListing
+        featuredPostsMap={featuredPostsMap}
+        latestPosts={latestPosts}
+        categoryLatestPostsMap={categoryLatestPostsMap}
+        categories={categories}
+      />
       <DownloadCTA />
       <AuthorSection />
     </main>

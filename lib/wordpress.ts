@@ -70,7 +70,12 @@ type WpPostNode = {
   categories?: { nodes?: Array<{ name?: string }> };
 };
 
-type WpCategoryNameNode = { name?: string; count?: number; posts?: { nodes?: WpPostNode[] } };
+type WpCategoryNameNode = {
+  name?: string;
+  slug?: string;
+  count?: number;
+  posts?: { nodes?: WpPostNode[] };
+};
 
 type GetAllBlogDataResponse = {
   posts?: { nodes?: WpPostNode[] };
@@ -123,6 +128,61 @@ const isCaseStudyCategory = (name: string): boolean => {
   const lower = name.toLowerCase();
   return lower.includes('case study') || lower.includes('case-study');
 };
+
+const toCategorySlug = (name: string): string =>
+  name
+    .toLowerCase()
+    .replace(/\s*&\s*/g, '-')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const BLOG_POSTS_BY_CATEGORY_QUERY = gql`
+  query GetBlogPostsByCategory($first: Int!, $categoryName: String!) {
+    posts(
+      first: $first
+      where: {
+        categoryName: $categoryName
+        status: PUBLISH
+        orderby: { field: DATE, order: DESC }
+      }
+    ) {
+      nodes {
+        id
+        slug
+        title
+        excerpt
+        content
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+        categories {
+          nodes {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function fetchBlogPostsByCategorySlug(
+  categorySlug: string,
+  first = 100,
+): Promise<BlogPost[]> {
+  const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
+    BLOG_POSTS_BY_CATEGORY_QUERY,
+    { first, categoryName: categorySlug },
+  );
+  return (data.posts?.nodes ?? []).map(mapPost);
+}
 
 
 
@@ -345,6 +405,7 @@ export const getBlogData = async () => {
       categories(first: 100) {
         nodes {
           name
+          slug
           count
           posts(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
             nodes {
@@ -396,14 +457,58 @@ export const getBlogData = async () => {
       categoryToLatestPostMap
     );
 
+    const categoryNodes =
+      data.categories?.nodes?.filter((cat) => {
+        if (!cat.name || (cat.count ?? 0) <= 0) return false;
+        const lower = cat.name.toLowerCase();
+        return (
+          !lower.includes('case study') &&
+          !lower.includes('case-study') &&
+          lower !== 'uncategorized'
+        );
+      }) ?? [];
+
+    const categoryLatestPostsMap: Record<string, BlogPost[]> = {};
+
+    await Promise.all(
+      categoryNodes.map(async (catNode) => {
+        const name = catNode.name!;
+        const slug = catNode.slug?.trim() || toCategorySlug(name);
+        const featuredId = featuredPostsMap[name]?.id;
+
+        try {
+          const posts = await fetchBlogPostsByCategorySlug(slug, 100);
+          categoryLatestPostsMap[name] = featuredId
+            ? posts.filter((post) => post.id !== featuredId)
+            : posts;
+        } catch (categoryError) {
+          console.warn(`Blog posts for category "${name}" (${slug}):`, categoryError);
+          categoryLatestPostsMap[name] = latestPosts.filter((post) => {
+            if (featuredId && post.id === featuredId) return false;
+            const cats =
+              post.categories && post.categories.length > 0
+                ? post.categories
+                : [post.category];
+            return cats.some((c) => c.toLowerCase() === name.toLowerCase());
+          });
+        }
+      }),
+    );
+
     return {
       featuredPostsMap,
       latestPosts,
       categories,
+      categoryLatestPostsMap,
     };
   } catch (error) {
     console.error('Error fetching blog data:', error);
-    return { featuredPostsMap: {}, latestPosts: [], categories: ['All Posts'] };
+    return {
+      featuredPostsMap: {},
+      latestPosts: [],
+      categories: ['All Posts'],
+      categoryLatestPostsMap: {},
+    };
   }
 };
 

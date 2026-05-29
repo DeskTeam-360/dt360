@@ -8,10 +8,16 @@ import { LatestBlogs } from "@/components/pages/blog/LatestBlogs";
 type Props = {
   featuredPostsMap: Record<string, BlogPost>;
   latestPosts: BlogPost[];
+  categoryLatestPostsMap: Record<string, BlogPost[]>;
   categories: string[];
 };
 
-export function BlogListing({ featuredPostsMap, latestPosts, categories }: Props) {
+export function BlogListing({
+  featuredPostsMap,
+  latestPosts,
+  categoryLatestPostsMap,
+  categories,
+}: Props) {
   const resolvedCategories = useMemo(
     () => (categories.length > 0 ? categories : ["All Posts"]),
     [categories],
@@ -26,10 +32,14 @@ export function BlogListing({ featuredPostsMap, latestPosts, categories }: Props
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
-      <LatestBlogs 
-        key={selectedCategory} 
-        posts={latestPosts} 
-        selectedCategory={selectedCategory} 
+      <LatestBlogs
+        key={selectedCategory}
+        posts={
+          selectedCategory === "All Posts"
+            ? latestPosts
+            : categoryLatestPostsMap[selectedCategory] ?? []
+        }
+        selectedCategory={selectedCategory}
         featuredPost={featuredPostsMap[selectedCategory]}
       />
     </>
