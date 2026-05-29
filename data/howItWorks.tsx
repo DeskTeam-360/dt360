@@ -55,6 +55,15 @@ export const howItWorksTaskSection = {
     </>
   ),
   titleHighlight: "2 Minutes",
+  video: {
+    ornamentLeftSrc: "/images/How it work - Video background left.png",
+    ornamentLeftAlt: "Design tablet and creative tools illustration",
+    ornamentRightSrc: "/images/How it work - Video background right.png",
+    ornamentRightAlt: "Developer monitor and code illustration",
+    embedSrc:
+      "https://player.vimeo.com/video/561929467?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0#t=",
+    ariaLabel: "Vimeo video player: how to submit a task in about two minutes",
+  },
   steps: [
     {
       id: "s1",
