@@ -41,7 +41,7 @@ export function CaseStudiesHero() {
         />
       </div>
 
-      <div className="relative z-10 w-full pb-[40px] pt-24 sm:pb-[60px] sm:pt-28 lg:pb-[80px] lg:pt-32 xl:pt-36 2xl:pt-40">
+      <div className="relative z-10 w-full pb-8 pt-30 sm:pb-[60px] sm:pt-28 lg:pb-[80px] lg:pt-32 xl:pt-36 2xl:pt-40">
         <Container className="max-w-[1440px] px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           <div className="mx-auto w-full max-w-full text-center">
             <h1
@@ -53,7 +53,7 @@ export function CaseStudiesHero() {
             <p className="mx-auto mt-4 w-full max-w-3xl px-1 font-heading text-[24px] font-normal leading-[1.2] text-balance text-white/95 sm:mt-5 sm:px-0 sm:text-[30px] lg:mt-6 lg:text-[36px]">
               {subtitle}
             </p>
-            <div className="mt-8 flex justify-center pb-[100px] sm:mt-10 sm:pb-10 lg:mt-12">
+            <div className="mt-8 flex justify-center sm:mt-10 lg:mt-12">
               <HeroCtaLink
                 href={ctaHref}
                 variant="primary"
@@ -66,7 +66,7 @@ export function CaseStudiesHero() {
         </Container>
 
         {/* Wave + characters — full wave visible (contain), characters overlaid */}
-        <div className="relative mt-6 mb-[100px] w-full overflow-visible sm:mb-0 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
+        <div className="relative mt-6 w-full overflow-visible sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
           <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-visible">
             <div className="relative w-full overflow-visible">
               <div className="relative w-full overflow-visible pb-[clamp(2.5rem,6vw,5rem)]">
