@@ -27,11 +27,11 @@ const hoverOverlayOuter = cn(
   "motion-reduce:opacity-0 motion-reduce:transition-opacity motion-reduce:group-hover:opacity-100",
 );
 
-/** Copy content: hover scale (transform separate from center translate). */
+/** Copy content: zoom only on fine-pointer hover; touch keeps neon border without scale. */
 const hoverOverlayInner = cn(
   "origin-center rounded-2xl bg-[#10103a] shadow-[0_0_40px_0_rgba(1,211,252,0.48)] ring-2 ring-[#01d3fc]",
   "scale-100 transition-transform duration-50 ease-out",
-  "group-hover:scale-[1.25]",
+  "[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.25]",
   "motion-reduce:scale-100 motion-reduce:group-hover:scale-100",
 );
 
