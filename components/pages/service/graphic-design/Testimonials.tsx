@@ -60,11 +60,11 @@ export function Testimonials() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(180deg,#5F69AD_0%,#FFA2DB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="type-rule-p font-montserrat !text-[32px] !font-semibold italic leading-relaxed lg:leading-[1.6]">
+            <p className="type-rule-p font-montserrat !text-[28px] !font-semibold italic leading-relaxed sm:!text-[32px] lg:leading-[1.6]">
                 “I&apos;m saving at least $20,000 monthly compared to what I was paying individual contractors - and the
                 quality and reliability is better.”
               </p>
-              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#3F4A83] lg:leading-tight pt-2">
+              <p className="type-rule-p font-montserrat !text-[22px] !font-bold text-[#3F4A83] pt-2 sm:!text-[28px] lg:leading-tight">
                 <span className="font-bold">Gaynor Meilke,</span>{" "}
                 <span className="font-medium">Charisma Ink</span>
               </p>

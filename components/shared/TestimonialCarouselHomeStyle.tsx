@@ -26,7 +26,7 @@ type Props = {
 
 function TestimonialSlideCard({ item }: { item: HomeStyleTestimonialItem }) {
   return (
-    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-14 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
+    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-20 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
       <div
         className="pointer-events-none absolute left-1/2 top-0 z-0 flex w-[120px] -translate-x-1/2 justify-center bg-white"
         aria-hidden

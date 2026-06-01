@@ -97,7 +97,7 @@ export default async function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[40px] pt-28 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[130px] pt-28 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
@@ -156,7 +156,7 @@ export default async function ServicesPage() {
 
         <div className="relative mx-auto max-w-[1440px]">
           <div className="text-center">
-            <h2 className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+            <h2 className="font-extrabold leading-tight tracking-tight text-[#101651]">
               <span className="text-[#E3058D]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
             <p className="mt-4 text-xl font-semibold text-[#1a1a1a]">
@@ -195,7 +195,7 @@ export default async function ServicesPage() {
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
-                    <h3 className="mt-6 max-w-[14ch] text-[36px] font-bold leading-tight">{service.title}</h3>
+                    <h4 className="mt-6 max-w-[14ch] font-bold leading-tight">{service.title}</h4>
                     <Link
                       href={service.href}
                       className="mt-auto w-fit pt-3 text-[18px] font-semibold transition duration-300 ease-out hover:translate-x-1"
@@ -223,7 +223,7 @@ export default async function ServicesPage() {
           aria-hidden
         />
         <div className="relative mx-auto max-w-[1440px] px-5 text-center md:px-10 xl:px-10">
-          <h2 id="services-testimonials-heading" className="text-[64px] font-extrabold leading-tight tracking-tight text-[#101651]">
+          <h2 id="services-testimonials-heading" className="font-extrabold leading-tight tracking-tight text-[#101651]">
             <span className="text-[#E3058D]">Proven Results</span>
             <br />
             Real Business

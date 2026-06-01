@@ -18,7 +18,7 @@ const includedItems = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
+    <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-6 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
       <SafeImage
         src="/images/Service - Ellipse Red.png"
         alt=""
@@ -79,7 +79,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(255,47,179,0.16),transparent_45%)]"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 max-md:pb-14 sm:pb-8 xl:!px-20 xl:pb-10">
+      <Container className="relative z-10 max-w-[1440px] !px-10 pb-6 sm:pb-8 xl:!px-20 xl:pb-10">
         <div className="grid grid-cols-1 items-start gap-x-16 gap-y-12 sm:gap-y-16 xl:grid-cols-2 xl:gap-x-28 xl:gap-y-24 2xl:gap-x-32 2xl:gap-y-28">
           <h2 className="type-rule-h2 col-span-full w-full max-w-none min-w-0 leading-tight text-white xl:max-w-2xl xl:leading-[1.02]">
             We Handle All of Your <span className="text-[#f6b22e]">Funnels Built</span> Needs

@@ -38,14 +38,14 @@ export function FAQ() {
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-45 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] max-md:-top-32 sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <SafeImage
         src="/images/Service - Graphic Design.png"
         alt=""
         width={512}
         height={512}
-        className="pointer-events-none absolute z-[2] -top-45 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] sm:-right-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
+        className="pointer-events-none absolute z-[2] -top-45 right-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] max-md:-top-32 sm:-right-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <div className="relative mx-auto w-full max-w-[620px]">

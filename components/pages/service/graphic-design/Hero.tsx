@@ -38,7 +38,7 @@ export function Hero() {
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-10 xl:!px-20">
-        <div className="grid items-center gap-8 pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
+        <div className="grid items-center gap-8 pb-8 sm:pb-8 xl:grid-cols-2 xl:gap-12 xl:pb-10 2xl:gap-16 2xl:pb-12">
           <div className="w-full min-w-0">
             <h1 className="type-rule-h1 leading-[1.03] tracking-tight text-white">
               Unlimited <span className="text-[#ef2f9e]">Graphic Design</span>

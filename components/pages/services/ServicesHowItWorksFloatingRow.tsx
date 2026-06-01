@@ -20,6 +20,10 @@ type Props = {
   extraNegativeMarginTopPx?: number;
   /** Added only to negative margin-bottom (px); does not affect margin-top */
   extraNegativeMarginBottomPx?: number;
+  /** Fixed negative margin-top on mobile only (max-width: 767px), overrides calculated overlap */
+  mobileNegativeMarginTopPx?: number;
+  /** Fixed negative margin-bottom on mobile only (max-width: 767px), overrides calculated overlap */
+  mobileNegativeMarginBottomPx?: number;
   /**
    * Below xl (&lt;1280px): no negative bottom margin — pricing stacks under cards
    * (web-design-development tablet/mobile).
@@ -33,6 +37,8 @@ export function ServicesHowItWorksFloatingRow({
   overlapFraction = DEFAULT_HOW_IT_WORKS_OVERLAP_FRACTION,
   extraNegativeMarginTopPx = 0,
   extraNegativeMarginBottomPx = 0,
+  mobileNegativeMarginTopPx,
+  mobileNegativeMarginBottomPx,
   disableOverlapBelowXl = false,
   className,
 }: Props) {
@@ -42,6 +48,7 @@ export function ServicesHowItWorksFloatingRow({
   const [overlapBottomPx, setOverlapBottomPx] = useState(0);
   /** Extra pull-up on mobile so the light section meets the cards (no white strip). */
   const [mobileExtraBottomPx, setMobileExtraBottomPx] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
     const el = measureRef.current;
@@ -53,6 +60,7 @@ export function ServicesHowItWorksFloatingRow({
       const clamped = Math.max(0, Math.min(1, overlapFraction));
       const fullPx = Math.round(h * clamped);
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      setIsMobile(isMobile);
       /** Mobile, tablet & narrow desktop (&lt;1280px): less negative top. Full desktop (xl+): unified overlap. */
       const isDesktopLayout = window.matchMedia("(min-width: 1280px)").matches;
       if (disableOverlapBelowXl && !isDesktopLayout) {
@@ -89,14 +97,24 @@ export function ServicesHowItWorksFloatingRow({
     };
   }, [overlapFraction, disableOverlapBelowXl]);
 
+  const marginTopPx =
+    isMobile && mobileNegativeMarginTopPx !== undefined
+      ? mobileNegativeMarginTopPx
+      : overlapTopPx + extraNegativeMarginTopPx;
+
+  const marginBottomPx =
+    isMobile && mobileNegativeMarginBottomPx !== undefined
+      ? mobileNegativeMarginBottomPx
+      : overlapBottomPx + extraNegativeMarginBottomPx + mobileExtraBottomPx;
+
   return (
     <div
       className={["overflow-visible", className].filter(Boolean).join(" ")}
       style={
-        overlapTopPx > 0 || overlapBottomPx > 0 || mobileExtraBottomPx > 0
+        marginTopPx > 0 || marginBottomPx > 0
           ? {
-              marginTop: -(overlapTopPx + extraNegativeMarginTopPx),
-              marginBottom: -(overlapBottomPx + extraNegativeMarginBottomPx + mobileExtraBottomPx),
+              marginTop: -marginTopPx,
+              marginBottom: -marginBottomPx,
             }
           : undefined
       }

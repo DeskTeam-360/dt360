@@ -65,21 +65,20 @@ function DotsArrow() {
 }
 
 function HowItWorksCard({ step, stepIndex }: { step: HowItWorksStep; stepIndex: number }) {
-  const halfHeightPadding = `calc(100% * ${ASSET_HEADER_H / 2} / ${ASSET_HEADER_W})`;
   const mobileMarginBelow = stepIndex < STEPS.length - 1 ? "max-md:mb-24" : "";
 
   return (
     <article
       className={`relative mx-auto flex min-w-0 flex-col self-stretch overflow-visible rounded-[24px] border border-white/[0.08] max-md:h-auto max-md:flex-none md:min-h-0 md:flex-1 md:max-w-none xl:mx-0 xl:max-w-none ${mobileMarginBelow} ${step.cardBodyClass} shadow-[0_24px_60px_-18px_rgba(0,0,0,0.55)] xl:h-full xl:flex-none`}
     >
-      <div className="relative z-10 mx-auto w-[85%] max-md:pb-1" style={{ paddingTop: halfHeightPadding }}>
+      <div className="relative z-10 mx-auto w-[85%] max-md:pb-1 max-md:pt-[45px] md:pt-[calc(100%*68/298)]">
         <Image
           src={step.headerSrc}
           alt={step.headerAlt}
           width={ASSET_HEADER_W}
           height={ASSET_HEADER_H}
-          sizes="(max-width: 1024px) 72vw, 22vw"
-          className="absolute left-0 top-0 z-20 h-auto w-full -translate-y-1/2 object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]"
+          sizes="(max-width: 767px) 250px, (max-width: 1024px) 72vw, 22vw"
+          className="absolute top-0 z-20 h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)] max-md:left-1/2 max-md:w-[280px] max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:left-0 md:w-full md:-translate-y-1/2"
         />
       </div>
       <p className="relative z-0 mx-0 mt-1 flex max-w-[28ch] flex-col justify-center overflow-visible px-5 pb-8 pt-2 text-left text-[20px] font-semibold leading-snug text-white max-md:mt-10 sm:px-7 max-md:min-h-0 max-md:flex-none md:min-h-0 md:flex-1 xl:min-h-0 xl:flex-1">
@@ -111,16 +110,16 @@ export function ServicesHowItWorks({
       {/* Navy only on top; larger pb creates runway so negative card margin does not cover heading */}
       <div
         className={cn(
-          "relative z-10 bg-[#0c1030] px-5 pb-22 max-md:pb-28 md:px-10 md:pb-30 xl:px-10 xl:pb-62",
+          "relative z-10 bg-[#0c1030] px-5 pb-140 md:px-10 md:pb-30 xl:px-10 xl:pb-62",
           overlappedByTestimonialSection
-            ? "max-md:pb-36 max-md:pt-24 pt-[150px] md:pt-[160px] xl:pt-[180px]"
+            ? "max-md:pt-24 pt-[150px] md:pt-[160px] xl:pt-[180px]"
             : "pt-[72px] md:pt-[88px] xl:pt-[100px]",
         )}
       >
         <div className="mx-auto max-w-[1440px]">
           <h2
             id="services-how-it-works-heading"
-            className="text-center text-[clamp(2.25rem,10vw,4rem)] font-extrabold leading-tight tracking-tight text-white md:text-[64px]"
+            className="text-center font-extrabold leading-tight tracking-tight text-white md:text-[64px]"
           >
             How It <span className="text-[#E3058D]">Works</span>
           </h2>
@@ -131,7 +130,7 @@ export function ServicesHowItWorks({
         className={cn(
           "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 md:px-10 md:pt-8 xl:px-10 xl:pt-0",
           overlappedByTestimonialSection
-            ? "z-30 max-md:pt-6 pb-0"
+            ? "z-30 max-md:pt-0 pb-0"
             : "z-[25] max-md:pt-28",
         )}
       >
@@ -139,6 +138,8 @@ export function ServicesHowItWorks({
           overlapFraction={cardsOverlapFraction}
           extraNegativeMarginTopPx={overlappedByTestimonialSection ? 0 : 30}
           extraNegativeMarginBottomPx={overlappedByTestimonialSection ? 0 : 30}
+          mobileNegativeMarginTopPx={overlappedByTestimonialSection ? 465 : 550}
+          mobileNegativeMarginBottomPx={overlappedByTestimonialSection ? 350 : undefined}
           disableOverlapBelowXl={overlappedByTestimonialSection}
         >
           <div className="flex flex-col items-stretch gap-0 overflow-visible drop-shadow-[0_28px_60px_-12px_rgba(0,0,0,0.45)] md:min-h-0 md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-[minmax(0,1fr)_110px_minmax(0,1fr)_110px_minmax(0,1fr)] xl:gap-0 xl:items-stretch">

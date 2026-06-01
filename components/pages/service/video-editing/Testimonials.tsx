@@ -60,11 +60,11 @@ export function Testimonials() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-[10px] rounded-2xl bg-[linear-gradient(180deg,#5F69AD_0%,#FFA2DB_100%)] px-6 py-8 text-white sm:px-8 sm:py-10 lg:px-[50px] lg:py-[40px]">
-              <p className="type-rule-p font-montserrat !text-[32px] !font-semibold italic leading-relaxed lg:leading-[1.6]">
+            <p className="type-rule-p font-montserrat !text-[28px] !font-semibold italic leading-relaxed sm:!text-[32px] lg:leading-[1.6]">
                 “DeskTeam360 takes our webinar recordings and turns them into YouTube videos, social clips, and ad
                 creatives. What used to take me 8 hours now takes 15 minutes to brief.”
               </p>
-              <p className="type-rule-p font-montserrat !text-[28px] !font-bold text-[#3F4A83] lg:leading-tight pt-2">
+              <p className="type-rule-p font-montserrat !text-[22px] !font-bold text-[#3F4A83] pt-2 sm:!text-[28px] lg:leading-tight">
                 Multiple DeskTeam360 clients
               </p>
             </div>
