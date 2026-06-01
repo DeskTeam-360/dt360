@@ -55,11 +55,11 @@ export function BlogHero() {
         </div>
 
         {/* Content */}
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative pt-32 md:pt-[240px] pb-32">
+        <div className="relative mx-auto max-w-[1440px] px-6 pb-32 pt-30 md:pt-[240px] lg:px-12">
           <div className="flex justify-end">
             <div className="w-full">
               <h1
-                className="font-bold text-right font-heading mb-12"
+                className="mb-4 font-bold text-right font-heading md:mb-12"
                 style={{
                   fontSize: 'clamp(36px, 8vw, 63px)',
                   lineHeight: '1.2',
@@ -77,7 +77,7 @@ export function BlogHero() {
                 The DeskTeam360 Blog
               </h1>
 
-              <div className="bg-white/44 backdrop-blur-md border-[3px] border-white rounded-[30px] p-8 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.1)] w-fit max-w-[650px] ml-auto">
+              <div className="ml-auto w-fit max-w-[650px] rounded-[30px] border-[3px] border-white bg-white/44 p-8 shadow-[0_10px_30px_rgba(0,0,0,0.1)] backdrop-blur-md max-md:mt-28 md:mt-0 md:p-10">
                 <p className="mb-6 text-left font-sans text-[20px] font-semibold leading-[1.4] text-[#11104c] max-md:text-pretty max-md:text-balance md:text-[24px] md:leading-[36px]">
                   <span className="md:hidden">
                     Real talk about delegation, outsourcing, and growing your business without working
