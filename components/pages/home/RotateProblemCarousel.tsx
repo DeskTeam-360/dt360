@@ -105,7 +105,11 @@ export function RotateProblemCarousel() {
                       />
                     </span>
                     <span
-                      className="relative z-[2] flex h-full w-full max-h-full flex-col items-start justify-start gap-6 overflow-y-auto py-7 pl-5 pr-4 text-[16px] leading-[26px] [transform:translate3d(0,0,0.1px)] antialiased sm:w-[344px] sm:gap-12 sm:py-12 sm:pl-8 sm:pr-5 sm:text-[18px] sm:leading-[30px] lg:gap-16 lg:py-16 lg:pl-[42px] lg:pr-[22px]"
+                      className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[82%] bg-gradient-to-r from-black/40 to-transparent sm:w-[400px] lg:w-[460px]"
+                      aria-hidden
+                    />
+                    <span
+                      className="relative z-[2] flex h-full w-[70%] max-h-full flex-col items-start justify-start gap-6 overflow-y-auto py-7 pl-5 pr-4 text-[16px] leading-[26px] [transform:translate3d(0,0,0.1px)] antialiased sm:w-[344px] sm:gap-12 sm:py-12 sm:pl-8 sm:pr-5 sm:text-[18px] sm:leading-[30px] lg:gap-16 lg:py-16 lg:pl-[42px] lg:pr-[22px]"
                       aria-hidden={!isCenter}
                     >
                       <span className="font-[var(--font-poppins)] text-[28px] font-semibold leading-[32px] tracking-tight text-white sm:text-[40px] sm:leading-[44px] lg:text-[48px] lg:leading-[52px]">

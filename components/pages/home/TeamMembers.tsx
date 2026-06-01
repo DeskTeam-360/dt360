@@ -243,7 +243,7 @@ export function TeamMembers() {
   return (
     <section
       id="team"
-      className="overflow-x-hidden bg-white py-16 sm:py-20 lg:py-24 mt-[-2px]"
+      className="overflow-x-hidden bg-white pt-10 pb-16 sm:py-20 lg:py-24 mt-[-2px]"
       aria-labelledby="team-heading"
     >
       <Container className="max-w-7xl">
