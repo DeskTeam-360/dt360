@@ -47,7 +47,7 @@ export function RotateProblemCarousel() {
       <Container className="relative z-10 max-w-7xl px-4 py-0 sm:px-6">
         <div className="mx-auto flex w-full max-w-[min(100%,1100px)] flex-col items-center">
           <div
-            className="relative mx-auto h-[480px] w-full max-w-[calc(100vw-2rem)] shrink-0 sm:h-[580px] sm:w-[500px] lg:h-[688px] lg:w-[611px]"
+            className="relative mx-auto h-[430px] w-full max-w-[calc(100vw-2rem)] shrink-0 sm:h-[580px] sm:w-[500px] lg:h-[688px] lg:w-[611px]"
             style={{ perspective: "1400px" }}
           >
             <div
@@ -105,13 +105,17 @@ export function RotateProblemCarousel() {
                       />
                     </span>
                     <span
-                      className="relative z-[2] flex h-full w-full max-h-full flex-col items-start justify-start gap-8 overflow-y-auto py-10 pl-6 pr-4 text-[18px] leading-[30px] [transform:translate3d(0,0,0.1px)] antialiased sm:w-[344px] sm:gap-12 sm:py-12 sm:pl-8 sm:pr-5 lg:gap-16 lg:py-16 lg:pl-[42px] lg:pr-[22px]"
+                      className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[82%] bg-gradient-to-r from-black/40 to-transparent sm:w-[400px] lg:w-[460px]"
+                      aria-hidden
+                    />
+                    <span
+                      className="relative z-[2] flex h-full w-[70%] max-h-full flex-col items-start justify-start gap-6 overflow-y-auto py-7 pl-5 pr-4 text-[16px] leading-[26px] [transform:translate3d(0,0,0.1px)] antialiased sm:w-[344px] sm:gap-12 sm:py-12 sm:pl-8 sm:pr-5 sm:text-[18px] sm:leading-[30px] lg:gap-16 lg:py-16 lg:pl-[42px] lg:pr-[22px]"
                       aria-hidden={!isCenter}
                     >
-                      <span className="font-[var(--font-poppins)] text-[32px] font-semibold leading-[36px] tracking-tight text-white sm:text-[40px] sm:leading-[44px] lg:text-[48px] lg:leading-[52px]">
+                      <span className="font-[var(--font-poppins)] text-[28px] font-semibold leading-[32px] tracking-tight text-white sm:text-[40px] sm:leading-[44px] lg:text-[48px] lg:leading-[52px]">
                         {card.title}
                       </span>
-                      <span className="text-pretty text-[18px] font-normal leading-[30px] text-white">
+                      <span className="text-pretty text-[16px] font-normal leading-[26px] text-white sm:text-[18px] sm:leading-[30px]">
                         {card.description}
                       </span>
                     </span>
