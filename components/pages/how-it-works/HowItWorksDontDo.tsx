@@ -12,11 +12,7 @@ export function HowItWorksDontDo() {
       aria-labelledby="how-it-works-dont-heading"
     >
       <div
-        className="relative -mt-[2.5rem] overflow-hidden bg-gradient-to-b from-[#231d62] via-[#181547] to-[#0f0c32] pt-14 shadow-[0_-12px_40px_-28px_rgba(15,12,42,0.35)] sm:-mt-[2.5rem] sm:pt-[3.25rem] md:-mt-[3.75rem] md:pt-[3.75rem] lg:-mt-16 lg:pt-20"
-        style={{
-          borderTopLeftRadius: "100% 20rem",
-          borderTopRightRadius: "100% 20rem",
-        }}
+        className="relative -mt-[2.5rem] overflow-hidden bg-gradient-to-b from-[#231d62] via-[#181547] to-[#0f0c32] pt-14 shadow-[0_-12px_40px_-28px_rgba(15,12,42,0.35)] max-md:[border-top-left-radius:100%_5rem] max-md:[border-top-right-radius:100%_5rem] sm:-mt-[2.5rem] sm:pt-[3.25rem] md:-mt-[3.75rem] md:pt-[3.75rem] md:[border-top-left-radius:100%_20rem] md:[border-top-right-radius:100%_20rem] lg:-mt-16 lg:pt-20"
       >
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(129,106,246,0.22)_0%,transparent_55%),radial-gradient(ellipse_50%_40%_at_100%_70%,rgba(236,72,153,0.12)_0%,transparent_50%)]"

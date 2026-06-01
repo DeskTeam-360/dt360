@@ -15,7 +15,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#11104C] text-white">
+    <footer className="relative z-30 -mt-1 bg-[#11104C] text-white">
       <Container className="relative max-w-7xl pb-0 pt-16 sm:pb-0 sm:pt-20 lg:pb-0 lg:pt-24">
         <FooterScrollTop />
 
