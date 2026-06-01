@@ -12,7 +12,7 @@ export function FAQAccordionList({ items }: Props) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <div className="mt-24 space-y-3 sm:mt-28">
+    <div className="mt-8 space-y-3 sm:mt-28">
       {items.map((item) => {
         const isOpen = openId === item.id;
         return (

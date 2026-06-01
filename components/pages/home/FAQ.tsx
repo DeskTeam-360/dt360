@@ -31,18 +31,18 @@ export function FAQ() {
 
       <Container className="relative z-[1] max-w-7xl">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div className="order-2 lg:order-1">
+          <div className="order-1">
             <Image
               src="/images/home-faq-imageleft1.png"
               alt="FAQ illustration with design and development tools."
               width={900}
               height={980}
-              className="h-auto w-full max-w-full lg:max-w-[34rem]"
-              sizes="(max-width: 1024px) 90vw, 560px"
+              className="h-[100vw] w-full max-w-full object-contain object-center lg:h-auto lg:max-w-[34rem]"
+              sizes="(max-width: 1023px) 100vw, 560px"
             />
           </div>
 
-          <div className="order-1 lg:order-2">
+          <div className="order-2">
             <h2 className="text-balance text-white">
               <span>{headingStart} </span>
               <span className="text-[#E3058D]">{headingHighlight}</span>

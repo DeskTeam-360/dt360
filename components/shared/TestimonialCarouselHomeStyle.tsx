@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SafeImage } from "@/components/shared/SafeImage";
 import {
   useCallback,
@@ -26,7 +27,7 @@ type Props = {
 
 function TestimonialSlideCard({ item }: { item: HomeStyleTestimonialItem }) {
   return (
-    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-20 shadow-sm sm:px-8 sm:pb-10 sm:pt-16">
+    <div className="relative h-full overflow-hidden rounded-[2.5rem] bg-[#EFEFEF] px-6 pb-8 pt-16 shadow-sm sm:px-8 sm:pb-10">
       <div
         className="pointer-events-none absolute left-1/2 top-0 z-0 flex w-[120px] -translate-x-1/2 justify-center bg-white"
         aria-hidden
@@ -104,6 +105,7 @@ export function TestimonialCarouselHomeStyle({ items }: Props) {
   );
 
   const viewportRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
   const [wideMetrics, setWideMetrics] = useState<{ slideW: number; gapPx: number } | null>(null);
 
   useLayoutEffect(() => {
@@ -214,7 +216,23 @@ export function TestimonialCarouselHomeStyle({ items }: Props) {
   return (
     <div className="mt-12 sm:mt-14 lg:mt-16">
       <div className="w-full px-0 min-[1680px]:px-8 min-[1800px]:px-12">
-        <div ref={viewportRef} className="relative w-full overflow-hidden">
+        <div
+          ref={viewportRef}
+          className="relative w-full touch-pan-y overflow-hidden"
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(e) => {
+            const start = touchStartX.current;
+            touchStartX.current = null;
+            if (start == null || count <= 1) return;
+            const end = e.changedTouches[0]?.clientX;
+            if (end == null) return;
+            const dx = end - start;
+            if (dx < -48) goNext();
+            else if (dx > 48) goPrev();
+          }}
+        >
           <div
             data-carousel-track
             className={cn(
@@ -248,9 +266,7 @@ export function TestimonialCarouselHomeStyle({ items }: Props) {
           )}
           aria-label="Previous testimonial"
         >
-          <span className="text-lg font-semibold" aria-hidden>
-            &lsaquo;
-          </span>
+          <ChevronLeft className="size-8 shrink-0" strokeWidth={2.5} aria-hidden />
         </button>
         <button
           type="button"
@@ -261,9 +277,7 @@ export function TestimonialCarouselHomeStyle({ items }: Props) {
           )}
           aria-label="Next testimonial"
         >
-          <span className="text-lg font-semibold" aria-hidden>
-            &rsaquo;
-          </span>
+          <ChevronRight className="size-8 shrink-0" strokeWidth={2.5} aria-hidden />
         </button>
       </div>
     </div>

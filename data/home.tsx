@@ -260,9 +260,10 @@ export type SocialProofTestimonial = {
 };
 
 export type SocialProofSection = {
-  headlineLine1: string;
-  headlineLine2: string;
-  headlineHighlight: string;
+  /** Navy heading (single row). */
+  headlineLine: string;
+  /** Pink accent line (single row). */
+  headlineAccentLine: string;
   imageSrc: string;
   imageAlt: string;
   testimonials: SocialProofTestimonial[];
@@ -369,9 +370,8 @@ export const howItWorksSection: HowItWorksSection = {
 };
 
 export const socialProofSection: SocialProofSection = {
-  headlineLine1: "They Tried Freelancers, Agencies, and Upwork First.",
-  headlineLine2: "Then They",
-  headlineHighlight: "Found Us",
+  headlineLine: "They Tried Freelancers, Agencies, and Upwork First.",
+  headlineAccentLine: "Then They Found Us",
   imageSrc: "/images/home-SocialProofTestimonials-ImageMain-2.png",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
