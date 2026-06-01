@@ -42,11 +42,14 @@ export function HowItWorksRealTeam() {
   const { titleLine1, titleLine2, titleLine3, quote, bullets, photoSrc, photoAlt } = howItWorksRealTeam;
 
   return (
-    <div className="bg-transparent pb-0 pt-20 lg:pt-28">
+    <div className="bg-transparent pb-0 pt-8 lg:pt-28">
       <Container className="max-w-[1440px] lg:px-10">
         <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-16">
           <div>
-            <h2 id="how-it-works-real-team-heading" className="tracking-tight">
+            <h2
+              id="how-it-works-real-team-heading"
+              className="tracking-tight text-center lg:text-left"
+            >
               <span className="block type-rule-h2 text-[#101651]">{titleLine1}</span>
               <span className="block type-rule-h2 text-[#7547C5]">{titleLine2}</span>
               <span className="block type-rule-h2 text-[#E3058D]">{titleLine3}</span>

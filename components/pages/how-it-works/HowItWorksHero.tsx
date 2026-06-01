@@ -1,15 +1,14 @@
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { HowItWorksTaskVideo } from "@/components/pages/how-it-works/HowItWorksTaskVideo";
-import { howItWorksHero, howItWorksTaskSection } from "@/data/howItWorks";
+import { howItWorksHero } from "@/data/howItWorks";
 
 export function HowItWorksHero() {
   const { title, subtitle, paragraphs, heroImageSrc, heroImageAlt } = howItWorksHero;
-  const { titleBefore, titleHighlight } = howItWorksTaskSection;
 
   return (
     <section
-      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-10 pt-[100px] md:pb-[22rem] lg:px-[40px] lg:pb-[600px] lg:pt-[120px]"
+      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-[340px] pt-30 md:pb-[22rem] lg:px-[40px] lg:pb-[600px]"
       aria-labelledby="how-it-works-hero-heading"
     >
       {/* Mobile — pink circle atas, cyan circle bawah */}
@@ -35,7 +34,7 @@ export function HowItWorksHero() {
       />
       <Container className="relative z-10 max-w-[1440px] lg:px-10">
         <div className="grid items-center gap-[80px] lg:grid-cols-[minmax(0,60%)_minmax(0,40%)]">
-          <div>
+          <div className="order-2 lg:order-1">
             <h1 id="how-it-works-hero-heading" className="type-rule-h1 text-balance font-bold tracking-tight text-white">
               {title}
             </h1>
@@ -46,7 +45,7 @@ export function HowItWorksHero() {
               ))}
             </div>
           </div>
-          <div className="relative mx-auto flex w-full justify-center">
+          <div className="relative order-1 mx-auto flex w-full justify-center lg:order-2">
             <SafeImage
               src={heroImageSrc}
               alt={heroImageAlt}
@@ -75,15 +74,8 @@ export function HowItWorksHero() {
         </div>
       </Container>
 
-      <Container className="relative z-20 mt-[calc(var(--spacing)*20)] max-w-[1440px] md:mt-[calc(var(--spacing)*42)] lg:mt-[calc(var(--spacing)*55)] lg:px-10">
+      <Container className="relative z-20 mt-[calc(var(--spacing)*20)] max-w-[1440px] pb-8 md:mt-[calc(var(--spacing)*42)] md:pb-10 lg:mt-[calc(var(--spacing)*55)] lg:pb-12 lg:px-10">
         <HowItWorksTaskVideo />
-        <h2
-          id="how-it-works-task-heading"
-          className="type-rule-h2 mt-[calc(var(--spacing)*8)] text-center font-semibold tracking-tight text-white md:hidden"
-        >
-          {titleBefore}
-          <span className="text-[#f336b6]">{titleHighlight}</span>
-        </h2>
       </Container>
     </section>
   );

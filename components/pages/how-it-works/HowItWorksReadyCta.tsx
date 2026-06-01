@@ -17,7 +17,7 @@ export function HowItWorksReadyCta() {
     >
       <Container className="relative max-w-[1440px] lg:px-10">
         <div className="flex w-full flex-col lg:grid lg:min-h-[min(440px,48vh)] lg:grid-cols-[minmax(0,60%)_minmax(0,40%)] lg:items-stretch">
-          <div className="order-1 flex w-full flex-col justify-center px-1 pt-5 pb-0 sm:pt-6 sm:pb-0 lg:order-1 lg:w-auto lg:max-w-none lg:flex-none lg:pt-8 lg:pb-0 lg:pr-8 xl:pt-10 xl:pb-0">
+          <div className="order-1 flex w-full flex-col justify-center px-1 pt-16 pb-0 sm:pt-6 sm:pb-0 lg:order-1 lg:w-auto lg:max-w-none lg:flex-none lg:pt-8 lg:pb-0 lg:pr-8 xl:pt-10 xl:pb-0">
             <h2 id="how-it-works-ready-heading" className="type-rule-h2 tracking-tight text-white">
               {title}
             </h2>
@@ -26,7 +26,6 @@ export function HowItWorksReadyCta() {
               <HeroCtaLink
                 href={primaryCta.href}
                 variant="secondary"
-                showChevron={false}
                 className="focus-visible:ring-offset-[#3b1f6b]"
               >
                 {primaryCta.label}
@@ -47,7 +46,7 @@ export function HowItWorksReadyCta() {
                 alt={imageAlt}
                 width={800}
                 height={980}
-                className="h-auto w-full max-h-[560px] object-contain object-bottom sm:max-h-[620px] lg:max-h-[min(92vh,840px)]"
+                className="h-auto w-full max-h-[560px] object-contain object-bottom sm:max-h-[620px] lg:max-h-[min(101.2vh,924px)]"
                 sizes="(max-width:1024px) 100vw, 40vw"
                 priority={false}
               />

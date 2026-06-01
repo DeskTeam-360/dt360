@@ -13,22 +13,20 @@ export function HowItWorksTaskSteps() {
 
   return (
     <section
-      className="relative z-10 bg-white pb-20 pt-0 max-md:bg-transparent md:pt-6 lg:pb-28 lg:pt-10"
-      aria-labelledby="how-it-works-task-steps-heading"
+      className="relative z-10 bg-transparent pb-8 pt-0 md:pb-28 md:pt-6 lg:pb-28 lg:pt-10"
+      aria-labelledby="how-it-works-task-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 hidden h-40 bg-gradient-to-b from-white/5 to-transparent md:block"
-        aria-hidden
-      />
-      <Container className="relative z-20 max-w-[1440px] md:mt-[calc(calc(var(--spacing)*80)*-1)] lg:-mt-[calc(var(--spacing)*140)] lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
-        <h2
-          id="how-it-works-task-steps-heading"
-          className="type-rule-h2 hidden text-center font-semibold tracking-tight text-white md:block md:mt-[calc(var(--spacing)*6)] lg:mt-[calc(var(--spacing)*16)]"
-        >
-          {titleBefore}
-          <span className="text-[#f336b6]">{titleHighlight}</span>
-        </h2>
-        <div className="relative grid grid-cols-1 gap-6 max-md:-mx-4 max-md:bg-white max-md:px-4 max-md:py-8 sm:max-md:-mx-6 sm:max-md:px-6 md:mt-16 md:mx-0 md:bg-transparent md:px-0 md:py-0 md:grid-cols-1 lg:mt-12 lg:grid-cols-3 lg:gap-8">
+      <Container className="relative z-20 flex max-w-[1440px] flex-col gap-10 -mt-[300px] md:-mt-[calc(calc(var(--spacing)*80)*-1)] md:gap-12 lg:-mt-[calc(var(--spacing)*140)] lg:mx-0 lg:max-w-none lg:gap-14 lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
+        <div className="relative z-30 max-md:bg-[#02063B] max-md:px-4 max-md:pb-2 max-md:pt-0 md:contents">
+          <h2
+            id="how-it-works-task-heading"
+            className="type-rule-h2 text-center font-semibold tracking-tight text-white max-md:-mt-2 md:mt-[calc(var(--spacing)*6)] lg:mt-[calc(var(--spacing)*16)]"
+          >
+            {titleBefore}
+            <span className="text-[#f336b6]">{titleHighlight}</span>
+          </h2>
+        </div>
+        <div className="relative z-10 grid grid-cols-1 gap-6 max-md:-mx-4 max-md:px-4 max-md:pb-8 max-md:pt-0 sm:max-md:-mx-6 sm:max-md:px-6 md:mt-16 md:mx-0 md:px-0 md:py-0 md:grid-cols-1 lg:mt-12 lg:grid-cols-3 lg:gap-8">
           {steps.map((step, i) => {
             const iconSrc = STEP_ICON_SRCS[i] ?? STEP_ICON_SRCS[2];
             return (

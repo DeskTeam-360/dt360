@@ -8,7 +8,7 @@ export function HowItWorksMeetGrid() {
 
   return (
     <section
-      className="relative z-0 overflow-hidden bg-[#fff] pb-54 pt-20 md:px-0 md:py-0 md:pb-[13em] lg:pb-68 lg:pt-[220px]"
+      className="relative z-0 overflow-hidden bg-[#fff] pb-54 pt-8 md:px-0 md:py-0 md:pb-[13em] lg:pb-68 lg:pt-[220px]"
       aria-labelledby="how-it-works-meet-heading"
     >
       {/* Mobile / tablet — pink kanan-atas, cyan kiri-bawah */}
@@ -75,7 +75,7 @@ export function HowItWorksMeetGrid() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 pt-12 sm:grid-cols-2 sm:pt-14 md:pt-16 lg:grid-cols-3 lg:gap-8 lg:pt-20">
+        <div className="mt-0 grid grid-cols-1 gap-6 pt-8 sm:grid-cols-2 sm:pt-14 md:mt-14 md:pt-16 lg:grid-cols-3 lg:gap-8 lg:pt-20">
           {cards.map((card) => {
             const wideIconCard = card.id === "crm" || card.id === "email";
             return (

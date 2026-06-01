@@ -11,7 +11,7 @@ export function HowItWorksDelegationResults({ testimonials }: Props) {
 
   return (
     <div
-      className="relative overflow-x-hidden bg-transparent pb-[15rem] pt-16 md:pt-20 lg:pt-24"
+      className="relative overflow-x-hidden bg-transparent pb-20 pt-16 md:pb-[15rem] md:pt-20 lg:pt-24"
       aria-labelledby="how-it-works-delegation-heading"
     >
       <div className="relative mx-auto w-full max-w-full px-5 text-center md:max-w-[80%] md:px-10 lg:max-w-[55%] lg:px-10">
