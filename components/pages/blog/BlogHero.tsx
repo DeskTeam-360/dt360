@@ -17,7 +17,7 @@ export function BlogHero() {
             src="/images/blog/blog-hero-bg-jeremy-work.png"
             alt="Hero Background"
             fill
-            className="object-cover object-[center_top]"
+            className="object-cover object-[20%_top] md:object-[center_top]"
             priority
           />
         </div>
@@ -78,12 +78,23 @@ export function BlogHero() {
               </h1>
 
               <div className="bg-white/44 backdrop-blur-md border-[3px] border-white rounded-[30px] p-8 md:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.1)] w-fit max-w-[650px] ml-auto">
-                <p className="text-[20px] md:text-[24px] leading-[1.4] md:leading-[36px] text-[#11104c] font-semibold mb-6 text-left font-sans">
-                  Real talk about delegation, outsourcing,<br />
-                  and growing your business without<br />
-                  working 80-hour weeks. I spent 12 years<br />
-                  and over $1 million learning what works.<br />
-                  These are the lessons.
+                <p className="mb-6 text-left font-sans text-[20px] font-semibold leading-[1.4] text-[#11104c] max-md:text-pretty max-md:text-balance md:text-[24px] md:leading-[36px]">
+                  <span className="md:hidden">
+                    Real talk about delegation, outsourcing, and growing your business without working
+                    80-hour weeks. I spent 12 years and over $1 million learning what works. These are the
+                    lessons.
+                  </span>
+                  <span className="hidden md:block">
+                    Real talk about delegation, outsourcing,
+                    <br />
+                    and growing your business without
+                    <br />
+                    working 80-hour weeks. I spent 12 years
+                    <br />
+                    and over $1 million learning what works.
+                    <br />
+                    These are the lessons.
+                  </span>
                 </p>
                 <p className="text-[22px] md:text-[26px] leading-[1.5] text-[#e3058d] font-semibold italic text-left font-heading">
                   Jeremy Kenerson, Founder

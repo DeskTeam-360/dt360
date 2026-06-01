@@ -31,7 +31,7 @@ export function ShowcaseHero({
   return (
     <section
       id="showcase-hero"
-      className="relative min-h-screen overflow-x-clip overflow-y-visible bg-white text-[#11104C]"
+      className="relative min-h-0 overflow-x-clip overflow-y-visible bg-white text-[#11104C] lg:min-h-screen"
       aria-labelledby="showcase-hero-heading"
     >
       {/* Radial washes */}
@@ -41,11 +41,11 @@ export function ShowcaseHero({
       </div>
 
       {/* 1440px design frame */}
-      <div className="relative z-0 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center px-4 pt-[100px] pb-0 sm:px-8 lg:px-12 xl:px-14 min-[1440px]:px-20">
+      <div className="relative z-0 mx-auto flex w-full max-w-[1440px] flex-col items-center justify-center px-5 pb-0 pt-30 sm:px-8 sm:pt-28 lg:min-h-screen lg:px-12 lg:pt-32 xl:px-14 min-[1440px]:px-20">
 
         {/* Side image */}
         <div
-          className="pointer-events-none absolute z-[1] left-[-12%] top-[6%] w-[min(42vw,22rem)] sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
+          className="pointer-events-none absolute z-[1] left-[-12%] top-[10%] w-[min(42vw,22rem)] opacity-40 sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
         >
           <SafeImage
@@ -57,7 +57,7 @@ export function ShowcaseHero({
           />
         </div>
         <div
-          className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
+          className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] opacity-40 sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
           aria-hidden
         >
           <SafeImage
@@ -70,17 +70,17 @@ export function ShowcaseHero({
         </div>
 
         {/* Text content */}
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center py-12 text-center">
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center py-8 text-center sm:py-12">
           <h1 id="showcase-hero-heading" className="type-rule-h1 text-balance text-[#11104C]">
             <span className="block tracking-tight">{titleLine1}</span>
             <span className="mt-2 block tracking-tight lg:mt-3">{titleLine2}</span>
           </h1>
-          <p className="type-rule-p mx-auto mt-10 w-full max-w-[590px] text-pretty text-[#11104C]/90">
+          <p className="type-rule-p mx-auto mt-6 w-full max-w-[590px] text-pretty text-[#11104C]/90 sm:mt-10">
             {description}
           </p>
 
           {/* Filter buttons */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -100,7 +100,7 @@ export function ShowcaseHero({
         </div>
 
         {/* Showcase carousel */}
-        <div className="relative z-10 w-full pb-16">
+        <div className="relative z-10 w-full pb-8 sm:pb-16">
           <ShowcaseCarousel items={filteredItems} />
         </div>
       </div>
