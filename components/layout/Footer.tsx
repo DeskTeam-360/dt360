@@ -22,7 +22,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 xl:gap-14">
           <div className="sm:col-span-2 lg:col-span-1">
             <DeskTeamLogo variant="footer" />
-            <h4 className="mt-12 w-full font-normal text-white">
+            <h4 className="mt-12 w-full font-[var(--font-poppins)] text-[30px] font-normal leading-[1.22] text-white lg:text-[36px]">
               Stop Outsourcing
               <br />
               <span className="tracking-[0.05em]">Start Insourcing</span>

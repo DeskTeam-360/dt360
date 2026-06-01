@@ -9,7 +9,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="relative isolate overflow-hidden bg-[#11104C] py-20 sm:py-24 lg:py-[122px]"
+      className="relative isolate overflow-hidden bg-[#11104C] pt-20 pb-8 sm:py-24 lg:py-[122px]"
       aria-label="Frequently asked questions"
     >
       <div

@@ -17,7 +17,7 @@ export function LastCTA() {
   } = lastCtaContent;
 
   return (
-    <section id="last-cta" className="relative isolate overflow-visible bg-white pt-20 pb-0">
+    <section id="last-cta" className="relative isolate overflow-visible bg-white pt-8 pb-0 sm:pt-20">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <div
           className="absolute right-0 top-0 h-[1411px] w-[1411px] translate-x-[38%] -translate-y-[75%]"
