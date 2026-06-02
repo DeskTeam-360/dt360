@@ -17,8 +17,13 @@ export function ContactOfficeHours() {
       />
       <div className="relative z-20 grid items-stretch gap-8 py-10 [padding-inline:calc(var(--spacing)*10)] md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-10 md:py-12 md:[padding-inline:calc(var(--spacing)*20)] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.4fr)] lg:gap-10">
         <h2 className="font-[var(--font-poppins)] text-[40px] font-bold leading-tight text-[#11104C] sm:text-[48px] md:self-center">
-          <span className="block">{titleLine1}</span>
-          <span className="block">{titleLine2}</span>
+          <span className="lg:hidden">
+            {titleLine1} {titleLine2}
+          </span>
+          <span className="hidden lg:block">
+            <span className="block">{titleLine1}</span>
+            <span className="block">{titleLine2}</span>
+          </span>
         </h2>
 
         <div className="hidden w-px shrink-0 self-stretch bg-[#D1D5DB] lg:block" aria-hidden />

@@ -63,7 +63,7 @@ export function ContactMain() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-[10em] max-w-[1000px] overflow-visible">
+        <div className="relative mx-auto mt-12 max-w-[1000px] overflow-visible md:mt-16 lg:mt-[10em]">
           <SafeImage
             src={contactAssets.ornament}
             alt=""
