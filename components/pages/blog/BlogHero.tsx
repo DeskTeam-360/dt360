@@ -17,7 +17,7 @@ export function BlogHero() {
             src="/images/blog/blog-hero-bg-jeremy-work.png"
             alt="Hero Background"
             fill
-            className="object-cover object-[20%_top] md:object-[center_top]"
+            className="object-cover object-bottom"
             priority
           />
         </div>

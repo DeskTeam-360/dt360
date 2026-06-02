@@ -11,7 +11,7 @@ export default async function ShowcasePage() {
   const { allItems, categories, itemsByCategory } = await getShowcaseData();
 
   return (
-    <main className="flex flex-col overflow-x-clip bg-white">
+    <main className="flex flex-col bg-white">
       <ShowcaseContent
         categories={categories}
         itemsByCategory={itemsByCategory}

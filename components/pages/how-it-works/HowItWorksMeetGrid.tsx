@@ -83,16 +83,18 @@ export function HowItWorksMeetGrid() {
               key={card.id}
               className="relative flex min-h-[280px] flex-col rounded-[30px] border-[5px] border-white bg-white/60 p-7 shadow-[0_16px_40px_-24px_rgba(16,22,81,0.35)]"
             >
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="type-rule-h5 text-balance text-left text-black">
+              <div className="flex items-center justify-between gap-4 md:items-start">
+                <h3 className="type-rule-h5 min-w-0 flex-1 text-balance text-left text-black">
                   {avoidOrphansInPhrase(card.title, {
                     tieCount: card.title.split(/\s+/).length >= 7 ? 3 : 2,
                   })}
                 </h3>
                 <div
                   className={cn(
-                    "flex shrink-0 items-center justify-center",
-                    wideIconCard ? "w-[70px] self-stretch" : "h-[70px] w-[70px]",
+                    "flex shrink-0 justify-center",
+                    wideIconCard
+                      ? "w-[70px] items-center self-stretch md:h-[70px] md:items-start md:self-auto"
+                      : "h-[70px] w-[70px] items-center md:items-start",
                   )}
                 >
                   <SafeImage
@@ -101,8 +103,8 @@ export function HowItWorksMeetGrid() {
                     width={70}
                     height={wideIconCard ? 50 : 70}
                     className={cn(
-                      "object-contain",
-                      wideIconCard ? "h-auto w-full max-h-full max-w-[70px]" : "h-[70px] w-[70px]",
+                      "object-contain md:object-top",
+                      wideIconCard ? "h-auto w-full max-h-full max-w-[70px] md:max-h-[50px]" : "h-[70px] w-[70px]",
                     )}
                   />
                 </div>

@@ -2,13 +2,14 @@ import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { HowItWorksTaskVideo } from "@/components/pages/how-it-works/HowItWorksTaskVideo";
 import { howItWorksHero } from "@/data/howItWorks";
+import { avoidOrphansInPhrase } from "@/lib/utils";
 
 export function HowItWorksHero() {
   const { title, subtitle, paragraphs, heroImageSrc, heroImageAlt } = howItWorksHero;
 
   return (
     <section
-      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-[340px] pt-30 md:pb-[22rem] lg:px-[40px] lg:pb-[600px]"
+      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-[280px] pt-30 md:pb-[20rem] lg:px-[40px] lg:pb-[600px]"
       aria-labelledby="how-it-works-hero-heading"
     >
       {/* Mobile — pink circle atas, cyan circle bawah */}
@@ -41,7 +42,9 @@ export function HowItWorksHero() {
             <p className="mt-4 text-[36px] font-semibold leading-snug text-white/95">{subtitle}</p>
             <div className="mt-6 space-y-4 text-[1.125rem] font-medium leading-relaxed text-white/90">
               {paragraphs.map((p, idx) => (
-                <p key={`hiw-hero-${idx}`}>{p}</p>
+                <p key={`hiw-hero-${idx}`}>
+                  {avoidOrphansInPhrase(p, { tieCount: idx === 1 ? 3 : 2 })}
+                </p>
               ))}
             </div>
           </div>
@@ -59,7 +62,7 @@ export function HowItWorksHero() {
           </div>
         </div>
         <div
-          className="pointer-events-none absolute top-[100%] bottom-0 left-1/2 z-[1] w-screen -translate-x-1/2 min-[2560px]:left-[-115%] min-[2560px]:w-[150vw] min-[2560px]:translate-x-0"
+          className="pointer-events-none absolute top-[100%] bottom-0 left-1/2 z-[1] w-screen -translate-x-1/2 min-[2560px]:left-[-115%] min-[2560px]:w-[150vw] min-[2560px]:translate-x-0 min-[4000px]:w-[140vw] min-[4000px]:translate-x-[calc(var(--spacing)*-300)]"
           aria-hidden
         >
           <SafeImage

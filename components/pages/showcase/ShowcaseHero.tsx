@@ -45,7 +45,7 @@ export function ShowcaseHero({
 
         {/* Side image */}
         <div
-          className="pointer-events-none absolute z-[1] left-[-12%] top-[10%] w-[min(42vw,22rem)] opacity-40 sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
+          className="pointer-events-none absolute z-[1] left-[-12%] top-[10%] w-[min(42vw,22rem)] opacity-40 max-md:opacity-40 sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
         >
           <SafeImage
@@ -57,7 +57,7 @@ export function ShowcaseHero({
           />
         </div>
         <div
-          className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] opacity-40 sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
+          className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] opacity-40 max-md:opacity-40 sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
           aria-hidden
         >
           <SafeImage
@@ -79,18 +79,20 @@ export function ShowcaseHero({
             {description}
           </p>
 
-          {/* Filter buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
-            {categories.map((cat) => (
+          {/* Filter buttons — mobile: 2-col for first 6, then full-width; md+: flex wrap */}
+          <div className="mt-8 flex w-full flex-wrap items-center justify-center gap-3 sm:mt-10 max-md:mx-auto max-md:grid max-md:max-w-[min(100%,22rem)] max-md:grid-cols-2 max-md:gap-3 md:max-w-none">
+            {categories.map((cat, index) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => onCategoryChange(cat)}
                 className={cn(
-                  "cursor-pointer rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-200",
+                  "cursor-pointer rounded-full px-4 py-2.5 text-center text-sm font-bold transition-all duration-200 md:px-6",
+                  index === 0 && "max-md:col-span-2 max-md:mx-auto max-md:w-fit max-md:justify-self-center",
+                  index >= 7 && "max-md:col-span-2",
                   activeCategory === cat
-                    ? "bg-gradient-to-r from-[#E3058D] to-[#E3058D] text-white shadow-md"
-                    : "border border-[#11104C]/20 bg-white text-[#11104C] hover:border-[#11104C]/40 hover:shadow-sm"
+                    ? "border border-[#E3058D] bg-[#E3058D] text-white shadow-md md:border-transparent"
+                    : "border border-[#11104C] bg-white text-[#11104C] hover:shadow-sm md:border-[#11104C]/20 md:hover:border-[#11104C]/40",
                 )}
               >
                 {cat}

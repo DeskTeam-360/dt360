@@ -75,7 +75,7 @@ export function DeskTeam360sCaseStudies({ posts }: Props) {
   return (
     <section
       id="case-studies-stories"
-      className="relative z-10 -mt-12 sm:-mt-14 md:-mt-16 lg:-mt-20 xl:-mt-24 2xl:-mt-28 scroll-mt-28 overflow-hidden bg-white pt-28 pb-16 md:pt-36 md:pb-20 lg:pt-48 lg:pb-24"
+      className="relative z-10 -mt-20 scroll-mt-28 overflow-hidden bg-white pt-28 pb-16 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-20 before:h-1 before:-translate-y-full before:bg-white sm:-mt-14 md:-mt-16 md:before:hidden lg:-mt-20 xl:-mt-24 2xl:-mt-28 md:pt-36 md:pb-20 lg:pt-48 lg:pb-24"
       aria-labelledby="case-studies-list-heading"
     >
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">

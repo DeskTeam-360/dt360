@@ -223,22 +223,29 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
             </Link>
           </div>
         ) : (
-          <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-8 md:p-8 xl:mt-14 xl:flex-row xl:items-center xl:justify-between">
-            <ul className="grid flex-1 grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">
+          <div className="mt-10 flex flex-col gap-6 rounded-[24px] border border-[#e8eaf4] bg-white/90 p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)] backdrop-blur-sm md:mt-12 md:flex md:flex-col md:gap-6 md:p-6 lg:p-8 xl:mt-14 xl:flex-row xl:items-center xl:gap-8">
+            <ul className="grid min-w-0 flex-1 grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] sm:gap-x-4 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.38fr)] md:gap-x-3 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.28fr)] lg:gap-x-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)] xl:gap-x-8">
               {FEATURE_ITEMS.map((label) => (
                 <li
                   key={label}
-                  className="type-rule-p flex items-start gap-3 break-inside-avoid text-left text-[#101651]"
+                  className="type-rule-p flex items-start gap-2.5 break-inside-avoid text-left text-[#101651] md:gap-2 md:text-[16px] lg:gap-2.5 lg:text-[18px]"
                 >
                   <CheckIcon className="mt-0.5 shrink-0" />
-                  <span>{label}</span>
+                  <span
+                    className={cn(
+                      label === "North American Account Manager" &&
+                        "md:whitespace-nowrap lg:whitespace-nowrap xl:whitespace-normal",
+                    )}
+                  >
+                    {label}
+                  </span>
                 </li>
               ))}
             </ul>
-            <div className="shrink-0 md:pl-2">
+            <div className="shrink-0 xl:pl-0">
               <Link
                 href="/#pricing"
-                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E3058D] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[240px]"
+                className="font-button group inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E3058D] px-3 py-3.5 text-center tracking-wide text-white shadow-[0_10px_28px_-8px_rgba(239,47,169,0.55)] transition duration-300 ease-out hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(239,47,169,0.65)] md:w-auto md:min-w-[220px] xl:min-w-[240px]"
               >
                 See Full Pricing & Plans
                 <span className="flex h-9 w-9 max-h-[26px] max-w-[26px] shrink-0 items-center justify-center rounded-full border-2 border-white bg-white/20 transition duration-300 ease-out group-hover:translate-x-0.5" aria-hidden>

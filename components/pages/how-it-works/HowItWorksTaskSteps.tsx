@@ -1,6 +1,7 @@
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { howItWorksTaskSection } from "@/data/howItWorks";
+import { cn } from "@/lib/utils";
 
 const STEP_ICON_SRCS = [
   "/images/how it works/how-it-works-step-1.png",
@@ -8,41 +9,54 @@ const STEP_ICON_SRCS = [
   "/images/how it works/how-it-works-step-3.png",
 ] as const;
 
+const STEP_FOOTER_BG = ["bg-[#F6663E]", "bg-[#E95595]", "bg-[#5432B4]"] as const;
+
 export function HowItWorksTaskSteps() {
   const { titleBefore, titleHighlight, steps } = howItWorksTaskSection;
 
   return (
     <section
-      className="relative z-10 bg-transparent pb-8 pt-0 md:pb-28 md:pt-6 lg:pb-28 lg:pt-10"
+      className="relative z-10 bg-transparent pt-0 max-lg:bg-white max-lg:pb-0 lg:bg-white lg:pb-28 lg:pt-10"
       aria-labelledby="how-it-works-task-heading"
     >
-      <Container className="relative z-20 flex max-w-[1440px] flex-col gap-10 -mt-[300px] md:-mt-[calc(calc(var(--spacing)*80)*-1)] md:gap-12 lg:-mt-[calc(var(--spacing)*140)] lg:mx-0 lg:max-w-none lg:gap-14 lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
-        <div className="relative z-30 max-md:bg-[#02063B] max-md:px-4 max-md:pb-2 max-md:pt-0 md:contents">
+      <Container className="relative z-20 max-w-[1440px] -mt-[300px] md:-mt-[calc(calc(var(--spacing)*80)*-1)] lg:-mt-[calc(var(--spacing)*140)] lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
+        {/* Title — full-bleed navy di mobile/tablet agar tidak ada strip putih/hitam di samping */}
+        <div className="relative z-30 w-screen max-w-none -translate-x-1/2 bg-[#02063B] px-4 pb-4 pt-2 left-1/2 lg:static lg:w-auto lg:translate-x-0 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-0">
           <h2
             id="how-it-works-task-heading"
-            className="type-rule-h2 text-center font-semibold tracking-tight text-white max-md:-mt-2 md:mt-[calc(var(--spacing)*6)] lg:mt-[calc(var(--spacing)*16)]"
+            className="type-rule-h2 text-center font-semibold tracking-tight text-white md:mt-[calc(var(--spacing)*6)] lg:mt-[calc(var(--spacing)*16)]"
           >
             {titleBefore}
             <span className="text-[#f336b6]">{titleHighlight}</span>
           </h2>
         </div>
-        <div className="relative z-10 grid grid-cols-1 gap-6 max-md:-mx-4 max-md:px-4 max-md:pb-8 max-md:pt-0 sm:max-md:-mx-6 sm:max-md:px-6 md:mt-16 md:mx-0 md:px-0 md:py-0 md:grid-cols-1 lg:mt-12 lg:grid-cols-3 lg:gap-8">
+
+        {/* Step cards — full-bleed putih di mobile/tablet; overlap hero di desktop */}
+        <div className="relative z-10 mt-4 grid grid-cols-1 gap-6 w-screen max-w-none -translate-x-1/2 left-1/2 bg-white px-4 pb-16 pt-4 md:mt-16 md:pb-24 md:grid-cols-1 lg:static lg:mt-12 lg:w-auto lg:translate-x-0 lg:grid-cols-3 lg:gap-8 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-0">
           {steps.map((step, i) => {
             const iconSrc = STEP_ICON_SRCS[i] ?? STEP_ICON_SRCS[2];
             return (
               <article
                 key={step.id}
-                className={`flex min-h-[320px] flex-col py-15 px-10 pb-0 text-white shadow-xl ${step.gradientClass}`}
+                className={cn(
+                  "flex min-h-[320px] flex-col px-10 pb-0 pt-15 text-white shadow-xl md:min-h-[480px]",
+                  step.gradientClass,
+                )}
               >
-                <h3 className="text-[48px] font-semibold leading-snug text-center">{step.title}</h3>
-                <p className="mt-4 whitespace-pre-line text-[18px] font-medium leading-[1.9em] text-center text-white/95 pb-10">{step.body}</p>
-                <div className="-mx-10 flex flex-1">
+                <div className="flex flex-1 flex-col">
+                  <h3 className="type-rule-h3 text-center font-semibold leading-snug">{step.title}</h3>
+                  <p className="type-rule-p mt-4 flex-1 whitespace-pre-line text-center leading-[1.9em] text-white/95">
+                    {step.body}
+                  </p>
+                </div>
+                <div className="-mx-10 mt-auto">
                   <div
-                    className={`flex h-full w-full items-center justify-center border-t border-white/25 px-8 py-10 ${
-                      i === 0 ? "bg-[#F6663E]" : i === 1 ? "bg-[#E95595]" : "bg-[#5432B4]"
-                    }`}
+                    className={cn(
+                      "flex min-h-[140px] w-full items-center justify-center border-t border-white/25 px-8 py-10",
+                      STEP_FOOTER_BG[i] ?? STEP_FOOTER_BG[2],
+                    )}
                   >
-                    <div className="flex items-center justify-center gap-[20px]">
+                    <div className="flex items-center justify-center gap-5">
                       <SafeImage
                         src={iconSrc}
                         alt={`${step.stepLabel} icon`}
