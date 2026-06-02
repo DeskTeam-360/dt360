@@ -19,7 +19,7 @@ export function HowItWorksTaskSteps() {
       className="relative z-10 bg-transparent pt-0 max-lg:bg-white max-lg:pb-0 lg:bg-white lg:pb-28 lg:pt-10"
       aria-labelledby="how-it-works-task-heading"
     >
-      <Container className="relative z-20 max-w-[1440px] -mt-[300px] md:-mt-[calc(calc(var(--spacing)*80)*-1)] lg:-mt-[calc(var(--spacing)*70)] lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
+      <Container className="relative z-20 max-w-[1440px] -mt-[300px] md:-mt-[calc(calc(var(--spacing)*80)*-1)] lg:-mt-[calc(var(--spacing)*140)] lg:mx-0 lg:max-w-none lg:px-0 [@media(min-width:1441px)]:mx-auto [@media(min-width:1441px)]:max-w-[1440px] [@media(min-width:1441px)]:px-10">
         {/* Title — full-bleed navy di mobile/tablet agar tidak ada strip putih/hitam di samping */}
         <div className="relative z-30 w-screen max-w-none -translate-x-1/2 bg-[#02063B] px-4 pb-4 pt-2 left-1/2 lg:static lg:w-auto lg:translate-x-0 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-0">
           <h2
