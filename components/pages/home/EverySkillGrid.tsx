@@ -10,9 +10,9 @@ const r = "70px";
 const cardPaddingPx = "35px";
 const cardPaddingRightPx = "23px";
 
-/** All grid cells share the same size behavior: at md+, column width = height (square like the logo cell) */
+/** All grid cells share the same size behavior: at md+, slightly taller than square for more copy room */
 const gridCellSizeClass =
-  "w-full min-w-0 min-h-[10rem] sm:min-h-[11rem] md:min-h-0 md:aspect-square";
+  "w-full min-w-0 min-h-[11.5rem] sm:min-h-[12.5rem] md:min-h-0 md:aspect-[1/1.1] lg:aspect-[1/1.12]";
 
 type Cell =
   | { kind: "logo" }
