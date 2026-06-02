@@ -97,7 +97,7 @@ export default async function ServicesPage() {
   return (
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       {/* Hero: platforms card moved; keep vertical overflow visible */}
-      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[130px] pt-28 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
+      <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[130px] pt-30 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
         <Image
           src="/images/dt360-bg-hero-section.png"
           alt=""
@@ -164,7 +164,7 @@ export default async function ServicesPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-12 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 md:gap-4 xl:grid-cols-3">
             {coreServices.map((service, index) => {
               const overlayPosition = SERVICE_OVERLAY_POSITION_CLASS[service.no];
               return (
@@ -180,8 +180,8 @@ export default async function ServicesPage() {
                   <div
                     className={
                       overlayPosition
-                        ? "relative z-10 flex h-full min-h-0 flex-col"
-                        : "flex h-full min-h-0 flex-col"
+                        ? "relative z-10 flex h-full min-h-0 flex-col max-md:items-center md:items-start"
+                        : "flex h-full min-h-0 flex-col max-md:items-center md:items-start"
                     }
                   >
                     <div className="mt-6 flex h-[200px] w-full items-center justify-center">
@@ -195,7 +195,7 @@ export default async function ServicesPage() {
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>
-                    <h4 className="mt-6 max-w-[14ch] font-bold leading-tight">{service.title}</h4>
+                    <h4 className="mt-6 text-center font-bold leading-tight md:text-left">{service.title}</h4>
                     <Link
                       href={service.href}
                       className="mt-auto w-fit pt-3 text-[18px] font-semibold transition duration-300 ease-out hover:translate-x-1"
