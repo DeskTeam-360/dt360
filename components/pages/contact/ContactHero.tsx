@@ -7,7 +7,7 @@ export function ContactHero() {
 
   return (
     <section
-      className="relative overflow-x-hidden bg-[#11104C] pb-0 pt-28 text-white sm:pt-32 lg:pt-[120px]"
+      className="relative overflow-x-hidden bg-[#11104C] pb-4 pt-30 text-white sm:pb-10 sm:pt-32 lg:pb-12 lg:pt-[120px]"
       aria-labelledby="contact-hero-heading"
     >
       <div
@@ -15,12 +15,12 @@ export function ContactHero() {
         aria-hidden
       />
 
-      <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
-        <div className="grid min-w-0 items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+      <Container className="relative z-10 max-w-[1440px] px-6 pb-8 lg:px-20 lg:pb-0">
+        <div className="grid min-w-0 items-center gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div className="relative z-20 min-w-0 pb-6 lg:pb-10">
             <h1
               id="contact-hero-heading"
-              className="font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white lg:text-[76px]"
+              className="font-[var(--font-poppins)] text-center text-[56px] font-bold leading-[1.1] text-balance text-white lg:text-left lg:text-[76px]"
             >
               {title}
             </h1>
@@ -40,16 +40,6 @@ export function ContactHero() {
         </div>
       </Container>
 
-      <div className="relative z-0 -mt-1 w-full" aria-hidden>
-        <svg
-          className="block h-16 w-full sm:h-20 lg:h-28 xl:h-32"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path fill="#ffffff" d="M0,88 Q720,4 1440,88 L1440,120 L0,120 Z" />
-        </svg>
-      </div>
     </section>
   );
 }

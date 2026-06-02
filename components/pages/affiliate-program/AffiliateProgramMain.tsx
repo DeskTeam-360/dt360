@@ -45,7 +45,12 @@ function AffiliateFeatureCard({
         )}
         aria-hidden
       />
-      <div className="relative z-20 grid items-center gap-8 py-10 [padding-inline:calc(var(--spacing)*20)] lg:grid-cols-2 lg:gap-12 lg:py-12">
+      <div
+        className={cn(
+          "relative z-20 grid items-center gap-8 py-10 md:px-10 lg:grid-cols-2 lg:gap-12 lg:py-12 lg:[padding-inline:calc(var(--spacing)*20)]",
+          imageSide === "right" ? "pl-12 pr-6" : "pl-6 pr-12",
+        )}
+      >
         <div
           className={cn(
             "flex justify-center",
@@ -79,7 +84,7 @@ export function AffiliateProgramMain() {
       className="relative overflow-x-clip bg-white pb-[5em] pt-0 max-md:-mt-px min-[1440px]:-mt-px min-[2560px]:-mt-[2px]"
       aria-label="Affiliate program details"
     >
-      <div className="relative z-20 mb-[5em] w-full">
+      <div className="relative z-20 mb-8 w-full">
         <div
           className="affiliate-program-triangle block h-[calc(var(--spacing)*15)] w-[195px] bg-[#02063B] shadow-[0_-1px_0_0_#02063B] [clip-path:polygon(0_0,100%_0,50%_100%)] md:h-[calc(var(--spacing)*25)] md:w-[310px] min-[1440px]:shadow-[0_-1px_0_0_#02063B] min-[2560px]:shadow-[0_-2px_0_0_#02063B]"
           aria-hidden
@@ -105,7 +110,7 @@ export function AffiliateProgramMain() {
       />
 
       {/* Become a partner — yellow panel flush to viewport left */}
-      <div className="relative z-10 min-h-[520px] pt-4 md:min-h-0 lg:pt-8">
+      <div className="relative z-10 min-h-[380px] pt-4 md:min-h-0 lg:pt-8">
         {/* Ornamen kanan — top sejajar blok Become a Partner */}
         <SafeImage
           src={affiliateAssets.ornament}

@@ -3,7 +3,7 @@
 import { SafeImage } from "@/components/shared/SafeImage";
 import type { HowItWorksDontItem } from "@/data/howItWorks";
 
-const CARD_SIZE_CLASS = "h-[13em] w-[13em]";
+const CARD_SIZE_CLASS = "h-[17em] w-[13em]";
 
 const DESC_TEXT_CLASS =
   "text-pretty text-[16px] font-medium leading-[1.45] text-white/90";

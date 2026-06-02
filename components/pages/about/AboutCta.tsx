@@ -5,7 +5,7 @@ import { aboutCta } from "@/data/about";
 
 export function AboutCta() {
   return (
-    <section className="bg-gradient-to-br from-[#f8f0ff] via-[#e8e4ff] to-[#e4e1ff] pt-16 lg:pt-20 pb-0 relative">
+    <section className="bg-gradient-to-br from-[#f8f0ff] via-[#e8e4ff] to-[#e4e1ff] pt-8 lg:pt-20 pb-0 relative">
       {/* Background Blobs */}
       <div className="absolute top-1/2 left-[60%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(215,188,255,0.4)_0%,transparent_60%)] rounded-full pointer-events-none z-0" />
       <div className="absolute top-[40%] left-[80%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(200,225,255,0.5)_0%,transparent_70%)] rounded-full pointer-events-none z-0" />

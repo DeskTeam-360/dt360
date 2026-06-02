@@ -32,7 +32,7 @@ export function AboutNumbersThatMatter() {
         <h2 className="font-[var(--font-poppins)] text-center leading-none -mt-4 lg:-mt-8 lg:leading-none">
           The Numbers That Matter
         </h2>
-        <div className="mt-10 lg:mt-16 grid gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 max-w-[1100px] mx-auto">
+        <div className="mx-auto mt-10 grid max-w-[1100px] gap-x-6 gap-y-12 md:grid-cols-2 md:gap-8 lg:mt-16 lg:gap-12 xl:grid-cols-3">
           {numbersThatMatter.map((item, idx) => {
             const borderGradient =
               idx === 1

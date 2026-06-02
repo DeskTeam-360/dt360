@@ -20,7 +20,7 @@ export function AffiliateProgramHero() {
 
   return (
     <section
-      className="relative overflow-x-hidden bg-[#02063B] pb-[50px] pt-28 text-white sm:pt-32 lg:pt-[120px]"
+      className="relative overflow-x-hidden bg-[#02063B] pb-[50px] pt-30 text-white sm:pt-32 lg:pt-[120px]"
       aria-labelledby="affiliate-hero-heading"
     >
       <div
@@ -63,7 +63,7 @@ export function AffiliateProgramHero() {
                 width={540}
                 height={480}
                 priority
-                className="h-auto w-[120%] max-w-none origin-center object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)] lg:origin-right"
+                className="h-auto w-full max-w-none origin-center object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)] sm:w-[110%] lg:w-[120%] lg:origin-right"
                 sizes="(max-width: 1024px) 100vw, 648px"
               />
             </div>

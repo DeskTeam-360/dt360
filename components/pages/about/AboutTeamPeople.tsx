@@ -4,7 +4,7 @@ import { teamPeople, teamDifferencePoints } from "@/data/about";
 
 export function AboutTeamPeople() {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[250px] lg:pt-[380px] pb-20 lg:pb-32 overflow-x-clip">
+    <section className="relative w-full overflow-x-clip bg-gradient-to-br from-[#fdf0f7] to-[#e3fafe] pt-[60px] lg:pt-[380px] pb-20 lg:pb-32">
       
       {/* 1. Bubble background — flush to left screen edge */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] lg:top-0 lg:w-[800px] lg:h-[800px] opacity-80 pointer-events-none z-0">
@@ -25,10 +25,15 @@ export function AboutTeamPeople() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24 relative">
 
           <div className="relative z-10 pt-10 lg:pt-0">
-            <h2 className="type-rule-h2 font-semibold leading-[1.15] text-[#11104C] lg:leading-[1.1]">
-              The People<br />
-              Who Actually<br />
-              <span className="text-[#e3058d]">Do Your Work</span>
+            <h2 className="type-rule-h2 text-center font-semibold leading-[1.15] text-[#11104C] lg:text-left lg:leading-[1.1]">
+              <span className="lg:hidden">
+                The People Who Actually <span className="text-[#e3058d]">Do Your Work</span>
+              </span>
+              <span className="hidden lg:inline">
+                The People<br />
+                Who Actually<br />
+                <span className="text-[#e3058d]">Do Your Work</span>
+              </span>
             </h2>
           </div>
 
