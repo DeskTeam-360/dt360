@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import {
+  serviceFaqIllustrationImageClassName,
+  serviceFaqIllustrationWrapperClassName,
+} from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { SafeImage } from "@/components/shared/SafeImage";
+import { cn } from "@/lib/utils";
 
 const FAQ_ITEMS = [
   {
@@ -40,7 +45,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
   const illustrationSrc = isWebDev ? FAQ_ILLUSTRATION_WEB_DEV : FAQ_ILLUSTRATION_DEFAULT;
 
   return (
-    <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-[88px] md:px-10 md:pb-[96px] md:pt-[100px] xl:px-10 xl:pb-[120px] xl:pt-[110px]">
+    <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-8 md:px-10 md:pb-[96px] md:pt-[100px] xl:px-10 xl:pb-[120px] xl:pt-[110px]">
       <Image
         src="/images/dt360-faq-bg-service.png"
         alt=""
@@ -50,15 +55,21 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
       />
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-8 xl:grid-cols-[0.95fr_1.1fr] xl:gap-10">
-        <div className="flex justify-center xl:justify-start">
+        <div
+          className={cn(
+            "flex justify-center xl:justify-start",
+            serviceFaqIllustrationWrapperClassName,
+            "xl:max-w-none",
+          )}
+        >
           {isWebDev ? (
             <SafeImage
               src={illustrationSrc}
               alt="FAQ illustration with code editor monitor and web development icons"
               width={640}
               height={640}
-              className="h-auto w-full max-w-[560px] object-contain"
-              sizes="(min-width: 1280px) 40vw, 85vw"
+              className={serviceFaqIllustrationImageClassName}
+              sizes="(max-width: 1023px) 100vw, 560px"
             />
           ) : (
             <Image
@@ -66,8 +77,8 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
               alt="FAQ section illustration"
               width={609}
               height={739}
-              className="h-auto w-full max-w-[520px] object-contain"
-              sizes="(min-width: 1280px) 40vw, 85vw"
+              className={serviceFaqIllustrationImageClassName}
+              sizes="(max-width: 1023px) 100vw, 560px"
             />
           )}
         </div>

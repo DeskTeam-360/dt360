@@ -210,7 +210,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <div className="py-[80px]">
+      <div className="py-8 md:py-[80px]">
         <ServicesFloatingFeaturesBar />
       </div>
 

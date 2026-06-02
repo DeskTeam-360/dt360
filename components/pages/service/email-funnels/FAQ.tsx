@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container } from "@/components/shared/Container";
+import { ServiceFaqIllustration } from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { SafeImage } from "@/components/shared/SafeImage";
 
 const faqs = [
@@ -21,7 +22,7 @@ export function FAQ() {
   const [openId, setOpenId] = useState<string>(faqs[0].question);
 
   return (
-    <section className="relative overflow-visible max-md:overflow-x-visible py-20 sm:py-24 lg:py-28 2xl:py-36">
+    <section className="relative overflow-visible max-md:overflow-x-visible pb-20 pt-8 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 2xl:pb-36 2xl:pt-36">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <SafeImage
           src="/images/Service - FAQ BG.png"
@@ -48,15 +49,10 @@ export function FAQ() {
         className="pointer-events-none absolute z-[2] -top-45 -right-14 h-auto w-auto max-w-[min(100px,26vw)] max-md:right-0 sm:-right-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:right-0 md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:right-0 lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
-          <div className="relative mx-auto w-full max-w-[540px]">
-            <SafeImage
-              src="/images/Email - FAQ.png"
-              alt="Email and funnels FAQ illustration"
-              width={860}
-              height={640}
-              className="h-auto w-full"
-            />
-          </div>
+          <ServiceFaqIllustration
+            src="/images/Email - FAQ.png"
+            alt="Email and funnels FAQ illustration"
+          />
           <div>
             <h2 className="type-rule-h2 leading-tight text-[#11104C]">
               Got Questions? <span className="text-[#E3058D]">Good</span>
@@ -110,3 +106,4 @@ export function FAQ() {
     </section>
   );
 }
+

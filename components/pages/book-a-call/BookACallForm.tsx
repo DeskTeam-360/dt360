@@ -3,12 +3,15 @@
 import { CircleChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { BookACallRecaptcha } from "@/components/pages/book-a-call/BookACallRecaptcha";
+import {
+  serviceFaqIllustrationImageClassName,
+  serviceFaqIllustrationWrapperClassName,
+} from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
-import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHero } from "@/data/bookACall";
+import { cn } from "@/lib/utils";
+import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHeroOverlapClasses } from "@/data/bookACall";
 import { listBookACallFieldErrorMessages, type BookACallFieldErrors } from "@/lib/book-a-call-errors";
-
-const heroOverlapHeight = Math.abs(bookACallHero.heroImageOverlapMarginBottom);
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "";
 
@@ -143,8 +146,7 @@ export function BookACallForm() {
 
   return (
     <div
-      className="relative z-10 w-full overflow-x-hidden overflow-y-hidden"
-      style={{ marginTop: -heroOverlapHeight }}
+      className={`relative z-10 w-full overflow-x-hidden overflow-y-hidden ${bookACallHeroOverlapClasses.formPull}`}
       aria-labelledby={
         isSubmitted ? "book-a-call-success-heading" : "book-a-call-form-heading"
       }
@@ -166,13 +168,12 @@ export function BookACallForm() {
       ) : null}
 
       <div
-        className="pointer-events-none w-full shrink-0 min-[2560px]:-mb-1"
-        style={{ height: heroOverlapHeight, backgroundColor: BOOK_A_CALL_FORM_BG }}
+        className={`pointer-events-none w-full shrink-0 bg-[#F5F8FF] min-[2560px]:-mb-1 ${bookACallHeroOverlapClasses.formSpacer}`}
         aria-hidden
       />
 
       <div
-        className="relative w-full overflow-x-clip overflow-y-hidden pb-20 pt-[120px] md:pt-28 sm:pb-24 lg:pt-8 lg:pb-28 min-[2560px]:-mt-1"
+        className={`relative w-full overflow-x-clip overflow-y-hidden pb-20 sm:pb-24 lg:pb-28 min-[2560px]:-mt-1 ${bookACallHeroOverlapClasses.formContentPt}`}
         style={{ backgroundColor: BOOK_A_CALL_FORM_BG }}
       >
         {!isSubmitted ? (
@@ -194,14 +195,23 @@ export function BookACallForm() {
               <p className="type-rule-p mt-6 text-[#11104C]/90">{successMessage}</p>
             </div>
           ) : (
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16 xl:gap-20">
-              <div className="relative order-2 mx-auto w-full max-w-[520px] lg:order-1 lg:mx-0 lg:max-w-none">
+            <div className="grid items-start gap-8 max-lg:grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16 xl:gap-20">
+              <div
+                className={cn(
+                  "relative order-2 mx-auto w-full lg:order-1 lg:mx-0 lg:max-w-none",
+                  serviceFaqIllustrationWrapperClassName,
+                  "max-lg:max-w-[min(100%,320px)] lg:max-w-[520px]",
+                )}
+              >
                 <SafeImage
                   src={womanImageSrc}
                   alt={womanImageAlt}
                   width={560}
                   height={620}
-                  className="h-auto w-full object-contain"
+                  className={cn(
+                    serviceFaqIllustrationImageClassName,
+                    "lg:max-h-none lg:h-auto",
+                  )}
                   sizes="(max-width: 1024px) 88vw, 42vw"
                 />
               </div>

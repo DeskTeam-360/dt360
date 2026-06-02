@@ -14,8 +14,22 @@ export const bookACallHero = {
   heroImageMaxWidth: 430,
   heroImageMaxWidthSm: 260,
   heroImageMaxWidthLg: 360,
-  /** Pulls illustration over the arch into the form section (matches design) */
-  heroImageOverlapMarginBottom: -150,
+  /**
+   * Illustration overlap into the form section (px). Smaller on mobile to avoid excess whitespace.
+   */
+  heroOverlapPx: {
+    mobile: 72,
+    sm: 96,
+    lg: 150,
+  },
+} as const;
+
+/** Tailwind classes shared by hero image + form overlap (keep in sync with heroOverlapPx). */
+export const bookACallHeroOverlapClasses = {
+  imageMargin: "-mb-18 sm:-mb-24 lg:-mb-[150px]",
+  formPull: "-mt-18 sm:-mt-24 lg:-mt-[150px]",
+  formSpacer: "h-18 sm:h-24 lg:h-[150px]",
+  formContentPt: "pt-16 sm:pt-20 md:pt-28 lg:pt-8",
 } as const;
 
 export const bookACallForm = {
