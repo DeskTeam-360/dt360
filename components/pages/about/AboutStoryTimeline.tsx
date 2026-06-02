@@ -8,7 +8,7 @@ export function AboutStoryTimeline() {
 
   return (
     <section className="bg-white pt-16 lg:pt-32 relative z-10">
-      <Container className="max-w-[1440px] px-6 lg:px-20 relative z-10 pb-[350px] lg:pb-[450px]">
+      <Container className="relative z-10 max-w-[1440px] px-6 pb-24 md:pb-50 lg:px-20">
         
         {/* Step 1: The $5,000 Mistake */}
         <div className="flex gap-6 lg:gap-12">
