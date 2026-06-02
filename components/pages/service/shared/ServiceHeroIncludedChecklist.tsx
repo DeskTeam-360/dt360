@@ -35,13 +35,15 @@ export function ServiceHeroIncludedChecklist({
     [items, itemsPerPage, safePageIndex],
   );
 
-  /** Always `itemsPerPage` slots so section height stays stable when the last page has fewer rows. */
-  const rowSlots = useMemo(
-    () => Array.from({ length: itemsPerPage }, (_, i) => visibleItems[i] ?? null),
-    [visibleItems, itemsPerPage],
-  );
-
   const showDots = totalPages > 1;
+
+  /** Multi-page: pad to `itemsPerPage` so height stays stable between pages. Single-page: show items only. */
+  const rowSlots = useMemo(() => {
+    if (!showDots) {
+      return items.map((item) => item as string | null);
+    }
+    return Array.from({ length: itemsPerPage }, (_, i) => visibleItems[i] ?? null);
+  }, [items, visibleItems, itemsPerPage, showDots]);
 
   useEffect(() => {
     if (!showDots) return;
@@ -86,29 +88,28 @@ export function ServiceHeroIncludedChecklist({
           ),
         )}
       </div>
-      {/* Fixed vertical space for dots so single-page checklists don’t shorten the block vs multi-page. */}
-      <div
-        className="flex min-h-[2rem] items-center justify-center gap-2 pt-2 max-md:pb-3"
-        role={showDots ? "tablist" : undefined}
-        aria-label={showDots ? "Included items pages" : undefined}
-      >
-        {showDots
-          ? Array.from({ length: totalPages }, (_, dotIndex) => (
-              <button
-                key={dotIndex}
-                type="button"
-                role="tab"
-                aria-selected={safePageIndex === dotIndex}
-                aria-label={`Page ${dotIndex + 1} of ${totalPages}`}
-                onClick={() => setPageIndex(dotIndex)}
-                className={cn(
-                  "h-2 w-2 shrink-0 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
-                  safePageIndex === dotIndex ? "bg-[#F5B419]" : "bg-white/40 hover:bg-white/55",
-                )}
-              />
-            ))
-          : null}
-      </div>
+      {showDots ? (
+        <div
+          className="flex min-h-[2rem] items-center justify-center gap-2 pt-2 max-md:pb-3"
+          role="tablist"
+          aria-label="Included items pages"
+        >
+          {Array.from({ length: totalPages }, (_, dotIndex) => (
+            <button
+              key={dotIndex}
+              type="button"
+              role="tab"
+              aria-selected={safePageIndex === dotIndex}
+              aria-label={`Page ${dotIndex + 1} of ${totalPages}`}
+              onClick={() => setPageIndex(dotIndex)}
+              className={cn(
+                "h-2 w-2 shrink-0 rounded-full transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
+                safePageIndex === dotIndex ? "bg-[#F5B419]" : "bg-white/40 hover:bg-white/55",
+              )}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
