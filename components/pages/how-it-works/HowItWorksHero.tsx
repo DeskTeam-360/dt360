@@ -9,7 +9,7 @@ export function HowItWorksHero() {
 
   return (
     <section
-      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-[280px] pt-30 md:pb-[20rem] lg:px-[40px] lg:pb-[600px]"
+      className="relative z-0 overflow-hidden bg-[#02063B] px-[20px] pb-[280px] pt-30 md:pb-[20rem] lg:px-[40px] lg:pb-[300px]"
       aria-labelledby="how-it-works-hero-heading"
     >
       {/* Mobile — pink circle atas, cyan circle bawah */}
