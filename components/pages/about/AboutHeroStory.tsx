@@ -13,7 +13,7 @@ export function AboutHeroStory() {
 
       {/* Container z-[10] so everything inside it sits above the background wave z-[3] */}
       <Container className="relative z-[10] max-w-[1440px] px-6 lg:px-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+        <div className="grid gap-12 lg:relative lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
           <div className="pb-10 lg:pb-[80px] w-full max-w-[791px]">
             <h1 className="font-[var(--font-poppins)] leading-tight text-white max-w-[600px] lg:leading-[1.12]">
               {aboutHero.title}
@@ -27,7 +27,7 @@ export function AboutHeroStory() {
             </p>
           </div>
           {/* Image wrapper — top right (aligned with title area), extends to bottom of section */}
-          <div className="relative flex min-h-[400px] h-full w-full justify-end self-stretch lg:-mr-[100px] lg:-mt-12 lg:h-[calc(100%+3rem)]">
+          <div className="relative flex min-h-[400px] h-full w-full justify-end self-stretch lg:absolute lg:right-0 lg:top-0 lg:w-[110%] lg:-mt-12 lg:h-[calc(100%+3rem)]">
             <div className="relative flex h-full w-full justify-end items-end">
             <SafeImage
               src="/images/about-ceo-hero-image.png"

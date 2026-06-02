@@ -10,15 +10,18 @@ type AboutAssetImageProps = {
   rounded?: string;
   objectFitClass?: string;
   objectPositionClass?: string;
+  /** Extra classes on the image (e.g. scale to crop baked-in PNG padding). */
+  imageClassName?: string;
 };
 
-export function AboutAssetImage({ 
-  src, 
-  alt, 
-  className, 
+export function AboutAssetImage({
+  src,
+  alt,
+  className,
   rounded = "rounded-2xl",
   objectFitClass = "object-cover",
-  objectPositionClass = "object-center"
+  objectPositionClass = "object-center",
+  imageClassName,
 }: AboutAssetImageProps) {
   return (
     <div className={cn("relative min-h-44 overflow-hidden border border-white/20 bg-white/10", rounded, className)}>
@@ -27,7 +30,7 @@ export function AboutAssetImage({
         alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
-        className={cn(objectFitClass, objectPositionClass)}
+        className={cn(objectFitClass, objectPositionClass, imageClassName)}
       />
     </div>
   );

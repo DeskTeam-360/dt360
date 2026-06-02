@@ -15,7 +15,7 @@ export const aboutTimeline = [
       "So I did something most people thought was crazy at the time. I hired Maria overseas. $1,280 a month. And here's the thing - Maria was 10 times better. Never late. Proactive. Caught mistakes before I did. That hit me like a ton of bricks.",
       "I'd been paying more and assuming that meant better. It didn't."
     ],
-    image: "/images/about/1f287ebdb367ded858dcfdc21b9d9e2e6d822c01.png",
+    image: "/images/New - About 2.png",
     imageAlt: "The $5,000 mistake visual placeholder",
   },
   {
@@ -25,7 +25,7 @@ export const aboutTimeline = [
       "I was that close.",
       "Instead, I stayed. And I analyzed the root causes. What I found wasn't that my team was incompetent. It was that I'd never properly set expectations - with my clients or my team. So I built the Client Expectation Framework. And everything changed."
     ],
-    image: "/images/about/fd84e4ed6cf524ed5b645976be96dc3c7f6ccd1b.png",
+    image: "/images/New - About 3.png",
     imageAlt: "Parking lot moment visual placeholder",
   },
   {
