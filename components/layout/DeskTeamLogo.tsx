@@ -28,7 +28,7 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
             ? "h-fit w-auto object-contain object-left"
             : "h-auto max-h-full w-auto max-w-full object-contain object-center"
         }
-        sizes={isFooter ? "(max-width: 640px) 180px, 200px" : "180px"}
+        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "180px"}
         priority
       />
     </Link>
