@@ -14,7 +14,7 @@ export function AboutHeroStory() {
       {/* Container z-[10] so everything inside it sits above the background wave z-[3] */}
       <Container className="relative z-[10] max-w-[1440px] px-6 lg:px-20">
         <div className="grid gap-12 lg:relative lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-          <div className="pb-10 lg:pb-[80px] w-full max-w-[791px]">
+          <div className="relative z-10 pb-10 w-full max-w-[791px] lg:pb-[80px]">
             <h1 className="font-[var(--font-poppins)] leading-tight text-white max-w-[600px] lg:leading-[1.12]">
               {aboutHero.title}
             </h1>
