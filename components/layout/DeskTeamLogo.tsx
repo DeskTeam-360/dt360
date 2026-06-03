@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { LayoutSafeImage } from "@/components/shared/LayoutSafeImage";
 
 type DeskTeamLogoProps = {
   variant?: "header" | "footer";
@@ -18,7 +18,7 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
           : "relative flex h-9 w-[180px] shrink-0 items-center justify-center sm:h-10 sm:w-[180px]"
       }
     >
-      <SafeImage
+      <LayoutSafeImage
         src={logoSrc}
         alt="DeskTeam360"
         width={180}
@@ -28,7 +28,7 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
             ? "h-fit w-auto object-contain object-left"
             : "h-auto max-h-full w-auto max-w-full object-contain object-center"
         }
-        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "180px"}
+        sizes={isFooter ? "(max-width: 640px) 180px, 200px" : "180px"}
         priority
       />
     </Link>

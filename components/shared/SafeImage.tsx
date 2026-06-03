@@ -13,7 +13,7 @@ type SafeImageProps = {
   className?: string;
   sizes?: string;
   priority?: boolean;
-  /** When true, use Next.js image optimizer (home/about/services/marketing phases). Default false elsewhere. */
+  /** When true, use Next.js image optimizer (phased rollout). Default false elsewhere. */
   optimized?: boolean;
   unoptimized?: boolean;
 };
