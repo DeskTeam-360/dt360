@@ -75,7 +75,9 @@ export function AboutNumbersThatMatter() {
                       alt={`${item.label} icon`}
                       width={96}
                       height={96}
-                      className="w-full h-full object-contain"
+                      optimized
+                      sizes="96px"
+                      className="h-full w-full object-contain"
                     />
                   </div>
                 )}
@@ -98,12 +100,17 @@ export function AboutNumbersThatMatter() {
       </Container>
 
       {/* Section Separator Image (Reversed) */}
-      <div className="pointer-events-none absolute bottom-0 left-0 w-full z-20 leading-[0] translate-y-[98%] rotate-180">
-        <img 
-          src="/images/about-section-separator.png" 
-          alt="" 
-          className="w-full h-auto min-h-[50px] lg:min-h-[100px] object-cover object-bottom" 
-        />
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-full translate-y-[98%] rotate-180 leading-[0]">
+        <div className="relative min-h-[50px] w-full lg:min-h-[100px]">
+          <SafeImage
+            src="/images/about-section-separator.png"
+            alt=""
+            fill
+            optimized
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+        </div>
       </div>
     </section>
   );

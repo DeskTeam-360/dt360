@@ -35,6 +35,8 @@ export function AboutHeroStory() {
               width={492}
               height={733}
               priority
+              optimized
+              sizes="(max-width: 1023px) 85vw, 492px"
               className="h-full w-auto max-h-full object-contain object-bottom"
             />
             {/* Professional Team icon at bottom left of CEO image (Shrunken & Shifted Left) */}
@@ -44,6 +46,8 @@ export function AboutHeroStory() {
                 alt="Professional Team Icon"
                 width={75}
                 height={75}
+                optimized
+                sizes="75px"
                 className="object-contain drop-shadow-xl"
               />
             </div>

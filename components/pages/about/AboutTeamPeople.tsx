@@ -8,11 +8,14 @@ export function AboutTeamPeople() {
       
       {/* 1. Bubble background — flush to left screen edge */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] lg:top-0 lg:w-[800px] lg:h-[800px] opacity-80 pointer-events-none z-0">
-        <SafeImage 
-          src="/images/about-bubble-bg.png" 
-          alt="" 
-          width={800} height={800} 
-          className="w-full h-full object-contain object-left-top" 
+        <SafeImage
+          src="/images/about-bubble-bg.png"
+          alt=""
+          width={800}
+          height={800}
+          optimized
+          sizes="(max-width: 1023px) 50vw, 400px"
+          className="h-full w-full object-contain object-left-top"
         />
       </div>
 
@@ -39,11 +42,14 @@ export function AboutTeamPeople() {
 
           <div className="group relative z-10 -mr-6 w-[calc(100%+1.5rem)] rounded-tl-[50px] transition-[transform,shadow] duration-300 ease-out group-hover:shadow-[0_20px_50px_rgba(0,174,238,0.2)] lg:-mr-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
             <div className="overflow-hidden rounded-tl-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
-              <SafeImage 
-                src="/images/about-deskteam-people.png" 
-                alt="DeskTeam360 People" 
-                width={800} height={600} 
-                className="w-full h-auto object-cover rounded-tl-[50px]" 
+              <SafeImage
+                src="/images/about-deskteam-people.png"
+                alt="DeskTeam360 People"
+                width={800}
+                height={600}
+                optimized
+                sizes="(max-width: 1023px) 100vw, 560px"
+                className="h-auto w-full rounded-tl-[50px] object-cover"
               />
             </div>
           </div>
@@ -61,6 +67,7 @@ export function AboutTeamPeople() {
                   src="/images/about-jeremy-headshot.png"
                   alt="Jeremy"
                   fill
+                  optimized
                   sizes="(max-width: 767px) 120px, (max-width: 1023px) 180px, 220px"
                   className="object-cover object-[50%_38%] !top-[3px] md:!top-[2px] lg:!top-[3px]"
                 />
@@ -100,6 +107,7 @@ export function AboutTeamPeople() {
                   src="/images/about-jd-headshot.png"
                   alt="JD"
                   fill
+                  optimized
                   sizes="(max-width: 767px) 120px, (max-width: 1023px) 180px, 220px"
                   className="object-cover object-[50%_38%] !top-[3px] md:!top-[2px] lg:!top-[3px]"
                 />
@@ -124,11 +132,14 @@ export function AboutTeamPeople() {
           
           <div className="group relative z-10 -ml-6 w-[calc(100%+1.5rem)] rounded-tr-[50px] border border-solid border-[#7547C5] transition-transform duration-300 ease-out lg:-ml-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:!-ml-[150px] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
             <div className="overflow-hidden rounded-tr-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
-              <SafeImage 
-                src="/images/about - what makes the team different.png" 
-                alt="Team Gathering" 
-                width={800} height={600} 
-                className="w-full h-auto object-cover rounded-tr-[50px]" 
+              <SafeImage
+                src="/images/about - what makes the team different.png"
+                alt="Team Gathering"
+                width={800}
+                height={600}
+                optimized
+                sizes="(max-width: 1023px) 100vw, 560px"
+                className="h-auto w-full rounded-tr-[50px] object-cover"
               />
             </div>
           </div>

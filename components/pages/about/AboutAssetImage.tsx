@@ -29,7 +29,8 @@ export function AboutAssetImage({
         src={src}
         alt={alt}
         fill
-        sizes="(max-width: 768px) 100vw, 50vw"
+        optimized
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 560px"
         className={cn(objectFitClass, objectPositionClass, imageClassName)}
       />
     </div>

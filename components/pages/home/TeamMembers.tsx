@@ -314,7 +314,8 @@ export function TeamMembers() {
                     src={member.imageSrc}
                     alt={`${member.name}, ${member.role}`}
                     fill
-                    className="object-cover object-left-bottom scale-100"
+                    optimized
+                    className="scale-100 object-cover object-left-bottom"
                     sizes="(max-width: 640px) 90vw, 300px"
                     priority={member.id === "1"}
                   />

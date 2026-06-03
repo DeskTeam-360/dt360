@@ -13,6 +13,8 @@ type SafeImageProps = {
   className?: string;
   sizes?: string;
   priority?: boolean;
+  /** When true, use Next.js image optimizer (home/about phase). Default false elsewhere. */
+  optimized?: boolean;
   unoptimized?: boolean;
 };
 
@@ -25,6 +27,7 @@ function SafeImageInner({
   className,
   sizes,
   priority,
+  optimized = false,
   unoptimized,
 }: SafeImageProps) {
   const [failed, setFailed] = useState(false);
@@ -57,7 +60,7 @@ function SafeImageInner({
       height={fill ? undefined : height}
       sizes={sizes}
       priority={priority}
-      unoptimized={isSvg || unoptimized}
+      unoptimized={isSvg || unoptimized === true || !optimized}
       draggable={false}
       className={className}
       onError={() => setFailed(true)}

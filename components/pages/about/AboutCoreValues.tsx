@@ -40,6 +40,8 @@ export function AboutCoreValues() {
                      alt={`${value.title} icon`}
                      width={100}
                      height={100}
+                     optimized
+                     sizes="100px"
                      className="w-full h-full object-contain"
                    />
                 </div>

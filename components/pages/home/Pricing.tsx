@@ -57,6 +57,7 @@ export function Pricing() {
                 alt="Risk-free guarantee icon."
                 width={110}
                 height={110}
+                sizes="(max-width: 1023px) 80px, 110px"
                 className="h-auto w-[60px] shrink-0 sm:w-[80px] lg:w-[110px]"
               />
               <h3 className="text-[36px] font-normal leading-[40px] tracking-tight text-white sm:text-[48px] sm:leading-[52px] lg:text-[60px] lg:leading-[64px]">

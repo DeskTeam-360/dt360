@@ -40,6 +40,7 @@ export function HowItWorksSteps() {
           alt=""
           width={170}
           height={230}
+          sizes="(max-width: 1023px) 140px, 198px"
           className="h-auto w-[126px] sm:w-[162px] lg:w-[198px]"
           priority={false}
         />

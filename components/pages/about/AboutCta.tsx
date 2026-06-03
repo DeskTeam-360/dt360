@@ -57,7 +57,9 @@ export function AboutCta() {
                 alt="Jeremy"
                 width={800}
                 height={1000}
-                className="w-full h-full object-contain object-bottom"
+                optimized
+                sizes="(max-width: 1023px) 100vw, 640px"
+                className="h-full w-full object-contain object-bottom"
               />
             </div>
           </div>
@@ -71,7 +73,9 @@ export function AboutCta() {
                 alt="Jeremy"
                 width={600}
                 height={800}
-                className="w-full h-full object-contain object-bottom"
+                optimized
+                sizes="100vw"
+                className="h-full w-full object-contain object-bottom"
               />
            </div>
         </div>

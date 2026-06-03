@@ -37,6 +37,7 @@ function TestimonialSlideCard({ item }: { item: HomeStyleTestimonialItem }) {
           alt=""
           width={120}
           height={104}
+          optimized
           className="h-auto w-[120px] max-w-[120px] object-contain object-top"
           sizes="120px"
         />
