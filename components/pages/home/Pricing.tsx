@@ -28,9 +28,9 @@ export function Pricing() {
 
       </Container>
 
-      <div className="relative mt-12 flex min-h-[400px] w-full flex-col justify-center bg-[#7547C5] pb-12 pt-8 text-white sm:pt-10">
+      <div className="relative mt-12 flex min-h-[320px] w-full flex-col justify-center overflow-visible bg-[#7547C5] pb-10 pt-6 text-white sm:min-h-[400px] sm:pb-12 sm:pt-10">
         <div
-          className="pointer-events-none absolute inset-x-0 -top-[16px] h-[28px]"
+          className="pointer-events-none absolute inset-x-0 -top-[24px] h-[50px] sm:-top-[40px] sm:h-[68px] lg:-top-[51px] lg:h-[90px]"
           style={{
             backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "top center",
@@ -40,7 +40,7 @@ export function Pricing() {
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-[-16px] z-[1] h-[28px]"
+          className="pointer-events-none absolute inset-x-0 bottom-[-24px] z-[1] h-[50px] sm:bottom-[-40px] sm:h-[68px] lg:bottom-[-51px] lg:h-[90px]"
           style={{
             backgroundImage: "url('/images/scratchedbg4k.png')",
             backgroundPosition: "bottom center",
@@ -49,8 +49,8 @@ export function Pricing() {
           }}
           aria-hidden
         />
-        <Container className="max-w-7xl py-[40px]">
-          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+        <Container className="relative z-[2] max-w-7xl px-5 py-8 sm:px-6 sm:py-10 lg:py-[40px]">
+          <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
             <div className="flex items-center gap-4 sm:gap-6">
               <Image
                 src="/images/Home-pricing-banner-risk.png"
