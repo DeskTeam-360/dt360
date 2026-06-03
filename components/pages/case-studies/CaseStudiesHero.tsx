@@ -1,6 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { HeroCtaLink } from "@/components/shared/HeroCtaLink";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import { caseStudiesHero } from "@/data/caseStudies";
 
 export function CaseStudiesHero() {
@@ -30,12 +30,11 @@ export function CaseStudiesHero() {
     >
       {/* Background — cover, top center (no baked-in bottom curve) */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <SafeImage
+        <CaseStudiesSafeImage
           src={backgroundSrc}
           alt={backgroundAlt}
           fill
           priority
-          unoptimized
           className="object-cover object-top"
           sizes="100vw"
         />
@@ -71,12 +70,11 @@ export function CaseStudiesHero() {
             <div className="relative w-full overflow-visible">
               <div className="relative w-full overflow-visible pb-[clamp(2.5rem,6vw,5rem)]">
                 {/* ≤1440px: full viewport width */}
-                <SafeImage
+                <CaseStudiesSafeImage
                   src={waveLineSrc}
                   alt={waveLineAlt}
                   width={1920}
                   height={340}
-                  unoptimized
                   priority
                   className="relative z-[1] block h-auto w-full max-[1439px]:block min-[1440px]:hidden object-contain object-center"
                   sizes="100vw"
@@ -84,12 +82,11 @@ export function CaseStudiesHero() {
 
                 {/* ≥1440px: 4K ribbon — height contained, width may exceed screen */}
                 <div className="relative z-[1] hidden min-[1440px]:flex min-[1440px]:w-screen min-[1440px]:justify-center min-[1440px]:overflow-visible">
-                  <SafeImage
+                  <CaseStudiesSafeImage
                     src={waveLine4kSrc}
                     alt={waveLine4kAlt}
                     width={3840}
                     height={800}
-                    unoptimized
                     priority
                     className="h-[clamp(280px,22vw,520px)] w-auto max-w-none object-contain object-center"
                     sizes="100vw"
@@ -97,22 +94,20 @@ export function CaseStudiesHero() {
                 </div>
 
                 <div className="absolute inset-y-0 left-1/2 z-[2] flex w-full max-w-[1560px] -translate-x-1/2 items-end justify-between overflow-visible px-4 sm:px-6">
-                  <SafeImage
+                  <CaseStudiesSafeImage
                     src={manLeftSrc}
                     alt={manLeftAlt}
                     width={640}
                     height={569}
-                    unoptimized
                     priority
                     className="ml-[calc(var(--spacing)*-15)] mb-[4em] h-auto w-[clamp(12rem,52vw,40em)] max-w-[40em] shrink-0 object-contain object-bottom -translate-x-[2%] sm:-ml-35 sm:mb-[5em] sm:translate-x-0"
                     sizes="(max-width: 1024px) 52vw, 40em"
                   />
-                  <SafeImage
+                  <CaseStudiesSafeImage
                     src={womanRightSrc}
                     alt={womanRightAlt}
                     width={400}
                     height={312}
-                    unoptimized
                     priority
                     className="h-auto w-[clamp(10rem,46vw,25em)] max-w-[25em] shrink-0 object-contain object-bottom translate-x-[2%] sm:translate-x-0 mb-[4%] sm:mb-[6%] md:mb-[8%] md:w-[16em] md:max-w-[16em] lg:mb-[10%] lg:w-[clamp(10rem,46vw,25em)] lg:max-w-[25em]"
                     sizes="(max-width: 1024px) 46vw, 25em"
@@ -127,21 +122,21 @@ export function CaseStudiesHero() {
         <Container className="relative z-20 max-w-[1440px] px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16">
           <div className="mx-auto w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl">
             <div className="relative overflow-visible">
-              <SafeImage
+              <CaseStudiesSafeImage
                 src={letItGrow.squareGraphicSrc}
                 alt={letItGrow.squareGraphicAlt}
                 width={160}
                 height={160}
-                unoptimized
+                sizes="160px"
                 aria-hidden
                 className="pointer-events-none absolute -top-10 -right-0 z-0 h-auto w-[clamp(4.5rem,12vw,10rem)] max-w-[10rem] translate-x-[15%] md:top-[calc(var(--spacing)*-12)] md:right-[calc(var(--spacing)*1)] md:w-[7rem] md:max-w-[7rem] md:translate-x-0 lg:-top-24 lg:-right-9 lg:w-[10rem] lg:max-w-[10rem]"
               />
-              <SafeImage
+              <CaseStudiesSafeImage
                 src={letItGrow.codeGraphicSrc}
                 alt={letItGrow.codeGraphicAlt}
                 width={140}
                 height={140}
-                unoptimized
+                sizes="140px"
                 aria-hidden
                 className="pointer-events-none absolute -bottom-6 left-0 z-0 h-auto w-[clamp(4rem,11vw,8.5rem)] max-w-[8.5rem] -translate-x-[15%] sm:-bottom-8 sm:left-2 lg:bottom-[calc(var(--spacing)*-11)] lg:left-[calc(var(--spacing)*-10)] lg:w-[8rem] lg:max-w-[8rem] lg:translate-x-0"
               />

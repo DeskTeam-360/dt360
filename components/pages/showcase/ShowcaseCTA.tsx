@@ -76,6 +76,7 @@ export function ShowcaseCTA() {
               alt={imageAlt}
               width={768}
               height={810}
+              unoptimized
               className="relative z-[2] block h-auto w-full max-w-full origin-bottom object-contain object-bottom transform-gpu lg:h-auto lg:w-auto lg:max-h-[calc(100%+15rem)] lg:scale-150"
               sizes="(max-width: 1023px) 90vw, (max-width: 1366px) 42vw, 768px"
               loading="eager"

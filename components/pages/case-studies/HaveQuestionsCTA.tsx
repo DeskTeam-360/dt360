@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
@@ -9,11 +9,10 @@ export function HaveQuestionsCTA() {
       {/* Gradient CTA — height follows content; image cropped at bottom (no white fringe) */}
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <SafeImage
+          <CaseStudiesSafeImage
             src="/images/case-studies/Background - book a call.png"
             alt=""
             fill
-            unoptimized
             className="scale-[1.03] object-cover object-top"
             sizes="100vw"
             aria-hidden
@@ -39,10 +38,11 @@ export function HaveQuestionsCTA() {
           </div>
 
           <div className="relative mx-auto h-[150px] w-[150px] shrink-0 sm:h-[200px] sm:w-[200px] md:mx-0 md:h-[260px] md:w-[260px] lg:h-[320px] lg:w-[320px] xl:h-[360px] xl:w-[360px] 2xl:h-[400px] 2xl:w-[400px] min-[2560px]:h-[460px] min-[2560px]:w-[460px]">
-            <SafeImage
+            <CaseStudiesSafeImage
               src="/images/case-studies/Jeremy Image.png"
               alt="Jeremy"
               fill
+              sizes="(max-width: 768px) 200px, (max-width: 1536px) 400px, 460px"
               className="object-contain"
             />
           </div>

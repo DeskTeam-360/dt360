@@ -69,7 +69,7 @@ export default async function SingleCaseStudyPage({ params }: Props) {
 
   return (
     <main className="flex-grow">
-      <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} />
+      <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} optimizeImages />
       <HaveQuestionsCTA />
     </main>
   );

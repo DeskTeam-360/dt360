@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ShowcaseSafeImage } from "@/components/pages/showcase/shared/ShowcaseSafeImage";
 import { showcaseHeroContent } from "@/data/showcase";
 import type { ShowcaseItem } from "@/data/showcase";
 import { cn } from "@/lib/utils";
@@ -48,24 +48,28 @@ export function ShowcaseHero({
           className="pointer-events-none absolute z-[1] left-[-12%] top-[10%] w-[min(42vw,22rem)] opacity-40 max-md:opacity-40 sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]"
           aria-hidden
         >
-          <SafeImage
+          <ShowcaseSafeImage
             src="/images/showcase-hero-bgleft-1.png"
             alt=""
             width={400}
             height={480}
+            sizes="(max-width: 1024px) 40vw, 307px"
             className="h-auto w-full object-contain select-none"
+            aria-hidden
           />
         </div>
         <div
           className="pointer-events-none absolute z-[1] right-[-12%] top-[14%] w-[min(44vw,23rem)] opacity-40 max-md:opacity-40 sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]"
           aria-hidden
         >
-          <SafeImage
+          <ShowcaseSafeImage
             src="/images/showcase-hero-bgright-1.png"
             alt=""
             width={440}
             height={500}
+            sizes="(max-width: 1024px) 44vw, 396px"
             className="h-auto w-full object-contain select-none"
+            aria-hidden
           />
         </div>
 

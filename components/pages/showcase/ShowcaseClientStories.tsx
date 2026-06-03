@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ShowcaseSafeImage } from "@/components/pages/showcase/shared/ShowcaseSafeImage";
 import { clientStories } from "@/data/showcase";
 import { cn } from "@/lib/utils";
 
@@ -39,7 +39,7 @@ export function ShowcaseClientStories() {
 
       {/* Bottom-left ornament */}
       <div className="pointer-events-none absolute z-0 w-full bottom-[-10em] left-[-10em] sm:w-[50%] lg:w-[50%] lg:bottom-[-15em] lg:left-[-18em]" aria-hidden>
-        <SafeImage
+        <ShowcaseSafeImage
           src="/images/Showcase - Stories Ornament.png"
           alt=""
           width={400}
@@ -79,7 +79,7 @@ export function ShowcaseClientStories() {
                 className="pointer-events-none absolute left-1/2 top-0 z-0 flex w-[120px] -translate-x-1/2 justify-center bg-[#11104C]"
                 aria-hidden
               >
-                <SafeImage
+                <ShowcaseSafeImage
                   src="/images/home-testimonial-quote1.png"
                   alt=""
                   width={120}
@@ -100,7 +100,7 @@ export function ShowcaseClientStories() {
 
             {/* Person photo */}
             <div className="h-[180px] w-[180px] shrink-0 overflow-hidden rounded-2xl sm:h-[200px] sm:w-[200px] lg:self-center">
-              <SafeImage
+              <ShowcaseSafeImage
                 key={story.imageSrc}
                 src={story.imageSrc}
                 alt={story.imageAlt}

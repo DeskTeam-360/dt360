@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import { caseStudiesListSection } from "@/data/caseStudies";
 import type { BlogPost } from "@/data/blog";
 import { useState } from "react";
@@ -20,10 +20,11 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
     <article className="group flex h-full flex-col rounded-[30px] border-[5px] border-white bg-white/60 shadow-[0_16px_40px_-24px_rgba(16,22,81,0.35)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-20px_rgba(16,22,81,0.4)]">
       <div className="p-4 pb-0 md:p-5">
         <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] md:h-[240px]">
-          <SafeImage
+          <CaseStudiesSafeImage
             src={post.image}
             alt={post.title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
           />
         </div>
@@ -99,19 +100,23 @@ export function DeskTeam360sCaseStudies({ posts }: Props) {
         />
 
         <div className="absolute left-0 top-[5%] h-[500px] w-[300px] opacity-80 md:h-[700px] md:w-[400px] lg:h-[900px] lg:w-[500px] xl:w-[600px]">
-          <SafeImage
+          <CaseStudiesSafeImage
             src="/images/case-studies/fluid bg left.png"
             alt="Fluid Background Left"
             fill
+            sizes="(max-width: 1280px) 50vw, 600px"
             className="object-contain object-left-top"
+            aria-hidden
           />
         </div>
         <div className="absolute right-0 top-[15%] h-[500px] w-[300px] opacity-80 md:h-[700px] md:w-[400px] lg:h-[900px] lg:w-[500px] xl:w-[600px]">
-          <SafeImage
+          <CaseStudiesSafeImage
             src="/images/case-studies/fluid bg right.png"
             alt="Fluid Background Right"
             fill
+            sizes="(max-width: 1280px) 50vw, 600px"
             className="object-contain object-right-top"
+            aria-hidden
           />
         </div>
       </div>

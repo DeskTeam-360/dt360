@@ -2,6 +2,7 @@
 
 import React from 'react';
 import svgPaths from "./svg-blog-single";
+import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import { SafeImage } from "@/components/shared/SafeImage";
 import Link from "next/link";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
@@ -171,9 +172,16 @@ const formatDate = (dateString?: string) => {
 interface DynamicBlogPostContentProps {
   post: BlogPost;
   relatedPosts: BlogPost[];
+  /** Case study detail — optimize hero, author, and related thumbnails. */
+  optimizeImages?: boolean;
 }
 
-export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostContentProps) {
+export function DynamicBlogPostContent({
+  post,
+  relatedPosts,
+  optimizeImages = false,
+}: DynamicBlogPostContentProps) {
+  const PostImage = optimizeImages ? CaseStudiesSafeImage : SafeImage;
   const options: HTMLReactParserOptions = {
     replace: (domNode: DOMNode) => {
       const findRecursive = (nodes: DOMNode[] | undefined, names: string[]): Element[] => {
@@ -249,10 +257,11 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
             <div className="author-box bg-[#F8F9FF] border border-[#C8CEFB] rounded-[30px] p-8 md:p-12 my-12 flex flex-col items-start gap-8 md:flex-row md:gap-12">
               {actualImg && (
                 <div className="relative top-0 mx-auto mt-0 h-32 w-32 flex-shrink-0 self-start overflow-hidden rounded-full border-4 border-white shadow-lg md:mx-0 md:h-48 md:w-48">
-                  <SafeImage 
-                    src={actualImg.attribs.src} 
-                    alt={actualImg.attribs.alt || "Author"} 
+                  <PostImage
+                    src={actualImg.attribs.src}
+                    alt={actualImg.attribs.alt || "Author"}
                     fill
+                    sizes="(max-width: 768px) 128px, 192px"
                     className="object-cover object-top"
                   />
                 </div>
@@ -585,7 +594,13 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
           </p>
 
           <div className="relative w-full aspect-[2/1] rounded-br-[50px] md:rounded-br-[100px] rounded-tl-[50px] md:rounded-tl-[100px] overflow-hidden bg-gray-100 mb-8 md:mb-12 shadow-2xl">
-            <SafeImage src={post.image} alt={post.title} fill className="object-cover" />
+            <PostImage
+              src={post.image}
+              alt={post.title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 1082px"
+              className="object-cover"
+            />
           </div>
 
           {post.excerpt && (
@@ -789,7 +804,13 @@ export function DynamicBlogPostContent({ post, relatedPosts }: DynamicBlogPostCo
               {relatedPosts.map((related) => (
                 <div key={related.id} className="border border-[#11104C] rounded-[30px] overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full bg-white">
                   <div className="relative h-64 flex-shrink-0 bg-gray-100">
-                    <SafeImage src={related.image} alt={related.title} fill className="object-cover rounded-t-[25px]" />
+                    <PostImage
+                      src={related.image}
+                      alt={related.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+                      className="object-cover rounded-t-[25px]"
+                    />
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="flex gap-2 mb-4 flex-wrap">
