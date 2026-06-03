@@ -28,7 +28,7 @@ export function AboutCta() {
                 className="font-button group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-3 py-4 text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(240,87,58,0.25)] hover:-translate-y-1"
               >
                 Book a Free Strategy Call
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#F0573A] transition-colors">
+                <span className="inline-flex size-6 shrink-0 aspect-square items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#F0573A] transition-colors min-[4000px]:size-6 min-[4000px]:max-h-6 min-[4000px]:max-w-6">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </span>
               </Link>
@@ -38,7 +38,7 @@ export function AboutCta() {
                 className="font-button group flex w-full sm:w-auto items-center justify-center gap-3 rounded-[12px] bg-[#7547C5] px-3 py-4 text-white transition hover:brightness-110 shadow-[0_15px_30px_rgba(117,71,197,0.25)] hover:-translate-y-1"
               >
                 See How It Works
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#7547C5] transition-colors">
+                <span className="inline-flex size-6 shrink-0 aspect-square items-center justify-center rounded-full border-[1.5px] border-white text-white group-hover:bg-white group-hover:text-[#7547C5] transition-colors min-[4000px]:size-6 min-[4000px]:max-h-6 min-[4000px]:max-w-6">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </span>
               </Link>
@@ -49,9 +49,9 @@ export function AboutCta() {
             </p>
           </div>
           
-          <div className="relative hidden lg:block h-full">
+          <div className="relative hidden lg:block h-full min-[4000px]:pb-16">
             {/* The image that sticks out */}
-            <div className="absolute bottom-0 right-0 w-[120%] h-[135%] z-20 pointer-events-none flex items-end justify-end">
+            <div className="absolute bottom-0 right-0 w-[120%] h-[135%] z-20 pointer-events-none flex items-end justify-end min-[4000px]:bottom-8 min-[4000px]:right-4">
               <SafeImage
                 src="/images/about-jeremy-notebook.png"
                 alt="Jeremy"

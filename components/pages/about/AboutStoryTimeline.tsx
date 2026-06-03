@@ -8,7 +8,7 @@ export function AboutStoryTimeline() {
 
   return (
     <section className="bg-white pt-16 lg:pt-32 relative z-10">
-      <Container className="relative z-10 max-w-[1440px] px-6 pb-24 md:pb-50 lg:px-20">
+      <Container className="relative z-10 max-w-[1440px] px-6 pb-24 md:pb-50 min-[2560px]:pb-52 min-[4000px]:pb-64 lg:px-20">
         
         {/* Step 1: The $5,000 Mistake */}
         <div className="flex gap-6 lg:gap-12">
@@ -26,7 +26,7 @@ export function AboutStoryTimeline() {
           </div>
 
           {/* Content */}
-          <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start pb-20">
+          <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start lg:items-stretch pb-20">
             <div className="pt-2">
               <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104c] lg:leading-[1.15]">
                 {mistake.title}
@@ -37,13 +37,14 @@ export function AboutStoryTimeline() {
                 ))}
               </div>
             </div>
-            <div className="relative w-[110%] lg:w-[120%] h-[400px] lg:h-[650px] lg:-mr-[100px] justify-self-end rounded-[20px] lg:rounded-l-[30px] lg:rounded-r-none border-[7px] border-white shadow-[0px_40px_50px_0px_rgba(17,16,76,0.15)] overflow-hidden bg-white">
-               <AboutAssetImage 
-                 src={mistake.image} 
-                 alt={mistake.imageAlt} 
-                 className="h-full w-full" 
+            <div className="relative w-full md:w-[120%] h-[400px] md:h-[900px] md:min-h-[900px] lg:h-full lg:min-h-0 md:-mr-[100px] justify-self-end lg:self-stretch rounded-[20px] md:rounded-l-[30px] md:rounded-r-none border-[7px] border-white shadow-[0px_40px_50px_0px_rgba(17,16,76,0.15)] overflow-hidden bg-white">
+               <AboutAssetImage
+                 src={mistake.image}
+                 alt={mistake.imageAlt}
+                 className="h-full w-full border-none bg-white"
                  rounded="rounded-none border-none"
-                 objectPositionClass="object-[center_-20px]"
+                 objectPositionClass="object-[center_top]"
+                 imageClassName="origin-[center_top] scale-[1.22]"
                />
             </div>
           </article>
@@ -65,7 +66,7 @@ export function AboutStoryTimeline() {
           </div>
 
           {/* Content */}
-          <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start pb-20">
+          <article className="flex-1 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-start lg:items-stretch pb-20">
             <div className="pt-2">
               <h2 className="font-[var(--font-poppins)] leading-tight text-[#11104c] lg:leading-[1.15]">
                 {parkingLot.title}
@@ -76,8 +77,15 @@ export function AboutStoryTimeline() {
                 ))}
               </div>
             </div>
-            <div className="relative w-[110%] lg:w-[120%] h-[400px] lg:h-[477px] lg:-mr-[100px] justify-self-end rounded-[20px] lg:rounded-l-[30px] lg:rounded-r-none border-[7px] border-white shadow-[0px_40px_50px_0px_rgba(17,16,76,0.15)] overflow-hidden bg-white">
-               <AboutAssetImage src={parkingLot.image} alt={parkingLot.imageAlt} className="h-full w-full object-cover object-[0%_20%]" rounded="rounded-none border-none" />
+            <div className="relative w-full md:w-[120%] h-[400px] md:h-[900px] md:min-h-[900px] lg:h-full lg:min-h-[700px] md:-mr-[100px] justify-self-end lg:self-stretch rounded-[20px] md:rounded-l-[30px] md:rounded-r-none border-[7px] border-white shadow-[0px_40px_50px_0px_rgba(17,16,76,0.15)] overflow-hidden bg-white">
+               <AboutAssetImage
+                 src={parkingLot.image}
+                 alt={parkingLot.imageAlt}
+                 className="h-full w-full border-none bg-white"
+                 rounded="rounded-none border-none"
+                 objectPositionClass="object-[center_top]"
+                 imageClassName="origin-[center_top] scale-[1.28]"
+               />
             </div>
           </article>
         </div>
@@ -107,7 +115,7 @@ export function AboutStoryTimeline() {
         </div>
 
         {/* Upwork/Fiverr Comparison Block with high-fidelity styling */}
-        <div className="relative mt-2 lg:mt-4 max-w-[1100px] mx-auto px-4">
+        <div className="relative z-30 mt-2 lg:mt-4 max-w-[1100px] mx-auto px-4 min-[2560px]:mb-40 min-[4000px]:mb-[calc(var(--spacing)*100)]">
           {/* Background Blur Blobs */}
           <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[300px] h-[300px] bg-[#7CC2F9]/20 blur-[80px] rounded-full pointer-events-none" />
           <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[300px] h-[300px] bg-[#DE55AB]/20 blur-[80px] rounded-full pointer-events-none" />

@@ -21,7 +21,7 @@ const CARD_BORDER_GRADIENT_PINK =
 
 export function AboutNumbersThatMatter() {
   return (
-    <section className="relative z-20 bg-[#11104C] pt-0 pb-0 text-white">
+    <section className="relative z-20 bg-[#11104C] pt-0 pb-0 text-white min-[2560px]:mt-0 min-[2560px]:pt-12 min-[4000px]:mt-0 min-[4000px]:pt-20">
       {/* Background radial glows from design */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.2)_0%,transparent_60%)] mix-blend-screen blur-[80px]" />
@@ -29,7 +29,7 @@ export function AboutNumbersThatMatter() {
       </div>
 
       <Container className="relative z-30 max-w-[1440px] px-6 lg:px-20">
-        <h2 className="font-[var(--font-poppins)] text-center leading-none -mt-4 lg:-mt-8 lg:leading-none">
+        <h2 className="font-[var(--font-poppins)] text-center leading-none -mt-4 lg:-mt-8 min-[2560px]:mt-0 min-[4000px]:mt-2 lg:leading-none">
           The Numbers That Matter
         </h2>
         <div className="mx-auto mt-10 grid max-w-[1100px] gap-x-6 gap-y-12 md:grid-cols-2 md:gap-8 lg:mt-16 lg:gap-12 xl:grid-cols-3">
