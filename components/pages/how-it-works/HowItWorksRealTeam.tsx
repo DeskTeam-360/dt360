@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksRealTeam } from "@/data/howItWorks";
 import { cn } from "@/lib/utils";
 
@@ -74,12 +74,11 @@ export function HowItWorksRealTeam() {
 
             {/* Photo */}
             <div className="overflow-hidden rounded-[22px] shadow-none">
-              <SafeImage
+              <MarketingSafeImage
                 src={photoSrc}
                 alt={photoAlt}
                 width={900}
                 height={600}
-                unoptimized
                 className="h-auto w-full object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />

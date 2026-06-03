@@ -4,7 +4,7 @@ import {
   serviceFaqIllustrationWrapperClassName,
 } from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { BOOK_A_CALL_FORM_BG, bookACallHero, bookACallHeroOverlapClasses } from "@/data/bookACall";
 import { cn } from "@/lib/utils";
 
@@ -52,7 +52,7 @@ export function BookACallHero() {
                   "relative z-40 md:max-w-[300px] lg:max-w-[360px] xl:max-w-[430px]",
                 )}
               >
-                <SafeImage
+                <MarketingSafeImage
                   src={heroImageSrc}
                   alt={heroImageAlt}
                   width={heroImageMaxWidth}

@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { contactHero } from "@/data/contact";
 
 export function ContactHero() {
@@ -27,7 +27,7 @@ export function ContactHero() {
           </div>
 
           <div className="relative z-20 min-w-0 w-full lg:mx-0 lg:ml-auto">
-            <SafeImage
+            <MarketingSafeImage
               src={heroImageSrc}
               alt={heroImageAlt}
               width={540}

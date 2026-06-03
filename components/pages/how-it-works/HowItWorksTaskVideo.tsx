@@ -1,4 +1,4 @@
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksTaskSection } from "@/data/howItWorks";
 
 export function HowItWorksTaskVideo() {
@@ -26,12 +26,11 @@ export function HowItWorksTaskVideo() {
           className="absolute w-[482px] max-w-[482px]"
           style={{ left: "-11em", top: "10em" }}
         >
-          <SafeImage
+          <MarketingSafeImage
             src={ornamentLeftSrc}
             alt={ornamentLeftAlt}
             width={482}
             height={475}
-            unoptimized
             className="h-auto w-full object-contain"
             sizes="482px"
           />
@@ -41,12 +40,11 @@ export function HowItWorksTaskVideo() {
           className="absolute w-[752px] max-w-[752px]"
           style={{ bottom: 0, right: "-22em" }}
         >
-          <SafeImage
+          <MarketingSafeImage
             src={ornamentRightSrc}
             alt={ornamentRightAlt}
             width={752}
             height={743}
-            unoptimized
             className="h-auto w-full object-contain"
             sizes="752px"
           />

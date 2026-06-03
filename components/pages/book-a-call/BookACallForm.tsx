@@ -8,7 +8,7 @@ import {
   serviceFaqIllustrationWrapperClassName,
 } from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { cn } from "@/lib/utils";
 import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHeroOverlapClasses } from "@/data/bookACall";
 import { listBookACallFieldErrorMessages, type BookACallFieldErrors } from "@/lib/book-a-call-errors";
@@ -156,7 +156,7 @@ export function BookACallForm() {
           className="pointer-events-none absolute left-[-10%] top-[50%] z-[1] sm:left-[-10%] lg:left-[-10%] lg:top-50"
           aria-hidden
         >
-          <SafeImage
+          <MarketingSafeImage
             src={formBubbleSrc}
             alt={formBubbleAlt}
             width={368}
@@ -203,7 +203,7 @@ export function BookACallForm() {
                   "max-lg:max-w-[min(100%,320px)] lg:max-w-[520px]",
                 )}
               >
-                <SafeImage
+                <MarketingSafeImage
                   src={womanImageSrc}
                   alt={womanImageAlt}
                   width={560}

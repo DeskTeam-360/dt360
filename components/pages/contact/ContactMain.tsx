@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { contactAssets, contactIntro, contactOrnamentStyles } from "@/data/contact";
 import { ContactForm } from "./ContactForm";
 import { ContactOfficeHours } from "./ContactOfficeHours";
@@ -22,7 +22,7 @@ export function ContactMain() {
 
       <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
         <div className="relative mx-auto max-w-[1100px] overflow-visible text-center">
-          <SafeImage
+          <MarketingSafeImage
             src={contactAssets.ornament}
             alt=""
             width={360}
@@ -49,7 +49,7 @@ export function ContactMain() {
               }}
               aria-hidden
             />
-            <SafeImage
+            <MarketingSafeImage
               src={contactAssets.formIllustration}
               alt="Team member at desk with headset and support icons"
               width={560}
@@ -64,7 +64,7 @@ export function ContactMain() {
         </div>
 
         <div className="relative mx-auto mt-12 max-w-[1000px] overflow-visible md:mt-16 lg:mt-[10em]">
-          <SafeImage
+          <MarketingSafeImage
             src={contactAssets.ornament}
             alt=""
             width={360}

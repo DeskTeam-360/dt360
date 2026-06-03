@@ -1,6 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { HeroCtaLink } from "@/components/shared/HeroCtaLink";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksReadyCta } from "@/data/howItWorks";
 
 export function HowItWorksReadyCta() {
@@ -41,7 +41,7 @@ export function HowItWorksReadyCta() {
 
           <div className="order-2 mt-8 flex w-full justify-center px-2 pb-0 lg:order-2 lg:relative lg:mt-0 lg:min-h-[500px] lg:items-end lg:justify-center lg:px-0">
             <div className="relative flex w-full max-w-md items-end justify-center lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-[-18rem] lg:max-w-none xl:top-[-22rem]">
-              <SafeImage
+              <MarketingSafeImage
                 src={imageSrc}
                 alt={imageAlt}
                 width={800}

@@ -35,6 +35,7 @@ export function ContactOfficeHours() {
               alt=""
               width={48}
               height={48}
+              sizes="48px"
               className="size-10 shrink-0 object-contain sm:size-12"
               aria-hidden
             />
@@ -48,6 +49,7 @@ export function ContactOfficeHours() {
               alt=""
               width={48}
               height={48}
+              sizes="48px"
               className="size-10 shrink-0 object-contain sm:size-12"
               aria-hidden
             />

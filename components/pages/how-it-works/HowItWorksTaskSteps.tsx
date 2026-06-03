@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksTaskSection } from "@/data/howItWorks";
 import { cn } from "@/lib/utils";
 
@@ -57,12 +57,12 @@ export function HowItWorksTaskSteps() {
                     )}
                   >
                     <div className="flex items-center justify-center gap-5">
-                      <SafeImage
+                      <MarketingSafeImage
                         src={iconSrc}
                         alt={`${step.stepLabel} icon`}
                         width={80}
                         height={80}
-                        unoptimized
+                        sizes="80px"
                         className="h-auto w-auto max-h-[80px] object-contain"
                       />
                       <span className="shrink-0 whitespace-nowrap text-[32px] font-semibold">{step.stepLabel}</span>

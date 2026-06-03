@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { HowItWorksTaskVideo } from "@/components/pages/how-it-works/HowItWorksTaskVideo";
 import { howItWorksHero } from "@/data/howItWorks";
 import { avoidOrphansInPhrase } from "@/lib/utils";
@@ -49,12 +49,11 @@ export function HowItWorksHero() {
             </div>
           </div>
           <div className="relative order-1 mx-auto flex w-full justify-center lg:order-2">
-            <SafeImage
+            <MarketingSafeImage
               src={heroImageSrc}
               alt={heroImageAlt}
               width={720}
               height={640}
-              unoptimized
               priority
               className="h-auto w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
               sizes="(max-width: 1024px) 90vw, 46vw"
@@ -65,13 +64,13 @@ export function HowItWorksHero() {
           className="pointer-events-none absolute top-[100%] bottom-0 left-1/2 z-[1] w-screen -translate-x-1/2 min-[2560px]:left-[-115%] min-[2560px]:w-[150vw] min-[2560px]:translate-x-0 min-[4000px]:w-[140vw] min-[4000px]:translate-x-[calc(var(--spacing)*-300)]"
           aria-hidden
         >
-          <SafeImage
+          <MarketingSafeImage
             src="/images/how it works/dt360-arrow-bottom-hero-uploaded-v3-transparent.png"
             alt=""
             width={1920}
             height={220}
-            unoptimized
             priority
+            sizes="100vw"
             className="h-auto w-full"
           />
         </div>

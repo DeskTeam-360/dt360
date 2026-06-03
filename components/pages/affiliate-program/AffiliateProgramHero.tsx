@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { HeroCtaLink } from "@/components/shared/HeroCtaLink";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { affiliateProgramHero } from "@/data/affiliateProgram";
 
 export function AffiliateProgramHero() {
@@ -57,7 +57,7 @@ export function AffiliateProgramHero() {
 
           <div className="relative z-20 min-w-0 overflow-hidden lg:mx-0 lg:ml-auto">
             <div className="mx-auto flex w-full justify-center lg:justify-end">
-              <SafeImage
+              <MarketingSafeImage
                 src={heroImageSrc}
                 alt={heroImageAlt}
                 width={540}

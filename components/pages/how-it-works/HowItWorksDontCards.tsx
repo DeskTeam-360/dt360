@@ -1,6 +1,6 @@
 "use client";
 
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import type { HowItWorksDontItem } from "@/data/howItWorks";
 
 const CARD_SIZE_CLASS = "h-[17em] w-[13em]";
@@ -49,11 +49,12 @@ function DontScopeCard({ item }: { item: HowItWorksDontItem }) {
         ×
       </span>
       <div className="pointer-events-none absolute left-1/2 top-0 z-[98] flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-solid border-white bg-[#02063B] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
-        <SafeImage
+        <MarketingSafeImage
           src={item.iconSrc}
           alt={item.iconAlt}
           width={75}
           height={75}
+          sizes="75px"
           className="h-[75px] w-[75px] object-contain"
         />
       </div>

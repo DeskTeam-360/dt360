@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksMeetSection } from "@/data/howItWorks";
 import { avoidOrphansInPhrase, cn } from "@/lib/utils";
 
@@ -46,21 +46,23 @@ export function HowItWorksMeetGrid() {
       <Container className="relative z-10 max-w-[1440px] lg:px-10">
         <div className="relative flex flex-col items-center text-center">
           <div className="pointer-events-none absolute -left-10 top-1/2 z-0 hidden w-[min(28vw,300px)] -translate-y-1/2 lg:block xl:left-8">
-            <SafeImage
+            <MarketingSafeImage
               src="/images/how it works/dt360 buble with computer.png"
               alt=""
               width={500}
               height={842}
+              sizes="300px"
               className="-ml-[150px] h-auto w-full max-w-[300px] bg-transparent opacity-90 mix-blend-screen"
               aria-hidden
             />
           </div>
           <div className="pointer-events-none absolute -right-10 top-1/2 z-0 hidden w-[min(28vw,300px)] translate-x-[80px] -translate-y-[calc(50%+50px)] lg:block xl:-right-20">
-            <SafeImage
+            <MarketingSafeImage
               src="/images/how it works/dt360 buble with tablet.png"
               alt=""
               width={500}
               height={842}
+              sizes="300px"
               className="h-auto w-full max-w-[300px] bg-transparent opacity-90 mix-blend-screen"
               aria-hidden
             />
@@ -97,11 +99,12 @@ export function HowItWorksMeetGrid() {
                       : "h-[70px] w-[70px] items-center md:items-start",
                   )}
                 >
-                  <SafeImage
+                  <MarketingSafeImage
                     src={card.iconSrc}
                     alt={card.iconAlt}
                     width={70}
                     height={wideIconCard ? 50 : 70}
+                    sizes="70px"
                     className={cn(
                       "object-contain md:object-top",
                       wideIconCard ? "h-auto w-full max-h-full max-w-[70px] md:max-h-[50px]" : "h-[70px] w-[70px]",
@@ -112,11 +115,12 @@ export function HowItWorksMeetGrid() {
               <ul className="mt-5 space-y-3 text-left">
                 {card.bullets.map((line) => (
                   <li key={line} className="type-rule-p flex items-start justify-start gap-3 text-black">
-                    <SafeImage
+                    <MarketingSafeImage
                       src="/images/how-it-works-black-checklist.png"
                       alt=""
                       width={18}
                       height={18}
+                      sizes="18px"
                       className="mt-0.5 h-[18px] w-[18px] shrink-0"
                       aria-hidden
                     />

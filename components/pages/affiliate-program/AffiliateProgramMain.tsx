@@ -1,6 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { HeroCtaLink } from "@/components/shared/HeroCtaLink";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import {
   affiliateAssets,
   affiliateProgramEasyAccess,
@@ -57,7 +57,7 @@ function AffiliateFeatureCard({
             imageSide === "left" ? "order-1 lg:justify-start" : "order-2 lg:order-2 lg:justify-end",
           )}
         >
-          <SafeImage
+          <MarketingSafeImage
             src={imageSrc}
             alt={imageAlt}
             width={420}
@@ -112,7 +112,7 @@ export function AffiliateProgramMain() {
       {/* Become a partner — yellow panel flush to viewport left */}
       <div className="relative z-10 min-h-[380px] pt-4 md:min-h-0 lg:pt-8">
         {/* Ornamen kanan — top sejajar blok Become a Partner */}
-        <SafeImage
+        <MarketingSafeImage
           src={affiliateAssets.ornament}
           alt=""
           width={360}
@@ -129,7 +129,7 @@ export function AffiliateProgramMain() {
           <div className="grid items-center gap-10 md:justify-items-center lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:justify-items-stretch lg:gap-16">
             <div className="relative z-10 min-h-[320px] w-full sm:min-h-[380px] lg:min-h-[425px]">
               <div className="flex w-full justify-center lg:justify-start lg:pl-6">
-                <SafeImage
+                <MarketingSafeImage
                   src={coinImageSrc}
                   alt={coinImageAlt}
                   width={420}
