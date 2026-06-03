@@ -6,7 +6,7 @@ import {
   serviceFaqIllustrationImageClassName,
   serviceFaqIllustrationWrapperClassName,
 } from "@/components/pages/service/shared/ServiceFaqIllustration";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { cn } from "@/lib/utils";
 
 const FAQ_ITEMS = [
@@ -50,6 +50,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
         src="/images/dt360-faq-bg-service.png"
         alt=""
         fill
+        sizes="100vw"
         className="pointer-events-none object-cover object-center"
         aria-hidden
       />
@@ -63,7 +64,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
           )}
         >
           {isWebDev ? (
-            <SafeImage
+            <ServiceSafeImage
               src={illustrationSrc}
               alt="FAQ illustration with code editor monitor and web development icons"
               width={640}

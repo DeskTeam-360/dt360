@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 const platforms = [
   { src: "/images/Email - Platform HighLevel.png", alt: "HighLevel" },
@@ -22,28 +22,28 @@ export function PlatformsSupported() {
 
   return (
     <section className="relative overflow-hidden bg-[#fbf8ff] py-16 sm:py-20 lg:py-24">
-<SafeImage
+<ServiceSafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
         alt=""
         width={420}
         height={420}
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
         width={600}
         height={600}
         className="pointer-events-none absolute right-[-8%] top-[-20%] hidden h-auto w-[20vw] opacity-50 sm:block lg:w-[30vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src={`/images/${encodeURIComponent("bubble service testimonial.png")}`}
         alt=""
         width={140}
         height={220}
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Oval Purple.png"
         alt=""
         width={420}
@@ -58,7 +58,7 @@ export function PlatformsSupported() {
         {/* Mobile + tablet: 1 per row → md: 3 per row */}
         <div className="mx-auto mt-16 grid max-w-[1100px] grid-cols-1 items-center justify-items-center gap-x-10 gap-y-8 md:grid-cols-3 lg:mt-20 lg:hidden">
           {platforms.map((platform) => (
-            <SafeImage
+            <ServiceSafeImage
               key={platform.alt}
               src={platform.src}
               alt={platform.alt}
@@ -73,7 +73,7 @@ export function PlatformsSupported() {
         <div className="mx-auto mt-16 hidden max-w-[1100px] flex-col items-center gap-10 lg:mt-20 lg:flex">
           <div className="grid w-full grid-cols-5 items-center justify-items-center gap-x-6 gap-y-8 lg:gap-x-10">
             {desktopFirstRow.map((platform) => (
-              <SafeImage
+              <ServiceSafeImage
                 key={platform.alt}
                 src={platform.src}
                 alt={platform.alt}
@@ -85,7 +85,7 @@ export function PlatformsSupported() {
           </div>
           <div className="flex w-full flex-wrap justify-center gap-x-8 gap-y-8 lg:gap-x-12">
             {desktopSecondRow.map((platform) => (
-              <SafeImage
+              <ServiceSafeImage
                 key={platform.alt}
                 src={platform.src}
                 alt={platform.alt}

@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 const platforms = [
   { src: "/images/Social - Platform FB.png", alt: "Facebook" },
@@ -13,28 +13,28 @@ const platforms = [
 export function PlatformsSupported() {
   return (
     <section className="relative overflow-hidden bg-[#fbf8ff] py-16 sm:py-20 lg:py-24">
-<SafeImage
+<ServiceSafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
         alt=""
         width={420}
         height={420}
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
         width={600}
         height={600}
         className="pointer-events-none absolute right-[-8%] top-[-20%] hidden h-auto w-[20vw] opacity-50 sm:block lg:w-[30vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src={`/images/${encodeURIComponent("bubble service testimonial.png")}`}
         alt=""
         width={140}
         height={220}
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Oval Purple.png"
         alt=""
         width={420}
@@ -47,7 +47,7 @@ export function PlatformsSupported() {
         </h2>
         <div className="mx-auto mt-16 grid max-w-[900px] grid-cols-3 items-center justify-items-center gap-6 sm:gap-8 lg:mt-20 lg:grid-cols-6 lg:gap-10">
           {platforms.map((platform) => (
-            <SafeImage
+            <ServiceSafeImage
               key={platform.alt}
               src={platform.src}
               alt={platform.alt}

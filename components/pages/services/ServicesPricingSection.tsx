@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Montserrat, Readex_Pro } from "next/font/google";
 import { pricingCheckoutUrls } from "@/config/urls";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
@@ -78,6 +78,7 @@ function CheckIcon({ className }: { className?: string }) {
       alt=""
       width={20}
       height={20}
+      sizes="20px"
       className={className}
       aria-hidden
     />
@@ -111,11 +112,12 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
             className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden bg-white md:block md:-top-36 lg:-top-40 xl:hidden"
             aria-hidden
           />
-          <SafeImage
+          <ServiceSafeImage
             src="/images/Service/web-design-dev-pricing-bottom-left.png"
             alt=""
             width={500}
             height={500}
+            sizes="(max-width: 1280px) 40vw, 500px"
             className="pointer-events-none absolute bottom-0 left-0 z-[1] h-auto w-[30%] max-w-none object-contain object-left-bottom"
           />
         </>
@@ -136,6 +138,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         alt=""
         width={540}
         height={714}
+        sizes="(max-width: 1280px) 52vw, 520px"
         className="pointer-events-none absolute right-0 top-0 z-[1] h-auto w-[min(52vw,420px)] max-w-none opacity-95 md:w-[min(44vw,480px)] xl:w-[min(38vw,520px)]"
       />
 

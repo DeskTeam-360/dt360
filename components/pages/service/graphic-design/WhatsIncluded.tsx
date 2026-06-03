@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 const includedItems = [
   "Ad creatives for Facebook, Instagram, Google, and LinkedIn",
@@ -39,7 +39,7 @@ export function WhatsIncluded() {
 
   return (
     <div className="relative overflow-hidden bg-transparent py-10 text-white sm:py-14 xl:py-18 2xl:py-24">
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={460}
@@ -53,7 +53,7 @@ export function WhatsIncluded() {
             We Handle All of Your <span className="text-[#f6b22e]">Graphic Design</span> Needs
           </h2>
           <div className="flex w-full justify-center">
-            <SafeImage
+            <ServiceSafeImage
               src="/images/Service - Graphic Whats Included.png"
               alt="Graphic design workstation illustration"
               width={760}
@@ -68,7 +68,7 @@ export function WhatsIncluded() {
                   key={`${pageIndex}-${item}-${idx}`}
                   className="relative rounded-2xl border border-white/20 bg-white/8 py-3 pl-14 pr-3 backdrop-blur-[2px] sm:py-4 sm:pl-16 sm:pr-4"
                 >
-                  <SafeImage
+                  <ServiceSafeImage
                     src="/images/Service - Checklist.png"
                     alt=""
                     width={40}

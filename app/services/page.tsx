@@ -103,6 +103,7 @@ export default async function ServicesPage() {
           alt=""
           fill
           priority
+          sizes="100vw"
           className="object-cover object-[50%_100%] min-[2560px]:object-[50%_92%]"
         />
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
@@ -130,6 +131,7 @@ export default async function ServicesPage() {
               width={736}
               height={758}
               priority
+              sizes="(max-width: 1279px) 100vw, 736px"
               className="h-auto w-full"
             />
           </div>
@@ -191,7 +193,6 @@ export default async function ServicesPage() {
                         width={200}
                         height={200}
                         sizes="200px"
-                        unoptimized
                         className="h-[200px] w-[200px] object-contain transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-2"
                       />
                     </div>

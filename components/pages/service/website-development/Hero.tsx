@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { ServiceHeroIncludedChecklist } from "@/components/pages/service/shared/ServiceHeroIncludedChecklist";
 
 const includedPages = [
@@ -28,14 +28,14 @@ const includedItems = includedPages.flat();
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Red.png"
         alt=""
         width={380}
         height={380}
         className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={420}
@@ -69,18 +69,19 @@ export function Hero() {
               className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
               aria-hidden
             />
-            <SafeImage
+            <ServiceSafeImage
               src="/images/web-development-hero.png"
               alt="3D illustration of a developer on a laptop with floating code editor and website layout windows"
               width={820}
               height={620}
               priority
-              className="relative z-10 h-auto w-full"
+              sizes="(max-width: 1023px) 90vw, 820px"
+              className="relative z-10 h-auto w-full drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]"
             />
           </div>
         </div>
       </Container>
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={460}
@@ -97,11 +98,12 @@ export function Hero() {
             We Handle All of Your <span className="text-[#f6b22e]">Web Development</span> Needs
           </h2>
           <div className="flex w-full justify-center">
-            <SafeImage
+            <ServiceSafeImage
               src="/images/Service/web-development-we-handle.png"
               alt="3D illustration of a developer at a multi-monitor desk with BUILD A WEBSITE on screen, Elementor, Divi, Duda, and responsive devices"
               width={760}
               height={620}
+              sizes="(max-width: 1023px) 100vw, 620px"
               className="h-auto w-full max-w-[620px]"
             />
           </div>

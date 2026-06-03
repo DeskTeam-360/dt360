@@ -1,5 +1,5 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 const bullets = [
   "Marketing agencies extending delivery bandwidth",
@@ -11,28 +11,28 @@ const bullets = [
 export function WhoItsFor() {
   return (
     <section className="relative overflow-hidden bg-white pt-20 pb-12 sm:pt-24 sm:pb-14 lg:pt-28 lg:pb-16 2xl:pt-36 2xl:pb-20">
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
         alt=""
         width={420}
         height={420}
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
         width={600}
         height={600}
         className="pointer-events-none absolute right-[-8%] top-[-20%] hidden h-auto w-[20vw] opacity-50 sm:block lg:w-[30vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src={`/images/${encodeURIComponent("bubble service testimonial.png")}`}
         alt=""
         width={140}
         height={220}
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Oval Purple.png"
         alt=""
         width={420}
@@ -50,7 +50,7 @@ export function WhoItsFor() {
                 key={item}
                 className="relative rounded-2xl border border-white bg-gradient-to-r from-white/12 to-[#e3058d]/12 py-3 pl-14 pr-3 sm:py-4 sm:pl-16 sm:pr-4"
               >
-                <SafeImage
+                <ServiceSafeImage
                   src="/images/Service - Checklist.png"
                   alt=""
                   width={40}
@@ -64,7 +64,7 @@ export function WhoItsFor() {
             ))}
           </div>
           <div className="relative mx-auto w-full max-w-[560px]">
-            <SafeImage
+            <ServiceSafeImage
               src="/images/White Label - Who It's For.png"
               alt="Who white label partnerships illustration"
               width={820}

@@ -22,7 +22,14 @@ export function ServicesFloatingFeaturesBar() {
               ) : null}
               <div className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-xl">
                 {item.iconSrc ? (
-                  <Image src={item.iconSrc} alt="" width={123} height={123} className="h-[123px] min-h-[123px] w-auto object-contain" />
+                  <Image
+                    src={item.iconSrc}
+                    alt=""
+                    width={123}
+                    height={123}
+                    sizes="123px"
+                    className="h-[123px] min-h-[123px] w-auto object-contain"
+                  />
                 ) : (
                   <span className="text-[11px] font-medium uppercase tracking-wide text-white/35">Icon</span>
                 )}

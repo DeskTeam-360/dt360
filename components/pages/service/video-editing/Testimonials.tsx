@@ -1,31 +1,31 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 export function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-[#f9f6ff] py-20 sm:py-24 lg:py-28 2xl:py-36">
-<SafeImage
+<ServiceSafeImage
         src="/images/Service - Testimonial Graphic BG Left.png"
         alt=""
         width={420}
         height={420}
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
         width={600}
         height={600}
         className="pointer-events-none absolute right-[-8%] top-[-20%] hidden h-auto w-[20vw] opacity-50 sm:block lg:w-[30vw]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src={`/images/${encodeURIComponent("bubble service testimonial.png")}`}
         alt=""
         width={140}
         height={220}
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Oval Purple.png"
         alt=""
         width={420}
@@ -42,7 +42,7 @@ export function Testimonials() {
         <div className="mx-auto mt-12 max-w-[1040px] sm:mt-14">
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-12">
             <div className="relative h-[228px] w-[228px] shrink-0 sm:h-[238px] sm:w-[238px] lg:h-[246px] lg:w-[246px]">
-              <SafeImage
+              <ServiceSafeImage
                 src="/images/Service - Testimonial Quotes.png"
                 alt=""
                 width={104}
@@ -50,7 +50,7 @@ export function Testimonials() {
                 className="absolute left-[calc(var(--spacing)*-10)] top-[10%] z-20 h-auto w-[86px] opacity-70 sm:w-[104px]"
               />
               <div className="relative z-10 h-full w-full overflow-hidden rounded-full">
-                <SafeImage
+                <ServiceSafeImage
                   src="/images/Service - Video Testimonial Person.png"
                   alt="Portrait of testimonial clients"
                   fill

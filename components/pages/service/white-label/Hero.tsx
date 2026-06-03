@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { ServiceHeroIncludedChecklist } from "@/components/pages/service/shared/ServiceHeroIncludedChecklist";
 
 const includedItems = [
@@ -14,14 +14,14 @@ const includedItems = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(#02063B_0%,#02063B_50%,#E6236D_100%)] pb-10 pt-32 text-white sm:pb-12 xl:pt-40 xl:pb-14 2xl:pb-16">
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Red.png"
         alt=""
         width={380}
         height={380}
         className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={420}
@@ -51,18 +51,19 @@ export function Hero() {
               className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
               aria-hidden
             />
-            <SafeImage
+            <ServiceSafeImage
               src="/images/Service - White Label - hero.png"
               alt="Hero illustration for white label agency service"
               width={820}
               height={620}
               priority
+              sizes="(max-width: 1023px) 90vw, 820px"
               className="relative z-10 h-auto w-full"
             />
           </div>
         </div>
       </Container>
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Ellipse Blue.png"
         alt=""
         width={460}
@@ -76,11 +77,12 @@ export function Hero() {
             We Handle All of Your <span className="text-[#f6b22e]">White Label Agency</span> Needs
           </h2>
           <div className="flex w-full justify-center">
-            <SafeImage
+            <ServiceSafeImage
               src="/images/White Label - Whats Included.png"
               alt="White label agency workstation illustration"
               width={760}
               height={620}
+              sizes="(max-width: 1023px) 100vw, 620px"
               className="h-auto w-full max-w-[620px]"
             />
           </div>

@@ -33,7 +33,8 @@ export function ServiceFaqIllustration({
         alt={alt}
         width={width}
         height={height}
-        sizes={sizes}
+        sizes={sizes ?? "(max-width: 1023px) 90vw, 560px"}
+        optimized
         className={cn(serviceFaqIllustrationImageClassName, imageClassName)}
       />
     </div>

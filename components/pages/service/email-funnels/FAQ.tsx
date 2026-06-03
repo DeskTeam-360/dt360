@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { ServiceFaqIllustration } from "@/components/pages/service/shared/ServiceFaqIllustration";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 const faqs = [
   {
@@ -24,24 +24,25 @@ export function FAQ() {
   return (
     <section className="relative overflow-visible max-md:overflow-x-visible pb-20 pt-8 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 2xl:pb-36 2xl:pt-36">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <SafeImage
+        <ServiceSafeImage
           src="/images/Service - FAQ BG.png"
           alt=""
           width={1600}
           height={560}
+          sizes="100vw"
           className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center"
         />
       </div>
      
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Graphic Code.png"
         alt=""
         width={512}
         height={512}
         className="pointer-events-none absolute z-[2] -top-45 -left-14 h-auto w-auto max-w-[min(100px,26vw)] max-md:left-0 sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Graphic Design.png"
         alt=""
         width={512}

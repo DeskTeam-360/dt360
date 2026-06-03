@@ -1,18 +1,18 @@
 import { Container } from "@/components/shared/Container";
-import { SafeImage } from "@/components/shared/SafeImage";
+import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
 export function CaseStudy() {
   return (
     <section className="relative overflow-hidden bg-white pt-10 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28 2xl:pt-16 2xl:pb-36">
       {/* Bottom-left: red radial behind decorative image (~10% larger) — visible all breakpoints */}
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic Radial Red.png"
         alt=""
         width={500}
         height={500}
         className="pointer-events-none absolute bottom-[-6%] left-[-6%] z-0 block h-auto w-[min(42vw,200px)] opacity-75 sm:bottom-[-8%] sm:left-[-4%] sm:w-[min(38vw,240px)] md:w-[264px] lg:bottom-[-6%] lg:left-[2%] lg:w-[330px]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/Service - Testimonial Graphic BG Right.png"
         alt=""
         width={420}
@@ -20,14 +20,14 @@ export function CaseStudy() {
         className="pointer-events-none absolute bottom-[-4%] left-[-12%] z-[1] block h-auto w-[min(68vw,280px)] -scale-x-100 opacity-90 sm:bottom-0 sm:left-[-18%] sm:w-[min(58vw,380px)] md:left-[calc(var(--spacing)*-40)] md:w-[min(55vw,420px)] lg:left-[calc(var(--spacing)*-50)] lg:w-[484px]"
       />
       {/* Top-right: cyan w-50%; negative right only from md+ so mobile/tablet stay inside overflow clip */}
-      <SafeImage
+      <ServiceSafeImage
         src="/images/White Label - Cyan Round BG.png"
         alt=""
         width={1600}
         height={900}
         className="pointer-events-none absolute top-0 z-0 h-auto w-1/2 max-w-none object-right object-top right-0 sm:right-[-3rem] md:right-[-10rem] lg:right-[-20rem]"
       />
-      <SafeImage
+      <ServiceSafeImage
         src="/images/White Label - Case Study Top Right Image.png"
         alt=""
         width={720}
@@ -41,7 +41,7 @@ export function CaseStudy() {
         <div className="mx-auto mt-12 max-w-[1040px] sm:mt-14">
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-12">
             <div className="relative h-[228px] w-[228px] shrink-0 sm:h-[238px] sm:w-[238px] lg:h-[246px] lg:w-[246px]">
-              <SafeImage
+              <ServiceSafeImage
                 src="/images/Service - Testimonial Quotes.png"
                 alt=""
                 width={104}
@@ -49,7 +49,7 @@ export function CaseStudy() {
                 className="absolute left-[calc(var(--spacing)*-10)] top-[10%] z-20 h-auto w-[86px] opacity-70 sm:w-[104px]"
               />
               <div className="relative z-10 h-full w-full overflow-hidden rounded-full border-4 border-white/80 shadow-lg">
-                <SafeImage
+                <ServiceSafeImage
                   src="/images/White Label - Case Study Person.png"
                   alt="Portrait for case study"
                   fill
