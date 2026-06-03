@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-x-hidden overflow-y-hidden bg-[#11104C] pb-0 pt-26"
+      className="relative z-10 overflow-x-hidden overflow-y-hidden bg-[#11104C] pb-0 pt-26"
       aria-labelledby="hero-heading"
     >
       {/* Same Figma corner treatment as navbar — continues the cyan “arc” into hero */}
@@ -65,9 +65,9 @@ export function Hero() {
         <HeroStatsBar className="mt-[50px]" />
       </Container>
 
-      {/* Hero → white transition: one wide arc (half ellipse), not a wave */}
+      {/* Hero → white transition: one wide arc (half ellipse), not a wave — z-20 stays below navbar (z-50); hero section z-10 keeps arc above TeamMembers */}
       <div
-        className="relative bottom-[-2px] z-50 mt-10 w-full overflow-y-hidden text-white sm:mt-12 lg:mt-20"
+        className="relative bottom-[-2px] z-20 mt-10 w-full overflow-y-hidden text-white sm:mt-12 lg:mt-20"
         aria-hidden
       >
         <svg

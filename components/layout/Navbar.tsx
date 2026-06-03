@@ -88,7 +88,7 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)] transition-[background-color] duration-300 ease-out",
+          "fixed inset-x-0 top-0 z-[60] border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)] transition-[background-color] duration-300 ease-out",
           showSolidHeader ? "bg-[#11104C]" : "bg-transparent"
         )}
       >
