@@ -10,6 +10,7 @@ const INITIAL_ROWS = 3;
 const ROWS_PER_LOAD = 2;
 
 type Props = {
+  itemsByCategory: Record<string, ShowcaseItem[]>;
   allItems: ShowcaseItem[];
   activeCategory: string;
 };
@@ -61,14 +62,13 @@ function MarqueeRow({
   );
 }
 
-export function ShowcaseGallery({ allItems, activeCategory }: Props) {
+export function ShowcaseGallery({ itemsByCategory, allItems, activeCategory }: Props) {
   const [visibleRows, setVisibleRows] = useState(INITIAL_ROWS);
   const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null);
 
   const filteredItems = useMemo(() => {
-    if (activeCategory === "All Work") return allItems;
-    return allItems.filter((item) => item.categories.includes(activeCategory));
-  }, [allItems, activeCategory]);
+    return itemsByCategory[activeCategory] ?? allItems;
+  }, [itemsByCategory, allItems, activeCategory]);
 
   const rows = useMemo(() => {
     const result: ShowcaseItem[][] = [];

@@ -26,6 +26,7 @@ export function ShowcaseContent({ categories, itemsByCategory, allItems }: Props
         onCategoryChange={setActiveCategory}
       />
       <ShowcaseGallery
+        itemsByCategory={itemsByCategory}
         allItems={allItems}
         activeCategory={activeCategory}
       />

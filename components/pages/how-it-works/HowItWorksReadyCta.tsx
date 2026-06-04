@@ -17,7 +17,7 @@ export function HowItWorksReadyCta() {
     >
       <Container className="relative max-w-[1440px] lg:px-10">
         <div className="flex w-full flex-col lg:grid lg:min-h-[min(440px,48vh)] lg:grid-cols-[minmax(0,60%)_minmax(0,40%)] lg:items-stretch">
-          <div className="order-1 flex w-full flex-col justify-center px-1 pt-16 pb-0 sm:pt-6 sm:pb-0 lg:order-1 lg:w-auto lg:max-w-none lg:flex-none lg:pt-8 lg:pb-0 lg:pr-8 xl:pt-10 xl:pb-0">
+          <div className="order-1 flex w-full flex-col justify-center px-1 py-16 sm:py-6 md:pt-12 lg:order-1 lg:w-auto lg:max-w-none lg:flex-none lg:py-8 lg:pr-8 xl:py-20">
             <h2 id="how-it-works-ready-heading" className="type-rule-h2 tracking-tight text-white">
               {title}
             </h2>

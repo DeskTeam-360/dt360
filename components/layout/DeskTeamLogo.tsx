@@ -15,7 +15,7 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
       className={
         isFooter
           ? "relative block h-9 w-[80%] shrink-0 sm:h-10"
-          : "relative flex h-9 w-[180px] shrink-0 items-center justify-center sm:h-10 sm:w-[180px]"
+          : "relative flex h-9 w-[250px] shrink-0 items-center justify-start sm:h-10 lg:w-[180px]"
       }
     >
       <LayoutSafeImage
@@ -26,9 +26,9 @@ export function DeskTeamLogo({ variant = "header", tone = "light" }: DeskTeamLog
         className={
           isFooter
             ? "h-fit w-auto object-contain object-left"
-            : "h-auto max-h-full w-auto max-w-full object-contain object-center"
+            : "h-auto max-h-full w-auto max-w-full object-contain object-left"
         }
-        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "180px"}
+        sizes={isFooter ? "(max-width: 640px) 100vw, 25vw" : "(max-width: 1023px) 250px, 180px"}
         priority
       />
     </Link>

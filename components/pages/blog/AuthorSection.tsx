@@ -12,8 +12,8 @@ export function AuthorSection() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <SafeImage
-            src="/images/blog/aouit-jeremy-bg.png"
-            alt="Author Background"
+            src="/images/blog/blog-bubble-cta-bg.png"
+            alt=""
             fill
             className="object-contain object-right"
           />

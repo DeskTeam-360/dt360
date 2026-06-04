@@ -23,14 +23,14 @@ const STEPS: HowItWorksStep[] = [
     number: "1",
     headerSrc: "/images/dt360-icon-Task-box.png",
     headerAlt: "Step 1: submit your web task",
-    description: "Submit your web task - Loom video, written brief, or quick description",
+    description: "Submit your web task - Loom video, written brief, or quick description.",
     cardBodyClass: "bg-[#0E3160]",
   },
   {
     number: "2",
     headerSrc: "/images/dt360-icon-Work-box.png",
     headerAlt: "Step 2: your account manager assigns a developer",
-    description: "Your North American account manager assigns a developer and manages the build",
+    description: "Your North American account manager assigns a developer and manages the build.",
     cardBodyClass: "bg-[#121550]",
   },
   {

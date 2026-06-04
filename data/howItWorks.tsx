@@ -17,6 +17,8 @@ export type HowItWorksMeetCard = {
 export type HowItWorksDontItem = {
   id: string;
   label: string;
+  /** Optional multi-line front label; each entry is one line. */
+  labelLines?: string[];
   /** Shown on the back of the card when flipped on hover */
   description: string;
   /** Target for “View Details >>” */
@@ -197,6 +199,7 @@ export const howItWorksDontSection = {
     {
       id: "cube",
       label: "3D Design & Animation",
+      labelLines: ["3D Design &", "Animation"],
       description:
         "Standard graphic design and 2D motion graphics are included. Complex 3D rendering and 3D modeling are not.",
       detailHref: "/services/graphic-design",

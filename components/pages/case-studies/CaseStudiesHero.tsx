@@ -65,7 +65,7 @@ export function CaseStudiesHero() {
         </Container>
 
         {/* Wave + characters — full wave visible (contain), characters overlaid */}
-        <div className="relative mt-6 w-full overflow-visible sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
+        <div className="relative mt-[100px] mb-[100px] w-full overflow-visible sm:mt-8 sm:mb-0 md:mt-10 lg:mt-12 xl:mt-14">
           <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-visible">
             <div className="relative w-full overflow-visible">
               <div className="relative w-full overflow-visible pb-[clamp(2.5rem,6vw,5rem)]">

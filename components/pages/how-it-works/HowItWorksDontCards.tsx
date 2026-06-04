@@ -24,7 +24,16 @@ function DontScopeCard({ item }: { item: HowItWorksDontItem }) {
           >
             <div className="relative flex h-full min-h-0 w-full flex-col items-center justify-center gap-y-4 rounded-[59px] bg-[#02063B] px-2.5 py-7 text-center">
               <h3 className="text-balance text-[18px] font-bold leading-snug tracking-tight text-white">
-                {item.label}
+                {item.labelLines ? (
+                  item.labelLines.map((line, i) => (
+                    <span key={line}>
+                      {i > 0 ? <br /> : null}
+                      {line}
+                    </span>
+                  ))
+                ) : (
+                  item.label
+                )}
               </h3>
             </div>
           </div>

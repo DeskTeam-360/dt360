@@ -687,6 +687,8 @@ type WpShowcaseCategoryNode = {
 };
 
 const SHOWCASE_ALL_WORK = 'All Work';
+/** Max showcase posts loaded per filter category (carousel + gallery). */
+const SHOWCASE_PER_CATEGORY_LIMIT = 300;
 
 /** Sort filter pills: All Work first, then WP taxonomy count (desc), tie-break A–Z. */
 function buildShowcaseCategoryList(
@@ -758,6 +760,16 @@ const mapShowcase = (node: WpShowcaseNode): ShowcaseItem => ({
       .filter((n): n is string => typeof n === 'string' && n.length > 0) ?? []),
   ],
 });
+
+/** Posts loaded via taxonomy relation may omit the parent term on `showcaseCategories`. */
+const withShowcaseCategory = (item: ShowcaseItem, categoryName: string): ShowcaseItem => {
+  if (item.categories.includes(categoryName)) return item;
+  return { ...item, categories: [...item.categories, categoryName] };
+};
+
+type WpShowcaseCategoryWithPosts = WpShowcaseCategoryNode & {
+  showcases?: { nodes?: WpShowcaseNode[] };
+};
 
 type WpTestimonialNode = {
   databaseId: number;
@@ -873,13 +885,47 @@ export const getShowcaseData = cache(async () => {
       }
     `;
 
+    const categoriesWithShowcasesQuery = gql`
+      query GetShowcasePostsByCategory($first: Int!) {
+        showcaseCategories(first: 100, where: { hideEmpty: true }) {
+          nodes {
+            name
+            count
+            showcases(first: $first) {
+              nodes {
+                id
+                ... on Showcase {
+                  title
+                  slug
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  showcaseCategories {
+                    nodes {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
     try {
-      const [nodesResult, categoriesResult] = await Promise.allSettled([
+      const [nodesResult, categoriesResult, byCategoryResult] = await Promise.allSettled([
         client.request<{ contentNodes?: { nodes?: WpShowcaseNode[] } }>(nodesQuery, {
-          first: 300,
+          first: SHOWCASE_PER_CATEGORY_LIMIT,
         }),
         client.request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryNode[] } }>(
           categoriesQuery,
+        ),
+        client.request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryWithPosts[] } }>(
+          categoriesWithShowcasesQuery,
+          { first: SHOWCASE_PER_CATEGORY_LIMIT },
         ),
       ]);
 
@@ -900,17 +946,35 @@ export const getShowcaseData = cache(async () => {
         );
       }
 
+      if (byCategoryResult.status === 'rejected') {
+        console.warn(
+          'Showcase per-category posts unavailable; falling back to global batch filter:',
+          byCategoryResult.reason,
+        );
+      }
+
       const categories = buildShowcaseCategoryList(taxonomyNodes, allItems);
 
-      const itemsByCategory: Record<string, ShowcaseItem[]> = {};
-      for (const cat of categories) {
-        if (cat === SHOWCASE_ALL_WORK) {
-          itemsByCategory[cat] = allItems.slice(0, 5);
-        } else {
-          itemsByCategory[cat] = allItems
-            .filter((item) => item.categories.includes(cat))
-            .slice(0, 5);
+      const itemsByCategory: Record<string, ShowcaseItem[]> = {
+        [SHOWCASE_ALL_WORK]: allItems,
+      };
+
+      if (byCategoryResult.status === 'fulfilled') {
+        for (const catNode of byCategoryResult.value.showcaseCategories?.nodes ?? []) {
+          const name = catNode.name;
+          if (typeof name !== 'string' || name.length === 0 || name === SHOWCASE_ALL_WORK) {
+            continue;
+          }
+          itemsByCategory[name] = (catNode.showcases?.nodes ?? []).map((node) =>
+            withShowcaseCategory(mapShowcase(node), name),
+          );
         }
+      }
+
+      for (const cat of categories) {
+        if (cat === SHOWCASE_ALL_WORK) continue;
+        if ((itemsByCategory[cat]?.length ?? 0) > 0) continue;
+        itemsByCategory[cat] = allItems.filter((item) => item.categories.includes(cat));
       }
 
       return {
