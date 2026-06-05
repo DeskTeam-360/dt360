@@ -1,0 +1,117 @@
+/* eslint-disable @next/next/no-img-element */
+import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
+import { numbersThatMatter } from "@/data/about";
+import { fontRussoOne } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
+const CARD_FILL_BG = "linear-gradient(225deg, #11104C 21%, #201E7A 100%)";
+/** Border: 0% #7547C5 → 46% #fff → 100% #7547C5 @ 35deg (cards idx 0 & 4) */
+const CARD_BORDER_GRADIENT_PURPLE =
+  "linear-gradient(35deg, #7547C5 0%, #ffffff 46%, #7547C5 100%)";
+/** Border: 0% #A1E6FF → 46% #fff → 100% #A1E6FF @ 35deg (card idx 2) */
+const CARD_BORDER_GRADIENT_CYAN =
+  "linear-gradient(35deg, #A1E6FF 0%, #ffffff 46%, #A1E6FF 100%)";
+/** Border: 0% #FB3A1E → 46% #ffcccc → 100% #FB3A1E @ 35deg (card idx 1) */
+const CARD_BORDER_GRADIENT_RED =
+  "linear-gradient(35deg, #FB3A1E 0%, #ffcccc 46%, #FB3A1E 100%)";
+/** Border: 0% #E61E98 → 46% #ffdef2 → 100% #E61E98 @ 35deg (cards idx 3 & 5) */
+const CARD_BORDER_GRADIENT_PINK =
+  "linear-gradient(35deg, #E61E98 0%, #ffdef2 46%, #E61E98 100%)";
+
+export function AboutNumbersThatMatter() {
+  return (
+    <section className="relative z-20 bg-[#11104C] pt-0 pb-0 text-white min-[2560px]:mt-0 min-[2560px]:pt-12 min-[4000px]:mt-0 min-[4000px]:pt-20">
+      {/* Background radial glows from design */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.2)_0%,transparent_60%)] mix-blend-screen blur-[80px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_center,rgba(117,71,197,0.3)_0%,transparent_50%)] mix-blend-screen blur-[100px]" />
+      </div>
+
+      <Container className="relative z-30 max-w-[1440px] px-6 lg:px-20">
+        <h2 className="font-[var(--font-poppins)] text-center leading-none -mt-4 lg:-mt-8 min-[2560px]:mt-0 min-[4000px]:mt-2 lg:leading-none">
+          The Numbers That Matter
+        </h2>
+        <div className="mx-auto mt-10 grid max-w-[1100px] gap-x-6 gap-y-12 md:grid-cols-2 md:gap-8 lg:mt-16 lg:gap-12 xl:grid-cols-3">
+          {numbersThatMatter.map((item, idx) => {
+            const borderGradient =
+              idx === 1
+                ? CARD_BORDER_GRADIENT_RED
+                : idx === 2
+                  ? CARD_BORDER_GRADIENT_CYAN
+                  : idx === 3 || idx === 5
+                    ? CARD_BORDER_GRADIENT_PINK
+                    : CARD_BORDER_GRADIENT_PURPLE;
+            return (
+            <div
+              key={item.value + item.label}
+              className="relative rounded-[30px] border-2 border-transparent p-6 lg:p-8 min-h-[210px] flex flex-col justify-center backdrop-blur-xl transition-transform hover:-translate-y-2 duration-300"
+              style={{
+                border: "2px solid transparent",
+                backgroundImage: `${CARD_FILL_BG}, ${borderGradient}`,
+                backgroundOrigin: "border-box",
+                backgroundClip: "padding-box, border-box",
+                boxShadow: "0px 20px 50px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              {/* Inner glow specific to each card */}
+              <div className="absolute inset-0 rounded-[30px] opacity-20 pointer-events-none mix-blend-overlay"
+                   style={{
+                     background: `radial-gradient(circle at top right, ${idx === 1 ? '#FB3A1E' : idx === 2 ? '#A1E6FF' : idx === 3 || idx === 5 ? '#E61E98' : '#7547C5'}, transparent 70%)`
+                   }}
+              />
+              <div className="relative z-10">
+                {/* 3D Icon */}
+                {idx !== 2 && (
+                  <div className="absolute -top-16 -right-6 w-24 h-24 flex items-center justify-center drop-shadow-2xl hover:-translate-y-2 transition-transform duration-300">
+                    <SafeImage
+                      src={
+                        idx === 0 ? "/images/about-rocket-icon.png" :
+                        idx === 1 ? "/images/about-person-icon.png" :
+                        idx === 3 ? "/images/about-person-blue-icon.png" :
+                        idx === 4 ? "/images/about-mail-icon.png" :
+                        "/images/about-window-icon.png"
+                      }
+                      alt={`${item.label} icon`}
+                      width={96}
+                      height={96}
+                      optimized
+                      sizes="96px"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                )}
+                <p
+                  className={cn(
+                    fontRussoOne.className,
+                    "text-5xl lg:text-[64px] lg:leading-[80px] uppercase text-white drop-shadow-lg tracking-wider",
+                  )}
+                >
+                  {item.value}
+                </p>
+                <p className="mt-4 font-[var(--font-montserrat)] text-[16px] lg:text-[18px] font-semibold leading-[30px] text-white/90">
+                  {item.label}
+                </p>
+              </div>
+            </div>
+            );
+          })}
+        </div>
+      </Container>
+
+      {/* Section Separator Image (Reversed) */}
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 w-full translate-y-[98%] rotate-180 leading-[0]">
+        <div className="relative min-h-[50px] w-full lg:min-h-[100px]">
+          <SafeImage
+            src="/images/about-section-separator.png"
+            alt=""
+            fill
+            optimized
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

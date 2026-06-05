@@ -1,0 +1,83 @@
+import Image from "next/image";
+import { Container } from "@/components/shared/Container";
+import { pricingSection } from "@/data/home";
+import { PricingPlanCardComponent } from "./PricingPlanCard";
+
+export function Pricing() {
+  const { headlineLine1, headlineHighlight, headlineLine2, subheading, ctaLabel, plans } =
+    pricingSection;
+
+  return (
+    <section id="pricing" className="mt-[-1px] bg-white pt-7 sm:pt-16 lg:pt-20" aria-labelledby="pricing-heading">
+      <Container className="max-w-7xl pb-0 sm:pb-12">
+        <h2 id="pricing-heading" className="mx-auto max-w-4xl text-balance text-center text-[#101651]">
+          <span className="block sm:inline">{headlineLine1} </span>
+          <span className="block text-[#E3058D] sm:inline">{headlineHighlight} </span>
+          <span className="block sm:inline">{headlineLine2}</span>
+        </h2>
+
+        <p className="type-rule-p mx-auto mt-6 max-w-3xl text-center text-zinc-600 sm:mt-8">
+          {subheading}
+        </p>
+
+        <div className="mb-12 mt-12 grid gap-3.5 sm:mt-14 md:grid-cols-1 lg:grid-cols-3 lg:mt-16">
+          {plans.map((plan) => (
+            <PricingPlanCardComponent key={plan.id} plan={plan} ctaLabel={ctaLabel} />
+          ))}
+        </div>
+
+      </Container>
+
+      <div className="relative mt-12 flex min-h-[320px] w-full flex-col justify-center overflow-visible bg-[#7547C5] pb-10 pt-6 text-white sm:min-h-[400px] sm:pb-12 sm:pt-10">
+        <div
+          className="pointer-events-none absolute inset-x-0 -top-[24px] h-[50px] sm:-top-[40px] sm:h-[68px] lg:-top-[51px] lg:h-[90px]"
+          style={{
+            backgroundImage: "url('/images/scratchedbg4k.png')",
+            backgroundPosition: "top center",
+            backgroundSize: "110% auto",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-[-24px] z-[1] h-[50px] sm:bottom-[-40px] sm:h-[68px] lg:bottom-[-51px] lg:h-[90px]"
+          style={{
+            backgroundImage: "url('/images/scratchedbg4k.png')",
+            backgroundPosition: "bottom center",
+            backgroundSize: "110% auto",
+            backgroundRepeat: "no-repeat",
+          }}
+          aria-hidden
+        />
+        <Container className="relative z-[2] max-w-7xl px-5 py-8 sm:px-6 sm:py-10 lg:py-[40px]">
+          <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <Image
+                src="/images/Home-pricing-banner-risk.png"
+                alt="Risk-free guarantee icon."
+                width={110}
+                height={110}
+                sizes="(max-width: 1023px) 80px, 110px"
+                className="h-auto w-[60px] shrink-0 sm:w-[80px] lg:w-[110px]"
+              />
+              <h3 className="text-[36px] font-normal leading-[40px] tracking-tight text-white sm:text-[48px] sm:leading-[52px] lg:text-[60px] lg:leading-[64px]">
+                <span className="block">
+                  <span className="font-normal">Try It </span>
+                  <strong>Risk-Free</strong>
+                </span>
+                <span className="block font-normal">for 30 Days</span>
+              </h3>
+            </div>
+
+            <p className="max-w-2xl text-[20px] leading-[30px] text-white/95">
+              Not the right fit? Full refund within the first 30 days. No awkward conversations. No
+              cancellation hoops. No contracts - ever. Cancel any month, for any reason. We&apos;ve been at
+              this since 2018. We don&apos;t need lock-in contracts to keep people. We keep them by doing work
+              they can&apos;t get anywhere else.
+            </p>
+          </div>
+        </Container>
+      </div>
+    </section>
+  );
+}

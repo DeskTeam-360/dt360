@@ -1,0 +1,350 @@
+"use client";
+
+import { CircleChevronRight } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { BookACallRecaptcha } from "@/components/pages/book-a-call/BookACallRecaptcha";
+import {
+  serviceFaqIllustrationImageClassName,
+  serviceFaqIllustrationWrapperClassName,
+} from "@/components/pages/service/shared/ServiceFaqIllustration";
+import { Container } from "@/components/shared/Container";
+import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
+import { cn } from "@/lib/utils";
+import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHeroOverlapClasses } from "@/data/bookACall";
+import { listBookACallFieldErrorMessages, type BookACallFieldErrors } from "@/lib/book-a-call-errors";
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "";
+
+const inputClass =
+  "w-full rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium leading-normal text-[#11104C] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#30439E] focus:ring-2 focus:ring-[#30439E]/15";
+
+const labelClass =
+  "mb-2 block font-[var(--font-montserrat)] text-[20px] font-bold leading-snug text-[#11104C]";
+
+function FormFieldErrorsAlert({ errors }: { errors: BookACallFieldErrors }) {
+  const messages = listBookACallFieldErrorMessages(errors);
+  if (messages.length === 0) return null;
+
+  return (
+    <div
+      role="alert"
+      className="rounded-[12px] border border-[#E57373] bg-[#FFF5F5] px-4 py-3"
+    >
+      <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-bold text-[#C0392B]">
+        Please correct the following:
+      </p>
+      <ul className="list-disc space-y-1 pl-5 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+        {messages.map((msg) => (
+          <li key={msg}>{msg}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function BookACallForm() {
+  const {
+    stepLabel,
+    stepBgClipSrc,
+    heading,
+    womanImageSrc,
+    womanImageAlt,
+    formBubbleSrc,
+    formBubbleAlt,
+    fields,
+    submitLabel,
+    successTitle,
+    successMessage,
+  } = bookACallForm;
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<BookACallFieldErrors>({});
+  const [formMessage, setFormMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
+
+  useEffect(() => {
+    const section = document.getElementById("book-a-call-section");
+    if (!section) return;
+    if (isSubmitted) {
+      section.setAttribute("data-submitted", "true");
+    } else {
+      section.removeAttribute("data-submitted");
+    }
+    return () => section.removeAttribute("data-submitted");
+  }, [isSubmitted]);
+
+  const handleRecaptchaChange = useCallback((token: string | null) => {
+    setRecaptchaToken(token);
+    if (token) {
+      setFieldErrors((prev) => ({ ...prev, captcha: undefined }));
+    }
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormMessage(null);
+    setFieldErrors({});
+
+    if (!recaptchaSiteKey) {
+      setFormMessage(
+        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
+      );
+      return;
+    }
+
+    if (!recaptchaToken) {
+      setFieldErrors({ captcha: "Please complete the reCAPTCHA verification." });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/book-a-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          recaptchaToken,
+        }),
+      });
+
+      const data = (await response.json()) as {
+        ok?: boolean;
+        message?: string;
+        fieldErrors?: BookACallFieldErrors;
+        redirectUrl?: string | null;
+      };
+
+      if (!response.ok || !data.ok) {
+        setFieldErrors(data.fieldErrors ?? {});
+        setFormMessage(data.message ?? "Submission failed. Please try again.");
+        if (data.fieldErrors?.captcha) {
+          setRecaptchaToken(null);
+          setRecaptchaResetKey((k) => k + 1);
+        }
+        return;
+      }
+
+      setIsSubmitted(true);
+      setFormMessage(null);
+      setFieldErrors({});
+      setRecaptchaToken(null);
+    } catch {
+      setFormMessage("Connection failed. Check your network and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <div
+      className={`relative z-10 w-full overflow-x-hidden overflow-y-hidden ${bookACallHeroOverlapClasses.formPull}`}
+      aria-labelledby={
+        isSubmitted ? "book-a-call-success-heading" : "book-a-call-form-heading"
+      }
+    >
+      {!isSubmitted ? (
+        <div
+          className="pointer-events-none absolute left-[-10%] top-[50%] z-[1] sm:left-[-10%] lg:left-[-10%] lg:top-50"
+          aria-hidden
+        >
+          <MarketingSafeImage
+            src={formBubbleSrc}
+            alt={formBubbleAlt}
+            width={368}
+            height={368}
+            className="h-auto w-[min(220px,42vw)] max-w-[368px] mix-blend-screen opacity-95 sm:w-[280px] lg:w-[368px]"
+            sizes="(max-width: 1024px) 42vw, 368px"
+          />
+        </div>
+      ) : null}
+
+      <div
+        className={`pointer-events-none w-full shrink-0 bg-[#F5F8FF] min-[2560px]:-mb-1 ${bookACallHeroOverlapClasses.formSpacer}`}
+        aria-hidden
+      />
+
+      <div
+        className={`relative w-full overflow-x-clip overflow-y-hidden pb-20 sm:pb-24 lg:pb-28 min-[2560px]:-mt-1 ${bookACallHeroOverlapClasses.formContentPt}`}
+        style={{ backgroundColor: BOOK_A_CALL_FORM_BG }}
+      >
+        {!isSubmitted ? (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+            <div className="absolute bottom-[-45%] left-[-20%] h-[min(1500px,90vw)] w-[min(1500px,90vw)] bg-[radial-gradient(circle_at_center,rgba(0,200,244,0.35)_0%,transparent_40%)] blur-3xl lg:left-[-25%]" />
+            <div className="absolute top-0 right-[-35%] h-[min(1200px,90vw)] w-[min(1200px,90vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_40%)] blur-3xl lg:top-[-20%]" />
+          </div>
+        ) : null}
+
+        <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
+          {isSubmitted ? (
+            <div className="mx-auto w-full max-w-[640px] py-8 text-center lg:py-12">
+              <h2
+                id="book-a-call-success-heading"
+                className="font-[var(--font-poppins)] text-[32px] font-semibold leading-[1.2] text-[#11104C] sm:text-[40px] lg:text-[48px]"
+              >
+                {successTitle}
+              </h2>
+              <p className="type-rule-p mt-6 text-[#11104C]/90">{successMessage}</p>
+            </div>
+          ) : (
+            <div className="grid items-start gap-8 max-lg:grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16 xl:gap-20">
+              <div
+                className={cn(
+                  "relative order-2 mx-auto w-full lg:order-1 lg:mx-0 lg:max-w-none",
+                  serviceFaqIllustrationWrapperClassName,
+                  "max-lg:max-w-[min(100%,320px)] lg:max-w-[520px]",
+                )}
+              >
+                <MarketingSafeImage
+                  src={womanImageSrc}
+                  alt={womanImageAlt}
+                  width={560}
+                  height={620}
+                  className={cn(
+                    serviceFaqIllustrationImageClassName,
+                    "lg:max-h-none lg:h-auto",
+                  )}
+                  sizes="(max-width: 1024px) 88vw, 42vw"
+                />
+              </div>
+
+              <div className="order-1 w-full max-w-[640px] justify-self-center lg:order-2 lg:max-w-none lg:justify-self-stretch">
+                <div className="relative mb-6">
+                  <span
+                    className="inline-flex w-fit items-center px-10 py-5 font-[var(--font-poppins)] text-[28px] font-semibold leading-none text-white sm:text-[32px] lg:text-[36px]"
+                    style={{
+                      backgroundImage: `url('${stepBgClipSrc}')`,
+                      backgroundSize: "100% 100%",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    role="status"
+                  >
+                    {stepLabel}
+                  </span>
+                </div>
+
+                <h2
+                  id="book-a-call-form-heading"
+                  className="max-w-[580px] font-[var(--font-poppins)] text-[28px] font-semibold leading-[1.2] text-balance text-[#11104C] sm:text-[32px] lg:text-[36px]"
+                >
+                  {heading}
+                </h2>
+
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
+                  <FormFieldErrorsAlert errors={fieldErrors} />
+
+                  {formMessage ? (
+                    <p
+                      className="rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#11104C]"
+                      role="status"
+                    >
+                      {formMessage}
+                    </p>
+                  ) : null}
+
+                  <div>
+                    <label htmlFor="book-a-call-first-name" className={labelClass}>
+                      {fields.nameLabel}
+                    </label>
+                    {fieldErrors.name ? (
+                      <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        {fieldErrors.name}
+                      </p>
+                    ) : null}
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <input
+                        id="book-a-call-first-name"
+                        name="firstName"
+                        type="text"
+                        autoComplete="given-name"
+                        placeholder={fields.firstNamePlaceholder}
+                        className={inputClass}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                      />
+                      <input
+                        id="book-a-call-last-name"
+                        name="lastName"
+                        type="text"
+                        autoComplete="family-name"
+                        placeholder={fields.lastNamePlaceholder}
+                        className={inputClass}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="book-a-call-email" className={labelClass}>
+                      {fields.emailLabel}
+                    </label>
+                    {fieldErrors.email ? (
+                      <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        {fieldErrors.email}
+                      </p>
+                    ) : null}
+                    <input
+                      id="book-a-call-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder={fields.emailPlaceholder}
+                      className={inputClass}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <div>
+                    <p className={labelClass}>{fields.captchaLabel}</p>
+                    {fieldErrors.captcha ? (
+                      <p className="mb-2 font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        {fieldErrors.captcha}
+                      </p>
+                    ) : null}
+                    {recaptchaSiteKey ? (
+                      <BookACallRecaptcha
+                        key={recaptchaResetKey}
+                        siteKey={recaptchaSiteKey}
+                        onChange={handleRecaptchaChange}
+                      />
+                    ) : (
+                      <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
+                        reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).
+                      </p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="font-button group mt-2 flex w-full max-w-[420px] cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-6 py-4 text-[20px] text-white shadow-[0_15px_30px_rgba(240,87,58,0.28)] transition duration-200 hover:bg-[#e04d32] hover:shadow-[0_18px_36px_rgba(240,87,58,0.38)] hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 motion-reduce:hover:translate-y-0"
+                  >
+                    {isSubmitting ? "Submitting…" : submitLabel}
+                    
+                      <CircleChevronRight className="size-6" strokeWidth={2.25} />
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+        </Container>
+      </div>
+    </div>
+  );
+}

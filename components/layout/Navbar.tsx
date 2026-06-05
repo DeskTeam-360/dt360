@@ -1,0 +1,379 @@
+"use client";
+
+import { useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Container } from "@/components/shared/Container";
+import { cn } from "@/lib/utils";
+import { DeskTeamLogo } from "./DeskTeamLogo";
+import { ServicesMegaMenuDesktop } from "./ServicesMegaMenuDesktop";
+import { externalUrls, sitePaths } from "@/config/urls";
+import { readLightHeroNavFromDocument } from "@/components/layout/LightHeroNavScope";
+import { navServices, type NavMenuItem } from "@/data/nav";
+
+const SCROLL_SOLID_THRESHOLD_PX = 12;
+
+/** Top-level app routes — not WordPress blog posts at `/{slug}`. */
+const ROOT_NON_BLOG_ROUTES = new Set([
+  "about",
+  "affiliate-program",
+  "book-a-call",
+  "contact",
+  "how-it-works",
+  "showcase",
+  "services",
+  "case-studies",
+  "blog",
+  "privacy-policy",
+  "terms-conditions",
+]);
+
+/**
+ * Light-hero content detail: blog listing/detail and case study detail only.
+ * Excludes `/case-studies` listing (keeps its existing navbar).
+ */
+function usesBlogStyleNav(pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) return true;
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 2 && segments[0] === "case-studies") {
+    return true;
+  }
+  if (segments.length === 1 && !ROOT_NON_BLOG_ROUTES.has(segments[0]!)) {
+    return true;
+  }
+  return false;
+}
+
+export function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [lightHeroNavPage, setLightHeroNavPage] = useState(false);
+  const pathname = usePathname();
+  const showSolidHeader = scrolled;
+  const isShowcaseOrBlog = pathname === "/showcase" || usesBlogStyleNav(pathname);
+  const useDarkTopNav = (isShowcaseOrBlog || lightHeroNavPage) && !scrolled;
+
+  useEffect(() => {
+    const syncLightHeroNav = () => setLightHeroNavPage(readLightHeroNavFromDocument());
+    syncLightHeroNav();
+    const observer = new MutationObserver(syncLightHeroNav);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-light-hero-nav"],
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
+  const desktopLinkClass = useDarkTopNav
+    ? "text-[#11104C]/90 hover:text-[#11104C]"
+    : "text-white/90 hover:text-white";
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > SCROLL_SOLID_THRESHOLD_PX);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
+  return (
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-[60] border-b border-none shadow-[inset_0_0_0_0_rgba(255,255,255,0.01)] transition-[background-color] duration-300 ease-out",
+          showSolidHeader ? "bg-[#11104C]" : "bg-transparent"
+        )}
+      >
+        {/* Figma-style: two overlapping corner radials from top-left (arc “slices”), not a full left stripe */}
+        <div
+          className={cn(
+            "pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,200,244,0.5)_0%,transparent_50%)] transition-opacity duration-300 ease-out",
+            showSolidHeader ? "opacity-100" : "opacity-0"
+          )}
+          aria-hidden
+        />
+        <Container className="relative z-10 max-w-7xl py-5 lg:py-0">
+          <div className="flex h-fit items-center justify-between gap-4 lg:h-[72px]">
+            <div className="flex min-h-0 min-w-0 flex-1 items-center justify-start lg:flex-none">
+              <DeskTeamLogo tone={useDarkTopNav ? "dark" : "light"} />
+            </div>
+
+            <nav
+              className="hidden items-center gap-8 lg:flex"
+              aria-label="Primary navigation"
+            >
+              <Link
+                href="/case-studies"
+                className={cn(
+                  "font-nav-primary transition-colors",
+                  pathname === "/case-studies"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
+                )}
+              >
+                Case Studies
+              </Link>
+              <Link
+                href="/how-it-works"
+                className={cn(
+                  "font-nav-primary transition-colors",
+                  pathname === "/how-it-works"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
+                )}
+              >
+                How it Works
+              </Link>
+              <ServicesMegaMenuDesktop
+                key={pathname}
+                triggerClassName={desktopLinkClass}
+                useDarkTopNav={useDarkTopNav}
+                servicesRouteActive={pathname.startsWith("/services")}
+              />
+              <Link
+                href="/showcase"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
+              >
+                Showcase
+              </Link>
+              <Link
+                href="/blog"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
+              >
+                Blog
+              </Link>
+              <Link
+                href="/about"
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
+              >
+                About
+              </Link>
+            </nav>
+
+            <div
+              className={cn(
+                "hidden h-6 w-px shrink-0 lg:block",
+                useDarkTopNav ? "bg-[#11104C]/20" : "bg-white/25",
+              )}
+              aria-hidden
+            />
+
+            <div className="hidden items-center gap-5 lg:flex">
+              <Link
+                href={externalUrls.customerPortal}
+                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
+              >
+                Log in
+              </Link>
+              <Link
+                href={sitePaths.bookACall}
+                className="font-nav-primary inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2.5 py-2.5 text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
+              >
+                Book a call
+                <ChevronsRight className="size-4" aria-hidden />
+              </Link>
+            </div>
+
+            <button
+              type="button"
+              className={cn(
+                "inline-flex items-center justify-center rounded-lg p-2 lg:hidden",
+                useDarkTopNav ? "text-[#11104C] hover:bg-black/10" : "text-white hover:bg-white/10",
+              )}
+              onClick={() => setMobileOpen(true)}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+              aria-label="Open menu"
+            >
+              <MenuIcon className="size-8" />
+            </button>
+          </div>
+        </Container>
+      </header>
+
+      {mobileOpen ? (
+        <div className="fixed inset-0 z-[100] lg:hidden" id="mobile-nav" role="dialog" aria-modal="true">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/60"
+            aria-label="Close menu"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-[#11104C] shadow-2xl">
+            <div
+              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(140%_60%_at_100%_0%,#1e50a099_0%,#143c824d_50%,#0000_70%)]"
+              aria-hidden
+            />
+            <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-4 py-4">
+              <span className="font-nav-primary text-white">Menu</span>
+              <button
+                type="button"
+                className="rounded-lg p-2 text-white hover:bg-white/10"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close"
+              >
+                <CloseIcon className="size-5" />
+              </button>
+            </div>
+            <nav className="relative z-10 flex flex-1 flex-col gap-1 overflow-y-auto p-4" aria-label="Mobile navigation">
+              <MobileLink href="/case-studies" onNavigate={() => setMobileOpen(false)}>
+                Case Studies
+              </MobileLink>
+              <MobileLink href="/how-it-works" onNavigate={() => setMobileOpen(false)}>
+                How it Works
+              </MobileLink>
+              <MobileGroup title="Services" items={navServices} onPick={() => setMobileOpen(false)} />
+              <MobileLink href="/showcase" onNavigate={() => setMobileOpen(false)}>
+                Showcase
+              </MobileLink>
+              <MobileLink href="/blog" onNavigate={() => setMobileOpen(false)}>
+                Blog
+              </MobileLink>
+              <MobileLink href="/about" onNavigate={() => setMobileOpen(false)}>
+                About
+              </MobileLink>
+              <hr className="my-3 border-white/10" />
+              <MobileLink href={externalUrls.customerPortal} onNavigate={() => setMobileOpen(false)}>
+                Log in
+              </MobileLink>
+              <Link
+                href={sitePaths.bookACall}
+                onClick={() => setMobileOpen(false)}
+                className="font-nav-primary mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2 py-3 text-center text-white shadow-md"
+              >
+                Book a call
+                <ChevronsRight className="size-4" aria-hidden />
+              </Link>
+            </nav>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+function MobileLink({
+  href,
+  children,
+  onNavigate,
+}: {
+  href: string;
+  children: ReactNode;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onNavigate}
+      className="font-nav-primary rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/5"
+    >
+      {children}
+    </Link>
+  );
+}
+
+function MobileGroup({
+  title,
+  items,
+  onPick,
+}: {
+  title: string;
+  items: NavMenuItem[];
+  onPick: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-white/5 bg-white/[0.03]">
+      <div className="flex w-full items-stretch">
+        <Link
+          href="/services"
+          onClick={onPick}
+          className="font-nav-primary min-w-0 flex-1 px-3 py-2.5 text-left text-white hover:bg-white/5"
+        >
+          {title}
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex shrink-0 items-center justify-center px-3 py-2.5 text-white hover:bg-white/5"
+          aria-expanded={open}
+          aria-label={`${open ? "Collapse" : "Expand"} ${title} submenu`}
+        >
+          <ChevronSmall className={cn("size-4 transition", open && "rotate-180")} />
+        </button>
+      </div>
+      {open ? (
+        <div className="border-t border-white/5 pb-2 pt-1">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onPick}
+              className="font-nav-primary block px-5 py-2 text-white/75 hover:text-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/services"
+            onClick={onPick}
+            className="font-nav-primary mx-3 mt-2 flex items-center justify-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-center text-sm font-bold uppercase tracking-[0.06em] text-white hover:bg-white/10"
+          >
+            See All Services
+            <span aria-hidden className="text-base leading-none">
+              →
+            </span>
+          </Link>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+      <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+function CloseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden>
+      <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
+function ChevronSmall({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+      <path
+        fillRule="evenodd"
+        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function ChevronsRight({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l6 7-6 7M6 5l6 7-6 7" />
+    </svg>
+  );
+}

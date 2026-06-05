@@ -1,0 +1,157 @@
+import Image from "next/image";
+import { Fragment, type ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import {
+  DEFAULT_HOW_IT_WORKS_OVERLAP_FRACTION,
+  ServicesHowItWorksFloatingRow,
+} from "@/components/pages/services/ServicesHowItWorksFloatingRow";
+
+/** Intrinsic PNG dimensions (Task / Work / Result box) — all are 298x136 */
+const ASSET_HEADER_W = 298;
+const ASSET_HEADER_H = 136;
+
+type HowItWorksStep = {
+  number: string;
+  headerSrc: string;
+  headerAlt: string;
+  description: ReactNode;
+  cardBodyClass: string;
+};
+
+const STEPS: HowItWorksStep[] = [
+  {
+    number: "1",
+    headerSrc: "/images/dt360-icon-Task-box.png",
+    headerAlt: "Step 1: submit your web task",
+    description: "Submit your web task - Loom video, written brief, or quick description.",
+    cardBodyClass: "bg-[#0E3160]",
+  },
+  {
+    number: "2",
+    headerSrc: "/images/dt360-icon-Work-box.png",
+    headerAlt: "Step 2: your account manager assigns a developer",
+    description: "Your North American account manager assigns a developer and manages the build.",
+    cardBodyClass: "bg-[#121550]",
+  },
+  {
+    number: "3",
+    headerSrc: "/images/dt360-icon-Result-box.png",
+    headerAlt: "Step 3: work delivered with revisions",
+    description: (
+      <>
+        <span className="block text-balance">Work delivered in 1-3 days.</span>
+        <span className="mt-1 block text-balance">Unlimited revisions until perfect.</span>
+      </>
+    ),
+    cardBodyClass: "bg-[#281D4D]",
+  },
+];
+
+function DotsArrow() {
+  return (
+    <div
+      className="relative mx-auto box-border hidden h-full w-[110px] max-w-[110px] shrink-0 items-center justify-center px-5 py-3 xl:mx-0 xl:flex xl:min-h-0 xl:overflow-visible xl:py-0"
+      aria-hidden
+    >
+      <Image
+        src="/images/dt360-dots-arrow.png"
+        alt=""
+        width={120}
+        height={100}
+        className="h-[72px] w-full max-w-[70px] shrink-0 rotate-90 object-contain opacity-100 xl:absolute xl:left-1/2 xl:top-0 xl:h-auto xl:max-h-[90px] xl:max-w-[70px] xl:-translate-x-1/2 xl:-translate-y-1/2 xl:rotate-0"
+      />
+    </div>
+  );
+}
+
+function HowItWorksCard({ step, stepIndex }: { step: HowItWorksStep; stepIndex: number }) {
+  const mobileMarginBelow = stepIndex < STEPS.length - 1 ? "max-md:mb-24" : "";
+
+  return (
+    <article
+      className={`relative mx-auto flex min-w-0 flex-col self-stretch overflow-visible rounded-[24px] border border-white/[0.08] max-md:h-auto max-md:flex-none md:min-h-0 md:flex-1 md:max-w-none xl:mx-0 xl:max-w-none ${mobileMarginBelow} ${step.cardBodyClass} shadow-[0_24px_60px_-18px_rgba(0,0,0,0.55)] xl:h-full xl:flex-none`}
+    >
+      <div className="relative z-10 mx-auto w-[85%] max-md:pb-1 max-md:pt-[45px] md:pt-[calc(100%*68/298)]">
+        <Image
+          src={step.headerSrc}
+          alt={step.headerAlt}
+          width={ASSET_HEADER_W}
+          height={ASSET_HEADER_H}
+          sizes="(max-width: 767px) 250px, (max-width: 1024px) 72vw, 22vw"
+          className="absolute top-0 z-20 h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)] max-md:left-1/2 max-md:w-[280px] max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:left-0 md:w-full md:-translate-y-1/2"
+        />
+      </div>
+      <p className="relative z-0 mx-0 mt-1 flex max-w-[28ch] flex-col justify-center overflow-visible px-5 pb-8 pt-2 text-left text-[20px] font-semibold leading-snug text-white max-md:mt-10 sm:px-7 max-md:min-h-0 max-md:flex-none md:min-h-0 md:flex-1 xl:min-h-0 xl:flex-1">
+        {step.description}
+      </p>
+    </article>
+  );
+}
+
+type ServicesHowItWorksProps = {
+  /** 0-1: how much of the card-row height overlaps into the next section (0.5 ~= half). */
+  cardsOverlapFraction?: number;
+  /**
+   * When true, navy header uses extra top padding so the “How It Works” title clears content
+   * that overlaps from above (e.g. testimonial row on Web Design & Development).
+   */
+  overlappedByTestimonialSection?: boolean;
+};
+
+export function ServicesHowItWorks({
+  cardsOverlapFraction = DEFAULT_HOW_IT_WORKS_OVERLAP_FRACTION,
+  overlappedByTestimonialSection = false,
+}: ServicesHowItWorksProps = {}) {
+  return (
+    <section
+      className="relative z-[30] flex flex-col gap-0 overflow-visible bg-transparent"
+      aria-labelledby="services-how-it-works-heading"
+    >
+      {/* Navy only on top; larger pb creates runway so negative card margin does not cover heading */}
+      <div
+        className={cn(
+          "relative z-10 bg-[#0c1030] px-5 pb-140 md:px-10 md:pb-30 xl:px-10 xl:pb-62",
+          overlappedByTestimonialSection
+            ? "max-md:pt-24 pt-[150px] md:pt-[160px] xl:pt-[180px]"
+            : "pt-[72px] md:pt-[88px] xl:pt-[100px]",
+        )}
+      >
+        <div className="mx-auto max-w-[1440px]">
+          <h2
+            id="services-how-it-works-heading"
+            className="text-center font-extrabold leading-tight tracking-tight text-white md:text-[64px]"
+          >
+            How It <span className="text-[#E3058D]">Works</span>
+          </h2>
+        </div>
+      </div>
+
+      <div
+        className={cn(
+          "relative mx-auto w-full max-w-[1440px] px-5 pb-0 pt-0 md:px-10 md:pt-8 xl:px-10 xl:pt-0",
+          overlappedByTestimonialSection
+            ? "z-30 max-md:pt-0 pb-0"
+            : "z-[25] max-md:pt-28",
+        )}
+      >
+        <ServicesHowItWorksFloatingRow
+          overlapFraction={cardsOverlapFraction}
+          extraNegativeMarginTopPx={overlappedByTestimonialSection ? 0 : 30}
+          extraNegativeMarginBottomPx={overlappedByTestimonialSection ? 0 : 30}
+          mobileNegativeMarginTopPx={overlappedByTestimonialSection ? 465 : 550}
+          mobileNegativeMarginBottomPx={overlappedByTestimonialSection ? 350 : undefined}
+          disableOverlapBelowXl={overlappedByTestimonialSection}
+        >
+          <div className="flex flex-col items-stretch gap-0 overflow-visible drop-shadow-[0_28px_60px_-12px_rgba(0,0,0,0.45)] md:min-h-0 md:grid md:grid-cols-3 md:gap-4 xl:grid-cols-[minmax(0,1fr)_110px_minmax(0,1fr)_110px_minmax(0,1fr)] xl:gap-0 xl:items-stretch">
+            {STEPS.map((step, i) => (
+              <Fragment key={step.number}>
+                <HowItWorksCard step={step} stepIndex={i} />
+                {i < STEPS.length - 1 ? <DotsArrow /> : null}
+              </Fragment>
+            ))}
+          </div>
+        </ServicesHowItWorksFloatingRow>
+      </div>
+    </section>
+  );
+}

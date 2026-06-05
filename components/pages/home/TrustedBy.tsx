@@ -1,0 +1,105 @@
+import Image from "next/image";
+import { Container } from "@/components/shared/Container";
+import type { TrustedByLogo } from "@/data/home";
+import { trustedByContent, trustedByLogos } from "@/data/home";
+import { cn } from "@/lib/utils";
+
+function LogoRow({
+  logos,
+  ariaHidden,
+  dupIndex,
+}: {
+  logos: TrustedByLogo[];
+  ariaHidden?: boolean;
+  /** Copy segment (for unique key); undefined = first segment. */
+  dupIndex?: number;
+}) {
+  return (
+    <ul
+      className={cn(
+        "flex shrink-0 list-none items-center gap-x-8 gap-y-8 px-4 sm:gap-x-16 sm:px-12 lg:gap-x-20",
+      )}
+      aria-hidden={ariaHidden ? true : undefined}
+      aria-label={ariaHidden ? undefined : "Client logos"}
+    >
+      {logos.map((logo) => (
+        <li
+          key={dupIndex != null ? `${logo.id}-seg${dupIndex}` : logo.id}
+          className="flex shrink-0 items-center justify-center"
+        >
+          <div className="origin-center transition-transform duration-300 ease-out hover:scale-[1.3] motion-reduce:transition-none motion-reduce:hover:scale-100">
+            <Image
+              src={logo.imageSrc}
+              alt={ariaHidden ? "" : logo.alt}
+              width={400}
+              height={104}
+              className="h-[70px] w-auto max-w-[10rem] object-contain opacity-90 sm:h-[104px] sm:max-w-[22rem]"
+              sizes="(max-width: 768px) 180px, 280px"
+            />
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function TrustedBy() {
+  const { headlineLine1, headlineHighlight, headlineLine2After } = trustedByContent;
+
+  return (
+    <section
+      className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-white py-16 sm:py-20 lg:py-24 mt-[-1px]"
+      aria-labelledby="trusted-by-heading"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#f3f4f6_0%,#e6edf5_50%,#f3f4f6_100%)]"
+        aria-hidden
+      />
+      <Container className="relative max-w-7xl">
+        <h2
+          id="trusted-by-heading"
+          className="mx-auto max-w-4xl text-center font-[var(--font-montserrat)] text-[20px] font-medium leading-snug text-zinc-800"
+        >
+          <span className="block">{headlineLine1}</span>
+          <span className="mt-2 block text-zinc-800">
+            <span className="font-semibold text-[#3b82f6]">{headlineHighlight}</span>
+            {headlineLine2After}
+          </span>
+        </h2>
+      </Container>
+
+      {/* Marquee + fade: full viewport width (breaks out of max-w container). */}
+      <div
+        className="relative left-1/2 mt-12 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden py-6 sm:mt-14 sm:py-8 min-[1920px]:max-w-[1920px] min-[1920px]:mx-auto min-[1920px]:left-auto min-[1920px]:translate-x-0 min-[1920px]:w-full"
+        role="presentation"
+        aria-label="Client logos marquee"
+      >
+        {/* Edge fade: logo area base color (~#f4f7f9) → transparent (no #fff white so it does not block). */}
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 sm:w-28 lg:w-40"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(244 247 249) 0%, rgba(244,247,249,0.92) 22%, rgba(244,247,249,0.55) 55%, rgba(244,247,249,0.12) 88%, rgba(244,247,249,0) 100%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 sm:w-28 lg:w-40"
+          style={{
+            background:
+              "linear-gradient(to left, rgb(244 247 249) 0%, rgba(244,247,249,0.92) 22%, rgba(244,247,249,0.55) 55%, rgba(244,247,249,0.12) 88%, rgba(244,247,249,0) 100%)",
+          }}
+          aria-hidden
+        />
+        <div className="flex w-max shrink-0 trusted-by-marquee-track">
+          <LogoRow logos={trustedByLogos} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={1} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={2} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={3} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={4} />
+          <LogoRow logos={trustedByLogos} ariaHidden dupIndex={5} />
+        </div>
+      </div>
+    </section>
+  );
+}

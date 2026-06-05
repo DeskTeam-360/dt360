@@ -1,0 +1,21 @@
+.heroFloat {
+  animation: serviceHeroFloat 6s ease-in-out infinite;
+}
+
+.heroImage {
+  transition: transform 500ms ease-out;
+}
+
+.heroImage:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+@keyframes serviceHeroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

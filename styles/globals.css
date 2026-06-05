@@ -1,0 +1,406 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /** Body / UI: Montserrat (AGENTS — P & default) */
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-geist-mono);
+  /** Headings H1–H4: Poppins (via base layer + arbitrary var in legacy components) */
+  --font-heading: var(--font-poppins);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /** AGENTS: P — Montserrat Medium 18px */
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/**
+ * Global typography (AGENTS.md Global Font Setting).
+ * Max size = rules values; `clamp` scales down on narrow screens to avoid overflow.
+ */
+@layer base {
+  h1 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 700;
+    /** AGENTS: H1 Poppins Bold — max 76px; fluid below 1024px */
+    font-size: clamp(2.5rem, 5vw + 1rem, 76px);
+    line-height: 1.1;
+  }
+
+  /** Desktop lg+: full 76px size (clamp vw reaches ~76px at ~1200px viewport). */
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 76px;
+    }
+  }
+
+  h2 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw + 0.85rem, 3rem);
+    line-height: 1.18;
+  }
+
+  h4 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw + 0.65rem, 2.25rem);
+    line-height: 1.22;
+  }
+
+  h5 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1vw + 0.9rem, 1.5rem);
+    line-height: 1.3;
+  }
+
+  h6 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.6vw + 0.82rem, 1.125rem);
+    line-height: 1.35;
+  }
+
+  p {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 30px;
+  }
+
+  /** AGENTS: B — Montserrat Bold; size follows parent context (usually 18px in body) */
+  strong,
+  b {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+/**
+ * rules.md Global Font Setting — utilities for services pages
+ * (values & clamp aligned with @layer base; use when explicit styling outside semantic tags is needed).
+ */
+@layer components {
+  .type-rule-h1 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 700;
+    /** AGENTS: H1 — max 76px (Poppins Bold); fluid below 1024px */
+    font-size: clamp(2.5rem, 5vw + 1rem, 76px);
+    line-height: 1.1;
+  }
+
+  @media (min-width: 1024px) {
+    .type-rule-h1 {
+      font-size: 76px;
+    }
+  }
+
+  .type-rule-h2 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  /**
+   * Hero stats bar (homepage): numbers use same size/scale as H2,
+   * Russo One family (Google) — `--font-russo-one` variable from `app/layout.tsx`.
+   */
+  .type-rule-h2-hero-stats {
+    font-family: var(--font-russo-one), sans-serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.15;
+  }
+
+  /** AGENTS: H2 — Poppins SemiBold 64px; at lg+ nominal size stays 64px (not only max clamp). */
+  @media (min-width: 1024px) {
+    .type-rule-h2,
+    .type-rule-h2-hero-stats {
+      font-size: 64px;
+    }
+  }
+
+  .type-rule-h3 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw + 0.85rem, 3rem);
+    line-height: 1.18;
+  }
+
+  .type-rule-h4 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw + 0.65rem, 2.25rem);
+    line-height: 1.22;
+  }
+
+  .type-rule-h5 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1vw + 0.9rem, 1.5rem);
+    line-height: 1.3;
+  }
+
+  .type-rule-h6 {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.6vw + 0.82rem, 1.125rem);
+    line-height: 1.35;
+  }
+
+  .type-rule-p {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 30px;
+  }
+
+  .type-rule-b {
+    font-family: var(--font-montserrat), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+
+  /**
+   * Wrapper `app/services/layout.tsx` — `/services` & all `/services/*`.
+   * Reduce line orphans: headings `balance`, paragraph/list copy `pretty`.
+   */
+  .services-route-typography h1,
+  .services-route-typography h2,
+  .services-route-typography h3,
+  .services-route-typography h4,
+  .services-route-typography h5,
+  .services-route-typography h6 {
+    text-wrap: balance;
+  }
+
+  .services-route-typography p,
+  .services-route-typography li {
+    text-wrap: pretty;
+  }
+}
+
+/** Navbar (AGENTS): Montserrat Bold 14px — primary header links */
+.font-nav-primary {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/** AGENTS: B — Montserrat Bold 20px; accent / primary text blocks (not every `<strong>`) */
+.font-body-emphasis {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/** CTA / `<Button>` — Montserrat Bold 20px */
+.font-button {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/**
+ * Russo fallback via CSS variable (optional).
+ * Prefer `fontRussoOne.className` from `@/lib/fonts` for text that must use Russo One — more reliable than `font-family: var(...)` alone.
+ */
+.font-russo-one {
+  font-family: var(--font-russo-one), sans-serif;
+}
+
+/** Home only: standard container width 1440px. */
+.home-page .max-w-7xl {
+  max-width: 1440px;
+}
+
+@keyframes home-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-flip-once {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.home-marquee-track {
+  animation: home-marquee 48s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-marquee-track {
+    animation: none;
+  }
+}
+
+/**
+ * Trusted-by: several identical segments; shift exactly 1 segment per cycle
+ * (translate = -100% / segment count) for a seamless loop without empty “gaps”.
+ */
+@keyframes trusted-by-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-16.6666666667%);
+  }
+}
+
+.trusted-by-marquee-track {
+  animation: trusted-by-marquee 55s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-by-marquee-track {
+    animation: none;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .trusted-by-marquee-track > ul:not(:first-of-type) {
+    display: none;
+  }
+}
+
+/* ── Showcase gallery marquee ── */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="marquee-left"],
+  [style*="marquee-right"] {
+    animation: none !important;
+  }
+}
+
+/**
+ * TeamMembers full-bleed (<1440px): hanya scroll-padding (tidak menambah scrollWidth).
+ * Padding pada box membuat area kosong ikut ter-scroll di mobile/tablet.
+ */
+@media (max-width: 1439px) {
+  .team-members-scroller-peek {
+    scroll-padding-inline: max(1rem, calc(50vw - min(150px, 50vw - 2rem)));
+    overscroll-behavior-x: none;
+  }
+}
+
+/*
+ * Affiliate program — segitiga (ubah `right` di sini).
+ * Harus pakai relative + margin-left: auto — sama seperti Tailwind
+ * `relative ml-auto right-[33%]`; jangan absolute (arti % berbeda).
+ */
+@layer components {
+  .affiliate-program-triangle {
+    position: relative;
+    margin-left: auto;
+    right: 33%;
+  }
+
+  @media (min-width: 768px) {
+    .affiliate-program-triangle {
+      right: 37%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .affiliate-program-triangle {
+      right: 23%;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .affiliate-program-triangle {
+      right: 35%;
+    }
+  }
+
+  /* Book a Call — hide cyan decor after form submit */
+  #book-a-call-section[data-submitted="true"] .book-a-call-arch-glow-stroke,
+  #book-a-call-section[data-submitted="true"] .book-a-call-hero-cyan-glow {
+    display: none;
+  }
+
+  .book-a-call-arch-seam-cover {
+    display: none;
+  }
+
+  @media (min-width: 2560px) {
+    .book-a-call-arch-seam-cover {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 25;
+      height: 4px;
+      transform: translateY(1px);
+      background-color: #f5f8ff;
+      pointer-events: none;
+    }
+  }
+
+  /** Blog & case study detail — WP/HTML content utility classes */
+  .dynamic-prose .videoWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
