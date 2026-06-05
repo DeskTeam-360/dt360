@@ -8,8 +8,8 @@ export const affiliateAssets = {
 
 /** Matches live partner-program CTAs (both link to /affiliate-area). */
 export const affiliateUrls = {
-  signUp: "https://deskteam360.com/affiliate-area/",
-  partnerArea: "https://deskteam360.com/affiliate-area/",
+  signUp: "https://portal.deskteam360.com/affiliate-area/",
+  partnerArea: "https://portal.deskteam360.com/affiliate-area/",
 } as const;
 
 export const affiliateProgramHero = {
