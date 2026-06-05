@@ -100,6 +100,73 @@ function isInsideTocPanel(domNode: { parent?: unknown }): boolean {
   return false;
 }
 
+function isCtaPrimaryElement(attribs?: { class?: string; id?: string }): boolean {
+  const cls = attribs?.class || '';
+  const elementId = attribs?.id || '';
+  return cls.includes('dt360-cta-primary') || elementId === 'dt360-cta-primary';
+}
+
+const HTML_VOID_ELEMENTS = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
+]);
+
+/** Re-serialize a parsed DOM node back to HTML — preserves every attribute and inline style */
+function domNodeToHtml(node: DOMNode): string {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nodeAsAny = node as any;
+
+  if (nodeAsAny.type === 'text') {
+    return nodeAsAny.data ?? '';
+  }
+
+  if (nodeAsAny.type === 'tag') {
+    const tagName = nodeAsAny.name as string;
+    const attribs = (nodeAsAny.attribs ?? {}) as Record<string, string>;
+    const attrString = Object.entries(attribs)
+      .map(([key, value]) => `${key}="${String(value).replace(/"/g, '&quot;')}"`)
+      .join(' ');
+    const openTag = attrString ? `<${tagName} ${attrString}>` : `<${tagName}>`;
+
+    if (HTML_VOID_ELEMENTS.has(tagName)) {
+      return openTag;
+    }
+
+    const children = ((nodeAsAny.children as DOMNode[] | undefined) ?? [])
+      .map(domNodeToHtml)
+      .join('');
+
+    return `${openTag}${children}</${tagName}>`;
+  }
+
+  return '';
+}
+
+/** Preserve WordPress HTML inside primary CTA — do not re-style child nodes */
+function isInsideCtaPrimary(domNode: { parent?: unknown }): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let parent = domNode.parent as any;
+  while (parent?.type === 'tag') {
+    if (isCtaPrimaryElement(parent.attribs)) {
+      return true;
+    }
+    parent = parent.parent;
+  }
+  return false;
+}
+
 /** Next.js `<Link>` often skips in-page hash scrolling — use a native anchor instead */
 function isInPageAnchorHref(href?: string): boolean {
   if (!href) return false;
@@ -204,6 +271,21 @@ export function DynamicBlogPostContent({
       if (domNodeAsAny.type === 'tag') {
         const className = domNodeAsAny.attribs?.class || '';
         const id = domNodeAsAny.attribs?.id || '';
+
+        // Primary CTA — render exact WordPress HTML (all tags, inline styles, onmouseover, etc.)
+        if (isCtaPrimaryElement(domNodeAsAny.attribs)) {
+          return (
+            <div
+              className="wp-cta-primary-passthrough"
+              dangerouslySetInnerHTML={{ __html: domNodeToHtml(domNodeAsAny) }}
+            />
+          );
+        }
+
+        // Children already included in the serialized CTA block above
+        if (isInsideCtaPrimary(domNodeAsAny)) {
+          return null;
+        }
 
         // Hide redundant WordPress related posts section and headings
         if (className.includes('dt360-related-posts')) {
@@ -343,12 +425,13 @@ export function DynamicBlogPostContent({
           );
         }
 
-        // Handle specific classes/IDs for callouts/CTAs
-        const isCallout = className.includes('dt360-callout-') || className.includes('dt360-cta-');
-        const isCtaPrimary = className.includes('dt360-cta-primary') || id === 'dt360-cta-primary';
+        // Handle specific classes/IDs for callouts/CTAs (primary CTA handled above via passthrough)
+        const isCallout =
+          className.includes('dt360-callout-') ||
+          (className.includes('dt360-cta-') && !isCtaPrimaryElement(domNodeAsAny.attribs));
         const isCtaSecondary = className.includes('dt360-cta-secondary') || id === 'dt360-cta-secondary';
 
-        if (isCallout || isCtaPrimary || isCtaSecondary) {
+        if (isCallout || isCtaSecondary) {
           // Determine Background Style
           let containerClass = "bg-[#45108B]"; // Default Purple
           const containerStyle = {};
@@ -723,6 +806,15 @@ export function DynamicBlogPostContent({
               .dynamic-prose blockquote a {
                 color: inherit;
               }
+              /* WordPress primary CTA — let inline styles from CMS win over blog link defaults */
+              .dynamic-prose .wp-cta-primary-passthrough a {
+                color: unset;
+                text-decoration: unset;
+              }
+              .dynamic-prose .wp-cta-primary-passthrough a:hover {
+                color: unset;
+                opacity: unset;
+              }
               .dt360-blog-header, .dt360-blog-featured-img {
                 display: none !important;
               }
@@ -739,8 +831,8 @@ export function DynamicBlogPostContent({
                 width: 100%;
                 height: 100%;
               }
-              /* Force H2 styles to match reference exactly */
-              .dynamic-prose h2 {
+              /* Force H2 styles to match reference exactly (skip WordPress CTA blocks) */
+              .dynamic-prose h2:not(:is(.wp-cta-primary-passthrough *)) {
                 font-size: 48px !important;
                 font-weight: 700 !important;
                 margin-top: 4rem !important;
@@ -774,7 +866,7 @@ export function DynamicBlogPostContent({
                 text-align: justify !important;
               }
               @media (max-width: 767px) {
-                .dynamic-prose h2 {
+                .dynamic-prose h2:not(:is(.wp-cta-primary-passthrough *)) {
                   font-size: 32px !important;
                 }
               }
