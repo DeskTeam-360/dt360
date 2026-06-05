@@ -173,6 +173,8 @@ export function Navbar() {
             <div className="hidden items-center gap-5 lg:flex">
               <Link
                 href={externalUrls.customerPortal}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
                 Log in
@@ -245,7 +247,11 @@ export function Navbar() {
                 About
               </MobileLink>
               <hr className="my-3 border-white/10" />
-              <MobileLink href={externalUrls.customerPortal} onNavigate={() => setMobileOpen(false)}>
+              <MobileLink
+                href={externalUrls.customerPortal}
+                onNavigate={() => setMobileOpen(false)}
+                openInNewTab
+              >
                 Log in
               </MobileLink>
               <Link
@@ -268,15 +274,18 @@ function MobileLink({
   href,
   children,
   onNavigate,
+  openInNewTab,
 }: {
   href: string;
   children: ReactNode;
   onNavigate: () => void;
+  openInNewTab?: boolean;
 }) {
   return (
     <Link
       href={href}
       onClick={onNavigate}
+      {...(openInNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className="font-nav-primary rounded-lg px-3 py-2.5 text-white/90 hover:bg-white/5"
     >
       {children}
