@@ -322,7 +322,7 @@ export function TeamMembers() {
                 </div>
                 <div
                   className={cn(
-                    "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-none px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",
+                    "absolute left-0 bottom-2 z-[2] max-w-[min(100%,18rem)] rounded-[0_100px_0_0] px-3 py-2 pl-3 pr-4 sm:bottom-3 sm:py-2.5 sm:pr-5",
                     member.labelClass,
                   )}
                 >

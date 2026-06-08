@@ -155,8 +155,8 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
 
       {card.placement === "wide-magenta" && (card.title || card.description || card.mediaSrc) ? (
         <div className="box-border flex h-full min-h-0 w-full max-w-6xl min-w-0 flex-1 flex-col items-start justify-start lg:min-h-0">
-          <div className="w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 py-8 px-10 lg:px-0 lg:pl-10">
-            <div className="grid w-full min-w-0 grid-cols-1 items-start gap-6 sm:gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8">
+          <div className="w-full min-w-0 max-w-[min(100%,calc(1440px*0.62))] shrink-0 px-8 py-5 max-lg:pb-3 lg:py-8 lg:px-0 lg:pl-10">
+            <div className="grid w-full min-w-0 grid-cols-1 items-start gap-3 max-lg:gap-3 sm:gap-6 lg:grid-cols-2 lg:items-stretch lg:gap-8">
               {(card.title || card.description) && (
                 <div className="flex min-w-0 flex-col items-start justify-center gap-3 sm:gap-3.5 lg:gap-4">
                   {card.title ? title : null}
@@ -164,13 +164,13 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
                 </div>
               )}
               {card.mediaSrc ? (
-                <div className="relative min-h-[14rem] w-full min-w-0 overflow-visible lg:h-full lg:min-h-0">
-                  <div className="absolute top-1/2 left-0 h-full w-full max-w-none -translate-y-1/2">
+                <div className="relative w-full min-w-0 overflow-visible max-lg:min-h-0 lg:h-full lg:min-h-0">
+                  <div className="relative aspect-[16/9] w-full max-lg:aspect-[5/3] lg:absolute lg:top-1/2 lg:left-0 lg:h-full lg:w-full lg:max-w-none lg:-translate-y-1/2 lg:aspect-auto">
                     <Image
                       src={card.mediaSrc}
                       alt={card.mediaAlt ?? ""}
                       fill
-                      className="object-contain object-left"
+                      className="object-contain object-left max-lg:object-center"
                       sizes="(max-width: 1024px) 96vw, 480px"
                     />
                   </div>
