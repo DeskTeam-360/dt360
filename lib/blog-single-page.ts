@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import type { BlogPost } from '@/data/blog';
-import { getPostBySlug, getBlogLatestPostsPoolForRelated } from '@/lib/wordpress';
+import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs } from '@/lib/wordpress';
 
 export type BlogSinglePageData = {
   post: BlogPost;
   relatedPosts: BlogPost[];
+  publishedSlugs: string[];
 };
 
 /** Canonical blog post URL (WordPress-style, no `/blog/` prefix). */
@@ -48,9 +49,10 @@ function resolveRelatedPosts(
 export async function getBlogSinglePageData(
   slug: string,
 ): Promise<BlogSinglePageData | null> {
-  const [post, latestPostsPool] = await Promise.all([
+  const [post, latestPostsPool, publishedSlugs] = await Promise.all([
     getPostBySlug(slug),
     getBlogLatestPostsPoolForRelated(),
+    getAllPublishedPostSlugs(),
   ]);
 
   if (!post) {
@@ -60,6 +62,7 @@ export async function getBlogSinglePageData(
   return {
     post,
     relatedPosts: resolveRelatedPosts(slug, post, latestPostsPool),
+    publishedSlugs,
   };
 }
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllCaseStudyPosts, getPostBySlug } from '@/lib/wordpress';
+import { getAllCaseStudyPosts, getPostBySlug, getAllPublishedPostSlugs } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
 
@@ -33,9 +33,11 @@ export default async function SingleCaseStudyPage({ params }: Props) {
   const results = await Promise.all([
     getPostBySlug(resolvedParams.slug),
     getAllCaseStudyPosts(),
+    getAllPublishedPostSlugs(),
   ]);
   const post = results[0];
   const latestPostsPool = results[1];
+  const publishedSlugs = results[2];
 
   if (!post) {
     notFound();
@@ -69,7 +71,7 @@ export default async function SingleCaseStudyPage({ params }: Props) {
 
   return (
     <main className="flex-grow">
-      <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} optimizeImages />
+      <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} publishedSlugs={publishedSlugs} optimizeImages />
       <HaveQuestionsCTA />
     </main>
   );

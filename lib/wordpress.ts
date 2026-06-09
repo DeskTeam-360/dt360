@@ -671,6 +671,28 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
   });
 });
 
+export const getAllPublishedPostSlugs = cache(async (): Promise<string[]> => {
+  return fetchWordPressCached(['wp', 'published-slugs'], async () => {
+    const query = gql`
+      query GetPublishedSlugs {
+        posts(first: 1000, where: { status: PUBLISH }) {
+          nodes {
+            slug
+          }
+        }
+      }
+    `;
+
+    try {
+      const data = await client.request<{ posts?: { nodes?: { slug: string }[] } }>(query);
+      return (data.posts?.nodes || []).map((n) => n.slug);
+    } catch (error) {
+      console.error('Error fetching published slugs:', error);
+      return [];
+    }
+  });
+});
+
 // ─── Showcase ────────────────────────────────────────────────────────────────
 
 type WpShowcaseNode = {

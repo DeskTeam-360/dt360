@@ -47,10 +47,10 @@ export function DownloadCTA({
                 </svg>
               </div>
               <div className="text-white">
-                <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] font-bold font-heading mb-1">
+                <h2 className="text-[36px] md:text-[48px] lg:text-[64px] leading-[1.2] font-bold font-heading mb-1">
                   {title}
                 </h2>
-                <p className="text-[28px] md:text-[32px] lg:text-[40px] leading-[1.2] font-heading font-medium">
+                <p className="text-[28px] md:text-[36px] lg:text-[48px] leading-[1.2] font-heading font-medium">
                   {subtitle}
                 </p>
               </div>
@@ -67,7 +67,7 @@ export function DownloadCTA({
                   href={buttonHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-[#11104c] px-6 py-3 md:px-8 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-gray-100 transition-colors flex-shrink-0 cursor-pointer"
+                  className="bg-white text-[#11104c] hover:text-[#11104c] px-6 py-3 md:px-8 md:py-3 rounded-[10px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-gray-100 transition-colors flex-shrink-0 cursor-pointer"
                 >
                   {buttonText}
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-current flex items-center justify-center">

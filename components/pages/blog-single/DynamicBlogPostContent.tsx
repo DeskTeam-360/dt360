@@ -100,6 +100,27 @@ function isInsideTocPanel(domNode: { parent?: unknown }): boolean {
   return false;
 }
 
+function cleanCalloutText(nodes: DOMNode[]): DOMNode[] {
+  return nodes.map((node) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nodeAsAny = node as any;
+    if (nodeAsAny.type === 'text') {
+      let data = nodeAsAny.data || '';
+      // Remove > CALLOUT (tip): or CALLOUT (tip):
+      data = data.replace(/^>\s*CALLOUT\s*\([^)]+\):\s*/i, '');
+      data = data.replace(/^CALLOUT\s*\([^)]+\):\s*/i, '');
+      return { ...nodeAsAny, data };
+    }
+    if (nodeAsAny.children) {
+      return {
+        ...nodeAsAny,
+        children: cleanCalloutText(nodeAsAny.children as DOMNode[]),
+      };
+    }
+    return node;
+  });
+}
+
 function isCtaPrimaryElement(attribs?: { class?: string; id?: string }): boolean {
   const cls = attribs?.class || '';
   const elementId = attribs?.id || '';
@@ -239,6 +260,7 @@ const formatDate = (dateString?: string) => {
 interface DynamicBlogPostContentProps {
   post: BlogPost;
   relatedPosts: BlogPost[];
+  publishedSlugs: string[];
   /** Case study detail — optimize hero, author, and related thumbnails. */
   optimizeImages?: boolean;
 }
@@ -246,6 +268,7 @@ interface DynamicBlogPostContentProps {
 export function DynamicBlogPostContent({
   post,
   relatedPosts,
+  publishedSlugs,
   optimizeImages = false,
 }: DynamicBlogPostContentProps) {
   const PostImage = optimizeImages ? CaseStudiesSafeImage : SafeImage;
@@ -274,10 +297,16 @@ export function DynamicBlogPostContent({
 
         // Primary CTA — render exact WordPress HTML (all tags, inline styles, onmouseover, etc.)
         if (isCtaPrimaryElement(domNodeAsAny.attribs)) {
+          let html = domNodeToHtml(domNodeAsAny);
+          // Enlarge "Free 5-Minute Video" title text size and add bottom margin
+          html = html.replace(/font-size:\s*13px/g, 'font-size: 36px; font-weight: 800;');
+          html = html.replace(/margin:\s*0\s+0\s+8px\s+0/g, 'margin: 0 0 24px 0');
+          // Unify primary CTA description size/font with standard content
+          html = html.replace(/color:\s*rgba\(255,\s*255,\s*255,\s*0\.85\);\s*font-size:\s*16px/g, 'color: #ffffff; font-size: 18px; font-family: var(--font-montserrat), sans-serif; font-weight: 600;');
           return (
             <div
               className="wp-cta-primary-passthrough"
-              dangerouslySetInnerHTML={{ __html: domNodeToHtml(domNodeAsAny) }}
+              dangerouslySetInnerHTML={{ __html: html }}
             />
           );
         }
@@ -300,27 +329,36 @@ export function DynamicBlogPostContent({
 
         // Handle Blockquote
         if (domNodeAsAny.name === 'blockquote') {
+          const className = domNodeAsAny.attribs?.class || '';
           const textContent = extractText(domNodeAsAny).toLowerCase();
           
-          if (textContent.includes('pro tip:')) {
-            // Pro Tip Style
-            return (
-              <div className="bg-[#E6236D] rounded-[35px] p-8 md:p-12 my-12">
-                <div className="text-white text-lg md:text-2xl font-semibold font-montserrat">
-                  {domToReact(domNodeAsAny.children as DOMNode[], options)}
-                </div>
-              </div>
-            );
-          } else {
-            // Standard Quote Style
-            return (
-              <div className="bg-[#45108B] rounded-[35px] p-8 md:p-12 my-12 text-center">
-                <div className="text-white text-2xl md:text-3xl font-bold font-montserrat">
-                  {domToReact(domNodeAsAny.children as DOMNode[], options)}
-                </div>
-              </div>
-            );
+          const isCallout = className.includes('dt-callout') || textContent.includes('callout');
+          
+          // Determine the correct style card
+          let cardBg = "bg-[#45108B]"; // Default Purple
+          let cardTextClass = "text-white text-2xl md:text-3xl font-bold font-montserrat text-center";
+          
+          if (textContent.includes('pro tip:') || textContent.includes('(tip):')) {
+            cardBg = "bg-[#E6236D]"; // Pink
+            cardTextClass = "text-white text-lg md:text-2xl font-semibold font-montserrat";
+          } else if (textContent.includes('(warning):')) {
+            cardBg = "bg-[#F0573A]"; // Orange
+            cardTextClass = "text-white text-lg md:text-2xl font-semibold font-montserrat";
           }
+
+          // If it is a callout block, clean up the label prefix
+          let children = domNodeAsAny.children as DOMNode[];
+          if (isCallout) {
+            children = cleanCalloutText(children);
+          }
+
+          return (
+            <div className={`${cardBg} rounded-[35px] p-8 md:p-12 my-12`}>
+              <div className={cardTextClass}>
+                {domToReact(children, options)}
+              </div>
+            </div>
+          );
         }
 
         // Handle Author Box
@@ -437,7 +475,9 @@ export function DynamicBlogPostContent({
           const containerStyle = {};
           let shortTextColor = "text-[#F0573A]"; // Default Highlight color
           
-          if (className.includes('warning')) {
+          if (isCtaSecondary) {
+            containerClass = "bg-gradient-to-br from-[#E01B89] to-[#F0603C]";
+          } else if (className.includes('warning')) {
             containerClass = "bg-[#F0573A]";
             shortTextColor = "text-white underline";
           } else if (className.includes('tip')) {
@@ -464,13 +504,36 @@ export function DynamicBlogPostContent({
                 const isShort = text.length > 0 && text.length < 100;
                 const pColor = className.includes('outline') ? 'text-[#11104C]' : 'text-white';
                 
-                const { alignClass, style: childStyle } = wpElementPresentation(childAsAny.attribs);
+                const { alignClass, style: rawStyle } = wpElementPresentation(childAsAny.attribs);
+                let childStyle = rawStyle;
+                
+                let pClasses = "";
+                if (isCtaSecondary && isShort) {
+                  pClasses = "text-[#F8C25D] text-2xl md:text-3xl lg:text-[36px] font-extrabold uppercase tracking-widest";
+                  if (childStyle) {
+                    childStyle = { ...childStyle };
+                    delete childStyle.fontSize;
+                    delete childStyle.fontWeight;
+                    delete childStyle.letterSpacing;
+                  }
+                } else {
+                  pClasses = isShort ? `${shortTextColor} text-xl md:text-2xl font-bold` : `${pColor} text-[18px] font-semibold`;
+                  if (isCtaSecondary && !isShort) {
+                    if (childStyle) {
+                      childStyle = { ...childStyle };
+                      delete childStyle.fontSize;
+                      delete childStyle.fontWeight;
+                      delete childStyle.color;
+                    }
+                  }
+                }
+
                 return (
                   <p
                     key={idx}
                     className={cn(
                       'font-montserrat leading-relaxed mb-4',
-                      isShort ? `${shortTextColor} text-xl md:text-2xl font-bold` : `${pColor} text-lg md:text-xl font-medium`,
+                      pClasses,
                       alignClass,
                     )}
                     style={childStyle}
@@ -482,13 +545,21 @@ export function DynamicBlogPostContent({
               if (childAsAny.name === 'a') {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { href, class: _class, style: _style, ...linkProps } = childAsAny.attribs || {};
-                const btnBg = className.includes('cta-secondary') ? 'bg-[#45108B]' : 'bg-[#e3058d]';
+                
+                let btnClasses = "";
+                if (isCtaSecondary) {
+                  btnClasses = "bg-white !text-[#E01B89] !no-underline hover:bg-[#11104C] hover:!text-white";
+                } else {
+                  const btnBg = className.includes('cta-secondary') ? 'bg-[#45108B]' : 'bg-[#e3058d]';
+                  btnClasses = `${btnBg} !text-white !no-underline hover:!text-white hover:opacity-90`;
+                }
+
                 return (
                   <div key={idx} className="mt-6">
                     <Link 
                       href={href || '#'} 
                       {...linkProps}
-                      className={`${btnBg} text-white px-8 py-4 md:px-10 md:py-5 rounded-[15px] font-bold text-xl md:text-2xl transition-all hover:opacity-90 hover:scale-105 shadow-lg font-montserrat inline-block`}
+                      className={`${btnClasses} px-8 py-4 md:px-10 md:py-5 rounded-[15px] font-bold text-xl md:text-2xl transition-all hover:scale-105 shadow-lg font-montserrat inline-block`}
                     >
                       {domToReact(childAsAny.children as DOMNode[], options)}
                     </Link>
@@ -597,6 +668,42 @@ export function DynamicBlogPostContent({
           const { href, class: linkHtmlClass, style: linkStyle, ...restAttribs } = attribs;
           const children = domToReact(domNodeAsAny.children as DOMNode[], options);
           const anchorStyle = parseHtmlStyleAttribute(linkStyle);
+
+          let isDraftBlogLink = false;
+          try {
+            if (href) {
+              const url = new URL(href, 'https://deskteam360.com');
+              const isInternal = url.hostname === 'deskteam360.com' || url.hostname === 'clone.deskteam360.com';
+              if (isInternal) {
+                const path = url.pathname.replace(/\/$/, '');
+                const linkSlug = path.slice(1);
+                
+                // If it is a blog post URL, extract the slug and check against published posts
+                if (linkSlug.startsWith('blog/')) {
+                  const actualSlug = linkSlug.slice(5);
+                  if (actualSlug && !publishedSlugs.includes(actualSlug)) {
+                    isDraftBlogLink = true;
+                  }
+                } else {
+                  const knownPages = ['about', 'services', 'contact', 'how-it-works', 'showcase', 'blog', 'book-a-call', 'privacy-policy', 'terms-conditions', 'case-studies', 'affiliate-program', ''];
+                  const isKnownPage = knownPages.includes(linkSlug) || linkSlug.startsWith('services/') || linkSlug.startsWith('showcase/');
+                  if (linkSlug && !isKnownPage && !linkSlug.startsWith('wp-content/') && !publishedSlugs.includes(linkSlug)) {
+                    isDraftBlogLink = true;
+                  }
+                }
+              }
+            }
+          } catch {
+            // invalid URL parsing ignored
+          }
+
+          if (isDraftBlogLink) {
+            return (
+              <a className={cn(linkHtmlClass, 'font-semibold cursor-text', isInsideBodyParagraph(domNodeAsAny) ? 'text-black' : '')} style={anchorStyle}>
+                {children}
+              </a>
+            );
+          }
 
           if (isFullVideoCtaHref(href) && !isInsideTocPanel(domNodeAsAny)) {
             return (

@@ -24,7 +24,11 @@ export default async function RootBlogPostPage({ params }: Props) {
 
   return (
     <main className="flex-grow">
-      <DynamicBlogPostContent post={data.post} relatedPosts={data.relatedPosts} />
+      <DynamicBlogPostContent 
+        post={data.post} 
+        relatedPosts={data.relatedPosts} 
+        publishedSlugs={data.publishedSlugs}
+      />
     </main>
   );
 }
