@@ -49,6 +49,15 @@ export function Pricing() {
           }}
           aria-hidden
         />
+        {/* Mobile: cover PNG white fringe inside content zone — not on torn-edge overlays */}
+        <span
+          className="pointer-events-none absolute inset-x-0 top-[21px] z-[1] hidden h-4 bg-[#7547C5] max-sm:block"
+          aria-hidden
+        />
+        <span
+          className="pointer-events-none absolute inset-x-0 bottom-[21px] z-[1] hidden h-4 bg-[#7547C5] max-sm:block"
+          aria-hidden
+        />
         <Container className="relative z-[2] max-w-7xl px-5 py-8 sm:px-6 sm:py-10 lg:py-[40px]">
           <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
             <div className="flex items-center gap-4 sm:gap-6">

@@ -105,7 +105,10 @@ export function RotateProblemCarousel() {
                       />
                     </span>
                     <span
-                      className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[82%] bg-gradient-to-r from-black/40 to-transparent sm:w-[400px] lg:w-[460px]"
+                      className={cn(
+                        "pointer-events-none absolute inset-y-0 left-0 z-[1] w-[72%] bg-gradient-to-r sm:w-[344px] lg:w-[400px]",
+                        card.scrimClass,
+                      )}
                       aria-hidden
                     />
                     <span

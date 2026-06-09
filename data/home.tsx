@@ -182,6 +182,8 @@ export type RotateProblemCard = {
   title: string;
   description: string;
   imageSrc: string;
+  /** Tinted scrim behind text — matches card bg color at ~55%, not pure black. */
+  scrimClass: string;
 };
 
 export const rotateProblemCards: RotateProblemCard[] = [
@@ -191,6 +193,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     description:
       "Your graphic designer bills hourly. Your web developer charges \"project management\" on top of dev time. Your video editor has a revision surcharge. Every task feels like opening your wallet and hoping for the best.",
     imageSrc: "/images/home-rotatecard-Card-1.png",
+    scrimClass: "from-[#8B1048]/55 via-[#8B1048]/28 to-transparent",
   },
   {
     id: "vendors",
@@ -198,6 +201,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     description:
       "One person handles graphics. Another does web updates. A third builds funnels. Someone else edits video. They've never spoken to each other. And you're the human glue - the project manager you never signed up to be.",
     imageSrc: "/images/home-rotatecard-Card-2.png",
+    scrimClass: "from-[#B84718]/55 via-[#B84718]/28 to-transparent",
   },
   {
     id: "lottery",
@@ -205,6 +209,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
     imageSrc: "/images/home-rotatecard-Card-3.png",
+    scrimClass: "from-[#4D1098]/55 via-[#4D1098]/28 to-transparent",
   },
 ];
 
