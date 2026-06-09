@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@tailwindcss/oxide-wasm32-wasi": "^4.3.0",
     "framer-motion": "^12.38.0",
     "graphql": "^16.14.0",
     "graphql-request": "^7.4.0",
