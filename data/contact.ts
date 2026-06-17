@@ -40,7 +40,7 @@ export const contactForm = {
   successMessage: "Thank you! Your message has been received. We will respond ASAP.",
 } as const;
 
-/** Gravity Forms — https://clone.deskteam360.com/wp-admin/admin.php?page=gf_edit_forms&id=1 */
+/** Gravity Forms — https://portal.deskteam360.com/wp-admin/admin.php?page=gf_edit_forms&id=1 */
 export const contactGravityForm = {
   formId: 1,
   fieldIds: {

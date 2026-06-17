@@ -6,9 +6,16 @@ import { socialProofSection, type SocialProofTestimonial } from '@/data/home';
 import type { ShowcaseItem } from '@/data/showcase';
 import { BLOG_ROUTE_REVALIDATE_SECONDS } from '@/lib/blog-revalidate';
 
-const API_URL = process.env.WORDPRESS_URL || process.env.WORDPRESS_API_URL || 'https://clone.deskteam360.com/endpoint';
 const API_USER = process.env.WORDPRESS_USER;
 const API_TOKEN = process.env.WORDPRESS_AUTH_TOKEN;
+
+function getWordPressGraphqlUrl(): string {
+  const url = process.env.WORDPRESS_API_URL;
+  if (!url) {
+    throw new Error('Missing WORDPRESS_API_URL environment variable.');
+  }
+  return url;
+}
 
 const getAuthHeader = (): Record<string, string> => {
   if (!API_TOKEN) return {};
@@ -28,9 +35,16 @@ const getAuthHeader = (): Record<string, string> => {
   return { Authorization: `Bearer ${API_TOKEN}` };
 };
 
-const client = new GraphQLClient(API_URL, {
-  headers: getAuthHeader(),
-});
+let graphqlClient: GraphQLClient | null = null;
+
+function getWpClient(): GraphQLClient {
+  if (!graphqlClient) {
+    graphqlClient = new GraphQLClient(getWordPressGraphqlUrl(), {
+      headers: getAuthHeader(),
+    });
+  }
+  return graphqlClient;
+}
 
 const WORDPRESS_BLOG_CACHE_TAG = 'wordpress-blog';
 
@@ -177,7 +191,7 @@ async function fetchBlogPostsByCategorySlug(
   categorySlug: string,
   first = 100,
 ): Promise<BlogPost[]> {
-  const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
+  const data = await getWpClient().request<{ posts?: { nodes?: WpPostNode[] } }>(
     BLOG_POSTS_BY_CATEGORY_QUERY,
     { first, categoryName: categorySlug },
   );
@@ -369,7 +383,7 @@ async function fetchCaseStudyPostsForCategory(
   categorySlug: string,
   first = 100,
 ): Promise<BlogPost[]> {
-  const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(
+  const data = await getWpClient().request<{ posts?: { nodes?: WpPostNode[] } }>(
     CASE_STUDY_POSTS_BY_CATEGORY_QUERY,
     { first, categoryName: categorySlug },
   );
@@ -469,7 +483,7 @@ export const getBlogData = async () => {
   `;
 
   try {
-    const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
+    const data = await getWpClient().request<GetAllBlogDataResponse>(query, { first: 300 });
 
     const allPosts = (data.posts?.nodes || []).map(mapPost);
     
@@ -609,7 +623,7 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
   `;
 
     try {
-      const data = await client.request<GetAllBlogDataResponse>(query, { first: 300 });
+      const data = await getWpClient().request<GetAllBlogDataResponse>(query, { first: 300 });
       const allPosts = (data.posts?.nodes || []).map(mapPostLite);
       
       const categoryToLatestPostMap: Record<string, BlogPost> = {};
@@ -662,7 +676,7 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
   `;
 
     try {
-      const data = await client.request<GetPostBySlugResponse>(query, { id: slug });
+      const data = await getWpClient().request<GetPostBySlugResponse>(query, { id: slug });
       return data.post ? mapPost(data.post) : null;
     } catch (error) {
       console.error('Error fetching post by slug:', error);
@@ -684,7 +698,7 @@ export const getAllPublishedPostSlugs = cache(async (): Promise<string[]> => {
     `;
 
     try {
-      const data = await client.request<{ posts?: { nodes?: { slug: string }[] } }>(query);
+      const data = await getWpClient().request<{ posts?: { nodes?: { slug: string }[] } }>(query);
       return (data.posts?.nodes || []).map((n) => n.slug);
     } catch (error) {
       console.error('Error fetching published slugs:', error);
@@ -837,7 +851,7 @@ const HOME_TESTIMONIALS_QUERY = gql`
 async function fetchPublishedTestimonials(
   orderbyField: 'MENU_ORDER' | 'DATE',
 ): Promise<SocialProofTestimonial[]> {
-  const data = await client.request<{ testimonials?: { nodes?: WpTestimonialNode[] } }>(
+  const data = await getWpClient().request<{ testimonials?: { nodes?: WpTestimonialNode[] } }>(
     HOME_TESTIMONIALS_QUERY,
     { first: 100, orderbyField },
   );
@@ -939,13 +953,13 @@ export const getShowcaseData = cache(async () => {
 
     try {
       const [nodesResult, categoriesResult, byCategoryResult] = await Promise.allSettled([
-        client.request<{ contentNodes?: { nodes?: WpShowcaseNode[] } }>(nodesQuery, {
+        getWpClient().request<{ contentNodes?: { nodes?: WpShowcaseNode[] } }>(nodesQuery, {
           first: SHOWCASE_PER_CATEGORY_LIMIT,
         }),
-        client.request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryNode[] } }>(
+        getWpClient().request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryNode[] } }>(
           categoriesQuery,
         ),
-        client.request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryWithPosts[] } }>(
+        getWpClient().request<{ showcaseCategories?: { nodes?: WpShowcaseCategoryWithPosts[] } }>(
           categoriesWithShowcasesQuery,
           { first: SHOWCASE_PER_CATEGORY_LIMIT },
         ),

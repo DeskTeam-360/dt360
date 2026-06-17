@@ -58,7 +58,7 @@ export const bookACallForm = {
   bookingEmbedScriptSrc: "https://link.msgsndr.com/js/form_embed.js",
 } as const;
 
-/** Gravity Forms — https://clone.deskteam360.com/wp-admin/admin.php?page=gf_edit_forms&id=59 */
+/** Gravity Forms — https://portal.deskteam360.com/wp-admin/admin.php?page=gf_edit_forms&id=59 */
 export const bookACallGravityForm = {
   formId: 59,
   fieldIds: {

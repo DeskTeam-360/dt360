@@ -10,6 +10,7 @@ import { AUTHOR_INFO, BlogPost } from "@/data/blog";
 import parse, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser';
 import { DOMNode } from 'html-react-parser';
 import { cn } from '@/lib/utils';
+import { getWordPressInternalHostnames } from '@/lib/wp-public';
 
 type WpElementAttribs = { class?: string; style?: string };
 
@@ -673,7 +674,7 @@ export function DynamicBlogPostContent({
           try {
             if (href) {
               const url = new URL(href, 'https://deskteam360.com');
-              const isInternal = url.hostname === 'deskteam360.com' || url.hostname === 'clone.deskteam360.com';
+              const isInternal = getWordPressInternalHostnames().includes(url.hostname);
               if (isInternal) {
                 const path = url.pathname.replace(/\/$/, '');
                 const linkSlug = path.slice(1);

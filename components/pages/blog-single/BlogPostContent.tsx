@@ -1,6 +1,7 @@
 import svgPaths from "./svg-blog-single";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
+import { wordPressBlogPath } from "@/lib/wp-public";
 
 export function BlogPostContent() {
   return (
@@ -96,10 +97,10 @@ export function BlogPostContent() {
                 Here&apos;s what I&apos;ve learned after spending the last two years knee-deep in AI content workflows, testing every tool from ChatGPT to Claude to the latest marketing automation platforms, and integrating AI into our content operations at DeskTeam360. The difference between AI content that converts and AI content that gets ignored isn&apos;t the tool you use. It&apos;s how you use it.
               </p>
               <p className="text-black leading-relaxed mb-4 font-montserrat font-semibold">
-                I&apos;ve seen companies blow $50K on AI writing platforms only to produce content that reads like it was written by a committee of robots. I&apos;ve also seen smart operators use basic AI tools <a href="https://clone.deskteam360.com/how-to-create-faq-page/" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">to create</a> content that outperforms anything their competitors are publishing. The gap is strategy, not technology.
+                I&apos;ve seen companies blow $50K on AI writing platforms only to produce content that reads like it was written by a committee of robots. I&apos;ve also seen smart operators use basic AI tools <a href={wordPressBlogPath("/how-to-create-faq-page/")} className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">to create</a> content that outperforms anything their competitors are publishing. The gap is strategy, not technology.
               </p>
               <p className="text-black leading-relaxed mb-4 font-montserrat font-semibold">
-                Let me show you exactly what works, what doesn&apos;t, and <a href="https://clone.deskteam360.com/outsource-content-creation/" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">how to</a> build a content operation that actually moves the needle on your <a href="https://hbr.org/topic/subject/ai-and-machine-learning" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">business</a>.
+                Let me show you exactly what works, what doesn&apos;t, and <a href={wordPressBlogPath("/outsource-content-creation/")} className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">how to</a> build a content operation that actually moves the needle on your <a href="https://hbr.org/topic/subject/ai-and-machine-learning" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">business</a>.
               </p>
             </section>
 
@@ -142,7 +143,7 @@ export function BlogPostContent() {
                 But here&apos;s the thing most people miss about AI and SEO. The content still needs to be good. Google&apos;s algorithms are smart enough to detect thin, auto-generated content that adds no value. If you&apos;re using AI to pump out 50 mediocre blog posts hoping something sticks, you&apos;re doing it wrong.
               </p>
               <p className="text-black leading-relaxed mb-4 font-montserrat font-semibold">
-                The companies winning <a href="https://clone.deskteam360.com/automate-marketing-with-ai/" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">with AI</a> SEO are the ones using it to create genuinely helpful content faster, not more bad content at scale. Our <a href="https://clone.deskteam360.com/how-to-do-keyword-research/" className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">keyword research guide</a> still applies, AI just makes the execution faster.
+                The companies winning <a href={wordPressBlogPath("/automate-marketing-with-ai/")} className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">with AI</a> SEO are the ones using it to create genuinely helpful content faster, not more bad content at scale. Our <a href={wordPressBlogPath("/how-to-do-keyword-research/")} className="text-black underline hover:text-[#E6236D]" target="_blank" rel="noopener noreferrer">keyword research guide</a> still applies, AI just makes the execution faster.
               </p>
             </section>
 

@@ -4,16 +4,19 @@ export function getWordPressSiteOrigin(): string {
   const explicit = process.env.WORDPRESS_SITE_URL?.replace(/\/$/, "");
   if (explicit) return explicit;
 
-  const apiUrl =
-    process.env.WORDPRESS_URL ||
-    process.env.WORDPRESS_API_URL ||
-    "https://clone.deskteam360.com/endpoint";
-
-  try {
-    return new URL(apiUrl).origin;
-  } catch {
-    return "https://clone.deskteam360.com";
+  const apiUrl = process.env.WORDPRESS_API_URL;
+  if (apiUrl) {
+    try {
+      return new URL(apiUrl).origin;
+    } catch {
+      // fall through
+    }
   }
+
+  const publicSite = process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL?.replace(/\/$/, "");
+  if (publicSite) return publicSite;
+
+  throw new Error("Missing WORDPRESS_SITE_URL (or WORDPRESS_API_URL) environment variable.");
 }
 
 export function getWordPressAuthHeaders(): Record<string, string> {
