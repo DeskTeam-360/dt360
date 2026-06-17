@@ -37,7 +37,7 @@ const cells: Cell[] = [
       <>
         AI Agent setup, AI Training, Chatbot setup, workflow automation, process optimization - scale
         <br />
-        without headcount
+        without headcount.
       </>
     ),
     bg: "bg-[#1E1D76]",
@@ -48,7 +48,7 @@ const cells: Cell[] = [
     id: "web-design",
     title: "Web Design &\nDevelopment",
     description:
-      "WordPress, React, and other CMS's, landing pages, redesigns, bug fixes, WooCommerce, custom features",
+      "WordPress, React, and other CMS's, landing pages, redesigns, bug fixes, WooCommerce, custom features.",
     bg: "bg-[#7547C5]",
     text: "light",
   },
@@ -57,7 +57,7 @@ const cells: Cell[] = [
     id: "graphic-design",
     title: "Graphic\nDesign",
     description:
-      "Ad creatives, social graphics, branding, print materials, pitch decks, presentations",
+      "Ad creatives, social graphics, branding, print materials, pitch decks, presentations.",
     bg: "bg-[#E3058D]",
     text: "light",
   },
@@ -66,7 +66,7 @@ const cells: Cell[] = [
     id: "video-editing",
     title: "Video\nEditing",
     description:
-      "YouTube content, short-form reels, ad cuts, thumbnails, motion graphics",
+      "YouTube content, short-form reels, ad cuts, thumbnails, motion graphics.",
     bg: "bg-[#C7B3F2]",
     text: "dark",
   },
@@ -75,7 +75,7 @@ const cells: Cell[] = [
     id: "email-funnels",
     title: "Email &\nFunnels",
     description:
-      "Campaign builds, automation sequences, drip nurture, newsletter design, A/B testing",
+      "Campaign builds, automation sequences, drip nurture, newsletter design, A/B testing.",
     bg: "bg-[#F0573A]",
     text: "light",
   },
@@ -88,7 +88,7 @@ const cells: Cell[] = [
         GoHighLevel, HubSpot, and other CRM&apos;s, Zapier, Make, ActiveCampaign, and other email software,
         integrations,
         <br />
-        API work
+        API work.
       </>
     ),
     bg: "bg-[#C7B3F2]",
@@ -99,7 +99,7 @@ const cells: Cell[] = [
     id: "social-media",
     title: "Social Media\nContent",
     description:
-      "Branded graphics, carousel posts, story templates, scheduling-ready assets",
+      "Branded graphics, carousel posts, story templates, scheduling-ready assets.",
     bg: "bg-[#7547C5]",
     text: "light",
   },
@@ -107,7 +107,7 @@ const cells: Cell[] = [
     kind: "card",
     id: "maintenance",
     title: "Website\nMaintenance",
-    description: "Core updates, security monitoring, speed optimization, backups - always current",
+    description: "Core updates, security monitoring, speed optimization, backups - always current.",
     bg: "bg-[#1E1D76]",
     text: "light",
   },

@@ -2,6 +2,8 @@ export type HowItWorksTaskStep = {
   id: string;
   title: string;
   body: string;
+  /** Optional follow-up line (e.g. examples list) with its own spacing */
+  examples?: string;
   stepLabel: string;
   gradientClass: string;
 };
@@ -70,9 +72,8 @@ export const howItWorksTaskSection = {
     {
       id: "s1",
       title: "Tell Us What You Need",
-      body: `Drop your task into our request system. Write it out, record a Loom video, attach a doc - whatever works for you. The more context you give, the better the output. Even a quick voice note gets the job done.
-
-Examples of what people submit: "Redesign our homepage," "Cut this 45-minute webinar into 5 social clips," "Build this GoHighLevel workflow," "Create 10 social graphics for next month."`,
+      body: `Drop your task into our request system. Write it out, record a Loom video, attach a doc - whatever works for you. The more context you give, the better the output. Even a quick voice note gets the job done.`,
+      examples: `Examples of what people submit: "Redesign our homepage," "Cut this 45-minute webinar into 5 social clips," "Build this GoHighLevel workflow," "Create 10 social graphics for next\u00A0month."`,
  
       stepLabel: "Step 1",
       gradientClass: "bg-gradient-to-b from-[#ff9f4d] via-[#f0732b] to-[#e8561a]",

@@ -13,13 +13,13 @@ const planCards = [
     type: "label" as const,
   },
   {
-    label: "1 North American\nAccount Manager",
+    label: "1 North American\nAccount Manager.",
     imageSrc: "/images/Strip Row - JD.png",
     bg: "#6312AD",
     type: "card" as const,
   },
   {
-    label: "1 Team Leader",
+    label: "1 Team Leader.",
     imageSrc: "/images/How it works - TL Strip.png",
     bg: "#8815A2",
     type: "card" as const,
