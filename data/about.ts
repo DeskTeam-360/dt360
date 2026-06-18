@@ -43,11 +43,11 @@ export const aboutTimeline = [
 export const numbersThatMatter = [
   {
     value: "12+",
-    label: "Years in business - we've been doing this since before outsourcing was trendy",
+    label: "Years in business - we've been doing this since before outsourcing was trendy.",
   },
   {
     value: "400+",
-    label: "Total clients served - agencies, consultants, coaches, course creators, small businesses",
+    label: "Total clients served - agencies, consultants, coaches, course creators, small businesses.",
   },
   {
     value: "$2.5M+",
@@ -55,15 +55,15 @@ export const numbersThatMatter = [
   },
   {
     value: "200+",
-    label: "Freelancers managed personally by Jeremy before building DeskTeam360",
+    label: "Freelancers managed personally by Jeremy before building DeskTeam360.",
   },
   {
     value: "$1M+",
-    label: "Spent on outsourcing to learn what works and what does not",
+    label: "Spent on outsourcing to learn what works and what does not.",
   },
   {
     value: "8",
-    label: "Service categories - more than any competitor in this space",
+    label: "Service categories - more than any competitor in this space.",
   },
 ] as const;
 

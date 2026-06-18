@@ -45,9 +45,16 @@ export function HowItWorksTaskSteps() {
               >
                 <div className="flex flex-1 flex-col">
                   <h3 className="type-rule-h3 text-center font-semibold leading-snug">{step.title}</h3>
-                  <p className="type-rule-p mt-4 flex-1 whitespace-pre-line text-center leading-[1.9em] text-white/95">
-                    {step.body}
-                  </p>
+                  <div className="mt-4 flex flex-1 flex-col">
+                    <p className="type-rule-p whitespace-pre-line text-center leading-[1.9em] text-white/95">
+                      {step.body}
+                    </p>
+                    {step.examples ? (
+                      <p className="type-rule-p mt-4 whitespace-pre-line pb-[50px] text-center leading-[1.9em] text-white/95">
+                        {step.examples}
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
                 <div className="-mx-10 mt-auto">
                   <div
