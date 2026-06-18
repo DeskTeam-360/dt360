@@ -10,7 +10,11 @@ import { AUTHOR_INFO, BlogPost } from "@/data/blog";
 import parse, { HTMLReactParserOptions, Element, domToReact } from 'html-react-parser';
 import { DOMNode } from 'html-react-parser';
 import { cn } from '@/lib/utils';
-import { getWordPressInternalHostnames } from '@/lib/wp-public';
+import {
+  getWordPressInternalHostnames,
+  rewriteWordPressContentHtml,
+  rewriteWordPressMediaUrl,
+} from '@/lib/wp-public';
 
 type WpElementAttribs = { class?: string; style?: string };
 
@@ -379,7 +383,7 @@ export function DynamicBlogPostContent({
               {actualImg && (
                 <div className="relative top-0 mx-auto mt-0 h-32 w-32 flex-shrink-0 self-start overflow-hidden rounded-full border-4 border-white shadow-lg md:mx-0 md:h-48 md:w-48">
                   <PostImage
-                    src={actualImg.attribs.src}
+                    src={rewriteWordPressMediaUrl(actualImg.attribs.src)}
                     alt={actualImg.attribs.alt || "Author"}
                     fill
                     sizes="(max-width: 768px) 128px, 192px"
@@ -786,7 +790,7 @@ export function DynamicBlogPostContent({
 
           <div className="relative w-full aspect-[2/1] rounded-br-[50px] md:rounded-br-[100px] rounded-tl-[50px] md:rounded-tl-[100px] overflow-hidden bg-gray-100 mb-8 md:mb-12 shadow-2xl">
             <PostImage
-              src={post.image}
+              src={rewriteWordPressMediaUrl(post.image)}
               alt={post.title}
               fill
               sizes="(max-width: 1024px) 100vw, 1082px"
@@ -980,7 +984,7 @@ export function DynamicBlogPostContent({
               }
             `}} />
             
-            {parse(post.content || '', options)}
+            {parse(rewriteWordPressContentHtml(post.content || ''), options)}
           </article>
         </div>
       </div>
@@ -1005,7 +1009,7 @@ export function DynamicBlogPostContent({
                 <div key={related.id} className="border border-[#11104C] rounded-[30px] overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full bg-white">
                   <div className="relative h-64 flex-shrink-0 bg-gray-100">
                     <PostImage
-                      src={related.image}
+                      src={rewriteWordPressMediaUrl(related.image)}
                       alt={related.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
