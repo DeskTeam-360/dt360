@@ -5,6 +5,7 @@ import { BlogPost } from '@/data/blog';
 import { socialProofSection, type SocialProofTestimonial } from '@/data/home';
 import type { ShowcaseItem } from '@/data/showcase';
 import { BLOG_ROUTE_REVALIDATE_SECONDS } from '@/lib/blog-revalidate';
+import { rewriteWordPressContentHtml, rewriteWordPressMediaUrl } from '@/lib/wp-public';
 
 const API_USER = process.env.WORDPRESS_USER;
 const API_TOKEN = process.env.WORDPRESS_AUTH_TOKEN;
@@ -275,8 +276,10 @@ const mapCaseStudyPost = (post: WpPostNode): BlogPost => {
     slug: post.slug,
     title: decodeHtmlEntities(post.title || ''),
     excerpt,
-    content: post.content,
-    image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    content: rewriteWordPressContentHtml(post.content),
+    image: rewriteWordPressMediaUrl(
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    ),
     category: caseStudyCats[0] || 'Case Study',
     categories: caseStudyCats.length > 0 ? caseStudyCats : ['Case Study'],
     author: post.author?.node?.name || 'Admin',
@@ -300,8 +303,10 @@ const mapPost = (post: WpPostNode): BlogPost => {
     slug: post.slug,
     title: decodeHtmlEntities(post.title || ''),
     excerpt,
-    content: post.content,
-    image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    content: rewriteWordPressContentHtml(post.content),
+    image: rewriteWordPressMediaUrl(
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    ),
     category: validCategory,
     categories: categoriesList,
     author: post.author?.node?.name || 'Admin',
@@ -326,7 +331,9 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
     title: decodeHtmlEntities(post.title || ''),
     excerpt,
     content: undefined,
-    image: post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    image: rewriteWordPressMediaUrl(
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+    ),
     category: validCategory,
     categories: categoriesList,
     author: post.author?.node?.name || 'Admin',
