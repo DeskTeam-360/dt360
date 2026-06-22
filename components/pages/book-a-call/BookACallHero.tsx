@@ -1,4 +1,4 @@
-import { BookACallForm } from "@/components/pages/book-a-call/BookACallForm";
+import { BookACallCalendarSection } from "@/components/pages/book-a-call/BookACallCalendarSection";
 import {
   serviceFaqIllustrationImageClassName,
   serviceFaqIllustrationWrapperClassName,
@@ -9,7 +9,7 @@ import { BOOK_A_CALL_FORM_BG, bookACallHero, bookACallHeroOverlapClasses } from 
 import { cn } from "@/lib/utils";
 
 /**
- * Book a Call — hero, arch transition, and step-1 form in one section.
+ * Book a Call — hero, arch transition, and GHL calendar embed.
  */
 export function BookACallHero() {
   const { title, heroImageSrc, heroImageAlt, heroImageMaxWidth, heroImageMaxWidthSm, heroImageMaxWidthLg } =
@@ -107,7 +107,7 @@ export function BookACallHero() {
         </div>
       </div>
 
-      <BookACallForm />
+      <BookACallCalendarSection />
     </section>
   );
 }

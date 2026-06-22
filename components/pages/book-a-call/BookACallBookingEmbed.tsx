@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { bookACallForm } from "@/data/bookACall";
+import { cn } from "@/lib/utils";
 
 const { bookingIframeSrc, bookingIframeId, bookingEmbedScriptSrc } = bookACallForm;
 
@@ -72,7 +73,7 @@ function loadEmbedScript(onReady: () => void) {
  * Lead Connector / GHL booking widget (not Calendly).
  * form_embed.js hides iframes until iFrameResize runs — must init after this iframe mounts.
  */
-export function BookACallBookingEmbed() {
+export function BookACallBookingEmbed({ className = "" }: { className?: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export function BookACallBookingEmbed() {
   }, []);
 
   return (
-    <div className="flex w-full justify-center py-4">
+    <div className={cn("flex w-full justify-center", className)}>
       <iframe
         ref={iframeRef}
         id={bookingIframeId}
