@@ -1,25 +1,25 @@
 import { CalendarCheck, Trash2 } from "lucide-react";
-import { DemoVideoPlaceholder } from "@/components/pages/demo-call-scheduled-thank-you/DemoVideoPlaceholder";
+import { DemoCallScheduledHero } from "@/components/pages/demo-call-scheduled-thank-you/DemoCallScheduledHero";
+import { DemoVimeoEmbed } from "@/components/pages/demo-call-scheduled-thank-you/DemoVimeoEmbed";
 import { Container } from "@/components/shared/Container";
 import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { demoCallScheduledThankYouPage } from "@/data/demoCallScheduledThankYou";
 import { cn } from "@/lib/utils";
 
 const accentOrange = "text-[#FF7A32]";
-const stepPurple = "text-[#7B3FE4]";
 
 function StepBadge({ label }: { label: string }) {
   const { stepBadgeBgSrc } = demoCallScheduledThankYouPage;
   return (
     <span
-      className="inline-flex w-fit items-center px-8 py-4 font-[var(--font-poppins)] text-[24px] font-bold leading-none sm:px-10 sm:py-5 sm:text-[28px] lg:text-[32px]"
+      className="inline-flex w-fit items-center px-8 py-4 font-[var(--font-poppins)] text-[24px] font-bold leading-none text-white sm:px-10 sm:py-5 sm:text-[28px] lg:text-[32px]"
       style={{
         backgroundImage: `url('${stepBadgeBgSrc}')`,
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <span className={stepPurple}>{label}</span>
+      {label}
     </span>
   );
 }
@@ -40,37 +40,16 @@ function StepTitle({
 }
 
 export function DemoCallScheduledThankYouContent() {
-  const { hero, stepsIntro, steps } = demoCallScheduledThankYouPage;
+  const { stepsIntro, steps } = demoCallScheduledThankYouPage;
   const [step1, step2, step3] = steps;
 
   return (
     <>
-      {/* Section 1 — confirmation + hero video */}
-      <section
-        className="bg-white pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24"
-        aria-labelledby="demo-thank-you-hero-heading"
-      >
-        <Container className="max-w-[900px] text-center">
-          <h1
-            id="demo-thank-you-hero-heading"
-            className="font-[var(--font-poppins)] text-[36px] font-bold leading-[1.15] text-[#11104C] sm:text-[44px] lg:text-[52px]"
-          >
-            {hero.title}
-          </h1>
-          <p className="type-rule-p mt-5 text-[#11104C]/90 sm:mt-6">{hero.subtitle}</p>
-          <div className="mt-10 sm:mt-12">
-            <DemoVideoPlaceholder
-              variant="framed"
-              label={hero.videoLabel}
-              ariaLabel={hero.videoAriaLabel}
-            />
-          </div>
-        </Container>
-      </section>
+      <DemoCallScheduledHero />
 
       {/* Steps intro + Step 1 */}
       <section
-        className="relative overflow-x-hidden bg-[#F5F8FF] pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24"
+        className="relative overflow-x-hidden bg-[#F5F8FF] pb-16 pt-4 sm:pb-20 sm:pt-6 lg:pb-24"
         aria-labelledby="demo-thank-you-steps-heading"
       >
         <div
@@ -98,7 +77,12 @@ export function DemoCallScheduledThankYouContent() {
                 <p className="type-rule-p mt-5 max-w-lg text-[#11104C]/90">{step1.body}</p>
               </div>
               <div className="order-2 lg:order-2">
-                <DemoVideoPlaceholder ariaLabel={step1.videoAriaLabel} />
+                <DemoVimeoEmbed
+                  embedSrc={step1.vimeoEmbedSrc}
+                  posterSrc={step1.posterSrc}
+                  posterAlt={step1.posterAlt}
+                  ariaLabel={step1.videoAriaLabel}
+                />
               </div>
             </div>
           ) : null}
@@ -115,7 +99,10 @@ export function DemoCallScheduledThankYouContent() {
                   className="pointer-events-none absolute -bottom-3 -left-3 h-[calc(100%+12px)] w-[calc(100%+12px)] rounded-[24px] bg-[linear-gradient(135deg,#E3058D_0%,#9B7DFF_100%)] opacity-80"
                   aria-hidden
                 />
-                <DemoVideoPlaceholder
+                <DemoVimeoEmbed
+                  embedSrc={step2.vimeoEmbedSrc}
+                  posterSrc={step2.posterSrc}
+                  posterAlt={step2.posterAlt}
                   ariaLabel={step2.videoAriaLabel}
                   className="relative z-10 ring-4 ring-white"
                 />
@@ -173,10 +160,10 @@ export function DemoCallScheduledThankYouContent() {
                 <MarketingSafeImage
                   src={step3.illustrationSrc}
                   alt={step3.illustrationAlt}
-                  width={560}
-                  height={480}
-                  className="h-auto w-full max-w-[480px] object-contain drop-shadow-[0_20px_40px_rgba(17,16,76,0.12)]"
-                  sizes="(max-width: 1024px) 88vw, 420px"
+                  width={1200}
+                  height={675}
+                  className="h-auto w-full max-w-[560px] object-contain drop-shadow-[0_20px_40px_rgba(17,16,76,0.12)]"
+                  sizes="(max-width: 1024px) 88vw, 560px"
                 />
               </div>
             </div>

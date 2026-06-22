@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function DemoCallScheduledThankYouPage() {
   return (
-    <main className="flex min-w-0 flex-col overflow-x-hidden bg-white">
+    <main className="relative flex min-w-0 flex-col overflow-x-hidden overflow-y-visible bg-[#F5F8FF]">
       <DemoCallScheduledThankYouContent />
     </main>
   );

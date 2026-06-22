@@ -1,5 +1,7 @@
 /** Demo call scheduled thank-you page — copy and asset paths */
 
+const assetBase = "/images/demo-call-scheduled-thank-you";
+
 export const demoCallScheduledThankYouPage = {
   hero: {
     title: "Congrats! Your Consultation Is Booked.",
@@ -21,6 +23,10 @@ export const demoCallScheduledThankYouPage = {
       titleAccent: "DeskTeam360 Will Do For You",
       body: "Understanding This Will Give You Some Ideas Of What We Can Help you With That You Haven’t Thought Of Yet",
       videoAriaLabel: "Video overview of what DeskTeam360 can do for you",
+      vimeoEmbedSrc:
+        "https://player.vimeo.com/video/569128267?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1#t=",
+      posterSrc: `${assetBase}/step-1-fitbodies-thumbnail.jpg`,
+      posterAlt: "Fitbodies 4 Life case study video thumbnail",
       layout: "text-left" as const,
     },
     {
@@ -30,6 +36,10 @@ export const demoCallScheduledThankYouPage = {
       titleAccent: "Help WomenInWhiteCoats Scale",
       body: "To The Point An Emergency Room Physician Was Able To Quit Her Day Job.",
       videoAriaLabel: "Case study video: how DeskTeam360 helped WomenInWhiteCoats scale",
+      vimeoEmbedSrc:
+        "https://player.vimeo.com/video/569538871?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1#t=",
+      posterSrc: `${assetBase}/step-2-women-in-white-coats-thumbnail.jpg`,
+      posterAlt: "Women in White Coats case study video thumbnail",
       layout: "video-left" as const,
     },
     {
@@ -41,7 +51,7 @@ export const demoCallScheduledThankYouPage = {
         { icon: "trash" as const, text: "(check your spam or junk folder)" },
         { icon: "calendar" as const, text: "and add the appointment to your calendar.", bold: true },
       ],
-      illustrationSrc: "/images/Contact - Calendar.png",
+      illustrationSrc: `${assetBase}/step-3-calendar.png`,
       illustrationAlt: "Illustration of people adding an appointment to a calendar",
       layout: "text-left" as const,
     },
