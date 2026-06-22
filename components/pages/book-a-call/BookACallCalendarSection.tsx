@@ -24,8 +24,16 @@ export function BookACallCalendarSection() {
         </div>
 
         <Container className="relative z-10 max-w-[1440px] px-6 py-8 sm:px-8 sm:py-10 lg:px-20 lg:py-12">
-          <div className="mx-auto w-full max-w-4xl rounded-2xl bg-white px-4 py-8 shadow-[0_8px_40px_rgba(17,16,76,0.06)] ring-1 ring-[#C5C9E0]/50 sm:px-8 sm:py-10 md:py-12">
-            <BookACallBookingEmbed className="px-1 sm:px-2" />
+          {/* Gradient frame — matches book-a-call arch (cyan → violet → magenta) */}
+          <div
+            className="mx-auto w-full max-w-4xl rounded-[22px] bg-gradient-to-r from-[#00C8F4] via-[#9B7DFF] to-[#E3058D] p-[4px] shadow-[0_16px_56px_rgba(17,16,76,0.14)] sm:rounded-[24px] sm:p-[5px] lg:p-[6px]"
+            role="presentation"
+          >
+            <div className="rounded-[18px] bg-white p-[3px] sm:rounded-[20px] sm:p-1">
+              <div className="overflow-hidden rounded-[15px] border-[3px] border-[#11104C]/12 bg-white px-4 py-8 sm:rounded-[17px] sm:px-8 sm:py-10 md:py-12 lg:border-[4px] lg:px-10 lg:py-14">
+                <BookACallBookingEmbed className="px-0 sm:px-1" />
+              </div>
+            </div>
           </div>
         </Container>
       </div>
