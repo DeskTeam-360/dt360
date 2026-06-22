@@ -11,7 +11,7 @@ export const onboardingCallAm2Booking = {
 
 export const onboardingCallAm2Hero = {
   ...bookACallHero,
-  title: "Book A Call",
+  title: "Book an Onboarding Call",
 } as const;
 
 export const onboardingCallAm2Calendar = {
