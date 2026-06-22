@@ -1,4 +1,4 @@
-import { DemoVideoPlaceholder } from "@/components/pages/demo-call-scheduled-thank-you/DemoVideoPlaceholder";
+import { DemoFramedVimeoEmbed } from "@/components/pages/demo-call-scheduled-thank-you/DemoFramedVimeoEmbed";
 import { CallScheduledThankYouHero } from "@/components/shared/CallScheduledThankYouHero";
 import { Container } from "@/components/shared/Container";
 import { demoCallScheduledThankYouPage } from "@/data/demoCallScheduledThankYou";
@@ -13,8 +13,8 @@ export function DemoCallScheduledHero() {
       title={hero.title}
       belowArch={
         <Container className="max-w-[900px]">
-          <DemoVideoPlaceholder
-            variant="framed"
+          <DemoFramedVimeoEmbed
+            embedSrc={hero.vimeoEmbedSrc}
             label={hero.videoLabel}
             ariaLabel={hero.videoAriaLabel}
           />

@@ -8,6 +8,8 @@ export const demoCallScheduledThankYouPage = {
     subtitle: "Please Do The Following Before Your Call:",
     videoLabel: "Watch This Video Explaining What To Expect On The Call",
     videoAriaLabel: "Video explaining what to expect on your consultation call",
+    vimeoEmbedSrc:
+      "https://player.vimeo.com/video/1203644058?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1#t=",
   },
   stepsIntro: {
     beforeAccent: "Follow ",
