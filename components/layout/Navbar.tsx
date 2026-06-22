@@ -18,6 +18,7 @@ const ROOT_NON_BLOG_ROUTES = new Set([
   "about",
   "affiliate-program",
   "book-a-call",
+  "demo-call-scheduled-thank-you",
   "contact",
   "how-it-works",
   "showcase",

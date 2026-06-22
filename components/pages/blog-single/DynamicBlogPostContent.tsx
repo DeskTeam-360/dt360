@@ -690,7 +690,7 @@ export function DynamicBlogPostContent({
                     isDraftBlogLink = true;
                   }
                 } else {
-                  const knownPages = ['about', 'services', 'contact', 'how-it-works', 'showcase', 'blog', 'book-a-call', 'privacy-policy', 'terms-conditions', 'case-studies', 'affiliate-program', ''];
+                  const knownPages = ['about', 'services', 'contact', 'how-it-works', 'showcase', 'blog', 'book-a-call', 'demo-call-scheduled-thank-you', 'privacy-policy', 'terms-conditions', 'case-studies', 'affiliate-program', ''];
                   const isKnownPage = knownPages.includes(linkSlug) || linkSlug.startsWith('services/') || linkSlug.startsWith('showcase/');
                   if (linkSlug && !isKnownPage && !linkSlug.startsWith('wp-content/') && !publishedSlugs.includes(linkSlug)) {
                     isDraftBlogLink = true;
