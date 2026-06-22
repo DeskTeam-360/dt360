@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BookACallHero } from "@/components/pages/book-a-call/BookACallHero";
+import { BookACallBookingEmbed } from "@/components/pages/book-a-call/BookACallBookingEmbed";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function BookACallPage() {
   return (
-    <main className="relative flex min-w-0 flex-col overflow-x-hidden overflow-y-visible bg-[#F5F8FF]">
-      <BookACallHero />
+    <main className="relative min-w-0 bg-[#F5F8FF] pt-24 pb-12 lg:pt-28">
+      <BookACallBookingEmbed />
     </main>
   );
 }
