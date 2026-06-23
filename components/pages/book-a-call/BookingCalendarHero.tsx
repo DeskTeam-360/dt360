@@ -5,6 +5,7 @@ import {
   bookACallHero,
   bookACallHeroLayout,
   bookACallHeroOverlapClasses,
+  bookACallShellContainerClassName,
 } from "@/data/bookACall";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
@@ -59,14 +60,20 @@ export function BookingCalendarHero({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_65%_at_72%_55%,rgba(227,5,141,0.22)_0%,transparent_55%)]" />
         </div>
 
-        <Container className="relative z-20 max-w-[1440px] px-6 lg:px-20">
+        <Container className={cn("relative z-20", bookACallShellContainerClassName)}>
           <div className={gridClassName}>
             <div className={titleColumnClassName}>
               <h1 id={headingId} className={titleClassName}>
                 {title}
               </h1>
             </div>
-            <div className={cn(imageColumnClassName, bookACallHeroOverlapClasses.imageMargin)}>
+            <div
+              className={cn(
+                imageColumnClassName,
+                bookACallHeroOverlapClasses.imageMargin,
+                "md:translate-y-3 lg:translate-y-5",
+              )}
+            >
               <div
                 className="pointer-events-none absolute inset-x-4 bottom-0 top-[8%] rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(155,125,255,0.45)_0%,rgba(227,5,141,0.15)_45%,transparent_68%)] blur-2xl sm:inset-x-6 lg:inset-x-8"
                 aria-hidden

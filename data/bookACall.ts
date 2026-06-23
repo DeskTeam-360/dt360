@@ -33,18 +33,21 @@ export const bookACallHeroOverlapClasses = {
   formContentPt: "pt-16 sm:pt-20 md:pt-28 lg:pt-8",
 } as const;
 
+/** Matches Navbar `Container` — hero title left edge aligns with logo. */
+export const bookACallShellContainerClassName = "max-w-7xl";
+
 /** Hero layout tokens — Elementor / Figma reference (title 76px, phone 429×429). */
 export const bookACallHeroLayout = {
   gridClassName:
-    "grid min-w-0 items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-12 xl:gap-16",
+    "grid min-w-0 items-center gap-8 md:grid-cols-2 md:gap-8 lg:gap-10 xl:gap-12",
   titleClassName:
-    "font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white max-md:text-center md:text-left lg:text-[76px]",
+    "w-full font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white max-md:text-center md:text-left lg:text-[76px]",
   titleColumnClassName:
-    "relative z-20 min-w-0 max-md:text-center md:translate-y-5 lg:translate-y-7 xl:translate-y-8",
+    "relative z-20 min-w-0 justify-self-start max-md:justify-self-center md:translate-y-4 lg:translate-y-6 xl:translate-y-7",
   imageColumnClassName:
-    "relative isolate z-40 flex flex-col items-center justify-center md:mx-0 md:ml-auto lg:translate-y-2",
+    "relative isolate z-40 flex w-full justify-center md:justify-end md:justify-self-end",
   imageWrapperClassName:
-    "relative z-40 size-[min(72vw,300px)] sm:size-[360px] lg:size-[429px]",
+    "relative z-40 size-[min(72vw,300px)] shrink-0 sm:size-[360px] lg:size-[429px]",
   imageClassName:
     "size-full object-contain object-center drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]",
 } as const;

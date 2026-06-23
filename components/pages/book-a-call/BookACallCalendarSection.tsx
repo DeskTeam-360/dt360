@@ -5,7 +5,7 @@ import {
 } from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { Container } from "@/components/shared/Container";
 import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
-import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHeroOverlapClasses } from "@/data/bookACall";
+import { BOOK_A_CALL_FORM_BG, bookACallForm, bookACallHeroOverlapClasses, bookACallShellContainerClassName } from "@/data/bookACall";
 import { cn } from "@/lib/utils";
 
 const { formBubbleSrc, formBubbleAlt, womanImageSrc, womanImageAlt } = bookACallForm;
@@ -45,7 +45,7 @@ export function BookACallCalendarSection() {
           <div className="absolute top-0 right-[-35%] h-[min(1200px,90vw)] w-[min(1200px,90vw)] bg-[radial-gradient(circle_at_center,rgba(227,5,141,0.4)_0%,transparent_40%)] blur-3xl lg:top-[-20%]" />
         </div>
 
-        <Container className="relative z-10 max-w-[1440px] px-6 lg:px-20">
+        <Container className={cn("relative z-10", bookACallShellContainerClassName)}>
           <div className="grid items-start gap-8 max-lg:grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center lg:gap-16 xl:gap-20">
             <div
               className={cn(
