@@ -37,6 +37,7 @@ export function BookingCalendarHero({
     heroImageIntrinsicSize,
   } = bookACallHero;
   const {
+    contentPaddingClassName,
     gridClassName,
     titleClassName,
     titleColumnClassName,
@@ -60,7 +61,7 @@ export function BookingCalendarHero({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_65%_at_72%_55%,rgba(227,5,141,0.22)_0%,transparent_55%)]" />
         </div>
 
-        <Container className={cn("relative z-20", bookACallShellContainerClassName)}>
+        <Container className={cn("relative z-20", bookACallShellContainerClassName, contentPaddingClassName)}>
           <div className={gridClassName}>
             <div className={titleColumnClassName}>
               <h1 id={headingId} className={titleClassName}>

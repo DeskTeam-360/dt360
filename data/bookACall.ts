@@ -38,6 +38,7 @@ export const bookACallShellContainerClassName = "max-w-7xl";
 
 /** Hero layout tokens — Elementor / Figma reference (title 76px, phone 429×429). */
 export const bookACallHeroLayout = {
+  contentPaddingClassName: "pb-[50px]",
   gridClassName:
     "grid min-w-0 items-center gap-8 md:grid-cols-2 md:gap-8 lg:gap-10 xl:gap-12",
   titleClassName:
@@ -45,7 +46,7 @@ export const bookACallHeroLayout = {
   titleColumnClassName:
     "relative z-20 min-w-0 justify-self-start max-md:justify-self-center md:translate-y-4 lg:translate-y-6 xl:translate-y-7",
   imageColumnClassName:
-    "relative isolate z-40 flex w-full justify-center md:justify-end md:justify-self-end",
+    "relative isolate z-40 flex w-full justify-center md:justify-end md:justify-self-end md:-translate-x-5",
   imageWrapperClassName:
     "relative z-40 size-[min(72vw,300px)] shrink-0 sm:size-[360px] lg:size-[429px]",
   imageClassName:
