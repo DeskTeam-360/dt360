@@ -39,6 +39,7 @@ export function BookingCalendarHero({
     contentMinHeight,
     gridClassName,
     titleClassName,
+    titleColumnClassName,
     imageColumnClassName,
     imageWrapperClassName,
     imageClassName,
@@ -61,7 +62,7 @@ export function BookingCalendarHero({
 
         <Container className={cn("relative z-20 max-w-[1440px] px-6 lg:px-20", contentMinHeight)}>
           <div className={gridClassName}>
-            <div className="relative z-20 flex min-w-0 items-center max-md:justify-center md:pb-2 lg:pb-4">
+            <div className={titleColumnClassName}>
               <h1 id={headingId} className={titleClassName}>
                 {title}
               </h1>

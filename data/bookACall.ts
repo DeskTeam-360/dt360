@@ -10,10 +10,10 @@ export const bookACallHero = {
   heroImageSrc: "/images/book-a-call/book-a-call-hero.png",
   heroImageAlt:
     "Isometric illustration of a smartphone with calendar, clock, and messaging icons for scheduling a call",
-  /** Desktop xl+ full size; smaller below lg (1024px) — tuned to Loom Book A Call reference at 1440px */
-  heroImageMaxWidth: 578,
-  heroImageMaxWidthSm: 300,
-  heroImageMaxWidthLg: 420,
+  /** Native asset size — display at 429×429 on desktop (no upscale). */
+  heroImageMaxWidth: 429,
+  heroImageMaxWidthSm: 260,
+  heroImageMaxWidthLg: 360,
   heroImageIntrinsicSize: 429,
   /**
    * Illustration overlap into the form section (px). Smaller on mobile to avoid excess whitespace.
@@ -33,19 +33,19 @@ export const bookACallHeroOverlapClasses = {
   formContentPt: "pt-16 sm:pt-20 md:pt-28 lg:pt-8",
 } as const;
 
-/** Hero layout tokens — mapped from Loom reference (2940px capture → 1440px container). */
+/** Hero layout tokens — Book A Call reference (title 76px, phone 429×429). */
 export const bookACallHeroLayout = {
   contentMinHeight: "min-h-[280px] sm:min-h-[320px] lg:min-h-[400px]",
   gridClassName:
-    "grid min-w-0 items-center gap-6 sm:gap-8 md:grid-cols-[minmax(0,0.44fr)_minmax(0,0.56fr)] md:items-center lg:gap-10 xl:gap-12",
+    "grid min-w-0 items-end gap-6 sm:gap-8 md:grid-cols-[minmax(0,0.44fr)_minmax(0,0.56fr)] lg:gap-10 xl:gap-12",
   titleClassName:
-    "font-[var(--font-poppins)] text-[44px] font-bold leading-[1.08] text-balance text-white max-md:text-center md:text-left sm:text-[52px] lg:text-[64px]",
+    "font-[var(--font-poppins)] text-[44px] font-bold leading-[1.1] text-balance text-white max-md:text-center md:text-left sm:text-[56px] lg:text-[76px]",
+  titleColumnClassName: "relative z-20 flex min-w-0 items-end max-md:justify-center md:pb-4 lg:pb-6 lg:pt-10 xl:pt-12",
   imageColumnClassName:
-    "relative isolate z-40 flex flex-col items-center justify-end md:mx-0 md:ml-auto md:translate-y-6 lg:translate-y-8 xl:translate-y-10",
-  imageWrapperClassName:
-    "relative z-40 w-full max-w-[min(100%,300px)] sm:max-w-[400px] md:max-w-[420px] lg:max-w-[520px] xl:max-w-[578px]",
+    "relative isolate z-40 flex flex-col items-center justify-end md:mx-0 md:ml-auto md:translate-y-4 lg:translate-y-6",
+  imageWrapperClassName: "relative z-40 size-[min(72vw,300px)] sm:size-[360px] lg:size-[429px]",
   imageClassName:
-    "h-auto w-full max-w-full object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]",
+    "size-full object-contain object-bottom drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]",
 } as const;
 
 export const bookACallForm = {
