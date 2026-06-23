@@ -36,7 +36,6 @@ export function BookingCalendarHero({
     heroImageIntrinsicSize,
   } = bookACallHero;
   const {
-    contentMinHeight,
     gridClassName,
     titleClassName,
     titleColumnClassName,
@@ -51,7 +50,7 @@ export function BookingCalendarHero({
       className="relative overflow-x-hidden overflow-y-visible"
       aria-labelledby={headingId}
     >
-      <div className="relative z-20 pb-0 pt-28 text-white sm:pt-30 lg:pt-[100px]">
+      <div className="relative z-20 bg-[#11104C] pb-0 pt-30 text-white sm:pt-32 lg:pt-[120px]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div className="absolute inset-0 bg-[#0B0E2D]" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0d1045] via-[#15124f] to-[#3b1a6e]" />
@@ -60,7 +59,7 @@ export function BookingCalendarHero({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_65%_at_72%_55%,rgba(227,5,141,0.22)_0%,transparent_55%)]" />
         </div>
 
-        <Container className={cn("relative z-20 max-w-[1440px] px-6 lg:px-20", contentMinHeight)}>
+        <Container className="relative z-20 max-w-[1440px] px-6 lg:px-20">
           <div className={gridClassName}>
             <div className={titleColumnClassName}>
               <h1 id={headingId} className={titleClassName}>
@@ -87,9 +86,9 @@ export function BookingCalendarHero({
           </div>
         </Container>
 
-        <div className="relative z-10 -mt-1 w-full sm:-mt-2 lg:-mt-3" aria-hidden>
+        <div className="relative z-10 -mt-1 w-full sm:-mt-2 lg:-mt-4" aria-hidden>
           <svg
-            className="relative z-0 block h-12 w-full sm:h-16 lg:h-24 xl:h-28"
+            className="relative z-0 block h-14 w-full sm:h-20 lg:h-28 xl:h-32"
             viewBox="0 0 1440 124"
             preserveAspectRatio="none"
             xmlns="http://www.w3.org/2000/svg"
