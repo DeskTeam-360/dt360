@@ -46,20 +46,24 @@ export function HowItWorksTaskSteps() {
                 <div className="-mx-10">
                   <div
                     className={cn(
-                      "flex min-h-[140px] w-full items-center justify-center border-b border-white/25 px-8 py-10",
+                      "flex h-[160px] w-full items-center justify-center border-b border-white/25 px-8",
                       STEP_HEADER_BG[i] ?? STEP_HEADER_BG[2],
                     )}
                   >
                     <div className="flex items-center justify-center gap-5">
-                      <MarketingSafeImage
-                        src={iconSrc}
-                        alt={`${step.stepLabel} icon`}
-                        width={80}
-                        height={80}
-                        sizes="80px"
-                        className="h-auto w-auto max-h-[80px] object-contain"
-                      />
-                      <span className="shrink-0 whitespace-nowrap text-[32px] font-semibold">{step.stepLabel}</span>
+                      <div className="flex h-20 w-20 shrink-0 items-center justify-center">
+                        <MarketingSafeImage
+                          src={iconSrc}
+                          alt={`${step.stepLabel} icon`}
+                          width={80}
+                          height={80}
+                          sizes="80px"
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+                      <span className="shrink-0 whitespace-nowrap text-[32px] font-semibold leading-none">
+                        {step.stepLabel}
+                      </span>
                     </div>
                   </div>
                 </div>
