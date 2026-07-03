@@ -10,10 +10,11 @@ export const bookACallHero = {
   heroImageSrc: "/images/book-a-call/book-a-call-hero.png",
   heroImageAlt:
     "Isometric illustration of a smartphone with calendar, clock, and messaging icons for scheduling a call",
-  /** Desktop xl+ full size; smaller below lg (1024px) */
-  heroImageMaxWidth: 430,
+  /** Native asset size — display at 429×429 on desktop (no upscale). */
+  heroImageMaxWidth: 429,
   heroImageMaxWidthSm: 260,
   heroImageMaxWidthLg: 360,
+  heroImageIntrinsicSize: 429,
   /**
    * Illustration overlap into the form section (px). Smaller on mobile to avoid excess whitespace.
    */
@@ -30,6 +31,26 @@ export const bookACallHeroOverlapClasses = {
   formPull: "-mt-18 sm:-mt-24 lg:-mt-[150px]",
   formSpacer: "h-18 sm:h-24 lg:h-[150px]",
   formContentPt: "pt-16 sm:pt-20 md:pt-28 lg:pt-8",
+} as const;
+
+/** Matches Navbar `Container` — hero title left edge aligns with logo. */
+export const bookACallShellContainerClassName = "max-w-7xl";
+
+/** Hero layout tokens — Elementor / Figma reference (title 76px, phone 429×429). */
+export const bookACallHeroLayout = {
+  contentPaddingClassName: "pb-[80px]",
+  gridClassName:
+    "grid min-w-0 items-center gap-8 md:grid-cols-2 md:gap-8 lg:gap-10 xl:gap-12",
+  titleClassName:
+    "w-full font-[var(--font-poppins)] text-[56px] font-bold leading-[1.1] text-balance text-white max-md:text-center md:text-left lg:text-[76px]",
+  titleColumnClassName:
+    "relative z-20 min-w-0 justify-self-start max-md:justify-self-center md:translate-y-4 lg:translate-y-6 xl:translate-y-7",
+  imageColumnClassName:
+    "relative isolate z-40 flex w-full justify-center md:justify-end md:justify-self-end md:-translate-x-10",
+  imageWrapperClassName:
+    "relative z-40 size-[min(72vw,300px)] shrink-0 sm:size-[360px] lg:size-[429px]",
+  imageClassName:
+    "size-full object-contain object-center drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]",
 } as const;
 
 export const bookACallForm = {
@@ -54,7 +75,7 @@ export const bookACallForm = {
   successMessage: "We will contact you soon",
   /** Lead Connector booking widget (shown after step 1 submits successfully) */
   bookingIframeSrc: "https://api.leadconnectorhq.com/widget/booking/BvMnlvEIoMKwnPB3eQjZ",
-  bookingIframeId: "Ko1nsW2cmgiBMQwJRPv3_1772435790587",
+  bookingIframeId: "Ko1nsW2cmgiBMQwJRPv3_1782152989179",
   bookingEmbedScriptSrc: "https://link.msgsndr.com/js/form_embed.js",
 } as const;
 
