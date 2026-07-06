@@ -40,6 +40,7 @@ export function ContactForm() {
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
   const handleRecaptchaChange = useCallback((token: string | null) => {
     setRecaptchaToken(token);
@@ -110,6 +111,10 @@ export function ContactForm() {
       if (!response.ok || !data.ok) {
         if (data.fieldErrors && Object.keys(data.fieldErrors).length > 0) {
           setFieldErrors(data.fieldErrors);
+          if (data.fieldErrors.captcha) {
+            setRecaptchaToken(null);
+            setRecaptchaResetKey((key) => key + 1);
+          }
         }
         setFormMessage(data.message ?? "Something went wrong. Please try again.");
         return;
@@ -258,7 +263,11 @@ export function ContactForm() {
           </p>
         ) : null}
         {recaptchaSiteKey ? (
-          <BookACallRecaptcha siteKey={recaptchaSiteKey} onChange={handleRecaptchaChange} />
+          <BookACallRecaptcha
+            key={recaptchaResetKey}
+            siteKey={recaptchaSiteKey}
+            onChange={handleRecaptchaChange}
+          />
         ) : (
           <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
             reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).
