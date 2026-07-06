@@ -1,0 +1,169 @@
+<!-- GHL Custom Code — STEP 2 poster video (demo-call-scheduled-thank-you) -->
+<!-- Paste ALL: <style> + HTML + <script>. Responsive: tablet ≤768px, mobile ≤425px -->
+
+<style>
+  .dt360-video-poster {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    height: 0;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #1a1a1a;
+    box-shadow: 0 20px 48px rgba(17, 16, 76, 0.14);
+  }
+  .dt360-video-poster__btn {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+  }
+  .dt360-video-poster__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dt360-video-poster__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 16, 76, 0.2);
+    transition: background 0.2s;
+  }
+  .dt360-video-poster__btn:hover .dt360-video-poster__overlay {
+    background: rgba(17, 16, 76, 0.3);
+  }
+  .dt360-video-poster__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .dt360-video-poster__play-icon {
+    display: flex;
+    width: 72px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  .dt360-video-poster__play-icon svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+    fill: #11104c;
+  }
+  .dt360-video-poster__iframe-wrap {
+    display: none;
+    position: absolute;
+    inset: 0;
+  }
+  .dt360-video-poster.is-playing .dt360-video-poster__btn {
+    display: none;
+  }
+  .dt360-video-poster.is-playing .dt360-video-poster__iframe-wrap {
+    display: block;
+  }
+  .dt360-video-poster__iframe-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (max-width: 768px) {
+    .dt360-video-poster {
+      max-width: calc(100% - 32px);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(17, 16, 76, 0.13);
+    }
+    .dt360-video-poster__play-icon {
+      width: 64px;
+      height: 64px;
+    }
+    .dt360-video-poster__play-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .dt360-video-poster {
+      max-width: calc(100% - 24px);
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(17, 16, 76, 0.12);
+    }
+    .dt360-video-poster__play-icon {
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+    .dt360-video-poster__play-icon svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+    }
+  }
+</style>
+
+<div
+  class="dt360-video-poster"
+  id="dt360-step-2-video"
+  style="position:relative;width:100%;height:0;padding-bottom:56.25%;"
+>
+  <button
+    type="button"
+    class="dt360-video-poster__btn"
+    aria-label="Case study video: how DeskTeam360 helped WomenInWhiteCoats scale"
+  >
+    <img
+      class="dt360-video-poster__img"
+      src="https://deskteam360.com/images/demo-call-scheduled-thank-you/step-2-women-in-white-coats-thumbnail.jpg"
+      alt="Women in White Coats case study video thumbnail"
+    />
+    <span class="dt360-video-poster__overlay" aria-hidden="true"></span>
+    <span class="dt360-video-poster__play" aria-hidden="true">
+      <span class="dt360-video-poster__play-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+    </span>
+  </button>
+  <div class="dt360-video-poster__iframe-wrap">
+    <iframe
+      src=""
+      data-src="https://player.vimeo.com/video/569538871?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      title="Case study video: how DeskTeam360 helped WomenInWhiteCoats scale"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var wrap = document.getElementById("dt360-step-2-video");
+    if (!wrap) return;
+    var btn = wrap.querySelector(".dt360-video-poster__btn");
+    var iframe = wrap.querySelector("iframe[data-src]");
+    if (!btn || !iframe) return;
+    btn.addEventListener("click", function () {
+      iframe.src = iframe.getAttribute("data-src");
+      wrap.classList.add("is-playing");
+    });
+  })();
+</script>

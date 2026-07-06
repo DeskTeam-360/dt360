@@ -1,0 +1,261 @@
+<!--
+  DeskTeam360 — demo-call-scheduled-thank-you video embeds
+  Paste into GHL Custom Code / Elementor HTML widget.
+  Replace BASE_URL if not production.
+-->
+<style>
+  .dt360-video-framed {
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #2b2b2b;
+    box-shadow: 0 24px 64px rgba(17, 16, 76, 0.18);
+  }
+  .dt360-video-framed__label {
+    margin: 0;
+    padding: 20px 24px;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #fff;
+  }
+  .dt360-video-framed__player,
+  .dt360-video-poster {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #1a1a1a;
+  }
+  .dt360-video-framed__player iframe,
+  .dt360-video-poster iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .dt360-video-poster {
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 48px rgba(17, 16, 76, 0.14);
+  }
+  .dt360-video-poster__btn {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+  }
+  .dt360-video-poster__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .dt360-video-poster__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 16, 76, 0.2);
+    transition: background 0.2s;
+  }
+  .dt360-video-poster__btn:hover .dt360-video-poster__overlay {
+    background: rgba(17, 16, 76, 0.3);
+  }
+  .dt360-video-poster__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .dt360-video-poster__play span {
+    display: flex;
+    width: 72px;
+    height: 72px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  .dt360-video-poster__play svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+    fill: #11104c;
+  }
+  .dt360-video-poster__iframe-wrap {
+    display: none;
+    position: absolute;
+    inset: 0;
+  }
+  .dt360-video-poster.is-playing .dt360-video-poster__btn {
+    display: none;
+  }
+  .dt360-video-poster.is-playing .dt360-video-poster__iframe-wrap {
+    display: block;
+  }
+
+  /* Tablet ≤768px */
+  @media (max-width: 768px) {
+    .dt360-video-framed {
+      max-width: calc(100% - 32px);
+      border-radius: 14px;
+      box-shadow: 0 16px 48px rgba(17, 16, 76, 0.16);
+    }
+    .dt360-video-framed__label {
+      padding: 16px 20px;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .dt360-video-poster {
+      max-width: calc(100% - 32px);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(17, 16, 76, 0.13);
+    }
+    .dt360-video-poster__play span {
+      width: 64px;
+      height: 64px;
+    }
+    .dt360-video-poster__play svg {
+      width: 28px;
+      height: 28px;
+    }
+    .dt360-step-3-img {
+      max-width: calc(100% - 32px);
+    }
+  }
+
+  /* Mobile ≤425px */
+  @media (max-width: 425px) {
+    .dt360-video-framed {
+      max-width: calc(100% - 24px);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(17, 16, 76, 0.14);
+    }
+    .dt360-video-framed__label {
+      padding: 12px 14px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .dt360-video-poster {
+      max-width: calc(100% - 24px);
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(17, 16, 76, 0.12);
+    }
+    .dt360-video-poster__play span {
+      width: 52px;
+      height: 52px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+    .dt360-video-poster__play svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+    }
+    .dt360-step-3-img {
+      max-width: calc(100% - 24px);
+    }
+  }
+</style>
+
+<!-- BASE URL for thumbnails & step 3 image -->
+<!-- https://deskteam360.com -->
+
+<!-- 1) HERO — framed player (no thumbnail, autoplay not forced) -->
+<div class="dt360-video-framed">
+  <p class="dt360-video-framed__label">Watch This Video Explaining What To Expect On The Call</p>
+  <div class="dt360-video-framed__player">
+    <iframe
+      src="https://player.vimeo.com/video/1203644058?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+      allowfullscreen
+      title="Video explaining what to expect on your consultation call"
+    ></iframe>
+  </div>
+</div>
+
+<br><br>
+
+<!-- 2) STEP 1 — poster + click to play -->
+<div class="dt360-video-poster" data-vimeo-id="569128267">
+  <button type="button" class="dt360-video-poster__btn" aria-label="Video overview of what DeskTeam360 can do for you">
+    <img
+      class="dt360-video-poster__img"
+      src="https://deskteam360.com/images/demo-call-scheduled-thank-you/step-1-fitbodies-thumbnail.jpg"
+      alt="Fitbodies 4 Life case study video thumbnail"
+    />
+    <span class="dt360-video-poster__overlay" aria-hidden="true"></span>
+    <span class="dt360-video-poster__play" aria-hidden="true">
+      <span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+    </span>
+  </button>
+  <div class="dt360-video-poster__iframe-wrap">
+    <iframe
+      src=""
+      data-src="https://player.vimeo.com/video/569128267?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1&autoplay=1"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+      allowfullscreen
+      title="Video overview of what DeskTeam360 can do for you"
+    ></iframe>
+  </div>
+</div>
+
+<br><br>
+
+<!-- 3) STEP 2 — poster + click to play -->
+<div class="dt360-video-poster" data-vimeo-id="569538871">
+  <button type="button" class="dt360-video-poster__btn" aria-label="Case study video: how DeskTeam360 helped WomenInWhiteCoats scale">
+    <img
+      class="dt360-video-poster__img"
+      src="https://deskteam360.com/images/demo-call-scheduled-thank-you/step-2-women-in-white-coats-thumbnail.jpg"
+      alt="Women in White Coats case study video thumbnail"
+    />
+    <span class="dt360-video-poster__overlay" aria-hidden="true"></span>
+    <span class="dt360-video-poster__play" aria-hidden="true">
+      <span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+    </span>
+  </button>
+  <div class="dt360-video-poster__iframe-wrap">
+    <iframe
+      src=""
+      data-src="https://player.vimeo.com/video/569538871?color&autopause=0&loop=0&muted=0&title=1&portrait=1&byline=1&autoplay=1"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+      allowfullscreen
+      title="Case study video: how DeskTeam360 helped WomenInWhiteCoats scale"
+    ></iframe>
+  </div>
+</div>
+
+<br><br>
+
+<!-- 4) STEP 3 — illustration only (bukan video) -->
+<img
+  class="dt360-step-3-img"
+  src="https://deskteam360.com/images/demo-call-scheduled-thank-you/step-3-calendar.png"
+  alt="Illustration of people adding an appointment to a calendar"
+  width="1200"
+  height="675"
+  style="max-width: 560px; width: 100%; height: auto; display: block; margin: 0 auto;"
+/>
+
+<script>
+  document.querySelectorAll(".dt360-video-poster").forEach(function (wrap) {
+    var btn = wrap.querySelector(".dt360-video-poster__btn");
+    var iframe = wrap.querySelector("iframe[data-src]");
+    if (!btn || !iframe) return;
+    btn.addEventListener("click", function () {
+      iframe.src = iframe.getAttribute("data-src");
+      wrap.classList.add("is-playing");
+    });
+  });
+</script>
