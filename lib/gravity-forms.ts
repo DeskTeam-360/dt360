@@ -1,5 +1,6 @@
 import { bookACallGravityForm } from "@/data/bookACall";
 import { contactGravityForm } from "@/data/contact";
+import { getGravityFormRecaptchaInputKeys } from "@/lib/gravity-form-captcha";
 import { getWordPressAuthHeaders, getWordPressSiteOrigin } from "@/lib/wp-auth";
 
 export type BookACallEntryInput = {
@@ -34,29 +35,51 @@ export type GravityFormsSubmitResult = {
   };
 };
 
-function buildSubmissionPayload(input: BookACallEntryInput): Record<string, string> {
-  const { fieldIds } = bookACallGravityForm;
-  const payload: Record<string, string> = {
-    [fieldIds.firstName]: input.firstName.trim(),
-    [fieldIds.lastName]: input.lastName.trim(),
-    [fieldIds.email]: input.email.trim(),
-  };
-
-  if (input.recaptchaToken) {
-    appendRecaptchaToken(payload, fieldIds.captcha, input.recaptchaToken);
-  }
-
-  return payload;
-}
-
-/** GF validates Google tokens via input_* and often expects `g-recaptcha-response` as well. */
-function appendRecaptchaToken(
+function appendRecaptchaTokens(
   payload: Record<string, string>,
-  captchaInputKey: string,
+  inputKeys: string[],
   token: string,
 ): void {
-  payload[captchaInputKey] = token;
-  payload["g-recaptcha-response"] = token;
+  for (const key of inputKeys) {
+    payload[key] = token;
+  }
+}
+
+async function submitGravityFormEntry(
+  formId: number,
+  payload: Record<string, string>,
+  fallbackCaptchaKey: string,
+  recaptchaToken?: string,
+): Promise<GravityFormsSubmitResult> {
+  if (recaptchaToken) {
+    const captchaKeys = await getGravityFormRecaptchaInputKeys(formId, fallbackCaptchaKey);
+    appendRecaptchaTokens(payload, captchaKeys, recaptchaToken);
+  }
+
+  const origin = getWordPressSiteOrigin();
+  const url = `${origin}/wp-json/gf/v2/forms/${formId}/submissions`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      ...getWordPressAuthHeaders(),
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  const data = (await response.json()) as GravityFormsSubmitResult & {
+    code?: string;
+    message?: string;
+  };
+
+  if (!response.ok && !data.validation_messages) {
+    throw new Error(data.message || `Gravity Forms request failed (${response.status})`);
+  }
+
+  return data;
 }
 
 /** Submit Book a Call step 1 to Gravity Forms (form 59 on clone WP). */
@@ -65,47 +88,18 @@ export async function submitBookACallEntry(
 ): Promise<GravityFormsSubmitResult> {
   const formId =
     Number(process.env.GRAVITY_FORMS_BOOK_A_CALL_ID) || bookACallGravityForm.formId;
-  const origin = getWordPressSiteOrigin();
-  const url = `${origin}/wp-json/gf/v2/forms/${formId}/submissions`;
+  const { fieldIds } = bookACallGravityForm;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      ...getWordPressAuthHeaders(),
-      "Content-Type": "application/json",
-      Accept: "application/json",
+  return submitGravityFormEntry(
+    formId,
+    {
+      [fieldIds.firstName]: input.firstName.trim(),
+      [fieldIds.lastName]: input.lastName.trim(),
+      [fieldIds.email]: input.email.trim(),
     },
-    body: JSON.stringify(buildSubmissionPayload(input)),
-    cache: "no-store",
-  });
-
-  const data = (await response.json()) as GravityFormsSubmitResult & {
-    code?: string;
-    message?: string;
-  };
-
-  if (!response.ok && !data.validation_messages) {
-    throw new Error(data.message || `Gravity Forms request failed (${response.status})`);
-  }
-
-  return data;
-}
-
-function buildContactSubmissionPayload(input: ContactEntryInput): Record<string, string> {
-  const { fieldIds } = contactGravityForm;
-  const payload: Record<string, string> = {
-    [fieldIds.firstName]: input.firstName.trim(),
-    [fieldIds.lastName]: input.lastName.trim(),
-    [fieldIds.phone]: input.phone.trim(),
-    [fieldIds.email]: input.email.trim(),
-    [fieldIds.message]: input.message.trim(),
-  };
-
-  if (input.recaptchaToken) {
-    appendRecaptchaToken(payload, fieldIds.captcha, input.recaptchaToken);
-  }
-
-  return payload;
+    fieldIds.captcha,
+    input.recaptchaToken,
+  );
 }
 
 /** Submit Contact page form to Gravity Forms (form 1 on clone WP). */
@@ -114,28 +108,18 @@ export async function submitContactEntry(
 ): Promise<GravityFormsSubmitResult> {
   const formId =
     Number(process.env.GRAVITY_FORMS_CONTACT_ID) || contactGravityForm.formId;
-  const origin = getWordPressSiteOrigin();
-  const url = `${origin}/wp-json/gf/v2/forms/${formId}/submissions`;
+  const { fieldIds } = contactGravityForm;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      ...getWordPressAuthHeaders(),
-      "Content-Type": "application/json",
-      Accept: "application/json",
+  return submitGravityFormEntry(
+    formId,
+    {
+      [fieldIds.firstName]: input.firstName.trim(),
+      [fieldIds.lastName]: input.lastName.trim(),
+      [fieldIds.phone]: input.phone.trim(),
+      [fieldIds.email]: input.email.trim(),
+      [fieldIds.message]: input.message.trim(),
     },
-    body: JSON.stringify(buildContactSubmissionPayload(input)),
-    cache: "no-store",
-  });
-
-  const data = (await response.json()) as GravityFormsSubmitResult & {
-    code?: string;
-    message?: string;
-  };
-
-  if (!response.ok && !data.validation_messages) {
-    throw new Error(data.message || `Gravity Forms request failed (${response.status})`);
-  }
-
-  return data;
+    fieldIds.captcha,
+    input.recaptchaToken,
+  );
 }

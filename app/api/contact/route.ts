@@ -6,6 +6,11 @@ import {
   type ContactFieldErrors,
 } from "@/lib/contact-errors";
 import { submitContactEntry } from "@/lib/gravity-forms";
+import {
+  gravityFormsRecaptchaMismatchMessage,
+  recaptchaVerifyErrorMessage,
+  verifyRecaptchaToken,
+} from "@/lib/recaptcha";
 
 export type ContactApiBody = {
   firstName?: string;
@@ -17,6 +22,14 @@ export type ContactApiBody = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function getClientIp(request: Request): string | undefined {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0]?.trim() || undefined;
+  }
+  return request.headers.get("x-real-ip") ?? undefined;
+}
 
 function buildValidationErrorResponse(fieldErrors: ContactFieldErrors) {
   let message = "Please fix the errors below and try again.";
@@ -70,6 +83,20 @@ export async function POST(request: Request) {
   }
 
   try {
+    const recaptchaCheck = await verifyRecaptchaToken(recaptchaToken, getClientIp(request));
+
+    if (!recaptchaCheck.skipped && !recaptchaCheck.success) {
+      const captchaMessage = recaptchaVerifyErrorMessage(recaptchaCheck.errorCodes);
+      return NextResponse.json(
+        {
+          ok: false,
+          message: captchaMessage,
+          fieldErrors: { captcha: captchaMessage },
+        },
+        { status: 422 },
+      );
+    }
+
     const result = await submitContactEntry({
       firstName,
       lastName,
@@ -88,6 +115,18 @@ export async function POST(request: Request) {
             ok: false,
             message: "Submission was rejected by Gravity Forms. Please try again.",
             fieldErrors: {},
+          },
+          { status: 422 },
+        );
+      }
+
+      if (fieldErrors.captcha && !recaptchaCheck.skipped && recaptchaCheck.success) {
+        const mismatchMessage = gravityFormsRecaptchaMismatchMessage();
+        return NextResponse.json(
+          {
+            ok: false,
+            message: mismatchMessage,
+            fieldErrors: { captcha: mismatchMessage },
           },
           { status: 422 },
         );

@@ -75,7 +75,7 @@ export function ContactForm() {
 
     if (!recaptchaSiteKey) {
       setFormMessage(
-        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
+        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY and RECAPTCHA_SECRET_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
       );
       return;
     }
