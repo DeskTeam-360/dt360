@@ -23,6 +23,11 @@ export type ContactApiBody = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Headless GF: verify captcha on Next.js, skip token on GF REST (needs WP filter in export/wordpress-gf-rest-recaptcha-bypass.php). */
+function useServerVerifiedRecaptcha(): boolean {
+  return process.env.CONTACT_RECAPTCHA_SERVER_VERIFY === "true";
+}
+
 function getClientIp(request: Request): string | undefined {
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
@@ -77,24 +82,48 @@ export async function POST(request: Request) {
 
   if (!recaptchaToken) {
     return NextResponse.json(
-      { ok: false, message: "Please complete the reCAPTCHA verification.", fieldErrors: { captcha: "Please complete the reCAPTCHA verification." } },
+      {
+        ok: false,
+        message: "Please complete the reCAPTCHA verification.",
+        fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
+      },
       { status: 400 },
     );
   }
 
   try {
-    const recaptchaCheck = await verifyRecaptchaToken(recaptchaToken, getClientIp(request));
+    const serverVerify = useServerVerifiedRecaptcha();
+    let omitRecaptcha = false;
 
-    if (!recaptchaCheck.skipped && !recaptchaCheck.success) {
-      const captchaMessage = recaptchaVerifyErrorMessage(recaptchaCheck.errorCodes);
-      return NextResponse.json(
-        {
-          ok: false,
-          message: captchaMessage,
-          fieldErrors: { captcha: captchaMessage },
-        },
-        { status: 422 },
-      );
+    if (serverVerify) {
+      const recaptchaCheck = await verifyRecaptchaToken(recaptchaToken, getClientIp(request));
+
+      if (recaptchaCheck.skipped) {
+        return NextResponse.json(
+          {
+            ok: false,
+            message:
+              "CONTACT_RECAPTCHA_SERVER_VERIFY is enabled but RECAPTCHA_SECRET_KEY is missing. Add the secret key to .env.local or Vercel.",
+            fieldErrors: { captcha: "Server reCAPTCHA is not configured." },
+          },
+          { status: 503 },
+        );
+      }
+
+      if (!recaptchaCheck.success) {
+        const captchaMessage = recaptchaVerifyErrorMessage(recaptchaCheck.errorCodes);
+        return NextResponse.json(
+          {
+            ok: false,
+            message: captchaMessage,
+            fieldErrors: { captcha: captchaMessage },
+          },
+          { status: 422 },
+        );
+      }
+
+      // Token consumed by Google siteverify — do not forward to GF.
+      omitRecaptcha = true;
     }
 
     const result = await submitContactEntry({
@@ -103,7 +132,8 @@ export async function POST(request: Request) {
       phone,
       email,
       message,
-      recaptchaToken,
+      recaptchaToken: omitRecaptcha ? undefined : recaptchaToken,
+      omitRecaptcha,
     });
 
     if (!result.is_valid) {
@@ -120,13 +150,15 @@ export async function POST(request: Request) {
         );
       }
 
-      if (fieldErrors.captcha && !recaptchaCheck.skipped && recaptchaCheck.success) {
-        const mismatchMessage = gravityFormsRecaptchaMismatchMessage();
+      if (fieldErrors.captcha) {
+        const captchaMessage = serverVerify
+          ? "Gravity Forms still rejected captcha. Add export/wordpress-gf-rest-recaptcha-bypass.php to WordPress (see file comments)."
+          : gravityFormsRecaptchaMismatchMessage();
         return NextResponse.json(
           {
             ok: false,
-            message: mismatchMessage,
-            fieldErrors: { captcha: mismatchMessage },
+            message: captchaMessage,
+            fieldErrors: { captcha: captchaMessage },
           },
           { status: 422 },
         );

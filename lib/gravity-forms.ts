@@ -1,6 +1,5 @@
 import { bookACallGravityForm } from "@/data/bookACall";
 import { contactGravityForm } from "@/data/contact";
-import { getGravityFormRecaptchaInputKeys } from "@/lib/gravity-form-captcha";
 import { getWordPressAuthHeaders, getWordPressSiteOrigin } from "@/lib/wp-auth";
 
 export type BookACallEntryInput = {
@@ -17,6 +16,8 @@ export type ContactEntryInput = {
   email: string;
   message: string;
   recaptchaToken?: string;
+  /** When true, captcha is verified elsewhere — do not send token to GF (requires WP REST bypass filter). */
+  omitRecaptcha?: boolean;
 };
 
 export type GravityFormsSubmitResult = {
@@ -35,25 +36,22 @@ export type GravityFormsSubmitResult = {
   };
 };
 
-function appendRecaptchaTokens(
-  payload: Record<string, string>,
-  inputKeys: string[],
-  token: string,
-): void {
-  for (const key of inputKeys) {
-    payload[key] = token;
-  }
+/**
+ * GF REST API expects the v2 token on `g-recaptcha-response` (same as browser form POST).
+ * Do not also verify the token with Google before this call — tokens are single-use.
+ */
+function appendRecaptchaToken(payload: Record<string, string>, token: string): void {
+  payload["g-recaptcha-response"] = token;
 }
 
 async function submitGravityFormEntry(
   formId: number,
   payload: Record<string, string>,
-  fallbackCaptchaKey: string,
   recaptchaToken?: string,
+  omitRecaptcha?: boolean,
 ): Promise<GravityFormsSubmitResult> {
-  if (recaptchaToken) {
-    const captchaKeys = await getGravityFormRecaptchaInputKeys(formId, fallbackCaptchaKey);
-    appendRecaptchaTokens(payload, captchaKeys, recaptchaToken);
+  if (recaptchaToken && !omitRecaptcha) {
+    appendRecaptchaToken(payload, recaptchaToken);
   }
 
   const origin = getWordPressSiteOrigin();
@@ -97,7 +95,6 @@ export async function submitBookACallEntry(
       [fieldIds.lastName]: input.lastName.trim(),
       [fieldIds.email]: input.email.trim(),
     },
-    fieldIds.captcha,
     input.recaptchaToken,
   );
 }
@@ -119,7 +116,7 @@ export async function submitContactEntry(
       [fieldIds.email]: input.email.trim(),
       [fieldIds.message]: input.message.trim(),
     },
-    fieldIds.captcha,
     input.recaptchaToken,
+    input.omitRecaptcha,
   );
 }

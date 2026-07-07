@@ -4,7 +4,10 @@ export type RecaptchaVerifyResult = {
   skipped: boolean;
 };
 
-/** Verify a reCAPTCHA v2 token with Google (server-side). */
+/**
+ * Verify a reCAPTCHA v2 token with Google (server-side).
+ * Tokens are single-use — do not call this if the same token will be sent to Gravity Forms.
+ */
 export async function verifyRecaptchaToken(
   token: string,
   remoteIp?: string,
@@ -61,5 +64,5 @@ export function recaptchaVerifyErrorMessage(errorCodes: string[]): string {
 }
 
 export function gravityFormsRecaptchaMismatchMessage(): string {
-  return "reCAPTCHA passed on this site but Gravity Forms rejected it. Ensure WordPress → Forms → Settings → reCAPTCHA uses the same secret key as RECAPTCHA_SECRET_KEY, and the form captcha field is reCAPTCHA v2 (checkbox).";
+  return "Gravity Forms rejected reCAPTCHA. Ensure NEXT_PUBLIC_RECAPTCHA_SITE_KEY matches WordPress → Forms → Settings → reCAPTCHA (same pair as the working GF form). For headless setup, use CONTACT_RECAPTCHA_SERVER_VERIFY=true with RECAPTCHA_SECRET_KEY and add export/wordpress-gf-rest-recaptcha-bypass.php to WordPress.";
 }
