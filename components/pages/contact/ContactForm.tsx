@@ -14,6 +14,10 @@ const inputClass =
 const labelClass =
   "mb-2 block font-[var(--font-montserrat)] text-[20px] font-bold leading-snug text-[#11104C]";
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export function ContactForm() {
   const {
     nameLabel,
@@ -28,6 +32,7 @@ export function ContactForm() {
     captchaLabel,
     submitLabel,
     successMessage,
+    sendAnotherLabel,
   } = contactForm;
 
   const [firstName, setFirstName] = useState("");
@@ -39,6 +44,7 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [successText, setSuccessText] = useState<string>(successMessage);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
@@ -48,6 +54,15 @@ export function ContactForm() {
       setFieldErrors((prev) => ({ ...prev, captcha: undefined }));
     }
   }, []);
+
+  function handleSendAnother() {
+    setIsSuccess(false);
+    setSuccessText(successMessage);
+    setFormMessage(null);
+    setFieldErrors({});
+    setRecaptchaToken(null);
+    setRecaptchaResetKey((key) => key + 1);
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -105,6 +120,7 @@ export function ContactForm() {
       const data = (await response.json()) as {
         ok?: boolean;
         message?: string;
+        confirmationMessage?: string | null;
         fieldErrors?: ContactFieldErrors;
       };
 
@@ -121,7 +137,8 @@ export function ContactForm() {
       }
 
       setIsSuccess(true);
-      setFormMessage(successMessage);
+      const gfMessage = data.confirmationMessage?.trim();
+      setSuccessText(gfMessage ? stripHtml(gfMessage) : successMessage);
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -135,16 +152,32 @@ export function ContactForm() {
     }
   }
 
+  if (isSuccess) {
+    return (
+      <div className="w-full max-w-[640px] space-y-4">
+        <p
+          className="rounded-[12px] border border-[#B8E6C8] bg-[#E8F8EF] px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#11104C]"
+          role="status"
+        >
+          {successText}
+        </p>
+        <button
+          type="button"
+          onClick={handleSendAnother}
+          className="font-button inline-flex cursor-pointer items-center justify-center rounded-[12px] border-2 border-[#30439E] bg-white px-6 py-3 font-[var(--font-montserrat)] text-[16px] font-semibold text-[#30439E] transition hover:bg-[#F5F8FF]"
+        >
+          {sendAnotherLabel}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <form className="w-full max-w-[640px] space-y-6" onSubmit={handleSubmit} noValidate>
       {formMessage ? (
         <p
-          className={`rounded-[12px] border px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium ${
-            isSuccess
-              ? "border-[#C5C9E0] text-[#11104C]"
-              : "border-[#F5C6CB] bg-[#FFF5F5] text-[#C0392B]"
-          }`}
-          role="status"
+          className="rounded-[12px] border border-[#F5C6CB] bg-[#FFF5F5] px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#C0392B]"
+          role="alert"
         >
           {formMessage}
         </p>
