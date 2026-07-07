@@ -24,7 +24,7 @@ export type ContactApiBody = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /** Headless GF: verify captcha on Next.js, skip token on GF REST (needs WP filter in export/wordpress-gf-rest-recaptcha-bypass.php). */
-function useServerVerifiedRecaptcha(): boolean {
+function isContactRecaptchaServerVerifyEnabled(): boolean {
   return process.env.CONTACT_RECAPTCHA_SERVER_VERIFY === "true";
 }
 
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const serverVerify = useServerVerifiedRecaptcha();
+    const serverVerify = isContactRecaptchaServerVerifyEnabled();
     let omitRecaptcha = false;
 
     if (serverVerify) {
