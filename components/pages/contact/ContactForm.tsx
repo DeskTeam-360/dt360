@@ -14,10 +14,6 @@ const inputClass =
 const labelClass =
   "mb-2 block font-[var(--font-montserrat)] text-[20px] font-bold leading-snug text-[#11104C]";
 
-function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-}
-
 export function ContactForm() {
   const {
     nameLabel,
@@ -44,7 +40,6 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [successText, setSuccessText] = useState<string>(successMessage);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
@@ -57,7 +52,6 @@ export function ContactForm() {
 
   function handleSendAnother() {
     setIsSuccess(false);
-    setSuccessText(successMessage);
     setFormMessage(null);
     setFieldErrors({});
     setRecaptchaToken(null);
@@ -120,7 +114,6 @@ export function ContactForm() {
       const data = (await response.json()) as {
         ok?: boolean;
         message?: string;
-        confirmationMessage?: string | null;
         fieldErrors?: ContactFieldErrors;
       };
 
@@ -137,8 +130,6 @@ export function ContactForm() {
       }
 
       setIsSuccess(true);
-      const gfMessage = data.confirmationMessage?.trim();
-      setSuccessText(gfMessage ? stripHtml(gfMessage) : successMessage);
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -159,14 +150,15 @@ export function ContactForm() {
           className="rounded-[12px] border border-[#B8E6C8] bg-[#E8F8EF] px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#11104C]"
           role="status"
         >
-          {successText}
+          {successMessage}
         </p>
         <button
           type="button"
           onClick={handleSendAnother}
-          className="font-button inline-flex cursor-pointer items-center justify-center rounded-[12px] border-2 border-[#30439E] bg-white px-6 py-3 font-[var(--font-montserrat)] text-[16px] font-semibold text-[#30439E] transition hover:bg-[#F5F8FF]"
+          className="font-button group flex w-full max-w-[420px] cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-6 py-4 text-[20px] text-white shadow-[0_15px_30px_rgba(240,87,58,0.28)] transition duration-200 hover:bg-[#e04d32] hover:shadow-[0_18px_36px_rgba(240,87,58,0.38)] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
         >
           {sendAnotherLabel}
+          <CircleChevronRight className="size-6" strokeWidth={2.25} aria-hidden />
         </button>
       </div>
     );
