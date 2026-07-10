@@ -397,28 +397,31 @@ async function fetchCaseStudyPostsForCategory(
   return (data.posts?.nodes ?? []).map(mapCaseStudyPost);
 }
 
-function mergeCaseStudyPostsByDate(postGroups: BlogPost[][]): BlogPost[] {
-  const byId = new Map<string, BlogPost>();
+/**
+ * Match WP admin listing: `case-study` posts first, then `website-case-study`,
+ * each group in the order returned by WPGraphQL for that category (same as portal).
+ */
+function concatCaseStudyPostsInPortalOrder(postGroups: BlogPost[][]): BlogPost[] {
+  const seen = new Set<string>();
+  const merged: BlogPost[] = [];
   for (const posts of postGroups) {
     for (const post of posts) {
-      byId.set(post.id, post);
+      if (seen.has(post.id)) continue;
+      seen.add(post.id);
+      merged.push(post);
     }
   }
-  return Array.from(byId.values()).sort((a, b) => {
-    const aTime = a.date ? new Date(a.date).getTime() : 0;
-    const bTime = b.date ? new Date(b.date).getTime() : 0;
-    return bTime - aTime;
-  });
+  return merged;
 }
 
 /** Published posts in `case-study` and `website-case-study` (Case Studies pages). */
 export const getAllCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
-  return fetchWordPressCached(['wp', 'case-studies', 'website-case-study'], async () => {
+  return fetchWordPressCached(['wp', 'case-studies', 'portal-category-order'], async () => {
     try {
       const groups = await Promise.all(
         CASE_STUDY_CATEGORY_SLUGS.map((slug) => fetchCaseStudyPostsForCategory(slug, 100)),
       );
-      return mergeCaseStudyPostsByDate(groups);
+      return concatCaseStudyPostsInPortalOrder(groups);
     } catch (error) {
       console.error('Error fetching case study posts:', error);
       return [];
