@@ -28,6 +28,7 @@ export function ContactForm() {
     captchaLabel,
     submitLabel,
     successMessage,
+    sendAnotherLabel,
   } = contactForm;
 
   const [firstName, setFirstName] = useState("");
@@ -40,6 +41,7 @@ export function ContactForm() {
   const [formMessage, setFormMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
   const handleRecaptchaChange = useCallback((token: string | null) => {
     setRecaptchaToken(token);
@@ -47,6 +49,14 @@ export function ContactForm() {
       setFieldErrors((prev) => ({ ...prev, captcha: undefined }));
     }
   }, []);
+
+  function handleSendAnother() {
+    setIsSuccess(false);
+    setFormMessage(null);
+    setFieldErrors({});
+    setRecaptchaToken(null);
+    setRecaptchaResetKey((key) => key + 1);
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -74,7 +84,7 @@ export function ContactForm() {
 
     if (!recaptchaSiteKey) {
       setFormMessage(
-        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
+        "Form is not configured: add NEXT_PUBLIC_RECAPTCHA_SITE_KEY and RECAPTCHA_SECRET_KEY (must match reCAPTCHA in WordPress Gravity Forms settings).",
       );
       return;
     }
@@ -110,13 +120,16 @@ export function ContactForm() {
       if (!response.ok || !data.ok) {
         if (data.fieldErrors && Object.keys(data.fieldErrors).length > 0) {
           setFieldErrors(data.fieldErrors);
+          if (data.fieldErrors.captcha) {
+            setRecaptchaToken(null);
+            setRecaptchaResetKey((key) => key + 1);
+          }
         }
         setFormMessage(data.message ?? "Something went wrong. Please try again.");
         return;
       }
 
       setIsSuccess(true);
-      setFormMessage(successMessage);
       setFirstName("");
       setLastName("");
       setPhone("");
@@ -130,16 +143,33 @@ export function ContactForm() {
     }
   }
 
+  if (isSuccess) {
+    return (
+      <div className="w-full max-w-[640px] space-y-4">
+        <p
+          className="rounded-[12px] border border-[#B8E6C8] bg-[#E8F8EF] px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#11104C]"
+          role="status"
+        >
+          {successMessage}
+        </p>
+        <button
+          type="button"
+          onClick={handleSendAnother}
+          className="font-button group flex w-full max-w-[420px] cursor-pointer items-center justify-center gap-3 rounded-[12px] bg-[#F0573A] px-6 py-4 text-[20px] text-white shadow-[0_15px_30px_rgba(240,87,58,0.28)] transition duration-200 hover:bg-[#e04d32] hover:shadow-[0_18px_36px_rgba(240,87,58,0.38)] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
+        >
+          {sendAnotherLabel}
+          <CircleChevronRight className="size-6" strokeWidth={2.25} aria-hidden />
+        </button>
+      </div>
+    );
+  }
+
   return (
     <form className="w-full max-w-[640px] space-y-6" onSubmit={handleSubmit} noValidate>
       {formMessage ? (
         <p
-          className={`rounded-[12px] border px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium ${
-            isSuccess
-              ? "border-[#C5C9E0] text-[#11104C]"
-              : "border-[#F5C6CB] bg-[#FFF5F5] text-[#C0392B]"
-          }`}
-          role="status"
+          className="rounded-[12px] border border-[#F5C6CB] bg-[#FFF5F5] px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium text-[#C0392B]"
+          role="alert"
         >
           {formMessage}
         </p>
@@ -258,7 +288,11 @@ export function ContactForm() {
           </p>
         ) : null}
         {recaptchaSiteKey ? (
-          <BookACallRecaptcha siteKey={recaptchaSiteKey} onChange={handleRecaptchaChange} />
+          <BookACallRecaptcha
+            key={recaptchaResetKey}
+            siteKey={recaptchaSiteKey}
+            onChange={handleRecaptchaChange}
+          />
         ) : (
           <p className="font-[var(--font-montserrat)] text-[14px] font-medium text-[#C0392B]">
             reCAPTCHA site key is not set (NEXT_PUBLIC_RECAPTCHA_SITE_KEY).

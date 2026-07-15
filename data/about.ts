@@ -25,8 +25,8 @@ export const aboutTimeline = [
       "I was that close.",
       "Instead, I stayed. And I analyzed the root causes. What I found wasn't that my team was incompetent. It was that I'd never properly set expectations - with my clients or my team. So I built the Client Expectation Framework. And everything changed."
     ],
-    image: "/images/New - About 3.png",
-    imageAlt: "Parking lot moment visual placeholder",
+    image: "/images/about-parking-lot-moment.png",
+    imageAlt: "DeskTeam360 founder reflecting in a parking lot during a pivotal business moment",
   },
   {
     title: "The Million Dollar Education",

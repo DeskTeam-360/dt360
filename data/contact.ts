@@ -38,6 +38,7 @@ export const contactForm = {
   captchaLabel: "Captcha",
   submitLabel: "Send Message",
   successMessage: "Thank you! Your message has been received. We will respond ASAP.",
+  sendAnotherLabel: "Send Another Message",
 } as const;
 
 /** Gravity Forms — https://portal.deskteam360.com/wp-admin/admin.php?page=gf_edit_forms&id=1 */

@@ -6,6 +6,11 @@ import {
   type ContactFieldErrors,
 } from "@/lib/contact-errors";
 import { submitContactEntry } from "@/lib/gravity-forms";
+import {
+  gravityFormsRecaptchaMismatchMessage,
+  recaptchaVerifyErrorMessage,
+  verifyRecaptchaToken,
+} from "@/lib/recaptcha";
 
 export type ContactApiBody = {
   firstName?: string;
@@ -17,6 +22,19 @@ export type ContactApiBody = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Headless GF: verify captcha on Next.js, skip token on GF REST (needs WP filter in export/wordpress-gf-rest-recaptcha-bypass.php). */
+function isContactRecaptchaServerVerifyEnabled(): boolean {
+  return process.env.CONTACT_RECAPTCHA_SERVER_VERIFY === "true";
+}
+
+function getClientIp(request: Request): string | undefined {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0]?.trim() || undefined;
+  }
+  return request.headers.get("x-real-ip") ?? undefined;
+}
 
 function buildValidationErrorResponse(fieldErrors: ContactFieldErrors) {
   let message = "Please fix the errors below and try again.";
@@ -64,19 +82,58 @@ export async function POST(request: Request) {
 
   if (!recaptchaToken) {
     return NextResponse.json(
-      { ok: false, message: "Please complete the reCAPTCHA verification.", fieldErrors: { captcha: "Please complete the reCAPTCHA verification." } },
+      {
+        ok: false,
+        message: "Please complete the reCAPTCHA verification.",
+        fieldErrors: { captcha: "Please complete the reCAPTCHA verification." },
+      },
       { status: 400 },
     );
   }
 
   try {
+    const serverVerify = isContactRecaptchaServerVerifyEnabled();
+    let omitRecaptcha = false;
+
+    if (serverVerify) {
+      const recaptchaCheck = await verifyRecaptchaToken(recaptchaToken, getClientIp(request));
+
+      if (recaptchaCheck.skipped) {
+        return NextResponse.json(
+          {
+            ok: false,
+            message:
+              "CONTACT_RECAPTCHA_SERVER_VERIFY is enabled but RECAPTCHA_SECRET_KEY is missing. Add the secret key to .env.local or Vercel.",
+            fieldErrors: { captcha: "Server reCAPTCHA is not configured." },
+          },
+          { status: 503 },
+        );
+      }
+
+      if (!recaptchaCheck.success) {
+        const captchaMessage = recaptchaVerifyErrorMessage(recaptchaCheck.errorCodes);
+        return NextResponse.json(
+          {
+            ok: false,
+            message: captchaMessage,
+            fieldErrors: { captcha: captchaMessage },
+          },
+          { status: 422 },
+        );
+      }
+
+      // Token consumed by Google siteverify — do not forward to GF.
+      omitRecaptcha = true;
+    }
+
     const result = await submitContactEntry({
       firstName,
       lastName,
       phone,
       email,
       message,
-      recaptchaToken,
+      recaptchaToken: omitRecaptcha ? undefined : recaptchaToken,
+      omitRecaptcha,
     });
 
     if (!result.is_valid) {
@@ -88,6 +145,20 @@ export async function POST(request: Request) {
             ok: false,
             message: "Submission was rejected by Gravity Forms. Please try again.",
             fieldErrors: {},
+          },
+          { status: 422 },
+        );
+      }
+
+      if (fieldErrors.captcha) {
+        const captchaMessage = serverVerify
+          ? "Gravity Forms still rejected captcha. Add export/wordpress-gf-rest-recaptcha-bypass.php to WordPress (see file comments)."
+          : gravityFormsRecaptchaMismatchMessage();
+        return NextResponse.json(
+          {
+            ok: false,
+            message: captchaMessage,
+            fieldErrors: { captcha: captchaMessage },
           },
           { status: 422 },
         );

@@ -9,7 +9,7 @@ const STEP_ICON_SRCS = [
   "/images/how it works/how-it-works-step-3.png",
 ] as const;
 
-const STEP_FOOTER_BG = ["bg-[#F6663E]", "bg-[#E95595]", "bg-[#5432B4]"] as const;
+const STEP_HEADER_BG = ["bg-[#F6663E]", "bg-[#E95595]", "bg-[#5432B4]"] as const;
 
 export function HowItWorksTaskSteps() {
   const { titleBefore, titleHighlight, steps } = howItWorksTaskSection;
@@ -39,41 +39,45 @@ export function HowItWorksTaskSteps() {
               <article
                 key={step.id}
                 className={cn(
-                  "flex min-h-[320px] flex-col px-10 pb-0 pt-15 text-white shadow-xl md:min-h-[480px]",
+                  "flex min-h-[320px] flex-col px-10 pb-15 pt-0 text-white shadow-xl md:min-h-[480px]",
                   step.gradientClass,
                 )}
               >
-                <div className="flex flex-1 flex-col">
+                <div className="-mx-10">
+                  <div
+                    className={cn(
+                      "flex h-[160px] w-full items-center justify-center border-b border-white/25 px-8",
+                      STEP_HEADER_BG[i] ?? STEP_HEADER_BG[2],
+                    )}
+                  >
+                    <div className="flex items-center justify-center gap-5">
+                      <div className="flex h-20 w-20 shrink-0 items-center justify-center">
+                        <MarketingSafeImage
+                          src={iconSrc}
+                          alt={`${step.stepLabel} icon`}
+                          width={80}
+                          height={80}
+                          sizes="80px"
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+                      <span className="shrink-0 whitespace-nowrap text-[32px] font-semibold leading-none">
+                        {step.stepLabel}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col pt-8 md:pt-10">
                   <h3 className="type-rule-h3 text-center font-semibold leading-snug">{step.title}</h3>
                   <div className="mt-4 flex flex-1 flex-col">
                     <p className="type-rule-p whitespace-pre-line text-center leading-[1.9em] text-white/95">
                       {step.body}
                     </p>
                     {step.examples ? (
-                      <p className="type-rule-p mt-4 whitespace-pre-line pb-[50px] text-center leading-[1.9em] text-white/95">
+                      <p className="type-rule-p mt-4 whitespace-pre-line text-center leading-[1.9em] text-white/95">
                         {step.examples}
                       </p>
                     ) : null}
-                  </div>
-                </div>
-                <div className="-mx-10 mt-auto">
-                  <div
-                    className={cn(
-                      "flex min-h-[140px] w-full items-center justify-center border-t border-white/25 px-8 py-10",
-                      STEP_FOOTER_BG[i] ?? STEP_FOOTER_BG[2],
-                    )}
-                  >
-                    <div className="flex items-center justify-center gap-5">
-                      <MarketingSafeImage
-                        src={iconSrc}
-                        alt={`${step.stepLabel} icon`}
-                        width={80}
-                        height={80}
-                        sizes="80px"
-                        className="h-auto w-auto max-h-[80px] object-contain"
-                      />
-                      <span className="shrink-0 whitespace-nowrap text-[32px] font-semibold">{step.stepLabel}</span>
-                    </div>
                   </div>
                 </div>
               </article>
