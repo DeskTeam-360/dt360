@@ -148,6 +148,6 @@ export const showcaseCtaContent: ShowcaseCtaContent = {
   primaryCta: { href: "/book-a-call", label: "Book a Free Strategy Call" },
   secondaryCta: { href: "/#pricing", label: "See Plans & Pricing" },
   note: "30-day money-back guarantee - No contracts - Cancel anytime",
-  imageSrc: "/images/Showcase - CTA.png",
-  imageAlt: "DeskTeam360 team member smiling with arms crossed.",
+  imageSrc: "/images/showcase-cta-jeremy-deskteam360.png",
+  imageAlt: "Jeremy Kenerson of DeskTeam360 smiling with arms crossed",
 };
