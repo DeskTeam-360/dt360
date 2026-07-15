@@ -53,8 +53,8 @@ export function AboutCta() {
             {/* The image that sticks out */}
             <div className="absolute bottom-0 right-0 w-[120%] h-[135%] z-20 pointer-events-none flex items-end justify-end min-[4000px]:bottom-8 min-[4000px]:right-4">
               <SafeImage
-                src="/images/about-jeremy-notebook.png"
-                alt="Jeremy"
+                src="/images/about-cta-jeremy-deskteam360-laptop.png"
+                alt="Jeremy Kenerson of DeskTeam360 holding a laptop ready to discuss strategy"
                 width={800}
                 height={1000}
                 optimized
@@ -69,8 +69,8 @@ export function AboutCta() {
         <div className="block lg:hidden mt-10 relative h-[400px]">
            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] z-20 pointer-events-none flex items-end justify-center">
              <SafeImage
-                src="/images/about-jeremy-notebook.png"
-                alt="Jeremy"
+                src="/images/about-cta-jeremy-deskteam360-laptop.png"
+                alt="Jeremy Kenerson of DeskTeam360 holding a laptop ready to discuss strategy"
                 width={600}
                 height={800}
                 optimized
