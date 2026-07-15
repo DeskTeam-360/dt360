@@ -39,8 +39,8 @@ export function HaveQuestionsCTA() {
 
           <div className="relative mx-auto h-[150px] w-[150px] shrink-0 sm:h-[200px] sm:w-[200px] md:mx-0 md:h-[260px] md:w-[260px] lg:h-[320px] lg:w-[320px] xl:h-[360px] xl:w-[360px] 2xl:h-[400px] 2xl:w-[400px] min-[2560px]:h-[460px] min-[2560px]:w-[460px]">
             <CaseStudiesSafeImage
-              src="/images/case-studies/Jeremy Image.png"
-              alt="Jeremy"
+              src="/images/case-studies/case-studies-cta-jeremy-book-a-call.png"
+              alt="Jeremy Kenerson of DeskTeam360 inviting you to book a call"
               fill
               sizes="(max-width: 768px) 200px, (max-width: 1536px) 400px, 460px"
               className="object-contain"
