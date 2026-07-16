@@ -165,8 +165,8 @@ export const lastCtaContent: LastCtaContent = {
     variant: "secondary",
   },
   note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
-  imageSrc: "/images/Home-cta-imageright1.png",
-  imageAlt: "Senior professional holding a laptop, ready to support your team.",
+  imageSrc: "/images/home-cta-jeremy-deskteam360-laptop.png",
+  imageAlt: "Jeremy Kenerson of DeskTeam360 holding a laptop, ready to support your team",
 };
 
 export const heroStats: HeroStatItem[] = [
