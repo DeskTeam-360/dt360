@@ -20,6 +20,21 @@ type WpPostNode = {
   categories?: { nodes?: Array<{ name?: string; slug?: string }> };
 };
 
+type SitemapPostsResponse = {
+  posts?: {
+    pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
+    nodes?: WpPostNode[];
+  };
+};
+
+type SitemapCategoriesResponse = {
+  categories?: { nodes?: WpCategoryNode[] };
+};
+
+type SitemapCaseStudyPostsResponse = {
+  posts?: { nodes?: WpPostNode[] };
+};
+
 function getWordPressGraphqlUrl(): string {
   const url = process.env.WORDPRESS_API_URL?.trim();
   if (!url) {
@@ -143,12 +158,10 @@ export async function fetchBlogPostEntries(siteUrl: string): Promise<SitemapUrlE
   let hasNextPage = true;
 
   while (hasNextPage) {
-    const data = await client.request<{
-      posts?: {
-        pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
-        nodes?: WpPostNode[];
-      };
-    }>(POSTS_QUERY, { first: 100, after });
+    const data: SitemapPostsResponse = await client.request<SitemapPostsResponse>(
+      POSTS_QUERY,
+      { first: 100, after },
+    );
 
     const nodes = data.posts?.nodes ?? [];
     for (const post of nodes) {
@@ -169,9 +182,10 @@ export async function fetchBlogPostEntries(siteUrl: string): Promise<SitemapUrlE
 
 export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlEntry[]> {
   const client = createWpClient();
-  const data = await client.request<{ categories?: { nodes?: WpCategoryNode[] } }>(CATEGORIES_QUERY, {
-    first: 100,
-  });
+  const data: SitemapCategoriesResponse = await client.request<SitemapCategoriesResponse>(
+    CATEGORIES_QUERY,
+    { first: 100 },
+  );
 
   const entries: SitemapUrlEntry[] = [];
 
@@ -198,10 +212,10 @@ export async function fetchCaseStudyEntries(siteUrl: string): Promise<SitemapUrl
   const entries: SitemapUrlEntry[] = [];
 
   for (const categorySlug of CASE_STUDY_CATEGORY_SLUGS) {
-    const data = await client.request<{ posts?: { nodes?: WpPostNode[] } }>(CASE_STUDY_POSTS_QUERY, {
-      first: 100,
-      categoryName: categorySlug,
-    });
+    const data: SitemapCaseStudyPostsResponse = await client.request<SitemapCaseStudyPostsResponse>(
+      CASE_STUDY_POSTS_QUERY,
+      { first: 100, categoryName: categorySlug },
+    );
 
     for (const post of data.posts?.nodes ?? []) {
       if (seen.has(post.slug)) continue;
