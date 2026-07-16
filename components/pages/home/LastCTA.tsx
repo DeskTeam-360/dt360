@@ -50,13 +50,13 @@ export function LastCTA() {
             <p className="mt-3 pb-4 text-[16px] italic text-[#11104C] sm:pb-6 lg:pb-10">{note}</p>
           </div>
 
-          <div className="relative z-[2] mx-auto mt-4 flex w-full max-w-[33rem] justify-center sm:mt-6 lg:absolute lg:-top-60 lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:w-auto lg:max-w-none lg:items-end lg:justify-end">
+          <div className="relative z-[2] mx-auto mt-4 flex w-full max-w-[30rem] justify-center sm:mt-6 lg:absolute lg:-top-60 lg:bottom-0 lg:right-0 lg:mx-0 lg:mt-0 lg:w-auto lg:max-w-none lg:items-end lg:justify-end">
             <Image
               src={imageSrc}
               alt={imageAlt}
               width={768}
               height={810}
-              className="relative z-[2] h-auto w-auto max-w-full object-contain object-bottom lg:h-full"
+              className="relative z-[2] h-auto w-auto max-w-full origin-bottom scale-[0.92] object-contain object-bottom transform-gpu lg:h-full lg:scale-[0.9]"
               sizes="(max-width: 1024px) 85vw, 768px"
               priority={false}
             />
