@@ -44,9 +44,9 @@ export function HowItWorksReadyCta() {
               <MarketingSafeImage
                 src={imageSrc}
                 alt={imageAlt}
-                width={800}
-                height={980}
-                className="h-auto w-full max-h-[560px] object-contain object-bottom sm:max-h-[620px] lg:max-h-[min(101.2vh,924px)]"
+                width={1026}
+                height={932}
+                className="h-auto w-full max-h-[560px] origin-bottom scale-[1.1] object-contain object-bottom transform-gpu sm:max-h-[620px] lg:max-h-[min(101.2vh,924px)] lg:scale-[1.15]"
                 sizes="(max-width:1024px) 100vw, 40vw"
                 priority={false}
               />
