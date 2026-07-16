@@ -289,6 +289,6 @@ export const howItWorksReadyCta = {
   primaryCta: { href: "/book-a-call", label: "Book a Free Strategy Call" },
   secondaryCta: { href: "/#pricing", label: "See Plans & Pricing" },
   noteBelowButtons: "30-day money-back guarantee - No contracts - Cancel anytime",
-  imageSrc: "/images/How it works - CTA.png",
-  imageAlt: "Team member giving a thumbs up with a laptop",
+  imageSrc: "/images/how-it-works-cta-jeremy-deskteam360-laptop.png",
+  imageAlt: "Jeremy Kenerson of DeskTeam360 giving a thumbs up while holding a laptop",
 };
