@@ -10,6 +10,7 @@ type Props = {
   latestPosts: BlogPost[];
   categoryLatestPostsMap: Record<string, BlogPost[]>;
   categories: string[];
+  initialCategory?: string;
 };
 
 export function BlogListing({
@@ -17,12 +18,17 @@ export function BlogListing({
   latestPosts,
   categoryLatestPostsMap,
   categories,
+  initialCategory,
 }: Props) {
   const resolvedCategories = useMemo(
     () => (categories.length > 0 ? categories : ["All Posts"]),
     [categories],
   );
-  const [selectedCategory, setSelectedCategory] = useState<string>(resolvedCategories[0] ?? "All Posts");
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    initialCategory && resolvedCategories.includes(initialCategory)
+      ? initialCategory
+      : (resolvedCategories[0] ?? "All Posts"),
+  );
 
   return (
     <>

@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: `${base}/sitemap.xml`,
+    sitemap: `${base}/sitemap_index.xml`,
     host: base.replace(/^https?:\/\//, ""),
   };
 }

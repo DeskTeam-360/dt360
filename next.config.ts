@@ -22,6 +22,15 @@ function getWordPressImageHostnames(): string[] {
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/sitemap_index.xml",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     /** Next.js Image Optimization (WebP/AVIF, responsive widths). Phase 1: home + about tuned with `sizes`. */
     unoptimized: false,

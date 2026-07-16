@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "npm run generate:sitemap",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
+    "generate:sitemap:strict": "tsx scripts/generate-sitemap.ts --strict"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -27,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }
