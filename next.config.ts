@@ -22,6 +22,8 @@ function getWordPressImageHostnames(): string[] {
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // Explicit: no trailing slash (Next default). /about/ → 308 /about
+  trailingSlash: false,
   async redirects() {
     return [
       {
