@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { BlogPost } from '@/data/blog';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs } from '@/lib/wordpress';
+import { withPageCanonical } from '@/lib/seo';
 
 export type BlogSinglePageData = {
   post: BlogPost;
@@ -8,9 +9,9 @@ export type BlogSinglePageData = {
   publishedSlugs: string[];
 };
 
-/** Canonical blog post URL (WordPress-style, no `/blog/` prefix). */
+/** Canonical blog post URL — matches sitemap (`/blog/{slug}`, no trailing slash). */
 export function getBlogPostCanonicalPath(slug: string): string {
-  return `/${slug}`;
+  return `/blog/${slug}`;
 }
 
 function resolveRelatedPosts(
@@ -75,11 +76,8 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     };
   }
 
-  return {
+  return withPageCanonical(getBlogPostCanonicalPath(slug), {
     title: `${post.title} | DeskTeam360`,
     description: post.excerpt,
-    alternates: {
-      canonical: getBlogPostCanonicalPath(slug),
-    },
-  };
+  });
 }

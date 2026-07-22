@@ -23,6 +23,14 @@ export async function generateMetadata(
   return {
     title: `${post!.title} | DeskTeam360`,
     description: post!.excerpt,
+    alternates: {
+      canonical: `/case-studies/${resolvedParams.slug}`,
+    },
+    openGraph: {
+      url: `/case-studies/${resolvedParams.slug}`,
+      title: `${post!.title} | DeskTeam360`,
+      description: post!.excerpt,
+    },
   };
 }
 

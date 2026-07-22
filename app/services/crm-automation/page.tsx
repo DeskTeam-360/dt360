@@ -1,5 +1,11 @@
+﻿import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { FAQ } from "@/components/pages/service/crm-automation/FAQ";
 import { Hero } from "@/components/pages/service/crm-automation/Hero";
+
+export const metadata: Metadata = withPageCanonical("/services/crm-automation", {
+  title: "CRM & Automation",
+});
 
 export default function CrmAutomationPage() {
   return (
@@ -13,3 +19,4 @@ export default function CrmAutomationPage() {
     </main>
   );
 }
+

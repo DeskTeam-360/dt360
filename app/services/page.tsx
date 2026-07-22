@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ServicesPlatformsSupportedBridge } from "@/components/pages/services/ServicesPlatformsSupportedBridge";
@@ -6,7 +7,14 @@ import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSecti
 import { ServicesHowItWorks } from "@/components/pages/services/ServicesHowItWorks";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
 import { SocialProofTestimonialCarousel } from "@/components/pages/home/SocialProofTestimonialCarousel";
+import { withPageCanonical } from "@/lib/seo";
 import { getHomeTestimonials } from "@/lib/wordpress";
+
+export const metadata: Metadata = withPageCanonical("/services", {
+  title: "Services",
+  description:
+    "Web design, graphic design, video editing, CRM, social media, and more — dedicated DeskTeam360 teams.",
+});
 
 /** Asset filename: `Service Box - {title}.webp` — encode for a safe URL (spaces, parentheses, etc.) */
 function serviceBoxWebpPath(serviceTitle: string) {

@@ -1,6 +1,12 @@
+﻿import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { FAQ } from "@/components/pages/service/email-funnels/FAQ";
 import { Hero } from "@/components/pages/service/email-funnels/Hero";
 import { PlatformsSupported } from "@/components/pages/service/email-funnels/PlatformsSupported";
+
+export const metadata: Metadata = withPageCanonical("/services/email-funnels", {
+  title: "Email & Funnels",
+});
 
 export default function EmailFunnelsPage() {
   return (
@@ -17,3 +23,4 @@ export default function EmailFunnelsPage() {
     </main>
   );
 }
+

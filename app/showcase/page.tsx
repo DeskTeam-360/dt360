@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { getShowcaseData } from "@/lib/wordpress";
 import { ShowcaseContent } from "@/components/pages/showcase/ShowcaseContent";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/showcase", {
   title: "Showcase",
   description: "See real client work delivered by the DeskTeam360 team.",
-};
+});
 
 export default async function ShowcasePage() {
   const { allItems, categories, itemsByCategory } = await getShowcaseData();

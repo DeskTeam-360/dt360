@@ -8,11 +8,12 @@ import { HowItWorksReadyCta } from "@/components/pages/how-it-works/HowItWorksRe
 import { HowItWorksRealTeam } from "@/components/pages/how-it-works/HowItWorksRealTeam";
 import { HowItWorksTaskSteps } from "@/components/pages/how-it-works/HowItWorksTaskSteps";
 import { siteConfig } from "@/config/site";
+import { withPageCanonical } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/how-it-works", {
   title: "How It Works",
   description: `${siteConfig.name} — What we do, what we don't, and how tasks get done in days—not weeks.`,
-};
+});
 
 /** ISR — testimonial carousel stays in sync with WP (same as homepage). */
 export const revalidate = 600;

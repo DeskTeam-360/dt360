@@ -1,8 +1,14 @@
+﻿import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { Hero } from "@/components/pages/service/website-development/Hero";
 import { WebDesignDevelopmentTestimonialAndHowSection } from "@/components/pages/service/website-development/WebDesignDevelopmentTestimonialAndHowSection";
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesPlatformsSupportedBridge } from "@/components/pages/services/ServicesPlatformsSupportedBridge";
 import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
+
+export const metadata: Metadata = withPageCanonical("/services/web-design-development", {
+  title: "Web Design & Development",
+});
 
 export default function WebDesignDevelopmentPage() {
   return (
@@ -26,3 +32,4 @@ export default function WebDesignDevelopmentPage() {
     </main>
   );
 }
+

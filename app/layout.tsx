@@ -65,16 +65,9 @@ export const metadata: Metadata = {
     telephone: false,
   },
   referrer: "origin-when-cross-origin",
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-US": "/",
-    },
-  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
-    url: "/",
     siteName: siteConfig.name,
     title: siteConfig.defaultTitle,
     description: siteConfig.description,

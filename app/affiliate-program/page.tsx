@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { AffiliateProgramHero } from "@/components/pages/affiliate-program/AffiliateProgramHero";
 import { AffiliateProgramMain } from "@/components/pages/affiliate-program/AffiliateProgramMain";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/affiliate-program", {
   title: "Affiliate Program",
   description: `Earn recurring commissions with the free ${siteConfig.name} partner program.`,
-};
+});
 
 export default function AffiliateProgramPage() {
   return (

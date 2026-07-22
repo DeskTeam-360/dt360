@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { BookACallHero } from "@/components/pages/book-a-call/BookACallHero";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/book-a-call", {
   title: "Book a Call",
   description: `Schedule a free strategy call with ${siteConfig.name}.`,
-};
+});
 
 export default function BookACallPage() {
   return (

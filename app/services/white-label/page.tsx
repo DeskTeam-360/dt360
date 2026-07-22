@@ -1,7 +1,13 @@
+﻿import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { CaseStudy } from "@/components/pages/service/white-label/CaseStudy";
 import { FAQ } from "@/components/pages/service/white-label/FAQ";
 import { Hero } from "@/components/pages/service/white-label/Hero";
 import { WhoItsFor } from "@/components/pages/service/white-label/WhoItsFor";
+
+export const metadata: Metadata = withPageCanonical("/services/white-label", {
+  title: "White Label",
+});
 
 export default function WhiteLabelPage() {
   return (
@@ -21,3 +27,4 @@ export default function WhiteLabelPage() {
     </main>
   );
 }
+

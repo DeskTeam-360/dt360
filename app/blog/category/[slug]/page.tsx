@@ -5,6 +5,7 @@ import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
 import { resolveCategoryNameFromSlug } from "@/lib/blog-categories";
+import { withPageCanonical } from "@/lib/seo";
 import { getBlogData } from "@/lib/wordpress";
 
 type Props = {
@@ -20,13 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Category Not Found | DeskTeam360" };
   }
 
-  return {
+  return withPageCanonical(`/blog/category/${slug}`, {
     title: `${categoryName} | DeskTeam360 Blog`,
     description: `Articles in the ${categoryName} category on the DeskTeam360 blog.`,
-    alternates: {
-      canonical: `/blog/category/${slug}`,
-    },
-  };
+  });
 }
 
 export default async function BlogCategoryPage({ params }: Props) {

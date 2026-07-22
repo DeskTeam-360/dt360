@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { PrivacyPolicyContent } from "@/components/pages/privacy-policy/PrivacyPolicyContent";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/privacy-policy", {
   title: "Privacy Policy",
   description: `Learn how ${siteConfig.name} collects, uses, and protects your personal information.`,
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (

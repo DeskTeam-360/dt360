@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getHomeTestimonials } from "@/lib/wordpress";
 import { Hero } from "@/components/pages/home/Hero";
 import { InsourcingBetter } from "@/components/pages/home/InsourcingBetter";
@@ -11,6 +12,9 @@ import { SocialProofTestimonials } from "@/components/pages/home/SocialProofTest
 import { Pricing } from "@/components/pages/home/Pricing";
 import { FAQ } from "@/components/pages/home/FAQ";
 import { LastCTA } from "@/components/pages/home/LastCTA";
+import { withPageCanonical } from "@/lib/seo";
+
+export const metadata: Metadata = withPageCanonical("/");
 
 /** ISR for homepage — keeps testimonial carousel in sync with WP (default 10 min). */
 export const revalidate = 600;

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withPageCanonical } from "@/lib/seo";
 import { ContactHero } from "@/components/pages/contact/ContactHero";
 import { ContactMain } from "@/components/pages/contact/ContactMain";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withPageCanonical("/contact", {
   title: "Contact",
   description: `Contact ${siteConfig.name}. Send a message or use live chat for a quick response.`,
-};
+});
 
 export default function ContactPage() {
   return (
