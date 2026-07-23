@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { GlobalSameRouteClickHandler } from "@/components/layout/GlobalSameRouteClickHandler";
 import { Navbar } from "@/components/layout/Navbar";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
-import { getMetadataBase, getSiteUrl, siteConfig } from "@/config/site";
+import { getMetadataBase, getSiteUrl, isSearchEngineIndexable, siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 
 const geistSans = Geist({
@@ -31,6 +31,7 @@ const montserrat = Montserrat({
 });
 
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+const searchEngineIndexable = isSearchEngineIndexable();
 
 export const viewport: Viewport = {
   themeColor: [
@@ -91,17 +92,27 @@ export const metadata: Metadata = {
         }
       : {}),
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  robots: searchEngineIndexable
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+        googleBot: {
+          index: false,
+          follow: false,
+          noimageindex: true,
+        },
+      },
   verification: googleVerification
     ? {
         google: googleVerification,

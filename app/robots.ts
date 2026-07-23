@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl } from "@/config/site";
+import { getSiteUrl, isSearchEngineIndexable } from "@/config/site";
 
 /**
- * Paths that should not be crawled (internal flows, thank-you, legacy WP commerce,
- * and non-public tools). Public marketing pages stay allowed.
+ * Paths that should not be crawled on production (internal flows, thank-you,
+ * legacy WP commerce, non-public tools). Public marketing pages stay allowed.
  */
-const DISALLOW_PATHS = [
+const PRODUCTION_DISALLOW_PATHS = [
   "/api/",
   // Thank-you / scheduled confirmation (also noindex in page metadata)
   "/demo-call-scheduled-thank-you",
@@ -31,12 +31,27 @@ const DISALLOW_PATHS = [
 
 export default function robots(): MetadataRoute.Robots {
   const base = getSiteUrl();
+  const indexable = isSearchEngineIndexable();
+
+  // Staging / local: block all crawling, do not advertise sitemap
+  if (!indexable) {
+    return {
+      rules: [
+        {
+          userAgent: "*",
+          disallow: "/",
+        },
+      ],
+      host: base.replace(/^https?:\/\//, ""),
+    };
+  }
+
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: [...DISALLOW_PATHS],
+        disallow: [...PRODUCTION_DISALLOW_PATHS],
       },
     ],
     sitemap: `${base}/sitemap_index.xml`,

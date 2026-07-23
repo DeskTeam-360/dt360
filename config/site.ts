@@ -42,3 +42,25 @@ export function getMetadataBase(): URL {
     return new URL("http://localhost:3000");
   }
 }
+
+/**
+ * Whether search engines may index this deployment.
+ * Staging/dev hosts (e.g. *.youare.ninja) are blocked by default.
+ * Override with NEXT_PUBLIC_ROBOTS_INDEX=true|false.
+ */
+export function isSearchEngineIndexable(): boolean {
+  const flag = process.env.NEXT_PUBLIC_ROBOTS_INDEX?.trim().toLowerCase();
+  if (flag === "false" || flag === "0" || flag === "no") return false;
+  if (flag === "true" || flag === "1" || flag === "yes") return true;
+
+  try {
+    const host = new URL(getSiteUrl()).hostname.toLowerCase();
+    if (host === "localhost" || host === "127.0.0.1") return false;
+    if (host.endsWith(".youare.ninja")) return false;
+    if (host.includes("staging") || host.startsWith("dev.")) return false;
+  } catch {
+    return false;
+  }
+
+  return true;
+}
