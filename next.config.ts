@@ -112,6 +112,18 @@ const nextConfig: NextConfig = {
         destination: "/case-studies",
         permanent: true,
       },
+
+      // --- GSC P3 / issue 102 — P4-Tim (legacy team member pages) ---
+      {
+        source: "/team-member/:slug*",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/team-members/:slug*",
+        destination: "/about",
+        permanent: true,
+      },
     ];
   },
   images: {
