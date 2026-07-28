@@ -95,6 +95,23 @@ const nextConfig: NextConfig = {
         destination: "/blog/graphic-design-subscription-services-guide",
         permanent: true,
       },
+
+      // --- GSC P3 / issue 102 — P3-Slug-rusak (concatenated path bugs) ---
+      {
+        source: "/aboutAbout",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/blogBlog",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/case-studiessee",
+        destination: "/case-studies",
+        permanent: true,
+      },
     ];
   },
   images: {
