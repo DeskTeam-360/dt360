@@ -124,6 +124,27 @@ const nextConfig: NextConfig = {
         destination: "/about",
         permanent: true,
       },
+
+      // --- GSC P3 / issue 102 — P6 form/booking legacy → /book-a-call ---
+      {
+        source: "/strategy-30-minute-call-with-jeremy",
+        destination: "/book-a-call",
+        permanent: true,
+      },
+      // Special Ed Resource legacy slug → case study
+      {
+        source:
+          "/special-ed-resource-we-did-our-website-7-years-ago-and-now-we-have-200-monthly-recurring-paying-students",
+        destination: "/case-studies/special-ed-resource-case-study",
+        permanent: true,
+      },
+      // Internal form — lives on portal, not marketing site
+      {
+        source: "/gaynor-email-submission-form",
+        destination:
+          "https://portal.deskteam360.com/gaynor-email-submission-form/",
+        permanent: true,
+      },
     ];
   },
   images: {
