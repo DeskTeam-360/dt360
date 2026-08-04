@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { portalPageFallbackRedirects } from "@/lib/seo/portal-page-redirects";
 
 function getWordPressImageHostnames(): string[] {
   const hostnames = new Set<string>(["deskteam360.com", "www.deskteam360.com"]);
@@ -138,13 +139,9 @@ const nextConfig: NextConfig = {
         destination: "/case-studies/special-ed-resource-case-study",
         permanent: true,
       },
-      // Internal form — lives on portal, not marketing site
-      {
-        source: "/gaynor-email-submission-form",
-        destination:
-          "https://portal.deskteam360.com/gaynor-email-submission-form/",
-        permanent: true,
-      },
+
+      // Portal-published pages missing on Next → portal (includes Gaynor form)
+      ...portalPageFallbackRedirects(),
     ];
   },
   images: {
