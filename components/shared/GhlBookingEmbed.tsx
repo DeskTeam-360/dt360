@@ -1,14 +1,8 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
-
-declare global {
-  interface Window {
-    iFrameResize?: (...args: unknown[]) => void;
-  }
-}
 
 export type GhlBookingEmbedConfig = {
   bookingIframeSrc: string;
@@ -43,12 +37,6 @@ export function GhlBookingEmbed({
   const [embedReady, setEmbedReady] = useState(false);
   const markReady = useCallback(() => setEmbedReady(true), []);
 
-  useEffect(() => {
-    if (typeof window.iFrameResize === "function") {
-      setEmbedReady(true);
-    }
-  }, []);
-
   return (
     <div className={cn("flex min-h-[520px] w-full justify-center", className)}>
       <iframe
@@ -56,7 +44,6 @@ export function GhlBookingEmbed({
         src={embedReady ? bookingIframeSrc : undefined}
         title={iframeTitle}
         allow="payment"
-        scrolling="no"
         className="w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
         style={{ border: "none", overflow: "hidden", minHeight: 520 }}
       />
