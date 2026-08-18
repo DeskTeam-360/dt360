@@ -1,7 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Script from "next/script";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+
+declare global {
+  interface Window {
+    iFrameResize?: (...args: unknown[]) => void;
+  }
+}
 
 export type GhlBookingEmbedConfig = {
   bookingIframeSrc: string;
@@ -12,97 +19,13 @@ export type GhlBookingEmbedConfig = {
   iframeTitle?: string;
 };
 
-declare global {
-  interface Window {
-    iFrameResize?: (
-      options: Record<string, unknown>,
-      target?: string | HTMLElement,
-    ) => void;
-  }
-}
-
-const IFRAME_RESIZE_OPTIONS = {
-  log: false,
-  checkOrigin: false,
-  enablePublicMethods: true,
-  scrolling: true,
-  sizeHeight: true,
-  sizeWidth: false,
-  autoResize: true,
-  heightCalculationMethod: "offset",
-};
-
-const BOOKING_EMBED_RETRY_INTERVAL_MS = 250;
-const BOOKING_EMBED_MAX_WAIT_MS = 10_000;
-
-function initBookingIframe(iframe: HTMLIFrameElement) {
-  if (iframe.getAttribute("data-iframe-resizer-initialized") === "true") {
-    return;
-  }
-
-  if (typeof window.iFrameResize === "function") {
-    window.iFrameResize(IFRAME_RESIZE_OPTIONS, iframe);
-    iframe.style.visibility = "visible";
-    return;
-  }
-
-  iframe.addEventListener(
-    "load",
-    () => {
-      window.iFrameResize?.(IFRAME_RESIZE_OPTIONS, iframe);
-      iframe.style.visibility = "visible";
-    },
-    { once: true },
-  );
-}
-
-function loadEmbedScript(scriptSrc: string, datasetKey: string, onReady: () => void) {
-  if (typeof window.iFrameResize === "function") {
-    onReady();
-    return;
-  }
-
-  const existing = document.querySelector<HTMLScriptElement>(
-    `script[data-ghl-booking-embed="${datasetKey}"]`,
-  );
-
-  if (existing) {
-    if (existing.dataset.ghlBookingLoaded === "true") {
-      onReady();
-      return;
-    }
-    existing.addEventListener("load", onReady, { once: true });
-    return;
-  }
-
-  const anyGhlScript = document.querySelector<HTMLScriptElement>('script[data-ghl-booking-embed]');
-  if (anyGhlScript?.src === scriptSrc) {
-    if (anyGhlScript.dataset.ghlBookingLoaded === "true") {
-      onReady();
-      return;
-    }
-    anyGhlScript.addEventListener("load", onReady, { once: true });
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.src = scriptSrc;
-  script.type = "text/javascript";
-  script.async = true;
-  script.dataset.ghlBookingEmbed = datasetKey;
-  script.addEventListener(
-    "load",
-    () => {
-      script.dataset.ghlBookingLoaded = "true";
-      onReady();
-    },
-    { once: true },
-  );
-  document.body.appendChild(script);
-}
-
 /**
- * Lead Connector / GHL booking widget. form_embed.js hides iframes until iFrameResize runs.
+ * Lead Connector / GHL booking widget.
+ *
+ * form_embed.js hides booking iframes until it handles `iframeLoaded`.
+ * If the iframe starts loading before that script registers its message
+ * handler, the first postMessage is missed and the calendar stays hidden
+ * until a manual reload. Delay the iframe `src` until the embed script is ready.
  */
 export function GhlBookingEmbed({
   config,
@@ -115,51 +38,34 @@ export function GhlBookingEmbed({
     bookingIframeSrc,
     bookingIframeId,
     bookingEmbedScriptSrc,
-    scriptDatasetKey = bookingIframeId,
     iframeTitle = "Schedule your call",
   } = config;
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [embedReady, setEmbedReady] = useState(false);
+  const markReady = useCallback(() => setEmbedReady(true), []);
 
   useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-
-    iframe.style.visibility = "hidden";
-
-    const run = () => initBookingIframe(iframe);
-    loadEmbedScript(bookingEmbedScriptSrc, scriptDatasetKey, run);
-
-    const retry = window.setInterval(() => {
-      if (iframe.getAttribute("data-iframe-resizer-initialized") === "true") {
-        window.clearInterval(retry);
-        return;
-      }
-      run();
-    }, BOOKING_EMBED_RETRY_INTERVAL_MS);
-
-    const timeout = window.setTimeout(() => {
-      window.clearInterval(retry);
-      iframe.style.visibility = "visible";
-    }, BOOKING_EMBED_MAX_WAIT_MS);
-
-    return () => {
-      window.clearInterval(retry);
-      window.clearTimeout(timeout);
-      iframe.removeAttribute("data-iframe-resizer-initialized");
-      iframe.style.visibility = "";
-    };
-  }, [bookingEmbedScriptSrc, scriptDatasetKey]);
+    if (typeof window.iFrameResize === "function") {
+      setEmbedReady(true);
+    }
+  }, []);
 
   return (
-    <div className={cn("flex w-full justify-center", className)}>
+    <div className={cn("flex min-h-[520px] w-full justify-center", className)}>
       <iframe
-        ref={iframeRef}
         id={bookingIframeId}
-        src={bookingIframeSrc}
+        src={embedReady ? bookingIframeSrc : undefined}
         title={iframeTitle}
-        className="w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
-        style={{ border: "none", overflow: "hidden" }}
+        allow="payment"
         scrolling="no"
+        className="w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
+        style={{ border: "none", overflow: "hidden", minHeight: 520 }}
+      />
+      <Script
+        id="ghl-form-embed"
+        src={bookingEmbedScriptSrc}
+        strategy="afterInteractive"
+        onReady={markReady}
+        onError={markReady}
       />
     </div>
   );
