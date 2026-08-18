@@ -32,6 +32,9 @@ const IFRAME_RESIZE_OPTIONS = {
   heightCalculationMethod: "offset",
 };
 
+const BOOKING_EMBED_RETRY_INTERVAL_MS = 250;
+const BOOKING_EMBED_MAX_WAIT_MS = 10_000;
+
 function initBookingIframe(iframe: HTMLIFrameElement) {
   if (iframe.getAttribute("data-iframe-resizer-initialized") === "true") {
     return;
@@ -39,6 +42,7 @@ function initBookingIframe(iframe: HTMLIFrameElement) {
 
   if (typeof window.iFrameResize === "function") {
     window.iFrameResize(IFRAME_RESIZE_OPTIONS, iframe);
+    iframe.style.visibility = "visible";
     return;
   }
 
@@ -46,6 +50,7 @@ function initBookingIframe(iframe: HTMLIFrameElement) {
     "load",
     () => {
       window.iFrameResize?.(IFRAME_RESIZE_OPTIONS, iframe);
+      iframe.style.visibility = "visible";
     },
     { once: true },
   );
@@ -62,12 +67,20 @@ function loadEmbedScript(scriptSrc: string, datasetKey: string, onReady: () => v
   );
 
   if (existing) {
+    if (existing.dataset.ghlBookingLoaded === "true") {
+      onReady();
+      return;
+    }
     existing.addEventListener("load", onReady, { once: true });
     return;
   }
 
   const anyGhlScript = document.querySelector<HTMLScriptElement>('script[data-ghl-booking-embed]');
   if (anyGhlScript?.src === scriptSrc) {
+    if (anyGhlScript.dataset.ghlBookingLoaded === "true") {
+      onReady();
+      return;
+    }
     anyGhlScript.addEventListener("load", onReady, { once: true });
     return;
   }
@@ -77,7 +90,14 @@ function loadEmbedScript(scriptSrc: string, datasetKey: string, onReady: () => v
   script.type = "text/javascript";
   script.async = true;
   script.dataset.ghlBookingEmbed = datasetKey;
-  script.addEventListener("load", onReady, { once: true });
+  script.addEventListener(
+    "load",
+    () => {
+      script.dataset.ghlBookingLoaded = "true";
+      onReady();
+    },
+    { once: true },
+  );
   document.body.appendChild(script);
 }
 
@@ -104,14 +124,29 @@ export function GhlBookingEmbed({
     const iframe = iframeRef.current;
     if (!iframe) return;
 
+    iframe.style.visibility = "hidden";
+
     const run = () => initBookingIframe(iframe);
     loadEmbedScript(bookingEmbedScriptSrc, scriptDatasetKey, run);
 
-    const retry = window.setTimeout(run, 600);
+    const retry = window.setInterval(() => {
+      if (iframe.getAttribute("data-iframe-resizer-initialized") === "true") {
+        window.clearInterval(retry);
+        return;
+      }
+      run();
+    }, BOOKING_EMBED_RETRY_INTERVAL_MS);
+
+    const timeout = window.setTimeout(() => {
+      window.clearInterval(retry);
+      iframe.style.visibility = "visible";
+    }, BOOKING_EMBED_MAX_WAIT_MS);
 
     return () => {
-      window.clearTimeout(retry);
+      window.clearInterval(retry);
+      window.clearTimeout(timeout);
       iframe.removeAttribute("data-iframe-resizer-initialized");
+      iframe.style.visibility = "";
     };
   }, [bookingEmbedScriptSrc, scriptDatasetKey]);
 
