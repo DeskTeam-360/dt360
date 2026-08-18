@@ -13,6 +13,7 @@ const PRODUCTION_DISALLOW_PATHS = [
   // Internal booking flows (not primary SEO landing pages)
   "/onboarding-call-am2",
   "/client-meeting-with-am2",
+  "/client-meeting-with-am3",
   // Dev / test only
   "/blog/test",
   // Legacy WordPress / WooCommerce surfaces (often soft-404 or noindex in GSC)
