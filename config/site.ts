@@ -7,7 +7,7 @@ export const siteConfig = {
   shortName: "DeskTeam360",
   defaultTitle: "DeskTeam360 — Stop Outsourcing, Start Insourcing",
   description:
-    "Stop uncontrolled outsourcing. Build a dedicated insourcing team—developers, designers, and AI specialists—with clear process, fast SLA, and direct communication.",
+    "Stop uncontrolled outsourcing. Build a dedicated insourcing team—developers, designers, and AI specialists—with clear process, fast SLA, and direct contact.",
   keywords: [
     "DeskTeam360",
     "insourcing",

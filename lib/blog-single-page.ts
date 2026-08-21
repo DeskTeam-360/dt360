@@ -72,12 +72,13 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
 
   if (!post) {
     return {
-      title: 'Post Not Found | DeskTeam360',
+      title: 'Post Not Found',
     };
   }
 
+  // Brand suffix comes from root layout title.template (`%s | DeskTeam360`).
   return withPageCanonical(getBlogPostCanonicalPath(slug), {
-    title: `${post.title} | DeskTeam360`,
+    title: post.title,
     description: post.excerpt,
   });
 }

@@ -16,20 +16,22 @@ export async function generateMetadata(
 
   if (!post) {
     return {
-      title: 'Case Study Not Found | DeskTeam360',
+      title: 'Case Study Not Found',
     };
   }
 
+  // Document title uses layout title.template (`%s | DeskTeam360`).
+  // openGraph.title does not, so keep the brand there once.
   return {
-    title: `${post!.title} | DeskTeam360`,
-    description: post!.excerpt,
+    title: post.title,
+    description: post.excerpt,
     alternates: {
       canonical: `/case-studies/${resolvedParams.slug}`,
     },
     openGraph: {
       url: `/case-studies/${resolvedParams.slug}`,
-      title: `${post!.title} | DeskTeam360`,
-      description: post!.excerpt,
+      title: `${post.title} | DeskTeam360`,
+      description: post.excerpt,
     },
   };
 }

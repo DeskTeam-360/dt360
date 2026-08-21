@@ -1,34 +1,29 @@
-import { notFound } from 'next/navigation';
-import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
-import {
-  generateBlogPostMetadata,
-  getBlogSinglePageData,
-} from '@/lib/blog-single-page';
+import { notFound, permanentRedirect } from 'next/navigation';
+import { getPostBySlug, isCaseStudyPost } from '@/lib/wordpress';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+/**
+ * Legacy root post URLs (`/{slug}`) used to render the same content as
+ * `/blog/{slug}` with only a soft canonical. Prefer a permanent redirect so
+ * Google consolidates signals on the canonical path.
+ *
+ * Static marketing routes (`/about`, `/services`, …) still win over this
+ * dynamic segment and are unaffected.
+ */
+export default async function LegacyRootPostRedirectPage({ params }: Props) {
   const { slug } = await params;
-  return generateBlogPostMetadata(slug);
-}
+  const post = await getPostBySlug(slug);
 
-export default async function RootBlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const data = await getBlogSinglePageData(slug);
-
-  if (!data) {
+  if (!post) {
     notFound();
   }
 
-  return (
-    <main className="flex-grow">
-      <DynamicBlogPostContent 
-        post={data.post} 
-        relatedPosts={data.relatedPosts} 
-        publishedSlugs={data.publishedSlugs}
-      />
-    </main>
-  );
+  if (isCaseStudyPost(post)) {
+    permanentRedirect(`/case-studies/${slug}`);
+  }
+
+  permanentRedirect(`/blog/${slug}`);
 }
