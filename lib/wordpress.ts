@@ -139,10 +139,14 @@ const decodeHtmlEntities = (text: string): string => {
 const stripExcerptHtml = (excerpt?: string): string =>
   decodeHtmlEntities(excerpt?.replace(/<[^>]*>?/gm, '') ?? '').trim();
 
-const isCaseStudyCategory = (name: string): boolean => {
+export const isCaseStudyCategory = (name: string): boolean => {
   const lower = name.toLowerCase();
   return lower.includes('case study') || lower.includes('case-study');
 };
+
+/** True when the post belongs to a Case Study category (for routing/canonical). */
+export const isCaseStudyPost = (post: Pick<BlogPost, 'categories'>): boolean =>
+  (post.categories ?? []).some(isCaseStudyCategory);
 
 const toCategorySlug = (name: string): string =>
   name

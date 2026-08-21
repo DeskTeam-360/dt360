@@ -18,11 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoryName = resolveCategoryNameFromSlug(slug, categories);
 
   if (!categoryName) {
-    return { title: "Category Not Found | DeskTeam360" };
+    return { title: "Category Not Found" };
   }
 
+  // Brand suffix comes from root layout title.template (`%s | DeskTeam360`).
   return withPageCanonical(`/blog/category/${slug}`, {
-    title: `${categoryName} | DeskTeam360 Blog`,
+    title: categoryName,
     description: `Articles in the ${categoryName} category on the DeskTeam360 blog.`,
   });
 }
