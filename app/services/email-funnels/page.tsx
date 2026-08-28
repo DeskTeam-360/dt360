@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 import { FAQ } from "@/components/pages/service/email-funnels/FAQ";
 import { Hero } from "@/components/pages/service/email-funnels/Hero";
@@ -11,6 +12,7 @@ export const metadata: Metadata = withPageCanonical("/services/email-funnels", {
 export default function EmailFunnelsPage() {
   return (
     <main className="bg-white">
+      <BreadcrumbJsonLd items={serviceBreadcrumbs("Email & Funnels", "/services/email-funnels")} />
       <div className="mx-0 px-0">
         <Hero />
       </div>

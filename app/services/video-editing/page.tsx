@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 import { FAQ } from "@/components/pages/service/video-editing/FAQ";
 import { Hero } from "@/components/pages/service/video-editing/Hero";
@@ -11,6 +12,7 @@ export const metadata: Metadata = withPageCanonical("/services/video-editing", {
 export default function VideoEditingPage() {
   return (
     <main className="bg-white">
+      <BreadcrumbJsonLd items={serviceBreadcrumbs("Video Editing", "/services/video-editing")} />
       <div className="mx-0 px-0">
         <Hero />
       </div>

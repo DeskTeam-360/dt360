@@ -4,6 +4,10 @@ import { BlogHero } from "@/components/pages/blog/BlogHero";
 import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
+import {
+  BreadcrumbJsonLd,
+  blogCategoryBreadcrumbs,
+} from "@/components/seo/BreadcrumbJsonLd";
 import { resolveCategoryNameFromSlug } from "@/lib/blog-categories";
 import { withPageCanonical } from "@/lib/seo";
 import { getBlogData } from "@/lib/wordpress";
@@ -40,6 +44,7 @@ export default async function BlogCategoryPage({ params }: Props) {
 
   return (
     <main className="flex-grow">
+      <BreadcrumbJsonLd items={blogCategoryBreadcrumbs(categoryName, slug)} />
       <BlogHero />
       <BlogListing
         featuredPostsMap={featuredPostsMap}

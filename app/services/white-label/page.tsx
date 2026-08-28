@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 import { CaseStudy } from "@/components/pages/service/white-label/CaseStudy";
 import { FAQ } from "@/components/pages/service/white-label/FAQ";
@@ -12,6 +13,7 @@ export const metadata: Metadata = withPageCanonical("/services/white-label", {
 export default function WhiteLabelPage() {
   return (
     <main className="bg-white">
+      <BreadcrumbJsonLd items={serviceBreadcrumbs("White Label", "/services/white-label")} />
       <div className="mx-0 px-0">
         <Hero />
       </div>

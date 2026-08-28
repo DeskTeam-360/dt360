@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CaseStudiesHero } from "@/components/pages/case-studies/CaseStudiesHero";
 import { DeskTeam360sCaseStudies } from "@/components/pages/case-studies/DeskTeam360sCaseStudies";
 import { HaveQuestionsCTA } from "@/components/pages/case-studies/HaveQuestionsCTA";
+import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
 import { siteConfig } from "@/config/site";
 import { withPageCanonical } from "@/lib/seo";
 import { getAllCaseStudyPosts } from "@/lib/wordpress";
@@ -24,6 +25,9 @@ export default async function CaseStudiesPage() {
 
   return (
     <main className="flex w-full flex-col overflow-hidden bg-white">
+      <BreadcrumbJsonLd
+        items={[homeBreadcrumb(), { name: "Case Studies", path: "/case-studies" }]}
+      />
       <CaseStudiesHero />
       <DeskTeam360sCaseStudies posts={posts} />
       <HaveQuestionsCTA />
