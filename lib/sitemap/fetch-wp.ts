@@ -32,7 +32,10 @@ type SitemapCategoriesResponse = {
 };
 
 type SitemapCaseStudyPostsResponse = {
-  posts?: { nodes?: WpPostNode[] };
+  posts?: {
+    pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
+    nodes?: WpPostNode[];
+  };
 };
 
 function getWordPressGraphqlUrl(): string {
@@ -133,15 +136,20 @@ const CATEGORIES_QUERY = gql`
 `;
 
 const CASE_STUDY_POSTS_QUERY = gql`
-  query SitemapCaseStudyPosts($first: Int!, $categoryName: String!) {
+  query SitemapCaseStudyPosts($first: Int!, $after: String, $categoryName: String!) {
     posts(
       first: $first
+      after: $after
       where: {
         categoryName: $categoryName
         status: PUBLISH
         orderby: { field: DATE, order: DESC }
       }
     ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       nodes {
         slug
         date
@@ -212,18 +220,29 @@ export async function fetchCaseStudyEntries(siteUrl: string): Promise<SitemapUrl
   const entries: SitemapUrlEntry[] = [];
 
   for (const categorySlug of CASE_STUDY_CATEGORY_SLUGS) {
-    const data: SitemapCaseStudyPostsResponse = await client.request<SitemapCaseStudyPostsResponse>(
-      CASE_STUDY_POSTS_QUERY,
-      { first: 100, categoryName: categorySlug },
-    );
+    let after: string | null = null;
+    let hasNextPage = true;
 
-    for (const post of data.posts?.nodes ?? []) {
-      if (seen.has(post.slug)) continue;
-      seen.add(post.slug);
-      entries.push({
-        loc: `${siteUrl}/case-studies/${post.slug}`,
-        lastmod: pickPostLastmod(post),
-      });
+    while (hasNextPage) {
+      const data: SitemapCaseStudyPostsResponse =
+        await client.request<SitemapCaseStudyPostsResponse>(CASE_STUDY_POSTS_QUERY, {
+          first: 100,
+          after,
+          categoryName: categorySlug,
+        });
+
+      for (const post of data.posts?.nodes ?? []) {
+        if (seen.has(post.slug)) continue;
+        seen.add(post.slug);
+        entries.push({
+          loc: `${siteUrl}/case-studies/${post.slug}`,
+          lastmod: pickPostLastmod(post),
+        });
+      }
+
+      hasNextPage = Boolean(data.posts?.pageInfo?.hasNextPage);
+      after = data.posts?.pageInfo?.endCursor ?? null;
+      if (!after) break;
     }
   }
 

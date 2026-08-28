@@ -3,7 +3,10 @@ import { getSiteUrl, isSearchEngineIndexable } from "@/config/site";
 
 /**
  * Paths that should not be crawled on production (internal flows, thank-you,
- * legacy WP commerce, non-public tools). Public marketing pages stay allowed.
+ * non-public tools). Public marketing pages stay allowed.
+ *
+ * WordPress/WooCommerce leftovers were removed — this site is Next.js-only;
+ * portal lives on portal.deskteam360.com and is handled separately.
  */
 const PRODUCTION_DISALLOW_PATHS = [
   "/api/",
@@ -16,18 +19,6 @@ const PRODUCTION_DISALLOW_PATHS = [
   "/client-meeting-with-am3",
   // Dev / test only
   "/blog/test",
-  // Legacy WordPress / WooCommerce surfaces (often soft-404 or noindex in GSC)
-  "/cart",
-  "/checkout",
-  "/my-account",
-  "/product/",
-  "/product-category/",
-  "/affiliate-area",
-  "/customer-portal",
-  "/wp-admin/",
-  "/wp-json/",
-  "/wp-login.php",
-  "/xmlrpc.php",
 ] as const;
 
 export default function robots(): MetadataRoute.Robots {

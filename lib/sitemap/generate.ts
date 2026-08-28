@@ -94,6 +94,15 @@ export async function generateSitemaps(
     { filename: "case-study-sitemap.xml", urls: caseStudyEntries },
   ];
 
+  // Guard: main-domain sitemap must never advertise portal URLs.
+  for (const file of sitemapFiles) {
+    for (const entry of file.urls) {
+      if (/portal\.deskteam360\.com/i.test(entry.loc)) {
+        warnings.push(`Portal URL leaked into ${file.filename}: ${entry.loc}`);
+      }
+    }
+  }
+
   const writtenFiles: string[] = [];
 
   for (const file of sitemapFiles) {

@@ -4,8 +4,8 @@ import { BlogHero } from '@/components/pages/blog/BlogHero';
 import { BlogListing } from '@/components/pages/blog/BlogListing';
 import { DownloadCTA } from '@/components/pages/blog/DownloadCTA';
 import { AuthorSection } from '@/components/pages/blog/AuthorSection';
+import { BreadcrumbJsonLd, homeBreadcrumb } from '@/components/seo/BreadcrumbJsonLd';
 import { withPageCanonical } from '@/lib/seo';
-
 import { getBlogData } from '@/lib/wordpress';
 
 export const metadata: Metadata = withPageCanonical('/blog', {
@@ -19,6 +19,9 @@ export default async function BlogPage() {
 
   return (
     <main className="flex-grow">
+      <BreadcrumbJsonLd
+        items={[homeBreadcrumb(), { name: 'Blog', path: '/blog' }]}
+      />
       <BlogHero />
       <BlogListing
         featuredPostsMap={featuredPostsMap}

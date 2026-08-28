@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAllCaseStudyPosts, getPostBySlug, getAllPublishedPostSlugs } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
+import { BreadcrumbJsonLd, caseStudyBreadcrumbs } from '@/components/seo/BreadcrumbJsonLd';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -81,6 +82,7 @@ export default async function SingleCaseStudyPage({ params }: Props) {
 
   return (
     <main className="flex-grow">
+      <BreadcrumbJsonLd items={caseStudyBreadcrumbs(post.title, resolvedParams.slug)} />
       <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} publishedSlugs={publishedSlugs} optimizeImages />
       <HaveQuestionsCTA />
     </main>
