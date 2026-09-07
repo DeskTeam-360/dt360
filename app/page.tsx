@@ -12,6 +12,7 @@ import { SocialProofTestimonials } from "@/components/pages/home/SocialProofTest
 import { Pricing } from "@/components/pages/home/Pricing";
 import { FAQ } from "@/components/pages/home/FAQ";
 import { LastCTA } from "@/components/pages/home/LastCTA";
+import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 
 export const metadata: Metadata = withPageCanonical("/");
@@ -24,6 +25,7 @@ export default async function Home() {
 
   return (
     <main className="home-page flex flex-col overflow-x-hidden">
+      <OrganizationJsonLd />
       <Hero />
       <TeamMembers />
       <TrustedBy />

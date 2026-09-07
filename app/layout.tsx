@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/Footer";
 import { GlobalSameRouteClickHandler } from "@/components/layout/GlobalSameRouteClickHandler";
 import { Navbar } from "@/components/layout/Navbar";
 import { MetaPixel } from "@/components/seo/MetaPixel";
-import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { getMetadataBase, getSiteUrl, isSearchEngineIndexable, siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 
@@ -139,7 +138,6 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         <MetaPixel />
-        <OrganizationJsonLd />
         <GlobalSameRouteClickHandler />
         <Navbar />
         {children}

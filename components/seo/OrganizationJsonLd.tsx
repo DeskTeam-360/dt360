@@ -1,30 +1,32 @@
 import { getSiteUrl, siteConfig } from "@/config/site";
 import {
-  organizationAreaServed,
   organizationDescription,
   organizationKnowsAbout,
   organizationSameAs,
   organizationSlogan,
 } from "@/data/organizationSchema";
 
-/** Schema.org Organization markup for rich results. */
+/** Schema.org Organization markup for rich results (homepage only). */
 export function OrganizationJsonLd() {
   const url = getSiteUrl();
   const json = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${url}/#organization`,
     name: siteConfig.name,
     url: `${url}/`,
     slogan: organizationSlogan,
-    logo: `${url}/images/logo-white.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${url}/images/logo-white.png`,
+    },
     description: organizationDescription,
     sameAs: [...organizationSameAs],
     knowsAbout: [...organizationKnowsAbout],
-    areaServed: organizationAreaServed.map((area) => ({
-      "@type": area["@type"],
-      name: area.name,
-      url: [...area.url],
-    })),
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
   };
 
   return (
