@@ -17,6 +17,7 @@ const PRODUCTION_DISALLOW_PATHS = [
   "/onboarding-call-am2",
   "/client-meeting-with-am2",
   "/client-meeting-with-am3",
+  "/client-meeting-with-am4",
   // Dev / test only
   "/blog/test",
 ] as const;

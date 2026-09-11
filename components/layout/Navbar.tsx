@@ -23,6 +23,7 @@ const ROOT_NON_BLOG_ROUTES = new Set([
   "onboarding-call-am2",
   "client-meeting-with-am2",
   "client-meeting-with-am3",
+  "client-meeting-with-am4",
   "contact",
   "how-it-works",
   "showcase",
