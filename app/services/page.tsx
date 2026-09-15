@@ -128,7 +128,7 @@ export default async function ServicesPage() {
               One Flat Rate
             </h1>
             <p className="mt-6 text-2xl font-semibold leading-snug text-white/95 text-balance">
-              Stop Paying $50/hr for Web&nbsp;Work That Takes 3&nbsp;Weeks
+              Stop Paying $150/hr for Web&nbsp;Work That Takes 3&nbsp;Weeks
             </p>
             <p className="mt-6 max-w-lg text-lg leading-8 text-white/85 pb-12">
             There&apos;s a better way to get web work done. Not cheaper freelancers. Not a retainer agency with a 10-person email chain. A flat-rate, dedicated web team that knows your brand and turns tasks around in 1-3 days.
