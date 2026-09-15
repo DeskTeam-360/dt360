@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Can you work in my existing platform?",
     answer:
-      "Yes. We can build inside your current CRM or email platform as long as we have access and your required integrations.",
+      "Yes. We work inside your account, not ours. You own everything.",
   },
 ];
 

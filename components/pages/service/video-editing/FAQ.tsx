@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "How long does video editing take?",
     answer:
-      "Turnaround depends on length and complexity. Simple cuts are often next business day; longer edits are scheduled with your editor and tracked in your workspace.",
+      "Standard edits - 1-3 business days. Complex projects with heavy graphics or motion work may take longer. Your account manager sets the timeline upfront.",
   },
   {
     question: "Can you match our existing brand style?",
