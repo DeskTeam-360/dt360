@@ -9,12 +9,12 @@ const faqs = [
   {
     question: "How much does website maintenance usually cost?",
     answer:
-      "DeskTeam360 delivers flat-rate website maintenance-so you avoid surprise invoices while keeping updates, backups, monitoring, and performance work on rails. Typical plans start around $1,497/month depending on complexity and SLA.",
+      "Most agencies charge $150-$500/month for basic maintenance. With DeskTeam360, website maintenance is included in your subscription along with design, development, video editing, and more - all for one flat rate starting at $1,497/month.",
   },
   {
     question: "What CMS platforms do you maintain?",
     answer:
-      "Primarily WordPress and WooCommerce, plus Shopify, Webflow, and custom stacks when we have access and documentation. Tell us where your site lives and we will tailor the maintenance playbook.",
+      "WordPress is our specialty. We also work with Webflow, Shopify, and custom-built sites. GoHighLevel website maintenance included.",
   },
 ];
 
