@@ -51,9 +51,9 @@ export function Hero() {
           <div className="w-full min-w-0">
             <h1 className="tracking-tight text-white">
               <span className="type-rule-h4 block leading-tight xl:leading-snug">
-                Stop Paying $50/hr for
+                Stop Paying $150/hr for
               </span>
-              <span className="type-rule-h1 mt-1 block text-[#ef2f9e] leading-[1.03]">Web Development</span>
+              <span className="type-rule-h1 mt-1 block text-[#ef2f9e] leading-[1.03]">Web Work</span>
               <span className="type-rule-h4 mt-1 block leading-tight xl:leading-snug">
                 That Takes 3 Weeks
               </span>

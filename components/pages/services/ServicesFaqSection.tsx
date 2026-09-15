@@ -30,6 +30,18 @@ const FAQ_ITEMS = [
   },
 ] as const;
 
+/** Client copy — Web Design & Development service page FAQ (SWEB04+) */
+const WEB_DESIGN_FAQ_ITEMS = [
+  {
+    id: "projects",
+    question: "What kinds of web projects can I submit?",
+    answer:
+      "Anything from a quick homepage update to a full website rebuild. Landing pages, GoHighLevel funnels, WooCommerce stores, custom WordPress builds - if it's web work, we handle it.",
+  },
+  FAQ_ITEMS[1],
+  FAQ_ITEMS[2],
+] as const;
+
 const FAQ_ILLUSTRATION_DEFAULT = "/images/dt360-faq-section.png";
 const FAQ_ILLUSTRATION_WEB_DEV = "/images/Service/web-design-dev-faq-illustration.png";
 
@@ -40,8 +52,9 @@ export type ServicesFaqSectionProps = {
 };
 
 export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionProps = {}) {
-  const [openId, setOpenId] = useState<string>(FAQ_ITEMS[0].id);
   const isWebDev = variant === "webDesignDevelopment";
+  const faqItems = isWebDev ? WEB_DESIGN_FAQ_ITEMS : FAQ_ITEMS;
+  const [openId, setOpenId] = useState<string>(faqItems[0].id);
   const illustrationSrc = isWebDev ? FAQ_ILLUSTRATION_WEB_DEV : FAQ_ILLUSTRATION_DEFAULT;
 
   return (
@@ -90,7 +103,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
           </h2>
 
           <div className="mt-6 space-y-4">
-            {FAQ_ITEMS.map((item) => {
+            {faqItems.map((item) => {
               const isOpen = openId === item.id;
               return (
                 <article key={item.id} className="rounded-[16px]">
