@@ -30,7 +30,7 @@ const FAQ_ITEMS = [
   },
 ] as const;
 
-/** Client copy — Web Design & Development service page FAQ (SWEB04+) */
+/** Client copy — Web Design & Development service page FAQ (SWEB04–SWEB06) */
 const WEB_DESIGN_FAQ_ITEMS = [
   {
     id: "projects",
@@ -38,8 +38,18 @@ const WEB_DESIGN_FAQ_ITEMS = [
     answer:
       "Anything from a quick homepage update to a full website rebuild. Landing pages, GoHighLevel funnels, WooCommerce stores, custom WordPress builds - if it's web work, we handle it.",
   },
-  FAQ_ITEMS[1],
-  FAQ_ITEMS[2],
+  {
+    id: "freelancer-difference",
+    question: "How is this different from hiring a web developer?",
+    answer:
+      "A freelance web developer bills hourly, goes dark between projects, and has one skill. Your DeskTeam360 web subscription includes 2 developers plus designers, tech VAs, and a North American account manager - all for one flat monthly rate.",
+  },
+  {
+    id: "multiple-projects",
+    question: "Can I submit multiple web projects at once?",
+    answer:
+      "The number of simultaneous tasks depends on your plan. Entrepreneur handles 1 at a time, Marketer handles 2, Agency handles 3. Bigger queue, upgrade your plan.",
+  },
 ] as const;
 
 const FAQ_ILLUSTRATION_DEFAULT = "/images/dt360-faq-section.png";
