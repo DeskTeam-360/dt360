@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Do you handle the automations or just the setup?",
     answer:
-      "We configure end-to-end: triggers, routing, tags, integrations, QA, and refinement so automations stay reliable—not a one-off build you have to troubleshoot alone.",
+      "Both. We build the automations, test them, and hand you a working system. Ongoing maintenance and updates are included in your subscription.",
   },
 ];
 
