@@ -9,12 +9,12 @@ const faqs = [
   {
     question: "What design software do you use?",
     answer:
-      "Adobe Photoshop, Illustrator, InDesign, Figma, Canva Pro, After Effects for motion graphics. You can of course file - always.",
+      "Adobe Photoshop, Illustrator, InDesign, Figma, Canva Pro, After Effects for motion graphics. You own all source files - always.",
   },
   {
     question: "How do I submit design requests?",
     answer:
-      "You can submit requests through your shared workspace, and we prioritize based on urgency and campaign timelines.",
+      "Drop a task in the request form with a description, reference images, brand guidelines, and any examples you like. Your account manager handles the rest.",
   },
   {
     question: "Can I ask for revisions?",
