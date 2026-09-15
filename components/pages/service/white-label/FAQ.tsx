@@ -7,14 +7,14 @@ import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeI
 
 const faqs = [
   {
-    question: "How does billing work for white-label clients?",
+    question: "Will my clients ever find out about DeskTeam360?",
     answer:
-      "You sell and invoice at your rate. DeskTeam360 bills you a predictable monthly seat model so margin stays clear and you can package services your way.",
+      "Not unless you tell them. We operate 100% under your brand. Our name never appears on deliverables, in emails, or in project management systems. We are your team as far as your clients are concerned.",
   },
   {
-    question: "Can we use our own project tools and brand?",
+    question: "What's the minimum commitment?",
     answer:
-      "Yes. We plug into your PM stack, email domain, and client-facing assets. Delivery happens under your processes with DeskTeam360 operating as your back-office team.",
+      "Month-to-month. No annual contracts. Cancel any month. The Agency plan at $4,491/month handles 3 simultaneous tasks - designed specifically for agency volume.",
   },
 ];
 

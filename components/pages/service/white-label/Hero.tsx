@@ -42,8 +42,9 @@ export function Hero() {
               Without Growing Your Payroll
             </p>
             <p className="type-rule-p mt-4 w-full max-w-none text-white/85">
-              Scale delivery under your brand with a DeskTeam360 white-label squad. Clients see your workflows, invoices,
-              and brand touchpoints - while DeskTeam360 handles fulfillment behind the curtain.
+              You&apos;ve got clients who need more than you can deliver. You don&apos;t want to hire. You don&apos;t
+              want to manage more freelancers. You want a team that does the work, under your brand, without anyone
+              knowing they&apos;re there. That&apos;s exactly what DeskTeam360 was built for.
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-[640px]">
