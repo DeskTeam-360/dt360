@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { mergeBlogSitemapEntries } from "@/lib/sitemap/blog-post-entries";
 import { buildStaticPageEntries } from "@/lib/sitemap/static-pages";
 import type { SitemapFile, SitemapIndexEntry } from "@/lib/sitemap/types";
 import {
@@ -27,6 +28,7 @@ export type GenerateSitemapResult = {
   files: string[];
   indexUrl: string;
   warnings: string[];
+  postCount?: number;
 };
 
 function normalizeSiteUrl(siteUrl: string): string {
@@ -75,16 +77,37 @@ export async function generateSitemaps(
   let postEntries: import("@/lib/sitemap/types").SitemapUrlEntry[] = [];
   let categoryEntries: import("@/lib/sitemap/types").SitemapUrlEntry[] = [];
   let caseStudyEntries: import("@/lib/sitemap/types").SitemapUrlEntry[] = [];
+  let addedExtraCount = 0;
 
   try {
-    [postEntries, categoryEntries, caseStudyEntries] = await Promise.all([
+    const [wpPosts, categories, caseStudies] = await Promise.all([
       fetchBlogPostEntries(siteUrl),
       fetchCategoryEntries(siteUrl),
       fetchCaseStudyEntries(siteUrl),
     ]);
+    categoryEntries = categories;
+    caseStudyEntries = caseStudies;
+    const merged = mergeBlogSitemapEntries(wpPosts, siteUrl, generatedAt);
+    postEntries = merged.entries;
+    addedExtraCount = merged.addedExtraCount;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     warnings.push(`WordPress fetch failed: ${message}`);
+    // Still emit Appendix C extras so missing live posts are listed when WP is down.
+    const merged = mergeBlogSitemapEntries([], siteUrl, generatedAt);
+    postEntries = merged.entries;
+    addedExtraCount = merged.addedExtraCount;
+    if (addedExtraCount > 0) {
+      warnings.push(
+        `Included ${addedExtraCount} Appendix C blog URLs without WordPress metadata (lastmod = generate time).`,
+      );
+    }
+  }
+
+  if (addedExtraCount > 0 && !warnings.some((w) => w.includes("Appendix C"))) {
+    warnings.push(
+      `F2: added ${addedExtraCount} live blog URLs missing from WordPress sitemap source (Appendix C).`,
+    );
   }
 
   const sitemapFiles: SitemapFile[] = [
@@ -125,5 +148,6 @@ export async function generateSitemaps(
     files: writtenFiles,
     indexUrl: `${siteUrl}/sitemap_index.xml`,
     warnings,
+    postCount: postEntries.length,
   };
 }

@@ -5,6 +5,7 @@ import { BlogPost } from '@/data/blog';
 import { socialProofSection, type SocialProofTestimonial } from '@/data/home';
 import type { ShowcaseItem } from '@/data/showcase';
 import { BLOG_ROUTE_REVALIDATE_SECONDS } from '@/lib/blog-revalidate';
+import { getExtraPublishedBlogSlugs } from '@/lib/sitemap/blog-post-entries';
 import { rewriteWordPressContentHtml, rewriteWordPressMediaUrl } from '@/lib/wp-public';
 
 const API_USER = process.env.WORDPRESS_USER;
@@ -702,8 +703,12 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
 export const getAllPublishedPostSlugs = cache(async (): Promise<string[]> => {
   return fetchWordPressCached(['wp', 'published-slugs'], async () => {
     const query = gql`
-      query GetPublishedSlugs {
-        posts(first: 1000, where: { status: PUBLISH }) {
+      query GetPublishedSlugs($first: Int!, $after: String) {
+        posts(first: $first, after: $after, where: { status: PUBLISH }) {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
           nodes {
             slug
           }
@@ -711,12 +716,38 @@ export const getAllPublishedPostSlugs = cache(async (): Promise<string[]> => {
       }
     `;
 
+    const extras = getExtraPublishedBlogSlugs();
+
     try {
-      const data = await getWpClient().request<{ posts?: { nodes?: { slug: string }[] } }>(query);
-      return (data.posts?.nodes || []).map((n) => n.slug);
+      const slugs = new Set<string>();
+      let after: string | null = null;
+      let hasNextPage = true;
+
+      while (hasNextPage) {
+        const data = await getWpClient().request<{
+          posts?: {
+            pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
+            nodes?: { slug: string }[];
+          };
+        }>(query, { first: 100, after });
+
+        for (const node of data.posts?.nodes || []) {
+          if (node.slug) slugs.add(node.slug);
+        }
+
+        hasNextPage = Boolean(data.posts?.pageInfo?.hasNextPage);
+        after = data.posts?.pageInfo?.endCursor ?? null;
+        if (!after) break;
+      }
+
+      for (const slug of extras) {
+        slugs.add(slug);
+      }
+
+      return [...slugs];
     } catch (error) {
       console.error('Error fetching published slugs:', error);
-      return [];
+      return extras;
     }
   });
 });

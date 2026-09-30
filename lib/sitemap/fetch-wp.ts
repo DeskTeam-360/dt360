@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
+import { BLOG_SITEMAP_EXCLUDED_SLUGS } from "@/data/blogSitemapExtraSlugs";
 import type { SitemapUrlEntry } from "@/lib/sitemap/types";
 import { formatSitemapLastmod } from "@/lib/sitemap/xml";
 
@@ -174,6 +175,7 @@ export async function fetchBlogPostEntries(siteUrl: string): Promise<SitemapUrlE
     const nodes = data.posts?.nodes ?? [];
     for (const post of nodes) {
       if (postHasCaseStudyCategory(post)) continue;
+      if (BLOG_SITEMAP_EXCLUDED_SLUGS.has(post.slug)) continue;
       entries.push({
         loc: `${siteUrl}/blog/${post.slug}`,
         lastmod: pickPostLastmod(post),

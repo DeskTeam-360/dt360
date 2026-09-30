@@ -49,6 +49,9 @@ async function main(): Promise<void> {
   console.log(`Sitemap index: ${result.indexUrl}`);
   console.log(`Output dir: ${result.outputDir}`);
   console.log(`Files written: ${result.files.join(", ")}`);
+  if (typeof result.postCount === "number") {
+    console.log(`Blog post sitemap URLs: ${result.postCount}`);
+  }
 
   if (result.warnings.length > 0) {
     for (const warning of result.warnings) {
