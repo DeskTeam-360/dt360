@@ -18,7 +18,7 @@ const PRODUCTION_DISALLOW_PATHS = [
   "/client-meeting-with-am2",
   "/client-meeting-with-am3",
   "/client-meeting-with-am4",
-  // Dev / test only
+  // F18a — test layout removed (404); keep disallow as defense in depth
   "/blog/test",
 ] as const;
 

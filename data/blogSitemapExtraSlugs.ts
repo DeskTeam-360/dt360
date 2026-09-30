@@ -4,7 +4,7 @@
  *
  * Keep these in the sitemap until they are republished into the primary
  * WordPress source (or the second content source is wired into the loader).
- * Exclude `/blog/test` (F18a).
+ * Exclude `/blog/test` (F18a — also 404 from the blog [slug] route).
  */
 export const BLOG_SITEMAP_EXTRA_SLUGS = [
   "web-design-for-small-business",

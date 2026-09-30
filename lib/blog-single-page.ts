@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { permanentRedirect } from 'next/navigation';
 import type { BlogPost } from '@/data/blog';
+import { BLOG_SITEMAP_EXCLUDED_SLUGS } from '@/data/blogSitemapExtraSlugs';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
 
@@ -95,6 +96,11 @@ function resolveRelatedPosts(
 export async function getBlogSinglePageData(
   slug: string,
 ): Promise<BlogSinglePageData | null> {
+  // F18a — never serve the live test layout / slug as a real post (404, no redirect).
+  if (BLOG_SITEMAP_EXCLUDED_SLUGS.has(slug)) {
+    return null;
+  }
+
   const [post, latestPostsPool, publishedSlugs] = await Promise.all([
     getPostBySlug(slug),
     getBlogLatestPostsPoolForRelated(),
@@ -118,6 +124,14 @@ export async function getBlogSinglePageData(
 }
 
 export async function generateBlogPostMetadata(slug: string): Promise<Metadata> {
+  // F18a
+  if (BLOG_SITEMAP_EXCLUDED_SLUGS.has(slug)) {
+    return {
+      title: 'Post Not Found',
+      robots: { index: false, follow: false },
+    };
+  }
+
   const post = await getPostBySlug(slug);
 
   if (!post) {
