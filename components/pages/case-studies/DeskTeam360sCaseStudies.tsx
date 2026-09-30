@@ -4,6 +4,7 @@ import { Container } from "@/components/shared/Container";
 import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import { caseStudiesListSection } from "@/data/caseStudies";
 import type { BlogPost } from "@/data/blog";
+import { toCaseStudyPublicSlug } from "@/lib/seo/fix-report-redirects";
 
 type Props = {
   posts: BlogPost[];
@@ -11,6 +12,7 @@ type Props = {
 
 function CaseStudyCard({ post }: { post: BlogPost }) {
   const { readLabel } = caseStudiesListSection;
+  const href = `/case-studies/${toCaseStudyPublicSlug(post.slug)}`;
 
   return (
     <article className="group flex h-full flex-col rounded-[30px] border-[5px] border-white bg-white/60 shadow-[0_16px_40px_-24px_rgba(16,22,81,0.35)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-20px_rgba(16,22,81,0.4)]">
@@ -26,7 +28,7 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
         </div>
       </div>
       <div className="flex flex-grow flex-col p-6 pt-5 md:p-8 md:pt-6">
-        <Link href={`/case-studies/${post.slug}`}>
+        <Link href={href}>
           <h3
             className="type-rule-h6 mb-3 font-heading font-bold text-[#11104c] transition-colors hover:text-[#f0573a]"
             dangerouslySetInnerHTML={{ __html: post.title }}
@@ -40,7 +42,7 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
         ) : null}
         <div className="mt-auto">
           <Link
-            href={`/case-studies/${post.slug}`}
+            href={href}
             className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#11104c] px-4 py-1.5 text-[14px] font-bold text-[#11104c] transition-colors hover:bg-[#11104c] hover:text-white md:px-5 md:py-2 md:text-[15px]"
           >
             {readLabel}

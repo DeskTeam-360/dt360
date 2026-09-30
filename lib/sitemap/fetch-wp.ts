@@ -1,5 +1,6 @@
 import { gql, GraphQLClient } from "graphql-request";
 import { BLOG_SITEMAP_EXCLUDED_SLUGS } from "@/data/blogSitemapExtraSlugs";
+import { toCaseStudyPublicSlug } from "@/lib/seo/fix-report-redirects";
 import type { SitemapUrlEntry } from "@/lib/sitemap/types";
 import { formatSitemapLastmod } from "@/lib/sitemap/xml";
 
@@ -237,7 +238,8 @@ export async function fetchCaseStudyEntries(siteUrl: string): Promise<SitemapUrl
         if (seen.has(post.slug)) continue;
         seen.add(post.slug);
         entries.push({
-          loc: `${siteUrl}/case-studies/${post.slug}`,
+          // F19: public URL may differ from the WordPress slug (120k → 160k).
+          loc: `${siteUrl}/case-studies/${toCaseStudyPublicSlug(post.slug)}`,
           lastmod: pickPostLastmod(post),
         });
       }

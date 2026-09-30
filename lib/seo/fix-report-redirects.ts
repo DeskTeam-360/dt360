@@ -1,12 +1,40 @@
 /**
- * Redirects from DeskTeam360 website fix report (2026-09-24): F3, F5, S1.
+ * Redirects from DeskTeam360 website fix report (2026-09-24): F3, F5, F19, S1.
  * Kept separate from next.config so lists stay reviewable.
  */
+
+/**
+ * F19 — Convert on Command case study: URL said 120k, page/facts say $160k.
+ * WordPress may still use the 120k slug until the portal post is renamed;
+ * the public URL is always the 160k form.
+ */
+export const F19_CONVERT_ON_COMMAND_WP_SLUG =
+  "freed-up-16-hours-a-week-added-120k-a-month-to-their-bottom-line" as const;
+export const F19_CONVERT_ON_COMMAND_PUBLIC_SLUG =
+  "freed-up-16-hours-a-week-added-160k-a-month-to-their-bottom-line" as const;
+
+/** Map a case-study slug to the public (canonical) URL slug. */
+export function toCaseStudyPublicSlug(slug: string): string {
+  return slug === F19_CONVERT_ON_COMMAND_WP_SLUG
+    ? F19_CONVERT_ON_COMMAND_PUBLIC_SLUG
+    : slug;
+}
+
+/**
+ * Slugs to try when loading a case study from WordPress for a public URL.
+ * Prefer the current WP slug, then the public slug (if WP was renamed).
+ */
+export function caseStudyWordpressSlugCandidates(publicSlug: string): string[] {
+  if (publicSlug === F19_CONVERT_ON_COMMAND_PUBLIC_SLUG) {
+    return [F19_CONVERT_ON_COMMAND_WP_SLUG, F19_CONVERT_ON_COMMAND_PUBLIC_SLUG];
+  }
+  return [publicSlug];
+}
 
 /** F3 — 23 case-study posts that also answer under /blog/{slug}. */
 export const F3_CASE_STUDY_BLOG_COPY_SLUGS = [
   "one-of-those-consistent-pieces-we-can-rely-on-how-the-tobie-group-transformed-from-ad-agency-to-full-service-provider-with-deskteam360",
-  "freed-up-16-hours-a-week-added-120k-a-month-to-their-bottom-line",
+  F19_CONVERT_ON_COMMAND_WP_SLUG,
   "see-how-duct-tape-marketing-was-able-to-get-better-quality-projects-done-faster-and-less-expensive-than-their-previous-provider",
   "i-now-have-a-peace-of-mind-and-predictability-around-projects-getting-done-i-think-of-deskteam360-as-a-partner-and-not-just-a-vendor",
   "i-was-able-to-eliminate-frustrations-from-working-with-people-overseas-to-being-able-to-do-more-quality-work",
@@ -52,11 +80,31 @@ type RedirectRule = {
   permanent: true;
 };
 
-/** F3 redirects for next.config */
+/**
+ * F19 — one-hop redirects to the 160k public URL (no chain via the old 120k case-study path).
+ */
+export function f19ConvertOnCommandRedirects(): RedirectRule[] {
+  const dest = `/case-studies/${F19_CONVERT_ON_COMMAND_PUBLIC_SLUG}`;
+  const wp = F19_CONVERT_ON_COMMAND_WP_SLUG;
+  return [
+    {
+      source: `/case-studies/${wp}`,
+      destination: dest,
+      permanent: true,
+    },
+    {
+      source: `/${wp}`,
+      destination: dest,
+      permanent: true,
+    },
+  ];
+}
+
+/** F3 redirects for next.config — destinations use public case-study slugs (F19). */
 export function f3CaseStudyBlogCopyRedirects(): RedirectRule[] {
   return F3_CASE_STUDY_BLOG_COPY_SLUGS.map((slug) => ({
     source: `/blog/${slug}`,
-    destination: `/case-studies/${slug}`,
+    destination: `/case-studies/${toCaseStudyPublicSlug(slug)}`,
     permanent: true,
   }));
 }
@@ -122,5 +170,9 @@ export function f5DeadPageRedirects(): RedirectRule[] {
 
 /** All fix-report redirects to merge into next.config `redirects()`. */
 export function fixReportRedirects(): RedirectRule[] {
-  return [...f3CaseStudyBlogCopyRedirects(), ...f5DeadPageRedirects()];
+  return [
+    ...f19ConvertOnCommandRedirects(),
+    ...f3CaseStudyBlogCopyRedirects(),
+    ...f5DeadPageRedirects(),
+  ];
 }

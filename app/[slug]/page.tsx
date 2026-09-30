@@ -1,4 +1,5 @@
 import { notFound, permanentRedirect } from 'next/navigation';
+import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, isCaseStudyPost } from '@/lib/wordpress';
 
 type Props = {
@@ -22,7 +23,7 @@ export default async function LegacyRootPostRedirectPage({ params }: Props) {
   }
 
   if (isCaseStudyPost(post)) {
-    permanentRedirect(`/case-studies/${slug}`);
+    permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
   permanentRedirect(`/blog/${slug}`);

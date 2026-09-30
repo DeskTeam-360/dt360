@@ -125,7 +125,8 @@ export const clientStories: ClientStory[] = [
     attribution: "Zach S., Convert on Command",
     imageSrc: "/images/showcase/Image - Zach Schuenke - no border.png",
     imageAlt: "Zach S. from Convert on Command",
-    caseStudyHref: "/case-studies/freed-up-16-hours-a-week-added-120k-a-month-to-their-bottom-line",
+    caseStudyHref:
+      "/case-studies/freed-up-16-hours-a-week-added-160k-a-month-to-their-bottom-line",
   },
 ];
 

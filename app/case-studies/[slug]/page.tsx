@@ -1,25 +1,52 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getAllCaseStudyPosts, getPostBySlug, getAllPublishedPostSlugs } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
 import { BreadcrumbJsonLd, caseStudyBreadcrumbs } from '@/components/seo/BreadcrumbJsonLd';
+import {
+  caseStudyWordpressSlugCandidates,
+  F19_CONVERT_ON_COMMAND_WP_SLUG,
+  toCaseStudyPublicSlug,
+} from '@/lib/seo/fix-report-redirects';
+import type { BlogPost } from '@/data/blog';
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
+async function resolveCaseStudyPost(
+  requestSlug: string,
+): Promise<{ post: BlogPost; publicSlug: string } | null> {
+  const publicSlug = toCaseStudyPublicSlug(requestSlug);
+
+  // Old 120k path should be handled by next.config redirect; belt-and-suspenders here.
+  if (requestSlug === F19_CONVERT_ON_COMMAND_WP_SLUG) {
+    permanentRedirect(`/case-studies/${publicSlug}`);
+  }
+
+  for (const candidate of caseStudyWordpressSlugCandidates(publicSlug)) {
+    const post = await getPostBySlug(candidate);
+    if (post) {
+      return { post, publicSlug };
+    }
+  }
+  return null;
+}
+
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = await getPostBySlug(resolvedParams.slug);
+  const resolved = await resolveCaseStudyPost(resolvedParams.slug);
 
-  if (!post) {
+  if (!resolved) {
     return {
       title: 'Case Study Not Found',
     };
   }
+
+  const { post, publicSlug } = resolved;
 
   // Document title uses layout title.template (`%s | DeskTeam360`).
   // openGraph.title does not, so keep the brand there once.
@@ -27,10 +54,10 @@ export async function generateMetadata(
     title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `/case-studies/${resolvedParams.slug}`,
+      canonical: `/case-studies/${publicSlug}`,
     },
     openGraph: {
-      url: `/case-studies/${resolvedParams.slug}`,
+      url: `/case-studies/${publicSlug}`,
       title: `${post.title} | DeskTeam360`,
       description: post.excerpt,
     },
@@ -42,17 +69,19 @@ export const revalidate = 600; // 10 minutes
 export default async function SingleCaseStudyPage({ params }: Props) {
   const resolvedParams = await params;
   const results = await Promise.all([
-    getPostBySlug(resolvedParams.slug),
+    resolveCaseStudyPost(resolvedParams.slug),
     getAllCaseStudyPosts(),
     getAllPublishedPostSlugs(),
   ]);
-  const post = results[0];
+  const resolved = results[0];
   const latestPostsPool = results[1];
   const publishedSlugs = results[2];
 
-  if (!post) {
+  if (!resolved) {
     notFound();
   }
+
+  const { post, publicSlug } = resolved;
 
   // Extract related posts from content if they exist (class="dt360-related-posts")
   const content = post.content || '';
@@ -75,14 +104,14 @@ export default async function SingleCaseStudyPage({ params }: Props) {
   if (relatedPosts.length < 3) {
     const foundSlugs = relatedPosts.map((p) => p.slug);
     const additional = latestPostsPool
-      .filter((p) => p.slug !== resolvedParams.slug && !foundSlugs.includes(p.slug))
+      .filter((p) => p.slug !== post.slug && p.slug !== publicSlug && !foundSlugs.includes(p.slug))
       .slice(0, 3 - relatedPosts.length);
     relatedPosts = [...relatedPosts, ...additional];
   }
 
   return (
     <main className="flex-grow">
-      <BreadcrumbJsonLd items={caseStudyBreadcrumbs(post.title, resolvedParams.slug)} />
+      <BreadcrumbJsonLd items={caseStudyBreadcrumbs(post.title, publicSlug)} />
       <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} publishedSlugs={publishedSlugs} optimizeImages />
       <HaveQuestionsCTA />
     </main>

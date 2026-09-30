@@ -144,8 +144,7 @@ const nextConfig: NextConfig = {
       // Portal-published pages missing on Next → portal (includes Gaynor form)
       ...portalPageFallbackRedirects(),
 
-      // Fix report 2026-09-24 — F3 (blog case-study copies) + F5 (dead backlinked pages)
-      // S1 trailing-slash one-hop is handled in middleware.ts
+      // Fix report 2026-09-24 — F3/F5/F19 (+ S1 trailing-slash one-hop in middleware)
       ...fixReportRedirects(),
     ];
   },
