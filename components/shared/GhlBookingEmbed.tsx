@@ -44,8 +44,9 @@ export function GhlBookingEmbed({
         src={embedReady ? bookingIframeSrc : undefined}
         title={iframeTitle}
         allow="payment"
-        className="w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
-        style={{ border: "none", overflow: "hidden", minHeight: 520 }}
+        scrolling="no"
+        className="min-h-[1150px] w-[100%] max-w-full border-0 md:min-h-[900px] max-[767px]:w-full max-[767px]:max-w-full"
+        style={{ border: "none", overflow: "hidden" }}
       />
       <Script
         id="ghl-form-embed"
