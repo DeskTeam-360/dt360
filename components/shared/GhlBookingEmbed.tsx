@@ -20,6 +20,10 @@ export type GhlBookingEmbedConfig = {
  * If the iframe starts loading before that script registers its message
  * handler, the first postMessage is missed and the calendar stays hidden
  * until a manual reload. Delay the iframe `src` until the embed script is ready.
+ *
+ * form_embed.js also auto-resizes the iframe (inline `height`) to its content
+ * on every step (time slots, form). Keep min-height small and never set a fixed
+ * `height` or `scrolling="no"`, or the resizer can't shrink/grow it correctly.
  */
 export function GhlBookingEmbed({
   config,
@@ -44,8 +48,7 @@ export function GhlBookingEmbed({
         src={embedReady ? bookingIframeSrc : undefined}
         title={iframeTitle}
         allow="payment"
-        scrolling="no"
-        className="min-h-[1150px] w-[100%] max-w-full border-0 md:min-h-[900px] max-[767px]:w-full max-[767px]:max-w-full"
+        className="min-h-[520px] w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
         style={{ border: "none", overflow: "hidden" }}
       />
       <Script
