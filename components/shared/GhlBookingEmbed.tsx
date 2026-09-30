@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export type GhlBookingEmbedConfig = {
@@ -13,6 +13,9 @@ export type GhlBookingEmbedConfig = {
   iframeTitle?: string;
 };
 
+const SET_HEIGHT_MESSAGE = "highlevel.setHeight";
+const MIN_IFRAME_HEIGHT = 520;
+
 /**
  * Lead Connector / GHL booking widget.
  *
@@ -21,9 +24,9 @@ export type GhlBookingEmbedConfig = {
  * handler, the first postMessage is missed and the calendar stays hidden
  * until a manual reload. Delay the iframe `src` until the embed script is ready.
  *
- * form_embed.js also auto-resizes the iframe (inline `height`) to its content
- * on every step (time slots, form). Keep min-height small and never set a fixed
- * `height` or `scrolling="no"`, or the resizer can't shrink/grow it correctly.
+ * The widget reports its content height via `["highlevel.setHeight", { height }]`
+ * on every step (time slots, form), but form_embed.js does not apply it, so the
+ * iframe height is synced from that message here.
  */
 export function GhlBookingEmbed({
   config,
@@ -39,17 +42,40 @@ export function GhlBookingEmbed({
     iframeTitle = "Schedule your call",
   } = config;
   const [embedReady, setEmbedReady] = useState(false);
+  const [iframeHeight, setIframeHeight] = useState<number | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const markReady = useCallback(() => setEmbedReady(true), []);
+
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      const source = iframeRef.current?.contentWindow;
+      if (!source || event.source !== source) return;
+      const { data } = event;
+      if (!Array.isArray(data) || data[0] !== SET_HEIGHT_MESSAGE) return;
+      const height = Number(data[1]?.height);
+      if (Number.isFinite(height) && height > 0) {
+        setIframeHeight(Math.max(Math.ceil(height), MIN_IFRAME_HEIGHT));
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
 
   return (
     <div className={cn("flex min-h-[520px] w-full justify-center", className)}>
       <iframe
+        ref={iframeRef}
         id={bookingIframeId}
         src={embedReady ? bookingIframeSrc : undefined}
         title={iframeTitle}
         allow="payment"
+        scrolling="no"
         className="min-h-[520px] w-[100%] max-w-full border-0 max-[767px]:w-full max-[767px]:max-w-full"
-        style={{ border: "none", overflow: "hidden" }}
+        style={{
+          border: "none",
+          overflow: "hidden",
+          height: iframeHeight ?? MIN_IFRAME_HEIGHT,
+        }}
       />
       <Script
         id="ghl-form-embed"
