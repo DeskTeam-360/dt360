@@ -1,13 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { CaseStudiesSafeImage } from "@/components/pages/case-studies/shared/CaseStudiesSafeImage";
 import { caseStudiesListSection } from "@/data/caseStudies";
 import type { BlogPost } from "@/data/blog";
-import { useState } from "react";
-import { CASE_STUDIES_PAGE_SIZE } from "@/lib/wordpress";
 
 type Props = {
   posts: BlogPost[];
@@ -58,20 +54,9 @@ function CaseStudyCard({ post }: { post: BlogPost }) {
   );
 }
 
+/** F6 — all case studies rendered as real links in the server HTML (no click-to-load). */
 export function DeskTeam360sCaseStudies({ posts }: Props) {
   const { title, emptyMessage } = caseStudiesListSection;
-  const [visibleCount, setVisibleCount] = useState(
-    Math.min(CASE_STUDIES_PAGE_SIZE, posts.length),
-  );
-
-  const displayPosts = posts.slice(0, visibleCount);
-  const hasMore = visibleCount < posts.length;
-
-  const handleLoadMore = () => {
-    setVisibleCount((current) =>
-      Math.min(current + CASE_STUDIES_PAGE_SIZE, posts.length),
-    );
-  };
 
   return (
     <section
@@ -131,32 +116,16 @@ export function DeskTeam360sCaseStudies({ posts }: Props) {
           </h2>
         </div>
 
-        {displayPosts.length === 0 ? (
+        {posts.length === 0 ? (
           <p className="type-rule-p mt-12 text-center text-[#11104c]/70">{emptyMessage}</p>
         ) : (
-          <>
-            <ul className="grid list-none grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-              {displayPosts.map((post: BlogPost) => (
-                <li key={post.id}>
-                  <CaseStudyCard post={post} />
-                </li>
-              ))}
-            </ul>
-            {hasMore && (
-              <div className="mt-12 flex justify-center md:mt-16">
-                <button
-                  type="button"
-                  onClick={handleLoadMore}
-                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#11104c] px-6 py-2 text-[15px] font-bold text-[#11104c] transition-colors hover:bg-[#11104c] hover:text-white md:px-8 md:py-2.5 md:text-[16px]"
-                >
-                  Load More
-                  <span className="flex size-5 items-center justify-center rounded-full border border-current md:size-6">
-                    <ChevronDown className="size-3 md:size-4" aria-hidden />
-                  </span>
-                </button>
-              </div>
-            )}
-          </>
+          <ul className="grid list-none grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+            {posts.map((post: BlogPost) => (
+              <li key={post.id}>
+                <CaseStudyCard post={post} />
+              </li>
+            ))}
+          </ul>
         )}
       </Container>
     </section>

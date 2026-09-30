@@ -348,9 +348,6 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
   };
 };
 
-/** Case Studies list page — items shown per "Load More" click. */
-export const CASE_STUDIES_PAGE_SIZE = 9;
-
 /** WP category slugs for the Case Studies listing (Case Study + Website Case Study). */
 const CASE_STUDY_CATEGORY_SLUGS = ['case-study', 'website-case-study'] as const;
 
@@ -604,54 +601,27 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
           }
         }
       }
-      categories(first: 100) {
-        nodes {
-          name
-          count
-          posts(first: 1, where: { orderby: { field: DATE, order: DESC } }) {
-            nodes {
-              id
-              slug
-              title
-              excerpt
-              date
-              featuredImage {
-                node {
-                  sourceUrl
-                }
-              }
-              author {
-                node {
-                  name
-                }
-              }
-              categories {
-                nodes {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
     }
   `;
 
     try {
-      const data = await getWpClient().request<GetAllBlogDataResponse>(query, { first: 300 });
+      const data = await getWpClient().request<{ posts?: { nodes?: WpPostNode[] } }>(query, {
+        first: 300,
+      });
       const allPosts = (data.posts?.nodes || []).map(mapPostLite);
-      
-      const categoryToLatestPostMap: Record<string, BlogPost> = {};
-      if (data.categories?.nodes) {
-        data.categories.nodes.forEach(catNode => {
-          if (catNode.name && catNode.posts?.nodes && catNode.posts.nodes.length > 0) {
-            categoryToLatestPostMap[catNode.name] = mapPostLite(catNode.posts.nodes[0]);
-          }
+
+      // F6 related pool: all listable posts (not only leftovers after featured slots).
+      return allPosts.filter((post: BlogPost) => {
+        const validCats = (post.categories || []).filter((c) => {
+          const lower = c.toLowerCase();
+          return (
+            !lower.includes('case study') &&
+            !lower.includes('case-study') &&
+            lower !== 'uncategorized'
+          );
         });
-      }
-      
-      const { latestPosts } = partitionBlogPostsForListing(allPosts, data.categories?.nodes, categoryToLatestPostMap);
-      return latestPosts;
+        return validCats.length > 0;
+      });
     } catch (error) {
       console.error('Error fetching blog pool for related:', error);
       return [];
@@ -724,19 +694,23 @@ export const getAllPublishedPostSlugs = cache(async (): Promise<string[]> => {
       let hasNextPage = true;
 
       while (hasNextPage) {
-        const data = await getWpClient().request<{
+        type PublishedSlugsResponse = {
           posts?: {
             pageInfo?: { hasNextPage?: boolean; endCursor?: string | null };
             nodes?: { slug: string }[];
           };
-        }>(query, { first: 100, after });
+        };
+        const pageData: PublishedSlugsResponse = await getWpClient().request(
+          query,
+          { first: 100, after },
+        );
 
-        for (const node of data.posts?.nodes || []) {
+        for (const node of pageData.posts?.nodes || []) {
           if (node.slug) slugs.add(node.slug);
         }
 
-        hasNextPage = Boolean(data.posts?.pageInfo?.hasNextPage);
-        after = data.posts?.pageInfo?.endCursor ?? null;
+        hasNextPage = Boolean(pageData.posts?.pageInfo?.hasNextPage);
+        after = pageData.posts?.pageInfo?.endCursor ?? null;
         if (!after) break;
       }
 

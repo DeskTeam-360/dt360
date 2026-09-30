@@ -15,6 +15,32 @@ export function getBlogPostCanonicalPath(slug: string): string {
   return `/blog/${slug}`;
 }
 
+function isListingCategory(name: string): boolean {
+  const lower = name.toLowerCase();
+  return (
+    !lower.includes('case study') &&
+    !lower.includes('case-study') &&
+    lower !== 'uncategorized'
+  );
+}
+
+function postCategories(post: BlogPost): string[] {
+  const cats =
+    post.categories && post.categories.length > 0
+      ? post.categories
+      : [post.category];
+  return cats.filter(isListingCategory);
+}
+
+function sharesCategory(a: BlogPost, b: BlogPost): boolean {
+  const aCats = postCategories(a).map((c) => c.toLowerCase());
+  const bCats = postCategories(b).map((c) => c.toLowerCase());
+  return aCats.some((c) => bCats.includes(c));
+}
+
+/**
+ * F6 — 3 to 5 related posts as real links, preferring the same category.
+ */
 function resolveRelatedPosts(
   slug: string,
   post: BlogPost,
@@ -35,17 +61,35 @@ function resolveRelatedPosts(
     }
   }
 
-  let relatedPosts = latestPostsPool.filter((p) => relatedSlugs.includes(p.slug));
+  const pool = latestPostsPool.filter((p) => p.slug !== slug);
+  const picked: BlogPost[] = [];
+  const pickedSlugs = new Set<string>();
 
-  if (relatedPosts.length < 3) {
-    const foundSlugs = relatedPosts.map((p) => p.slug);
-    const additional = latestPostsPool
-      .filter((p) => p.slug !== slug && !foundSlugs.includes(p.slug))
-      .slice(0, 3 - relatedPosts.length);
-    relatedPosts = [...relatedPosts, ...additional];
+  const take = (candidates: BlogPost[], limit: number) => {
+    for (const candidate of candidates) {
+      if (picked.length >= limit) break;
+      if (pickedSlugs.has(candidate.slug)) continue;
+      picked.push(candidate);
+      pickedSlugs.add(candidate.slug);
+    }
+  };
+
+  // Prefer explicit WP related block, then same category, then anything.
+  take(
+    pool.filter((p) => relatedSlugs.includes(p.slug)),
+    5,
+  );
+  take(
+    pool.filter((p) => sharesCategory(p, post)),
+    5,
+  );
+  take(pool, 5);
+
+  // Report asks for 3–5; keep whatever we have up to 5 (min 3 when pool allows).
+  if (picked.length >= 3) {
+    return picked.slice(0, 5);
   }
-
-  return relatedPosts;
+  return picked;
 }
 
 export async function getBlogSinglePageData(

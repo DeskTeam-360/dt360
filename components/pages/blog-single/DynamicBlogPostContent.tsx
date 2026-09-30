@@ -15,7 +15,18 @@ import {
   rewriteWordPressContentHtml,
   rewriteWordPressMediaUrl,
 } from '@/lib/wp-public';
+import { categoryNameToSlug } from '@/lib/blog-categories';
 import { F3_CASE_STUDY_BLOG_COPY_SLUG_SET } from '@/lib/seo/fix-report-redirects';
+
+function isLinkableBlogCategory(name: string): boolean {
+  const lower = name.toLowerCase();
+  return (
+    Boolean(name?.trim()) &&
+    !lower.includes('case study') &&
+    !lower.includes('case-study') &&
+    lower !== 'uncategorized'
+  );
+}
 
 type WpElementAttribs = { class?: string; style?: string };
 
@@ -778,10 +789,16 @@ export function DynamicBlogPostContent({
       <div className="relative z-10 px-4 md:px-8 lg:px-16 pt-32 pb-4 md:pb-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-wrap gap-3 mb-6">
-            {(post.categories && post.categories.length > 0 ? post.categories : [post.category]).map((cat) => (
-              <div key={cat} className="inline-block bg-[#F0573A] text-white px-5 py-1.5 rounded-[15px] font-bold text-base md:text-lg uppercase">
+            {(post.categories && post.categories.length > 0 ? post.categories : [post.category])
+              .filter(isLinkableBlogCategory)
+              .map((cat) => (
+              <Link
+                key={cat}
+                href={`/blog/category/${categoryNameToSlug(cat)}`}
+                className="inline-block bg-[#F0573A] text-white px-5 py-1.5 rounded-[15px] font-bold text-base md:text-lg uppercase transition-opacity hover:opacity-90"
+              >
                 {cat}
-              </div>
+              </Link>
             ))}
           </div>
 
