@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { fixReportRedirects } from "@/lib/seo/fix-report-redirects";
 import { portalPageFallbackRedirects } from "@/lib/seo/portal-page-redirects";
 
 function getWordPressImageHostnames(): string[] {
@@ -142,6 +143,10 @@ const nextConfig: NextConfig = {
 
       // Portal-published pages missing on Next → portal (includes Gaynor form)
       ...portalPageFallbackRedirects(),
+
+      // Fix report 2026-09-24 — F3 (blog case-study copies) + F5 (dead backlinked pages)
+      // S1 trailing-slash one-hop is handled in middleware.ts
+      ...fixReportRedirects(),
     ];
   },
   images: {

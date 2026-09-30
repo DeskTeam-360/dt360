@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation';
 import type { BlogPost } from '@/data/blog';
-import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs } from '@/lib/wordpress';
+import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
 
 export type BlogSinglePageData = {
@@ -60,6 +61,11 @@ export async function getBlogSinglePageData(
     return null;
   }
 
+  // F3: case studies must not stay live under /blog/{slug}
+  if (isCaseStudyPost(post)) {
+    permanentRedirect(`/case-studies/${slug}`);
+  }
+
   return {
     post,
     relatedPosts: resolveRelatedPosts(slug, post, latestPostsPool),
@@ -74,6 +80,10 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     return {
       title: 'Post Not Found',
     };
+  }
+
+  if (isCaseStudyPost(post)) {
+    permanentRedirect(`/case-studies/${slug}`);
   }
 
   // Brand suffix comes from root layout title.template (`%s | DeskTeam360`).

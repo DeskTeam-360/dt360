@@ -15,6 +15,7 @@ import {
   rewriteWordPressContentHtml,
   rewriteWordPressMediaUrl,
 } from '@/lib/wp-public';
+import { F3_CASE_STUDY_BLOG_COPY_SLUG_SET } from '@/lib/seo/fix-report-redirects';
 
 type WpElementAttribs = { class?: string; style?: string };
 
@@ -674,22 +675,26 @@ export function DynamicBlogPostContent({
           const children = domToReact(domNodeAsAny.children as DOMNode[], options);
           const anchorStyle = parseHtmlStyleAttribute(linkStyle);
 
+          let resolvedHref = href as string | undefined;
           let isDraftBlogLink = false;
           try {
-            if (href) {
-              const url = new URL(href, 'https://deskteam360.com');
+            if (resolvedHref) {
+              const url = new URL(resolvedHref, 'https://deskteam360.com');
               const isInternal = getWordPressInternalHostnames().includes(url.hostname);
               if (isInternal) {
                 const path = url.pathname.replace(/\/$/, '');
                 const linkSlug = path.slice(1);
-                
-                // If it is a blog post URL, extract the slug and check against published posts
+
+                // F3: rewrite /blog/{case-study-slug} → /case-studies/{slug} in post HTML
                 if (linkSlug.startsWith('blog/')) {
                   const actualSlug = linkSlug.slice(5);
-                  if (actualSlug && !publishedSlugs.includes(actualSlug)) {
+                  if (actualSlug && F3_CASE_STUDY_BLOG_COPY_SLUG_SET.has(actualSlug)) {
+                    url.pathname = `/case-studies/${actualSlug}`;
+                    resolvedHref = `${url.pathname}${url.search}${url.hash}`;
+                  } else if (actualSlug && !publishedSlugs.includes(actualSlug)) {
                     isDraftBlogLink = true;
                   }
-                } else {
+                } else if (!linkSlug.startsWith('case-studies/')) {
                   const knownPages = ['about', 'services', 'contact', 'how-it-works', 'showcase', 'blog', 'book-a-call', 'demo-call-scheduled-thank-you', 'onboarding-call-scheduled-thank-you', 'onboarding-call-am2', 'client-meeting-with-am2', 'client-meeting-with-am3', 'client-meeting-with-am4', 'privacy-policy', 'terms-conditions', 'case-studies', 'affiliate-program', ''];
                   const isKnownPage = knownPages.includes(linkSlug) || linkSlug.startsWith('services/') || linkSlug.startsWith('showcase/');
                   if (linkSlug && !isKnownPage && !linkSlug.startsWith('wp-content/') && !publishedSlugs.includes(linkSlug)) {
@@ -710,10 +715,10 @@ export function DynamicBlogPostContent({
             );
           }
 
-          if (isFullVideoCtaHref(href) && !isInsideTocPanel(domNodeAsAny)) {
+          if (isFullVideoCtaHref(resolvedHref) && !isInsideTocPanel(domNodeAsAny)) {
             return (
               <a
-                href={href}
+                href={resolvedHref}
                 {...restAttribs}
                 className={BLOG_VIDEO_CTA_BUTTON_CLASS}
                 style={anchorStyle}
@@ -732,10 +737,10 @@ export function DynamicBlogPostContent({
             isInsideTocPanel(domNodeAsAny) ? undefined : linkHtmlClass,
           );
 
-          if (isInPageAnchorHref(href)) {
+          if (isInPageAnchorHref(resolvedHref)) {
             return (
               <a
-                href={href}
+                href={resolvedHref}
                 {...restAttribs}
                 className={linkClass}
                 style={anchorStyle}
@@ -746,7 +751,7 @@ export function DynamicBlogPostContent({
           }
 
           return (
-            <Link href={href || '#'} {...restAttribs} className={linkClass} style={anchorStyle}>
+            <Link href={resolvedHref || '#'} {...restAttribs} className={linkClass} style={anchorStyle}>
               {children}
             </Link>
           );
