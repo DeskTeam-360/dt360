@@ -16,7 +16,7 @@ import {
   rewriteWordPressMediaUrl,
 } from '@/lib/wp-public';
 import { categoryNameToSlug } from '@/lib/blog-categories';
-import { F3_CASE_STUDY_BLOG_COPY_SLUG_SET, toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
+import { resolveInternalContentLink } from '@/lib/seo/internal-link-final-paths';
 
 function isLinkableBlogCategory(name: string): boolean {
   const lower = name.toLowerCase();
@@ -694,30 +694,13 @@ export function DynamicBlogPostContent({
               const isInternal = getWordPressInternalHostnames().includes(url.hostname);
               if (isInternal) {
                 const path = url.pathname.replace(/\/$/, '');
-                const linkSlug = path.slice(1);
+                const resolved = resolveInternalContentLink(path, publishedSlugs);
 
-                // F3 + F19: rewrite /blog/{case-study-slug} → public /case-studies/{slug}
-                if (linkSlug.startsWith('blog/')) {
-                  const actualSlug = linkSlug.slice(5);
-                  if (actualSlug && F3_CASE_STUDY_BLOG_COPY_SLUG_SET.has(actualSlug)) {
-                    url.pathname = `/case-studies/${toCaseStudyPublicSlug(actualSlug)}`;
-                    resolvedHref = `${url.pathname}${url.search}${url.hash}`;
-                  } else if (actualSlug && !publishedSlugs.includes(actualSlug)) {
-                    isDraftBlogLink = true;
-                  }
-                } else if (linkSlug.startsWith('case-studies/')) {
-                  const actualSlug = linkSlug.slice('case-studies/'.length);
-                  const publicSlug = toCaseStudyPublicSlug(actualSlug);
-                  if (actualSlug && publicSlug !== actualSlug) {
-                    url.pathname = `/case-studies/${publicSlug}`;
-                    resolvedHref = `${url.pathname}${url.search}${url.hash}`;
-                  }
-                } else if (!linkSlug.startsWith('case-studies/')) {
-                  const knownPages = ['about', 'services', 'contact', 'how-it-works', 'showcase', 'blog', 'book-a-call', 'demo-call-scheduled-thank-you', 'onboarding-call-scheduled-thank-you', 'onboarding-call-am2', 'client-meeting-with-am2', 'client-meeting-with-am3', 'client-meeting-with-am4', 'privacy-policy', 'terms-conditions', 'case-studies', 'affiliate-program', ''];
-                  const isKnownPage = knownPages.includes(linkSlug) || linkSlug.startsWith('services/') || linkSlug.startsWith('showcase/');
-                  if (linkSlug && !isKnownPage && !linkSlug.startsWith('wp-content/') && !publishedSlugs.includes(linkSlug)) {
-                    isDraftBlogLink = true;
-                  }
+                if (resolved.kind === 'href') {
+                  url.pathname = resolved.pathname;
+                  resolvedHref = `${url.pathname}${url.search}${url.hash}`;
+                } else if (resolved.kind === 'draft') {
+                  isDraftBlogLink = true;
                 }
               }
             }

@@ -115,7 +115,7 @@ export const clientStories: ClientStory[] = [
     attribution: "Stuart Swineford, Relish Studio",
     imageSrc: "/images/Showcase - Behind The Work.png",
     imageAlt: "Stuart Swineford from Relish Studio",
-    caseStudyHref: "/case-studies/relish-studio-deskteam360-partnership",
+    caseStudyHref: "/case-studies",
   },
   {
     id: "convert-on-command",
