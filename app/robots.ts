@@ -22,6 +22,29 @@ const PRODUCTION_DISALLOW_PATHS = [
   "/blog/test",
 ] as const;
 
+/**
+ * F12a — name major AI crawlers explicitly (allow site, block api + test).
+ * Bytespider omitted until Jeremy decides (report suggestion: block it).
+ */
+const AI_CRAWLER_USER_AGENTS = [
+  "GPTBot",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-User",
+  "Claude-SearchBot",
+  "anthropic-ai",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Google-Extended",
+  "Applebot-Extended",
+  "CCBot",
+  "Meta-ExternalAgent",
+  "FirecrawlAgent",
+] as const;
+
+const AI_CRAWLER_DISALLOW = ["/api/", "/blog/test"] as const;
+
 export default function robots(): MetadataRoute.Robots {
   const base = getSiteUrl();
   const indexable = isSearchEngineIndexable();
@@ -45,6 +68,11 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow: [...PRODUCTION_DISALLOW_PATHS],
+      },
+      {
+        userAgent: [...AI_CRAWLER_USER_AGENTS],
+        allow: "/",
+        disallow: [...AI_CRAWLER_DISALLOW],
       },
     ],
     sitemap: `${base}/sitemap_index.xml`,
