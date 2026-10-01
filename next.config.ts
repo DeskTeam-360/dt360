@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import { fixReportRedirects } from "@/lib/seo/fix-report-redirects";
 import { portalPageFallbackRedirects } from "@/lib/seo/portal-page-redirects";
+import { SECURITY_HEADERS } from "@/lib/seo/security-headers";
 
 function getWordPressImageHostnames(): string[] {
   const hostnames = new Set<string>(["deskteam360.com", "www.deskteam360.com"]);
@@ -24,8 +25,18 @@ function getWordPressImageHostnames(): string[] {
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  // F13 — do not advertise the framework in responses
+  poweredByHeader: false,
   // Explicit: no trailing slash (Next default). /about/ → 308 /about
   trailingSlash: false,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: SECURITY_HEADERS,
+      },
+    ];
+  },
   async redirects() {
     return [
       {
