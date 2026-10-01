@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { SERVICES_INDEX_FAQ_ITEMS } from "@/components/pages/services/ServicesFaqSection";
 import { ServicesPlatformsSupportedBridge } from "@/components/pages/services/ServicesPlatformsSupportedBridge";
 import { ServicesFloatingFeaturesBar } from "@/components/pages/services/ServicesFloatingFeaturesBar";
 import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
@@ -107,6 +109,9 @@ export default async function ServicesPage() {
     <main className="relative min-w-0 overflow-x-hidden bg-white">
       <BreadcrumbJsonLd
         items={[homeBreadcrumb(), { name: "Services", path: "/services" }]}
+      />
+      <FaqPageJsonLd
+        items={SERVICES_INDEX_FAQ_ITEMS.map(({ question, answer }) => ({ question, answer }))}
       />
       {/* Hero: platforms card moved; keep vertical overflow visible */}
       <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[130px] pt-30 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">

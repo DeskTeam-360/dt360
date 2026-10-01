@@ -5,6 +5,7 @@ import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
 import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
+import { CollectionPageJsonLd } from "@/components/seo/CollectionPageJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 import { getBlogData } from "@/lib/wordpress";
 
@@ -22,6 +23,11 @@ export default async function BlogPage() {
     <main className="flex-grow">
       <BreadcrumbJsonLd
         items={[homeBreadcrumb(), { name: "Blog", path: "/blog" }]}
+      />
+      <CollectionPageJsonLd
+        name="Blog"
+        path="/blog"
+        description="Real talk about delegation, outsourcing, and growing your business without working 80-hour weeks."
       />
       <BlogHero />
       <BlogListing

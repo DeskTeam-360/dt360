@@ -13,7 +13,9 @@ import { Pricing } from "@/components/pages/home/Pricing";
 import { FAQ } from "@/components/pages/home/FAQ";
 import { LastCTA } from "@/components/pages/home/LastCTA";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withPageCanonical } from "@/lib/seo";
+import { faqSection } from "@/data/home";
 
 export const metadata: Metadata = withPageCanonical("/");
 
@@ -26,6 +28,9 @@ export default async function Home() {
   return (
     <main className="home-page flex flex-col overflow-x-hidden">
       <OrganizationJsonLd />
+      <FaqPageJsonLd
+        items={faqSection.items.map(({ question, answer }) => ({ question, answer }))}
+      />
       <Hero />
       <TeamMembers />
       <TrustedBy />

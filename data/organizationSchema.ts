@@ -1,14 +1,19 @@
-/** Schema.org Organization fields (JSON-LD) — homepage only. */
+/** Schema.org Organization fields (JSON-LD) — homepage. F14/Gate 5 fields omitted. */
 
 export const organizationSlogan = "Your Digital Team, All in One Place.";
 
 export const organizationDescription =
   "DeskTeam360 provides flat-rate digital marketing and technical services, including web design and development, graphic design, video editing, email marketing and sales funnels, CRM and automation, social media content, website maintenance, AI automation, white label digital services, insourcing, and outsourcing.";
 
+export const organizationFounderName = "Jeremy Kenerson";
+export const organizationFoundingDate = "2018";
+
 export const organizationSameAs = [
-  "https://www.instagram.com/deskteam360/",
-  "https://www.facebook.com/deskteam360",
   "https://www.linkedin.com/company/deskteam360/",
+  "https://www.facebook.com/deskteam360",
+  "https://www.instagram.com/deskteam360/",
+  "https://www.trustpilot.com/review/deskteam360.com",
+  "https://www.crunchbase.com/organization/deskteam360",
 ] as const;
 
 export const organizationKnowsAbout = [
@@ -27,3 +32,6 @@ export const organizationKnowsAbout = [
   "Insourcing",
   "Outsourcing",
 ] as const;
+
+/** Site plan countries (F9) — not US-only. */
+export const organizationAreaServed = ["US", "AU", "NZ", "GB"] as const;

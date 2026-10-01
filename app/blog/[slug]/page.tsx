@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
+import { BlogPostingJsonLd } from '@/components/seo/BlogPostingJsonLd';
 import { BreadcrumbJsonLd, blogPostBreadcrumbs } from '@/components/seo/BreadcrumbJsonLd';
 import {
   generateBlogPostMetadata,
@@ -26,6 +27,7 @@ export default async function SingleBlogPage({ params }: Props) {
   return (
     <main className="flex-grow">
       <BreadcrumbJsonLd items={blogPostBreadcrumbs(data.post.title, slug)} />
+      <BlogPostingJsonLd post={data.post} path={`/blog/${slug}`} />
       <DynamicBlogPostContent 
         post={data.post} 
         relatedPosts={data.relatedPosts} 

@@ -1,5 +1,8 @@
 ﻿import type { Metadata } from "next";
 import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { WEB_DESIGN_FAQ_ITEMS } from "@/components/pages/services/ServicesFaqSection";
 import { withPageCanonical } from "@/lib/seo";
 import { Hero } from "@/components/pages/service/website-development/Hero";
 import { WebDesignDevelopmentTestimonialAndHowSection } from "@/components/pages/service/website-development/WebDesignDevelopmentTestimonialAndHowSection";
@@ -15,6 +18,10 @@ export default function WebDesignDevelopmentPage() {
   return (
     <main className="relative bg-white">
       <BreadcrumbJsonLd items={serviceBreadcrumbs("Web Design & Development", "/services/web-design-development")} />
+      <ServiceJsonLd name="Web Design & Development" path="/services/web-design-development" />
+      <FaqPageJsonLd
+        items={WEB_DESIGN_FAQ_ITEMS.map(({ question, answer }) => ({ question, answer }))}
+      />
       <div className="relative z-10 mx-0 px-0">
         <Hero />
       </div>

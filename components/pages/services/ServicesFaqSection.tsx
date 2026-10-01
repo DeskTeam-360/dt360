@@ -9,7 +9,7 @@ import {
 import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { cn } from "@/lib/utils";
 
-const FAQ_ITEMS = [
+export const SERVICES_INDEX_FAQ_ITEMS = [
   {
     id: "projects",
     question: "What kinds of projects can I submit?",
@@ -31,7 +31,7 @@ const FAQ_ITEMS = [
 ] as const;
 
 /** Client copy — Web Design & Development service page FAQ (SWEB04–SWEB06) */
-const WEB_DESIGN_FAQ_ITEMS = [
+export const WEB_DESIGN_FAQ_ITEMS = [
   {
     id: "projects",
     question: "What kinds of web projects can I submit?",
@@ -63,7 +63,7 @@ export type ServicesFaqSectionProps = {
 
 export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionProps = {}) {
   const isWebDev = variant === "webDesignDevelopment";
-  const faqItems = isWebDev ? WEB_DESIGN_FAQ_ITEMS : FAQ_ITEMS;
+  const faqItems = isWebDev ? WEB_DESIGN_FAQ_ITEMS : SERVICES_INDEX_FAQ_ITEMS;
   const [openId, setOpenId] = useState<string>(faqItems[0].id);
   const illustrationSrc = isWebDev ? FAQ_ILLUSTRATION_WEB_DEV : FAQ_ILLUSTRATION_DEFAULT;
 

@@ -4,6 +4,7 @@ import { getAllCaseStudyPosts, getPostBySlug, getAllPublishedPostSlugs } from '@
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
 import { BreadcrumbJsonLd, caseStudyBreadcrumbs } from '@/components/seo/BreadcrumbJsonLd';
+import { CaseStudyArticleJsonLd } from '@/components/seo/BlogPostingJsonLd';
 import {
   caseStudyWordpressSlugCandidates,
   F19_CONVERT_ON_COMMAND_WP_SLUG,
@@ -112,6 +113,7 @@ export default async function SingleCaseStudyPage({ params }: Props) {
   return (
     <main className="flex-grow">
       <BreadcrumbJsonLd items={caseStudyBreadcrumbs(post.title, publicSlug)} />
+      <CaseStudyArticleJsonLd post={post} path={`/case-studies/${publicSlug}`} />
       <DynamicBlogPostContent post={post} relatedPosts={relatedPosts} publishedSlugs={publishedSlugs} optimizeImages />
       <HaveQuestionsCTA />
     </main>

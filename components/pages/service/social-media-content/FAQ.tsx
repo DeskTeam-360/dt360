@@ -5,7 +5,7 @@ import { Container } from "@/components/shared/Container";
 import { ServiceFaqIllustration } from "@/components/pages/service/shared/ServiceFaqIllustration";
 import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 
-const faqs = [
+export const faqItems = [
   {
     question: "Do you schedule the posts or just create the graphics?",
     answer:
@@ -19,7 +19,7 @@ const faqs = [
 ];
 
 export function FAQ() {
-  const [openId, setOpenId] = useState<string>(faqs[0].question);
+  const [openId, setOpenId] = useState<string>(faqItems[0].question);
 
   return (
     <section className="relative overflow-visible max-md:overflow-x-visible pb-20 pt-8 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 2xl:pb-36 2xl:pt-36">
@@ -59,7 +59,7 @@ export function FAQ() {
               Got Questions? <span className="text-[#E3058D]">Good</span>
             </h2>
             <div className="mt-6 space-y-4">
-              {faqs.map((item) => {
+              {faqItems.map((item) => {
                 const isOpen = openId === item.question;
 
                 return (

@@ -5,6 +5,7 @@ import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
 import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
+import { CollectionPageJsonLd } from "@/components/seo/CollectionPageJsonLd";
 import {
   BLOG_POSTS_PER_PAGE,
   blogListPath,
@@ -79,6 +80,11 @@ export default async function BlogPaginatedPage({ params }: Props) {
           { name: "Blog", path: "/blog" },
           { name: `Page ${currentPage}`, path },
         ]}
+      />
+      <CollectionPageJsonLd
+        name={`Blog — Page ${currentPage}`}
+        path={path}
+        description="Real talk about delegation, outsourcing, and growing your business without working 80-hour weeks."
       />
       <BlogHero />
       <BlogListing

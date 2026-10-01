@@ -8,6 +8,7 @@ import {
   BreadcrumbJsonLd,
   blogCategoryBreadcrumbs,
 } from "@/components/seo/BreadcrumbJsonLd";
+import { CollectionPageJsonLd } from "@/components/seo/CollectionPageJsonLd";
 import { resolveCategoryNameFromSlug } from "@/lib/blog-categories";
 import { withPageCanonical } from "@/lib/seo";
 import { getBlogData } from "@/lib/wordpress";
@@ -45,6 +46,11 @@ export default async function BlogCategoryPage({ params }: Props) {
   return (
     <main className="flex-grow">
       <BreadcrumbJsonLd items={blogCategoryBreadcrumbs(categoryName, slug)} />
+      <CollectionPageJsonLd
+        name={categoryName}
+        path={`/blog/category/${slug}`}
+        description={`Articles in the ${categoryName} category on the DeskTeam360 blog.`}
+      />
       <BlogHero />
       <BlogListing
         featuredPostsMap={featuredPostsMap}

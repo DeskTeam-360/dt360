@@ -5,6 +5,8 @@ import { AboutHeroStory } from "@/components/pages/about/AboutHeroStory";
 import { AboutNumbersThatMatter } from "@/components/pages/about/AboutNumbersThatMatter";
 import { AboutStoryTimeline } from "@/components/pages/about/AboutStoryTimeline";
 import { AboutTeamPeople } from "@/components/pages/about/AboutTeamPeople";
+import { AboutPageJsonLd } from "@/components/seo/AboutPageJsonLd";
+import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
 import { withPageCanonical } from "@/lib/seo";
 
 export const metadata: Metadata = withPageCanonical("/about", {
@@ -16,6 +18,10 @@ export const metadata: Metadata = withPageCanonical("/about", {
 export default function AboutPage() {
   return (
     <main className="flex flex-col bg-white w-full overflow-hidden">
+      <AboutPageJsonLd />
+      <BreadcrumbJsonLd
+        items={[homeBreadcrumb(), { name: "About", path: "/about" }]}
+      />
       <AboutHeroStory />
       <AboutStoryTimeline />
       <AboutNumbersThatMatter />

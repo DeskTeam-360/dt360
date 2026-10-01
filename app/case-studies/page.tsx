@@ -3,6 +3,7 @@ import { CaseStudiesHero } from "@/components/pages/case-studies/CaseStudiesHero
 import { DeskTeam360sCaseStudies } from "@/components/pages/case-studies/DeskTeam360sCaseStudies";
 import { HaveQuestionsCTA } from "@/components/pages/case-studies/HaveQuestionsCTA";
 import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJsonLd";
+import { CollectionPageJsonLd } from "@/components/seo/CollectionPageJsonLd";
 import { siteConfig } from "@/config/site";
 import { withPageCanonical } from "@/lib/seo";
 import { getAllCaseStudyPosts } from "@/lib/wordpress";
@@ -27,6 +28,11 @@ export default async function CaseStudiesPage() {
     <main className="flex w-full flex-col overflow-hidden bg-white">
       <BreadcrumbJsonLd
         items={[homeBreadcrumb(), { name: "Case Studies", path: "/case-studies" }]}
+      />
+      <CollectionPageJsonLd
+        name="Case Studies"
+        path="/case-studies"
+        description="Learn from customers DeskTeam360 has helped. Real stories, results, and how dedicated insourcing teams deliver."
       />
       <CaseStudiesHero />
       <DeskTeam360sCaseStudies posts={posts} />

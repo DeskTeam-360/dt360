@@ -1,5 +1,8 @@
 ﻿import type { Metadata } from "next";
 import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
+import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { faqItems } from "@/components/pages/service/crm-automation/FAQ";
 import { withPageCanonical } from "@/lib/seo";
 import { FAQ } from "@/components/pages/service/crm-automation/FAQ";
 import { Hero } from "@/components/pages/service/crm-automation/Hero";
@@ -12,6 +15,8 @@ export default function CrmAutomationPage() {
   return (
     <main className="bg-white">
       <BreadcrumbJsonLd items={serviceBreadcrumbs("CRM & Automation", "/services/crm-automation")} />
+      <ServiceJsonLd name="CRM & Automation" path="/services/crm-automation" />
+      <FaqPageJsonLd items={faqItems} />
       <div className="mx-0 px-0">
         <Hero />
       </div>
