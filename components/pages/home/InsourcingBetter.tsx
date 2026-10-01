@@ -87,14 +87,14 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
     </p>
   );
   const title = (
-    <h4
+    <h3
       className={cn(
         "type-rule-h4 text-left tracking-tight text-balance text-white",
         isTallLeft && "leading-snug lg:leading-tight",
       )}
     >
       {card.title}
-    </h4>
+    </h3>
   );
 
   const wideMagentaEmpty =
@@ -228,9 +228,9 @@ function BentoCard({ card }: { card: InsourcingBentoCard }) {
                 <div className="grid h-full min-h-0 w-full min-w-0 flex-1 grid-cols-1 grid-rows-[auto_minmax(14rem,1fr)] items-stretch gap-6 sm:gap-6 lg:grid-cols-2 lg:grid-rows-none lg:gap-8">
                   <div className="flex min-h-0 min-w-0 flex-col justify-center gap-3 pb-8 sm:gap-3.5 lg:gap-4 lg:pb-8">
                     {card.title ? (
-                      <h4 className="type-rule-h4 text-left tracking-tight text-balance text-white">
+                      <h3 className="type-rule-h4 text-left tracking-tight text-balance text-white">
                         {card.title}
-                      </h4>
+                      </h3>
                     ) : null}
                     {card.description ? (
                       <p className="type-rule-p text-left text-pretty text-white/90">{card.description}</p>

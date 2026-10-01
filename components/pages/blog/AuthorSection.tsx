@@ -15,8 +15,7 @@ export function AuthorSection() {
             src="/images/blog/blog-bubble-cta-bg.png"
             alt=""
             fill
-            className="object-contain object-right"
-          />
+            className="object-contain object-right" aria-hidden="true" />
         </div>
 
         {/* Pink Radial Glow (Bottom Left) */}

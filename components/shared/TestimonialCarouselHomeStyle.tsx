@@ -39,8 +39,7 @@ function TestimonialSlideCard({ item }: { item: HomeStyleTestimonialItem }) {
           height={104}
           optimized
           className="h-auto w-[120px] max-w-[120px] object-contain object-top"
-          sizes="120px"
-        />
+          sizes="120px" aria-hidden="true" />
       </div>
       <div className="relative z-[1] grid gap-6 lg:grid-cols-[minmax(0,11rem)_1fr] lg:items-start lg:gap-8">
         <div className="mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl bg-zinc-200 lg:mx-0">

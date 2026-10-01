@@ -61,19 +61,19 @@ export function BlogPostContent() {
         />
 
         {/* Decorative Icon - Left Side */}
-        <div className="absolute left-[-20px] md:left-[20px] top-[10%] w-[149px] h-[174px] pointer-events-none hidden lg:block z-[-1]">
+        <div className="absolute left-[-20px] md:left-[20px] top-[10%] w-[149px] h-[174px] pointer-events-none hidden lg:block z-[-1]" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/blog/blog-icon-website-design.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <img src="/images/blog/blog-icon-website-design.png" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         </div>
 
         {/* Rotated Decorative Image - Right Side */}
-        <div className="absolute right-[-150px] top-[5%] w-[572px] h-[554px] pointer-events-none hidden xl:block z-[-1]">
+        <div className="absolute right-[-150px] top-[5%] w-[572px] h-[554px] pointer-events-none hidden xl:block z-[-1]" aria-hidden="true">
           <div className="w-full h-full flex items-center justify-center">
             <div className="rotate-[-42.51deg]">
               <div className="w-[542.557px] h-[254.598px] relative">
                 <div className="absolute inset-0 opacity-50 overflow-hidden pointer-events-none">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/blog/blog-decorative-image.png" alt="" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
+                  <img src="/images/blog/blog-decorative-image.png" alt="" aria-hidden="true" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
                 </div>
               </div>
             </div>

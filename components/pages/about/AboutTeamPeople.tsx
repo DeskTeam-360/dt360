@@ -15,8 +15,7 @@ export function AboutTeamPeople() {
           height={800}
           optimized
           sizes="(max-width: 1023px) 50vw, 400px"
-          className="h-full w-full object-contain object-left-top"
-        />
+          className="h-full w-full object-contain object-left-top" aria-hidden="true" />
       </div>
 
       {/* 2. Smooth pink circular gradient on the left */}

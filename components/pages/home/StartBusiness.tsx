@@ -36,8 +36,7 @@ export function StartBusiness() {
                 width={220}
                 height={220}
                 className="max-h-full w-full object-contain object-left-top opacity-90"
-                sizes="(max-width: 640px) 26vw, 220px"
-              />
+                sizes="(max-width: 640px) 26vw, 220px" aria-hidden="true" />
             </div>
             <div className="absolute right-0 top-1 flex h-full w-[min(24vw,170px)] max-w-[170px] items-start justify-end sm:top-2 sm:w-[min(22vw,190px)] sm:max-w-[190px] lg:max-w-[210px]">
               <Image
@@ -46,8 +45,7 @@ export function StartBusiness() {
                 width={210}
                 height={210}
                 className="max-h-full w-full object-contain object-right-top opacity-90"
-                sizes="(max-width: 640px) 24vw, 210px"
-              />
+                sizes="(max-width: 640px) 24vw, 210px" aria-hidden="true" />
             </div>
           </div>
 

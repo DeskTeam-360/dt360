@@ -121,8 +121,7 @@ export default async function ServicesPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_100%] min-[2560px]:object-[50%_92%]"
-        />
+          className="object-cover object-[50%_100%] min-[2560px]:object-[50%_92%]" aria-hidden="true" />
         <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-6">
           <div className="max-w-xl text-white">
             <h1 className="type-rule-h1 font-extrabold leading-[1.05] tracking-tight text-white">
@@ -163,15 +162,13 @@ export default async function ServicesPage() {
           alt=""
           width={540}
           height={714}
-          className="pointer-events-none absolute right-0 top-0 h-auto w-[260px] opacity-95 md:w-[340px] xl:w-[440px]"
-        />
+          className="pointer-events-none absolute right-0 top-0 h-auto w-[260px] opacity-95 md:w-[340px] xl:w-[440px]" aria-hidden="true" />
         <Image
           src="/images/dt360-bottom-bubble.png"
           alt=""
           width={382}
           height={576}
-          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] xl:w-[340px]"
-        />
+          className="pointer-events-none absolute bottom-0 left-0 h-auto w-[220px] opacity-95 md:w-[280px] xl:w-[340px]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-[1440px]">
           <div className="text-center">

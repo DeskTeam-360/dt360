@@ -107,8 +107,7 @@ export function AboutNumbersThatMatter() {
             fill
             optimized
             sizes="100vw"
-            className="object-cover object-bottom"
-          />
+            className="object-cover object-bottom" aria-hidden="true" />
         </div>
       </div>
     </section>

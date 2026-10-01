@@ -139,8 +139,7 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
         width={540}
         height={714}
         sizes="(max-width: 1280px) 52vw, 520px"
-        className="pointer-events-none absolute right-0 top-0 z-[1] h-auto w-[min(52vw,420px)] max-w-none opacity-95 md:w-[min(44vw,480px)] xl:w-[min(38vw,520px)]"
-      />
+        className="pointer-events-none absolute right-0 top-0 z-[1] h-auto w-[min(52vw,420px)] max-w-none opacity-95 md:w-[min(44vw,480px)] xl:w-[min(38vw,520px)]" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 md:px-10 xl:px-10">
         <h2

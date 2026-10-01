@@ -110,7 +110,7 @@ export function HowItWorksRealTeam() {
                 ) : null}
                 {card.type === "card" && card.imageSrc && (
                   <div className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-14">
-                    <Image src={card.imageSrc} alt="" fill className="object-cover" sizes="64px" />
+                    <Image src={card.imageSrc} alt="" fill className="object-cover" sizes="64px" aria-hidden="true" />
                   </div>
                 )}
                 <span className="text-[18px] font-bold leading-tight whitespace-pre-line">

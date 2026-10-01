@@ -101,8 +101,7 @@ export function RotateProblemCarousel() {
                         fill
                         className="object-cover object-bottom"
                         sizes="(max-width: 640px) 92vw, 611px"
-                        priority={i === 0}
-                      />
+                        priority={i === 0} aria-hidden="true" />
                     </span>
                     <span
                       className={cn(

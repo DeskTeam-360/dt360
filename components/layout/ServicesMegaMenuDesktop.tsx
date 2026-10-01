@@ -176,8 +176,7 @@ export function ServicesMegaMenuDesktop({
                                   width={48}
                                   height={48}
                                   className="object-contain p-1"
-                                  sizes="48px"
-                                />
+                                  sizes="48px" aria-hidden="true" />
                               </span>
                               <span className="min-w-0">
                                 <span className="block font-montserrat text-base font-bold leading-snug tracking-tight text-[#101651] group-hover:text-[#11104C]">

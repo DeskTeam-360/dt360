@@ -58,8 +58,7 @@ function DotsArrow() {
         alt=""
         width={120}
         height={100}
-        className="h-[72px] w-full max-w-[70px] shrink-0 rotate-90 object-contain opacity-100 xl:absolute xl:left-1/2 xl:top-0 xl:h-auto xl:max-h-[90px] xl:max-w-[70px] xl:-translate-x-1/2 xl:-translate-y-1/2 xl:rotate-0"
-      />
+        className="h-[72px] w-full max-w-[70px] shrink-0 rotate-90 object-contain opacity-100 xl:absolute xl:left-1/2 xl:top-0 xl:h-auto xl:max-h-[90px] xl:max-w-[70px] xl:-translate-x-1/2 xl:-translate-y-1/2 xl:rotate-0" aria-hidden="true" />
     </div>
   );
 }

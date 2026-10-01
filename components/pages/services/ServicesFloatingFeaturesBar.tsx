@@ -28,8 +28,7 @@ export function ServicesFloatingFeaturesBar() {
                     width={123}
                     height={123}
                     sizes="123px"
-                    className="h-[123px] min-h-[123px] w-auto object-contain"
-                  />
+                    className="h-[123px] min-h-[123px] w-auto object-contain" aria-hidden="true" />
                 ) : (
                   <span className="text-[11px] font-medium uppercase tracking-wide text-white/35">Icon</span>
                 )}

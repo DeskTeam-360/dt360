@@ -16,6 +16,8 @@ type SafeImageProps = {
   /** When true, use Next.js image optimizer (phased rollout). Default false elsewhere. */
   optimized?: boolean;
   unoptimized?: boolean;
+  /** F16 — decorative images should set alt="" (aria-hidden applied automatically). */
+  "aria-hidden"?: boolean | "true" | "false";
 };
 
 function SafeImageInner({
@@ -29,8 +31,10 @@ function SafeImageInner({
   priority,
   optimized = false,
   unoptimized,
+  "aria-hidden": ariaHidden,
 }: SafeImageProps) {
   const [failed, setFailed] = useState(false);
+  const decorative = alt === "" || ariaHidden === true || ariaHidden === "true";
 
   if (failed) {
     return (
@@ -64,6 +68,7 @@ function SafeImageInner({
       draggable={false}
       className={className}
       onError={() => setFailed(true)}
+      aria-hidden={decorative ? true : undefined}
     />
   );
 }

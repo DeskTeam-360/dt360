@@ -42,8 +42,7 @@ export function HowItWorksSteps() {
           height={230}
           sizes="(max-width: 1023px) 140px, 198px"
           className="h-auto w-[126px] sm:w-[162px] lg:w-[198px]"
-          priority={false}
-        />
+          priority={false} aria-hidden="true" />
       </div>
 
       <Container className="relative z-10 max-w-7xl">
