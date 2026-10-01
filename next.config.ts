@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   async headers() {
     return [
+      // F7 — fingerprinted Next build assets (also reinforce on CDN/nginx if present)
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: SECURITY_HEADERS,
