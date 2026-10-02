@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DemoCallScheduledThankYouContent } from "@/components/pages/demo-call-scheduled-thank-you/DemoCallScheduledThankYouContent";
+import { GaBookedCallEvent } from "@/components/seo/GaBookedCallEvent";
 import { siteConfig } from "@/config/site";
 import { withPageCanonical } from "@/lib/seo";
 
@@ -12,6 +13,7 @@ export const metadata: Metadata = withPageCanonical("/demo-call-scheduled-thank-
 export default function DemoCallScheduledThankYouPage() {
   return (
     <main className="relative flex min-w-0 flex-col overflow-x-hidden overflow-y-visible bg-[#F5F8FF]">
+      <GaBookedCallEvent source="demo_call_thank_you" />
       <DemoCallScheduledThankYouContent />
     </main>
   );
