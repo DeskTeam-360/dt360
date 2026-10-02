@@ -4,6 +4,7 @@ import { fontReadexPro, fontRussoOne } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { GlobalSameRouteClickHandler } from "@/components/layout/GlobalSameRouteClickHandler";
 import { Navbar } from "@/components/layout/Navbar";
+import { GoogleAnalytics } from "@/components/seo/GoogleAnalytics";
 import { MetaPixel } from "@/components/seo/MetaPixel";
 import { getMetadataBase, getSiteUrl, isSearchEngineIndexable, siteConfig } from "@/config/site";
 import "@/styles/globals.css";
@@ -144,6 +145,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
+        <GoogleAnalytics />
         <MetaPixel />
         <GlobalSameRouteClickHandler />
         <Navbar />
