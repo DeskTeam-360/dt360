@@ -1,5 +1,6 @@
 import { getSiteUrl, siteConfig } from "@/config/site";
 import {
+  companyContact,
   organizationAreaServed,
   organizationDescription,
   organizationFounderName,
@@ -10,7 +11,7 @@ import {
 } from "@/data/organizationSchema";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-/** Schema.org Organization + WebSite for the homepage (F9). */
+/** Schema.org Organization + WebSite for the homepage (F9 + F14). */
 export function OrganizationJsonLd() {
   const url = getSiteUrl();
   const orgId = `${url}/#organization`;
@@ -23,7 +24,8 @@ export function OrganizationJsonLd() {
           "@context": "https://schema.org",
           "@type": "Organization",
           "@id": orgId,
-          name: siteConfig.name,
+          name: companyContact.name,
+          legalName: companyContact.legalName,
           url: `${url}/`,
           slogan: organizationSlogan,
           logo: {
@@ -37,6 +39,26 @@ export function OrganizationJsonLd() {
             "@type": "Person",
             name: organizationFounderName,
           },
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: companyContact.streetAddress,
+            addressLocality: companyContact.addressLocality,
+            addressRegion: companyContact.addressRegion,
+            postalCode: companyContact.postalCode,
+            addressCountry: companyContact.addressCountry,
+          },
+          email: companyContact.emailDisplay,
+          telephone: companyContact.phoneDisplay,
+          contactPoint: [
+            {
+              "@type": "ContactPoint",
+              contactType: "customer service",
+              email: companyContact.emailDisplay,
+              telephone: companyContact.phoneDisplay,
+              areaServed: [...organizationAreaServed],
+              availableLanguage: ["English"],
+            },
+          ],
           sameAs: [...organizationSameAs],
           knowsAbout: [...organizationKnowsAbout],
           areaServed: [...organizationAreaServed],

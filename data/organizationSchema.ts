@@ -1,4 +1,6 @@
-/** Schema.org Organization fields (JSON-LD) — homepage. F14/Gate 5 fields omitted. */
+/** Schema.org Organization fields (JSON-LD) — homepage. NAP from F14 in companyContact. */
+
+export { companyContact } from "@/data/companyContact";
 
 export const organizationSlogan = "Your Digital Team, All in One Place.";
 

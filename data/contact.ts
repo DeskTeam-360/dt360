@@ -63,3 +63,8 @@ export const contactOfficeHours = {
   calendarIconSrc: contactAssets.calendarIcon,
   clockIconSrc: contactAssets.clockIcon,
 } as const;
+
+/** F14 — public NAP on /contact (city + state only for location). */
+export const contactCompanyDetails = {
+  heading: "Company",
+} as const;

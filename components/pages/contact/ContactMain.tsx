@@ -2,6 +2,7 @@ import { Container } from "@/components/shared/Container";
 import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { contactAssets, contactIntro, contactOrnamentStyles } from "@/data/contact";
 import { ContactForm } from "./ContactForm";
+import { ContactCompanyDetails } from "./ContactCompanyDetails";
 import { ContactOfficeHours } from "./ContactOfficeHours";
 
 export function ContactMain() {
@@ -63,7 +64,7 @@ export function ContactMain() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-12 max-w-[1000px] overflow-visible md:mt-16 lg:mt-[10em]">
+        <div className="relative mx-auto mt-12 grid max-w-[1000px] gap-8 overflow-visible md:mt-16 lg:mt-[10em] lg:gap-10">
           <MarketingSafeImage
             src={contactAssets.ornament}
             alt=""
@@ -73,6 +74,7 @@ export function ContactMain() {
             sizes="(max-width: 1024px) 32vw, 360px"
             aria-hidden
           />
+          <ContactCompanyDetails />
           <ContactOfficeHours />
         </div>
       </Container>

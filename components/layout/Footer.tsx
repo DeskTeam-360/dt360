@@ -7,6 +7,7 @@ import {
   footerSocial,
   type FooterSocial,
 } from "@/data/footer";
+import { companyContact } from "@/data/companyContact";
 import { siteConfig } from "@/config/site";
 import { DeskTeamLogo } from "./DeskTeamLogo";
 import { FooterScrollTop } from "./FooterScrollTop";
@@ -27,6 +28,20 @@ export function Footer() {
               <br />
               <span className="tracking-[0.05em]">Start Insourcing</span>
             </h3>
+            <address className="mt-8 not-italic font-[var(--font-montserrat)] text-[14px] font-medium leading-[1.7] text-white/80">
+              <p className="font-bold text-white">{companyContact.name}</p>
+              <p>{companyContact.publicLocation}</p>
+              <p>
+                <a href={companyContact.phoneHref} className="transition hover:text-white">
+                  {companyContact.phoneDisplay}
+                </a>
+              </p>
+              <p>
+                <a href={companyContact.emailHref} className="transition hover:text-white">
+                  {companyContact.emailDisplay}
+                </a>
+              </p>
+            </address>
           </div>
 
           <nav aria-label="Services">
