@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
-import { getGaMeasurementId } from "@/lib/seo/analytics";
+import { getGaMeasurementId, getGoogleAdsId } from "@/lib/seo/analytics";
 
 declare global {
   interface Window {
@@ -12,7 +12,13 @@ declare global {
   }
 }
 
-function GoogleAnalyticsPageViews({ gaId }: { gaId: string }) {
+function GoogleTagPageViews({
+  gaId,
+  adsId,
+}: {
+  gaId: string;
+  adsId: string;
+}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isFirstLoad = useRef(true);
@@ -25,14 +31,16 @@ function GoogleAnalyticsPageViews({ gaId }: { gaId: string }) {
     const query = searchParams?.toString();
     const pagePath = query ? `${pathname}?${query}` : pathname;
     window.gtag?.("config", gaId, { page_path: pagePath });
-  }, [gaId, pathname, searchParams]);
+    window.gtag?.("config", adsId, { page_path: pagePath });
+  }, [adsId, gaId, pathname, searchParams]);
 
   return null;
 }
 
-/** F4 — GA4 on every page (gtag.js). */
+/** GA4 + Google Ads via shared gtag.js. */
 export function GoogleAnalytics() {
   const gaId = getGaMeasurementId();
+  const adsId = getGoogleAdsId();
 
   return (
     <>
@@ -40,16 +48,17 @@ export function GoogleAnalytics() {
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
         strategy="afterInteractive"
       />
-      <Script id="ga4-gtag" strategy="afterInteractive">
+      <Script id="gtag-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${gaId}');
+          gtag('config', '${adsId}');
         `}
       </Script>
       <Suspense fallback={null}>
-        <GoogleAnalyticsPageViews gaId={gaId} />
+        <GoogleTagPageViews gaId={gaId} adsId={adsId} />
       </Suspense>
     </>
   );
