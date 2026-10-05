@@ -24,7 +24,7 @@ const PRODUCTION_DISALLOW_PATHS = [
 
 /**
  * F12a — name major AI crawlers explicitly (allow site, block api + test).
- * Bytespider omitted until Jeremy decides (report suggestion: block it).
+ * Bytespider: blocked (Jeremy, 2026-10).
  */
 const AI_CRAWLER_USER_AGENTS = [
   "GPTBot",
@@ -44,6 +44,9 @@ const AI_CRAWLER_USER_AGENTS = [
 ] as const;
 
 const AI_CRAWLER_DISALLOW = ["/api/", "/blog/test"] as const;
+
+/** TikTok Bytespider — full site block (Jeremy approved). */
+const BYTESPIDER_USER_AGENT = "Bytespider";
 
 export default function robots(): MetadataRoute.Robots {
   const base = getSiteUrl();
@@ -73,6 +76,10 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: [...AI_CRAWLER_USER_AGENTS],
         allow: "/",
         disallow: [...AI_CRAWLER_DISALLOW],
+      },
+      {
+        userAgent: BYTESPIDER_USER_AGENT,
+        disallow: "/",
       },
     ],
     sitemap: `${base}/sitemap_index.xml`,
