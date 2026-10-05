@@ -136,6 +136,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} ${fontReadexPro.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="madIqxrebLuHN7OtndzHUw"
+          async
+        />
+      </head>
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         <MetaPixel />
         <GlobalSameRouteClickHandler />
