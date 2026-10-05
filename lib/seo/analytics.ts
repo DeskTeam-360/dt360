@@ -5,10 +5,11 @@
 const DEFAULT_GA_MEASUREMENT_ID = "G-ZSLFPBZD33";
 const DEFAULT_GOOGLE_ADS_ID = "AW-799375519";
 
-/** Existing pixel + new pixel from marketing snippet. */
+/** Meta Pixel IDs (existing + marketing additions). */
 const DEFAULT_META_PIXEL_IDS = [
   "1586498862891785",
   "269049040359246",
+  "562043585837638",
 ] as const;
 
 export function getGaMeasurementId(): string {
