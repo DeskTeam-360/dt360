@@ -77,27 +77,27 @@ export const trustedByContent: TrustedByContent = {
 export const trustedByLogos: TrustedByLogo[] = [
   {
     id: "libra",
-    alt: "Libra Growth Labs",
+    alt: "Libra Growth Labs logo",
     imageSrc: "/images/home-trust-libragrowth.png",
   },
   {
     id: "charisma",
-    alt: "Charisma",
+    alt: "Charisma Ink. logo",
     imageSrc: "/images/home-trust-charismainc.png",
   },
   {
     id: "duct-tape",
-    alt: "Duct Tape Marketing",
+    alt: "Duct Tape Marketing logo",
     imageSrc: "/images/home-trust-ducttapemarketing.png",
   },
   {
     id: "convert",
-    alt: "Convert On Command",
+    alt: "Convert on Command logo",
     imageSrc: "/images/home-trust-conversiononcommand.png",
   },
   {
     id: "special-ed",
-    alt: "Special Ed Resource",
+    alt: "Special Ed Resource logo",
     imageSrc: "/images/home-trust-specialed.png",
   },
 ];

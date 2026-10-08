@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { rotateProblemCards } from "@/data/home";
+import { getGate5ImageAlt } from "@/data/gate5ImageAlts";
 import { cn } from "@/lib/utils";
 
 /** Figma: active (center) 611×688; inactive target ~464×610. */
@@ -97,11 +98,17 @@ export function RotateProblemCarousel() {
                     <span className="pointer-events-none absolute inset-0 z-0 block min-h-0 min-w-0 overflow-hidden">
                       <Image
                         src={card.imageSrc}
-                        alt=""
+                        alt={getGate5ImageAlt(card.imageSrc) ?? ""}
                         fill
                         className="object-cover object-bottom"
                         sizes="(max-width: 640px) 92vw, 611px"
-                        priority={i === 0} aria-hidden="true" />
+                        priority={i === 0}
+                        aria-hidden={
+                          !(getGate5ImageAlt(card.imageSrc) ?? "")
+                            ? true
+                            : undefined
+                        }
+                      />
                     </span>
                     <span
                       className={cn(

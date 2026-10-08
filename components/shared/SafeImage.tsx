@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { getGate5ImageAlt } from "@/data/gate5ImageAlts";
 import { cn } from "@/lib/utils";
 
 type SafeImageProps = {
@@ -34,7 +35,10 @@ function SafeImageInner({
   "aria-hidden": ariaHidden,
 }: SafeImageProps) {
   const [failed, setFailed] = useState(false);
-  const decorative = alt === "" || ariaHidden === true || ariaHidden === "true";
+  const gate5Alt = getGate5ImageAlt(src);
+  const resolvedAlt = gate5Alt !== undefined ? gate5Alt : alt;
+  const decorative =
+    resolvedAlt === "" || ariaHidden === true || ariaHidden === "true";
 
   if (failed) {
     return (
@@ -58,7 +62,7 @@ function SafeImageInner({
   return (
     <Image
       src={src}
-      alt={alt}
+      alt={resolvedAlt}
       fill={fill}
       width={fill ? undefined : width}
       height={fill ? undefined : height}

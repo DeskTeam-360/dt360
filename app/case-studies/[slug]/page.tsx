@@ -11,6 +11,8 @@ import {
   toCaseStudyPublicSlug,
 } from '@/lib/seo/fix-report-redirects';
 import type { BlogPost } from '@/data/blog';
+import { getGate5AbsoluteTitle } from '@/data/gate5AbsoluteTitles';
+import { withPageCanonical } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -48,21 +50,18 @@ export async function generateMetadata(
   }
 
   const { post, publicSlug } = resolved;
+  const path = `/case-studies/${publicSlug}`;
+  const absoluteTitle = getGate5AbsoluteTitle(path);
 
-  // Document title uses layout title.template (`%s | DeskTeam360`).
-  // openGraph.title does not, so keep the brand there once.
-  return {
-    title: post.title,
+  // Gate 5 F10: absolute titles when listed; otherwise layout template suffix.
+  return withPageCanonical(path, {
+    title: absoluteTitle ?? post.title,
     description: post.excerpt,
-    alternates: {
-      canonical: `/case-studies/${publicSlug}`,
-    },
     openGraph: {
-      url: `/case-studies/${publicSlug}`,
-      title: `${post.title} | DeskTeam360`,
+      title: absoluteTitle ?? `${post.title} | DeskTeam360`,
       description: post.excerpt,
     },
-  };
+  });
 }
 
 export const revalidate = 600; // 10 minutes

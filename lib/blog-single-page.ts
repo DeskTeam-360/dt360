@@ -145,7 +145,7 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
-  // Brand suffix comes from root layout title.template (`%s | DeskTeam360`).
+  // Gate 5 F10: absolute titles when provided; otherwise layout adds ` | DeskTeam360`.
   return withPageCanonical(getBlogPostCanonicalPath(slug), {
     title: post.title,
     description: post.excerpt,

@@ -1,3 +1,5 @@
+import { getGate5ImageAlt } from "@/data/gate5ImageAlts";
+
 /** Legacy WP hosts whose /wp-content/ URLs should resolve to the current CMS origin. */
 const LEGACY_WP_CONTENT_URL =
   /https?:\/\/(?:www\.)?(?:deskteam360|clone\.deskteam360)\.com(\/wp-content\/)/gi;
@@ -33,8 +35,21 @@ export function rewriteWordPressMediaUrl(url: string | undefined | null): string
 export function rewriteWordPressContentHtml(html: string | undefined | null): string {
   if (!html) return html ?? "";
   const origin = getWordPressMediaOrigin();
-  if (!origin) return html;
-  return html.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`);
+  let out = origin ? html.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`) : html;
+
+  // Gate 5 F16 — apply approved alts to <img> tags when we have a match.
+  out = out.replace(/<img\b([^>]*?)>/gi, (full, attrs: string) => {
+    const srcMatch = attrs.match(/\bsrc=["']([^"']+)["']/i);
+    if (!srcMatch) return full;
+    const alt = getGate5ImageAlt(srcMatch[1]);
+    if (alt === undefined) return full;
+    if (/\balt=["']/.test(attrs)) {
+      return `<img${attrs.replace(/\balt=["'][^"']*["']/i, `alt="${alt.replace(/"/g, "&quot;")}"`)}>`;
+    }
+    return `<img alt="${alt.replace(/"/g, "&quot;")}"${attrs}>`;
+  });
+
+  return out;
 }
 
 /** WordPress site origin for public/client-safe link building. */

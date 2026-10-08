@@ -15,9 +15,18 @@ import { LastCTA } from "@/components/pages/home/LastCTA";
 import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { withPageCanonical } from "@/lib/seo";
+import { GATE5_HOME_DESCRIPTION } from "@/data/gate5AbsoluteTitles";
 import { faqSection } from "@/data/home";
 
-export const metadata: Metadata = withPageCanonical("/");
+export const metadata: Metadata = withPageCanonical("/", {
+  description: GATE5_HOME_DESCRIPTION,
+  openGraph: {
+    description: GATE5_HOME_DESCRIPTION,
+  },
+  twitter: {
+    description: GATE5_HOME_DESCRIPTION,
+  },
+});
 
 /** ISR for homepage — keeps testimonial carousel in sync with WP (default 10 min). */
 export const revalidate = 600;
