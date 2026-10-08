@@ -1,44 +1,33 @@
 ﻿import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
-import { WEB_DESIGN_FAQ_ITEMS } from "@/components/pages/services/ServicesFaqSection";
+import {
+  Gate5ServicePage,
+  gate5ServiceFaqJsonLdItems,
+} from "@/components/pages/gate5/Gate5ServicePage";
+import { getGate5ServicePage } from "@/data/gate5ServicePages";
 import { withPageCanonical } from "@/lib/seo";
-import { Hero } from "@/components/pages/service/website-development/Hero";
-import { WebDesignDevelopmentTestimonialAndHowSection } from "@/components/pages/service/website-development/WebDesignDevelopmentTestimonialAndHowSection";
-import { ServicesFaqSection } from "@/components/pages/services/ServicesFaqSection";
-import { ServicesPlatformsSupportedBridge } from "@/components/pages/services/ServicesPlatformsSupportedBridge";
-import { ServicesPricingSection } from "@/components/pages/services/ServicesPricingSection";
+
+const page = getGate5ServicePage("web-design-development");
 
 export const metadata: Metadata = withPageCanonical("/services/web-design-development", {
-  title: "Web Design & Development",
+  title: page?.titleTag,
+  description: page?.metaDescription,
 });
 
 export default function WebDesignDevelopmentPage() {
-  return (
-    <main className="relative bg-white">
-      <BreadcrumbJsonLd items={serviceBreadcrumbs("Web Design & Development", "/services/web-design-development")} />
-      <ServiceJsonLd name="Web Design & Development" path="/services/web-design-development" />
-      <FaqPageJsonLd
-        items={WEB_DESIGN_FAQ_ITEMS.map(({ question, answer }) => ({ question, answer }))}
-      />
-      <div className="relative z-10 mx-0 px-0">
-        <Hero />
-      </div>
-      <div className="mx-0 px-0">
-        <ServicesPlatformsSupportedBridge overlap="belowChecklist" />
-      </div>
-      <div className="relative mx-0 px-0">
-        <WebDesignDevelopmentTestimonialAndHowSection />
-        <div className="relative z-0 mx-0 px-0">
-          <ServicesPricingSection variant="webDesignDevelopment" />
-        </div>
-      </div>
+  if (!page) notFound();
 
-      <div className="-mt-px mx-0 px-0">
-        <ServicesFaqSection variant="webDesignDevelopment" />
-      </div>
+  return (
+    <main className="bg-white">
+      <BreadcrumbJsonLd
+        items={serviceBreadcrumbs(page.breadcrumbName, page.path)}
+      />
+      <ServiceJsonLd name={page.breadcrumbName} path={page.path} />
+      <FaqPageJsonLd items={gate5ServiceFaqJsonLdItems(page)} />
+      <Gate5ServicePage page={page} />
     </main>
   );
 }
-

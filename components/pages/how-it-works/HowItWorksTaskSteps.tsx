@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { Container } from "@/components/shared/Container";
 import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
 import { howItWorksTaskSection } from "@/data/howItWorks";
@@ -74,8 +75,8 @@ export function HowItWorksTaskSteps() {
                       {step.body}
                     </p>
                     {step.examples ? (
-                      <p className="type-rule-p mt-4 whitespace-pre-line text-center leading-[1.9em] text-white/95">
-                        {step.examples}
+                      <p className="type-rule-p mt-4 whitespace-pre-line text-center leading-[1.9em] text-white/95 [&_a]:underline [&_a]:underline-offset-2">
+                        {parse(step.examples)}
                       </p>
                     ) : null}
                   </div>

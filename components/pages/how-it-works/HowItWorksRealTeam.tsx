@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
+import parse from "html-react-parser";
 import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MarketingSafeImage } from "@/components/shared/MarketingSafeImage";
@@ -67,8 +68,8 @@ export function HowItWorksRealTeam() {
             {/* Quote row */}
             <div className="flex items-stretch gap-0 rounded-xl bg-transparent px-6 py-5">
               <div className="w-1 shrink-0 rounded-full bg-[#ED63B7]" />
-              <p className="pl-5 text-[18px] font-bold leading-[1.6] text-[#11104C]">
-                {quote}
+              <p className="pl-5 text-[18px] font-bold leading-[1.6] text-[#11104C] [&_a]:text-[#E6236D] [&_a]:underline [&_a]:underline-offset-2">
+                {parse(quote)}
               </p>
             </div>
 

@@ -176,7 +176,14 @@ export default async function ServicesPage() {
               <span className="text-[#E3058D]">Core Services,</span> Everything<br />You Need to Scale
             </h2>
             <p className="mt-4 text-xl font-semibold text-[#1a1a1a]">
-              Pick the plan that fits. We handle the rest.
+              Pick the plan that fits. We handle the rest. If you want it task by task,{" "}
+              <Link
+                href="/blog/tasks-a-team-can-take-off-your-plate"
+                className="text-[#E6236D] underline underline-offset-2 hover:text-[#11104C]"
+              >
+                see everything the team can do
+              </Link>
+              .
             </p>
           </div>
 

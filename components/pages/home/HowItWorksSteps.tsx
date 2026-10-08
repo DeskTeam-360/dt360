@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { howItWorksSection } from "@/data/home";
 
@@ -99,7 +100,11 @@ export function HowItWorksSteps() {
         <div className="mx-auto mt-10 w-full max-w-5xl rounded-[10px] border border-white p-[22px] text-center sm:mt-12">
           <p className="text-white/95">
             <span className="font-extrabold">Agencies:</span> We work under your brand as your invisible back-office.
-            Your clients never know we exist.
+            Your clients never know we exist. If you run an agency,{" "}
+            <Link href="/services/white-label" className="underline decoration-white/70 underline-offset-2 hover:decoration-white">
+              see how agencies use the team
+            </Link>
+            .
           </p>
         </div>
       </Container>

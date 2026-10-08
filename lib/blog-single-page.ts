@@ -7,6 +7,10 @@ import {
   getGate5NewBlogPost,
   type Gate5NewBlogPost,
 } from '@/data/gate5NewBlogPosts';
+import {
+  GATE5_S9_BLOG_PATCHES,
+  normalizeQuotes,
+} from '@/data/gate5S9LinkPatches';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
@@ -28,29 +32,77 @@ function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
   };
 }
 
+/** Gate 5 S9 — insert planned link sentences into live blog HTML. */
+function applyGate5S9BlogPatches(slug: string, content: string): string {
+  const path = `/blog/${slug}`;
+  const patches = GATE5_S9_BLOG_PATCHES.filter((p) => p.path === path);
+  if (patches.length === 0) return content;
+
+  let out = content;
+  for (const patch of patches) {
+    if (out.includes(patch.replaceHtmlFragment)) continue;
+    if (out.includes(patch.find)) {
+      out = out.replace(patch.find, patch.replaceHtmlFragment);
+      continue;
+    }
+    const needle = normalizeQuotes(patch.find);
+    const normOut = normalizeQuotes(out);
+    const at = normOut.indexOf(needle);
+    if (at < 0) continue;
+    // Map normalized index back by scanning original with same length window.
+    // Quotes differ by at most 1 code unit each, so use a sliding exact-length match.
+    const targetLen = patch.find.length;
+    let replaced = false;
+    for (let i = 0; i <= out.length - targetLen; i++) {
+      const slice = out.slice(i, i + targetLen);
+      if (normalizeQuotes(slice) === needle) {
+        out = out.slice(0, i) + patch.replaceHtmlFragment + out.slice(i + targetLen);
+        replaced = true;
+        break;
+      }
+      // Also try longer windows when curly vs straight changes length (same for these chars).
+    }
+    if (!replaced) {
+      // Fallback: length may differ if HTML entities wrap the sentence — try loose search.
+      const loose = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(loose.replace(/['']/g, "[''’]"));
+      // Skip fragile regex fallback — leave unmatched for later crawl check.
+      void re;
+    }
+  }
+  return out;
+}
+
 async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
   const mergeOverride = getGate5BlogOverride(post.slug);
   const newOverride = getGate5NewBlogPost(post.slug);
   const override = mergeOverride ?? newOverride;
-  if (!override) return post;
 
-  let image = post.image;
-  if ('featuredImageFromSlug' in override && override.featuredImageFromSlug) {
-    const imageSource = await getPostBySlug(override.featuredImageFromSlug);
-    if (imageSource?.image) {
-      image = imageSource.image;
+  let next: BlogPost = post;
+  if (override) {
+    let image = post.image;
+    if ('featuredImageFromSlug' in override && override.featuredImageFromSlug) {
+      const imageSource = await getPostBySlug(override.featuredImageFromSlug);
+      if (imageSource?.image) {
+        image = imageSource.image;
+      }
     }
+
+    next = {
+      ...post,
+      title: override.postTitle,
+      excerpt: '',
+      content: override.contentHtml,
+      image,
+      ...(newOverride
+        ? { category: newOverride.category, categories: [newOverride.category] }
+        : {}),
+    };
   }
 
   return {
-    ...post,
-    title: override.postTitle,
-    excerpt: '',
-    content: override.contentHtml,
-    image,
-    ...(newOverride
-      ? { category: newOverride.category, categories: [newOverride.category] }
-      : {}),
+    ...next,
+    content: applyGate5S9BlogPatches(next.slug, next.content ?? ''),
   };
 }
 

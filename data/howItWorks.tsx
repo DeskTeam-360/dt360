@@ -73,7 +73,7 @@ export const howItWorksTaskSection = {
       id: "s1",
       title: "Tell Us What You Need",
       body: `Drop your task into our request system. Write it out, record a Loom video, attach a doc - whatever works for you. The more context you give, the better the output. Even a quick voice note gets the job done.`,
-      examples: `Examples of what people submit: "Redesign our homepage," "Cut this 45-minute webinar into 5 social clips," "Build this GoHighLevel workflow," "Create 10 social graphics for next\u00A0month."`,
+      examples: `Examples of what people submit: "Redesign our homepage," "Cut this 45-minute webinar into 5 social clips," "Build this GoHighLevel workflow," "Create 10 social graphics for next\u00A0month." If you run out of ideas, here's <a href="/blog/tasks-a-team-can-take-off-your-plate">the big list of tasks to hand off</a>.`,
  
       stepLabel: "Step 1",
       gradientClass: "bg-gradient-to-b from-[#ff9f4d] via-[#f0732b] to-[#e8561a]",
@@ -220,7 +220,7 @@ export const howItWorksRealTeam = {
   titleLine1: "A Real Team,",
   titleLine2: "A Real Office",
   titleLine3: "Every Day",
-  quote: "Not an algorithm. Not a freelancer marketplace. A real team in a real office in Indonesia that shows up every single day.",
+  quote: `Not an algorithm. Not a freelancer marketplace. A real team in a real office in Indonesia that shows up every single day. That's <a href="/blog/what-is-insourcing">what we mean by insourcing</a>.`,
   bullets: [
     "One physical office – everyone works together under the same roof, with the same standards",
     "Day shift and night shift – your time zone is always covered",

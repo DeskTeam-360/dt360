@@ -1,37 +1,33 @@
 ﻿import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
-import { faqItems } from "@/components/pages/service/white-label/FAQ";
+import {
+  Gate5ServicePage,
+  gate5ServiceFaqJsonLdItems,
+} from "@/components/pages/gate5/Gate5ServicePage";
+import { getGate5ServicePage } from "@/data/gate5ServicePages";
 import { withPageCanonical } from "@/lib/seo";
-import { CaseStudy } from "@/components/pages/service/white-label/CaseStudy";
-import { FAQ } from "@/components/pages/service/white-label/FAQ";
-import { Hero } from "@/components/pages/service/white-label/Hero";
-import { WhoItsFor } from "@/components/pages/service/white-label/WhoItsFor";
+
+const page = getGate5ServicePage("white-label");
 
 export const metadata: Metadata = withPageCanonical("/services/white-label", {
-  title: "White Label",
+  title: page?.titleTag,
+  description: page?.metaDescription,
 });
 
 export default function WhiteLabelPage() {
+  if (!page) notFound();
+
   return (
     <main className="bg-white">
-      <BreadcrumbJsonLd items={serviceBreadcrumbs("White Label", "/services/white-label")} />
-      <ServiceJsonLd name="White Label" path="/services/white-label" />
-      <FaqPageJsonLd items={faqItems} />
-      <div className="mx-0 px-0">
-        <Hero />
-      </div>
-      <div className="-mt-px mx-0 px-0">
-        <WhoItsFor />
-      </div>
-      <div className="-mt-px mx-0 px-0">
-        <CaseStudy />
-      </div>
-      <div className="-mt-px mx-0 px-0">
-        <FAQ />
-      </div>
+      <BreadcrumbJsonLd
+        items={serviceBreadcrumbs(page.breadcrumbName, page.path)}
+      />
+      <ServiceJsonLd name={page.breadcrumbName} path={page.path} />
+      <FaqPageJsonLd items={gate5ServiceFaqJsonLdItems(page)} />
+      <Gate5ServicePage page={page} />
     </main>
   );
 }
-

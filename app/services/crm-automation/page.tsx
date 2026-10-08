@@ -1,29 +1,33 @@
 ﻿import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd, serviceBreadcrumbs } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
-import { faqItems } from "@/components/pages/service/crm-automation/FAQ";
+import {
+  Gate5ServicePage,
+  gate5ServiceFaqJsonLdItems,
+} from "@/components/pages/gate5/Gate5ServicePage";
+import { getGate5ServicePage } from "@/data/gate5ServicePages";
 import { withPageCanonical } from "@/lib/seo";
-import { FAQ } from "@/components/pages/service/crm-automation/FAQ";
-import { Hero } from "@/components/pages/service/crm-automation/Hero";
+
+const page = getGate5ServicePage("crm-automation");
 
 export const metadata: Metadata = withPageCanonical("/services/crm-automation", {
-  title: "CRM & Automation",
+  title: page?.titleTag,
+  description: page?.metaDescription,
 });
 
 export default function CrmAutomationPage() {
+  if (!page) notFound();
+
   return (
     <main className="bg-white">
-      <BreadcrumbJsonLd items={serviceBreadcrumbs("CRM & Automation", "/services/crm-automation")} />
-      <ServiceJsonLd name="CRM & Automation" path="/services/crm-automation" />
-      <FaqPageJsonLd items={faqItems} />
-      <div className="mx-0 px-0">
-        <Hero />
-      </div>
-      <div className="-mt-px mx-0 px-0">
-        <FAQ />
-      </div>
+      <BreadcrumbJsonLd
+        items={serviceBreadcrumbs(page.breadcrumbName, page.path)}
+      />
+      <ServiceJsonLd name={page.breadcrumbName} path={page.path} />
+      <FaqPageJsonLd items={gate5ServiceFaqJsonLdItems(page)} />
+      <Gate5ServicePage page={page} />
     </main>
   );
 }
-
