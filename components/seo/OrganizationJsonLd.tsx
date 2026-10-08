@@ -32,7 +32,7 @@ export function OrganizationJsonLd() {
             "@type": "ImageObject",
             url: `${url}/images/logo-white.png`,
           },
-          // Existing description kept; Gate 5 may replace later (F9 step 4).
+          // Gate 5 (2026-10-06) Organization description.
           description: organizationDescription,
           foundingDate: organizationFoundingDate,
           founder: {
