@@ -2,9 +2,32 @@ import type { Metadata } from 'next';
 import { permanentRedirect } from 'next/navigation';
 import type { BlogPost } from '@/data/blog';
 import { BLOG_SITEMAP_EXCLUDED_SLUGS } from '@/data/blogSitemapExtraSlugs';
+import { getGate5BlogOverride } from '@/data/gate5BlogOverrides';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
+
+async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
+  const override = getGate5BlogOverride(post.slug);
+  if (!override) return post;
+
+  let image = post.image;
+  if (override.featuredImageFromSlug) {
+    const imageSource = await getPostBySlug(override.featuredImageFromSlug);
+    if (imageSource?.image) {
+      image = imageSource.image;
+    }
+  }
+
+  return {
+    ...post,
+    title: override.postTitle,
+    // Meta description is SEO-only; do not reuse it as the visible excerpt callout.
+    excerpt: '',
+    content: override.contentHtml,
+    image,
+  };
+}
 
 export type BlogSinglePageData = {
   post: BlogPost;
@@ -63,7 +86,9 @@ function resolveRelatedPosts(
     }
   }
 
-  const pool = latestPostsPool.filter((p) => p.slug !== slug);
+  const pool = latestPostsPool.filter(
+    (p) => p.slug !== slug && !BLOG_SITEMAP_EXCLUDED_SLUGS.has(p.slug),
+  );
   const picked: BlogPost[] = [];
   const pickedSlugs = new Set<string>();
 
@@ -117,9 +142,11 @@ export async function getBlogSinglePageData(
     permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
+  const resolvedPost = await applyGate5BlogOverride(post);
+
   return {
-    post,
-    relatedPosts: resolveRelatedPosts(slug, post, latestPostsPool),
+    post: resolvedPost,
+    relatedPosts: resolveRelatedPosts(slug, resolvedPost, latestPostsPool),
     publishedSlugs,
   };
 }
@@ -145,9 +172,12 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
+  const resolvedPost = await applyGate5BlogOverride(post);
+  const override = getGate5BlogOverride(slug);
+
   // Gate 5 F10: absolute titles when provided; otherwise layout adds ` | DeskTeam360`.
   return withPageCanonical(getBlogPostCanonicalPath(slug), {
-    title: post.title,
-    description: post.excerpt,
+    title: resolvedPost.title,
+    description: override?.metaDescription ?? resolvedPost.excerpt,
   });
 }

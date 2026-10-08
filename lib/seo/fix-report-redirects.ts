@@ -1,5 +1,6 @@
 /**
- * Redirects from DeskTeam360 website fix report (2026-09-24): F3, F5, F19, S1.
+ * Redirects from DeskTeam360 website fix report (2026-09-24): F3, F5, F19, S1,
+ * plus Gate 5 merge redirects F18b and S4.
  * Kept separate from next.config so lists stay reviewable.
  */
 
@@ -168,11 +169,53 @@ export function f5DeadPageRedirects(): RedirectRule[] {
   ];
 }
 
+/**
+ * Gate 5 F18b — merge loser `/blog/ai-for-marketing-agencies-2` into the survivor.
+ * Bare `/ai-for-marketing-agencies-2` must one-hop to the survivor (not via /blog/-2).
+ */
+export function f18bAiForMarketingAgenciesRedirects(): RedirectRule[] {
+  const dest = "/blog/ai-for-marketing-agencies";
+  return [
+    {
+      source: "/blog/ai-for-marketing-agencies-2",
+      destination: dest,
+      permanent: true,
+    },
+    {
+      source: "/ai-for-marketing-agencies-2",
+      destination: dest,
+      permanent: true,
+    },
+  ];
+}
+
+/**
+ * Gate 5 S4 — merge loser `/blog/scale-agency-without-hiring` into the survivor.
+ * Bare `/scale-agency-without-hiring` must one-hop to the survivor.
+ */
+export function s4ScaleAgencyRedirects(): RedirectRule[] {
+  const dest = "/blog/how-to-scale-a-marketing-agency-without-hiring";
+  return [
+    {
+      source: "/blog/scale-agency-without-hiring",
+      destination: dest,
+      permanent: true,
+    },
+    {
+      source: "/scale-agency-without-hiring",
+      destination: dest,
+      permanent: true,
+    },
+  ];
+}
+
 /** All fix-report redirects to merge into next.config `redirects()`. */
 export function fixReportRedirects(): RedirectRule[] {
   return [
     ...f19ConvertOnCommandRedirects(),
     ...f3CaseStudyBlogCopyRedirects(),
     ...f5DeadPageRedirects(),
+    ...f18bAiForMarketingAgenciesRedirects(),
+    ...s4ScaleAgencyRedirects(),
   ];
 }

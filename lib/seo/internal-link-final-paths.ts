@@ -24,6 +24,14 @@ const INTERNAL_LINK_PATH_OVERRIDES: Record<string, string> = {
   [`case-studies/${F19_CONVERT_ON_COMMAND_WP_SLUG}`]: `/case-studies/${toCaseStudyPublicSlug(F19_CONVERT_ON_COMMAND_WP_SLUG)}`,
   [F19_CONVERT_ON_COMMAND_WP_SLUG]: `/case-studies/${toCaseStudyPublicSlug(F19_CONVERT_ON_COMMAND_WP_SLUG)}`,
   [`blog/${F19_CONVERT_ON_COMMAND_WP_SLUG}`]: `/case-studies/${toCaseStudyPublicSlug(F19_CONVERT_ON_COMMAND_WP_SLUG)}`,
+
+  // Gate 5 F18b / S4 merge losers → survivors
+  "blog/ai-for-marketing-agencies-2": "/blog/ai-for-marketing-agencies",
+  "ai-for-marketing-agencies-2": "/blog/ai-for-marketing-agencies",
+  "blog/scale-agency-without-hiring":
+    "/blog/how-to-scale-a-marketing-agency-without-hiring",
+  "scale-agency-without-hiring":
+    "/blog/how-to-scale-a-marketing-agency-without-hiring",
 };
 
 const KNOWN_STATIC_PATH_PREFIXES = [

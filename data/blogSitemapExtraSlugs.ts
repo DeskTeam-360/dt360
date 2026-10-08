@@ -69,4 +69,9 @@ export const BLOG_SITEMAP_EXTRA_SLUGS = [
   "coaching-website-that-converts",
 ] as const;
 
-export const BLOG_SITEMAP_EXCLUDED_SLUGS = new Set(["test"]);
+/** F18a test slug + Gate 5 merge losers (redirect to survivors; keep out of sitemap). */
+export const BLOG_SITEMAP_EXCLUDED_SLUGS = new Set([
+  "test",
+  "ai-for-marketing-agencies-2",
+  "scale-agency-without-hiring",
+]);

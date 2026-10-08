@@ -5,7 +5,9 @@
 
 export const GATE5_ABSOLUTE_TITLES: Record<string, string> = {
   '/': 'DeskTeam360: Stop Outsourcing, Start Insourcing',
+  '/blog/ai-for-marketing-agencies': 'AI for Marketing Agencies: What to Automate, What Not To',
   '/blog/build-remote-marketing-team': 'Remote Marketing Team: How to Build and Manage One',
+  '/blog/how-to-scale-a-marketing-agency-without-hiring': 'How to Scale a Marketing Agency Without Hiring | DeskTeam360',
   '/blog/cost-to-outsource-marketing': 'How Much Does It Cost to Outsource Marketing?',
   '/blog/ecommerce-website-cost': 'Ecommerce Website Cost: From Shopify to Custom Builds',
   '/blog/freelance-web-designer-cost': 'Freelance Web Designer Cost: Rates, Hidden Costs, Red Flags',
