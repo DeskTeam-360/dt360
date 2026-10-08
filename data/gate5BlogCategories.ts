@@ -55,11 +55,11 @@ export const GATE5_BLOG_CATEGORIES: Gate5BlogCategory[] = [
     slug: "in-house-vs-team",
     name: "In-House vs a Team",
     titleTag: "In-House vs a Team: Marketing Help Compared | DeskTeam360",
-    // Version for today — switch when /blog/what-is-insourcing is live.
+    // Version for later — /blog/what-is-insourcing ships in Batch 5.
     metaDescription:
-      "Hire in-house, pay an agency, or work with a dedicated team? These guides compare the options and show what each one costs, so you can pick what fits you.",
+      "Hire in-house, pay an agency, or work with a dedicated team? These guides compare the options, show what each one costs, and explain what insourcing means.",
     pageDescription:
-      "Hire in-house, pay an agency, or work with a dedicated team? These guides compare the options and the costs.",
+      "Hire in-house, pay an agency, or work with a dedicated team? These guides compare the options and the costs, and explain what insourcing means.",
   },
   {
     slug: "small-business",

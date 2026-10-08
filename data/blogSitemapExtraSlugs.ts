@@ -7,6 +7,13 @@
  * Exclude `/blog/test` (F18a — also 404 from the blog [slug] route).
  */
 export const BLOG_SITEMAP_EXTRA_SLUGS = [
+  // Gate 5 Batch 5 — new posts (S3 + S8) served from Next
+  "how-to-choose-a-done-for-you-production-team",
+  "hire-a-gohighlevel-expert",
+  "tasks-a-team-can-take-off-your-plate",
+  "virtual-assistant-vs-dedicated-team",
+  "what-is-insourcing",
+  "white-label-wordpress-maintenance",
   "web-design-for-small-business",
   "website-content-audit",
   "best-unlimited-graphic-design-services",

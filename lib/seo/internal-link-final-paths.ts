@@ -58,6 +58,7 @@ const KNOWN_STATIC_PATHS = new Set([
   "showcase",
   "blog",
   "book-a-call",
+  "small-business",
   "demo-call-scheduled-thank-you",
   "onboarding-call-scheduled-thank-you",
   "onboarding-call-am2",

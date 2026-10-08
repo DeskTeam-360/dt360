@@ -3,16 +3,39 @@ import { permanentRedirect } from 'next/navigation';
 import type { BlogPost } from '@/data/blog';
 import { BLOG_SITEMAP_EXCLUDED_SLUGS } from '@/data/blogSitemapExtraSlugs';
 import { getGate5BlogOverride } from '@/data/gate5BlogOverrides';
+import {
+  getGate5NewBlogPost,
+  type Gate5NewBlogPost,
+} from '@/data/gate5NewBlogPosts';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
 
+const PLACEHOLDER_IMAGE = '/images/blog/blog-placeholder.png';
+
+function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
+  return {
+    id: `gate5-${override.slug}`,
+    slug: override.slug,
+    title: override.postTitle,
+    excerpt: '',
+    content: override.contentHtml,
+    image: PLACEHOLDER_IMAGE,
+    category: override.category,
+    categories: [override.category],
+    author: 'Jeremy Kenerson',
+    readTime: '8 min read',
+  };
+}
+
 async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
-  const override = getGate5BlogOverride(post.slug);
+  const mergeOverride = getGate5BlogOverride(post.slug);
+  const newOverride = getGate5NewBlogPost(post.slug);
+  const override = mergeOverride ?? newOverride;
   if (!override) return post;
 
   let image = post.image;
-  if (override.featuredImageFromSlug) {
+  if ('featuredImageFromSlug' in override && override.featuredImageFromSlug) {
     const imageSource = await getPostBySlug(override.featuredImageFromSlug);
     if (imageSource?.image) {
       image = imageSource.image;
@@ -22,10 +45,12 @@ async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
   return {
     ...post,
     title: override.postTitle,
-    // Meta description is SEO-only; do not reuse it as the visible excerpt callout.
     excerpt: '',
     content: override.contentHtml,
     image,
+    ...(newOverride
+      ? { category: newOverride.category, categories: [newOverride.category] }
+      : {}),
   };
 }
 
@@ -33,6 +58,8 @@ export type BlogSinglePageData = {
   post: BlogPost;
   relatedPosts: BlogPost[];
   publishedSlugs: string[];
+  faqs?: Array<{ question: string; answer: string }>;
+  showInsourcingDefinedTerm?: boolean;
 };
 
 /** Canonical blog post URL — matches sitemap (`/blog/{slug}`, no trailing slash). */
@@ -101,7 +128,6 @@ function resolveRelatedPosts(
     }
   };
 
-  // Prefer explicit WP related block, then same category, then anything.
   take(
     pool.filter((p) => relatedSlugs.includes(p.slug)),
     5,
@@ -112,7 +138,6 @@ function resolveRelatedPosts(
   );
   take(pool, 5);
 
-  // Report asks for 3–5; keep whatever we have up to 5 (min 3 when pool allows).
   if (picked.length >= 3) {
     return picked.slice(0, 5);
   }
@@ -122,37 +147,46 @@ function resolveRelatedPosts(
 export async function getBlogSinglePageData(
   slug: string,
 ): Promise<BlogSinglePageData | null> {
-  // F18a — never serve the live test layout / slug as a real post (404, no redirect).
   if (BLOG_SITEMAP_EXCLUDED_SLUGS.has(slug)) {
     return null;
   }
 
-  const [post, latestPostsPool, publishedSlugs] = await Promise.all([
+  const standalone = getGate5NewBlogPost(slug);
+
+  const [wpPost, latestPostsPool, publishedSlugs] = await Promise.all([
     getPostBySlug(slug),
     getBlogLatestPostsPoolForRelated(),
     getAllPublishedPostSlugs(),
   ]);
 
+  let post: BlogPost | null = wpPost;
+
+  if (!post && standalone) {
+    post = synthesizeStandalonePost(standalone);
+  }
+
   if (!post) {
     return null;
   }
 
-  // F3: case studies must not stay live under /blog/{slug}
-  if (isCaseStudyPost(post)) {
+  if (wpPost && isCaseStudyPost(post)) {
     permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
   const resolvedPost = await applyGate5BlogOverride(post);
+  const slugs = new Set(publishedSlugs);
+  if (standalone) slugs.add(slug);
 
   return {
     post: resolvedPost,
     relatedPosts: resolveRelatedPosts(slug, resolvedPost, latestPostsPool),
-    publishedSlugs,
+    publishedSlugs: [...slugs],
+    faqs: standalone?.faqs,
+    showInsourcingDefinedTerm: slug === 'what-is-insourcing',
   };
 }
 
 export async function generateBlogPostMetadata(slug: string): Promise<Metadata> {
-  // F18a
   if (BLOG_SITEMAP_EXCLUDED_SLUGS.has(slug)) {
     return {
       title: 'Post Not Found',
@@ -160,7 +194,8 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     };
   }
 
-  const post = await getPostBySlug(slug);
+  const standalone = getGate5NewBlogPost(slug);
+  const post = (await getPostBySlug(slug)) ?? (standalone ? synthesizeStandalonePost(standalone) : null);
 
   if (!post) {
     return {
@@ -168,16 +203,19 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     };
   }
 
-  if (isCaseStudyPost(post)) {
+  if (!standalone && isCaseStudyPost(post)) {
     permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
   }
 
   const resolvedPost = await applyGate5BlogOverride(post);
-  const override = getGate5BlogOverride(slug);
+  const mergeOverride = getGate5BlogOverride(slug);
+  const description =
+    standalone?.metaDescription ??
+    mergeOverride?.metaDescription ??
+    resolvedPost.excerpt;
 
-  // Gate 5 F10: absolute titles when provided; otherwise layout adds ` | DeskTeam360`.
   return withPageCanonical(getBlogPostCanonicalPath(slug), {
     title: resolvedPost.title,
-    description: override?.metaDescription ?? resolvedPost.excerpt,
+    description,
   });
 }

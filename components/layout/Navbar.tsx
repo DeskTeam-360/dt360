@@ -35,6 +35,7 @@ const ROOT_NON_BLOG_ROUTES = new Set([
   "services",
   "case-studies",
   "blog",
+  "small-business",
   "privacy-policy",
   "terms-conditions",
 ]);

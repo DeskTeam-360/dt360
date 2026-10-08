@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { BlogPostingJsonLd } from '@/components/seo/BlogPostingJsonLd';
 import { BreadcrumbJsonLd, blogPostBreadcrumbs } from '@/components/seo/BreadcrumbJsonLd';
+import { FaqPageJsonLd } from '@/components/seo/FaqPageJsonLd';
+import { InsourcingDefinedTermJsonLd } from '@/components/seo/DefinedTermJsonLd';
 import {
   generateBlogPostMetadata,
   getBlogSinglePageData,
@@ -28,9 +30,13 @@ export default async function SingleBlogPage({ params }: Props) {
     <main className="flex-grow">
       <BreadcrumbJsonLd items={blogPostBreadcrumbs(data.post.title, slug)} />
       <BlogPostingJsonLd post={data.post} path={`/blog/${slug}`} />
-      <DynamicBlogPostContent 
-        post={data.post} 
-        relatedPosts={data.relatedPosts} 
+      {data.faqs && data.faqs.length > 0 ? (
+        <FaqPageJsonLd items={data.faqs} />
+      ) : null}
+      {data.showInsourcingDefinedTerm ? <InsourcingDefinedTermJsonLd /> : null}
+      <DynamicBlogPostContent
+        post={data.post}
+        relatedPosts={data.relatedPosts}
         publishedSlugs={data.publishedSlugs}
       />
     </main>

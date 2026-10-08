@@ -6,9 +6,7 @@ export type FooterSimpleLink = {
 
 /**
  * Gate 5 S7 footer — four groups: Company, Services, Guides, Legal.
- * Held until live: Careers; White Label Marketing Help; What Is Insourcing?;
- * Virtual Assistant or a Whole Team?; Hiring a GoHighLevel Expert;
- * How to Choose a Done-For-You Team.
+ * Careers still held (needs resume form).
  */
 
 export const footerCompany: FooterSimpleLink[] = [
@@ -27,10 +25,15 @@ export const footerServices: FooterSimpleLink[] = [
   { href: "/services/video-editing", label: "Video" },
   { href: "/services/social-media-content", label: "Social Content" },
   { href: "/services/white-label", label: "Agencies" },
+  {
+    href: "/services/white-label/marketing",
+    label: "White Label Marketing Help",
+  },
   { href: "/services/graphic-design", label: "Design" },
 ];
 
 export const footerGuides: FooterSimpleLink[] = [
+  { href: "/blog/what-is-insourcing", label: "What Is Insourcing?" },
   { href: "/blog/website-maintenance-cost-guide", label: "Website Maintenance Cost" },
   {
     href: "/blog/white-label-web-development-guide",
@@ -38,8 +41,17 @@ export const footerGuides: FooterSimpleLink[] = [
   },
   { href: "/blog/how-to-delegate-tasks-effectively", label: "How to Delegate Tasks" },
   {
+    href: "/blog/virtual-assistant-vs-dedicated-team",
+    label: "Virtual Assistant or a Whole Team?",
+  },
+  { href: "/blog/hire-a-gohighlevel-expert", label: "Hiring a GoHighLevel Expert" },
+  {
     href: "/blog/marketing-agency-vs-in-house-team",
     label: "In-House Marketing Team vs Outside Help",
+  },
+  {
+    href: "/blog/how-to-choose-a-done-for-you-production-team",
+    label: "How to Choose a Done-For-You Team",
   },
 ];
 

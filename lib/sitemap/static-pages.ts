@@ -15,6 +15,8 @@ export const STATIC_SITEMAP_PAGES: Array<{ path: string; changeFrequency?: strin
   { path: "/services/website-maintenance" },
   { path: "/services/ai-automation" },
   { path: "/services/white-label" },
+  { path: "/services/white-label/marketing" },
+  { path: "/small-business" },
   { path: "/showcase" },
   { path: "/blog" },
   { path: "/case-studies" },

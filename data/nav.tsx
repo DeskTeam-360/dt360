@@ -5,10 +5,7 @@ export type NavMenuItem = {
   external?: boolean;
 };
 
-/**
- * Gate 5 S7 — Services dropdown (labels only).
- * Held until live: "See Everything the Team Can Do" → /blog/tasks-a-team-can-take-off-your-plate
- */
+/** Gate 5 S7 — Services dropdown (labels only). */
 export const navServices: NavMenuItem[] = [
   { href: "/services/web-design-development", label: "Websites and Development" },
   { href: "/services/website-maintenance", label: "Website Care and Tech Support" },
@@ -18,14 +15,20 @@ export const navServices: NavMenuItem[] = [
   { href: "/services/video-editing", label: "Video" },
   { href: "/services/social-media-content", label: "Social Content" },
   { href: "/services/graphic-design", label: "Design" },
+  {
+    href: "/blog/tasks-a-team-can-take-off-your-plate",
+    label: "See Everything the Team Can Do",
+  },
 ];
 
-/**
- * Gate 5 S7 — Who We Help dropdown (no top-level page).
- * Held until live: White Label Marketing Help, Small Businesses
- */
+/** Gate 5 S7 — Who We Help dropdown (no top-level page). */
 export const navWhoWeHelp: NavMenuItem[] = [
   { href: "/services/white-label", label: "Agencies" },
+  {
+    href: "/services/white-label/marketing",
+    label: "White Label Marketing Help",
+  },
+  { href: "/small-business", label: "Small Businesses" },
 ];
 
 /** Gate 5 S7 — Resources dropdown (top-level target /blog). */
