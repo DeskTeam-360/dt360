@@ -6,6 +6,12 @@
 export const GATE5_ABSOLUTE_TITLES: Record<string, string> = {
   '/': 'DeskTeam360: Stop Outsourcing, Start Insourcing',
   '/blog/ai-for-marketing-agencies': 'AI for Marketing Agencies: What to Automate, What Not To',
+  '/blog/category/automation': 'GoHighLevel, CRM and Automation Guides | DeskTeam360',
+  '/blog/category/delegation': 'Delegation Guides: How to Hand Off Work | DeskTeam360',
+  '/blog/category/in-house-vs-team': 'In-House vs a Team: Marketing Help Compared | DeskTeam360',
+  '/blog/category/small-business': 'Small Business Marketing and Website Guides | DeskTeam360',
+  '/blog/category/website-care': 'Website Care and WordPress Maintenance Guides | DeskTeam360',
+  '/blog/category/white-label': 'White Label Guides for Agencies | DeskTeam360',
   '/blog/build-remote-marketing-team': 'Remote Marketing Team: How to Build and Manage One',
   '/blog/how-to-scale-a-marketing-agency-without-hiring': 'How to Scale a Marketing Agency Without Hiring | DeskTeam360',
   '/blog/cost-to-outsource-marketing': 'How Much Does It Cost to Outsource Marketing?',

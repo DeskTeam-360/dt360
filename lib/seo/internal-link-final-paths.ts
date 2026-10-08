@@ -32,6 +32,13 @@ const INTERNAL_LINK_PATH_OVERRIDES: Record<string, string> = {
     "/blog/how-to-scale-a-marketing-agency-without-hiring",
   "scale-agency-without-hiring":
     "/blog/how-to-scale-a-marketing-agency-without-hiring",
+
+  // Gate 5 S6 old category paths
+  "blog/category/comparisons": "/blog/category/in-house-vs-team",
+  "blog/category/industry-insights": "/blog/category/small-business",
+  "blog/category/small-business-website": "/blog/category/small-business",
+  "blog/category/guides": "/blog",
+  "blog/category/pricing-cost": "/blog",
 };
 
 const KNOWN_STATIC_PATH_PREFIXES = [

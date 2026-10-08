@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
+import { GATE5_BLOG_CATEGORIES } from "@/data/gate5BlogCategories";
 import { BLOG_SITEMAP_EXCLUDED_SLUGS } from "@/data/blogSitemapExtraSlugs";
 import { toCaseStudyPublicSlug } from "@/lib/seo/fix-report-redirects";
 import type { SitemapUrlEntry } from "@/lib/sitemap/types";
@@ -198,7 +199,8 @@ export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlE
     { first: 100 },
   );
 
-  const entries: SitemapUrlEntry[] = [];
+  const bySlug = new Map<string, SitemapUrlEntry>();
+  const base = siteUrl.replace(/\/$/, "");
 
   for (const category of data.categories?.nodes ?? []) {
     const name = category.name?.trim();
@@ -208,13 +210,21 @@ export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlE
     if (name.toLowerCase() === "uncategorized") continue;
 
     const latestPost = category.posts?.nodes?.[0];
-    entries.push({
-      loc: `${siteUrl}/blog/category/${slug}`,
+    bySlug.set(slug, {
+      loc: `${base}/blog/category/${slug}`,
       lastmod: latestPost ? pickPostLastmod(latestPost) : undefined,
     });
   }
 
-  return entries.sort((a, b) => a.loc.localeCompare(b.loc));
+  // Gate 5 S6 — ensure the six named category URLs are in the sitemap.
+  for (const category of GATE5_BLOG_CATEGORIES) {
+    if (bySlug.has(category.slug)) continue;
+    bySlug.set(category.slug, {
+      loc: `${base}/blog/category/${category.slug}`,
+    });
+  }
+
+  return [...bySlug.values()].sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
 export async function fetchCaseStudyEntries(siteUrl: string): Promise<SitemapUrlEntry[]> {

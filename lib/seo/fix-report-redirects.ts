@@ -170,6 +170,40 @@ export function f5DeadPageRedirects(): RedirectRule[] {
 }
 
 /**
+ * Gate 5 S6 — old blog category paths → new category pages or /blog.
+ * Only ship after the destination category pages answer 200.
+ */
+export function s6BlogCategoryRedirects(): RedirectRule[] {
+  return [
+    {
+      source: "/blog/category/comparisons",
+      destination: "/blog/category/in-house-vs-team",
+      permanent: true,
+    },
+    {
+      source: "/blog/category/industry-insights",
+      destination: "/blog/category/small-business",
+      permanent: true,
+    },
+    {
+      source: "/blog/category/small-business-website",
+      destination: "/blog/category/small-business",
+      permanent: true,
+    },
+    {
+      source: "/blog/category/guides",
+      destination: "/blog",
+      permanent: true,
+    },
+    {
+      source: "/blog/category/pricing-cost",
+      destination: "/blog",
+      permanent: true,
+    },
+  ];
+}
+
+/**
  * Gate 5 F18b — merge loser `/blog/ai-for-marketing-agencies-2` into the survivor.
  * Bare `/ai-for-marketing-agencies-2` must one-hop to the survivor (not via /blog/-2).
  */
@@ -217,5 +251,6 @@ export function fixReportRedirects(): RedirectRule[] {
     ...f5DeadPageRedirects(),
     ...f18bAiForMarketingAgenciesRedirects(),
     ...s4ScaleAgencyRedirects(),
+    ...s6BlogCategoryRedirects(),
   ];
 }

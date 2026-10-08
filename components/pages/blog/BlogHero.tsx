@@ -1,7 +1,17 @@
 import React from 'react';
 import { SafeImage } from '@/components/shared/SafeImage';
 
-export function BlogHero() {
+type BlogHeroProps = {
+  /** Defaults to the main blog H1. Gate 5 S6 uses the category name. */
+  title?: string;
+  /** When set, replaces the founder quote card (category page description). */
+  description?: string;
+};
+
+export function BlogHero({
+  title = 'The DeskTeam360 Blog',
+  description,
+}: BlogHeroProps) {
   return (
     <section className="relative overflow-visible mb-0">
       {/* Main Hero Container with curved bottom */}
@@ -74,31 +84,39 @@ export function BlogHero() {
                   marginLeft: 'auto'
                 }}
               >
-                The DeskTeam360 Blog
+                {title}
               </h1>
 
               <div className="ml-auto w-fit max-w-[650px] rounded-[30px] border-[3px] border-white bg-white/44 p-8 shadow-[0_10px_30px_rgba(0,0,0,0.1)] backdrop-blur-md max-md:mt-28 md:mt-0 md:p-10">
-                <p className="mb-6 text-left font-sans text-[20px] font-semibold leading-[1.4] text-[#11104c] max-md:text-pretty max-md:text-balance md:text-[24px] md:leading-[36px]">
-                  <span className="md:hidden">
-                    Real talk about delegation, outsourcing, and growing your business without working
-                    80-hour weeks. I spent 12 years and over $1 million learning what works. These are the
-                    lessons.
-                  </span>
-                  <span className="hidden md:block">
-                    Real talk about delegation, outsourcing,
-                    <br />
-                    and growing your business without
-                    <br />
-                    working 80-hour weeks. I spent 12 years
-                    <br />
-                    and over $1 million learning what works.
-                    <br />
-                    These are the lessons.
-                  </span>
-                </p>
-                <p className="text-[22px] md:text-[26px] leading-[1.5] text-[#e3058d] font-semibold italic text-left font-heading">
-                  Jeremy Kenerson, Founder
-                </p>
+                {description ? (
+                  <p className="text-left font-sans text-[18px] font-medium leading-[1.9] text-[#11104c] md:text-[20px]">
+                    {description}
+                  </p>
+                ) : (
+                  <>
+                    <p className="mb-6 text-left font-sans text-[20px] font-semibold leading-[1.4] text-[#11104c] max-md:text-pretty max-md:text-balance md:text-[24px] md:leading-[36px]">
+                      <span className="md:hidden">
+                        Real talk about delegation, outsourcing, and growing your business without working
+                        80-hour weeks. I spent 12 years and over $1 million learning what works. These are the
+                        lessons.
+                      </span>
+                      <span className="hidden md:block">
+                        Real talk about delegation, outsourcing,
+                        <br />
+                        and growing your business without
+                        <br />
+                        working 80-hour weeks. I spent 12 years
+                        <br />
+                        and over $1 million learning what works.
+                        <br />
+                        These are the lessons.
+                      </span>
+                    </p>
+                    <p className="text-[22px] md:text-[26px] leading-[1.5] text-[#e3058d] font-semibold italic text-left font-heading">
+                      Jeremy Kenerson, Founder
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -14,14 +14,15 @@ export interface BlogPost {
   tagColor?: string;
 }
 
+/** Fallback chips when WordPress categories are unavailable (Gate 5 S6 names). */
 export const CATEGORIES = [
   "All Posts",
+  "Website Care",
+  "White Label",
+  "Automation",
   "Delegation",
-  "Outsourcing",
-  "Agency Growth",
-  "Comparisons",
-  "Pricing & Cost",
-  "Scaling",
+  "In-House vs a Team",
+  "Small Business",
 ];
 
 export const AUTHOR_INFO = {

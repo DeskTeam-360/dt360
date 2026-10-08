@@ -2,9 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import {
   footerCompany,
+  footerGuides,
   footerLegal,
   footerServices,
   footerSocial,
+  type FooterSimpleLink,
   type FooterSocial,
 } from "@/data/footer";
 import { companyContact } from "@/data/companyContact";
@@ -20,7 +22,7 @@ export function Footer() {
       <Container className="relative max-w-7xl pb-0 pt-16 sm:pb-0 sm:pt-20 lg:pb-0 lg:pt-24">
         <FooterScrollTop />
 
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 xl:gap-14">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] lg:gap-6 xl:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <DeskTeamLogo variant="footer" />
             <h3 className="mt-12 w-full font-[var(--font-poppins)] text-[30px] font-normal leading-[1.22] text-white lg:text-[32px]">
@@ -42,37 +44,8 @@ export function Footer() {
                 </a>
               </p>
             </address>
-          </div>
-
-          <nav aria-label="Services">
-            <b className="font-body-emphasis text-white">Services</b>
-            <ul className="type-rule-p mt-5 space-y-1 text-white/85">
-              {footerServices.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="Company">
-            <b className="font-body-emphasis text-white">Company</b>
-            <ul className="type-rule-p mt-5 space-y-1 text-white/85">
-              {footerCompany.map((item) => (
-                <li key={item.href + item.label}>
-                  <Link href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div>
-            <b className="font-body-emphasis text-white">Follow Us on</b>
-            <ul className="my-10 flex flex-wrap gap-3" aria-label="Social media">
+            <b className="mt-10 block font-body-emphasis text-white">Follow Us on</b>
+            <ul className="mt-5 flex flex-wrap gap-3" aria-label="Social media">
               {footerSocial.map((item) => (
                 <li key={item.label}>
                   <a
@@ -87,16 +60,12 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <ul className="mt-8 space-y-[11px] text-[14px] leading-[1.5] text-white/80">
-              {footerLegal.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
+
+          <FooterNav title="Company" items={footerCompany} />
+          <FooterNav title="Services" items={footerServices} />
+          <FooterNav title="Guides" items={footerGuides} />
+          <FooterNav title="Legal" items={footerLegal} />
         </div>
 
         <div className="type-rule-p mt-12 border-t border-white/25 py-5 text-center text-white/90 sm:mt-14">
@@ -104,6 +73,23 @@ export function Footer() {
         </div>
       </Container>
     </footer>
+  );
+}
+
+function FooterNav({ title, items }: { title: string; items: FooterSimpleLink[] }) {
+  return (
+    <nav aria-label={title}>
+      <b className="font-body-emphasis text-white">{title}</b>
+      <ul className="type-rule-p mt-5 space-y-1 text-white/85">
+        {items.map((item) => (
+          <li key={item.href + item.label}>
+            <Link href={item.href} className="transition hover:text-white">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

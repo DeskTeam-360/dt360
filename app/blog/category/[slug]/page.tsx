@@ -9,7 +9,11 @@ import {
   blogCategoryBreadcrumbs,
 } from "@/components/seo/BreadcrumbJsonLd";
 import { CollectionPageJsonLd } from "@/components/seo/CollectionPageJsonLd";
-import { resolveCategoryNameFromSlug } from "@/lib/blog-categories";
+import { GATE5_BLOG_CATEGORIES } from "@/data/gate5BlogCategories";
+import {
+  resolveCategoryNameFromSlug,
+  resolveGate5BlogCategory,
+} from "@/lib/blog-categories";
 import { withPageCanonical } from "@/lib/seo";
 import { getBlogData } from "@/lib/wordpress";
 
@@ -17,31 +21,56 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export function generateStaticParams() {
+  return GATE5_BLOG_CATEGORIES.map((category) => ({ slug: category.slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const gate5 = resolveGate5BlogCategory(slug);
   const { categories } = await getBlogData();
-  const categoryName = resolveCategoryNameFromSlug(slug, categories);
+  const categoryName =
+    gate5?.name ?? resolveCategoryNameFromSlug(slug, categories);
 
   if (!categoryName) {
     return { title: "Category Not Found" };
   }
 
-  // Brand suffix comes from root layout title.template (`%s | DeskTeam360`).
+  // Absolute title tags come from gate5AbsoluteTitles via withPageCanonical.
   return withPageCanonical(`/blog/category/${slug}`, {
     title: categoryName,
-    description: `Articles in the ${categoryName} category on the DeskTeam360 blog.`,
+    description:
+      gate5?.metaDescription ??
+      `Articles in the ${categoryName} category on the DeskTeam360 blog.`,
   });
 }
 
 export default async function BlogCategoryPage({ params }: Props) {
   const { slug } = await params;
+  const gate5 = resolveGate5BlogCategory(slug);
   const { featuredPostsMap, latestPosts, categories, categoryLatestPostsMap } =
     await getBlogData();
-  const categoryName = resolveCategoryNameFromSlug(slug, categories);
+  const categoryName =
+    gate5?.name ?? resolveCategoryNameFromSlug(slug, categories);
 
   if (!categoryName) {
     notFound();
   }
+
+  const listingCategories = categories.includes(categoryName)
+    ? categories
+    : [...categories.filter((c) => c !== "All Posts"), categoryName].sort(
+        (a, b) => {
+          if (a === "All Posts") return -1;
+          if (b === "All Posts") return 1;
+          return a.localeCompare(b);
+        },
+      );
+
+  // Ensure All Posts stays first when we inject a Gate 5 name.
+  const withAllPosts = listingCategories.includes("All Posts")
+    ? listingCategories
+    : ["All Posts", ...listingCategories];
 
   return (
     <main className="flex-grow">
@@ -49,14 +78,17 @@ export default async function BlogCategoryPage({ params }: Props) {
       <CollectionPageJsonLd
         name={categoryName}
         path={`/blog/category/${slug}`}
-        description={`Articles in the ${categoryName} category on the DeskTeam360 blog.`}
+        description={
+          gate5?.metaDescription ??
+          `Articles in the ${categoryName} category on the DeskTeam360 blog.`
+        }
       />
-      <BlogHero />
+      <BlogHero title={categoryName} description={gate5?.pageDescription} />
       <BlogListing
         featuredPostsMap={featuredPostsMap}
         latestPosts={latestPosts}
         categoryLatestPostsMap={categoryLatestPostsMap}
-        categories={categories}
+        categories={withAllPosts}
         initialCategory={categoryName}
       />
       <DownloadCTA />

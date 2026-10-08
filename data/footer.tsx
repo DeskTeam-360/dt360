@@ -1,28 +1,51 @@
-export type FooterSimpleLink = { href: string; label: string };
+export type FooterSimpleLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
 
-export const footerServices: FooterSimpleLink[] = [
-  { href: "/services/web-design-development", label: "Web Design" },
-  { href: "/services/graphic-design", label: "Graphic Design" },
-  { href: "/services/video-editing", label: "Video Editing" },
-  { href: "/services/email-funnels", label: "Email & Funnels" },
-  { href: "/services/crm-automation", label: "CRM & Automation" },
-  { href: "/services/social-media-content", label: "Social Media Content" },
-  { href: "/services/website-maintenance", label: "Website Maintenance" },
-];
+/**
+ * Gate 5 S7 footer — four groups: Company, Services, Guides, Legal.
+ * Held until live: Careers; White Label Marketing Help; What Is Insourcing?;
+ * Virtual Assistant or a Whole Team?; Hiring a GoHighLevel Expert;
+ * How to Choose a Done-For-You Team.
+ */
 
 export const footerCompany: FooterSimpleLink[] = [
   { href: "/about", label: "About" },
-  { href: "/how-it-works", label: "How It Works" },
   { href: "/showcase", label: "Showcase" },
-  { href: "/blog", label: "Blog" },
-  { href: "/case-studies", label: "Case Studies" },
+  { href: "/affiliate-program", label: "Affiliate Program" },
   { href: "/contact", label: "Contact" },
+];
+
+export const footerServices: FooterSimpleLink[] = [
+  { href: "/services/web-design-development", label: "Websites and Development" },
+  { href: "/services/website-maintenance", label: "Website Care and Tech Support" },
+  { href: "/services/crm-automation", label: "CRM and Automation (GoHighLevel)" },
+  { href: "/services/ai-automation", label: "AI Workflows" },
+  { href: "/services/email-funnels", label: "Email and Funnels" },
+  { href: "/services/video-editing", label: "Video" },
+  { href: "/services/social-media-content", label: "Social Content" },
+  { href: "/services/white-label", label: "Agencies" },
+  { href: "/services/graphic-design", label: "Design" },
+];
+
+export const footerGuides: FooterSimpleLink[] = [
+  { href: "/blog/website-maintenance-cost-guide", label: "Website Maintenance Cost" },
+  {
+    href: "/blog/white-label-web-development-guide",
+    label: "White Label Web Development Guide",
+  },
+  { href: "/blog/how-to-delegate-tasks-effectively", label: "How to Delegate Tasks" },
+  {
+    href: "/blog/marketing-agency-vs-in-house-team",
+    label: "In-House Marketing Team vs Outside Help",
+  },
 ];
 
 export const footerLegal: FooterSimpleLink[] = [
   { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms-conditions", label: "Terms & Conditions" },
-  { href: "/affiliate-program", label: "Affiliate Program" },
+  { href: "/terms-conditions", label: "Terms and Conditions" },
 ];
 
 export type FooterSocial = {

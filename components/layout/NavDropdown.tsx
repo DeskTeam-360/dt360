@@ -10,7 +10,20 @@ type NavDropdownProps = {
   triggerClassName?: string;
 };
 
-export function NavDropdown({ label, items, href, className, triggerClassName }: NavDropdownProps) {
+export function NavDropdown({
+  label,
+  items,
+  href,
+  className,
+  triggerClassName,
+}: NavDropdownProps) {
+  const trigger = (
+    <>
+      {label}
+      <ChevronDown className="size-3.5 opacity-70" aria-hidden />
+    </>
+  );
+
   return (
     <div className={cn("group relative", className)}>
       {href ? (
@@ -21,8 +34,7 @@ export function NavDropdown({ label, items, href, className, triggerClassName }:
             triggerClassName ?? "text-white/90 hover:text-white",
           )}
         >
-          {label}
-          <ChevronDown className="size-3.5 opacity-70" aria-hidden />
+          {trigger}
         </Link>
       ) : (
         <span
@@ -31,23 +43,33 @@ export function NavDropdown({ label, items, href, className, triggerClassName }:
             triggerClassName ?? "text-white/90 hover:text-white",
           )}
         >
-          {label}
-          <ChevronDown className="size-3.5 opacity-70" aria-hidden />
+          {trigger}
         </span>
       )}
-      <div className="pointer-events-none invisible absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
+      <div className="pointer-events-none invisible absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
         <ul
-          className="min-w-[220px] rounded-xl border border-white/10 bg-[#12152e]/95 py-2 shadow-xl backdrop-blur-md"
+          className="min-w-[240px] rounded-xl border border-[#101651]/10 bg-white py-2 shadow-xl"
           role="list"
         >
           {items.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="font-nav-primary block px-4 py-2.5 text-white/80 transition-colors hover:bg-white/5 hover:text-white"
-              >
-                {item.label}
-              </Link>
+            <li key={item.href + item.label}>
+              {item.external ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-nav-primary block px-4 py-2.5 text-[#11104C]/85 transition-colors hover:bg-sky-50 hover:text-[#11104C]"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="font-nav-primary block px-4 py-2.5 text-[#11104C]/85 transition-colors hover:bg-sky-50 hover:text-[#11104C]"
+                >
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

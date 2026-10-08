@@ -6,10 +6,15 @@ import { usePathname } from "next/navigation";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
 import { DeskTeamLogo } from "./DeskTeamLogo";
-import { ServicesMegaMenuDesktop } from "./ServicesMegaMenuDesktop";
+import { NavDropdown } from "./NavDropdown";
 import { externalUrls, sitePaths } from "@/config/urls";
 import { readLightHeroNavFromDocument } from "@/components/layout/LightHeroNavScope";
-import { navServices, type NavMenuItem } from "@/data/nav";
+import {
+  navResources,
+  navServices,
+  navWhoWeHelp,
+  type NavMenuItem,
+} from "@/data/nav";
 
 const SCROLL_SOLID_THRESHOLD_PX = 12;
 
@@ -113,9 +118,33 @@ export function Navbar() {
             </div>
 
             <nav
-              className="hidden items-center gap-8 lg:flex"
+              className="hidden items-center gap-6 xl:gap-8 lg:flex"
               aria-label="Primary navigation"
             >
+              <Link
+                href="/how-it-works"
+                className={cn(
+                  "font-nav-primary transition-colors",
+                  pathname === "/how-it-works"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
+                )}
+              >
+                How It Works
+              </Link>
+              <NavDropdown
+                label="Services"
+                href="/services"
+                items={navServices}
+                triggerClassName={desktopLinkClass}
+              />
+              <NavDropdown
+                label="Who We Help"
+                items={navWhoWeHelp}
+                triggerClassName={desktopLinkClass}
+              />
               <Link
                 href="/case-studies"
                 className={cn(
@@ -129,43 +158,12 @@ export function Navbar() {
               >
                 Case Studies
               </Link>
-              <Link
-                href="/how-it-works"
-                className={cn(
-                  "font-nav-primary transition-colors",
-                  pathname === "/how-it-works"
-                    ? useDarkTopNav
-                      ? "text-[#11104C]"
-                      : "text-white"
-                    : desktopLinkClass,
-                )}
-              >
-                How it Works
-              </Link>
-              <ServicesMegaMenuDesktop
-                key={pathname}
-                triggerClassName={desktopLinkClass}
-                useDarkTopNav={useDarkTopNav}
-                servicesRouteActive={pathname.startsWith("/services")}
-              />
-              <Link
-                href="/showcase"
-                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
-              >
-                Showcase
-              </Link>
-              <Link
+              <NavDropdown
+                label="Resources"
                 href="/blog"
-                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/about"
-                className={cn("font-nav-primary transition-colors", desktopLinkClass)}
-              >
-                About
-              </Link>
+                items={navResources}
+                triggerClassName={desktopLinkClass}
+              />
             </nav>
 
             <div
@@ -183,13 +181,13 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className={cn("font-nav-primary transition-colors", desktopLinkClass)}
               >
-                Log in
+                Log In
               </Link>
               <Link
                 href={sitePaths.bookACall}
                 className="font-nav-primary inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2.5 py-2.5 text-white shadow-lg shadow-[0_4px_20px_-2px_rgba(228,39,122,0.55)] transition hover:brightness-110"
               >
-                Book a call
+                Book a Call
                 <ChevronsRight className="size-4" aria-hidden />
               </Link>
             </div>
@@ -236,36 +234,43 @@ export function Navbar() {
               </button>
             </div>
             <nav className="relative z-10 flex flex-1 flex-col gap-1 overflow-y-auto p-4" aria-label="Mobile navigation">
+              <MobileLink href="/how-it-works" onNavigate={() => setMobileOpen(false)}>
+                How It Works
+              </MobileLink>
+              <MobileGroup
+                title="Services"
+                href="/services"
+                items={navServices}
+                onPick={() => setMobileOpen(false)}
+              />
+              <MobileGroup
+                title="Who We Help"
+                items={navWhoWeHelp}
+                onPick={() => setMobileOpen(false)}
+              />
               <MobileLink href="/case-studies" onNavigate={() => setMobileOpen(false)}>
                 Case Studies
               </MobileLink>
-              <MobileLink href="/how-it-works" onNavigate={() => setMobileOpen(false)}>
-                How it Works
-              </MobileLink>
-              <MobileGroup title="Services" items={navServices} onPick={() => setMobileOpen(false)} />
-              <MobileLink href="/showcase" onNavigate={() => setMobileOpen(false)}>
-                Showcase
-              </MobileLink>
-              <MobileLink href="/blog" onNavigate={() => setMobileOpen(false)}>
-                Blog
-              </MobileLink>
-              <MobileLink href="/about" onNavigate={() => setMobileOpen(false)}>
-                About
-              </MobileLink>
+              <MobileGroup
+                title="Resources"
+                href="/blog"
+                items={navResources}
+                onPick={() => setMobileOpen(false)}
+              />
               <hr className="my-3 border-white/10" />
               <MobileLink
                 href={externalUrls.customerPortal}
                 onNavigate={() => setMobileOpen(false)}
                 openInNewTab
               >
-                Log in
+                Log In
               </MobileLink>
               <Link
                 href={sitePaths.bookACall}
                 onClick={() => setMobileOpen(false)}
                 className="font-nav-primary mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#e4277a] to-[#c41e6a] px-2 py-3 text-center text-white shadow-md"
               >
-                Book a call
+                Book a Call
                 <ChevronsRight className="size-4" aria-hidden />
               </Link>
             </nav>
@@ -301,10 +306,12 @@ function MobileLink({
 
 function MobileGroup({
   title,
+  href,
   items,
   onPick,
 }: {
   title: string;
+  href?: string;
   items: NavMenuItem[];
   onPick: () => void;
 }) {
@@ -312,13 +319,19 @@ function MobileGroup({
   return (
     <div className="rounded-lg border border-white/5 bg-white/[0.03]">
       <div className="flex w-full items-stretch">
-        <Link
-          href="/services"
-          onClick={onPick}
-          className="font-nav-primary min-w-0 flex-1 px-3 py-2.5 text-left text-white hover:bg-white/5"
-        >
-          {title}
-        </Link>
+        {href ? (
+          <Link
+            href={href}
+            onClick={onPick}
+            className="font-nav-primary min-w-0 flex-1 px-3 py-2.5 text-left text-white hover:bg-white/5"
+          >
+            {title}
+          </Link>
+        ) : (
+          <span className="font-nav-primary min-w-0 flex-1 px-3 py-2.5 text-left text-white">
+            {title}
+          </span>
+        )}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -331,26 +344,29 @@ function MobileGroup({
       </div>
       {open ? (
         <div className="border-t border-white/5 pb-2 pt-1">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onPick}
-              className="font-nav-primary block px-5 py-2 text-white/75 hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/services"
-            onClick={onPick}
-            className="font-nav-primary mx-3 mt-2 flex items-center justify-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-center text-sm font-bold uppercase tracking-[0.06em] text-white hover:bg-white/10"
-          >
-            See All Services
-            <span aria-hidden className="text-base leading-none">
-              →
-            </span>
-          </Link>
+          {items.map((item) =>
+            item.external ? (
+              <a
+                key={item.href + item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onPick}
+                className="font-nav-primary block px-5 py-2 text-white/75 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href + item.label}
+                href={item.href}
+                onClick={onPick}
+                className="font-nav-primary block px-5 py-2 text-white/75 hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </div>
       ) : null}
     </div>
