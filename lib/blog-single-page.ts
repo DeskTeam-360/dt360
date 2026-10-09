@@ -24,11 +24,12 @@ function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
     title: override.postTitle,
     excerpt: '',
     content: override.contentHtml,
-    image: PLACEHOLDER_IMAGE,
+    image: override.image || PLACEHOLDER_IMAGE,
     category: override.category,
     categories: [override.category],
     author: 'Jeremy Kenerson',
     readTime: '8 min read',
+    date: override.date,
   };
 }
 
@@ -93,9 +94,13 @@ async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
       title: override.postTitle,
       excerpt: '',
       content: override.contentHtml,
-      image,
+      image: newOverride?.image || image,
       ...(newOverride
-        ? { category: newOverride.category, categories: [newOverride.category] }
+        ? {
+            category: newOverride.category,
+            categories: [newOverride.category],
+            ...(newOverride.date ? { date: newOverride.date } : {}),
+          }
         : {}),
     };
   }

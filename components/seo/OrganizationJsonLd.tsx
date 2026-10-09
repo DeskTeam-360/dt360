@@ -48,13 +48,11 @@ export function OrganizationJsonLd() {
             addressCountry: companyContact.addressCountry,
           },
           email: companyContact.emailDisplay,
-          telephone: companyContact.phoneDisplay,
           contactPoint: [
             {
               "@type": "ContactPoint",
               contactType: "customer service",
               email: companyContact.emailDisplay,
-              telephone: companyContact.phoneDisplay,
               areaServed: [...organizationAreaServed],
               availableLanguage: ["English"],
             },

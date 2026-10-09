@@ -27,11 +27,6 @@ export function ContactCompanyDetails() {
         <ul className="space-y-2 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.6] text-[#2a2f61]">
           <li>{companyContact.publicLocation}</li>
           <li>
-            <a href={companyContact.phoneHref} className="transition hover:text-[#11104C]">
-              {companyContact.phoneDisplay}
-            </a>
-          </li>
-          <li>
             <a href={companyContact.emailHref} className="transition hover:text-[#11104C]">
               {companyContact.emailDisplay}
             </a>

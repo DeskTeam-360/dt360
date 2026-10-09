@@ -14,6 +14,8 @@ type SafeImageProps = {
   className?: string;
   sizes?: string;
   priority?: boolean;
+  /** 1–100; passed to next/image when optimized. */
+  quality?: number;
   /** When true, use Next.js image optimizer (phased rollout). Default false elsewhere. */
   optimized?: boolean;
   unoptimized?: boolean;
@@ -30,6 +32,7 @@ function SafeImageInner({
   className,
   sizes,
   priority,
+  quality,
   optimized = false,
   unoptimized,
   "aria-hidden": ariaHidden,
@@ -68,6 +71,7 @@ function SafeImageInner({
       height={fill ? undefined : height}
       sizes={sizes}
       priority={priority}
+      quality={quality}
       unoptimized={isSvg || unoptimized === true || !optimized}
       draggable={false}
       className={className}

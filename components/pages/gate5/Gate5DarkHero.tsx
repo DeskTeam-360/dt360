@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { sitePaths } from "@/config/urls";
 import type { Gate5HeroArt } from "@/data/gate5HeroArt";
@@ -58,18 +59,20 @@ export function Gate5DarkHero({ h1, lead, art }: Gate5DarkHeroProps) {
             </div>
           </div>
 
-          <div className="relative isolate mx-auto w-full min-w-0 max-w-[640px] xl:justify-self-center">
+          <div className="relative isolate mx-auto w-full min-w-0 max-w-[520px] xl:max-w-[560px] xl:justify-self-center">
             <div
               className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-[radial-gradient(circle,rgba(251,98,183,0.45)_0%,rgba(71,56,206,0.15)_55%,transparent_75%)] blur-2xl"
               aria-hidden
             />
-            <ServiceSafeImage
+            <SafeImage
               src={art.src}
               alt={art.alt}
-              width={820}
-              height={620}
+              width={art.width}
+              height={art.height}
               priority
-              sizes="(max-width: 1279px) 100vw, 640px"
+              quality={95}
+              optimized
+              sizes="(max-width: 1279px) min(100vw, 520px), 560px"
               className="relative z-10 h-auto w-full drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]"
             />
           </div>
