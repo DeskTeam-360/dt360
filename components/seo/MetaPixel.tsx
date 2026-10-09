@@ -3,8 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-
-const META_PIXEL_ID = "1586498862891785";
+import { getMetaPixelIds } from "@/lib/seo/analytics";
 
 declare global {
   interface Window {
@@ -13,10 +12,11 @@ declare global {
   }
 }
 
-/** Meta (Facebook) Pixel — loads once and tracks PageView on client navigations. */
+/** Meta (Facebook) Pixel — supports multiple pixel IDs; tracks PageView on client navigations. */
 export function MetaPixel() {
   const pathname = usePathname();
   const isFirstLoad = useRef(true);
+  const pixelIds = getMetaPixelIds();
 
   useEffect(() => {
     if (isFirstLoad.current) {
@@ -25,6 +25,10 @@ export function MetaPixel() {
     }
     window.fbq?.("track", "PageView");
   }, [pathname]);
+
+  if (pixelIds.length === 0) return null;
+
+  const initCalls = pixelIds.map((id) => `fbq('init', '${id}');`).join("\n          ");
 
   return (
     <>
@@ -38,19 +42,22 @@ export function MetaPixel() {
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '${META_PIXEL_ID}');
+          ${initCalls}
           fbq('track', 'PageView');
         `}
       </Script>
       <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          alt=""
-          aria-hidden="true"
-        />
+        {pixelIds.map((id) => (
+          <img
+            key={id}
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`}
+            alt=""
+            aria-hidden="true"
+          />
+        ))}
       </noscript>
     </>
   );

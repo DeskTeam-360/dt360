@@ -42,10 +42,33 @@ export const PORTAL_PAGE_FALLBACK_PATHS = [
 
 const PORTAL_ORIGIN = "https://portal.deskteam360.com";
 
+/**
+ * Custom portal page redirects where the slug differs from the destination on portal.
+ */
+export const PORTAL_CUSTOM_REDIRECTS = [
+  {
+    source: "/new-duct-tape-subscription-discount",
+    destination: `${PORTAL_ORIGIN}/dtmoffer/`,
+    permanent: true,
+  },
+  {
+    source: "/duct-tape-subscription-discount",
+    destination: `${PORTAL_ORIGIN}/dtmoffer/`,
+    permanent: true,
+  },
+  {
+    source: "/duct-tape-websites",
+    destination: `${PORTAL_ORIGIN}/duct-tape-marketing-websites/`,
+    permanent: true,
+  },
+] as const;
+
 export function portalPageFallbackRedirects() {
-  return PORTAL_PAGE_FALLBACK_PATHS.map((path) => ({
+  const fallbackRedirects = PORTAL_PAGE_FALLBACK_PATHS.map((path) => ({
     source: path,
     destination: `${PORTAL_ORIGIN}${path}/`,
     permanent: true as const,
   }));
+
+  return [...fallbackRedirects, ...PORTAL_CUSTOM_REDIRECTS];
 }

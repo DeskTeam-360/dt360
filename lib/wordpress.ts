@@ -84,6 +84,7 @@ type WpPostNode = {
   featuredImage?: { node?: { sourceUrl?: string } };
   author?: { node?: { name?: string } };
   categories?: { nodes?: Array<{ name?: string }> };
+  tags?: { nodes?: Array<{ name?: string }> };
 };
 
 type WpCategoryNameNode = {
@@ -211,7 +212,7 @@ const partitionBlogPostsForListing = (
   allPosts: BlogPost[],
   categoryNodes: WpCategoryNameNode[] | undefined,
   categoryToLatestPostMap?: Record<string, BlogPost>
-): { featuredPostsMap: Record<string, BlogPost>; latestPosts: BlogPost[]; categories: string[] } => {
+): { featuredPostsMap: Record<string, BlogPost>; latestPosts: BlogPost[]; categories: string[]; validPosts: BlogPost[] } => {
   const validPosts = allPosts.filter((post: BlogPost) => {
     const validCats = (post.categories || []).filter(c => {
       const lower = c.toLowerCase();
@@ -264,7 +265,7 @@ const partitionBlogPostsForListing = (
 
   const latestPosts = validPosts.filter((post: BlogPost) => !usedPostIds.has(post.id));
 
-  return { featuredPostsMap, latestPosts, categories   };
+  return { featuredPostsMap, latestPosts, categories, validPosts };
 };
 
 /** Case Study category posts (excluded from main blog listing). */
@@ -298,6 +299,7 @@ const mapCaseStudyPost = (post: WpPostNode): BlogPost => {
 const mapPost = (post: WpPostNode): BlogPost => {
   const excerpt = stripExcerptHtml(post.excerpt);
   const categoriesList = post.categories?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
+  const tagsList = post.tags?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
   const validCategory = categoriesList.find(c => {
     const lower = c.toLowerCase();
     return !lower.includes('case study') && !lower.includes('case-study') && lower !== 'uncategorized';
@@ -314,6 +316,7 @@ const mapPost = (post: WpPostNode): BlogPost => {
     ),
     category: validCategory,
     categories: categoriesList,
+    tags: tagsList,
     author: post.author?.node?.name || 'Admin',
     readTime: calculateReadTime(post.content || excerpt),
     date: post.date,
@@ -325,6 +328,7 @@ const mapPost = (post: WpPostNode): BlogPost => {
 const mapPostLite = (post: WpPostNode): BlogPost => {
   const excerpt = stripExcerptHtml(post.excerpt);
   const categoriesList = post.categories?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
+  const tagsList = post.tags?.nodes?.map(n => n.name).filter((n): n is string => typeof n === 'string' && n.length > 0) || [];
   const validCategory = categoriesList.find(c => {
     const lower = c.toLowerCase();
     return !lower.includes('case study') && !lower.includes('case-study') && lower !== 'uncategorized';
@@ -341,6 +345,7 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
     ),
     category: validCategory,
     categories: categoriesList,
+    tags: tagsList,
     author: post.author?.node?.name || 'Admin',
     readTime: calculateReadTime(excerpt),
     date: post.date,
@@ -453,6 +458,11 @@ export const getBlogData = async () => {
             }
           }
           categories {
+            nodes {
+              name
+            }
+          }
+          tags {
             nodes {
               name
             }
@@ -599,6 +609,11 @@ export const getBlogLatestPostsPoolForRelated = cache(async (): Promise<BlogPost
               name
             }
           }
+          tags {
+            nodes {
+              name
+            }
+          }
         }
       }
     }
@@ -652,6 +667,11 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
           }
         }
         categories {
+          nodes {
+            name
+          }
+        }
+        tags {
           nodes {
             name
           }
