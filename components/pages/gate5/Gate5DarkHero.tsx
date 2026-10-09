@@ -70,7 +70,7 @@ export function Gate5DarkHero({ h1, lead, art }: Gate5DarkHeroProps) {
               width={art.width}
               height={art.height}
               priority
-              quality={95}
+              quality={75}
               optimized
               sizes="(max-width: 1279px) min(100vw, 520px), 560px"
               className="relative z-10 h-auto w-full drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]"

@@ -143,7 +143,10 @@ def main() -> int:
         print(result.stdout)
         if result.returncode != 0:
             problems.append("S2 script exited non-zero")
-        if "WRONG_DEST" in result.stdout or re.search(r"FAIL:\s*[1-9]", result.stdout):
+        # Match non-zero counts only (labels like "WRONG_DEST: 0" always contain the word).
+        if re.search(r"WRONG_DEST:\s*[1-9]", result.stdout) or re.search(
+            r"FAIL:\s*[1-9]", result.stdout
+        ):
             problems.append("S2: one or more keep redirects failed")
 
     print("\n## Summary")

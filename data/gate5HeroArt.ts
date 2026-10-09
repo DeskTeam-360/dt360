@@ -13,7 +13,7 @@ export type Gate5HeroArt = {
 /** Keyed by Gate 5 service slug (`getGate5ServicePage`). */
 export const GATE5_SERVICE_HERO_ART: Record<string, Gate5HeroArt> = {
   "ai-automation": {
-    src: "/images/Service - AI & Automation - Hero.png",
+    src: "/images/gate5-hero-hd/ai-hero-hd.png",
     alt: "Hero illustration for AI and automation service",
     width: 1087,
     height: 1093,
