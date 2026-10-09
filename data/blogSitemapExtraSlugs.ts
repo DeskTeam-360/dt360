@@ -1,3 +1,5 @@
+import { S3_DESIGN_COMPARISON_SLUGS } from "@/data/s3DesignComparison";
+
 /**
  * F2 — live `/blog/{slug}` URLs that answer 200 but are missing from the
  * WordPress-built post sitemap (fix report Appendix C, 2026-09-24).
@@ -7,7 +9,7 @@
  * Exclude `/blog/test` (F18a — also 404 from the blog [slug] route).
  */
 export const BLOG_SITEMAP_EXTRA_SLUGS = [
-  // Gate 5 Batch 5 — new posts (S3 + S8) served from Next
+  // Gate 5 Batch 5 — new posts (S3 replacement + S8) served from Next
   "how-to-choose-a-done-for-you-production-team",
   "hire-a-gohighlevel-expert",
   "tasks-a-team-can-take-off-your-plate",
@@ -16,7 +18,6 @@ export const BLOG_SITEMAP_EXTRA_SLUGS = [
   "white-label-wordpress-maintenance",
   "web-design-for-small-business",
   "website-content-audit",
-  "best-unlimited-graphic-design-services",
   "what-is-white-label-marketing",
   "best-unlimited-video-editing-services",
   "what-is-retargeting",
@@ -26,12 +27,10 @@ export const BLOG_SITEMAP_EXTRA_SLUGS = [
   "digital-marketing-construction-companies",
   "how-to-create-faq-page",
   "how-to-measure-marketing-roi",
-  "best-superside-alternatives",
   "how-to-scale-digital-marketing-agency",
   "wordpress-vs-shopify-ecommerce",
   "outsource-social-media-video-editing",
   "ai-content-creation-guide",
-  "best-manypixels-alternatives",
   "digital-marketing-pet-businesses",
   "gohighlevel-website-design",
   "personal-brand-consultant",
@@ -76,9 +75,10 @@ export const BLOG_SITEMAP_EXTRA_SLUGS = [
   "coaching-website-that-converts",
 ] as const;
 
-/** F18a test slug + Gate 5 merge losers (redirect to survivors; keep out of sitemap). */
+/** F18a test slug + Gate 5 merge losers + S3 design-comparison retirees. */
 export const BLOG_SITEMAP_EXCLUDED_SLUGS = new Set([
   "test",
   "ai-for-marketing-agencies-2",
   "scale-agency-without-hiring",
+  ...S3_DESIGN_COMPARISON_SLUGS,
 ]);

@@ -1,7 +1,7 @@
 /**
  * Gate 5 Batch 5 — new blog posts (S3 + S8) served from Next when WP has no post yet.
  * Source: DeskTeam360 website copy for developer 2026-10-06.
- * S3 comparison redirects wait on Jeremy timing — post content ships without those redirects.
+ * S3 comparison redirects ship with this replacement (see s3DesignComparisonRedirects).
  */
 
 export type Gate5NewBlogPost = {

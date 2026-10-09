@@ -34,11 +34,6 @@ export function Footer() {
               <p className="font-bold text-white">{companyContact.name}</p>
               <p>{companyContact.publicLocation}</p>
               <p>
-                <a href={companyContact.phoneHref} className="transition hover:text-white">
-                  {companyContact.phoneDisplay}
-                </a>
-              </p>
-              <p>
                 <a href={companyContact.emailHref} className="transition hover:text-white">
                   {companyContact.emailDisplay}
                 </a>

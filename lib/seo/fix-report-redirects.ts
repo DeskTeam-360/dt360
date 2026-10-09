@@ -1,8 +1,19 @@
 /**
  * Redirects from DeskTeam360 website fix report (2026-09-24): F3, F5, F19, S1,
- * plus Gate 5 merge redirects F18b and S4.
+ * plus Gate 5 merge redirects F18b, S3, and S4.
  * Kept separate from next.config so lists stay reviewable.
  */
+
+import {
+  S3_DESIGN_COMPARISON_SLUGS,
+  S3_REPLACEMENT_POST_PATH,
+} from "@/data/s3DesignComparison";
+
+export {
+  S3_DESIGN_COMPARISON_SLUGS,
+  S3_DESIGN_COMPARISON_SLUG_SET,
+  S3_REPLACEMENT_POST_PATH,
+} from "@/data/s3DesignComparison";
 
 /**
  * F19 — Convert on Command case study: URL said 120k, page/facts say $160k.
@@ -243,6 +254,27 @@ export function s4ScaleAgencyRedirects(): RedirectRule[] {
   ];
 }
 
+/**
+ * Gate 5 S3 — 12 design-comparison posts (+ 12 bare short URLs) → replacement guide.
+ * Bare paths one-hop to the replacement (not via /blog/{old}).
+ * Jeremy approved shipping once the replacement post was live (2026-10).
+ */
+export function s3DesignComparisonRedirects(): RedirectRule[] {
+  const dest = S3_REPLACEMENT_POST_PATH;
+  return S3_DESIGN_COMPARISON_SLUGS.flatMap((slug) => [
+    {
+      source: `/blog/${slug}`,
+      destination: dest,
+      permanent: true,
+    },
+    {
+      source: `/${slug}`,
+      destination: dest,
+      permanent: true,
+    },
+  ]);
+}
+
 /** All fix-report redirects to merge into next.config `redirects()`. */
 export function fixReportRedirects(): RedirectRule[] {
   return [
@@ -251,6 +283,7 @@ export function fixReportRedirects(): RedirectRule[] {
     ...f5DeadPageRedirects(),
     ...f18bAiForMarketingAgenciesRedirects(),
     ...s4ScaleAgencyRedirects(),
+    ...s3DesignComparisonRedirects(),
     ...s6BlogCategoryRedirects(),
   ];
 }
