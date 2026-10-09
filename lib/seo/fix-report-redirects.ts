@@ -4,16 +4,17 @@
  * Kept separate from next.config so lists stay reviewable.
  */
 
+// Relative import: next.config loads this file and does not resolve `@/` here.
 import {
   S3_DESIGN_COMPARISON_SLUGS,
   S3_REPLACEMENT_POST_PATH,
-} from "@/data/s3DesignComparison";
+} from "../../data/s3DesignComparison";
 
 export {
   S3_DESIGN_COMPARISON_SLUGS,
   S3_DESIGN_COMPARISON_SLUG_SET,
   S3_REPLACEMENT_POST_PATH,
-} from "@/data/s3DesignComparison";
+} from "../../data/s3DesignComparison";
 
 /**
  * F19 — Convert on Command case study: URL said 120k, page/facts say $160k.
