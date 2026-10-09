@@ -6,10 +6,12 @@ import {
 } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { getGate5StaticHeroArt } from "@/data/gate5HeroArt";
 import { getGate5StaticPage } from "@/data/gate5StaticPages";
 import { withPageCanonical } from "@/lib/seo";
 
 const page = getGate5StaticPage("white-label-marketing")!;
+const heroArt = getGate5StaticHeroArt("white-label-marketing");
 
 export const metadata: Metadata = withPageCanonical(
   "/services/white-label/marketing",
@@ -33,7 +35,12 @@ export default function WhiteLabelMarketingPage() {
         path="/services/white-label/marketing"
       />
       <FaqPageJsonLd items={page.faqs} />
-      <Gate5ProsePage h1={page.h1} contentHtml={page.contentHtml} />
+      <Gate5ProsePage
+        h1={page.h1}
+        lead={page.metaDescription}
+        heroArt={heroArt}
+        contentHtml={page.contentHtml}
+      />
     </main>
   );
 }

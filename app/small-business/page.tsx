@@ -6,10 +6,12 @@ import {
 } from "@/components/seo/BreadcrumbJsonLd";
 import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
 import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { getGate5StaticHeroArt } from "@/data/gate5HeroArt";
 import { getGate5StaticPage } from "@/data/gate5StaticPages";
 import { withPageCanonical } from "@/lib/seo";
 
 const page = getGate5StaticPage("small-business")!;
+const heroArt = getGate5StaticHeroArt("small-business");
 
 export const metadata: Metadata = withPageCanonical("/small-business", {
   title: page.titleTag,
@@ -27,7 +29,12 @@ export default function SmallBusinessPage() {
       />
       <ServiceJsonLd name={page.h1} path="/small-business" />
       <FaqPageJsonLd items={page.faqs} />
-      <Gate5ProsePage h1={page.h1} contentHtml={page.contentHtml} />
+      <Gate5ProsePage
+        h1={page.h1}
+        lead={page.metaDescription}
+        heroArt={heroArt}
+        contentHtml={page.contentHtml}
+      />
     </main>
   );
 }

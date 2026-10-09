@@ -1,7 +1,9 @@
 import Link from "next/link";
 import parse from "html-react-parser";
 import { Container } from "@/components/shared/Container";
+import { Gate5DarkHero } from "@/components/pages/gate5/Gate5DarkHero";
 import { sitePaths } from "@/config/urls";
+import { getGate5ServiceHeroArt } from "@/data/gate5HeroArt";
 import {
   GATE5_BOOK_A_CALL_MARKER,
   type Gate5ServicePage as Gate5ServicePageData,
@@ -26,49 +28,69 @@ type Props = {
   page: Gate5ServicePageData;
 };
 
-/** Gate 5 F11 — 5-section service page (What you get → Questions + closing CTA). */
+/** Gate 5 F11 — dark hero + 5-section prose (What you get → Questions + closing CTA). */
 export function Gate5ServicePage({ page }: Props) {
   const [beforeCta, afterCta = ""] = page.bodyHtml.split(GATE5_BOOK_A_CALL_MARKER);
+  const heroArt = getGate5ServiceHeroArt(page.slug);
 
   return (
-    <section className="bg-white pb-20 pt-32 md:pb-28 md:pt-40">
-      <Container className="max-w-[900px]">
-        <h1 className="font-[var(--font-poppins)] text-[36px] font-bold leading-[1.15] text-[#11104C] md:text-[48px] lg:text-[56px]">
-          {page.h1}
-        </h1>
+    <>
+      {heroArt ? (
+        <Gate5DarkHero h1={page.h1} lead={page.metaDescription} art={heroArt} />
+      ) : null}
 
-        <div className="gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
-          {parse(beforeCta)}
-        </div>
+      <section
+        className={
+          heroArt
+            ? "bg-white pb-20 pt-14 md:pb-28 md:pt-16"
+            : "bg-white pb-20 pt-32 md:pb-28 md:pt-40"
+        }
+      >
+        <Container className="max-w-[900px]">
+          {!heroArt ? (
+            <h1 className="font-[var(--font-poppins)] text-[36px] font-bold leading-[1.15] text-[#11104C] md:text-[48px] lg:text-[56px]">
+              {page.h1}
+            </h1>
+          ) : null}
 
-        <div className="mt-8">
-          <BookACallButton />
-        </div>
-
-        {afterCta.trim() ? (
-          <div className="gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
-            {parse(afterCta)}
+          <div
+            className={
+              heroArt
+                ? "gate5-prose font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90"
+                : "gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90"
+            }
+          >
+            {parse(beforeCta)}
           </div>
-        ) : null}
 
-        <div className="gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
-          <h2>{page.questionsH2}</h2>
-          {page.faqs.map((faq) => (
-            <div key={faq.question} className="mb-6">
-              <h3>{faq.question}</h3>
-              <div>{parse(faq.answer)}</div>
+          <div className="mt-8">
+            <BookACallButton />
+          </div>
+
+          {afterCta.trim() ? (
+            <div className="gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
+              {parse(afterCta)}
             </div>
-          ))}
-        </div>
+          ) : null}
 
-        <p className="mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
-          {page.closingLine}
-        </p>
-        <div className="mt-8">
-          <BookACallButton />
-        </div>
-      </Container>
-      <style>{`
+          <div className="gate5-prose mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
+            <h2>{page.questionsH2}</h2>
+            {page.faqs.map((faq) => (
+              <div key={faq.question} className="mb-6">
+                <h3>{faq.question}</h3>
+                <div>{parse(faq.answer)}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-10 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.9] text-[#11104C]/90">
+            {page.closingLine}
+          </p>
+          <div className="mt-8">
+            <BookACallButton />
+          </div>
+        </Container>
+        <style>{`
         .gate5-prose h2 {
           font-family: var(--font-poppins), sans-serif;
           font-weight: 600;
@@ -93,7 +115,8 @@ export function Gate5ServicePage({ page }: Props) {
         .gate5-prose a { color: #E6236D; text-decoration: underline; }
         .gate5-prose a:hover { color: #11104C; }
       `}</style>
-    </section>
+      </section>
+    </>
   );
 }
 
