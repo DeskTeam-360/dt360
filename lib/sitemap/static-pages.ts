@@ -22,6 +22,7 @@ export const STATIC_SITEMAP_PAGES: Array<{ path: string; changeFrequency?: strin
   { path: "/case-studies" },
   { path: "/book-a-call" },
   { path: "/contact" },
+  { path: "/careers" },
   { path: "/privacy-policy" },
   { path: "/terms-conditions" },
   { path: "/affiliate-program" },

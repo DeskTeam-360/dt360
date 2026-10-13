@@ -18,4 +18,5 @@ export const sitePaths = {
   contact: "/contact",
   bookACall: "/book-a-call",
   affiliateProgram: "/affiliate-program",
+  careers: "/careers",
 } as const;
