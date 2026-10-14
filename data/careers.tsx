@@ -22,22 +22,35 @@ export const careersHero = {
     "Join a team that works together to deliver great work for our clients. Whether you want to apply now or join our talent pool for future openings, we would love to hear from you.",
   primaryCta: { label: "Explore Opportunities", href: "#opportunities" },
   secondaryCta: { label: "Join Our Talent Pool", href: "#apply" },
-  image: "/images/careers/careers-hero-placeholder.png",
+  backgroundImage: "/images/careers/hero-careers-bg.png",
+  image: "/images/careers/hero-image-v2.png",
   imageAlt: "DeskTeam360 team members collaborating around a laptop",
   stickyNote: "Teamwork Makes Your Dreamwork",
   badge: "Different Skills Same Goal",
 } as const;
 
 export const careersValues = {
-  image: "/images/careers/careers-values-placeholder.png",
+  image: "/images/careers/image-more-than-just-a-job-v1.png",
   imageAlt: "DeskTeam360 teammates working together in the office",
   titleBefore: "More Than ",
   titleAccent: "Just a Job",
   body: "At DeskTeam360, our team brings together different skills and perspectives to solve problems, support clients, and deliver quality work for businesses around the world.",
   points: [
-    "Collaboration across skills and perspectives",
-    "Accountability and clear communication",
-    "Continuous improvement, every day",
+    {
+      text: "Collaboration across skills and perspectives",
+      icon: "/images/careers/icon-collaboration.png",
+      iconAlt: "Collaboration icon",
+    },
+    {
+      text: "Accountability and clear communication",
+      icon: "/images/careers/icon-accountability.png",
+      iconAlt: "Accountability icon",
+    },
+    {
+      text: "Continuous improvement, every day",
+      icon: "/images/careers/icon-continuous-improvement.png",
+      iconAlt: "Continuous improvement icon",
+    },
   ],
 } as const;
 
