@@ -10,13 +10,11 @@ import {
 
 function RoleRow({
   role,
-  accent,
   showTip,
   onEnter,
   onLeave,
 }: {
   role: CareersRole;
-  accent: string;
   showTip: boolean;
   onEnter: () => void;
   onLeave: () => void;
@@ -32,17 +30,16 @@ function RoleRow({
       onBlur={hasDetail ? onLeave : undefined}
     >
       <div
-        className="flex w-full items-start justify-between gap-2 px-3 py-3 text-left font-[var(--font-inter)] text-[13px] font-normal leading-[1.5] tracking-normal text-[#242C55]"
+        className="flex w-full items-center justify-between gap-1.5 px-3 py-3 text-left"
         tabIndex={hasDetail ? 0 : undefined}
         role={hasDetail ? "button" : undefined}
         aria-describedby={hasDetail && showTip ? `role-tip-${role.title}` : undefined}
       >
-        <span>{role.title}</span>
+        <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-[#080F40] sm:text-[15px]">
+          {role.title}
+        </span>
         {role.talentPool ? (
-          <span
-            className="shrink-0 rounded-full px-2 py-0.5 font-[var(--font-poppins)] text-[10px] font-bold uppercase tracking-wide text-white"
-            style={{ backgroundColor: accent }}
-          >
+          <span className="shrink-0 rounded-full bg-[#EAE5FD] px-1.5 py-px font-[var(--font-poppins)] text-[8px] font-bold uppercase leading-none tracking-wide text-[#6646BD]">
             Talent pool
           </span>
         ) : null}
@@ -100,19 +97,32 @@ export function CareersOpportunities() {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="mt-8 grid justify-items-center gap-4 sm:grid-cols-2 xl:grid-cols-5">
           {careersCategories.map((cat) => (
             <article
               key={cat.id}
-              className="flex min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)]"
+              className="flex w-full max-w-[265px] min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)]"
             >
               <header
-                className="rounded-t-2xl px-4 py-4 text-center text-white"
+                className="box-border flex h-[94px] w-[265px] max-w-full items-center overflow-hidden rounded-[12px] text-white"
                 style={{ background: cat.headerBg }}
               >
-                <p className="font-[var(--font-poppins)] text-[14px] font-bold leading-[1.4] tracking-[-0.2px]">
-                  {cat.name}
-                </p>
+                <div className="flex h-full w-[30%] shrink-0 items-center justify-center px-1">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={cat.icon}
+                    alt={cat.iconAlt}
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-contain"
+                    draggable={false}
+                  />
+                </div>
+                <div className="flex h-full w-[70%] items-center px-2 pr-3">
+                  <p className="font-[var(--font-poppins)] text-[14px] font-bold leading-[1.3] tracking-[-0.2px]">
+                    {cat.name}
+                  </p>
+                </div>
               </header>
               <ul className="relative flex-1 px-1 py-1">
                 {cat.roles.map((role) => {
@@ -121,7 +131,6 @@ export function CareersOpportunities() {
                     <RoleRow
                       key={role.title}
                       role={role}
-                      accent={cat.accent}
                       showTip={hoverKey === key}
                       onEnter={() => setHoverKey(key)}
                       onLeave={() => setHoverKey(null)}

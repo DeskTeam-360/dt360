@@ -10,6 +10,8 @@ export type CareersCategory = {
   name: string;
   accent: string;
   headerBg: string;
+  icon: string;
+  iconAlt: string;
   roles: CareersRole[];
 };
 
@@ -59,15 +61,17 @@ export const careersOpportunities = {
   titleBefore: "Find Your Place on ",
   titleAccent: "Our Team",
   lead:
-    "Explore open roles below, or join our talent pool so we can reach out when a fit opens up.",
+    "Explore the positions below or join our talent pool to be considered for current and future opportunities.",
 } as const;
 
 export const careersCategories: CareersCategory[] = [
   {
     id: "technical",
     name: "Technical",
-    accent: "#F43F5E",
-    headerBg: "linear-gradient(135deg, #FB7185 0%, #E11D48 100%)",
+    accent: "#da0285",
+    headerBg: "linear-gradient(90deg, #fd7955 0%, #da0285 100%)",
+    icon: "/images/careers/icon-category-technical.svg",
+    iconAlt: "Technical category icon",
     roles: [
       { title: "Backend Developer", talentPool: true },
       { title: "Frontend Developer", talentPool: true },
@@ -82,8 +86,10 @@ export const careersCategories: CareersCategory[] = [
   {
     id: "operations",
     name: "Operations & Client Management",
-    accent: "#8B5CF6",
-    headerBg: "linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%)",
+    accent: "#6d25f1",
+    headerBg: "linear-gradient(90deg, #bb28f9 0%, #6d25f1 100%)",
+    icon: "/images/careers/icon-category-operations.svg",
+    iconAlt: "Operations & Client Management category icon",
     roles: [
       { title: "Virtual Assistant", talentPool: true },
       { title: "Project Manager", talentPool: true },
@@ -93,8 +99,10 @@ export const careersCategories: CareersCategory[] = [
   {
     id: "sales",
     name: "Sales & Outreach",
-    accent: "#EC4899",
-    headerBg: "linear-gradient(135deg, #F472B6 0%, #DB2777 100%)",
+    accent: "#7618e0",
+    headerBg: "linear-gradient(90deg, #e40ab4 0%, #7618e0 100%)",
+    icon: "/images/careers/icon-category-sales.svg",
+    iconAlt: "Sales & Outreach category icon",
     roles: [
       { title: "Lead Generator", talentPool: true },
       { title: "Cold Email Specialist", talentPool: true },
@@ -106,8 +114,10 @@ export const careersCategories: CareersCategory[] = [
   {
     id: "content",
     name: "Content & Social",
-    accent: "#6366F1",
-    headerBg: "linear-gradient(135deg, #818CF8 0%, #4F46E5 100%)",
+    accent: "#6229fc",
+    headerBg: "linear-gradient(90deg, #a021fd 0%, #6229fc 100%)",
+    icon: "/images/careers/icon-category-content.svg",
+    iconAlt: "Content & Social category icon",
     roles: [
       { title: "Copy Writer", talentPool: true },
       { title: "Social Media Manager", talentPool: true },
@@ -117,8 +127,10 @@ export const careersCategories: CareersCategory[] = [
   {
     id: "paid-media",
     name: "Paid Media & Advertising",
-    accent: "#3B82F6",
-    headerBg: "linear-gradient(135deg, #60A5FA 0%, #2563EB 100%)",
+    accent: "#4534fd",
+    headerBg: "linear-gradient(90deg, #753efd 0%, #4534fd 100%)",
+    icon: "/images/careers/icon-category-paid-media.svg",
+    iconAlt: "Paid Media & Advertising category icon",
     roles: [
       { title: "Meta Ads Media Buyer", talentPool: true },
       { title: "Google Media Buyer", talentPool: true },
