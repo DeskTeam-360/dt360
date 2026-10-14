@@ -12,6 +12,8 @@ export type CareersCategory = {
   headerBg: string;
   icon: string;
   iconAlt: string;
+  iconWidth: number;
+  iconHeight: number;
   roles: CareersRole[];
 };
 
@@ -70,8 +72,10 @@ export const careersCategories: CareersCategory[] = [
     name: "Technical",
     accent: "#da0285",
     headerBg: "linear-gradient(90deg, #fd7955 0%, #da0285 100%)",
-    icon: "/images/careers/icon-category-technical.svg",
+    icon: "/images/careers/icon-technical-3.png",
     iconAlt: "Technical category icon",
+    iconWidth: 60,
+    iconHeight: 49,
     roles: [
       { title: "Backend Developer", talentPool: true },
       { title: "Frontend Developer", talentPool: true },
@@ -88,8 +92,10 @@ export const careersCategories: CareersCategory[] = [
     name: "Operations & Client Management",
     accent: "#6d25f1",
     headerBg: "linear-gradient(90deg, #bb28f9 0%, #6d25f1 100%)",
-    icon: "/images/careers/icon-category-operations.svg",
+    icon: "/images/careers/icon-operations-client-management-3.png",
     iconAlt: "Operations & Client Management category icon",
+    iconWidth: 71,
+    iconHeight: 50,
     roles: [
       { title: "Virtual Assistant", talentPool: true },
       { title: "Project Manager", talentPool: true },
@@ -101,8 +107,10 @@ export const careersCategories: CareersCategory[] = [
     name: "Sales & Outreach",
     accent: "#7618e0",
     headerBg: "linear-gradient(90deg, #e40ab4 0%, #7618e0 100%)",
-    icon: "/images/careers/icon-category-sales.svg",
+    icon: "/images/careers/icon-sales-and-outreach-3.png",
     iconAlt: "Sales & Outreach category icon",
+    iconWidth: 73,
+    iconHeight: 52,
     roles: [
       { title: "Lead Generator", talentPool: true },
       { title: "Cold Email Specialist", talentPool: true },
@@ -116,8 +124,10 @@ export const careersCategories: CareersCategory[] = [
     name: "Content & Social",
     accent: "#6229fc",
     headerBg: "linear-gradient(90deg, #a021fd 0%, #6229fc 100%)",
-    icon: "/images/careers/icon-category-content.svg",
+    icon: "/images/careers/icon-content-social-3.png",
     iconAlt: "Content & Social category icon",
+    iconWidth: 51,
+    iconHeight: 57,
     roles: [
       { title: "Copy Writer", talentPool: true },
       { title: "Social Media Manager", talentPool: true },
@@ -129,8 +139,10 @@ export const careersCategories: CareersCategory[] = [
     name: "Paid Media & Advertising",
     accent: "#4534fd",
     headerBg: "linear-gradient(90deg, #753efd 0%, #4534fd 100%)",
-    icon: "/images/careers/icon-category-paid-media.svg",
+    icon: "/images/careers/icon-paid-media-advertising-3.png",
     iconAlt: "Paid Media & Advertising category icon",
+    iconWidth: 60,
+    iconHeight: 55,
     roles: [
       { title: "Meta Ads Media Buyer", talentPool: true },
       { title: "Google Media Buyer", talentPool: true },

@@ -35,7 +35,7 @@ function RoleRow({
         role={hasDetail ? "button" : undefined}
         aria-describedby={hasDetail && showTip ? `role-tip-${role.title}` : undefined}
       >
-        <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-[#080F40] sm:text-[15px]">
+        <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[11px] font-semibold leading-[1.6] tracking-normal text-[#080F40]">
           {role.title}
         </span>
         {role.talentPool ? (
@@ -107,18 +107,18 @@ export function CareersOpportunities() {
                 className="box-border flex h-[94px] w-[265px] max-w-full items-center overflow-hidden rounded-[12px] text-white"
                 style={{ background: cat.headerBg }}
               >
-                <div className="flex h-full w-[30%] shrink-0 items-center justify-center px-1">
+                <div className="flex h-full w-[40%] shrink-0 items-center justify-center px-1">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={cat.icon}
                     alt={cat.iconAlt}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 object-contain"
+                    width={cat.iconWidth}
+                    height={cat.iconHeight}
+                    className="object-contain"
                     draggable={false}
                   />
                 </div>
-                <div className="flex h-full w-[70%] items-center px-2 pr-3">
+                <div className="flex h-full w-[60%] items-center px-2 pr-3">
                   <p className="font-[var(--font-poppins)] text-[14px] font-bold leading-[1.3] tracking-[-0.2px]">
                     {cat.name}
                   </p>
