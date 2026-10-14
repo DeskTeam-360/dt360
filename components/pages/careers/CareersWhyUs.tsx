@@ -47,7 +47,7 @@ export function CareersWhyUs() {
                 className="mb-5 h-auto w-auto max-w-none object-contain"
                 aria-hidden
               />
-              <h3 className="font-[var(--font-poppins)] text-[16px] font-semibold leading-[1.35] tracking-[-0.4px] text-white sm:text-[17px]">
+              <h3 className="font-[var(--font-poppins)] text-[19px] font-bold leading-[1.35] tracking-[-0.4px] text-white sm:text-[20px]">
                 {card.title}
               </h3>
               <p className="mt-3 font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-white sm:text-[15px]">

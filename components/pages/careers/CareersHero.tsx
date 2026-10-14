@@ -25,12 +25,12 @@ export function CareersHero() {
       </div>
 
       <Container className="relative z-20 max-w-[1440px] !px-6 pb-16 sm:pb-20 lg:!px-20 xl:pb-24">
-        <div className="grid items-center gap-12 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-16">
+        <div className="grid items-center gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] xl:gap-6">
           <div className="relative z-20 min-w-0">
             <p className="font-[var(--font-poppins)] text-[17px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
               {d.eyebrow}
             </p>
-            <h1 className="mt-4 max-w-[550px] font-[var(--font-poppins)] text-[32px] font-bold leading-[1.12] tracking-[-1px] text-white sm:text-[40px] lg:text-[48px] lg:tracking-[-1.2px]">
+            <h1 className="mt-4 max-w-[620px] font-[var(--font-poppins)] text-[42px] font-bold leading-[1.12] tracking-[-1px] text-white sm:text-[50px] lg:text-[58px] lg:tracking-[-1.2px]">
               {d.titleBefore}
               <span className="text-[#F60996]">{d.titleAccent}</span>
               {d.titleAfter}

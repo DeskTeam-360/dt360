@@ -163,21 +163,21 @@ export const careersWhyUs = {
   cards: [
     {
       title: "Collaborative Environment",
-      body: "Work alongside people with different skills who share one goal: great work for clients.",
+      body: "Work alongside people with different skills and expertise.",
       icon: "/images/careers/icon-collaborative-environment.png",
       iconWidth: 81,
       iconHeight: 57,
     },
     {
       title: "Accountability & Quality",
-      body: "Take ownership of your work. Clear standards, clear feedback, and a team that follows through.",
+      body: "Take ownership of your work and contribute to team goals.",
       icon: "/images/careers/icon-accountability-quality.png",
       iconWidth: 57,
       iconHeight: 67,
     },
     {
       title: "Continuous Improvement",
-      body: "Keep learning and refining your skills. We grow by shipping better work every week.",
+      body: "Keep learning, refining your skills, and finding better ways to work.",
       icon: "/images/careers/icon-continuous-improvement-why.png",
       iconWidth: 68,
       iconHeight: 63,
@@ -186,11 +186,15 @@ export const careersWhyUs = {
 } as const;
 
 export const careersApplication = {
+  eyebrow: "JOIN OUR TALENT POOL",
   titleBefore: "Ready to ",
   titleAccent: "Join Us?",
   backgroundImage: "/images/careers/background-ready-to-join-us.png",
-  body: "Send your profile and tell us which roles interest you. If there isn’t an open seat today, we’ll keep you in our talent pool for the right fit.",
-  handwritten: "We'd love to hear from you!",
+  body: "Interested in working with DeskTeam 360? Tell us a little about yourself and the role you are interested in. Don't see the right opening? Send us your profile anyway. We'll keep your information on file and reach out when a matching opportunity comes up.",
+  handwrittenImage: "/images/careers/handwritten-wed-love-to-hear.png",
+  handwrittenImageAlt: "We'd love to hear from you!",
+  handwrittenWidth: 714,
+  handwrittenHeight: 298,
   positions: careersCategories.flatMap((c) => c.roles.map((r) => r.title)),
   experienceLevels: [
     "Less than 1 year",

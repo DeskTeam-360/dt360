@@ -64,32 +64,26 @@ export function CareersApplication() {
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
-            <h2 className="max-w-[550px] font-[var(--font-poppins)] text-[29px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[37px] lg:text-[45px] lg:tracking-[-1.2px]">
+            <p className="font-[var(--font-poppins)] text-[17px] font-bold uppercase leading-[1.4] tracking-[2px] text-white">
+              {d.eyebrow}
+            </p>
+            <h2 className="mt-3 max-w-[550px] font-[var(--font-poppins)] text-[29px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[37px] lg:text-[45px] lg:tracking-[-1.2px]">
               {d.titleBefore}
               <span className="text-[#fcb44e]">{d.titleAccent}</span>
             </h2>
             <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-white sm:text-[15px]">
               {d.body}
             </p>
-            <p className="mt-10 rotate-[-4deg] font-[var(--font-poppins)] text-[22px] font-bold italic text-white sm:text-[26px]">
-              {d.handwritten}
-            </p>
-            <svg
-              className="mt-2 ml-8 hidden text-white/80 sm:block"
-              width="120"
-              height="48"
-              viewBox="0 0 120 48"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M8 8c28 4 48 20 72 28M80 36c8 2 16 4 28 2"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
+            <div className="mt-10 w-full max-w-[360px]">
+              <SafeImage
+                src={d.handwrittenImage}
+                alt={d.handwrittenImageAlt}
+                width={d.handwrittenWidth}
+                height={d.handwrittenHeight}
+                className="h-auto w-full object-contain"
+                unoptimized
               />
-              <path d="M96 28l14 10-16 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            </div>
           </div>
 
           <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
