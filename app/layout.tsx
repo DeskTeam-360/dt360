@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Poppins, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Poppins, Montserrat } from "next/font/google";
 import { fontReadexPro, fontRussoOne } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { GlobalSameRouteClickHandler } from "@/components/layout/GlobalSameRouteClickHandler";
@@ -17,6 +17,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const poppins = Poppins({
@@ -134,7 +140,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} ${fontReadexPro.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${poppins.variable} ${montserrat.variable} ${fontRussoOne.variable} ${fontReadexPro.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

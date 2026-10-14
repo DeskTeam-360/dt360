@@ -24,30 +24,28 @@ export function CareersValues() {
           </div>
 
           <div className="min-w-0">
-            <h2 className="font-[var(--font-poppins)] text-[36px] font-semibold leading-[1.15] text-[#11104C] sm:text-[48px] lg:text-[56px]">
+            <h2 className="font-[var(--font-poppins)] text-[28px] font-bold leading-[1.2] tracking-[-0.8px] text-[#080F40] sm:text-[32px] lg:text-[36px] lg:tracking-[-1px]">
               {d.titleBefore}
-              <span className="text-[#E3058D]">{d.titleAccent}</span>
+              <span className="text-[#F60996]">{d.titleAccent}</span>
             </h2>
-            <p className="mt-5 font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.8] text-[#11104C]/80">
+            <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] tracking-normal text-[#242C55] sm:text-[15px]">
               {d.body}
             </p>
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-8 space-y-5">
               {d.points.map((point) => (
                 <li
                   key={point.text}
-                  className="flex items-start gap-3 font-[var(--font-montserrat)] text-[17px] font-semibold leading-snug text-[#11104C]"
+                  className="flex items-center gap-4 font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] text-[#242C55] sm:text-[15px]"
                 >
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E3058D]/10">
-                    <SafeImage
-                      src={point.icon}
-                      alt=""
-                      width={22}
-                      height={22}
-                      className="h-[22px] w-[22px] object-contain"
-                      aria-hidden
-                    />
-                  </span>
-                  <span>{point.text}</span>
+                  <SafeImage
+                    src={point.icon}
+                    alt=""
+                    width={57}
+                    height={67}
+                    className="h-[66.43px] w-[56.45px] shrink-0 object-contain"
+                    aria-hidden
+                  />
+                  <span className="font-semibold text-[#080F40]">{point.text}</span>
                 </li>
               ))}
             </ul>

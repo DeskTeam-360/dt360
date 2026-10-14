@@ -33,17 +33,17 @@ export function CareersWhyUs() {
   return (
     <section className="relative overflow-hidden bg-[#02063B] py-16 text-white sm:py-24">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(227,5,141,0.4),transparent_40%),radial-gradient(circle_at_90%_80%,rgba(99,102,241,0.35),transparent_42%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(246,9,150,0.4),transparent_40%),radial-gradient(circle_at_90%_80%,rgba(99,102,241,0.35),transparent_42%)]"
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-[var(--font-montserrat)] text-[13px] font-bold uppercase tracking-[0.14em] text-[#E3058D]">
+          <p className="font-[var(--font-poppins)] text-[12px] font-semibold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
             {d.eyebrow}
           </p>
-          <h2 className="mt-3 font-[var(--font-poppins)] text-[36px] font-semibold leading-[1.15] sm:text-[48px] lg:text-[56px]">
+          <h2 className="mt-3 font-[var(--font-poppins)] text-[26px] font-bold leading-[1.2] tracking-[-0.8px] sm:text-[28px] lg:text-[32px] lg:tracking-[-1px]">
             {d.titleBefore}
-            <span className="text-[#E3058D]">{d.titleAccent}</span>
+            <span className="text-[#F60996]">{d.titleAccent}</span>
           </h2>
         </div>
 
@@ -53,13 +53,13 @@ export function CareersWhyUs() {
               key={card.title}
               className="rounded-2xl border border-white/10 bg-[#11104C]/70 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.25)] backdrop-blur-sm"
             >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E3058D]/15 text-[#E3058D]">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F60996]/15 text-[#F60996]">
                 <CardIcon type={card.icon} />
               </div>
-              <h3 className="font-[var(--font-montserrat)] text-[20px] font-bold leading-snug text-white">
+              <h3 className="font-[var(--font-poppins)] text-[16px] font-semibold leading-[1.35] tracking-[-0.4px] text-white sm:text-[17px]">
                 {card.title}
               </h3>
-              <p className="mt-3 font-[var(--font-montserrat)] text-[16px] font-medium leading-[1.7] text-white/75">
+              <p className="mt-3 font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] tracking-normal text-white/80">
                 {card.body}
               </p>
             </article>

@@ -5,10 +5,10 @@ import { Container } from "@/components/shared/Container";
 import { careersApplication } from "@/data/careers";
 
 const inputClass =
-  "w-full rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-montserrat)] text-[16px] font-medium leading-normal text-[#11104C] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#E3058D] focus:ring-2 focus:ring-[#E3058D]/20";
+  "w-full rounded-[12px] border border-[#C5C9E0] bg-white px-4 py-3 font-[var(--font-inter)] text-[13px] font-normal leading-[1.5] tracking-normal text-[#080F40] placeholder:text-[#9CA3AF] outline-none transition focus:border-[#F60996] focus:ring-2 focus:ring-[#F60996]/20";
 
 const labelClass =
-  "mb-2 block font-[var(--font-montserrat)] text-[15px] font-bold leading-snug text-[#11104C]";
+  "mb-2 block font-[var(--font-inter)] text-[12px] font-semibold leading-[1.4] tracking-normal text-[#080F40]";
 
 type FieldErrors = {
   name?: string;
@@ -48,16 +48,16 @@ export function CareersApplication() {
   return (
     <section
       id="apply"
-      className="scroll-mt-28 relative overflow-hidden bg-gradient-to-br from-[#E3058D] via-[#C026D3] to-[#7C3AED] py-16 sm:py-24"
+      className="scroll-mt-28 relative overflow-hidden bg-gradient-to-br from-[#F60996] via-[#C026D3] to-[#7C3AED] py-16 sm:py-24"
     >
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
-            <h2 className="font-[var(--font-poppins)] text-[40px] font-semibold leading-[1.12] sm:text-[52px] lg:text-[56px]">
+            <h2 className="max-w-[550px] font-[var(--font-poppins)] text-[30px] font-bold leading-[1.2] tracking-[-1px] sm:text-[34px] lg:text-[40px] lg:tracking-[-1.2px]">
               {d.titleBefore}
               <span className="text-[#FFE4F1]">{d.titleAccent}</span>
             </h2>
-            <p className="mt-5 max-w-md font-[var(--font-montserrat)] text-[18px] font-medium leading-[1.8] text-white/90">
+            <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] tracking-normal text-white/90 sm:text-[15px]">
               {d.body}
             </p>
             <p className="mt-10 rotate-[-4deg] font-[var(--font-poppins)] text-[22px] font-semibold italic text-white/95 sm:text-[26px]">
@@ -84,12 +84,12 @@ export function CareersApplication() {
           <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
             {isSuccess ? (
               <div className="py-10 text-center">
-                <p className="font-[var(--font-montserrat)] text-[20px] font-bold text-[#11104C]">
+                <p className="font-[var(--font-inter)] text-[15px] font-semibold text-[#080F40]">
                   {d.successMessage}
                 </p>
                 <button
                   type="button"
-                  className="mt-6 font-[var(--font-montserrat)] text-[15px] font-bold text-[#E3058D] underline-offset-2 hover:underline"
+                  className="mt-6 font-[var(--font-poppins)] text-[14px] font-semibold text-[#F60996] underline-offset-2 hover:underline"
                   onClick={() => {
                     setIsSuccess(false);
                     setFullName("");
@@ -120,7 +120,7 @@ export function CareersApplication() {
                     onChange={(e) => setFullName(e.target.value)}
                   />
                   {errors.name ? (
-                    <p className="mt-1 text-[13px] font-medium text-red-600">{errors.name}</p>
+                    <p className="mt-1 font-[var(--font-inter)] text-[12px] font-medium text-red-600">{errors.name}</p>
                   ) : null}
                 </div>
 
@@ -138,7 +138,7 @@ export function CareersApplication() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   {errors.email ? (
-                    <p className="mt-1 text-[13px] font-medium text-red-600">{errors.email}</p>
+                    <p className="mt-1 font-[var(--font-inter)] text-[12px] font-medium text-red-600">{errors.email}</p>
                   ) : null}
                 </div>
 
@@ -161,7 +161,7 @@ export function CareersApplication() {
                     ))}
                   </select>
                   {errors.position ? (
-                    <p className="mt-1 text-[13px] font-medium text-red-600">{errors.position}</p>
+                    <p className="mt-1 font-[var(--font-inter)] text-[12px] font-medium text-red-600">{errors.position}</p>
                   ) : null}
                 </div>
 
@@ -184,7 +184,7 @@ export function CareersApplication() {
                     ))}
                   </select>
                   {errors.experience ? (
-                    <p className="mt-1 text-[13px] font-medium text-red-600">{errors.experience}</p>
+                    <p className="mt-1 font-[var(--font-inter)] text-[12px] font-medium text-red-600">{errors.experience}</p>
                   ) : null}
                 </div>
 
@@ -194,12 +194,12 @@ export function CareersApplication() {
                   </label>
                   <label
                     htmlFor="careers-cv"
-                    className="flex cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-[#C5C9E0] bg-[#FAFBFF] px-4 py-8 text-center transition hover:border-[#E3058D]/50"
+                    className="flex cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-[#C5C9E0] bg-[#FAFBFF] px-4 py-8 text-center transition hover:border-[#F60996]/50"
                   >
-                    <span className="font-[var(--font-montserrat)] text-[14px] font-semibold text-[#11104C]">
+                    <span className="font-[var(--font-inter)] text-[13px] font-semibold text-[#080F40]">
                       {cvName ?? "Click to upload PDF or DOC"}
                     </span>
-                    <span className="mt-1 font-[var(--font-montserrat)] text-[12px] font-medium text-[#9CA3AF]">
+                    <span className="mt-1 font-[var(--font-inter)] text-[12px] font-normal text-[#9CA3AF]">
                       Max 5MB · stored with your application when backend is wired
                     </span>
                     <input
@@ -248,7 +248,7 @@ export function CareersApplication() {
 
                 <button
                   type="submit"
-                  className="mt-2 w-full rounded-xl bg-gradient-to-r from-[#e4277a] to-[#f97316] px-6 py-4 font-[var(--font-montserrat)] text-[16px] font-bold text-white shadow-lg transition hover:brightness-110"
+                  className="mt-2 w-full rounded-full bg-gradient-to-r from-[#F60996] to-[#f97316] px-6 py-4 font-[var(--font-poppins)] text-[14px] font-semibold leading-[1.4] text-white shadow-lg transition hover:brightness-110"
                 >
                   {d.submitLabel}
                 </button>
