@@ -27,7 +27,7 @@ export function CareersHero() {
       <Container className="relative z-20 max-w-[1440px] !px-6 pb-16 sm:pb-20 lg:!px-20 xl:pb-24">
         <div className="grid items-center gap-12 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-16">
           <div className="relative z-20 min-w-0">
-            <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
+            <p className="font-[var(--font-poppins)] text-[17px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
               {d.eyebrow}
             </p>
             <h1 className="mt-4 max-w-[550px] font-[var(--font-poppins)] text-[32px] font-bold leading-[1.12] tracking-[-1px] text-white sm:text-[40px] lg:text-[48px] lg:tracking-[-1.2px]">

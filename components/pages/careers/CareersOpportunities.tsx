@@ -52,11 +52,11 @@ function RoleRow({
         <div
           id={`role-tip-${role.title}`}
           role="tooltip"
-          className="absolute left-0 right-0 top-full z-20 mx-2 mt-1 rounded-xl border border-[#E8EAF4] bg-white p-4 shadow-[0_16px_40px_rgba(17,16,76,0.16)]"
+          className="absolute left-0 top-full z-20 mt-1 box-border h-[209px] w-[376px] overflow-auto rounded-xl border border-[#E8EAF4] bg-white p-4 shadow-[0_16px_40px_rgba(17,16,76,0.16)]"
         >
           {role.whatYoullDo ? (
             <div className="mb-3">
-              <p className="font-[var(--font-poppins)] text-[11px] font-bold uppercase tracking-[2px] text-[#F60996]">
+              <p className="font-[var(--font-poppins)] text-[14px] font-bold uppercase tracking-[2px] text-[#F60996]">
                 What you&apos;ll do
               </p>
               <p className="mt-1 font-[var(--font-inter)] text-[13px] font-semibold leading-[1.5] text-[#080F40]">
@@ -66,7 +66,7 @@ function RoleRow({
           ) : null}
           {role.requirements ? (
             <div>
-              <p className="font-[var(--font-poppins)] text-[11px] font-bold uppercase tracking-[2px] text-[#F60996]">
+              <p className="font-[var(--font-poppins)] text-[14px] font-bold uppercase tracking-[2px] text-[#F60996]">
                 Requirements
               </p>
               <p className="mt-1 font-[var(--font-inter)] text-[13px] font-semibold leading-[1.5] text-[#080F40]">
@@ -88,10 +88,10 @@ export function CareersOpportunities() {
     <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] pb-12 pt-6 sm:pb-16 sm:pt-8">
       <Container className="max-w-[1440px] !px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
+          <p className="font-[var(--font-poppins)] text-[17px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
             {d.eyebrow}
           </p>
-          <h2 className="mt-3 font-[var(--font-poppins)] text-[26px] font-bold leading-[1.2] tracking-[-0.8px] text-[#080F40] sm:text-[28px] lg:text-[32px] lg:tracking-[-1px]">
+          <h2 className="mt-3 font-[var(--font-poppins)] text-[29px] font-bold leading-[1.12] tracking-[-0.8px] text-[#080F40] sm:text-[37px] lg:text-[45px] lg:tracking-[-1.2px]">
             {d.titleBefore}
             <span className="text-[#F60996]">{d.titleAccent}</span>
           </h2>

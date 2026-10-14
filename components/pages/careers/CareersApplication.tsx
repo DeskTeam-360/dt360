@@ -55,8 +55,8 @@ export function CareersApplication() {
         src={d.backgroundImage}
         alt=""
         fill
-        quality={75}
-        optimized
+        quality={100}
+        unoptimized
         sizes="100vw"
         className="object-fill object-center"
         aria-hidden
@@ -64,7 +64,7 @@ export function CareersApplication() {
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
-            <h2 className="max-w-[550px] font-[var(--font-poppins)] text-[30px] font-bold leading-[1.2] tracking-[-1px] sm:text-[34px] lg:text-[40px] lg:tracking-[-1.2px]">
+            <h2 className="max-w-[550px] font-[var(--font-poppins)] text-[29px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[37px] lg:text-[45px] lg:tracking-[-1.2px]">
               {d.titleBefore}
               <span className="text-[#fcb44e]">{d.titleAccent}</span>
             </h2>
