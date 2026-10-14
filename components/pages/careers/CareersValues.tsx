@@ -19,7 +19,7 @@ export function CareersValues() {
   const d = careersValues;
 
   return (
-    <section className="relative bg-white pb-16 pt-4 sm:pb-24 sm:pt-8">
+    <section className="relative bg-white pb-16 pt-2 sm:pb-24 sm:pt-4">
       <Container className="max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="relative mx-auto w-full max-w-[480px] lg:mx-0">

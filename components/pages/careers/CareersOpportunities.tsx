@@ -11,25 +11,31 @@ import {
 function RoleRow({
   role,
   accent,
-  active,
-  onToggle,
+  showTip,
+  onEnter,
+  onLeave,
 }: {
   role: CareersRole;
   accent: string;
-  active: boolean;
-  onToggle: () => void;
+  showTip: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
 }) {
   const hasDetail = Boolean(role.whatYoullDo || role.requirements);
 
   return (
-    <li className="relative border-b border-[#E8EAF4] last:border-b-0">
-      <button
-        type="button"
-        onClick={hasDetail ? onToggle : undefined}
-        className={`flex w-full items-start justify-between gap-2 px-3 py-3 text-left font-[var(--font-montserrat)] text-[14px] font-semibold leading-snug text-[#11104C] transition hover:bg-[#F7F8FC] sm:text-[15px] ${
-          hasDetail ? "cursor-pointer" : "cursor-default"
-        }`}
-        aria-expanded={hasDetail ? active : undefined}
+    <li
+      className="relative border-b border-[#E8EAF4] last:border-b-0"
+      onMouseEnter={hasDetail ? onEnter : undefined}
+      onMouseLeave={hasDetail ? onLeave : undefined}
+      onFocus={hasDetail ? onEnter : undefined}
+      onBlur={hasDetail ? onLeave : undefined}
+    >
+      <div
+        className="flex w-full items-start justify-between gap-2 px-3 py-3 text-left font-[var(--font-montserrat)] text-[14px] font-semibold leading-snug text-[#11104C] sm:text-[15px]"
+        tabIndex={hasDetail ? 0 : undefined}
+        role={hasDetail ? "button" : undefined}
+        aria-describedby={hasDetail && showTip ? `role-tip-${role.title}` : undefined}
       >
         <span>{role.title}</span>
         {role.talentPool ? (
@@ -40,10 +46,14 @@ function RoleRow({
             Talent pool
           </span>
         ) : null}
-      </button>
+      </div>
 
-      {hasDetail && active ? (
-        <div className="absolute left-0 right-0 top-full z-20 mx-2 mt-1 rounded-xl border border-[#E8EAF4] bg-white p-4 shadow-[0_16px_40px_rgba(17,16,76,0.16)]">
+      {hasDetail && showTip ? (
+        <div
+          id={`role-tip-${role.title}`}
+          role="tooltip"
+          className="absolute left-0 right-0 top-full z-20 mx-2 mt-1 rounded-xl border border-[#E8EAF4] bg-white p-4 shadow-[0_16px_40px_rgba(17,16,76,0.16)]"
+        >
           {role.whatYoullDo ? (
             <div className="mb-3">
               <p className="font-[var(--font-montserrat)] text-[11px] font-bold uppercase tracking-wide text-[#E3058D]">
@@ -72,7 +82,7 @@ function RoleRow({
 
 export function CareersOpportunities() {
   const d = careersOpportunities;
-  const [openKey, setOpenKey] = useState<string | null>("technical:GHL Specialist");
+  const [hoverKey, setHoverKey] = useState<string | null>(null);
 
   return (
     <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] py-16 sm:py-24">
@@ -112,8 +122,9 @@ export function CareersOpportunities() {
                       key={role.title}
                       role={role}
                       accent={cat.accent}
-                      active={openKey === key}
-                      onToggle={() => setOpenKey((prev) => (prev === key ? null : key))}
+                      showTip={hoverKey === key}
+                      onEnter={() => setHoverKey(key)}
+                      onLeave={() => setHoverKey(null)}
                     />
                   );
                 })}

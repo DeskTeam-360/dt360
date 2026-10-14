@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import { careersHero } from "@/data/careers";
@@ -7,7 +8,7 @@ export function CareersHero() {
   const d = careersHero;
 
   return (
-    <section className="relative overflow-hidden bg-[#02063B] pb-16 pt-32 text-white sm:pb-20 xl:pb-24 xl:pt-40">
+    <section className="relative overflow-hidden bg-[#02063B] pb-8 pt-32 text-white sm:pb-10 xl:pb-12 xl:pt-40">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(227,5,141,0.45),transparent_42%),radial-gradient(circle_at_100%_0%,rgba(99,102,241,0.4),transparent_40%)]"
         aria-hidden
@@ -30,13 +31,14 @@ export function CareersHero() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href={d.primaryCta.href}
-                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#e4277a] to-[#f97316] px-6 py-3.5 font-[var(--font-montserrat)] text-[15px] font-bold text-white shadow-lg transition hover:brightness-110"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#e4277a] to-[#f97316] px-7 py-3.5 font-[var(--font-montserrat)] text-[15px] font-bold text-white shadow-lg transition hover:brightness-110"
               >
                 {d.primaryCta.label}
+                <ChevronRight className="size-5 shrink-0 text-white" strokeWidth={2.5} aria-hidden />
               </Link>
               <Link
                 href={d.secondaryCta.href}
-                className="inline-flex items-center justify-center rounded-xl border-2 border-white/80 bg-transparent px-6 py-3.5 font-[var(--font-montserrat)] text-[15px] font-bold text-white transition hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-full border-2 border-white/80 bg-transparent px-7 py-3.5 font-[var(--font-montserrat)] text-[15px] font-bold text-white transition hover:bg-white/10"
               >
                 {d.secondaryCta.label}
               </Link>
@@ -78,10 +80,23 @@ export function CareersHero() {
         </div>
       </Container>
 
+      {/* Wave into white section below (not a fade) */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white sm:h-24"
+        className="relative z-20 mt-10 w-full overflow-hidden text-white sm:mt-14 lg:mt-16"
         aria-hidden
-      />
+      >
+        <svg
+          className="block h-12 w-full sm:h-16 lg:h-20"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M0,55 C240,95 480,10 720,45 C960,80 1200,15 1440,50 L1440,100 L0,100 Z"
+          />
+        </svg>
+      </div>
     </section>
   );
 }

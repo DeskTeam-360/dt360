@@ -22,14 +22,14 @@ export const careersHero = {
     "Join a team that works together to deliver great work for our clients. Whether you want to apply now or join our talent pool for future openings, we would love to hear from you.",
   primaryCta: { label: "Explore Opportunities", href: "#opportunities" },
   secondaryCta: { label: "Join Our Talent Pool", href: "#apply" },
-  image: "/images/about-deskteam-people.png",
+  image: "/images/careers/careers-hero-placeholder.png",
   imageAlt: "DeskTeam360 team members collaborating around a laptop",
   stickyNote: "Teamwork Makes Your Dreamwork",
   badge: "Different Skills Same Goal",
 } as const;
 
 export const careersValues = {
-  image: "/images/about-deskteam-team-gather.png",
+  image: "/images/careers/careers-values-placeholder.png",
   imageAlt: "DeskTeam360 teammates working together in the office",
   titleBefore: "More Than ",
   titleAccent: "Just a Job",
