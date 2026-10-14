@@ -40,7 +40,7 @@ function RoleRow({
         <span>{role.title}</span>
         {role.talentPool ? (
           <span
-            className="shrink-0 rounded-full px-2 py-0.5 font-[var(--font-poppins)] text-[10px] font-semibold uppercase tracking-wide text-white"
+            className="shrink-0 rounded-full px-2 py-0.5 font-[var(--font-poppins)] text-[10px] font-bold uppercase tracking-wide text-white"
             style={{ backgroundColor: accent }}
           >
             Talent pool
@@ -56,20 +56,20 @@ function RoleRow({
         >
           {role.whatYoullDo ? (
             <div className="mb-3">
-              <p className="font-[var(--font-poppins)] text-[11px] font-semibold uppercase tracking-[2px] text-[#F60996]">
+              <p className="font-[var(--font-poppins)] text-[11px] font-bold uppercase tracking-[2px] text-[#F60996]">
                 What you&apos;ll do
               </p>
-              <p className="mt-1 font-[var(--font-inter)] text-[13px] font-normal leading-[1.5] text-[#242C55]">
+              <p className="mt-1 font-[var(--font-inter)] text-[13px] font-semibold leading-[1.5] text-[#080F40]">
                 {role.whatYoullDo}
               </p>
             </div>
           ) : null}
           {role.requirements ? (
             <div>
-              <p className="font-[var(--font-poppins)] text-[11px] font-semibold uppercase tracking-[2px] text-[#F60996]">
+              <p className="font-[var(--font-poppins)] text-[11px] font-bold uppercase tracking-[2px] text-[#F60996]">
                 Requirements
               </p>
-              <p className="mt-1 font-[var(--font-inter)] text-[13px] font-normal leading-[1.5] text-[#242C55]">
+              <p className="mt-1 font-[var(--font-inter)] text-[13px] font-semibold leading-[1.5] text-[#080F40]">
                 {role.requirements}
               </p>
             </div>
@@ -88,14 +88,14 @@ export function CareersOpportunities() {
     <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] py-16 sm:py-24">
       <Container className="max-w-[1440px] !px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-[var(--font-poppins)] text-[12px] font-semibold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
+          <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
             {d.eyebrow}
           </p>
           <h2 className="mt-3 font-[var(--font-poppins)] text-[26px] font-bold leading-[1.2] tracking-[-0.8px] text-[#080F40] sm:text-[28px] lg:text-[32px] lg:tracking-[-1px]">
             {d.titleBefore}
             <span className="text-[#F60996]">{d.titleAccent}</span>
           </h2>
-          <p className="mt-4 font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] tracking-normal text-[#242C55] sm:text-[15px]">
+          <p className="mt-4 font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-[#080F40] sm:text-[15px]">
             {d.lead}
           </p>
         </div>
@@ -110,7 +110,7 @@ export function CareersOpportunities() {
                 className="rounded-t-2xl px-4 py-4 text-center text-white"
                 style={{ background: cat.headerBg }}
               >
-                <p className="font-[var(--font-poppins)] text-[14px] font-semibold leading-[1.4] tracking-[-0.2px]">
+                <p className="font-[var(--font-poppins)] text-[14px] font-bold leading-[1.4] tracking-[-0.2px]">
                   {cat.name}
                 </p>
               </header>

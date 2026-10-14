@@ -135,21 +135,28 @@ export const careersWhyUs = {
   eyebrow: "WHY WORK WITH US",
   titleBefore: "Why Work ",
   titleAccent: "with Us?",
+  backgroundImage: "/images/careers/background-why-work-with-us.png",
   cards: [
     {
       title: "Collaborative Environment",
       body: "Work alongside people with different skills who share one goal: great work for clients.",
-      icon: "users" as const,
+      icon: "/images/careers/icon-collaborative-environment.png",
+      iconWidth: 81,
+      iconHeight: 57,
     },
     {
       title: "Accountability & Quality",
       body: "Take ownership of your work. Clear standards, clear feedback, and a team that follows through.",
-      icon: "shield" as const,
+      icon: "/images/careers/icon-accountability-quality.png",
+      iconWidth: 57,
+      iconHeight: 67,
     },
     {
       title: "Continuous Improvement",
       body: "Keep learning and refining your skills. We grow by shipping better work every week.",
-      icon: "chart" as const,
+      icon: "/images/careers/icon-continuous-improvement-why.png",
+      iconWidth: 68,
+      iconHeight: 63,
     },
   ],
 } as const;
@@ -157,6 +164,7 @@ export const careersWhyUs = {
 export const careersApplication = {
   titleBefore: "Ready to ",
   titleAccent: "Join Us?",
+  backgroundImage: "/images/careers/background-ready-to-join-us.png",
   body: "Send your profile and tell us which roles interest you. If there isn’t an open seat today, we’ll keep you in our talent pool for the right fit.",
   handwritten: "We'd love to hear from you!",
   positions: careersCategories.flatMap((c) => c.roles.map((r) => r.title)),

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import { careersApplication } from "@/data/careers";
 
 const inputClass =
@@ -48,19 +49,29 @@ export function CareersApplication() {
   return (
     <section
       id="apply"
-      className="scroll-mt-28 relative overflow-hidden bg-gradient-to-br from-[#F60996] via-[#C026D3] to-[#7C3AED] py-16 sm:py-24"
+      className="scroll-mt-28 relative overflow-hidden bg-[#F60996] py-16 sm:py-24"
     >
+      <SafeImage
+        src={d.backgroundImage}
+        alt=""
+        fill
+        quality={75}
+        optimized
+        sizes="100vw"
+        className="object-cover object-center"
+        aria-hidden
+      />
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
             <h2 className="max-w-[550px] font-[var(--font-poppins)] text-[30px] font-bold leading-[1.2] tracking-[-1px] sm:text-[34px] lg:text-[40px] lg:tracking-[-1.2px]">
               {d.titleBefore}
-              <span className="text-[#FFE4F1]">{d.titleAccent}</span>
+              <span className="text-[#fcb44e]">{d.titleAccent}</span>
             </h2>
-            <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-normal leading-[1.6] tracking-normal text-white/90 sm:text-[15px]">
+            <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-white sm:text-[15px]">
               {d.body}
             </p>
-            <p className="mt-10 rotate-[-4deg] font-[var(--font-poppins)] text-[22px] font-semibold italic text-white/95 sm:text-[26px]">
+            <p className="mt-10 rotate-[-4deg] font-[var(--font-poppins)] text-[22px] font-bold italic text-white sm:text-[26px]">
               {d.handwritten}
             </p>
             <svg
