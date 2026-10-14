@@ -174,7 +174,7 @@ const nextConfig: NextConfig = {
     unoptimized: false,
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2560, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: getWordPressImageHostnames().map((hostname) => ({
       protocol: "https" as const,

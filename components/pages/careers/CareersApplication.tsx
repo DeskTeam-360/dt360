@@ -49,7 +49,7 @@ export function CareersApplication() {
   return (
     <section
       id="apply"
-      className="scroll-mt-28 relative overflow-hidden bg-[#F60996] py-16 sm:py-24"
+      className="scroll-mt-28 relative overflow-hidden bg-[#F60996] py-12 sm:py-16 lg:py-24"
     >
       <SafeImage
         src={d.backgroundImage}
@@ -58,31 +58,54 @@ export function CareersApplication() {
         quality={100}
         unoptimized
         sizes="100vw"
-        className="object-fill object-center"
+        className="object-cover object-center md:object-cover lg:object-fill xl:object-cover 2xl:object-cover"
         aria-hidden
       />
-      <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+      <Container className="relative z-10 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
+        <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
-            <p className="font-[var(--font-poppins)] text-[17px] font-bold uppercase leading-[1.4] tracking-[2px] text-white">
+            <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-white sm:text-[15px] lg:text-[17px]">
               {d.eyebrow}
             </p>
-            <h2 className="mt-3 max-w-[550px] font-[var(--font-poppins)] text-[29px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[37px] lg:text-[45px] lg:tracking-[-1.2px]">
+            <h2 className="mt-3 max-w-[550px] font-[var(--font-poppins)] text-[26px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[34px] lg:text-[45px] lg:tracking-[-1.2px]">
               {d.titleBefore}
               <span className="text-[#fcb44e]">{d.titleAccent}</span>
             </h2>
-            <p className="mt-5 max-w-[520px] font-[var(--font-inter)] text-[14px] font-semibold leading-[1.6] tracking-normal text-white sm:text-[15px]">
+            <p className="mt-4 max-w-[520px] font-[var(--font-inter)] text-[13px] font-semibold leading-[1.6] tracking-normal text-white sm:mt-5 sm:text-[14px] lg:text-[15px]">
               {d.body}
             </p>
-            <div className="mt-10 w-full max-w-[360px]">
-              <SafeImage
-                src={d.handwrittenImage}
-                alt={d.handwrittenImageAlt}
-                width={d.handwrittenWidth}
-                height={d.handwrittenHeight}
-                className="h-auto w-full object-contain"
-                unoptimized
-              />
+            <div
+              className="mt-8 max-w-[320px] rotate-[-5deg] sm:mt-10 sm:max-w-[400px]"
+              aria-label={d.handwritten}
+            >
+              <p className="font-[var(--font-caveat)] text-[34px] font-semibold leading-[1.05] tracking-[-0.02em] text-white sm:text-[42px] lg:text-[48px]">
+                We&apos;d love
+                <br />
+                to hear from you!
+              </p>
+              <svg
+                className="ml-[36%] mt-[-4px] block w-[100px] text-white sm:ml-[42%] sm:mt-[-6px] sm:w-[140px]"
+                width="140"
+                height="64"
+                viewBox="0 0 140 64"
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M8 22c10 16 28 30 52 28 20-2 36-14 52-28 8-7 16-12 28-14"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M118 6l16 10-12 14"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
           </div>
 

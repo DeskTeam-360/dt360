@@ -191,10 +191,7 @@ export const careersApplication = {
   titleAccent: "Join Us?",
   backgroundImage: "/images/careers/background-ready-to-join-us.png",
   body: "Interested in working with DeskTeam 360? Tell us a little about yourself and the role you are interested in. Don't see the right opening? Send us your profile anyway. We'll keep your information on file and reach out when a matching opportunity comes up.",
-  handwrittenImage: "/images/careers/handwritten-wed-love-to-hear.png",
-  handwrittenImageAlt: "We'd love to hear from you!",
-  handwrittenWidth: 714,
-  handwrittenHeight: 298,
+  handwritten: "We'd love to hear from you!",
   positions: careersCategories.flatMap((c) => c.roles.map((r) => r.title)),
   experienceLevels: [
     "Less than 1 year",
