@@ -1,19 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Montserrat, Readex_Pro } from "next/font/google";
 import { pricingCheckoutUrls } from "@/config/urls";
 import { ServiceSafeImage } from "@/components/pages/service/shared/ServiceSafeImage";
 import { cn } from "@/lib/utils";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-});
-
-const readexPro = Readex_Pro({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 const PLANS = [
   {
@@ -187,9 +176,9 @@ export function ServicesPricingSection({ variant = "default" }: ServicesPricingS
                 </div>
                 <div className="flex flex-1 flex-col items-center px-6 pb-7 pt-14">
                   <p className="inline-flex w-full items-end justify-center whitespace-nowrap font-extrabold leading-none tracking-tight text-[72px]">
-                    <span className={readexPro.className}>{plan.price}</span>
+                    <span className="font-[var(--font-readex-pro)]">{plan.price}</span>
                     <span
-                      className={`${montserrat.className} ml-1 text-[18px] tracking-normal font-bold text-white/90`}
+                      className="ml-1 font-[var(--font-montserrat)] text-[18px] font-bold tracking-normal text-white/90"
                     >
                       {plan.period}
                     </span>
