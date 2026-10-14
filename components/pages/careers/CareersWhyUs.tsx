@@ -43,8 +43,7 @@ export function CareersWhyUs() {
                 alt=""
                 width={card.iconWidth}
                 height={card.iconHeight}
-                className="mb-5 object-contain"
-                style={{ width: card.iconWidth, height: card.iconHeight }}
+                className="mb-5 h-auto w-auto max-w-none object-contain"
                 aria-hidden
               />
               <h3 className="font-[var(--font-poppins)] text-[16px] font-semibold leading-[1.35] tracking-[-0.4px] text-white sm:text-[17px]">
