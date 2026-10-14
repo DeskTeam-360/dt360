@@ -14,7 +14,7 @@ export function CareersWhyUs() {
         quality={75}
         optimized
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-fill object-center"
         aria-hidden
       />
 
@@ -35,7 +35,8 @@ export function CareersWhyUs() {
               key={card.title}
               className="rounded-2xl border border-white/10 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.25)]"
               style={{
-                background: "linear-gradient(90deg, #1e1a75 0%, #1e1a75 30%, #160f61 30%, #160f61 100%)",
+                // 70% left #1e1a75 → 30% right #160f61 as a soft gradient
+                background: "linear-gradient(90deg, #1e1a75 0%, #1e1a75 55%, #160f61 100%)",
               }}
             >
               <SafeImage

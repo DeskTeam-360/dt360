@@ -6,7 +6,7 @@ export function CareersValues() {
   const d = careersValues;
 
   return (
-    <section className="relative bg-white pb-16 pt-10 sm:pb-24 sm:pt-14">
+    <section className="relative bg-white pb-8 pt-[15px] sm:pb-10">
       <Container className="max-w-[1440px] !px-6 lg:!px-20">
         <div className="grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
           <div className="relative mx-auto w-full max-w-[640px] lg:mx-0 lg:max-w-none">

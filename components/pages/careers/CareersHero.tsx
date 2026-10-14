@@ -19,7 +19,7 @@ export function CareersHero() {
           quality={75}
           optimized
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-fill object-center"
           aria-hidden
         />
       </div>

@@ -85,7 +85,7 @@ export function CareersOpportunities() {
   const [hoverKey, setHoverKey] = useState<string | null>(null);
 
   return (
-    <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] py-16 sm:py-24">
+    <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] pb-12 pt-6 sm:pb-16 sm:pt-8">
       <Container className="max-w-[1440px] !px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996]">
@@ -100,7 +100,7 @@ export function CareersOpportunities() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
           {careersCategories.map((cat) => (
             <article
               key={cat.id}

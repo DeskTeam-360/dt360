@@ -58,7 +58,7 @@ export function CareersApplication() {
         quality={75}
         optimized
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-fill object-center"
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] !px-6 lg:!px-20">
