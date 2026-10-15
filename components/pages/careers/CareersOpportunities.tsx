@@ -12,11 +12,13 @@ import {
 function RoleRow({
   role,
   showTip,
+  tipAlign,
   onEnter,
   onLeave,
 }: {
   role: CareersRole;
   showTip: boolean;
+  tipAlign: "start" | "end";
   onEnter: () => void;
   onLeave: () => void;
 }) {
@@ -50,7 +52,9 @@ function RoleRow({
         <div
           id={`role-tip-${role.title}`}
           role="tooltip"
-          className="absolute left-0 top-full z-20 mt-1 box-border h-auto max-h-[209px] w-[min(376px,calc(100vw-2rem))] overflow-auto rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.16)] sm:h-[209px] sm:p-4"
+          className={`absolute top-full z-50 mt-[14px] box-border h-auto max-h-[209px] w-[min(376px,calc(100vw-2rem))] overflow-auto rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.16)] sm:h-[209px] sm:p-4 ${
+            tipAlign === "end" ? "right-0 left-auto" : "left-0"
+          }`}
         >
           {role.whatYoullDo ? (
             <div className="mb-3">
@@ -81,22 +85,24 @@ function RoleRow({
 export function CareersOpportunities() {
   const d = careersOpportunities;
   const [hoverKey, setHoverKey] = useState<string | null>(null);
+  const lastIndex = careersCategories.length - 1;
 
   return (
     <section
       id="opportunities"
-      className="scroll-mt-28 relative overflow-hidden bg-white pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
+      className="scroll-mt-28 relative z-30 overflow-visible bg-white pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
     >
-      <SafeImage
-        src={d.backgroundImage}
-        alt=""
-        fill
-        quality={100}
-        unoptimized
-        sizes="100vw"
-        className="h-full w-full object-cover object-center lg:object-fill"
-        aria-hidden
-      />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <SafeImage
+          src={d.backgroundImage}
+          alt=""
+          fill
+          quality={100}
+          unoptimized
+          sizes="100vw"
+          className="h-full w-full object-cover object-center lg:object-fill"
+        />
+      </div>
       <Container className="relative z-10 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:text-[17px]">
@@ -112,48 +118,57 @@ export function CareersOpportunities() {
         </div>
 
         <div className="mt-6 grid justify-items-center gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {careersCategories.map((cat) => (
-            <article
-              key={cat.id}
-              className="flex w-full max-w-[265px] min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)] sm:max-w-none xl:max-w-[265px]"
-            >
-              <header
-                className="box-border flex h-[84px] w-full items-center overflow-hidden rounded-[12px] text-white sm:h-[94px]"
-                style={{ background: cat.headerBg }}
+          {careersCategories.map((cat, index) => {
+            // Keep tips inside the viewport on right-edge columns (esp. Paid Media).
+            const tipAlign: "start" | "end" =
+              cat.id === "paid-media" || index === lastIndex || index >= 3
+                ? "end"
+                : "start";
+
+            return (
+              <article
+                key={cat.id}
+                className="relative z-10 flex w-full max-w-[265px] min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)] sm:max-w-none xl:max-w-[265px]"
               >
-                <div className="flex h-full w-[40%] shrink-0 items-center justify-center px-1">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cat.icon}
-                    alt={cat.iconAlt}
-                    width={cat.iconWidth}
-                    height={cat.iconHeight}
-                    className="max-h-[70%] max-w-[85%] object-contain"
-                    draggable={false}
-                  />
-                </div>
-                <div className="flex h-full w-[60%] items-center px-2 pr-3">
-                  <p className="font-[var(--font-poppins)] text-[13px] font-bold leading-[1.3] tracking-[-0.2px] sm:text-[14px]">
-                    {cat.name}
-                  </p>
-                </div>
-              </header>
-              <ul className="relative flex-1 px-1 py-1">
-                {cat.roles.map((role) => {
-                  const key = `${cat.id}:${role.title}`;
-                  return (
-                    <RoleRow
-                      key={role.title}
-                      role={role}
-                      showTip={hoverKey === key}
-                      onEnter={() => setHoverKey(key)}
-                      onLeave={() => setHoverKey(null)}
+                <header
+                  className="box-border flex h-[84px] w-full items-center overflow-hidden rounded-[12px] text-white sm:h-[94px]"
+                  style={{ background: cat.headerBg }}
+                >
+                  <div className="flex h-full w-[40%] shrink-0 items-center justify-center px-1">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cat.icon}
+                      alt={cat.iconAlt}
+                      width={cat.iconWidth}
+                      height={cat.iconHeight}
+                      className="max-h-[70%] max-w-[85%] object-contain"
+                      draggable={false}
                     />
-                  );
-                })}
-              </ul>
-            </article>
-          ))}
+                  </div>
+                  <div className="flex h-full w-[60%] items-center px-2 pr-3">
+                    <p className="font-[var(--font-poppins)] text-[13px] font-bold leading-[1.3] tracking-[-0.2px] sm:text-[14px]">
+                      {cat.name}
+                    </p>
+                  </div>
+                </header>
+                <ul className="relative z-20 flex-1 overflow-visible px-1 py-1">
+                  {cat.roles.map((role) => {
+                    const key = `${cat.id}:${role.title}`;
+                    return (
+                      <RoleRow
+                        key={role.title}
+                        role={role}
+                        tipAlign={tipAlign}
+                        showTip={hoverKey === key}
+                        onEnter={() => setHoverKey(key)}
+                        onLeave={() => setHoverKey(null)}
+                      />
+                    );
+                  })}
+                </ul>
+              </article>
+            );
+          })}
         </div>
       </Container>
     </section>
