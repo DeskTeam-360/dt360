@@ -19,8 +19,7 @@ export function CareersHero() {
           quality={80}
           optimized
           sizes="100vw"
-          // Cover on mobile/tablet/4K (no stretch); fill only near design width (~lg–xl)
-          className="object-cover object-[center_top] md:object-[center_center] lg:object-fill xl:object-cover xl:object-center 2xl:object-cover"
+          className="h-full w-full object-fill object-center"
           aria-hidden
         />
       </div>

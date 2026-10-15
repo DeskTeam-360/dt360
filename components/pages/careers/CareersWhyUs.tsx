@@ -14,7 +14,7 @@ export function CareersWhyUs() {
         quality={100}
         unoptimized
         sizes="100vw"
-        className="object-cover object-center md:object-cover lg:object-fill xl:object-cover 2xl:object-cover"
+        className="h-full w-full object-fill object-center"
         aria-hidden
       />
 
