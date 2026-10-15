@@ -20,7 +20,7 @@ export function CareersWhyUs() {
 
       <Container className="relative z-10 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="pt-5 font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:pt-0 lg:text-[17px]">
+          <p className="pt-[30px] font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:pt-5 sm:text-[15px] lg:pt-0 lg:text-[17px]">
             {d.eyebrow}
           </p>
           <h2 className="mt-3 font-[var(--font-poppins)] text-[26px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[34px] lg:text-[45px] lg:tracking-[-1.2px]">
