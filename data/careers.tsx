@@ -17,6 +17,9 @@ export type CareersCategory = {
   roles: CareersRole[];
 };
 
+const mediaBuyerCommon =
+  "Experience running paid ads, managing budgets, tracking performance metrics (such as CPA and ROAS), and reporting.";
+
 export const careersHero = {
   eyebrow: "DESKTEAM360 CAREERS",
   titleBefore: "Build Your ",
@@ -27,7 +30,7 @@ export const careersHero = {
   primaryCta: { label: "Explore Opportunities", href: "#opportunities" },
   secondaryCta: { label: "Join Our Talent Pool", href: "#apply" },
   backgroundImage: "/images/careers/hero-careers-bg.png",
-  image: "/images/careers/hero-image-v1.jpg",
+  image: "/images/careers/hero-image-v1.webp",
   imageAlt: "DeskTeam360 team members collaborating around a laptop",
 } as const;
 
@@ -76,13 +79,23 @@ export const careersCategories: CareersCategory[] = [
     iconWidth: 60,
     iconHeight: 49,
     roles: [
-      { title: "Backend Developer", talentPool: true },
-      { title: "Frontend Developer", talentPool: true },
+      {
+        title: "Backend Developer",
+        talentPool: true,
+        whatYoullDo: "Build and maintain server logic, databases, and API integrations.",
+        requirements: "Backend language experience, REST APIs and databases, Git.",
+      },
+      {
+        title: "Frontend Developer",
+        talentPool: true,
+        whatYoullDo: "Turn designs into clean, responsive web pages.",
+        requirements: "HTML, CSS, JavaScript; WordPress/Webflow or a front-end framework.",
+      },
       {
         title: "GHL Specialist",
         talentPool: true,
-        whatYoullDo: "Set up and manage funnels, pipelines, and automations in GoHighLevel.",
-        requirements: "Hands-on GoHighLevel experience and clear written communication.",
+        whatYoullDo: "Set up and manage GoHighLevel funnels, workflows, pipelines, and forms.",
+        requirements: "GoHighLevel automation and CRM experience; troubleshooting skills.",
       },
     ],
   },
@@ -96,9 +109,24 @@ export const careersCategories: CareersCategory[] = [
     iconWidth: 71,
     iconHeight: 50,
     roles: [
-      { title: "Virtual Assistant", talentPool: true },
-      { title: "Project Manager", talentPool: true },
-      { title: "Account Manager", talentPool: true },
+      {
+        title: "Virtual Assistant",
+        talentPool: true,
+        whatYoullDo: "Support daily admin and operations: scheduling, data entry, communication.",
+        requirements: "Strong written English; well organized; comfortable with productivity tools.",
+      },
+      {
+        title: "Project Manager",
+        talentPool: true,
+        whatYoullDo: "Plan timelines, set priorities, and coordinate the team to deliver on time.",
+        requirements: "Project or team management experience; task-management tools; clear communication.",
+      },
+      {
+        title: "Account Manager",
+        talentPool: true,
+        whatYoullDo: "Be the main contact for clients: take requests, track quality, follow up.",
+        requirements: "Strong English; client-handling experience; proactive and detail-oriented.",
+      },
     ],
   },
   {
@@ -111,11 +139,36 @@ export const careersCategories: CareersCategory[] = [
     iconWidth: 73,
     iconHeight: 52,
     roles: [
-      { title: "Lead Generator", talentPool: true },
-      { title: "Cold Email Specialist", talentPool: true },
-      { title: "Cold Outreach", talentPool: true },
-      { title: "Sales", talentPool: true },
-      { title: "SDR", talentPool: true },
+      {
+        title: "Lead Generator",
+        talentPool: true,
+        whatYoullDo: "Find and compile prospect data that fits our target profile.",
+        requirements: "Prospect research; accurate data entry; lead research tools.",
+      },
+      {
+        title: "Cold Email Specialist",
+        talentPool: true,
+        whatYoullDo: "Write and run cold email campaigns, from copy and setup to follow-up.",
+        requirements: "Cold email and deliverability basics; sequences; English copywriting.",
+      },
+      {
+        title: "Cold Outreach",
+        talentPool: true,
+        whatYoullDo: "Reach prospects by email, LinkedIn, or other channels to start conversations.",
+        requirements: "Persuasive English; consistent follow-up; tracks outreach results.",
+      },
+      {
+        title: "Sales",
+        talentPool: true,
+        whatYoullDo: "Engage prospects and move them through the sales process toward a deal.",
+        requirements: "Sales or business development experience; strong English; target-driven.",
+      },
+      {
+        title: "SDR",
+        talentPool: true,
+        whatYoullDo: "Qualify prospects and book meetings for the sales team.",
+        requirements: "Spoken and written English; prospecting or CRM experience; target-driven.",
+      },
     ],
   },
   {
@@ -128,9 +181,24 @@ export const careersCategories: CareersCategory[] = [
     iconWidth: 51,
     iconHeight: 57,
     roles: [
-      { title: "Copy Writer", talentPool: true },
-      { title: "Social Media Manager", talentPool: true },
-      { title: "YouTube Specialist", talentPool: true },
+      {
+        title: "Copy Writer",
+        talentPool: true,
+        whatYoullDo: "Write copy for ads, emails, websites, and content.",
+        requirements: "Strong English writing; writing samples; adapts to brand tone.",
+      },
+      {
+        title: "Social Media Manager",
+        talentPool: true,
+        whatYoullDo: "Plan, create, schedule, and monitor social content and engagement.",
+        requirements: "Social account management; content calendars; basic analytics.",
+      },
+      {
+        title: "YouTube Specialist",
+        talentPool: true,
+        whatYoullDo: "Manage YouTube channels: uploads, titles, thumbnails, descriptions, analytics.",
+        requirements: "YouTube Studio and video SEO; reads channel analytics.",
+      },
     ],
   },
   {
@@ -143,13 +211,48 @@ export const careersCategories: CareersCategory[] = [
     iconWidth: 60,
     iconHeight: 55,
     roles: [
-      { title: "Meta Ads Media Buyer", talentPool: true },
-      { title: "Google Media Buyer", talentPool: true },
-      { title: "YouTube Media Buyer", talentPool: true },
-      { title: "LinkedIn Media Buyer", talentPool: true },
-      { title: "Native Ad Media Buyer", talentPool: true },
-      { title: "ChatGPT Media Buyer", talentPool: true },
-      { title: "Hulu Ad Media Buyer", talentPool: true },
+      {
+        title: "Meta Ads Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize ads on Meta (Facebook and Instagram).",
+        requirements: `Meta Ads Manager experience. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "Google Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize ads on Google Ads.",
+        requirements: `Google Ads (Search, Display) experience. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "YouTube Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize video ads on YouTube.",
+        requirements: `Video ads experience; understands video creative. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "LinkedIn Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize B2B ads on LinkedIn.",
+        requirements: `LinkedIn Campaign Manager and B2B targeting. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "ChatGPT Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize ads on the ChatGPT ad platform.",
+        requirements: `Learns new ad platforms quickly. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "Native Ad Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize ads on native ad networks.",
+        requirements: `Native ads platform experience. ${mediaBuyerCommon}`,
+      },
+      {
+        title: "Hulu Ad Media Buyer",
+        talentPool: true,
+        whatYoullDo: "Plan, run, and optimize video ads on Hulu.",
+        requirements: `Video or CTV ads experience. ${mediaBuyerCommon}`,
+      },
     ],
   },
 ];

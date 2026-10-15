@@ -55,7 +55,7 @@ function RoleRow({
           {role.whatYoullDo ? (
             <div className="mb-3">
               <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase tracking-[2px] text-[#F60996] sm:text-[14px]">
-                What you&apos;ll do
+                Short description
               </p>
               <p className="mt-1 font-[var(--font-inter)] text-[12px] font-semibold leading-[1.5] text-[#080F40] sm:text-[13px]">
                 {role.whatYoullDo}
@@ -65,7 +65,7 @@ function RoleRow({
           {role.requirements ? (
             <div>
               <p className="font-[var(--font-poppins)] text-[12px] font-bold uppercase tracking-[2px] text-[#F60996] sm:text-[14px]">
-                Requirements
+                Short requirements
               </p>
               <p className="mt-1 font-[var(--font-inter)] text-[12px] font-semibold leading-[1.5] text-[#080F40] sm:text-[13px]">
                 {role.requirements}

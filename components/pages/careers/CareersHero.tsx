@@ -65,7 +65,7 @@ export function CareersHero() {
                 quality={88}
                 optimized
                 sizes="(max-width: 639px) min(100vw, 420px), (max-width: 1023px) min(100vw, 520px), 560px"
-                className="object-contain object-center mix-blend-lighten"
+                className="object-contain object-center"
               />
             </div>
           </div>
