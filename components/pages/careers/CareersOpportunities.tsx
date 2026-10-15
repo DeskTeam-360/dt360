@@ -85,7 +85,7 @@ export function CareersOpportunities() {
   return (
     <section
       id="opportunities"
-      className="scroll-mt-28 relative overflow-hidden bg-[#F5F6FB] pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
+      className="scroll-mt-28 relative overflow-hidden bg-white pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
     >
       <SafeImage
         src={d.backgroundImage}
