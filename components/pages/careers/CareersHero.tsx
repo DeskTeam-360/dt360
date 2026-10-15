@@ -56,35 +56,17 @@ export function CareersHero() {
           </div>
 
           <div className="relative z-20 mx-auto w-full max-w-[420px] sm:max-w-[520px] lg:max-w-none">
-            <div className="relative mx-auto aspect-[541/449] w-full max-w-[541px]">
+            <div className="relative mx-auto aspect-[819/648] w-full max-w-[560px]">
               <SafeImage
                 src={d.image}
                 alt={d.imageAlt}
                 fill
                 priority
-                quality={80}
+                quality={88}
                 optimized
                 sizes="(max-width: 639px) min(100vw, 420px), (max-width: 1023px) min(100vw, 520px), 560px"
                 className="object-contain object-center mix-blend-lighten"
               />
-            </div>
-
-            <div className="absolute left-0 top-4 z-30 max-w-[140px] rotate-[-8deg] rounded-md bg-[#F60996] px-2.5 py-1.5 shadow-lg sm:-left-2 sm:top-6 sm:max-w-[160px] sm:px-3 sm:py-2 md:-left-4 md:max-w-[180px]">
-              <p className="font-[var(--font-poppins)] text-[11px] font-bold leading-snug text-white sm:text-[12px] md:text-[13px]">
-                {d.stickyNote}
-              </p>
-            </div>
-
-            <div className="absolute bottom-2 right-0 z-30 flex max-w-[150px] items-center gap-2 rounded-xl bg-[#4C1D95] px-2.5 py-2 shadow-lg sm:bottom-4 sm:right-0 sm:max-w-[170px] sm:px-3 sm:py-2.5 md:right-2 md:max-w-[190px]">
-              <span
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/15 text-sm sm:h-8 sm:w-8"
-                aria-hidden
-              >
-                ★
-              </span>
-              <p className="font-[var(--font-poppins)] text-[10px] font-bold leading-snug text-white sm:text-[11px] md:text-[12px]">
-                {d.badge}
-              </p>
             </div>
           </div>
         </div>

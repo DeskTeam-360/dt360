@@ -74,42 +74,21 @@ export function CareersApplication() {
             <p className="mt-4 max-w-[520px] font-[var(--font-inter)] text-[13px] font-semibold leading-[1.6] tracking-normal text-white sm:mt-5 sm:text-[14px] lg:text-[15px]">
               {d.body}
             </p>
-            <div
-              className="mt-8 max-w-[320px] rotate-[-5deg] sm:mt-10 sm:max-w-[400px]"
-              aria-label={d.handwritten}
-            >
-              <p className="font-[var(--font-caveat)] text-[34px] font-semibold leading-[1.05] tracking-[-0.02em] text-white sm:text-[42px] lg:text-[48px]">
-                We&apos;d love
-                <br />
-                to hear from you!
-              </p>
-              <svg
-                className="ml-[36%] mt-[-4px] block w-[100px] text-white sm:ml-[42%] sm:mt-[-6px] sm:w-[140px]"
-                width="140"
-                height="64"
-                viewBox="0 0 140 64"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M8 22c10 16 28 30 52 28 20-2 36-14 52-28 8-7 16-12 28-14"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M118 6l16 10-12 14"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
           </div>
 
-          <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+          <div className="relative">
+            <div className="pointer-events-none mb-4 ml-auto w-full max-w-[260px] sm:mb-6 sm:max-w-[320px] lg:absolute lg:-left-8 lg:top-8 lg:mb-0 lg:max-w-[300px] xl:-left-16 xl:max-w-[340px]">
+              <SafeImage
+                src={d.handwrittenImage}
+                alt={d.handwrittenImageAlt}
+                width={d.handwrittenWidth}
+                height={d.handwrittenHeight}
+                className="h-auto w-full object-contain mix-blend-screen"
+                quality={100}
+                unoptimized
+              />
+            </div>
+            <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10 lg:mt-28">
             {isSuccess ? (
               <div className="py-10 text-center">
                 <p className="font-[var(--font-inter)] text-[15px] font-semibold text-[#080F40]">
@@ -282,6 +261,7 @@ export function CareersApplication() {
                 </button>
               </form>
             )}
+          </div>
           </div>
         </div>
       </Container>

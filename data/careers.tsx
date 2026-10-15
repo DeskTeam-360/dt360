@@ -27,14 +27,12 @@ export const careersHero = {
   primaryCta: { label: "Explore Opportunities", href: "#opportunities" },
   secondaryCta: { label: "Join Our Talent Pool", href: "#apply" },
   backgroundImage: "/images/careers/hero-careers-bg.png",
-  image: "/images/careers/hero-image-v2.png",
+  image: "/images/careers/hero-image-v1.jpg",
   imageAlt: "DeskTeam360 team members collaborating around a laptop",
-  stickyNote: "Teamwork Makes Your Dreamwork",
-  badge: "Different Skills Same Goal",
 } as const;
 
 export const careersValues = {
-  image: "/images/careers/image-more-than-just-a-job-v1.png",
+  image: "/images/careers/image-more-than-just-a-job.webp",
   imageAlt: "DeskTeam360 teammates working together in the office",
   titleBefore: "More Than ",
   titleAccent: "Just a Job",
@@ -64,6 +62,7 @@ export const careersOpportunities = {
   titleAccent: "Our Team",
   lead:
     "Explore the positions below or join our talent pool to be considered for current and future opportunities.",
+  backgroundImage: "/images/careers/background-find-your-place.png",
 } as const;
 
 export const careersCategories: CareersCategory[] = [
@@ -191,7 +190,10 @@ export const careersApplication = {
   titleAccent: "Join Us?",
   backgroundImage: "/images/careers/background-ready-to-join-us.png",
   body: "Interested in working with DeskTeam 360? Tell us a little about yourself and the role you are interested in. Don't see the right opening? Send us your profile anyway. We'll keep your information on file and reach out when a matching opportunity comes up.",
-  handwritten: "We'd love to hear from you!",
+  handwrittenImage: "/images/careers/handwritten-wed-love-to-hear.png",
+  handwrittenImageAlt: "We'd love to hear from you!",
+  handwrittenWidth: 1064,
+  handwrittenHeight: 702,
   positions: careersCategories.flatMap((c) => c.roles.map((r) => r.title)),
   experienceLevels: [
     "Less than 1 year",

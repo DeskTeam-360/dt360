@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container } from "@/components/shared/Container";
+import { SafeImage } from "@/components/shared/SafeImage";
 import {
   careersCategories,
   careersOpportunities,
@@ -82,8 +83,21 @@ export function CareersOpportunities() {
   const [hoverKey, setHoverKey] = useState<string | null>(null);
 
   return (
-    <section id="opportunities" className="scroll-mt-28 bg-[#F5F6FB] pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8">
-      <Container className="max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
+    <section
+      id="opportunities"
+      className="scroll-mt-28 relative overflow-hidden bg-[#F5F6FB] pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
+    >
+      <SafeImage
+        src={d.backgroundImage}
+        alt=""
+        fill
+        quality={100}
+        unoptimized
+        sizes="100vw"
+        className="h-full w-full object-cover object-center lg:object-fill"
+        aria-hidden
+      />
+      <Container className="relative z-10 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:text-[17px]">
             {d.eyebrow}
