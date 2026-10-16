@@ -74,7 +74,7 @@ export function CareersApplication() {
             <p className="mt-4 max-w-[520px] font-[var(--font-inter)] text-[13px] font-semibold leading-[1.6] tracking-normal text-white sm:mt-5 sm:text-[14px] lg:text-[15px]">
               {d.body}
             </p>
-            <div className="mt-6 w-full max-w-[280px] sm:mt-8 sm:max-w-[340px]">
+            <div className="mt-6 hidden w-full max-w-[280px] sm:mt-8 sm:max-w-[340px] lg:block">
               <SafeImage
                 src={d.handwrittenImage}
                 alt={d.handwrittenImageAlt}
@@ -87,6 +87,7 @@ export function CareersApplication() {
             </div>
           </div>
 
+          <div>
           <div className="rounded-3xl bg-white p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
             {isSuccess ? (
               <div className="py-10 text-center">
@@ -260,6 +261,18 @@ export function CareersApplication() {
                 </button>
               </form>
             )}
+          </div>
+            <div className="mx-auto mt-6 w-full max-w-[280px] sm:mt-8 sm:max-w-[340px] lg:hidden">
+              <SafeImage
+                src={d.handwrittenImage}
+                alt={d.handwrittenImageAlt}
+                width={d.handwrittenWidth}
+                height={d.handwrittenHeight}
+                className="h-auto w-full object-contain mix-blend-screen"
+                quality={100}
+                unoptimized
+              />
+            </div>
           </div>
         </div>
       </Container>

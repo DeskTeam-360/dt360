@@ -52,7 +52,7 @@ function RoleRow({
         <div
           id={`role-tip-${role.title}`}
           role="tooltip"
-          className={`absolute top-full z-50 mt-[14px] box-border h-auto max-h-[209px] w-[min(376px,calc(100vw-2rem))] overflow-auto rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.16)] sm:h-[209px] sm:p-4 ${
+          className={`absolute top-full z-50 mt-[14px] box-border h-auto min-h-[219px] w-[min(376px,calc(100vw-2rem))] overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.16)] sm:p-4 ${
             tipAlign === "end" ? "right-0 left-auto" : "left-0"
           }`}
         >
@@ -103,7 +103,7 @@ export function CareersOpportunities() {
           className="h-full w-full object-cover object-center lg:object-fill"
         />
       </div>
-      <Container className="relative z-10 mt-5 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
+      <Container className="relative z-10 mt-[50px] max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:text-[17px]">
             {d.eyebrow}
