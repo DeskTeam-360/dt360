@@ -26,7 +26,7 @@ export function DownloadCTA({
       <div className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         {/* Torn Edge Background Image */}
         <SafeImage
-          src="/images/blog/Download BG.png"
+          src="/images/blog/download-bg.webp"
           alt="Download Background"
           fill
           className="object-cover md:object-fill object-center z-0"

@@ -34,7 +34,7 @@ export function BlogPostContent() {
           </p>
 
           <div className="relative w-full aspect-[2/1] rounded-br-[50px] md:rounded-br-[100px] rounded-tl-[50px] md:rounded-tl-[100px] overflow-hidden">
-            <SafeImage src="/images/blog/blog-ai-content-creation-hero.png" alt="AI Content Creation" fill className="object-cover" />
+            <SafeImage src="/images/blog/blog-ai-content-creation-hero.webp" alt="AI Content Creation" fill className="object-cover" />
           </div>
         </div>
       </div>
@@ -251,9 +251,9 @@ export function BlogPostContent() {
             {/* Article 3 */}
             <div className="border border-[#11104C] rounded-[30px] overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
               <div className="relative h-64 flex-shrink-0">
-                <SafeImage src="/images/blog/blog-how-to-scale-your-agency.png" alt="How to Scale Your Agency" fill className="object-cover rounded-t-[25px]" />
+                <SafeImage src="/images/blog/blog-how-to-scale-your-agency.webp" alt="How to Scale Your Agency" fill className="object-cover rounded-t-[25px]" />
                 <div className="absolute inset-0 overflow-hidden rounded-t-[25px]">
-                  <SafeImage src="/images/blog/blog-how-to-scale-your-agency-overlay.png" alt="Overlay" fill className="object-cover" />
+                  <SafeImage src="/images/blog/blog-how-to-scale-your-agency-overlay.webp" alt="Overlay" fill className="object-cover" />
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-grow">

@@ -31,11 +31,25 @@ export function rewriteWordPressMediaUrl(url: string | undefined | null): string
   return url.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`);
 }
 
+/** Dead internal booking host (SEO developer-report-v2 P1.1). */
+const DEAD_SCHEDULE_DEMO_HREF =
+  /https?:\/\/internal\.deskteam360\.com\/deskteam360-schedule-demo-call\/?/gi;
+
+/** Old maintenance-cost slug → guide (SEO developer-report-v2 P1.3). */
+const OLD_MAINTENANCE_COST_HREF =
+  /(?:https?:\/\/(?:www\.)?deskteam360\.com)?\/blog\/website-maintenance-cost(?!-guide)\/?/gi;
+
 /** Rewrite wp-content URLs inside WordPress HTML content. */
 export function rewriteWordPressContentHtml(html: string | undefined | null): string {
   if (!html) return html ?? "";
   const origin = getWordPressMediaOrigin();
   let out = origin ? html.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`) : html;
+
+  // P1.1 — dead demo host → live booking page
+  out = out.replace(DEAD_SCHEDULE_DEMO_HREF, "/book-a-call");
+
+  // P1.3 — broken maintenance-cost links → guide
+  out = out.replace(OLD_MAINTENANCE_COST_HREF, "/blog/website-maintenance-cost-guide");
 
   // Gate 5 F16 — apply approved alts to <img> tags when we have a match.
   out = out.replace(/<img\b([^>]*?)>/gi, (full, attrs: string) => {

@@ -24,7 +24,7 @@ export function BlogHero({
         {/* Background Image Container - 120% height to ensure baked-in curve is cropped out */}
         <div className="absolute inset-x-0 top-0 h-[120%]">
           <SafeImage
-            src="/images/blog/blog-hero-bg-jeremy-work.png"
+            src="/images/blog/blog-hero-bg-jeremy-work.webp"
             alt="Hero Background"
             fill
             className="object-cover object-bottom"

@@ -157,6 +157,7 @@ const toCategorySlug = (name: string): string =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
+/** Listing/category cards — no `content` (SEO developer-report-v2 P2.6 HTML size). */
 const BLOG_POSTS_BY_CATEGORY_QUERY = gql`
   query GetBlogPostsByCategory($first: Int!, $categoryName: String!) {
     posts(
@@ -172,7 +173,6 @@ const BLOG_POSTS_BY_CATEGORY_QUERY = gql`
         slug
         title
         excerpt
-        content
         date
         featuredImage {
           node {
@@ -202,7 +202,7 @@ async function fetchBlogPostsByCategorySlug(
     BLOG_POSTS_BY_CATEGORY_QUERY,
     { first, categoryName: categorySlug },
   );
-  return (data.posts?.nodes ?? []).map(mapPost);
+  return (data.posts?.nodes ?? []).map(mapPostLite);
 }
 
 
@@ -436,6 +436,7 @@ export const getAllCaseStudyPosts = cache(async (): Promise<BlogPost[]> => {
   });
 });
 
+/** Blog index / category listing — omit post body HTML (P2.6 payload). */
 export const getBlogData = async () => {
   const query = gql`
     query GetAllBlogData($first: Int!) {
@@ -445,7 +446,6 @@ export const getBlogData = async () => {
           slug
           title
           excerpt
-          content
           date
           featuredImage {
             node {
@@ -480,7 +480,6 @@ export const getBlogData = async () => {
               slug
               title
               excerpt
-              content
               date
               featuredImage {
                 node {
@@ -507,13 +506,13 @@ export const getBlogData = async () => {
   try {
     const data = await getWpClient().request<GetAllBlogDataResponse>(query, { first: 300 });
 
-    const allPosts = (data.posts?.nodes || []).map(mapPost);
+    const allPosts = (data.posts?.nodes || []).map(mapPostLite);
     
     const categoryToLatestPostMap: Record<string, BlogPost> = {};
     if (data.categories?.nodes) {
       data.categories.nodes.forEach(catNode => {
         if (catNode.name && catNode.posts?.nodes && catNode.posts.nodes.length > 0) {
-          categoryToLatestPostMap[catNode.name] = mapPost(catNode.posts.nodes[0]);
+          categoryToLatestPostMap[catNode.name] = mapPostLite(catNode.posts.nodes[0]);
         }
       });
     }

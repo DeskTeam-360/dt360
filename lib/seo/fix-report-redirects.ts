@@ -276,6 +276,26 @@ export function s3DesignComparisonRedirects(): RedirectRule[] {
   ]);
 }
 
+/**
+ * SEO developer-report-v2 P1.3 — old maintenance-cost URL → guide.
+ * Also cover bare path in case of leftover backlinks.
+ */
+export function p13WebsiteMaintenanceCostRedirects(): RedirectRule[] {
+  const dest = "/blog/website-maintenance-cost-guide";
+  return [
+    {
+      source: "/blog/website-maintenance-cost",
+      destination: dest,
+      permanent: true,
+    },
+    {
+      source: "/website-maintenance-cost",
+      destination: dest,
+      permanent: true,
+    },
+  ];
+}
+
 /** All fix-report redirects to merge into next.config `redirects()`. */
 export function fixReportRedirects(): RedirectRule[] {
   return [
@@ -286,5 +306,6 @@ export function fixReportRedirects(): RedirectRule[] {
     ...s4ScaleAgencyRedirects(),
     ...s3DesignComparisonRedirects(),
     ...s6BlogCategoryRedirects(),
+    ...p13WebsiteMaintenanceCostRedirects(),
   ];
 }
