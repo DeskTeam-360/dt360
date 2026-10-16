@@ -6,7 +6,7 @@ export function CareersWhyUs() {
   const d = careersWhyUs;
 
   return (
-    <section className="relative z-0 overflow-hidden bg-[#EAE5FD] py-12 text-white sm:py-16 lg:py-24">
+    <section className="relative z-0 isolate overflow-hidden bg-[#EAE5FD] py-12 text-white sm:py-16 lg:py-24">
       <SafeImage
         src={d.backgroundImage}
         alt=""

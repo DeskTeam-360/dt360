@@ -26,7 +26,7 @@ function RoleRow({
 
   return (
     <li
-      className="relative border-b border-[#E8EAF4] last:border-b-0"
+      className={`relative border-b border-[#E8EAF4] last:border-b-0 ${showTip ? "z-50" : "z-0"}`}
       onMouseEnter={hasDetail ? onEnter : undefined}
       onMouseLeave={hasDetail ? onLeave : undefined}
       onFocus={hasDetail ? onEnter : undefined}
@@ -52,7 +52,7 @@ function RoleRow({
         <div
           id={`role-tip-${role.title}`}
           role="tooltip"
-          className={`absolute top-full z-50 mt-[14px] box-border h-auto min-h-[219px] w-[min(376px,calc(100vw-2rem))] overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.16)] sm:p-4 ${
+          className={`absolute top-full z-[200] mt-[14px] box-border h-auto min-h-[219px] w-[min(376px,calc(100vw-2rem))] overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.24)] sm:p-4 ${
             tipAlign === "end" ? "right-0 left-auto" : "left-0"
           }`}
         >
@@ -90,7 +90,7 @@ export function CareersOpportunities() {
   return (
     <section
       id="opportunities"
-      className="scroll-mt-28 relative z-30 overflow-visible bg-white pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
+      className="scroll-mt-28 relative z-40 overflow-visible bg-white pb-10 pt-5 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-8"
     >
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <SafeImage
@@ -117,18 +117,21 @@ export function CareersOpportunities() {
           </p>
         </div>
 
-        <div className="mt-6 grid justify-items-center gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="relative z-20 mt-6 grid justify-items-center gap-4 overflow-visible sm:mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {careersCategories.map((cat, index) => {
             // Keep tips inside the viewport on right-edge columns (esp. Paid Media).
             const tipAlign: "start" | "end" =
               cat.id === "paid-media" || index === lastIndex || index >= 3
                 ? "end"
                 : "start";
+            const isActive = hoverKey?.startsWith(`${cat.id}:`) ?? false;
 
             return (
               <article
                 key={cat.id}
-                className="relative z-10 flex w-full max-w-[265px] min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)] sm:max-w-none xl:max-w-[265px]"
+                className={`relative flex w-full max-w-[265px] min-h-0 flex-col overflow-visible rounded-2xl bg-white shadow-[0_8px_28px_rgba(17,16,76,0.08)] sm:max-w-none xl:max-w-[265px] ${
+                  isActive ? "z-50" : "z-10"
+                }`}
               >
                 <header
                   className="box-border flex h-[84px] w-full items-center overflow-hidden rounded-[12px] text-white sm:h-[94px]"
@@ -151,7 +154,7 @@ export function CareersOpportunities() {
                     </p>
                   </div>
                 </header>
-                <ul className="relative z-20 flex-1 overflow-visible px-1 py-1">
+                <ul className="relative z-30 flex-1 overflow-visible px-1 py-1">
                   {cat.roles.map((role) => {
                     const key = `${cat.id}:${role.title}`;
                     return (

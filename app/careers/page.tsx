@@ -15,7 +15,7 @@ export const metadata: Metadata = withPageCanonical("/careers", {
 
 export default function CareersPage() {
   return (
-    <main className="flex w-full flex-col overflow-hidden bg-white">
+    <main className="flex w-full flex-col overflow-x-hidden bg-white">
       <BreadcrumbJsonLd
         items={[homeBreadcrumb(), { name: "Careers", path: "/careers" }]}
       />

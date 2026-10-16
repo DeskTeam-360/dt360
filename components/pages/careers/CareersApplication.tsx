@@ -49,7 +49,7 @@ export function CareersApplication() {
   return (
     <section
       id="apply"
-      className="scroll-mt-28 relative overflow-hidden bg-[#F60996] py-12 sm:py-16 lg:py-24"
+      className="scroll-mt-28 relative z-0 isolate overflow-hidden bg-[#F60996] py-12 sm:py-16 lg:py-24"
     >
       <SafeImage
         src={d.backgroundImage}
