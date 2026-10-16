@@ -30,7 +30,7 @@ export function AboutHeroStory() {
           <div className="relative flex min-h-[400px] h-full w-full justify-end self-stretch lg:absolute lg:right-0 lg:top-0 lg:w-[110%] lg:-mt-12 lg:h-[calc(100%+3rem)]">
             <div className="relative flex h-full w-full justify-end items-end">
             <SafeImage
-              src="/images/about/about-hero-image-v2.png"
+              src="/images/about/about-hero-image-v2.webp"
               alt="Jeremy Kenerson portrait"
               width={484}
               height={691}

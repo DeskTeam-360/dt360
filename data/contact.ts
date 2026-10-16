@@ -1,6 +1,6 @@
 export const contactAssets = {
-  hero: "/images/Contact - Hero.png",
-  formIllustration: "/images/Contact - Form.png",
+  hero: "/images/Contact - Hero.webp",
+  formIllustration: "/images/Contact - Form.webp",
   calendarIcon: "/images/Contact - Calendar.png",
   clockIcon: "/images/Contact - Clock.png",
   ornament: "/images/Affiliate - Ornament.png",

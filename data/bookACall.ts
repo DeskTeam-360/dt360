@@ -7,7 +7,7 @@ export const bookACallRecaptchaDisabled = false;
 
 export const bookACallHero = {
   title: "Book A Call",
-  heroImageSrc: "/images/book-a-call/book-a-call-hero.png",
+  heroImageSrc: "/images/book-a-call/book-a-call-hero.webp",
   heroImageAlt:
     "Isometric illustration of a smartphone with calendar, clock, and messaging icons for scheduling a call",
   /** Native asset size — display at 429×429 on desktop (no upscale). */
@@ -57,7 +57,7 @@ export const bookACallForm = {
   stepLabel: "STEP 1:",
   stepBgClipSrc: "/images/book-a-call/step-bg-clip.png",
   heading: "Enter Your Name and Best Email Address",
-  womanImageSrc: "/images/book-a-call/book-a-call-form-woman.png",
+  womanImageSrc: "/images/book-a-call/book-a-call-form-woman.webp",
   womanImageAlt:
     "Professional woman holding a laptop with register form and email icons",
   formBubbleSrc: "/images/book-a-call/book-a-call-form-bubble.png",

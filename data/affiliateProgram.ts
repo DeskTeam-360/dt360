@@ -1,5 +1,5 @@
 export const affiliateAssets = {
-  hero: "/images/Affiliate - Hero.png",
+  hero: "/images/Affiliate - Hero.webp",
   body: "/images/Affiliate - Body.png",
   howItWorks: "/images/Affiliate - How It Works.png",
   easyAccess: "/images/Affiliate - Easy Access.png",

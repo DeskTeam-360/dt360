@@ -33,7 +33,7 @@ export function FAQ() {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="order-1">
             <Image
-              src="/images/home-faq-imageleft1.png"
+              src="/images/home-faq-imageleft1.webp"
               alt="FAQ illustration with design and development tools."
               width={900}
               height={980}

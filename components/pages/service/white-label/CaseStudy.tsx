@@ -6,7 +6,7 @@ export function CaseStudy() {
     <section className="relative overflow-hidden bg-white pt-10 pb-20 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28 2xl:pt-16 2xl:pb-36">
       {/* Bottom-left: red radial behind decorative image (~10% larger) — visible all breakpoints */}
       <ServiceSafeImage
-        src="/images/Service - Testimonial Graphic Radial Red.png"
+        src="/images/Service - Testimonial Graphic Radial Red.webp"
         alt=""
         width={500}
         height={500}
@@ -21,7 +21,7 @@ export function CaseStudy() {
       />
       {/* Top-right: cyan w-50%; negative right only from md+ so mobile/tablet stay inside overflow clip */}
       <ServiceSafeImage
-        src="/images/White Label - Cyan Round BG.png"
+        src="/images/White Label - Cyan Round BG.webp"
         alt=""
         width={1600}
         height={900}

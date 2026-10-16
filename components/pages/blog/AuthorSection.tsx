@@ -51,7 +51,7 @@ export function AuthorSection() {
           <div className="w-full md:w-[40%] lg:w-[50%] mt-12 md:mt-0 flex justify-center md:absolute md:bottom-0 md:right-2 lg:right-4 xl:right-8 z-10 pointer-events-none">
             <div className="relative w-[300px] h-[380px] origin-bottom scale-[1.1] translate-y-4 sm:w-[400px] sm:h-[480px] sm:scale-[1.1] md:w-[500px] md:h-[620px] md:translate-y-6 md:scale-[1.1] lg:w-[580px] lg:h-[720px] lg:translate-y-7 lg:scale-[1.1] xl:w-[640px] xl:h-[780px] xl:scale-[1.1]">
               <SafeImage
-                src="/images/blog/blog-cta-jeremy-kenerson-deskteam360.png"
+                src="/images/blog/blog-cta-jeremy-kenerson-deskteam360.webp"
                 alt={`${AUTHOR_INFO.name}, founder of DeskTeam360`}
                 fill
                 className="object-contain object-bottom pointer-events-auto"

@@ -73,7 +73,7 @@ export function BlogPostContent() {
               <div className="w-[542.557px] h-[254.598px] relative">
                 <div className="absolute inset-0 opacity-50 overflow-hidden pointer-events-none">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/blog/blog-decorative-image.png" alt="" aria-hidden="true" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
+                  <img src="/images/blog/blog-decorative-image.webp" alt="" aria-hidden="true" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
                 </div>
               </div>
             </div>
@@ -198,8 +198,8 @@ export function BlogPostContent() {
             {/* Article 1 */}
             <div className="border border-[#11104C] rounded-[30px] overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
               <div className="relative h-64 flex-shrink-0">
-                <SafeImage src="/images/blog/blog-how-much-does-website-maintenance-cost.png" alt="How Much Does Website" fill className="object-cover rounded-t-[25px]" />
-                <SafeImage src="/images/blog/blog-how-much-does-website-maintenance-cost-overlay.png" alt="Overlay" fill className="object-cover rounded-t-[25px]" />
+                <SafeImage src="/images/blog/blog-how-much-does-website-maintenance-cost.webp" alt="How Much Does Website" fill className="object-cover rounded-t-[25px]" />
+                <SafeImage src="/images/blog/blog-how-much-does-website-maintenance-cost-overlay.webp" alt="Overlay" fill className="object-cover rounded-t-[25px]" />
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex gap-2 mb-4 flex-wrap">
@@ -225,7 +225,7 @@ export function BlogPostContent() {
             {/* Article 2 */}
             <div className="border border-[#11104C] rounded-[30px] overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
               <div className="relative h-64 flex-shrink-0">
-                <SafeImage src="/images/blog/blog-outsourced-marketing-team.png" alt="Outsourced Marketing Team" fill className="object-cover rounded-t-[25px]" />
+                <SafeImage src="/images/blog/blog-outsourced-marketing-team.webp" alt="Outsourced Marketing Team" fill className="object-cover rounded-t-[25px]" />
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex gap-2 mb-4 flex-wrap">

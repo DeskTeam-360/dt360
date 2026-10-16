@@ -37,7 +37,7 @@ export function HowItWorksSteps() {
 
       <div className="pointer-events-none absolute left-0 top-10 z-[1] -translate-x-[20%] sm:top-12 lg:top-14" aria-hidden>
         <Image
-          src="/images/Home-HowItWorksStep-BgLeft.png"
+          src="/images/Home-HowItWorksStep-BgLeft.webp"
           alt=""
           width={170}
           height={230}
@@ -66,7 +66,7 @@ export function HowItWorksSteps() {
               aria-hidden
             />
             <Image
-              src="/images/Home-HowItWorksStep-Gear.png"
+              src="/images/Home-HowItWorksStep-Gear.webp"
               alt="How it works step wheel illustration with user icon."
               width={900}
               height={980}

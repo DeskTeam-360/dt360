@@ -42,7 +42,7 @@ export function AboutTeamPeople() {
           <div className="group relative z-10 -mr-6 w-[calc(100%+1.5rem)] rounded-tl-[50px] transition-[transform,shadow] duration-300 ease-out group-hover:shadow-[0_20px_50px_rgba(0,174,238,0.2)] lg:-mr-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
             <div className="overflow-hidden rounded-tl-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
               <SafeImage
-                src="/images/about-deskteam-people.png"
+                src="/images/about-deskteam-people.webp"
                 alt="DeskTeam360 People"
                 width={800}
                 height={600}
@@ -132,7 +132,7 @@ export function AboutTeamPeople() {
           <div className="group relative z-10 -ml-6 w-[calc(100%+1.5rem)] rounded-tr-[50px] border border-solid border-[#7547C5] transition-transform duration-300 ease-out lg:-ml-[max(5rem,calc((100vw-90rem)/2+5rem))] lg:w-[calc(100%+max(5rem,calc((100vw-90rem)/2+5rem)))] min-[2560px]:!-ml-[150px] min-[2560px]:w-[720px] min-[2560px]:max-w-[720px]">
             <div className="overflow-hidden rounded-tr-[50px] transition-transform duration-300 ease-out group-hover:scale-[1.04] group-hover:-translate-y-2 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:translate-y-0">
               <SafeImage
-                src="/images/about - what makes the team different.png"
+                src="/images/about - what makes the team different.webp"
                 alt="Team Gathering"
                 width={800}
                 height={600}

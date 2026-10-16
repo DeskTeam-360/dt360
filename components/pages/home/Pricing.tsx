@@ -32,7 +32,7 @@ export function Pricing() {
         <div
           className="pointer-events-none absolute inset-x-0 -top-[24px] h-[50px] sm:-top-[40px] sm:h-[68px] lg:-top-[51px] lg:h-[90px]"
           style={{
-            backgroundImage: "url('/images/scratchedbg4k.png')",
+            backgroundImage: "url('/images/scratchedbg4k.webp')",
             backgroundPosition: "top center",
             backgroundSize: "110% auto",
             backgroundRepeat: "no-repeat",
@@ -42,7 +42,7 @@ export function Pricing() {
         <div
           className="pointer-events-none absolute inset-x-0 bottom-[-24px] z-[1] h-[50px] sm:bottom-[-40px] sm:h-[68px] lg:bottom-[-51px] lg:h-[90px]"
           style={{
-            backgroundImage: "url('/images/scratchedbg4k.png')",
+            backgroundImage: "url('/images/scratchedbg4k.webp')",
             backgroundPosition: "bottom center",
             backgroundSize: "110% auto",
             backgroundRepeat: "no-repeat",

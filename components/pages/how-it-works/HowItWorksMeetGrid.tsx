@@ -47,7 +47,7 @@ export function HowItWorksMeetGrid() {
         <div className="relative flex flex-col items-center text-center">
           <div className="pointer-events-none absolute -left-10 top-1/2 z-0 hidden w-[min(28vw,300px)] -translate-y-1/2 lg:block xl:left-8">
             <MarketingSafeImage
-              src="/images/how it works/dt360 buble with computer.png"
+              src="/images/how it works/dt360 buble with computer.webp"
               alt=""
               width={500}
               height={842}
@@ -58,7 +58,7 @@ export function HowItWorksMeetGrid() {
           </div>
           <div className="pointer-events-none absolute -right-10 top-1/2 z-0 hidden w-[min(28vw,300px)] translate-x-[80px] -translate-y-[calc(50%+50px)] lg:block xl:-right-20">
             <MarketingSafeImage
-              src="/images/how it works/dt360 buble with tablet.png"
+              src="/images/how it works/dt360 buble with tablet.webp"
               alt=""
               width={500}
               height={842}

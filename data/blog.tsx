@@ -29,7 +29,7 @@ export const CATEGORIES = [
 export const AUTHOR_INFO = {
   name: "Jeremy Kenerson",
   title: "Founder",
-  image: "/images/blog/blog-jeremy-author.png",
+  image: "/images/blog/blog-jeremy-author.webp",
   bio: "Jeremy Kenerson is the founder of DeskTeam360 and a former digital agency owner who spent over $1 million outsourcing work across 200+ freelancers over 12 years. In 2018, he built DeskTeam360 to give other business owners the dedicated, accountable team he wished he'd had. He's served 400+ clients and processed $2.5M+ through Stripe with zero chargebacks.",
 };
 
@@ -74,7 +74,7 @@ export const LATEST_POSTS: BlogPost[] = [
     slug: "website-maintenance-cost-guide",
     title: "How Much Does Website Maintenance Actually Cost? (2024 guide)",
     excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel convallis ante.",
-    image: "/images/blog/blog-website.png",
+    image: "/images/blog/blog-website.webp",
     category: "Delegation",
     author: "Jeremy Kenerson",
     readTime: "8 min read",
@@ -85,7 +85,7 @@ export const LATEST_POSTS: BlogPost[] = [
     slug: "outsourced-marketing-team",
     title: "Outsourced Marketing Team: What to Look for and When to Avoid",
     excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel convallis ante.",
-    image: "/images/blog/blog-marketing.png",
+    image: "/images/blog/blog-marketing.webp",
     category: "Outsourcing",
     author: "Jeremy Kenerson",
     readTime: "8 min read",

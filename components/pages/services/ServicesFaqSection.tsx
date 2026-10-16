@@ -15,8 +15,8 @@ import { cn } from "@/lib/utils";
 
 export { SERVICES_INDEX_FAQ_ITEMS, WEB_DESIGN_FAQ_ITEMS } from "@/data/servicesFaq";
 
-const FAQ_ILLUSTRATION_DEFAULT = "/images/dt360-faq-section.png";
-const FAQ_ILLUSTRATION_WEB_DEV = "/images/Service/web-design-dev-faq-illustration.png";
+const FAQ_ILLUSTRATION_DEFAULT = "/images/dt360-faq-section.webp";
+const FAQ_ILLUSTRATION_WEB_DEV = "/images/Service/web-design-dev-faq-illustration.webp";
 
 export type ServicesFaqSectionVariant = "default" | "webDesignDevelopment";
 
@@ -33,7 +33,7 @@ export function ServicesFaqSection({ variant = "default" }: ServicesFaqSectionPr
   return (
     <section className="relative isolate overflow-hidden bg-white px-5 pb-[84px] pt-8 md:px-10 md:pb-[96px] md:pt-[100px] xl:px-10 xl:pb-[120px] xl:pt-[110px]">
       <Image
-        src="/images/dt360-faq-bg-service.png"
+        src="/images/dt360-faq-bg-service.webp"
         alt=""
         fill
         sizes="100vw"

@@ -25,7 +25,7 @@ export function FAQ() {
     <section className="relative overflow-visible max-md:overflow-x-visible pb-20 pt-8 sm:pb-24 sm:pt-24 lg:pb-28 lg:pt-28 2xl:pb-36 2xl:pt-36">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <ServiceSafeImage
-          src="/images/Service - FAQ BG.png"
+          src="/images/Service - FAQ BG.webp"
           alt=""
           width={1600}
           height={560}
@@ -36,14 +36,14 @@ export function FAQ() {
       
       <Container className="relative z-10 max-w-[1440px] !px-10 lg:!px-20">
       <ServiceSafeImage
-        src="/images/Service - Graphic Code.png"
+        src="/images/Service - Graphic Code.webp"
         alt=""
         width={512}
         height={512}
         className="pointer-events-none absolute z-[2] -top-45 left-[calc(var(--spacing)_*_0)] h-auto w-auto max-w-[min(100px,26vw)] max-md:-top-32 sm:-left-10 sm:-top-50 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:-top-55 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
       />
       <ServiceSafeImage
-        src="/images/Service - Graphic Design.png"
+        src="/images/Service - Graphic Design.webp"
         alt=""
         width={512}
         height={512}
@@ -51,7 +51,7 @@ export function FAQ() {
       />
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10 2xl:gap-14">
           <ServiceFaqIllustration
-            src="/images/Automation - FAQ.png"
+            src="/images/Automation - FAQ.webp"
             alt="AI and automation FAQ illustration"
           />
           <div>

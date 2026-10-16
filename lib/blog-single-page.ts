@@ -15,7 +15,7 @@ import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
 
-const PLACEHOLDER_IMAGE = '/images/blog/blog-placeholder.png';
+const PLACEHOLDER_IMAGE = '/images/blog/blog-placeholder.webp';
 
 function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
   return {

@@ -12,7 +12,7 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
       <ServiceSafeImage
-        src="/images/Service - Testimonial Graphic Radial Red.png"
+        src="/images/Service - Testimonial Graphic Radial Red.webp"
         alt=""
         width={600}
         height={600}
@@ -26,7 +26,7 @@ export function Testimonials() {
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
       <ServiceSafeImage
-        src="/images/Service - Testimonial Graphic Oval Purple.png"
+        src="/images/Service - Testimonial Graphic Oval Purple.webp"
         alt=""
         width={420}
         height={420}

@@ -841,7 +841,7 @@ export function DynamicBlogPostContent({
               <div className="w-[542.557px] h-[254.598px] relative">
                 <div className="absolute inset-0 opacity-50 overflow-hidden pointer-events-none">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/blog/blog-decorative-image.png" alt="" aria-hidden="true" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
+                  <img src="/images/blog/blog-decorative-image.webp" alt="" aria-hidden="true" className="absolute h-[264.83%] left-[-3.72%] max-w-none top-[-10.69%] w-[222.65%]" />
                 </div>
               </div>
             </div>

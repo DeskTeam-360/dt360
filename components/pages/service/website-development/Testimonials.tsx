@@ -14,7 +14,7 @@ export function Testimonials() {
         className="pointer-events-none absolute left-[calc(var(--spacing)*-50)] top-[calc(var(--spacing)*-20)] hidden h-auto w-[10vw] opacity-60 sm:block lg:w-[20vw]"
       />
       <ServiceSafeImage
-        src="/images/Service - Testimonial Graphic Radial Red.png"
+        src="/images/Service - Testimonial Graphic Radial Red.webp"
         alt=""
         width={600}
         height={600}
@@ -28,7 +28,7 @@ export function Testimonials() {
         className="pointer-events-none absolute right-[0] top-[10%] hidden h-auto w-[15%] opacity-100 sm:block"
       />
       <ServiceSafeImage
-        src="/images/Service - Testimonial Graphic Oval Purple.png"
+        src="/images/Service - Testimonial Graphic Oval Purple.webp"
         alt=""
         width={420}
         height={420}
@@ -77,14 +77,14 @@ export function Testimonials() {
         </div>
 
         <ServiceSafeImage
-          src="/images/Service - Graphic Code.png"
+          src="/images/Service - Graphic Code.webp"
           alt=""
           width={512}
           height={512}
           className="pointer-events-none absolute z-[1] bottom-18 -left-14 h-auto w-auto max-w-[min(100px,26vw)] max-md:z-50 max-md:left-3 max-md:-bottom-10 sm:z-[1] sm:-left-10 sm:bottom-16 sm:max-w-[min(118px,28vw)] md:-left-[1rem] md:w-[16%] md:max-w-[220px] md:min-w-[120px] lg:-left-[1rem] lg:bottom-18 lg:w-[10%] lg:max-w-[190px] lg:min-w-[110px]"
         />
         <ServiceSafeImage
-          src="/images/Service - Graphic Design.png"
+          src="/images/Service - Graphic Design.webp"
           alt=""
           width={512}
           height={512}

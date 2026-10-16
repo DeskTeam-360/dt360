@@ -29,7 +29,7 @@ export const careersHero = {
     "Join a team that works together to deliver great work for our clients. Whether you want to apply now or join our talent pool for future openings, we would love to hear from you.",
   primaryCta: { label: "Explore Opportunities", href: "#opportunities" },
   secondaryCta: { label: "Join Our Talent Pool", href: "#apply" },
-  backgroundImage: "/images/careers/hero-careers-bg.png",
+  backgroundImage: "/images/careers/hero-careers-bg.webp",
   image: "/images/careers/hero-image-v1.webp",
   imageAlt: "DeskTeam360 team members collaborating around a laptop",
 } as const;
@@ -291,7 +291,7 @@ export const careersApplication = {
   eyebrow: "JOIN OUR TALENT POOL",
   titleBefore: "Ready to ",
   titleAccent: "Join Us?",
-  backgroundImage: "/images/careers/background-ready-to-join-us.png",
+  backgroundImage: "/images/careers/background-ready-to-join-us.webp",
   body: "Interested in working with DeskTeam 360? Tell us a little about yourself and the role you are interested in. Don't see the right opening? Send us your profile anyway. We'll keep your information on file and reach out when a matching opportunity comes up.",
   handwrittenImage: "/images/careers/handwritten-wed-love-to-hear.png",
   handwrittenImageAlt: "We'd love to hear from you!",

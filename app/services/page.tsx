@@ -116,7 +116,7 @@ export default async function ServicesPage() {
       {/* Hero: platforms card moved; keep vertical overflow visible */}
       <section className="relative isolate z-10 overflow-x-hidden px-5 pb-[130px] pt-30 md:px-10 sm:pt-32 xl:px-10 xl:pb-[80px] xl:pt-[120px] min-[2560px]:pb-[64px]">
         <Image
-          src="/images/dt360-bg-hero-section.png"
+          src="/images/dt360-bg-hero-section.webp"
           alt=""
           fill
           priority
@@ -142,7 +142,7 @@ export default async function ServicesPage() {
             className="relative z-[1300] mx-auto mb-[-65px] w-full self-end xl:mx-0 xl:w-[50%]"
           >
             <Image
-              src="/images/Main Service - Hero.png"
+              src="/images/Main Service - Hero.webp"
               alt="DT360 services team illustration"
               width={736}
               height={758}

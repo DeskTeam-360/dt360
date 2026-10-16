@@ -15,7 +15,7 @@ export const aboutTimeline = [
       "So I did something most people thought was crazy at the time. I hired Maria overseas. $1,280 a month. And here's the thing - Maria was 10 times better. Never late. Proactive. Caught mistakes before I did. That hit me like a ton of bricks.",
       "I'd been paying more and assuming that meant better. It didn't."
     ],
-    image: "/images/New - About 2.png",
+    image: "/images/New - About 2.webp",
     imageAlt: "The $5,000 mistake visual placeholder",
   },
   {
@@ -25,7 +25,7 @@ export const aboutTimeline = [
       "I was that close.",
       "Instead, I stayed. And I analyzed the root causes. What I found wasn't that my team was incompetent. It was that I'd never properly set expectations - with my clients or my team. So I built the Client Expectation Framework. And everything changed."
     ],
-    image: "/images/about-parking-lot-moment.png",
+    image: "/images/about-parking-lot-moment.webp",
     imageAlt: "DeskTeam360 founder reflecting in a parking lot during a pivotal business moment",
   },
   {
@@ -35,7 +35,7 @@ export const aboutTimeline = [
       "The pattern I kept seeing with the amazing ones? They weren't random freelancers. They had structure around them. A team leader. Clear processes. Real accountability. They were operating like a company, not like a solo contractor.",
       "So I built that. One office. Real team structure. US-based management. Day and night shifts. And in 2018, DeskTeam360 was born."
     ],
-    image: "/images/about/1996a1f4927014ae387a345fb6f526d3f720e197.png",
+    image: "/images/about/1996a1f4927014ae387a345fb6f526d3f720e197.webp",
     imageAlt: "Million dollar education visual placeholder",
   },
 ] as const;
@@ -72,19 +72,19 @@ export const teamPeople = [
     name: "JEREMY KENERSON",
     role: "FOUNDER & CEO",
     desc: "Built DeskTeam360 after 12+ years running a digital agency and managing 200+ overseas contractors. Based in the US. Hosts weekly AMA calls for all clients. Kolbe A result: Quick Start - which means he builds systems fast and keeps things moving.",
-    image: "/images/about/d3a1e8b26a75cbf29d39be8a2e7d6e424d47cf0b.png",
+    image: "/images/about/d3a1e8b26a75cbf29d39be8a2e7d6e424d47cf0b.webp",
   },
   {
     name: "JOHN DORNER (JD)",
     role: "CLIENT SUCCESS MANAGER",
     desc: "JD is the bridge between Jeremy's vision and your day-to-day experience as a client. US-based. Handles soft handoffs from sales to your account team and makes sure onboarding actually sticks.",
-    image: "/images/about/b6068106c474f4f6b1a5538e4506fd4193689504.png",
+    image: "/images/about/b6068106c474f4f6b1a5538e4506fd4193689504.webp",
   },
   {
     name: "INDONESIA PRODUCTION TEAM",
     role: "2 designers. 2 developers. 2 technical VAs. 1 team leader.",
     desc: "All working in one physical office in Indonesia. Day and night shifts so your time zone is always covered. Same team every month - they learn your brand, your preferences, your standards.",
-    image: "/images/about/9a7811f55169e7c6bf4641ccbc2570c0f743ed70.png",
+    image: "/images/about/9a7811f55169e7c6bf4641ccbc2570c0f743ed70.webp",
   },
 ] as const;
 

@@ -284,7 +284,7 @@ const mapCaseStudyPost = (post: WpPostNode): BlogPost => {
     excerpt,
     content: rewriteWordPressContentHtml(post.content),
     image: rewriteWordPressMediaUrl(
-      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.webp',
     ),
     category: caseStudyCats[0] || 'Case Study',
     categories: caseStudyCats.length > 0 ? caseStudyCats : ['Case Study'],
@@ -312,7 +312,7 @@ const mapPost = (post: WpPostNode): BlogPost => {
     excerpt,
     content: rewriteWordPressContentHtml(post.content),
     image: rewriteWordPressMediaUrl(
-      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.webp',
     ),
     category: validCategory,
     categories: categoriesList,
@@ -341,7 +341,7 @@ const mapPostLite = (post: WpPostNode): BlogPost => {
     excerpt,
     content: undefined,
     image: rewriteWordPressMediaUrl(
-      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.png',
+      post.featuredImage?.node?.sourceUrl || '/images/blog/blog-placeholder.webp',
     ),
     category: validCategory,
     categories: categoriesList,

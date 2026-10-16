@@ -50,7 +50,7 @@ export function ShowcaseHero({
         >
           <div className="absolute left-[-12%] top-[10%] w-[min(42vw,22rem)] sm:left-[-10%] sm:top-[7%] sm:w-[min(38vw,24rem)] lg:left-[-8%] lg:w-full lg:max-w-[307px] min-[1440px]:left-[-140px] min-[1440px]:top-[72px]">
             <ShowcaseSafeImage
-              src="/images/showcase-hero-bgleft-1.png"
+              src="/images/showcase-hero-bgleft-1.webp"
               alt=""
               width={400}
               height={480}
@@ -61,7 +61,7 @@ export function ShowcaseHero({
           </div>
           <div className="absolute right-[-12%] top-[14%] w-[min(44vw,23rem)] sm:right-[-10%] sm:top-[15%] sm:w-[min(40vw,25rem)] lg:right-[-8%] lg:w-full lg:max-w-[396px] min-[1440px]:right-[-160px] min-[1440px]:top-[140px]">
             <ShowcaseSafeImage
-              src="/images/showcase-hero-bgright-1.png"
+              src="/images/showcase-hero-bgright-1.webp"
               alt=""
               width={440}
               height={500}

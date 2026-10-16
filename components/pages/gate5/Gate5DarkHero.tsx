@@ -28,7 +28,7 @@ export function Gate5DarkHero({ h1, lead, art }: Gate5DarkHeroProps) {
         aria-hidden
       />
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={420}
         height={420}

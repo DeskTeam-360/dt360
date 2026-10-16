@@ -27,7 +27,7 @@ export function Hero() {
         className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={420}
         height={420}
@@ -58,7 +58,7 @@ export function Hero() {
               aria-hidden
             />
             <ServiceSafeImage
-              src="/images/Service - Graphic Hero.png"
+              src="/images/Service - Graphic Hero.webp"
               alt="Hero illustration for graphic design service"
               width={820}
               height={620}
@@ -70,7 +70,7 @@ export function Hero() {
         </div>
       </Container>
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={460}
         height={460}
@@ -84,7 +84,7 @@ export function Hero() {
           </h2>
           <div className="flex w-full justify-center">
             <ServiceSafeImage
-              src="/images/Service - Graphic Whats Included.png"
+              src="/images/Service - Graphic Whats Included.webp"
               alt="Graphic design workstation illustration"
               width={760}
               height={620}

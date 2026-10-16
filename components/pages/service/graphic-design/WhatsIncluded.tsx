@@ -40,7 +40,7 @@ export function WhatsIncluded() {
   return (
     <div className="relative overflow-hidden bg-transparent py-10 text-white sm:py-14 xl:py-18 2xl:py-24">
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={460}
         height={460}
@@ -54,7 +54,7 @@ export function WhatsIncluded() {
           </h2>
           <div className="flex w-full justify-center">
             <ServiceSafeImage
-              src="/images/Service - Graphic Whats Included.png"
+              src="/images/Service - Graphic Whats Included.webp"
               alt="Graphic design workstation illustration"
               width={760}
               height={620}

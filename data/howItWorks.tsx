@@ -46,7 +46,7 @@ export const howItWorksHero = {
     "DeskTeam360 is a flat-rate subscription that gives you designers, developers, video editors, and marketing technology specialists in one real office—coordinated by a North American account manager. You do not hire, onboard, or wrangle invoices for one-off freelancers.",
     "You tell us what needs to be built, fixed, or shipped. Your account manager routes the work, keeps quality consistent, and brings it back to your inbox—most tasks in one to three business days—with unlimited revisions so your queue never stalls.",
   ],
-  heroImageSrc: "/images/how it works/How-it-works-Hero new_1.png",
+  heroImageSrc: "/images/how it works/How-it-works-Hero new_1.webp",
   heroImageAlt: "DeskTeam360 task dashboard with account manager and supported tools",
 };
 
@@ -229,7 +229,7 @@ export const howItWorksRealTeam = {
     "3 separate internet providers and 2 backup power sources – no excuses, no downtime",
     "Same team every month – they learn your brand, your preferences, your standards over time",
   ],
-  photoSrc: "/images/how it works/How it work - Real Team-v2.png",
+  photoSrc: "/images/how it works/How it work - Real Team-v2.webp",
   photoAlt: "DeskTeam360 team group photo in the office",
   stripMembers: [
     { id: "lex", name: "LEX", title: "ACCOUNT MANAGER", imageSrc: "/images/teams/LEX.png" },
@@ -289,6 +289,6 @@ export const howItWorksReadyCta = {
   primaryCta: { href: "/book-a-call", label: "Book a Free Strategy Call" },
   secondaryCta: { href: "/#pricing", label: "See Plans & Pricing" },
   noteBelowButtons: "30-day money-back guarantee - No contracts - Cancel anytime",
-  imageSrc: "/images/how-it-works-cta-jeremy-deskteam360-laptop.png",
+  imageSrc: "/images/how-it-works-cta-jeremy-deskteam360-laptop.webp",
   imageAlt: "Jeremy Kenerson of DeskTeam360 giving a thumbs up while holding a laptop",
 };

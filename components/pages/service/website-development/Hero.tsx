@@ -36,7 +36,7 @@ export function Hero() {
         className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={420}
         height={420}
@@ -70,7 +70,7 @@ export function Hero() {
               aria-hidden
             />
             <ServiceSafeImage
-              src="/images/web-development-hero.png"
+              src="/images/web-development-hero.webp"
               alt="3D illustration of a developer on a laptop with floating code editor and website layout windows"
               width={820}
               height={620}
@@ -82,7 +82,7 @@ export function Hero() {
         </div>
       </Container>
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={460}
         height={460}
@@ -99,7 +99,7 @@ export function Hero() {
           </h2>
           <div className="flex w-full justify-center">
             <ServiceSafeImage
-              src="/images/Service/web-development-we-handle.png"
+              src="/images/Service/web-development-we-handle.webp"
               alt="3D illustration of a developer at a multi-monitor desk with BUILD A WEBSITE on screen, Elementor, Divi, Duda, and responsive devices"
               width={760}
               height={620}

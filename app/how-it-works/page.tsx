@@ -36,7 +36,7 @@ export default async function HowItWorksPage() {
         <div
           className="pointer-events-none absolute left-0 top-0 bottom-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/images/How it works - Background Ornament.png')",
+            backgroundImage: "url('/images/How it works - Background Ornament.webp')",
             right: "-20em",
           }}
           aria-hidden

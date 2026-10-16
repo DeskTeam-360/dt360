@@ -12,7 +12,7 @@ export function AboutTeamDifference() {
             <div className="absolute -left-[10%] -top-[10%] w-[350px] h-[350px] rounded-full border-[2px] border-dashed border-[#DE55AB]/40 z-0 hidden lg:block animate-spin-slow" style={{ animationDuration: '30s' }} />
             <div className="relative z-10 p-6 lg:p-0">
               <AboutAssetImage
-                src="/images/about/3137b12c2147fe19a4be206aa7b0e996970aff6a.png"
+                src="/images/about/3137b12c2147fe19a4be206aa7b0e996970aff6a.webp"
                 alt="Team difference"
                 className="min-h-[400px] lg:min-h-[550px] border-[8px] border-white shadow-[0_30px_60px_-15px_rgba(17,16,76,0.2)] bg-[#f7f7f7]"
                 rounded="rounded-[40px] lg:rounded-tr-[80px] lg:rounded-bl-[80px] lg:rounded-tl-none lg:rounded-br-none"

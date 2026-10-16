@@ -26,11 +26,11 @@ export function HowItWorksHero() {
 
       {/* Tablet+ — circle PNG backgrounds */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 hidden bg-[url('/images/how%20it%20works/dt360-circle-hero-bg-blue.png')] bg-[length:min(72vw,860px)_auto] bg-left-top bg-no-repeat sm:block"
+        className="pointer-events-none absolute inset-0 z-0 hidden bg-[url('/images/how%20it%20works/dt360-circle-hero-bg-blue.webp')] bg-[length:min(72vw,860px)_auto] bg-left-top bg-no-repeat sm:block"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute bottom-0 left-0 z-0 hidden aspect-square w-[min(52vw,620px)] translate-y-1/2 bg-[url('/images/how%20it%20works/dt360-circle-hero-bg.png')] bg-contain bg-left-bottom bg-no-repeat sm:block"
+        className="pointer-events-none absolute bottom-0 left-0 z-0 hidden aspect-square w-[min(52vw,620px)] translate-y-1/2 bg-[url('/images/how%20it%20works/dt360-circle-hero-bg.webp')] bg-contain bg-left-bottom bg-no-repeat sm:block"
         aria-hidden
       />
       <Container className="relative z-10 max-w-[1440px] lg:px-10">

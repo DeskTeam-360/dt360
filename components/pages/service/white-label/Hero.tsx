@@ -22,7 +22,7 @@ export function Hero() {
         className="pointer-events-none absolute -right-12 -top-12 z-[1] h-auto w-[230px] opacity-90 sm:w-[300px] xl:w-[360px]"
       />
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={420}
         height={420}
@@ -53,7 +53,7 @@ export function Hero() {
               aria-hidden
             />
             <ServiceSafeImage
-              src="/images/Service - White Label - hero.png"
+              src="/images/Service - White Label - hero.webp"
               alt="Hero illustration for white label agency service"
               width={820}
               height={620}
@@ -65,7 +65,7 @@ export function Hero() {
         </div>
       </Container>
       <ServiceSafeImage
-        src="/images/Service - Ellipse Blue.png"
+        src="/images/Service - Ellipse Blue.webp"
         alt=""
         width={460}
         height={460}

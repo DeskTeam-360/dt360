@@ -123,10 +123,10 @@ export const startBusinessContent: StartBusinessContent = {
   headlineSecondLine: "to Chase Freelancers",
   subheading:
     "Somewhere between managing vendors, chasing revisions, and watching invoices pile up—you stopped doing the work that actually grows your company.",
-  illustrationSrc: "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite.png",
+  illustrationSrc: "/images/home-startbusiness-DigitalCreativeProfessionalsWideWhite.webp",
   illustrationAlt:
     "Designers, developers, and media specialists working together on digital projects.",
-  decorTopLeftSrc: "/images/home-startbusiness-topleft.png",
+  decorTopLeftSrc: "/images/home-startbusiness-topleft.webp",
   decorTopRightSrc: "/images/home-startbusiness-topright.png",
 };
 
@@ -165,7 +165,7 @@ export const lastCtaContent: LastCtaContent = {
     variant: "secondary",
   },
   note: "30-day money-back guarantee - No contracts - Cancel anytime - Since 2018",
-  imageSrc: "/images/home-cta-jeremy-deskteam360-laptop.png",
+  imageSrc: "/images/home-cta-jeremy-deskteam360-laptop.webp",
   imageAlt: "Jeremy Kenerson of DeskTeam360 holding a laptop, ready to support your team",
 };
 
@@ -192,7 +192,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "Death by a Thousand Invoices",
     description:
       "Your graphic designer bills hourly. Your web developer charges \"project management\" on top of dev time. Your video editor has a revision surcharge. Every task feels like opening your wallet and hoping for the best.",
-    imageSrc: "/images/home-rotatecard-Card-1.png",
+    imageSrc: "/images/home-rotatecard-Card-1.webp",
     scrimClass: "from-[#8B1048]/55 via-[#8B1048]/28 to-transparent",
   },
   {
@@ -200,7 +200,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "Five Vendors, Nobody Talking",
     description:
       "One person handles graphics. Another does web updates. A third builds funnels. Someone else edits video. They've never spoken to each other. And you're the human glue - the project manager you never signed up to be.",
-    imageSrc: "/images/home-rotatecard-Card-2.png",
+    imageSrc: "/images/home-rotatecard-Card-2.webp",
     scrimClass: "from-[#B84718]/55 via-[#B84718]/28 to-transparent",
   },
   {
@@ -208,7 +208,7 @@ export const rotateProblemCards: RotateProblemCard[] = [
     title: "The Freelancer Lottery",
     description:
       "Every new project means a new search. New portfolios. New \"getting to know your brand\" conversations. New prayers that this one won't ghost you mid-project. And the cost keeps climbing - $75, $100, $150 an hour - with zero guarantee they'll be available next month.",
-    imageSrc: "/images/home-rotatecard-Card-3.png",
+    imageSrc: "/images/home-rotatecard-Card-3.webp",
     scrimClass: "from-[#4D1098]/55 via-[#4D1098]/28 to-transparent",
   },
 ];
@@ -287,7 +287,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       title: "Insourcing, Not Outsourcing",
       description:
         "We eliminated the frustrations of traditional outsourcing by bringing everything in-house. Your work is done by a real team in a real office - with the infrastructure and accountability to back it up.",
-      mediaSrc: "/images/home-InsourcingBetter-grid1.png",
+      mediaSrc: "/images/home-InsourcingBetter-grid1.webp",
       mediaAlt:
         "Illustration of designers, developers, and video editors working together as one in-house team.",
     },
@@ -298,7 +298,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       title: "Built-In Redundancy",
       description:
         "New computers. Three different internet providers. Two backup power sources. When someone's out sick or on vacation, the team keeps moving - you never feel the gap.",
-      mediaSrc: "/images/home-InsourcingBetter-grid2-rev2.png",
+      mediaSrc: "/images/home-InsourcingBetter-grid2-rev2.webp",
       mediaAlt: "Office infrastructure, backups, and redundant systems.",
     },
     {
@@ -326,7 +326,7 @@ export const insourcingBetterSection: InsourcingBetterSection = {
       title: "North American Account Managers",
       description:
         "Your dedicated account manager speaks fluent English and bridges any language gaps with the production team. They help you get the most out of the service - so you can focus on growing your business.",
-      mediaSrc: "/images/home-InsourcingBetter-grid5.png",
+      mediaSrc: "/images/home-InsourcingBetter-grid5.webp",
       mediaAlt: "North American account manager.",
     },
     {
@@ -377,7 +377,7 @@ export const howItWorksSection: HowItWorksSection = {
 export const socialProofSection: SocialProofSection = {
   headlineLine: "They Tried Freelancers, Agencies, and Upwork First.",
   headlineAccentLine: "Then They Found Us",
-  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-2.png",
+  imageSrc: "/images/home-SocialProofTestimonials-ImageMain-2.webp",
   imageAlt: "DeskTeam360 in-house team group photo.",
   testimonials: [
     {
@@ -401,7 +401,7 @@ export const socialProofSection: SocialProofSection = {
       attribution: "Renee Beth Poindexter, Living the Potential",
       quote:
         "I've tried Fiverr, Upwork, and two agencies. DeskTeam360 is the first team that feels like MY team. They know my brand, my voice, my standards.",
-      imageSrc: "/images/home-SocialProofTestimonials-Renee.png",
+      imageSrc: "/images/home-SocialProofTestimonials-Renee.webp",
       imageAlt: "Renee Beth Poindexter portrait.",
     },
   ],
