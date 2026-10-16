@@ -166,6 +166,19 @@ export function Navbar() {
                 items={navResources}
                 triggerClassName={desktopLinkClass}
               />
+              <Link
+                href="/careers"
+                className={cn(
+                  "font-nav-primary transition-colors",
+                  pathname === "/careers"
+                    ? useDarkTopNav
+                      ? "text-[#11104C]"
+                      : "text-white"
+                    : desktopLinkClass,
+                )}
+              >
+                Careers
+              </Link>
             </nav>
 
             <div
@@ -259,6 +272,9 @@ export function Navbar() {
                 items={navResources}
                 onPick={() => setMobileOpen(false)}
               />
+              <MobileLink href="/careers" onNavigate={() => setMobileOpen(false)}>
+                Careers
+              </MobileLink>
               <hr className="my-3 border-white/10" />
               <MobileLink
                 href={externalUrls.customerPortal}
