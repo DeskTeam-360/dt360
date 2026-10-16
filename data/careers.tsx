@@ -297,14 +297,4 @@ export const careersApplication = {
   handwrittenImageAlt: "We'd love to hear from you!",
   handwrittenWidth: 1064,
   handwrittenHeight: 702,
-  positions: careersCategories.flatMap((c) => c.roles.map((r) => r.title)),
-  experienceLevels: [
-    "Less than 1 year",
-    "1–3 years",
-    "3–5 years",
-    "5+ years",
-  ],
-  submitLabel: "Submit Application",
-  successMessage:
-    "Thanks — we received your application. Our team will review it and reach out if there’s a fit.",
 } as const;
