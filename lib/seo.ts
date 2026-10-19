@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getGate5AbsoluteTitle } from "@/data/gate5AbsoluteTitles";
+import { getCopyV3MetaDescription } from "@/data/developerCopyChangesV3";
 
 /**
  * Canonical path without trailing slash (except homepage `/`).
@@ -22,6 +23,7 @@ export function pageAlternates(pathname: string): NonNullable<Metadata["alternat
 /**
  * Gate 5 F10 — absolute document title (no layout ` | DeskTeam360` suffix).
  * Falls back to a plain string title (which still uses the layout template).
+ * SEO copy-changes-v3 also overrides meta description when present.
  */
 /** Merge page metadata with a correct canonical (and matching Open Graph url). */
 export function withPageCanonical(
@@ -30,14 +32,17 @@ export function withPageCanonical(
 ): Metadata {
   const path = canonicalPath(pathname);
   const gate5Title = getGate5AbsoluteTitle(path);
+  const copyMeta = getCopyV3MetaDescription(path);
   const title =
     gate5Title != null
       ? { absolute: gate5Title }
       : metadata.title;
+  const description = copyMeta ?? metadata.description;
 
   return {
     ...metadata,
     title,
+    description,
     alternates: {
       ...metadata.alternates,
       canonical: path,
@@ -45,9 +50,8 @@ export function withPageCanonical(
     openGraph: {
       ...metadata.openGraph,
       url: path,
-      ...(gate5Title
-        ? { title: gate5Title }
-        : {}),
+      ...(gate5Title ? { title: gate5Title } : {}),
+      ...(copyMeta ? { description: copyMeta } : {}),
     },
   };
 }

@@ -12,6 +12,7 @@ import {
 } from '@/lib/seo/fix-report-redirects';
 import type { BlogPost } from '@/data/blog';
 import { getGate5AbsoluteTitle } from '@/data/gate5AbsoluteTitles';
+import { getCopyV3MetaDescription } from '@/data/developerCopyChangesV3';
 import { withPageCanonical } from '@/lib/seo';
 
 type Props = {
@@ -52,14 +53,15 @@ export async function generateMetadata(
   const { post, publicSlug } = resolved;
   const path = `/case-studies/${publicSlug}`;
   const absoluteTitle = getGate5AbsoluteTitle(path);
+  const description = getCopyV3MetaDescription(path) ?? post.excerpt;
 
   // Gate 5 F10: absolute titles when listed; otherwise layout template suffix.
   return withPageCanonical(path, {
     title: absoluteTitle ?? post.title,
-    description: post.excerpt,
+    description,
     openGraph: {
       title: absoluteTitle ?? `${post.title} | DeskTeam360`,
-      description: post.excerpt,
+      description,
     },
   });
 }

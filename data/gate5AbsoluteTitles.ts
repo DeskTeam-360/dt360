@@ -3,6 +3,8 @@
  * Source: DeskTeam360 website copy for developer 2026-10-06.
  */
 
+import { getCopyV3Title } from "@/data/developerCopyChangesV3";
+
 export const GATE5_ABSOLUTE_TITLES: Record<string, string> = {
   '/': 'DeskTeam360: Stop Outsourcing, Start Insourcing',
   '/blog/ai-for-marketing-agencies': 'AI for Marketing Agencies: What to Automate, What Not To',
@@ -88,7 +90,8 @@ export const GATE5_ABSOLUTE_TITLES: Record<string, string> = {
 
 export function getGate5AbsoluteTitle(pathname: string): string | undefined {
   const path = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
-  return GATE5_ABSOLUTE_TITLES[path];
+  // SEO copy-changes-v3 titles take priority over Gate 5 F10 list.
+  return getCopyV3Title(path) ?? GATE5_ABSOLUTE_TITLES[path];
 }
 
 /** Gate 5 F10 — homepage meta description (also site-wide twitter default). */
