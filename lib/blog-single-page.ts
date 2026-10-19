@@ -14,10 +14,7 @@ import {
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
-import {
-  getCopyV3MetaDescription,
-  shouldDemoteExtraH1,
-} from '@/data/developerCopyChangesV3';
+import { getCopyV3MetaDescription } from '@/data/developerCopyChangesV3';
 
 const PLACEHOLDER_IMAGE = '/images/blog/blog-placeholder.webp';
 
@@ -109,23 +106,10 @@ async function applyGate5BlogOverride(post: BlogPost): Promise<BlogPost> {
     };
   }
 
-  let content = applyGate5S9BlogPatches(next.slug, next.content ?? '');
-  // P4.8 / copy-changes-v3 — keep the page template H1; demote body H1s to H2.
-  if (shouldDemoteExtraH1(`/blog/${next.slug}`)) {
-    content = demoteExtraH1Tags(content);
-  }
-
   return {
     ...next,
-    content,
+    content: applyGate5S9BlogPatches(next.slug, next.content ?? ''),
   };
-}
-
-/** Change every <h1> in post body HTML to <h2> (page chrome already has the title H1). */
-function demoteExtraH1Tags(html: string): string {
-  return html
-    .replace(/<h1(\s[^>]*)?>/gi, "<h2$1>")
-    .replace(/<\/h1>/gi, "</h2>");
 }
 
 export type BlogSinglePageData = {

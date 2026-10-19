@@ -201,11 +201,6 @@ export const COPY_V3_META_DESCRIPTIONS: Record<string, string> = {
   "/terms-conditions": "Read the terms and conditions for using the DeskTeam360 website and subscription services. Review them before you sign up for any service.",
 };
 
-/** Paths where body HTML should keep one H1 (demote further H1s to H2). */
-export const COPY_V3_DEMOTE_EXTRA_H1_PATHS = new Set<string>([
-  "/blog/reasons-need-website-business",
-]);
-
 function normalizePath(pathname: string): string {
   if (!pathname || pathname === "/") return "/";
   return pathname.replace(/\/+$/, "");
@@ -217,8 +212,4 @@ export function getCopyV3Title(pathname: string): string | undefined {
 
 export function getCopyV3MetaDescription(pathname: string): string | undefined {
   return COPY_V3_META_DESCRIPTIONS[normalizePath(pathname)];
-}
-
-export function shouldDemoteExtraH1(pathname: string): boolean {
-  return COPY_V3_DEMOTE_EXTRA_H1_PATHS.has(normalizePath(pathname));
 }
