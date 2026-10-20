@@ -49,7 +49,14 @@ export function LatestBlogs({
 }: LatestBlogsProps) {
   const [clientPage, setClientPage] = useState(0);
 
-  const displayPosts = posts.length > 0 ? posts : DUMMY_POSTS;
+  // Dummy cards are local/dev only for All Posts. Empty category lists must stay
+  // empty — otherwise fallback slugs (SEO D1) ship as 404 links on live category pages.
+  const displayPosts =
+    posts.length > 0
+      ? posts
+      : selectedCategory === "All Posts"
+        ? DUMMY_POSTS
+        : [];
   const isAllPosts = selectedCategory === "All Posts";
   // Server pagination only when the parent already sliced All Posts for this URL page.
   const useServerPagination =

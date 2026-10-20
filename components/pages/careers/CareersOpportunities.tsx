@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "@/components/shared/Container";
 import { SafeImage } from "@/components/shared/SafeImage";
 import {
@@ -9,52 +9,102 @@ import {
   type CareersRole,
 } from "@/data/careers";
 
+function useIsMobileLayout() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  return isMobile;
+}
+
 function RoleRow({
   role,
   showTip,
   tipAlign,
+  isMobile,
   onEnter,
   onLeave,
+  onToggle,
 }: {
   role: CareersRole;
   showTip: boolean;
   tipAlign: "start" | "end";
+  isMobile: boolean;
   onEnter: () => void;
   onLeave: () => void;
+  onToggle: () => void;
 }) {
   const hasDetail = Boolean(role.whatYoullDo || role.requirements);
 
   return (
     <li
       className={`relative border-b border-[#E8EAF4] last:border-b-0 ${showTip ? "z-50" : "z-0"}`}
-      onMouseEnter={hasDetail ? onEnter : undefined}
-      onMouseLeave={hasDetail ? onLeave : undefined}
-      onFocus={hasDetail ? onEnter : undefined}
-      onBlur={hasDetail ? onLeave : undefined}
+      onMouseEnter={!isMobile && hasDetail ? onEnter : undefined}
+      onMouseLeave={!isMobile && hasDetail ? onLeave : undefined}
+      onFocus={!isMobile && hasDetail ? onEnter : undefined}
+      onBlur={!isMobile && hasDetail ? onLeave : undefined}
     >
-      <div
-        className="flex w-full items-center justify-between gap-1.5 px-2.5 py-2.5 text-left sm:px-3 sm:py-3"
-        tabIndex={hasDetail ? 0 : undefined}
-        role={hasDetail ? "button" : undefined}
-        aria-describedby={hasDetail && showTip ? `role-tip-${role.title}` : undefined}
-      >
-        <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[11px] font-semibold leading-[1.6] tracking-normal text-[#080F40]">
-          {role.title}
-        </span>
-        {role.talentPool ? (
-          <span className="shrink-0 rounded-full bg-[#EAE5FD] px-1.5 py-px font-[var(--font-poppins)] text-[8px] font-bold uppercase leading-none tracking-wide text-[#6646BD]">
-            Talent pool
+      {hasDetail ? (
+        <button
+          type="button"
+          className="flex w-full items-center justify-between gap-1.5 px-2.5 py-2.5 text-left sm:px-3 sm:py-3"
+          aria-expanded={showTip}
+          aria-controls={`role-tip-${role.title}`}
+          onClick={isMobile ? onToggle : undefined}
+        >
+          <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[11px] font-semibold leading-[1.6] tracking-normal text-[#080F40]">
+            {role.title}
           </span>
-        ) : null}
-      </div>
+          <span className="flex shrink-0 items-center gap-1.5">
+            {role.talentPool ? (
+              <span className="rounded-full bg-[#EAE5FD] px-1.5 py-px font-[var(--font-poppins)] text-[8px] font-bold uppercase leading-none tracking-wide text-[#6646BD]">
+                Talent pool
+              </span>
+            ) : null}
+            {isMobile ? (
+              <span
+                className={`inline-flex h-4 w-4 items-center justify-center text-[#6646BD] transition-transform ${
+                  showTip ? "rotate-180" : ""
+                }`}
+                aria-hidden
+              >
+                <svg viewBox="0 0 12 8" className="h-2.5 w-2.5 fill-current">
+                  <path d="M1.4.6 6 5.2 10.6.6 12 2 6 8 0 2z" />
+                </svg>
+              </span>
+            ) : null}
+          </span>
+        </button>
+      ) : (
+        <div className="flex w-full items-center justify-between gap-1.5 px-2.5 py-2.5 text-left sm:px-3 sm:py-3">
+          <span className="min-w-0 whitespace-nowrap font-[var(--font-inter)] text-[11px] font-semibold leading-[1.6] tracking-normal text-[#080F40]">
+            {role.title}
+          </span>
+          {role.talentPool ? (
+            <span className="shrink-0 rounded-full bg-[#EAE5FD] px-1.5 py-px font-[var(--font-poppins)] text-[8px] font-bold uppercase leading-none tracking-wide text-[#6646BD]">
+              Talent pool
+            </span>
+          ) : null}
+        </div>
+      )}
 
       {hasDetail && showTip ? (
         <div
           id={`role-tip-${role.title}`}
-          role="tooltip"
-          className={`absolute top-full z-[200] mt-[14px] box-border h-auto min-h-[219px] w-[min(376px,calc(100vw-2rem))] overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.24)] sm:p-4 ${
-            tipAlign === "end" ? "right-0 left-auto" : "left-0"
-          }`}
+          role={isMobile ? "region" : "tooltip"}
+          className={
+            isMobile
+              ? "relative z-[200] mx-1 mb-2 box-border overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_8px_20px_rgba(17,16,76,0.12)]"
+              : `absolute top-full z-[200] mt-[14px] box-border h-auto min-h-[219px] w-[min(376px,calc(100vw-2rem))] overflow-visible rounded-xl border border-[#E8EAF4] bg-white p-3 shadow-[0_16px_40px_rgba(17,16,76,0.24)] sm:p-4 ${
+                  tipAlign === "end" ? "right-0 left-auto" : "left-0"
+                }`
+          }
         >
           {role.whatYoullDo ? (
             <div className="mb-3">
@@ -85,6 +135,7 @@ function RoleRow({
 export function CareersOpportunities() {
   const d = careersOpportunities;
   const [hoverKey, setHoverKey] = useState<string | null>(null);
+  const isMobile = useIsMobileLayout();
   const lastIndex = careersCategories.length - 1;
 
   return (
@@ -162,9 +213,13 @@ export function CareersOpportunities() {
                         key={role.title}
                         role={role}
                         tipAlign={tipAlign}
+                        isMobile={isMobile}
                         showTip={hoverKey === key}
                         onEnter={() => setHoverKey(key)}
                         onLeave={() => setHoverKey(null)}
+                        onToggle={() =>
+                          setHoverKey((prev) => (prev === key ? null : key))
+                        }
                       />
                     );
                   })}

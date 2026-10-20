@@ -39,6 +39,10 @@ const DEAD_SCHEDULE_DEMO_HREF =
 const OLD_MAINTENANCE_COST_HREF =
   /(?:https?:\/\/(?:www\.)?deskteam360\.com)?\/blog\/website-maintenance-cost(?!-guide)\/?/gi;
 
+/** Missing post — unwrap link, keep anchor text (SEO developer-report D1). */
+const MISSING_DELEGATE_WITHOUT_CONTROL_ANCHOR =
+  /<a\b[^>]*\bhref=["'](?:https?:\/\/(?:www\.)?deskteam360\.com)?\/blog\/how-to-delegate-without-losing-control\/?["'][^>]*>([\s\S]*?)<\/a>/gi;
+
 /** Rewrite wp-content URLs inside WordPress HTML content. */
 export function rewriteWordPressContentHtml(html: string | undefined | null): string {
   if (!html) return html ?? "";
@@ -50,6 +54,9 @@ export function rewriteWordPressContentHtml(html: string | undefined | null): st
 
   // P1.3 — broken maintenance-cost links → guide
   out = out.replace(OLD_MAINTENANCE_COST_HREF, "/blog/website-maintenance-cost-guide");
+
+  // D1 — missing post: keep surrounding text, drop the href
+  out = out.replace(MISSING_DELEGATE_WITHOUT_CONTROL_ANCHOR, "$1");
 
   // Gate 5 F16 — apply approved alts to <img> tags when we have a match.
   out = out.replace(/<img\b([^>]*?)>/gi, (full, attrs: string) => {

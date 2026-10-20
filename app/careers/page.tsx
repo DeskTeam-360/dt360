@@ -8,7 +8,8 @@ import { BreadcrumbJsonLd, homeBreadcrumb } from "@/components/seo/BreadcrumbJso
 import { withPageCanonical } from "@/lib/seo";
 
 export const metadata: Metadata = withPageCanonical("/careers", {
-  title: "Careers | DeskTeam360",
+  // Absolute — avoid layout template doubling to "Careers | DeskTeam360 | DeskTeam360"
+  title: { absolute: "Careers | DeskTeam360" },
   description:
     "Build your career with DeskTeam360. Explore roles across technical, operations, sales, content, and paid media — or join our talent pool.",
 });

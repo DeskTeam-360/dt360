@@ -6,7 +6,7 @@ export function CareersWhyUs() {
   const d = careersWhyUs;
 
   return (
-    <section className="relative z-0 isolate overflow-hidden bg-[#EAE5FD] py-12 text-white sm:py-16 lg:py-24">
+    <section className="relative z-0 isolate overflow-hidden bg-[#EAE5FD] pt-[25px] pb-12 text-white sm:py-16 lg:py-24">
       <SafeImage
         src={d.backgroundImage}
         alt=""
@@ -18,9 +18,9 @@ export function CareersWhyUs() {
         aria-hidden
       />
 
-      <Container className="relative z-10 max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
+      <Container className="relative z-10 max-w-[1440px] !px-[15px] sm:!px-6 lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="pt-[30px] font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:pt-5 sm:text-[15px] lg:pt-0 lg:text-[17px]">
+          <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:text-[17px]">
             {d.eyebrow}
           </p>
           <h2 className="mt-3 font-[var(--font-poppins)] text-[26px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[34px] lg:text-[45px] lg:tracking-[-1.2px]">

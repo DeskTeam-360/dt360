@@ -49,9 +49,11 @@ export const FEATURED_POST: BlogPost = {
 export const LATEST_POSTS: BlogPost[] = [
   {
     id: "latest-1",
-    slug: "how-to-delegate-without-losing-control",
-    title: "How to Delegate Tasks Effectively Without Losing Control",
-    excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel convallis ante. Sed id rutrum odio, sit amet auctor nibh. Integer lectus urna, dictum in mi sed.",
+    // Live post — do not use /blog/how-to-delegate-without-losing-control (404; SEO D1).
+    slug: "how-to-delegate-tasks-effectively",
+    title: "How to Delegate Tasks When You Run the Whole Business",
+    excerpt:
+      "Most people think they're bad at delegating. Turns out the brief is usually the problem. Here's what to hand off first and how to write a task brief that comes back right.",
     image: "/images/blog/blog-delegate.webp",
     category: "Delegation",
     author: "Jeremy Kenerson",
