@@ -10,7 +10,7 @@ export function CareersValues() {
       <Container className="max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
         <div className="grid items-center gap-6 md:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
           <div className="relative mx-auto w-full max-w-[520px] md:max-w-[640px] lg:mx-0 lg:max-w-none">
-            <div className="relative aspect-[819/564] w-full">
+            <div className="relative aspect-[1278/880] w-full">
               <SafeImage
                 src={d.image}
                 alt={d.imageAlt}
