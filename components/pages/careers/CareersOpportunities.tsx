@@ -154,7 +154,7 @@ export function CareersOpportunities() {
           className="h-full w-full object-cover object-center lg:object-fill"
         />
       </div>
-      <Container className="relative z-10 mt-[70px] max-w-[1440px] !px-4 sm:!px-6 lg:!px-20">
+      <Container className="relative z-10 mt-[140px] max-w-[1440px] !px-4 sm:!mt-[115px] sm:!px-6 lg:!mt-[70px] lg:!px-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-[#F60996] sm:text-[15px] lg:text-[17px]">
             {d.eyebrow}
