@@ -17,7 +17,7 @@ export function CareersApplication() {
   return (
     <section
       id="apply"
-      className="scroll-mt-28 relative z-0 isolate overflow-hidden bg-[#F60996] pt-[25px] pb-12 sm:py-16 lg:py-24"
+      className="scroll-mt-28 relative z-0 isolate overflow-hidden bg-[#F60996] py-12 sm:py-16 lg:py-24"
     >
       <SafeImage
         src={d.backgroundImage}
@@ -32,7 +32,7 @@ export function CareersApplication() {
       <Container className="relative z-10 max-w-[1440px] !px-[15px] sm:!px-6 lg:!px-20">
         <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
           <div className="text-white lg:pt-8">
-            <p className="font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-white sm:text-[15px] lg:text-[17px]">
+            <p className="pt-[50px] font-[var(--font-poppins)] text-[13px] font-bold uppercase leading-[1.4] tracking-[2px] text-white sm:pt-5 sm:text-[15px] lg:pt-0 lg:text-[17px]">
               {d.eyebrow}
             </p>
             <h2 className="mt-3 max-w-[550px] font-[var(--font-poppins)] text-[26px] font-bold leading-[1.12] tracking-[-0.8px] sm:text-[34px] lg:text-[45px] lg:tracking-[-1.2px]">
