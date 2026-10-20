@@ -35,7 +35,7 @@ export const careersHero = {
 } as const;
 
 export const careersValues = {
-  image: "/images/careers/image-more-than-just-a-job.webp",
+  image: "/images/careers/image-more-than-just-a-job-v2.webp",
   imageAlt: "DeskTeam360 teammates working together in the office",
   titleBefore: "More Than ",
   titleAccent: "Just a Job",
