@@ -1,9 +1,11 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { GATE5_BLOG_CATEGORIES } from "@/data/gate5BlogCategories";
 import { mergeBlogSitemapEntries } from "@/lib/sitemap/blog-post-entries";
 import { buildStaticPageEntries } from "@/lib/sitemap/static-pages";
-import type { SitemapFile, SitemapIndexEntry } from "@/lib/sitemap/types";
+import type { SitemapFile, SitemapIndexEntry, SitemapUrlEntry } from "@/lib/sitemap/types";
 import {
+  CATEGORY_SITEMAP_EXCLUDED_SLUGS,
   fetchBlogPostEntries,
   fetchCaseStudyEntries,
   fetchCategoryEntries,
@@ -14,6 +16,18 @@ import {
   formatSitemapLastmod,
   getLatestLastmod,
 } from "@/lib/sitemap/xml";
+
+/** Gate 5 S6 categories only — used when WordPress is unavailable. */
+function gate5CategoryFallbackEntries(siteUrl: string): SitemapUrlEntry[] {
+  const base = siteUrl.replace(/\/$/, "");
+  return GATE5_BLOG_CATEGORIES.filter(
+    (category) => !CATEGORY_SITEMAP_EXCLUDED_SLUGS.has(category.slug),
+  )
+    .map((category) => ({
+      loc: `${base}/blog/category/${category.slug}`,
+    }))
+    .sort((a, b) => a.loc.localeCompare(b.loc));
+}
 
 export const SITEMAP_ENTRIES_PER_FILE = 1000;
 
@@ -97,9 +111,15 @@ export async function generateSitemaps(
     const merged = mergeBlogSitemapEntries([], siteUrl, generatedAt);
     postEntries = merged.entries;
     addedExtraCount = merged.addedExtraCount;
+    categoryEntries = gate5CategoryFallbackEntries(siteUrl);
     if (addedExtraCount > 0) {
       warnings.push(
         `Included ${addedExtraCount} Appendix C blog URLs without WordPress metadata (lastmod = generate time).`,
+      );
+    }
+    if (categoryEntries.length > 0) {
+      warnings.push(
+        `Included ${categoryEntries.length} Gate 5 category URLs without WordPress metadata.`,
       );
     }
   }

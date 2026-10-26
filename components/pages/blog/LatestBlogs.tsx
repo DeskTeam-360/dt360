@@ -13,6 +13,7 @@ import {
   paginateItems,
   type BlogPagination,
 } from "@/lib/blog-pagination";
+import { blogPostPublicHref } from "@/lib/seo/internal-link-final-paths";
 
 // Fallback when WP is empty (local/dev without API)
 const DUMMY_POSTS = Array.from({ length: 15 }).map((_, i) => {
@@ -172,7 +173,7 @@ export function LatestBlogs({
                     </div>
 
                     <div className="relative z-10 mt-auto flex w-full flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-                      <Link href={`/blog/${highlighted.slug}`}>
+                      <Link href={blogPostPublicHref(highlighted.slug)}>
                         <button className="flex cursor-pointer items-center gap-3 rounded-[10px] border-2 border-[#e3058d] px-6 py-2 text-[14px] font-bold text-[#e3058d] transition-colors group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] md:py-3 md:text-[16px]">
                           Read Post
                           <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-current md:h-6 md:w-6">
@@ -284,7 +285,7 @@ function BlogCard({ post }: { post: BlogPost }) {
           {post.title}
         </h3>
         <div className="mt-auto">
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={blogPostPublicHref(post.slug)}>
             <button className="flex cursor-pointer items-center gap-3 rounded-[10px] border-2 border-[#7547c5] px-6 py-2 text-[14px] font-bold text-[#7547c5] transition-colors group-hover:border-[#f5b419] group-hover:text-[#f5b419] hover:!bg-[#f5b419] hover:!text-[#11104c] md:py-3 md:text-[16px]">
               Read Post
               <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-current md:h-6 md:w-6">

@@ -192,6 +192,18 @@ export async function fetchBlogPostEntries(siteUrl: string): Promise<SitemapUrlE
   return entries;
 }
 
+/**
+ * Legacy WP category slugs that 308 to another URL — must not appear in the
+ * category sitemap (CMO P1 Oct 2026). Targets already listed separately.
+ */
+export const CATEGORY_SITEMAP_EXCLUDED_SLUGS = new Set([
+  "comparisons", // → /blog/category/in-house-vs-team
+  "guides", // → /blog
+  "industry-insights", // → /blog/category/small-business
+  "pricing-cost", // → /blog
+  "small-business-website", // → /blog/category/small-business
+]);
+
 export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlEntry[]> {
   const client = createWpClient();
   const data: SitemapCategoriesResponse = await client.request<SitemapCategoriesResponse>(
@@ -208,6 +220,7 @@ export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlE
     if (!name || !slug || (category.count ?? 0) <= 0) continue;
     if (isCaseStudyCategoryName(name) || isCaseStudyCategorySlug(slug)) continue;
     if (name.toLowerCase() === "uncategorized") continue;
+    if (CATEGORY_SITEMAP_EXCLUDED_SLUGS.has(slug)) continue;
 
     const latestPost = category.posts?.nodes?.[0];
     bySlug.set(slug, {
@@ -219,6 +232,7 @@ export async function fetchCategoryEntries(siteUrl: string): Promise<SitemapUrlE
   // Gate 5 S6 — ensure the six named category URLs are in the sitemap.
   for (const category of GATE5_BLOG_CATEGORIES) {
     if (bySlug.has(category.slug)) continue;
+    if (CATEGORY_SITEMAP_EXCLUDED_SLUGS.has(category.slug)) continue;
     bySlug.set(category.slug, {
       loc: `${base}/blog/category/${category.slug}`,
     });

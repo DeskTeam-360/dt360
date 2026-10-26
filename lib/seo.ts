@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getGate5AbsoluteTitle } from "@/data/gate5AbsoluteTitles";
 import { getCopyV3MetaDescription } from "@/data/developerCopyChangesV3";
+import { siteConfig } from "@/config/site";
 
 /**
  * Canonical path without trailing slash (except homepage `/`).
@@ -20,10 +21,22 @@ export function pageAlternates(pathname: string): NonNullable<Metadata["alternat
   };
 }
 
+const DEFAULT_OG_IMAGES: NonNullable<NonNullable<Metadata["openGraph"]>["images"]> = [
+  {
+    url: "/opengraph-image",
+    width: 1200,
+    height: 630,
+    alt: siteConfig.name,
+  },
+];
+
 /**
  * Gate 5 F10 — absolute document title (no layout ` | DeskTeam360` suffix).
  * Falls back to a plain string title (which still uses the layout template).
  * SEO copy-changes-v3 also overrides meta description when present.
+ *
+ * Open Graph: page-level `openGraph` replaces the layout object in Next.js, so
+ * always re-assert type + default image here (CMO P2 incomplete OG tags).
  */
 /** Merge page metadata with a correct canonical (and matching Open Graph url). */
 export function withPageCanonical(
@@ -38,6 +51,16 @@ export function withPageCanonical(
       ? { absolute: gate5Title }
       : metadata.title;
   const description = copyMeta ?? metadata.description;
+  const pageOg = metadata.openGraph ?? {};
+  const pageOgType =
+    pageOg && typeof pageOg === "object" && "type" in pageOg
+      ? (pageOg as { type?: string }).type
+      : undefined;
+  const ogType = pageOgType === "article" ? "article" : "website";
+  const pageImages =
+    pageOg && typeof pageOg === "object" && "images" in pageOg
+      ? pageOg.images
+      : undefined;
 
   return {
     ...metadata,
@@ -48,10 +71,15 @@ export function withPageCanonical(
       canonical: path,
     },
     openGraph: {
-      ...metadata.openGraph,
+      locale: siteConfig.locale,
+      siteName: siteConfig.name,
+      ...pageOg,
       url: path,
       ...(gate5Title ? { title: gate5Title } : {}),
       ...(copyMeta ? { description: copyMeta } : {}),
+      // Page-level openGraph replaces layout; re-assert required fields.
+      type: ogType,
+      images: pageImages ?? DEFAULT_OG_IMAGES,
     },
   };
 }

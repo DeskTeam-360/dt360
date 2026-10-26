@@ -34,6 +34,7 @@ export const footerServices: FooterSimpleLink[] = [
 
 export const footerGuides: FooterSimpleLink[] = [
   { href: "/blog/what-is-insourcing", label: "What Is Insourcing?" },
+  { href: "/blog/category/website-care", label: "Website Care Guides" },
   { href: "/blog/website-maintenance-cost-guide", label: "Website Maintenance Cost" },
   {
     href: "/blog/white-label-web-development-guide",

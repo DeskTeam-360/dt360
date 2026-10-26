@@ -7,8 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-
-
+import { blogPostPublicHref } from '@/lib/seo/internal-link-final-paths';
 
 interface FeaturedBlogProps {
   featuredPostsMap: Record<string, BlogPost>;
@@ -105,7 +104,7 @@ export function FeaturedBlog({
 
               {/* Bottom Row: Button & Author Info */}
               <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between mt-auto gap-6 w-full">
-                <Link href={`/blog/${currentPost.slug}`}>
+                <Link href={blogPostPublicHref(currentPost.slug)}>
                   <button className="bg-[#e3058d] text-white px-6 py-2.5 md:px-8 md:py-3 rounded-[30px] font-bold text-[16px] md:text-[18px] flex items-center gap-3 hover:bg-[#d11f62] transition-colors cursor-pointer">
                     Read Post
                     <div className="w-5 h-5 md:w-6 md:h-6 rounded-full border-2 border-white flex items-center justify-center">

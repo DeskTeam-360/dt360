@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogHero } from "@/components/pages/blog/BlogHero";
+import { BlogCategoryLinks } from "@/components/pages/blog/BlogCategoryLinks";
 import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
@@ -84,6 +85,7 @@ export default async function BlogCategoryPage({ params }: Props) {
         }
       />
       <BlogHero title={categoryName} description={gate5?.pageDescription} />
+      <BlogCategoryLinks activeSlug={slug} />
       <BlogListing
         featuredPostsMap={featuredPostsMap}
         latestPosts={latestPosts}

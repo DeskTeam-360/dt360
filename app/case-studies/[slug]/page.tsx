@@ -60,6 +60,7 @@ export async function generateMetadata(
     title: absoluteTitle ?? post.title,
     description,
     openGraph: {
+      type: "article",
       title: absoluteTitle ?? `${post.title} | DeskTeam360`,
       description,
     },

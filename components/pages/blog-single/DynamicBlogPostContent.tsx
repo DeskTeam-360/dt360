@@ -15,8 +15,11 @@ import {
   rewriteWordPressContentHtml,
   rewriteWordPressMediaUrl,
 } from '@/lib/wp-public';
-import { categoryNameToSlug } from '@/lib/blog-categories';
-import { resolveInternalContentLink } from '@/lib/seo/internal-link-final-paths';
+import { blogCategoryHref } from '@/lib/blog-categories';
+import {
+  blogPostPublicHref,
+  resolveInternalContentLink,
+} from '@/lib/seo/internal-link-final-paths';
 
 function isLinkableBlogCategory(name: string): boolean {
   const lower = name.toLowerCase();
@@ -784,7 +787,7 @@ export function DynamicBlogPostContent({
               .map((cat) => (
               <Link
                 key={cat}
-                href={`/blog/category/${categoryNameToSlug(cat)}`}
+                href={blogCategoryHref(cat)}
                 className="inline-block bg-[#F0573A] text-white px-5 py-1.5 rounded-[15px] font-bold text-base md:text-lg uppercase transition-opacity hover:opacity-90"
               >
                 {cat}
@@ -1041,12 +1044,12 @@ export function DynamicBlogPostContent({
                       <span>|</span>
                       <span>{related.author}</span>
                     </div>
-                    <Link href={`/blog/${related.slug}`} className="group flex-grow flex flex-col">
+                    <Link href={blogPostPublicHref(related.slug)} className="group flex-grow flex flex-col">
                       <h3 className="text-[#1B1464] text-xl md:text-2xl font-bold mb-6 leading-tight font-poppins group-hover:text-[#F0573A] transition-colors flex-grow">
                         {related.title}
                       </h3>
                     </Link>
-                    <Link href={`/blog/${related.slug}`}>
+                    <Link href={blogPostPublicHref(related.slug)}>
                       <button className="border-2 border-[#7547C5] text-[#7547C5] px-8 py-3 rounded-[10px] font-bold flex items-center justify-center gap-2 hover:bg-[#7547C5] hover:text-white transition-colors font-montserrat w-fit">
                         Read Post
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 26 26">

@@ -11,6 +11,7 @@ import {
   GATE5_S9_BLOG_PATCHES,
   normalizeQuotes,
 } from '@/data/gate5S9LinkPatches';
+import { ORPHAN_INTERNAL_LINK_PATCHES } from '@/data/orphanInternalLinkPatches';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
@@ -34,10 +35,12 @@ function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
   };
 }
 
-/** Gate 5 S9 — insert planned link sentences into live blog HTML. */
+/** Gate 5 S9 + CMO orphan inbound links — insert link sentences into live blog HTML. */
 function applyGate5S9BlogPatches(slug: string, content: string): string {
   const path = `/blog/${slug}`;
-  const patches = GATE5_S9_BLOG_PATCHES.filter((p) => p.path === path);
+  const patches = [...GATE5_S9_BLOG_PATCHES, ...ORPHAN_INTERNAL_LINK_PATCHES].filter(
+    (p) => p.path === path,
+  );
   if (patches.length === 0) return content;
 
   let out = content;
@@ -398,5 +401,10 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
   return withPageCanonical(path, {
     title: resolvedPost.title,
     description,
+    openGraph: {
+      type: 'article',
+      title: resolvedPost.title,
+      description,
+    },
   });
 }

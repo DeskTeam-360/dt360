@@ -1,3 +1,5 @@
+import { S3_DESIGN_COMPARISON_SLUGS, S3_REPLACEMENT_POST_PATH } from "@/data/s3DesignComparison";
+import { REDIRECTING_BLOG_CATEGORY_HREFS } from "@/lib/blog-categories";
 import {
   F3_CASE_STUDY_BLOG_COPY_SLUG_SET,
   F19_CONVERT_ON_COMMAND_WP_SLUG,
@@ -34,12 +36,37 @@ const INTERNAL_LINK_PATH_OVERRIDES: Record<string, string> = {
     "/blog/how-to-scale-a-marketing-agency-without-hiring",
 
   // Gate 5 S6 old category paths
-  "blog/category/comparisons": "/blog/category/in-house-vs-team",
-  "blog/category/industry-insights": "/blog/category/small-business",
-  "blog/category/small-business-website": "/blog/category/small-business",
-  "blog/category/guides": "/blog",
-  "blog/category/pricing-cost": "/blog",
+  ...Object.fromEntries(
+    Object.entries(REDIRECTING_BLOG_CATEGORY_HREFS).map(([slug, href]) => [
+      `blog/category/${slug}`,
+      href,
+    ]),
+  ),
+
+  // Gate 5 S3 design-comparison retirees → replacement guide
+  ...Object.fromEntries(
+    S3_DESIGN_COMPARISON_SLUGS.flatMap((slug) => [
+      [`blog/${slug}`, S3_REPLACEMENT_POST_PATH],
+      [slug, S3_REPLACEMENT_POST_PATH],
+    ]),
+  ),
 };
+
+/**
+ * Final public href for a blog/case-study/S3 slug used in cards and related posts.
+ * Avoids internal links that only resolve via redirect.
+ */
+export function blogPostPublicHref(slug: string): string {
+  const clean = slug.replace(/^\/+|\/+$/g, "");
+  const asBlog = `blog/${clean}`;
+  const override =
+    INTERNAL_LINK_PATH_OVERRIDES[asBlog] ?? INTERNAL_LINK_PATH_OVERRIDES[clean];
+  if (override) return override;
+  if (F3_CASE_STUDY_BLOG_COPY_SLUG_SET.has(clean)) {
+    return `/case-studies/${toCaseStudyPublicSlug(clean)}`;
+  }
+  return `/blog/${clean}`;
+}
 
 const KNOWN_STATIC_PATH_PREFIXES = [
   "services/",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { BlogHero } from "@/components/pages/blog/BlogHero";
+import { BlogCategoryLinks } from "@/components/pages/blog/BlogCategoryLinks";
 import { BlogListing } from "@/components/pages/blog/BlogListing";
 import { DownloadCTA } from "@/components/pages/blog/DownloadCTA";
 import { AuthorSection } from "@/components/pages/blog/AuthorSection";
@@ -87,6 +88,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
         description="Real talk about delegation, outsourcing, and growing your business without working 80-hour weeks."
       />
       <BlogHero />
+      <BlogCategoryLinks />
       <BlogListing
         featuredPostsMap={featuredPostsMap}
         latestPosts={latestPosts}
