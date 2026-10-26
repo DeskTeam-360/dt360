@@ -1,0 +1,70 @@
+DeskTeam360 — page-sharing previews (P1 shared template)
+Branch: fix/social-share-metadata
+Prepared for Jeremy review — NOT deployed to production.
+
+ROOT CAUSE
+----------
+Next.js App Router merges metadata such that a page-level `openGraph` object
+replaces the root layout `openGraph`, but if the page does not also set
+`twitter`, the layout twitter block is kept. Root layout twitter used the
+homepage title/description, so inner pages kept correct og:title/description
+(after earlier OG work) while twitter:title and twitter:description stayed on
+the homepage copy. og:image also fell back to /opengraph-image for posts/case
+studies because featured media was never passed into openGraph.images.
+
+FILES CHANGED
+-------------
+- lib/seo.ts — withPageCanonical always emits page-specific openGraph + twitter
+  (title, description, absolute image URLs, type website|article, absolute og:url)
+- lib/blog-single-page.ts — featured image → openGraph.images (article)
+- app/case-studies/[slug]/page.tsx — featured image → openGraph.images (article)
+- app/layout.tsx — default share image URLs made absolute HTTPS
+
+CASE STUDY SAMPLE URL
+---------------------
+https://deskteam360.com/case-studies/fitbodies4life-1500-month-to-500
+
+BEFORE (live production HTML, 2026-10-26)
+----------------------------------------
+home:
+  og:title/description/url/type/image OK; twitter:card=summary; twitter matches page
+services:
+  og OK (website + default image); twitter:title/description = HOMEPAGE copy
+blog/what-is-retargeting:
+  og OK (article) but og:image=/opengraph-image (not featured);
+  twitter:title/description = HOMEPAGE copy
+case-studies/fitbodies4life-1500-month-to-500:
+  og OK (article) but og:image=/opengraph-image (not featured);
+  twitter:title/description = HOMEPAGE copy
+
+AFTER (local next build HTML for / and /services; helper for article samples)
+-----------------------------------------------------------------------------
+home (regression):
+  og + twitter page-specific; twitter:card=summary_large_image; image absolute HTTPS
+services:
+  twitter:title=Services | DeskTeam360
+  twitter:description=page services copy (NOT homepage)
+  og:type=website; og:image=https://deskteam360.com/opengraph-image
+blog / case study (code path + withPageCanonical simulation):
+  og:type=article; twitter mirrors page title/description;
+  images = featured media when WP returns post.image, else /opengraph-image
+  Known live featured media (200 OK):
+    retargeting: https://portal.deskteam360.com/wp-content/uploads/2026/03/feat_50986_v10.png
+    fitbodies: https://portal.deskteam360.com/wp-content/uploads/2021/07/7975-DeskTeam360-Case-Study_Website-Mock-Up-Fitbodies-4-Life-Op.jpg
+
+LIMITATIONS
+-----------
+Public Facebook/X debugger checks remain post-release (staging previews not used).
+Local dynamic blog/case HTML 404’d without a fully wired WordPress API in this
+sandbox build; static / and /services HTML plus the shared helper cover the
+template contract. Live crawler recheck after Jeremy approves release.
+
+BUILD
+-----
+npm run build — TypeScript OK (Next.js 16.2.4). Sitemap regen from empty WP was
+reverted and not committed.
+
+ROLLBACK
+--------
+Revert commit(s) on fix/social-share-metadata or redeploy previous main SHA.
+No privacy, robots, canonical path, or visible copy changes in this diff.

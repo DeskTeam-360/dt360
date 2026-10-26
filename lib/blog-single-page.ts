@@ -15,7 +15,7 @@ import { ORPHAN_INTERNAL_LINK_PATCHES } from '@/data/orphanInternalLinkPatches';
 import { findPlainTextRange } from '@/lib/html-plain-find';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
-import { withPageCanonical } from '@/lib/seo';
+import { featuredShareImages, withPageCanonical } from '@/lib/seo';
 import { getCopyV3MetaDescription } from '@/data/developerCopyChangesV3';
 
 const PLACEHOLDER_IMAGE = '/images/blog/blog-placeholder.webp';
@@ -412,13 +412,15 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     mergeOverride?.metaDescription ??
     resolvedPost.excerpt;
 
+  const shareTitle = resolvedPost.title;
   return withPageCanonical(path, {
-    title: resolvedPost.title,
+    title: shareTitle,
     description,
     openGraph: {
       type: 'article',
-      title: resolvedPost.title,
+      title: shareTitle,
       description,
+      images: featuredShareImages(resolvedPost.image, shareTitle),
     },
   });
 }
