@@ -13,7 +13,7 @@ import {
 import type { BlogPost } from '@/data/blog';
 import { getGate5AbsoluteTitle } from '@/data/gate5AbsoluteTitles';
 import { getCopyV3MetaDescription } from '@/data/developerCopyChangesV3';
-import { withPageCanonical } from '@/lib/seo';
+import { featuredShareImages, withPageCanonical } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -55,14 +55,16 @@ export async function generateMetadata(
   const absoluteTitle = getGate5AbsoluteTitle(path);
   const description = getCopyV3MetaDescription(path) ?? post.excerpt;
 
+  const shareTitle = absoluteTitle ?? `${post.title} | DeskTeam360`;
   // Gate 5 F10: absolute titles when listed; otherwise layout template suffix.
   return withPageCanonical(path, {
     title: absoluteTitle ?? post.title,
     description,
     openGraph: {
       type: "article",
-      title: absoluteTitle ?? `${post.title} | DeskTeam360`,
+      title: shareTitle,
       description,
+      images: featuredShareImages(post.image, shareTitle),
     },
   });
 }
