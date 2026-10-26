@@ -826,7 +826,9 @@ function buildShowcaseCategoryList(
 const mapShowcase = (node: WpShowcaseNode): ShowcaseItem => ({
   id: node.id,
   title: node.title,
-  image: node.featuredImage?.node?.sourceUrl || '/images/showcase/placeholder.png',
+  image:
+    rewriteWordPressMediaUrl(node.featuredImage?.node?.sourceUrl) ||
+    '/images/showcase/placeholder.png',
   categories: [
     SHOWCASE_ALL_WORK,
     ...(node.showcaseCategories?.nodes

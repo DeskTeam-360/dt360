@@ -23,9 +23,33 @@ export function getWordPressMediaOrigin(): string {
   return "";
 }
 
+/**
+ * Oversized WP media swapped for local optimized assets (SEO audit P2 showcase GIF).
+ * Match on filename so portal/clone hosts both resolve.
+ */
+const WORDPRESS_MEDIA_LOCAL_OVERRIDES: Record<string, string> = {
+  "Showcase-Christmas-Card-Aluminex-Inc-5414.gif":
+    "/images/showcase/Showcase-Christmas-Card-Aluminex-Inc-5414.webp",
+};
+
+function localOverrideForMediaUrl(url: string): string | undefined {
+  try {
+    const path = url.startsWith("http")
+      ? new URL(url).pathname
+      : url.split("?")[0] ?? url;
+    const file = path.split("/").pop()?.trim();
+    if (!file) return undefined;
+    return WORDPRESS_MEDIA_LOCAL_OVERRIDES[file];
+  } catch {
+    return undefined;
+  }
+}
+
 /** Rewrite legacy deskteam360.com / clone wp-content URLs to the current CMS origin. */
 export function rewriteWordPressMediaUrl(url: string | undefined | null): string {
   if (!url) return "";
+  const local = localOverrideForMediaUrl(url);
+  if (local) return local;
   const origin = getWordPressMediaOrigin();
   if (!origin) return url;
   return url.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`);
