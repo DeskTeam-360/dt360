@@ -12,6 +12,7 @@ import {
   normalizeQuotes,
 } from '@/data/gate5S9LinkPatches';
 import { ORPHAN_INTERNAL_LINK_PATCHES } from '@/data/orphanInternalLinkPatches';
+import { findPlainTextRange } from '@/lib/html-plain-find';
 import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { withPageCanonical } from '@/lib/seo';
@@ -35,7 +36,11 @@ function synthesizeStandalonePost(override: Gate5NewBlogPost): BlogPost {
   };
 }
 
-/** Gate 5 S9 + CMO orphan inbound links — insert link sentences into live blog HTML. */
+/**
+ * Gate 5 S9 + CMO orphan inbound links.
+ * Prefer appending the new sentence after a plain-text match so WP entities
+ * (`&#8217;`) and inline tags (`<strong>`) do not block the patch.
+ */
 function applyGate5S9BlogPatches(slug: string, content: string): string {
   const path = `/blog/${slug}`;
   const patches = [...GATE5_S9_BLOG_PATCHES, ...ORPHAN_INTERNAL_LINK_PATCHES].filter(
@@ -46,34 +51,43 @@ function applyGate5S9BlogPatches(slug: string, content: string): string {
   let out = content;
   for (const patch of patches) {
     if (out.includes(patch.replaceHtmlFragment)) continue;
+
+    const append = patch.replaceHtmlFragment.startsWith(patch.find)
+      ? patch.replaceHtmlFragment.slice(patch.find.length)
+      : null;
+    if (append && out.includes(append.trim())) continue;
+
     if (out.includes(patch.find)) {
       out = out.replace(patch.find, patch.replaceHtmlFragment);
       continue;
     }
+
     const needle = normalizeQuotes(patch.find);
     const normOut = normalizeQuotes(out);
-    const at = normOut.indexOf(needle);
-    if (at < 0) continue;
-    // Map normalized index back by scanning original with same length window.
-    // Quotes differ by at most 1 code unit each, so use a sliding exact-length match.
-    const targetLen = patch.find.length;
-    let replaced = false;
-    for (let i = 0; i <= out.length - targetLen; i++) {
-      const slice = out.slice(i, i + targetLen);
-      if (normalizeQuotes(slice) === needle) {
-        out = out.slice(0, i) + patch.replaceHtmlFragment + out.slice(i + targetLen);
-        replaced = true;
-        break;
+    if (normOut.includes(needle)) {
+      const targetLen = patch.find.length;
+      let replaced = false;
+      for (let i = 0; i <= out.length - targetLen; i++) {
+        const slice = out.slice(i, i + targetLen);
+        if (normalizeQuotes(slice) === needle) {
+          out = out.slice(0, i) + patch.replaceHtmlFragment + out.slice(i + targetLen);
+          replaced = true;
+          break;
+        }
       }
-      // Also try longer windows when curly vs straight changes length (same for these chars).
+      if (replaced) continue;
     }
-    if (!replaced) {
-      // Fallback: length may differ if HTML entities wrap the sentence — try loose search.
-      const loose = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const re = new RegExp(loose.replace(/['']/g, "[''’]"));
-      // Skip fragile regex fallback — leave unmatched for later crawl check.
-      void re;
+
+    // WP entities + inline tags: match plain text, insert only the new sentence.
+    if (!append) continue;
+    const range = findPlainTextRange(out, patch.find);
+    if (!range) continue;
+    if (out.slice(range.end).includes(patch.href)) {
+      // Already linked after this point (or later in the same article).
+      const window = out.slice(range.end, range.end + Math.max(append.length * 2, 200));
+      if (window.includes(patch.href)) continue;
     }
+    out = `${out.slice(0, range.end)}${append}${out.slice(range.end)}`;
   }
   return out;
 }
