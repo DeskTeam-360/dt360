@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { permanentRedirect } from 'next/navigation';
 import type { BlogPost } from '@/data/blog';
 import { BLOG_SITEMAP_EXCLUDED_SLUGS } from '@/data/blogSitemapExtraSlugs';
 import { getGate5BlogOverride } from '@/data/gate5BlogOverrides';
@@ -13,7 +12,7 @@ import {
 } from '@/data/gate5S9LinkPatches';
 import { ORPHAN_INTERNAL_LINK_PATCHES } from '@/data/orphanInternalLinkPatches';
 import { findPlainTextRange } from '@/lib/html-plain-find';
-import { toCaseStudyPublicSlug } from '@/lib/seo/fix-report-redirects';
+import { F3_CASE_STUDY_BLOG_COPY_SLUG_SET } from '@/lib/seo/fix-report-redirects';
 import { getPostBySlug, getBlogLatestPostsPoolForRelated, getAllPublishedPostSlugs, isCaseStudyPost } from '@/lib/wordpress';
 import { featuredShareImages, withPageCanonical } from '@/lib/seo';
 import { getCopyV3MetaDescription } from '@/data/developerCopyChangesV3';
@@ -365,8 +364,13 @@ export async function getBlogSinglePageData(
     return null;
   }
 
-  if (wpPost && isCaseStudyPost(post)) {
-    permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
+  // Case-study copies under /blog/{slug} are redirected in next.config (F3).
+  // Returning null keeps this route statically cacheable (no permanentRedirect).
+  if (
+    wpPost &&
+    (isCaseStudyPost(post) || F3_CASE_STUDY_BLOG_COPY_SLUG_SET.has(slug))
+  ) {
+    return null;
   }
 
   const resolvedPost = await applyGate5BlogOverride(post);
@@ -399,8 +403,14 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
     };
   }
 
-  if (!standalone && isCaseStudyPost(post)) {
-    permanentRedirect(`/case-studies/${toCaseStudyPublicSlug(slug)}`);
+  if (
+    !standalone &&
+    (isCaseStudyPost(post) || F3_CASE_STUDY_BLOG_COPY_SLUG_SET.has(slug))
+  ) {
+    return {
+      title: 'Post Not Found',
+      robots: { index: false, follow: false },
+    };
   }
 
   const resolvedPost = await applyGate5BlogOverride(post);
