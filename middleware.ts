@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { LEGACY_TRAILING_SLASH_ONE_HOP } from "@/lib/seo/legacy-path-redirects";
 import { S1_TRAILING_SLASH_BLOG_SLUG_SET } from "@/lib/seo/fix-report-redirects";
 
 /**
@@ -8,6 +9,7 @@ import { S1_TRAILING_SLASH_BLOG_SLUG_SET } from "@/lib/seo/fix-report-redirects"
  *
  * S1: /{slug}/ → /blog/{slug}
  * F5: /pricing/ → /#pricing
+ * Legacy marketing paths: /faqs/, /websites/, etc. → final destinations
  */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,6 +18,16 @@ export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     url.hash = "pricing";
+    return NextResponse.redirect(url, 308);
+  }
+
+  const legacyDest = LEGACY_TRAILING_SLASH_ONE_HOP[pathname];
+  if (legacyDest) {
+    if (/^https?:\/\//i.test(legacyDest)) {
+      return NextResponse.redirect(legacyDest, 308);
+    }
+    const url = request.nextUrl.clone();
+    url.pathname = legacyDest;
     return NextResponse.redirect(url, 308);
   }
 
@@ -34,6 +46,14 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/pricing/",
+    "/faqs/",
+    "/website-maintenance/",
+    "/websites/",
+    "/partner-program/",
+    "/lost-opportunity-calculator/",
+    "/how-to-delegate-tasks/",
+    "/product/membership/",
+    "/product/deskteam360-monthly-membership/",
     "/best-unlimited-web-development-services/",
     "/fiverr-vs-upwork-vs-subscription/",
     "/how-to-create-marketing-budget/",

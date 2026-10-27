@@ -18,7 +18,7 @@ export const PORTAL_PAGE_FALLBACK_PATHS = [
   "/domain-moving",
   "/dtmoffer",
   "/duct-tape-marketing-websites",
-  "/faqs",
+  // "/faqs" → main site / (see lib/seo/legacy-path-redirects.ts)
   "/free",
   "/freelance-roi-calculator",
   "/gaynor-email-submission-form",
@@ -34,7 +34,7 @@ export const PORTAL_PAGE_FALLBACK_PATHS = [
   "/thank-you-additional-revisions",
   "/thank-you-page-website",
   "/thank-you-website-change-order",
-  "/website-maintenance",
+  // "/website-maintenance" → /services/website-maintenance (legacy-path-redirects)
   "/website-showcase",
   "/welcome",
   "/working-with-deskteam360",

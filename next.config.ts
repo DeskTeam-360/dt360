@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { fixReportRedirects } from "@/lib/seo/fix-report-redirects";
+import { legacyPathRedirects } from "@/lib/seo/legacy-path-redirects";
 import { portalPageFallbackRedirects } from "@/lib/seo/portal-page-redirects";
 import { SECURITY_HEADERS } from "@/lib/seo/security-headers";
 
@@ -161,6 +162,9 @@ const nextConfig: NextConfig = {
         destination: "/case-studies/special-ed-resource-case-study",
         permanent: true,
       },
+
+      // Legacy marketing URLs (must run before portal fallbacks for /faqs, /website-maintenance)
+      ...legacyPathRedirects(),
 
       // Portal-published pages missing on Next → portal (includes Gaynor form)
       ...portalPageFallbackRedirects(),
