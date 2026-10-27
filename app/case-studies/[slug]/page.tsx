@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound, permanentRedirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { getAllCaseStudyPosts, getPostBySlug, getAllPublishedPostSlugs } from '@/lib/wordpress';
 import { DynamicBlogPostContent } from '@/components/pages/blog-single/DynamicBlogPostContent';
 import { HaveQuestionsCTA } from '@/components/pages/case-studies/HaveQuestionsCTA';
@@ -7,7 +7,6 @@ import { BreadcrumbJsonLd, caseStudyBreadcrumbs } from '@/components/seo/Breadcr
 import { CaseStudyArticleJsonLd } from '@/components/seo/BlogPostingJsonLd';
 import {
   caseStudyWordpressSlugCandidates,
-  F19_CONVERT_ON_COMMAND_WP_SLUG,
   toCaseStudyPublicSlug,
 } from '@/lib/seo/fix-report-redirects';
 import type { BlogPost } from '@/data/blog';
@@ -24,11 +23,6 @@ async function resolveCaseStudyPost(
 ): Promise<{ post: BlogPost; publicSlug: string } | null> {
   const publicSlug = toCaseStudyPublicSlug(requestSlug);
 
-  // Old 120k path should be handled by next.config redirect; belt-and-suspenders here.
-  if (requestSlug === F19_CONVERT_ON_COMMAND_WP_SLUG) {
-    permanentRedirect(`/case-studies/${publicSlug}`);
-  }
-
   for (const candidate of caseStudyWordpressSlugCandidates(publicSlug)) {
     const post = await getPostBySlug(candidate);
     if (post) {
@@ -36,6 +30,20 @@ async function resolveCaseStudyPost(
     }
   }
   return null;
+}
+
+/** Prerender case studies for ISR HTML cache (same P2 slow-page fix as /blog/[slug]). */
+export async function generateStaticParams() {
+  try {
+    const posts = await getAllCaseStudyPosts();
+    const slugs = new Set<string>();
+    for (const post of posts) {
+      slugs.add(toCaseStudyPublicSlug(post.slug));
+    }
+    return [...slugs].map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata(
