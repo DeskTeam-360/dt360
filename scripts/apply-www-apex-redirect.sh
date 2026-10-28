@@ -6,7 +6,6 @@ set -euo pipefail
 
 SITE_AVAILABLE="${NGINX_SITES_AVAILABLE:-/etc/nginx/sites-available}"
 SITE_ENABLED="${NGINX_SITES_ENABLED:-/etc/nginx/sites-enabled}"
-CONF_D="${NGINX_CONF_D:-/etc/nginx/conf.d}"
 CONF_NAME="www-to-apex.conf"
 TEMPLATE_REL="deploy/nginx/www-to-apex.conf.template"
 
@@ -51,9 +50,25 @@ if ! run true 2>/dev/null; then
 fi
 debug "sudo=ok"
 
-# Resolve cert + key from the real apex vhost. Never use snakeoil / first random match.
+# Undo a previous failed strip that left invalid server_name directives on disk.
+restore_strip_backups() {
+  run bash -c '
+shopt -s nullglob
+for bak in /etc/nginx/sites-available/*.bak-www-redirect /etc/nginx/conf.d/*.bak-www-redirect; do
+  target="${bak%.bak-www-redirect}"
+  echo "Restoring $bak -> $target"
+  cp -a "$bak" "$target"
+  rm -f "$bak"
+done
+# Remove duplicate copy in conf.d from older script versions (sites-enabled is enough).
+rm -f /etc/nginx/conf.d/www-to-apex.conf
+' >>"$DEBUG_OUT" 2>&1 || true
+}
+debug "restoring any *.bak-www-redirect from prior failed runs"
+restore_strip_backups
+
 find_cert_and_key() {
-  local apex_conf cert key line
+  local apex_conf cert key
 
   apex_conf="$(run bash -c "ls -1 $SITE_AVAILABLE/deskteam360.com.conf $SITE_ENABLED/deskteam360.com.conf 2>/dev/null | head -n 1" || true)"
   if [[ -z "${apex_conf:-}" ]]; then
@@ -69,7 +84,6 @@ find_cert_and_key() {
   fi
 
   if [[ -z "${cert:-}" || -z "${key:-}" ]]; then
-    # Fallback: Let's Encrypt names only (skip snakeoil)
     for candidate in \
       /etc/letsencrypt/live/deskteam360.com/fullchain.pem \
       /etc/letsencrypt/live/www.deskteam360.com/fullchain.pem; do
@@ -89,12 +103,8 @@ find_cert_and_key() {
     *snakeoil*) debug "ERROR: refused snakeoil cert $cert"; return 1 ;;
   esac
 
-  if ! run test -f "$cert"; then
-    debug "ERROR: cert missing $cert"
-    return 1
-  fi
-  if ! run test -f "$key"; then
-    debug "ERROR: key missing $key"
+  if ! run test -f "$cert" || ! run test -f "$key"; then
+    debug "ERROR: cert/key missing ($cert / $key)"
     return 1
   fi
 
@@ -117,54 +127,46 @@ sed \
   -e "s|__SSL_CERTIFICATE_KEY__|$KEY|g" \
   "$TEMPLATE" >"$TMP"
 
-INSTALLED=0
-if run test -d "$SITE_AVAILABLE"; then
-  run install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
-  INSTALLED=1
-  if run test -d "$SITE_ENABLED"; then
-    run ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
-  fi
+if ! run test -d "$SITE_AVAILABLE"; then
+  debug "ERROR: $SITE_AVAILABLE missing"
+  rm -f "$TMP"
+  exit 1
 fi
-if run test -d "$CONF_D"; then
-  run install -m 644 "$TMP" "$CONF_D/$CONF_NAME"
-  INSTALLED=1
-fi
+
+run install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
 rm -f "$TMP"
+run ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
+# Avoid loading the same vhost twice.
+run rm -f /etc/nginx/conf.d/"$CONF_NAME"
 
 {
   echo "--- installed www-to-apex.conf ---"
-  run cat "$SITE_AVAILABLE/$CONF_NAME" 2>/dev/null || run cat "$CONF_D/$CONF_NAME" 2>/dev/null || true
+  run cat "$SITE_AVAILABLE/$CONF_NAME"
 } >>"$DEBUG_OUT"
 
-if [[ "$INSTALLED" -ne 1 ]]; then
-  debug "ERROR: no install path"
+# default/deskteam360 load before www-to-apex alphabetically; duplicate server_name
+# keeps the FIRST vhost. Remove www from other confs without leaving empty server_name.
+STRIP_PY="$ROOT_DIR/scripts/nginx-strip-www-server-name.py"
+debug "removing www.deskteam360.com from other server_name directives (safe)"
+if [[ ! -f "$STRIP_PY" ]]; then
+  debug "ERROR: missing $STRIP_PY"
   exit 1
 fi
-
-# Duplicate server_name → first loaded wins (default/deskteam360 before www-to-apex).
-debug "stripping www.deskteam360.com from other server_name directives"
-run bash -c '
-shopt -s nullglob
-for f in /etc/nginx/sites-enabled/* /etc/nginx/sites-available/* /etc/nginx/conf.d/*; do
-  base=$(basename "$f")
-  [[ "$base" == "www-to-apex.conf" ]] && continue
-  [[ -e "$f" ]] || continue
-  target=$(readlink -f "$f" 2>/dev/null || echo "$f")
-  [[ -f "$target" ]] || continue
-  if grep -qE "server_name[^;]*www\.deskteam360\.com" "$target" 2>/dev/null; then
-    echo "Stripping www.deskteam360.com from $target"
-    cp -a "$target" "${target}.bak-www-redirect"
-    sed -i -E "s/www\.deskteam360\.com[[:space:]]*//g" "$target"
-  fi
-done
-' >>"$DEBUG_OUT" 2>&1
+run python3 "$STRIP_PY" >>"$DEBUG_OUT" 2>&1
 
 debug "nginx -t"
-if ! run nginx -t >>"$DEBUG_OUT" 2>&1; then
-  debug "ERROR: nginx -t failed; restoring *.bak-www-redirect if needed"
-  echo "ERROR: nginx -t failed after installing www→apex" >&2
+NGINX_T_OUT="$(mktemp)"
+if ! run nginx -t >"$NGINX_T_OUT" 2>&1; then
+  cat "$NGINX_T_OUT" | tee -a "$DEBUG_OUT" >&2
+  debug "ERROR: nginx -t failed; restoring *.bak-www-redirect"
+  restore_strip_backups
+  run nginx -t >>"$DEBUG_OUT" 2>&1 || true
+  rm -f "$NGINX_T_OUT"
+  echo "ERROR: nginx -t failed after installing www→apex (backups restored)" >&2
   exit 1
 fi
+cat "$NGINX_T_OUT" >>"$DEBUG_OUT"
+rm -f "$NGINX_T_OUT"
 
 {
   echo "--- nginx -T www matches ---"
