@@ -66,6 +66,8 @@ jobs:
             else
               echo "PM2 not found. Start the app manually, e.g.: nohup npm run start -- -p 3000 &"
             fi
+            # P1: www.deskteam360.com must 301/308 to apex (not default nginx page)
+            bash scripts/apply-www-apex-redirect.sh
 
   deploy-staging:
     name: Deploy staging (dev)
