@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Configure origin nginx so www.deskteam360.com permanently redirects to
 # https://deskteam360.com while preserving path and query.
-# Safe to re-run (idempotent). Requires sudo for nginx paths.
+# Safe to re-run (idempotent). Needs passwordless sudo for nginx install/reload.
 set -euo pipefail
 
 SITE_AVAILABLE="${NGINX_SITES_AVAILABLE:-/etc/nginx/sites-available}"
@@ -17,35 +17,67 @@ if [[ ! -f "$TEMPLATE" ]]; then
   exit 1
 fi
 
+# Non-interactive only — CI SSH has no TTY for a password prompt.
 if [[ "$(id -u)" -eq 0 ]]; then
   SUDO=()
+  run() { "$@"; }
 else
-  SUDO=(sudo)
+  SUDO=(sudo -n)
+  run() { sudo -n "$@"; }
 fi
 
+if ! run true 2>/dev/null; then
+  echo "ERROR: passwordless sudo required to install nginx www→apex redirect." >&2
+  echo "Grant the deploy user NOPASSWD for nginx/install/systemctl, then re-run:" >&2
+  echo "  bash scripts/apply-www-apex-redirect.sh" >&2
+  exit 1
+fi
+
+# Resolve cert paths. Prefer paths already used by apex vhost (readable conf),
+# then Let's Encrypt layout via sudo (live/ is often mode 700).
 find_cert() {
+  local path
+
+  # 1) ssl_certificate from existing enabled/available configs (apex site)
+  path="$(
+    run bash -c "grep -RhsE '^[[:space:]]*ssl_certificate[[:space:]]+' \
+      '$SITE_ENABLED' '$SITE_AVAILABLE' 2>/dev/null" \
+      | grep -v 'ssl_certificate_key' \
+      | grep -vi 'www-to-apex' \
+      | awk '{print $2}' | tr -d ';' \
+      | while read -r p; do
+          if run test -f "$p"; then echo "$p"; break; fi
+        done
+  )"
+  if [[ -n "${path:-}" ]]; then
+    echo "$path"
+    return 0
+  fi
+
+  # 2) Preferred LE name
   local live="${LETSENCRYPT_LIVE:-/etc/letsencrypt/live}"
   local preferred="$live/deskteam360.com/fullchain.pem"
-  if [[ -f "$preferred" ]]; then
+  if run test -f "$preferred"; then
     echo "$preferred"
     return 0
   fi
-  # Fallback: first fullchain that exists under live/
-  local found
-  found="$(find "$live" -type f -name fullchain.pem 2>/dev/null | head -n 1 || true)"
-  if [[ -n "$found" ]]; then
-    echo "$found"
+
+  # 3) Any LE fullchain
+  path="$(run bash -c "find '$live' -type f -name fullchain.pem 2>/dev/null | head -n 1" || true)"
+  if [[ -n "${path:-}" ]] && run test -f "$path"; then
+    echo "$path"
     return 0
   fi
+
   return 1
 }
 
 CERT="$(find_cert)" || {
-  echo "Could not locate Let's Encrypt fullchain.pem under /etc/letsencrypt/live" >&2
+  echo "Could not locate an SSL fullchain for www (check apex nginx ssl_certificate / Let's Encrypt)." >&2
   exit 1
 }
 KEY="$(dirname "$CERT")/privkey.pem"
-if [[ ! -f "$KEY" ]]; then
+if ! run test -f "$KEY"; then
   echo "Missing privkey next to $CERT" >&2
   exit 1
 fi
@@ -57,31 +89,29 @@ sed \
   -e "s|__SSL_CERTIFICATE_KEY__|$KEY|g" \
   "$TEMPLATE" >"$TMP"
 
-"${SUDO[@]}" install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
+run install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
 rm -f "$TMP"
 
-# Enable site (replace dangling symlink if needed)
-"${SUDO[@]}" ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
+run ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
 
-# If a default site explicitly lists www, leave a note (redirect block still wins by name match).
-if grep -Rsl --include='*.conf' 'server_name.*www\.deskteam360\.com' "$SITE_AVAILABLE" "$SITE_ENABLED" 2>/dev/null \
-  | grep -v "$CONF_NAME" >/tmp/www-server-name-hits.txt 2>/dev/null; then
+if run bash -c "grep -Rsl --include='*.conf' 'server_name.*www\\.deskteam360\\.com' \
+  '$SITE_AVAILABLE' '$SITE_ENABLED' 2>/dev/null | grep -v '$CONF_NAME'" \
+  >/tmp/www-server-name-hits.txt 2>/dev/null; then
   echo "Note: other nginx confs also mention www.deskteam360.com:"
   cat /tmp/www-server-name-hits.txt || true
 fi
 
 echo "Testing nginx config..."
-"${SUDO[@]}" nginx -t
+run nginx -t
 echo "Reloading nginx..."
-"${SUDO[@]}" systemctl reload nginx
+run systemctl reload nginx
 
 echo "Smoke checks (origin, Host: www)..."
-# Local loopback checks if curl available; otherwise skip.
 if command -v curl >/dev/null 2>&1; then
   for path in "/" "/blog/what-is-insourcing?x=1"; do
-    code="$(curl -sI -o /dev/null -w '%{http_code}' --max-redirs 0 \
-      -H "Host: www.deskteam360.com" "https://127.0.0.1$path" -k || true)"
-    loc="$(curl -sI --max-redirs 0 -H "Host: www.deskteam360.com" "https://127.0.0.1$path" -k \
+    code="$(curl -skI -o /dev/null -w '%{http_code}' --max-redirs 0 \
+      -H "Host: www.deskteam360.com" "https://127.0.0.1$path" || true)"
+    loc="$(curl -skI --max-redirs 0 -H "Host: www.deskteam360.com" "https://127.0.0.1$path" \
       | tr -d '\r' | awk 'BEGIN{IGNORECASE=1} /^location:/{print $2; exit}')"
     echo "  https www$path -> $code Location: ${loc:-none}"
   done
