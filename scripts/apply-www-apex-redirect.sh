@@ -6,6 +6,7 @@ set -euo pipefail
 
 SITE_AVAILABLE="${NGINX_SITES_AVAILABLE:-/etc/nginx/sites-available}"
 SITE_ENABLED="${NGINX_SITES_ENABLED:-/etc/nginx/sites-enabled}"
+CONF_D="${NGINX_CONF_D:-/etc/nginx/conf.d}"
 CONF_NAME="www-to-apex.conf"
 TEMPLATE_REL="deploy/nginx/www-to-apex.conf.template"
 
@@ -17,12 +18,9 @@ if [[ ! -f "$TEMPLATE" ]]; then
   exit 1
 fi
 
-# Non-interactive only — CI SSH has no TTY for a password prompt.
 if [[ "$(id -u)" -eq 0 ]]; then
-  SUDO=()
   run() { "$@"; }
 else
-  SUDO=(sudo -n)
   run() { sudo -n "$@"; }
 fi
 
@@ -33,15 +31,17 @@ if ! run true 2>/dev/null; then
   exit 1
 fi
 
-# Resolve cert paths. Prefer paths already used by apex vhost (readable conf),
-# then Let's Encrypt layout via sudo (live/ is often mode 700).
-find_cert() {
-  local path
+echo "Host diagnostics:"
+hostname -f 2>/dev/null || hostname || true
+run bash -c 'hostname -I 2>/dev/null || true'
+run bash -c 'ls -la /etc/nginx 2>/dev/null | head -40' || true
 
-  # 1) ssl_certificate from existing enabled/available configs (apex site)
+find_cert() {
+  local path live preferred
+
   path="$(
     run bash -c "grep -RhsE '^[[:space:]]*ssl_certificate[[:space:]]+' \
-      '$SITE_ENABLED' '$SITE_AVAILABLE' 2>/dev/null" \
+      /etc/nginx 2>/dev/null" \
       | grep -v 'ssl_certificate_key' \
       | grep -vi 'www-to-apex' \
       | awk '{print $2}' | tr -d ';' \
@@ -54,15 +54,13 @@ find_cert() {
     return 0
   fi
 
-  # 2) Preferred LE name
-  local live="${LETSENCRYPT_LIVE:-/etc/letsencrypt/live}"
-  local preferred="$live/deskteam360.com/fullchain.pem"
+  live="${LETSENCRYPT_LIVE:-/etc/letsencrypt/live}"
+  preferred="$live/deskteam360.com/fullchain.pem"
   if run test -f "$preferred"; then
     echo "$preferred"
     return 0
   fi
 
-  # 3) Any LE fullchain
   path="$(run bash -c "find '$live' -type f -name fullchain.pem 2>/dev/null | head -n 1" || true)"
   if [[ -n "${path:-}" ]] && run test -f "$path"; then
     echo "$path"
@@ -89,32 +87,90 @@ sed \
   -e "s|__SSL_CERTIFICATE_KEY__|$KEY|g" \
   "$TEMPLATE" >"$TMP"
 
-run install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
+# Install into every common include path so the vhost is actually loaded.
+INSTALLED=0
+if run test -d "$SITE_AVAILABLE"; then
+  run install -m 644 "$TMP" "$SITE_AVAILABLE/$CONF_NAME"
+  if run test -d "$SITE_ENABLED"; then
+    run ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
+  fi
+  echo "Installed $SITE_AVAILABLE/$CONF_NAME (+ sites-enabled link if present)"
+  INSTALLED=1
+fi
+if run test -d "$CONF_D"; then
+  run install -m 644 "$TMP" "$CONF_D/$CONF_NAME"
+  echo "Installed $CONF_D/$CONF_NAME"
+  INSTALLED=1
+fi
 rm -f "$TMP"
 
-run ln -sfn "$SITE_AVAILABLE/$CONF_NAME" "$SITE_ENABLED/$CONF_NAME"
-
-if run bash -c "grep -Rsl --include='*.conf' 'server_name.*www\\.deskteam360\\.com' \
-  '$SITE_AVAILABLE' '$SITE_ENABLED' 2>/dev/null | grep -v '$CONF_NAME'" \
-  >/tmp/www-server-name-hits.txt 2>/dev/null; then
-  echo "Note: other nginx confs also mention www.deskteam360.com:"
-  cat /tmp/www-server-name-hits.txt || true
+if [[ "$INSTALLED" -ne 1 ]]; then
+  echo "ERROR: neither $SITE_AVAILABLE nor $CONF_D exists on this host." >&2
+  exit 1
 fi
+
+# If another vhost also claims www, prefer ours by renaming conflicting names.
+# Duplicate server_name → nginx keeps the first loaded; welcome/default often wins.
+run bash -c '
+shopt -s nullglob
+for f in /etc/nginx/sites-enabled/* /etc/nginx/sites-available/* /etc/nginx/conf.d/*; do
+  base=$(basename "$f")
+  [[ "$base" == "www-to-apex.conf" ]] && continue
+  [[ -f "$f" || -L "$f" ]] || continue
+  target="$f"
+  [[ -L "$f" ]] && target=$(readlink -f "$f" || true)
+  [[ -n "$target" && -f "$target" ]] || continue
+  if grep -qE "server_name[^;]*www\.deskteam360\.com" "$target" 2>/dev/null; then
+    echo "Stripping www.deskteam360.com from server_name in $target"
+    sed -i -E "s/www\.deskteam360\.com[[:space:]]*//g" "$target"
+  fi
+done
+' || true
 
 echo "Testing nginx config..."
 run nginx -t
-echo "Reloading nginx..."
-run systemctl reload nginx
 
-echo "Smoke checks (origin, Host: www)..."
+echo "Active www server blocks (nginx -T):"
+run bash -c "nginx -T 2>/dev/null | grep -n \"www.deskteam360.com\" | head -40" || true
+
+echo "Reloading nginx..."
+run systemctl reload nginx || run service nginx reload
+
+echo "Smoke checks (loopback Host: www) — must be 301/308 to apex..."
+fail=0
 if command -v curl >/dev/null 2>&1; then
-  for path in "/" "/blog/what-is-insourcing?x=1"; do
-    code="$(curl -skI -o /dev/null -w '%{http_code}' --max-redirs 0 \
-      -H "Host: www.deskteam360.com" "https://127.0.0.1$path" || true)"
-    loc="$(curl -skI --max-redirs 0 -H "Host: www.deskteam360.com" "https://127.0.0.1$path" \
-      | tr -d '\r' | awk 'BEGIN{IGNORECASE=1} /^location:/{print $2; exit}')"
-    echo "  https www$path -> $code Location: ${loc:-none}"
+  for scheme in https http; do
+    for path in "/" "/blog/what-is-insourcing?x=1"; do
+      headers="$(curl -skI --max-redirs 0 -H "Host: www.deskteam360.com" \
+        "${scheme}://127.0.0.1${path}" || true)"
+      code="$(printf '%s' "$headers" | awk 'NR==1{print $2}')"
+      loc="$(printf '%s' "$headers" | tr -d '\r' | awk 'BEGIN{IGNORECASE=1} /^location:/{print $2; exit}')"
+      echo "  ${scheme} www${path} -> ${code:-err} Location: ${loc:-none}"
+      case "${code:-}" in
+        301|308)
+          case "${loc:-}" in
+            https://deskteam360.com/*|https://deskteam360.com) ;;
+            *)
+              echo "ERROR: Location must be https://deskteam360.com… (got ${loc:-none})" >&2
+              fail=1
+              ;;
+          esac
+          ;;
+        *)
+          echo "ERROR: expected 301/308, got ${code:-err}" >&2
+          fail=1
+          ;;
+      esac
+    done
   done
+else
+  echo "ERROR: curl missing; cannot smoke-test www redirect" >&2
+  fail=1
+fi
+
+if [[ "$fail" -ne 0 ]]; then
+  echo "ERROR: www→apex redirect not active on this host after reload." >&2
+  exit 1
 fi
 
 echo "Applied $CONF_NAME"
