@@ -37,7 +37,9 @@ debug_reset() {
 }
 
 debug() {
-  printf '%s\n' "$*" | tee -a "$DEBUG_OUT"
+  # Never write diagnostics to stdout — callers capture command substitutions.
+  printf '%s\n' "$*" >>"$DEBUG_OUT"
+  printf '%s\n' "$*" >&2
 }
 
 debug_reset
