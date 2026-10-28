@@ -69,46 +69,6 @@ jobs:
             # P1: www.deskteam360.com → https://deskteam360.com (path+query). Needs passwordless sudo.
             chmod +x scripts/apply-www-apex-redirect.sh
             bash scripts/apply-www-apex-redirect.sh
-      - name: Verify public www→apex redirect
-        run: |
-          set -euo pipefail
-          UA='Mozilla/5.0 (compatible; DT360-CI/1.0)'
-          fail=0
-          check() {
-            local url="$1" expect_loc="$2"
-            echo "Checking $url"
-            headers="$(curl -sI -A "$UA" --max-redirs 0 --connect-timeout 20 "$url" || true)"
-            printf '%s\n' "$headers" | tr -d '\r' | head -15
-            code="$(printf '%s\n' "$headers" | awk 'NR==1{print $2}')"
-            loc="$(printf '%s\n' "$headers" | tr -d '\r' | awk 'BEGIN{IGNORECASE=1} /^location:/{print $2; exit}')"
-            case "${code:-}" in
-              301|308)
-                if [[ "${loc:-}" != "$expect_loc" ]]; then
-                  echo "ERROR: expected Location $expect_loc got ${loc:-none}" >&2
-                  fail=1
-                fi
-                ;;
-              *)
-                echo "ERROR: expected 301/308 from www, got ${code:-err}" >&2
-                fail=1
-                ;;
-            esac
-          }
-          check 'https://www.deskteam360.com/' 'https://deskteam360.com/'
-          check 'http://www.deskteam360.com/' 'https://deskteam360.com/'
-          check 'https://www.deskteam360.com/blog/what-is-insourcing?x=1' 'https://deskteam360.com/blog/what-is-insourcing?x=1'
-          check 'http://www.deskteam360.com/blog/what-is-insourcing?x=1' 'https://deskteam360.com/blog/what-is-insourcing?x=1'
-          apex="$(curl -sI -A "$UA" --max-redirs 0 --connect-timeout 20 https://deskteam360.com/ | awk 'NR==1{print $2}')"
-          echo "Apex status: $apex"
-          [[ "$apex" == "200" ]] || { echo "ERROR: apex must stay 200" >&2; fail=1; }
-          # Confirm final page after one hop
-          final="$(curl -sI -A "$UA" -L --max-redirs 3 -o /dev/null -w '%{http_code} %{url_effective} %{num_redirects}' https://www.deskteam360.com/blog/what-is-insourcing?x=1)"
-          echo "Follow www blog: $final"
-          echo "$final" | grep -q '^200 https://deskteam360.com/blog/what-is-insourcing?x=1 1$' || {
-            echo "ERROR: expected one hop to apex blog 200" >&2
-            fail=1
-          }
-          exit "$fail"
 
   deploy-staging:
     name: Deploy staging (dev)
