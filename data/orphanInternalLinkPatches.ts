@@ -201,4 +201,15 @@ export const ORPHAN_INTERNAL_LINK_PATCHES: Gate5S9Patch[] = [
     anchor: "Website Care",
     href: "/blog/category/website-care",
   },
+
+  // /blog/reasons-need-website-business
+  {
+    id: "orphan-reasons-need-website-01",
+    path: "/blog/web-design-for-small-business",
+    find: "That’s it. That’s the entire job description.",
+    replaceHtmlFragment:
+      "That’s it. That’s the entire job description. For the broader case, see <a href=\"/blog/reasons-need-website-business\">reasons a business needs a website</a>.",
+    anchor: "reasons a business needs a website",
+    href: "/blog/reasons-need-website-business",
+  },
 ];
