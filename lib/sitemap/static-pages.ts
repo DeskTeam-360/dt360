@@ -1,6 +1,15 @@
 import type { SitemapUrlEntry } from "@/lib/sitemap/types";
 
-/** Static marketing routes included in page-sitemap.xml (noindex / thank-you pages excluded). */
+/**
+ * Static marketing routes included in page-sitemap.xml (noindex / thank-you pages excluded).
+ *
+ * Intentional omissions (do not add without CMO sign-off):
+ * - `/blog/page/2`…`/7` — crawlable + self-canonical + indexable, but omitted from
+ *   the sitemap by design (CMO-REV.2). Keep pagination reachable; do not noindex.
+ * - `www.deskteam360.com/*` — host redirect to apex; never list www URLs.
+ * - `start.` / `open.` lead URLs — host-owned sitemaps only (see
+ *   `deploy/lead-host-sitemaps/`); never cross-list in this main-domain sitemap.
+ */
 export const STATIC_SITEMAP_PAGES: Array<{ path: string; changeFrequency?: string }> = [
   { path: "/" },
   { path: "/about" },

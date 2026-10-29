@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Host-owned sitemap for open.deskteam360.com (GHL).
+  Publish as https://open.deskteam360.com/sitemap.xml
+  Include only public search landing URLs. Exclude privacy opt-in pages.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://open.deskteam360.com/roi-calculator</loc>
+  </url>
+</urlset>

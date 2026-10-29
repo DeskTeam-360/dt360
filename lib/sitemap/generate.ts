@@ -137,11 +137,13 @@ export async function generateSitemaps(
     { filename: "case-study-sitemap.xml", urls: caseStudyEntries },
   ];
 
-  // Guard: main-domain sitemap must never advertise portal URLs.
+  // Guard: main-domain sitemap must never advertise other hosts (portal / start / open / www).
   for (const file of sitemapFiles) {
     for (const entry of file.urls) {
-      if (/portal\.deskteam360\.com/i.test(entry.loc)) {
-        warnings.push(`Portal URL leaked into ${file.filename}: ${entry.loc}`);
+      if (
+        /(?:portal|start|open|www)\.deskteam360\.com/i.test(entry.loc)
+      ) {
+        warnings.push(`Cross-host URL leaked into ${file.filename}: ${entry.loc}`);
       }
     }
   }

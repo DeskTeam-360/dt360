@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Host-owned sitemap for start.deskteam360.com (GHL).
+  Publish as https://start.deskteam360.com/sitemap.xml
+  Include only public search landing URLs. Exclude privacy opt-in pages.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://start.deskteam360.com/ultimate-task-delegation-template</loc>
+  </url>
+  <url>
+    <loc>https://start.deskteam360.com/5-minute-demo</loc>
+  </url>
+</urlset>

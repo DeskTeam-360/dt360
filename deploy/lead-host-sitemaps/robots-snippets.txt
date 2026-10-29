@@ -1,0 +1,16 @@
+# Paste into each host's robots.txt (GHL domain / SEO settings).
+# Keep privacy pages out of the sitemap; they already use noindex,follow.
+
+# --- start.deskteam360.com/robots.txt ---
+User-agent: *
+Allow: /
+Disallow: /privacy-policy-optin1
+Disallow: /privacy-policy-optin3
+Sitemap: https://start.deskteam360.com/sitemap.xml
+
+# --- open.deskteam360.com/robots.txt ---
+User-agent: *
+Allow: /
+Disallow: /privacy
+Disallow: /privacy-policy-optin2
+Sitemap: https://open.deskteam360.com/sitemap.xml
