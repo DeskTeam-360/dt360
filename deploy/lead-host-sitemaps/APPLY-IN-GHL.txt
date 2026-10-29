@@ -1,0 +1,37 @@
+P2-7 — wajib di GHL (bukan di repo Next.js). Host start/open = sites.ludicrous.cloud.
+
+Tujuan: sitemap host berisi tepat halaman lead (privacy tetap di luar).
+
+=== open.deskteam360.com ===
+1. GHL sub-account → Settings → Domains (atau Sites → gear → Domains)
+2. Domain open.deskteam360.com → Manage (⋯)
+3. Connected product → ⋯ → XML Sitemap
+4. Expand funnel/website; centang HANYA:
+   - /roi-calculator
+   Jangan centang: /privacy, /privacy-policy-optin2, thank-you, step internal
+5. Proceed → path: sitemap.xml → Generate & Save
+6. Buka https://open.deskteam360.com/sitemap.xml
+   Harus ada 1× <loc>https://open.deskteam360.com/roi-calculator</loc>
+
+=== start.deskteam360.com ===
+Ulangi untuk start.deskteam360.com. Centang HANYA:
+   - /ultimate-task-delegation-template
+   - /5-minute-demo
+Jangan centang: /privacy-policy-optin1, /privacy-policy-optin3, thank-you
+Path: sitemap.xml → Generate & Save
+Harus 2× <loc> di https://start.deskteam360.com/sitemap.xml
+
+=== robots (opsional tapi disarankan) ===
+Isi robots.txt per host dari robots-snippets.txt di folder ini.
+
+=== verifikasi cepat ===
+curl -s https://open.deskteam360.com/sitemap.xml | grep -c '<loc>'
+# expect 1
+curl -s https://start.deskteam360.com/sitemap.xml | grep -c '<loc>'
+# expect 2
+curl -s https://open.deskteam360.com/sitemap.xml | grep -c 'roi-calculator'
+# expect 1
+curl -s https://start.deskteam360.com/sitemap.xml | grep -c 'ultimate-task-delegation-template'
+# expect 1
+curl -s https://start.deskteam360.com/sitemap.xml | grep -c '5-minute-demo'
+# expect 1

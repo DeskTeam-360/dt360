@@ -25,12 +25,15 @@ export function getWordPressMediaOrigin(): string {
 
 /**
  * Oversized WP media swapped for local optimized assets (SEO audit P2 showcase GIF).
- * Match on filename so portal/clone hosts both resolve.
+ * Match on basename (incl. WP size suffixes like -1024x768) so portal/clone hosts resolve.
+ * Do not delete the portal GIF; Ahrefs may still know the direct asset URL.
  */
-const WORDPRESS_MEDIA_LOCAL_OVERRIDES: Record<string, string> = {
-  "Showcase-Christmas-Card-Aluminex-Inc-5414.gif":
-    "/images/showcase/Showcase-Christmas-Card-Aluminex-Inc-5414.webp",
-};
+const WORDPRESS_MEDIA_LOCAL_OVERRIDES: Array<{ match: RegExp; local: string }> = [
+  {
+    match: /^Showcase-Christmas-Card-Aluminex-Inc-5414(?:-\d+x\d+)?\.gif$/i,
+    local: "/images/showcase/Showcase-Christmas-Card-Aluminex-Inc-5414.webp",
+  },
+];
 
 function localOverrideForMediaUrl(url: string): string | undefined {
   try {
@@ -39,7 +42,10 @@ function localOverrideForMediaUrl(url: string): string | undefined {
       : url.split("?")[0] ?? url;
     const file = path.split("/").pop()?.trim();
     if (!file) return undefined;
-    return WORDPRESS_MEDIA_LOCAL_OVERRIDES[file];
+    for (const rule of WORDPRESS_MEDIA_LOCAL_OVERRIDES) {
+      if (rule.match.test(file)) return rule.local;
+    }
+    return undefined;
   } catch {
     return undefined;
   }
@@ -82,6 +88,30 @@ export function rewriteWordPressContentHtml(html: string | undefined | null): st
   if (!html) return html ?? "";
   const origin = getWordPressMediaOrigin();
   let out = origin ? html.replace(LEGACY_WP_CONTENT_URL, `${origin}$1`) : html;
+
+  // Local media overrides (e.g. Aluminex Christmas Card GIF → WebP) inside HTML attrs.
+  out = out.replace(
+    /\b((?:src|href|srcset)=["'])([^"']+)(["'])/gi,
+    (full, pre: string, value: string, post: string) => {
+      if (/\bsrcset=/i.test(pre)) {
+        const rewritten = value
+          .split(",")
+          .map((part) => {
+            const trimmed = part.trim();
+            if (!trimmed) return part;
+            const bits = trimmed.split(/\s+/);
+            const candidate = bits[0] ?? "";
+            const local = localOverrideForMediaUrl(candidate);
+            if (!local) return part;
+            return [local, ...bits.slice(1)].join(" ");
+          })
+          .join(", ");
+        return `${pre}${rewritten}${post}`;
+      }
+      const local = localOverrideForMediaUrl(value);
+      return local ? `${pre}${local}${post}` : full;
+    },
+  );
 
   // P1.1 — dead demo host → live booking page
   out = out.replace(DEAD_SCHEDULE_DEMO_HREF, "/book-a-call");
