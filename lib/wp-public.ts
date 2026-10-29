@@ -67,6 +67,16 @@ const OLD_MAINTENANCE_COST_HREF =
 const MISSING_DELEGATE_WITHOUT_CONTROL_ANCHOR =
   /<a\b[^>]*\bhref=["'](?:https?:\/\/(?:www\.)?deskteam360\.com)?\/blog\/how-to-delegate-without-losing-control\/?["'][^>]*>([\s\S]*?)<\/a>/gi;
 
+/**
+ * P2 redirecting inlinks — seven blog pairs that still use a trailing slash.
+ * Source anchors stay the same; only the href loses the final "/".
+ * Slugs: marketing-implementation-team-for-agencies,
+ * how-to-scale-a-marketing-agency-without-hiring,
+ * white-label-vs-in-house-agency-production.
+ */
+const BLOG_TRAILING_SLASH_HREF =
+  /((?:https?:\/\/(?:www\.)?deskteam360\.com)?\/blog\/(?:marketing-implementation-team-for-agencies|how-to-scale-a-marketing-agency-without-hiring|white-label-vs-in-house-agency-production))\/(?=[?"'#\s>]|$)/gi;
+
 /** Rewrite wp-content URLs inside WordPress HTML content. */
 export function rewriteWordPressContentHtml(html: string | undefined | null): string {
   if (!html) return html ?? "";
@@ -81,6 +91,10 @@ export function rewriteWordPressContentHtml(html: string | undefined | null): st
 
   // D1 — missing post: keep surrounding text, drop the href
   out = out.replace(MISSING_DELEGATE_WITHOUT_CONTROL_ANCHOR, "$1");
+
+  // P2 — trailing-slash blog hrefs that only resolve via redirect (L05–L06, L08–L12).
+  // Keep absolute or root-relative form; strip the final slash before ?, #, or ".
+  out = out.replace(BLOG_TRAILING_SLASH_HREF, "$1");
 
   // Gate 5 F16 — apply approved alts to <img> tags when we have a match.
   out = out.replace(/<img\b([^>]*?)>/gi, (full, attrs: string) => {

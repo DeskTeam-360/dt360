@@ -696,14 +696,22 @@ export function DynamicBlogPostContent({
               const url = new URL(resolvedHref, 'https://deskteam360.com');
               const isInternal = getWordPressInternalHostnames().includes(url.hostname);
               if (isInternal) {
-                const path = url.pathname.replace(/\/$/, '');
-                const resolved = resolveInternalContentLink(path, publishedSlugs);
+                // Canonical public paths omit trailing slash (except "/").
+                // WP content often still ships /blog/.../ which only reaches the
+                // article via redirect — rewrite to the final URL in the href.
+                const pathNoTrail =
+                  url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '');
+                const resolved = resolveInternalContentLink(pathNoTrail, publishedSlugs);
 
-                if (resolved.kind === 'href') {
-                  url.pathname = resolved.pathname;
-                  resolvedHref = `${url.pathname}${url.search}${url.hash}`;
-                } else if (resolved.kind === 'draft') {
+                if (resolved.kind === 'draft') {
                   isDraftBlogLink = true;
+                } else {
+                  const finalPath =
+                    resolved.kind === 'href' ? resolved.pathname : pathNoTrail;
+                  const pathname = finalPath.startsWith('/')
+                    ? finalPath
+                    : `/${finalPath}`;
+                  resolvedHref = `${pathname}${url.search}${url.hash}`;
                 }
               }
             }
