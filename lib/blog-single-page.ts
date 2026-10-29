@@ -416,11 +416,13 @@ export async function generateBlogPostMetadata(slug: string): Promise<Metadata> 
   const resolvedPost = await applyGate5BlogOverride(post);
   const mergeOverride = getGate5BlogOverride(slug);
   const path = getBlogPostCanonicalPath(slug);
-  const description =
+  // Explicit copy-changes / Gate 5 descriptions must win over WP excerpt fallbacks
+  // (long excerpt-like meta was leaking into <meta name="description">).
+  const explicitDescription =
     getCopyV3MetaDescription(path) ??
     standalone?.metaDescription ??
-    mergeOverride?.metaDescription ??
-    resolvedPost.excerpt;
+    mergeOverride?.metaDescription;
+  const description = explicitDescription ?? resolvedPost.excerpt;
 
   const shareTitle = resolvedPost.title;
   return withPageCanonical(path, {
